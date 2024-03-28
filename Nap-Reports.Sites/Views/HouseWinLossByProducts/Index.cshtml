@@ -1,0 +1,46 @@
+﻿@{
+    @inject IJsonHelper Json;
+    ViewBag.Title = "House Win Loss by Products";
+    ViewBag.AngularAppName = "houseWinlossApp";
+
+    var napConfig = new
+    {
+        Today = Convert.ToInt64(DateTime.Now
+           .Subtract(new DateTime(1970, 1, 1, 0, 0, 0))
+           .TotalMilliseconds),
+        RootUrl = ViewBag.RootUrl,
+        LegacyPath = ViewBag.LegacyPath,
+        BalanceUp = Convert.ToInt64(ViewBag.BalanceUp.BalanceUpDate
+           .Subtract(new DateTime(1970, 1, 1, 0, 0, 0))
+           .TotalMilliseconds)
+    };
+}
+
+<div class="page-header">
+    Main / <span class="active">@ViewBag.Title</span>
+</div>
+<div data-ng-view></div>
+<div data-nap-alert></div>
+<div data-nap-loading></div>
+@section Styles {
+    <link href="~/bundle/app-style.css" rel="stylesheet" />
+    <link href="~/bundle/house-win-loss-style.css" rel="stylesheet" />
+}
+<script type="text/javascript">
+    var napConfig = @Html.Raw(Json.Serialize(napConfig));
+    if (location.protocol === 'https:') {
+        napConfig.RootUrl = napConfig.RootUrl.replace("http://", "https://");
+        napConfig.LegacyPath = napConfig.LegacyPath.replace("http://", "https://");
+    }
+
+</script>
+@section Scripts {
+    <script src="~/bundle/lib.chunk.js"></script>
+    <script src="~/bundle/app.chunk.js"></script>
+    <script src="~/bundle/house-win-loss.chunk.js"></script>
+}
+<script type="text/javascript">
+    var modePermissions = @Html.Raw(Json.Serialize(ViewBag.ModePermissions));
+    var productPermissions = @Html.Raw(Json.Serialize(ViewBag.ProductPermissions));
+    var permissionProfileID = @Html.Raw(Json.Serialize(ViewBag.PermissionProfileID));
+</script>

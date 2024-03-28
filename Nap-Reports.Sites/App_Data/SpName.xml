@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+	<Function Name="HouseWinLossByProducts">
+		<Setting Key="HouseWinLoss-Soccer-Minor-SportType" SpName="Acc_Rpt_DailyWinLossSoccerMinorBetTypes_Lvl1" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinLoss-Soccer-Minor-BetType" SpName="Acc_Rpt_DailyWinLossSoccerMinorBetTypes_Lvl2" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_Lvl1" SpName="Acc_Rpt_HouseWinlossByProducts_Lvl1" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_Lvl2" SpName="Acc_Rpt_HouseWinlossByProducts_Lvl2" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_Parlay" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_Parlay" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_Sportsbook_MajorMinor" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_Sportsbook_MajorMinor" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_Sportsbook_Sporttype" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_Sportsbook_Sporttype" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_Sportsbook_Bettype" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_Sportsbook_Bettype" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_Sportsbook_MatchDetail" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_Sportsbook_MatchDetail" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_Sportsbook_Site" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_Sportsbook_Site" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_NumberGame" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_NumberGame" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_3rd_Bettype" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_3rd_Bettype" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_3rd_MatchDetail" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_3rd_MatchDetail" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_LvlN_3rd_Site" SpName="Acc_Rpt_HouseWinlossByProducts_LvlN_3rd_Site" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+		<Setting Key="HouseWinlossByProducts_Lvl2_BettypePerformance" SpName="Acc_Rpt_HouseWinlossByProducts_BettypePerformance" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+	</Function>
+	<Function Name="Permission">
+		<Setting Key="Permission-GetPermisionProfileID" SpName="Acc_Rpt_GetPermisionProfileID" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="180" />
+	</Function>
+	<Function Name="Core - Report Service">
+		<Setting Key="GetBalanceUpRange" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.wsv_nap">
+			<Mapping DataField="BalanceUpDay" ObjectProperty="BalanceUpDate" />
+			<Mapping DataField="MoveBetsDay" ObjectProperty="MoveBetsDate" />
+		</Setting>
+	</Function>
+</Functions>

@@ -1,0 +1,20 @@
+﻿using System;
+using Nap_Reports.HouseWinLoss.Configuration;
+
+namespace Nap_Reports.HouseWinLoss.OtherSports.SportType
+{
+    public class QueryModel
+    {
+        public int IsLive { get; set; } = Constants.LiveDefault;
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public bool NormalMode { get; set; } = true;
+
+        public bool IsNoDraw { get; set; }
+
+        public int PermissionProfileID { get; set; }
+    }
+}

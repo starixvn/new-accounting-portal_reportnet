@@ -1,0 +1,45 @@
+﻿@using Fanex.NAP.Client.Models
+@model IEnumerable<MenuItem>
+@{
+    var lvl0MenuItemList = Model.Where(m => m.ParentId <= 0).OrderBy(m => m.DisplayOrder).ToList();
+}
+<nav>
+    <ul class="menu">
+        @for (var i = 0; i < lvl0MenuItemList.Count; i++)
+        {
+            var menuItem = lvl0MenuItemList[i];
+            var lvl1MenuItemList = Model.Where(x => x.ParentId >= 0 && x.ParentId == menuItem.Id)
+                .OrderBy(x => x.DisplayOrder).ToList();
+            var className = string.Empty;
+
+            if (i == 0)
+            {
+                className = "first";
+            }
+
+            if ((i == lvl0MenuItemList.Count - 1) && (lvl0MenuItemList.Count > 1))
+            {
+                className += className.Length > 0 ? " last" : "last";
+            }
+
+            if (!lvl1MenuItemList.Any())
+            {
+                <li class="@className"><a href="@Url.Content("~" + menuItem.Url)">@menuItem.Name</a></li>
+            }
+            else
+            {
+                className += className.Length > 0 ? " has-kids" : "has-kids";
+
+                <li class="@className">
+                    <a href="javascript:;">@menuItem.Name</a>
+                    <ul>
+                        @foreach (var subMenuItem in lvl1MenuItemList)
+                        {
+                            <li><a href="@Url.Content("~" + subMenuItem.Url)">@subMenuItem.Name</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+</nav>

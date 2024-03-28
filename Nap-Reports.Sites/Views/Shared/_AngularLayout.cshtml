@@ -1,0 +1,22 @@
+﻿@{
+    var baseHref = Context.Request.PathBase;
+    if (baseHref != "/")
+    {
+        baseHref = baseHref + "/";
+    }
+}
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="@baseHref">
+    <link rel="icon" type="image/x-icon" href="@Url.Content("favicon.ico")">
+    <title>@Html.Raw(ViewBag.Title)</title>
+    @RenderSection("Head", false)
+</head>
+<body>
+    @RenderBody()
+    <script src="@Url.Content("~/auth/recheckinscript")" type="text/javascript"></script>
+</body>
+</html>

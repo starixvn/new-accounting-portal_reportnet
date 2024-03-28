@@ -1,0 +1,15 @@
+﻿<div class="score-information">
+    <div class="modal-header">
+        <button type="button" data-ng-click="closePopup()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-title">Score Information</div>
+    </div>
+    <div id="scoreInformationPopup" class="ui-dialog-content ui-widget-content">
+        <div class="soccerReport_ScoreInfo reportTable">
+            <div class="reportHeader grid-title">
+                <span class="sportTypeName_Header">{{sportTypeName}}</span> - {{leagueName}}<br>Bettype: <font color="red">{{liveName}}</font> {{betTypeName}}<br>Trader: {{traderName}}<br>MatchID: {{matchId}}
+            </div>
+        </div>
+        <div data-ng-bind-html="matchInformation"></div>
+    </div>
+
+</div>

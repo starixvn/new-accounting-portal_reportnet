@@ -1,0 +1,975 @@
+﻿
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    outline: 0px;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+    nav ul {
+        list-style: none;
+    }
+
+blockquote, q {
+    quotes: none;
+}
+
+    blockquote::before, blockquote::after, q::before, q::after {
+        content: none;
+    }
+
+a {
+    margin: 0px;
+    padding: 0px;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+ins {
+    background-color: rgb(255, 255, 153);
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+mark {
+    background-color: rgb(255, 255, 153);
+    color: rgb(0, 0, 0);
+    font-style: italic;
+    font-weight: bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom: 1px dotted;
+    cursor: help;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border-width: 1px 0px 0px;
+    border-right-style: initial;
+    border-bottom-style: initial;
+    border-left-style: initial;
+    border-right-color: initial;
+    border-bottom-color: initial;
+    border-left-color: initial;
+    border-image: initial;
+    border-top-style: solid;
+    border-top-color: rgb(204, 204, 204);
+    margin: 1em 0px;
+    padding: 0px;
+}
+
+input, select {
+    vertical-align: middle;
+}
+
+body {
+    font: 13px/1.231 sans-serif;
+}
+
+select, input, textarea, button {
+    font: 99% sans-serif;
+}
+
+pre, code, kbd, samp {
+    font-family: monospace, sans-serif;
+}
+
+body, select, input, textarea {
+    color: rgb(68, 68, 68);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+a:hover, a:active, a:focus {
+    outline: none;
+}
+
+a, a:active {
+    color: rgb(96, 120, 144);
+}
+
+    a:hover {
+        color: rgb(0, 51, 102);
+    }
+
+ul, ol {
+    margin-left: 1.8em;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+nav ul, nav li {
+    margin: 0px;
+}
+
+small {
+    font-size: 85%;
+}
+
+strong, th {
+    font-weight: bold;
+}
+
+td, td img {
+    vertical-align: top;
+}
+
+sub {
+    vertical-align: sub;
+    font-size: smaller;
+}
+
+sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+
+pre {
+    padding: 15px;
+    white-space: pre-line;
+    word-wrap: break-word;
+}
+
+textarea {
+    overflow: auto;
+}
+
+input[type="radio"] {
+    vertical-align: text-bottom;
+}
+
+input[type="checkbox"] {
+    vertical-align: bottom;
+}
+
+label, input[type="button"], input[type="submit"], button {
+    cursor: pointer;
+}
+
+button, input, select, textarea {
+    margin: 0px;
+}
+
+    input:valid, textarea:valid {
+    }
+
+    input:invalid, textarea:invalid {
+        border-radius: 1px;
+        box-shadow: red 0px 0px 5px;
+    }
+
+button {
+    width: auto;
+    overflow: visible;
+}
+
+body {
+    width: 100%;
+}
+
+    body::before, body::after {
+        content: "";
+        display: table;
+    }
+
+    body::after {
+        clear: both;
+    }
+
+    body::before, body::after {
+        content: "";
+        display: table;
+    }
+
+    body::after {
+        clear: both;
+    }
+
+.inline-message {
+    display: none;
+    margin: 0px 0px 15px 20px;
+    font-style: oblique;
+    clear: both;
+}
+
+    .inline-message.error {
+        padding: 3px 0 3px 30px;
+        background: url(img/icon-error-message.png) no-repeat;
+        color: #db2c2c;
+    }
+
+    .inline-message.success {
+        padding: 3px 0 3px 30px;
+        background: url(img/icon-success-message.png) no-repeat;
+        color: #333;
+    }
+
+.ui-dialog .ui-dialog-content .form {
+    background-color: transparent;
+    border: none;
+    padding: 10px 0px;
+    box-shadow: none;
+}
+
+    .ui-dialog .ui-dialog-content .form input[type="button"], .ui-dialog .ui-dialog-content .form input[type="submit"] {
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+    }
+
+html {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    border: 0px;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    min-width: 480px;
+}
+
+    body::before, body::after {
+        content: "";
+        display: table;
+    }
+
+    body::after {
+        clear: both;
+    }
+
+    body::before, body::after {
+        content: "";
+        display: table;
+    }
+
+    body::after {
+        clear: both;
+    }
+
+body, button, input, textarea {
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: rgb(0, 0, 0);
+}
+
+input, select {
+    outline: none 0px;
+}
+
+    input[type="checkbox"] {
+        padding: 0px;
+    }
+
+select {
+    cursor: pointer;
+}
+
+p, ul, ol, dl {
+    margin-bottom: 16px;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    outline: none 0px;
+    color: rgb(79, 130, 198);
+}
+
+    a:hover {
+        text-decoration: underline;
+        color: rgb(79, 130, 198);
+    }
+
+iframe {
+    display: block;
+}
+
+:focus {
+    outline: none;
+}
+
+header, #headline, #msg-bar, #body, .filter-bar, footer {
+    float: left;
+    width: 100%;
+}
+
+header {
+    border-style: solid;
+    border-color: rgb(60, 91, 155);
+    border-image: initial;
+    border-width: 1px 0px;
+    background: -webkit-linear-gradient(top, rgb(122, 151, 209) 1px, rgb(90, 125, 193) 1px, rgb(72, 108, 184) 100%) 0px 0px repeat scroll transparent;
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    position: relative;
+}
+
+    header .logo {
+        padding: 0px;
+        float: left;
+    }
+
+        header .logo a {
+            display: block;
+            background: url("img/logo.png") left center no-repeat;
+            margin: 5px 0px 5px 10px;
+            height: 28px;
+            width: 130px;
+            border-right: 1px solid rgb(126, 163, 233);
+            box-shadow: rgb(36, 71, 153) 1px 0px;
+        }
+
+            header .logo a:hover {
+                text-decoration: none;
+            }
+
+    header nav {
+        margin-left: 3px;
+        float: left;
+    }
+
+        header nav .menu {
+            margin: 2px 0px 0px;
+            z-index: 2000 !important;
+        }
+
+            header nav .menu li {
+                display: block;
+                float: left;
+                list-style-type: none;
+                position: relative;
+                padding: 1px 0px;
+            }
+
+                header nav .menu li a {
+                    color: rgb(255, 255, 255);
+                    text-shadow: rgb(214, 222, 233) 0px 0.025em 0px;
+                }
+
+            header nav .menu > li > a {
+                display: block;
+                font-size: 1em;
+                padding: 9px 16px;
+                border: 1px solid transparent;
+            }
+
+            header nav .menu > li ul {
+                position: absolute;
+                background-color: rgb(255, 255, 255);
+                margin: 0px;
+                text-align: left;
+                z-index: 10001;
+                visibility: hidden;
+                opacity: 0;
+                border-right: 1px solid rgb(60, 91, 155);
+                border-bottom: 1px solid rgb(60, 91, 155);
+                border-left: 1px solid rgb(60, 91, 155);
+                border-image: initial;
+                border-top: none;
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 2px 1px;
+                transition: all 0.1s ease-in-out 0s;
+                padding: 4px 0px;
+            }
+
+                header nav .menu > li ul li {
+                    display: block;
+                    clear: both;
+                    width: 100%;
+                }
+
+                    header nav .menu > li ul li a {
+                        color: rgb(59, 91, 152);
+                        background-image: none;
+                        border-left: none;
+                        display: block;
+                        padding: 6px 12px;
+                        white-space: nowrap;
+                        min-width: 160px;
+                        font-size: 1em;
+                    }
+
+                    header nav .menu > li ul li:hover a {
+                        text-decoration: none;
+                        background-color: rgb(60, 91, 155);
+                        color: rgb(255, 255, 255);
+                    }
+
+                    header nav .menu > li ul li:last-child {
+                        border: none;
+                    }
+
+            header nav .menu > li:hover > a {
+                border-width: 1px;
+                border-style: solid;
+                border-color: rgb(60, 91, 155) rgb(60, 91, 155) transparent;
+                border-image: initial;
+                background: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(255, 255, 255) 20%) 0px 0px repeat scroll transparent;
+                text-decoration: none;
+                color: rgb(59, 91, 152);
+            }
+
+            header nav .menu > li:hover ul {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            header nav .menu > li.normal ul {
+                left: 0px;
+            }
+
+            header nav .menu > li.last {
+                border-right: 0px none;
+            }
+
+                header nav .menu > li.last ul {
+                    right: 0px;
+                }
+
+            header nav .menu > li.has-kids:hover {
+                background: url("img/bgmenu-more.png");
+            }
+
+                header nav .menu > li.has-kids:hover > a {
+                    cursor: default;
+                }
+
+    header .user-info {
+        float: right;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+    }
+
+        header .user-info .greeting {
+            position: relative;
+            float: right;
+            cursor: pointer;
+        }
+
+            header .user-info .greeting h2 {
+                background: url("img/user.png") 6px center no-repeat rgb(72, 108, 184);
+                display: block;
+                clear: none;
+                margin: 0px 0px 0px -2px;
+                float: left;
+                padding: 5px 10px 5px 28px;
+                color: rgb(255, 255, 255);
+                border-radius: 3px;
+                font-weight: normal;
+                font-size: 1em;
+                text-shadow: black 0px 0px 0.03em;
+                box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 2px inset;
+            }
+
+                header .user-info .greeting h2 .info-acc {
+                    color: rgb(254, 204, 53);
+                    font-weight: bold;
+                    display: inline-block;
+                }
+
+                header .user-info .greeting h2 .info-more {
+                    background: url("img/small-arrow-down.png") center 6px no-repeat;
+                    margin-left: 6px;
+                    padding: 0px 6px;
+                }
+
+            header .user-info .greeting ul {
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                visibility: hidden;
+                opacity: 0;
+                background-color: rgb(255, 255, 255);
+                list-style-type: none;
+                margin: 0px;
+                border: 1px solid rgb(60, 91, 155);
+                width: 100%;
+                padding: 2px 0px;
+                z-index: 11;
+            }
+
+                header .user-info .greeting ul li {
+                    display: block;
+                    text-align: left;
+                    white-space: nowrap;
+                    padding: 4px 10px;
+                }
+
+                    header .user-info .greeting ul li a {
+                        display: block;
+                        color: rgb(59, 91, 152);
+                        font-size: 0.9em;
+                    }
+
+                    header .user-info .greeting ul li:hover {
+                        background-color: rgb(60, 91, 155);
+                    }
+
+                        header .user-info .greeting ul li:hover a {
+                            text-decoration: none;
+                            color: rgb(255, 255, 255);
+                            text-shadow: rgb(0, 0, 0) 0em 0em 0.05em;
+                        }
+
+            header .user-info .greeting:hover ul {
+                top: 24px;
+                visibility: visible;
+                opacity: 1;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 1px;
+            }
+
+.ie8 header nav .menu > li > a {
+    font-size: 1em;
+}
+
+.ie8 header nav .menu > li ul li a {
+    font-size: 1em;
+    min-width: 180px;
+}
+
+.ie8 header nav .menu > li:hover ul {
+    top: 28px;
+}
+
+.ie8 header .user-info h2 {
+    font-size: 1em;
+}
+
+#headline {
+    margin: 0px;
+}
+
+    #headline .title {
+        font-family: Tahoma, Arial, Helvetica, sans-serif;
+        font-size: 1.2em;
+        color: rgb(0, 0, 0);
+        display: inline-block;
+        float: left;
+        margin: 2px 5px 2px 26px;
+        height: 32px;
+    }
+
+        #headline .title div {
+            margin-left: 0px;
+            margin-top: 8px;
+            text-shadow: rgba(0, 0, 0, 0.25) 0px 1px;
+            display: inline-block;
+        }
+
+            #headline .title div .curr {
+                color: rgb(1, 54, 172);
+            }
+
+.ie8 #headline h1 .lnk {
+    font-size: 0.6em;
+}
+
+#body {
+    background-color: rgb(255, 255, 255);
+}
+
+    #body .content {
+        padding: 0px;
+        float: left;
+        min-width: 100%;
+    }
+
+footer {
+    background: url("img/bg_footer.jpg");
+    border-style: solid;
+    border-color: rgb(170, 170, 170);
+    border-image: initial;
+    border-width: 1px 0px;
+    box-shadow: rgb(224, 228, 231) 0px 1px 0px inset;
+}
+
+    footer .content {
+        padding: 10px;
+        color: rgb(0, 0, 0);
+        text-shadow: rgba(255, 255, 255, 0.5) 1px 1px 0px;
+    }
+
+        footer .content p {
+            margin: 0px;
+        }
+
+.filter-bar .filter-form .lbl-field {
+    text-shadow: rgb(0, 0, 0) 0px 0.023em 0px;
+    display: inline;
+    float: left;
+    width: 72px;
+    text-align: right;
+    padding: 4px 0px 0px;
+    margin: 0px;
+    height: 21px;
+}
+
+.filter-bar .filter-form .edit-field *, .filter-bar .filter-form .submit * {
+    vertical-align: baseline;
+    text-align: left;
+}
+
+.filter-bar .filter-form .edit-field {
+    display: inline;
+    float: left;
+    width: 150px;
+    margin: 0px;
+    height: 24px;
+}
+
+    .filter-bar .filter-form .edit-field input[type="text"], .filter-bar .filter-form .edit-field input[type="password"], .filter-bar .filter-form .edit-field select {
+        border: 1px solid rgb(206, 204, 205);
+        padding: 2px;
+        font-size: 0.9em;
+        color: rgb(0, 0, 0);
+    }
+
+        .filter-bar .filter-form .edit-field input[type="text"]:disabled, .filter-bar .filter-form .edit-field input[type="password"]:disabled, .filter-bar .filter-form .edit-field select:disabled {
+            background-color: rgb(243, 239, 238) !important;
+        }
+
+    .filter-bar .filter-form .edit-field input[type="password"] {
+        width: 165px;
+        height: 20px;
+    }
+
+    .filter-bar .filter-form .edit-field input.userprofile {
+        height: 20px;
+        width: 165px !important;
+    }
+
+    .filter-bar .filter-form .edit-field input[type="text"] {
+        width: 120px;
+        height: 20px;
+    }
+
+    .filter-bar .filter-form .edit-field input[type="checkbox"] {
+        margin-right: 2px;
+        margin-top: 3px;
+    }
+
+    .filter-bar .filter-form .edit-field select {
+        height: 24px;
+        padding: 3px;
+        border-radius: 2px;
+    }
+
+        .filter-bar .filter-form .edit-field select option {
+            padding: 2px 4px;
+        }
+
+        .filter-bar .filter-form .edit-field input:active, .filter-bar .filter-form .edit-field select:active, .filter-bar .filter-form .edit-field input:focus, .filter-bar .filter-form .edit-field select:focus, .filter-bar .filter-form .edit-field input:hover, .filter-bar .filter-form .edit-field select:hover {
+            border: 1px solid rgb(206, 204, 205);
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 3px;
+        }
+
+.filter-bar .tabs-area .tab.first {
+    margin-left: 5px;
+}
+
+.ie8 .filter-form .edit-field input[type="text"] {
+    line-height: 20px;
+}
+
+.ie9 .filter-form .edit-field input[type="checkbox"]:active, .ie9 .filter-form .edit-field input[type="checkbox"]:focus, .ie9 .filter-form .edit-field input[type="checkbox"]:hover {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.form {
+    background-color: rgb(230, 230, 230);
+    border: 1px solid rgb(196, 196, 196);
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 2px 1px;
+    padding: 15px;
+    float: left;
+}
+
+    .form .form-row {
+        float: left;
+        clear: both;
+        margin-bottom: 3px;
+        min-height: 33px;
+    }
+
+        .form .form-row .lbl-field, .form .form-row .edit-field {
+            display: block;
+            float: left;
+        }
+
+        .form .form-row .lbl-field {
+            width: 100px;
+            vertical-align: top;
+            text-align: left;
+            padding: 5px 20px 0px 0px;
+            text-shadow: rgb(0, 0, 0) 0px 0.023em 0px;
+        }
+
+        .form .form-row .edit-field .read-only {
+            padding-top: 5px;
+        }
+
+        .form .form-row .edit-field input[type="text"], .form .form-row .edit-field input[type="password"], .form .form-row .edit-field select {
+            width: 280px;
+            height: 20px;
+            padding: 2px;
+            border: 1px solid rgb(196, 196, 196);
+            font-size: 0.9em;
+            color: rgb(0, 0, 0);
+        }
+
+            .form .form-row .edit-field input[type="text"]:disabled, .form .form-row .edit-field input[type="password"]:disabled, .form .form-row .edit-field select:disabled {
+                background-color: rgb(243, 239, 238) !important;
+            }
+
+        .form .form-row .edit-field textarea {
+            padding: 2px;
+            border: 1px solid rgb(196, 196, 196);
+            font-size: 0.9em;
+            color: rgb(0, 0, 0);
+        }
+
+        .form .form-row .edit-field input[type="submit"], .form .form-row .edit-field input[type="reset"] {
+            border-radius: 2px;
+            text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+            box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px inset;
+            background: -webkit-linear-gradient(top, rgb(72, 108, 184), rgb(90, 125, 193)) rgb(90, 125, 193);
+            border: 1px solid rgb(60, 91, 155);
+            color: rgb(255, 255, 255);
+            height: 25px;
+            min-width: 80px;
+            text-align: center;
+            text-decoration: none !important;
+        }
+
+            .form .form-row .edit-field input[type="submit"]:hover, .form .form-row .edit-field input[type="reset"]:hover {
+                color: rgb(255, 255, 255);
+                background: -webkit-linear-gradient(top, rgb(72, 108, 184), rgb(104, 145, 232)) rgb(104, 145, 232);
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 1px;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .form .form-row .edit-field input[type="submit"]:active, .form .form-row .edit-field input[type="reset"]:active, .form .form-row .edit-field input[type="submit"]:focus, .form .form-row .edit-field input[type="reset"]:focus {
+                background: -webkit-linear-gradient(top, rgb(90, 125, 193), rgb(72, 108, 184)) rgb(72, 108, 184);
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 1px;
+            }
+
+            .form .form-row .edit-field input[type="submit"]:disabled, .form .form-row .edit-field input[type="reset"]:disabled {
+                background: -webkit-linear-gradient(top, rgb(208, 208, 208), rgb(229, 229, 229) 1px) 1px center rgb(229, 229, 229);
+                border: 1px solid rgb(169, 169, 169);
+                text-shadow: rgba(255, 255, 255, 0.25) 0px 1px;
+                box-shadow: none;
+                color: rgb(151, 151, 151) !important;
+            }
+
+        .form .form-row .edit-field .cancel {
+            border-radius: 2px;
+            text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+            box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px inset;
+            background: -webkit-linear-gradient(top, rgb(72, 108, 184), rgb(90, 125, 193)) rgb(90, 125, 193);
+            border: 1px solid rgb(60, 91, 155);
+            color: rgb(255, 255, 255);
+            height: 25px;
+            min-width: 80px;
+            text-align: center;
+            text-decoration: none !important;
+        }
+
+            .form .form-row .edit-field .cancel:hover {
+                color: rgb(255, 255, 255);
+                background: -webkit-linear-gradient(top, rgb(72, 108, 184), rgb(104, 145, 232)) rgb(104, 145, 232);
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 1px;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .form .form-row .edit-field .cancel:active, .form .form-row .edit-field .cancel:focus {
+                background: -webkit-linear-gradient(top, rgb(90, 125, 193), rgb(72, 108, 184)) rgb(72, 108, 184);
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 1px;
+            }
+
+            .form .form-row .edit-field .cancel:disabled {
+                background: -webkit-linear-gradient(top, rgb(208, 208, 208), rgb(229, 229, 229) 1px) 1px center rgb(229, 229, 229);
+                border: 1px solid rgb(169, 169, 169);
+                text-shadow: rgba(255, 255, 255, 0.25) 0px 1px;
+                box-shadow: none;
+                color: rgb(151, 151, 151) !important;
+            }
+
+        .form .form-row .edit-field * {
+            vertical-align: middle;
+        }
+
+        .form .form-row .read-only {
+            cursor: text;
+        }
+
+        .form .form-row .rdo-field, .form .form-row .chk-field {
+            padding: 3px 0px 0px;
+        }
+
+        .form .form-row .rdolist label {
+            padding: 0px 10px 0px 2px;
+        }
+
+        .form .form-row.required .lbl-field {
+            font-weight: bold;
+        }
+
+    .form.user-control {
+        margin: 6px 0px 0px 10px;
+    }
+
+.ie8 .form .edit-field input[type="text"] {
+    line-height: 20px;
+}
+
+.form.w80 .form-row .lbl-field {
+    width: 80px;
+}
+
+.form.w120 .form-row .lbl-field {
+    width: 120px;
+}
+
+.grid th.first {
+    border-left: 1px solid rgb(84, 156, 186);
+}
+
+.grid th.last {
+    border-right: 1px solid rgb(84, 156, 186);
+}
+
+h2 .title {
+    display: block;
+    padding-bottom: 5px;
+    font-family: "Yanone Kaffeesatz", "Segoe UI", Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 1.4em;
+    color: rgb(0, 0, 0);
+}
+
+.server-time {
+    display: inline-block;
+    margin: 12px 12px 0px 0px;
+    float: right;
+    color: rgb(51, 51, 51);
+}
+
+.blue-button {
+    border-radius: 2px;
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+    box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px inset;
+    background: -webkit-linear-gradient(top, rgb(72, 108, 184), rgb(90, 125, 193)) rgb(90, 125, 193);
+    border: 1px solid rgb(60, 91, 155);
+    color: rgb(255, 255, 255);
+    height: 25px;
+    min-width: 80px;
+    text-align: center;
+    text-decoration: none !important;
+}
+
+    .blue-button:hover {
+        color: rgb(255, 255, 255);
+        background: -webkit-linear-gradient(top, rgb(72, 108, 184), rgb(104, 145, 232)) rgb(104, 145, 232);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 1px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .blue-button:active, .blue-button:focus {
+        background: -webkit-linear-gradient(top, rgb(90, 125, 193), rgb(72, 108, 184)) rgb(72, 108, 184);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 1px;
+    }
+
+    .blue-button:disabled {
+        background: -webkit-linear-gradient(top, rgb(208, 208, 208), rgb(229, 229, 229) 1px) 1px center rgb(229, 229, 229);
+        border: 1px solid rgb(169, 169, 169);
+        text-shadow: rgba(255, 255, 255, 0.25) 0px 1px;
+        box-shadow: none;
+        color: rgb(151, 151, 151) !important;
+    }
+
+.red-button {
+    border-radius: 2px;
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 1px;
+    box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px inset;
+    background: -webkit-linear-gradient(top, rgb(182, 95, 81), rgb(221, 125, 109)) rgb(221, 125, 109);
+    border: 1px solid rgb(137, 58, 46);
+    color: rgb(255, 255, 255);
+    height: 25px;
+    min-width: 80px;
+    text-align: center;
+    text-decoration: none !important;
+}
+
+    .red-button:hover {
+        color: rgb(255, 255, 255);
+        background: -webkit-linear-gradient(top, rgb(182, 95, 81), rgb(234, 132, 115)) rgb(234, 132, 115);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 1px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .red-button:active, .red-button:focus {
+        background: -webkit-linear-gradient(top, rgb(221, 125, 109), rgb(182, 95, 81)) rgb(182, 95, 81);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px 1px;
+    }
+
+    .red-button:disabled {
+        background: -webkit-linear-gradient(top, rgb(208, 208, 208), rgb(229, 229, 229) 1px) 1px center rgb(229, 229, 229);
+        border: 1px solid rgb(169, 169, 169);
+        text-shadow: rgba(255, 255, 255, 0.25) 0px 1px;
+        box-shadow: none;
+        color: rgb(151, 151, 151) !important;
+    }
+
+.error-tipsy {
+    font-size: 10px;
+    position: absolute;
+    padding: 5px;
+    z-index: 1100;
+}
+
+.error-tipsy-inner {
+    background-color: #ffb375;
+    color: #000;
+    max-width: 400px;
+    padding: 5px 8px 4px 8px;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0 0 5px #000;
+    -moz-box-shadow: 0 0 5px #000;
+    -webkit-box-shadow: 0 0 5px #000;
+}
+
+.alert-browser {
+    clear: both;
+    display: none;
+    margin-top: 100px;
+    text-align: center;
+    color: red;
+    font-size: 1rem;
+}

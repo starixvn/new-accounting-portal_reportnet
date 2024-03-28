@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5FE921E3-BA82-458A-9983-BEA80F74C49D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nap-Reports.Sites", "Nap-Reports.Sites\Nap-Reports.Sites.csproj", "{C9C9727F-6806-4C67-B987-83FC16D8CC0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{A9904CC1-6040-4CA6-84CF-568401D7F360}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nap-Reports.HouseWinLoss", "src\Main\Nap-Reports.HouseWinLoss\Nap-Reports.HouseWinLoss.csproj", "{FC713F31-95BD-4E61-963E-CC39B1DFDDF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{E388571F-0CCD-4103-9378-C0A755AD0DE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nap-Reports.Utilities", "src\Shared\Nap-Reports.Utilities\Nap-Reports.Utilities.csproj", "{23176A29-487B-4399-8ABE-DF03CB3BCB68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9C9727F-6806-4C67-B987-83FC16D8CC0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9C9727F-6806-4C67-B987-83FC16D8CC0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9C9727F-6806-4C67-B987-83FC16D8CC0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9C9727F-6806-4C67-B987-83FC16D8CC0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC713F31-95BD-4E61-963E-CC39B1DFDDF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC713F31-95BD-4E61-963E-CC39B1DFDDF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC713F31-95BD-4E61-963E-CC39B1DFDDF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC713F31-95BD-4E61-963E-CC39B1DFDDF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23176A29-487B-4399-8ABE-DF03CB3BCB68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23176A29-487B-4399-8ABE-DF03CB3BCB68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23176A29-487B-4399-8ABE-DF03CB3BCB68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23176A29-487B-4399-8ABE-DF03CB3BCB68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A9904CC1-6040-4CA6-84CF-568401D7F360} = {5FE921E3-BA82-458A-9983-BEA80F74C49D}
+		{FC713F31-95BD-4E61-963E-CC39B1DFDDF5} = {A9904CC1-6040-4CA6-84CF-568401D7F360}
+		{E388571F-0CCD-4103-9378-C0A755AD0DE8} = {5FE921E3-BA82-458A-9983-BEA80F74C49D}
+		{23176A29-487B-4399-8ABE-DF03CB3BCB68} = {E388571F-0CCD-4103-9378-C0A755AD0DE8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}
+	EndGlobalSection
+EndGlobal
