@@ -6,6 +6,7 @@ using Nap_Reports.Utilities.ExcelResult;
 namespace Nap_Reports.HouseWinLoss.Products
 {
     [Route("api/house-win-loss-by-products/product")]
+    [ApiController]
     public class ProductController : ControllerBase
     {
         private readonly Service service;
@@ -21,7 +22,7 @@ namespace Nap_Reports.HouseWinLoss.Products
             this.decorator = decorator;
         }
 
-        [Route("")]
+        [HttpPost, Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {
             var winlosses = await service.Query(queryModel);

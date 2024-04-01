@@ -28,10 +28,8 @@ namespace Nap_Reports.Sites
                 .FromApplication("Nap-Reports");
         }
 
-        public static void RegisterInternalServices(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterInternalServices(this IServiceCollection services)
         {
-            services.RegisterGlobalServices();
-            OnebookUMInjection.RegisterServices(services, configuration);
             services.RegisterHouseWinLossServices();
         }
 

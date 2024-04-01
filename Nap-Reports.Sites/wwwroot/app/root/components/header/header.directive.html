@@ -1,0 +1,30 @@
+﻿<header class="navbar navbar-static-top">
+    <div class="logo">
+        <a href="{{vm.legacyUrl}}?ref=logo">&nbsp;</a>
+    </div>
+    <nav>
+        <ul class="menu">
+            <li data-ng-repeat="item in vm.menus" data-ng-class="{first: $first, last: $last && !$first, 'has-child': item.Children && item.Children.length > 0}">
+                <a href="javascript:;" data-ng-if="item.Children && item.Children.length > 0">{{item.Name}}</a>
+                <a data-menu-id="{{item.Id}}" data-ng-href="{{item.Url}}" data-ng-if="!item.Children || item.Children.length === 0">{{item.Name}}</a>
+                <ul class="sub-menu" data-ng-if="item.Children && item.Children.length > 0">
+                    <li data-ng-repeat="childItem in item.Children">
+                        <a data-ng-if="!childItem.Reload" data-menu-id="{{childItem.Id}}" data-ng-href="{{childItem.Url}}">{{childItem.Name}}</a>
+                        <a data-ng-if="childItem.Reload" href="javascript:location.reload();">{{childItem.Name}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="user-info">
+        <div class="greeting">
+            <h2>
+                Welcome <span class="info-acc" id="menu-username">{{vm.username}}</span><span class="info-more"></span>
+            </h2>
+            <ul>
+                <li><a data-ng-href="{{vm.changePasswordUrl}}">Change Password</a></li>
+                <li><a data-ng-href="{{vm.logOutUrl}}">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+</header>

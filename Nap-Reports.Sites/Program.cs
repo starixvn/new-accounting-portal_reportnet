@@ -9,6 +9,8 @@ using ONEbook.UM.AspNetCore.Filters;
 using Nap_Reports.Sites.Middleware;
 using Nap_Reports.Sites.DependencyInjection;
 using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using Nap_Reports.Sites.App_Start;
 
 internal class Program
 {
@@ -21,6 +23,8 @@ internal class Program
         services.RegisterAuthentication(configuration);
         services.RegisterGlobalServices();
         OnebookUMInjection.RegisterServices(services, configuration);
+        AutoMapperConfiguration.Initialize(services);
+        services.RegisterInternalServices();
 
         // Add services to the container.
         services.AddControllersWithViews(options =>
