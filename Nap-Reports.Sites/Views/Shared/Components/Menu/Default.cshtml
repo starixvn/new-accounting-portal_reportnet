@@ -35,7 +35,8 @@
                     <ul>
                         @foreach (var subMenuItem in lvl1MenuItemList)
                         {
-                            <li><a href="@Url.Content("~" + subMenuItem.Url)">@subMenuItem.Name</a></li>
+                            <li>
+                                <a href="@Url.Content("~" + subMenuItem.Url.Replace("/UniversalReports", string.Empty))">@subMenuItem.Name</a></li>
                         }
                     </ul>
                 </li>

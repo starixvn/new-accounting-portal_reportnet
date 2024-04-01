@@ -7,7 +7,11 @@ using Fanex.NAP.Client.Services;
 using Fanex.NAP.Client.Session;
 using Fanex.RemotingRef;
 using Nap_Reports.Utilities.BalanceUpServices;
+using Nap_Reports.Utilities.Configurations;
 using Nap_Reports.Utilities.PermissionFilter;
+using SMAWinLoss;
+using System.Net.NetworkInformation;
+using System.Reflection;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {
@@ -29,6 +33,9 @@ namespace Nap_Reports.Sites.DependencyInjection
 
             service.AddTransient<PermissionFilterService, PermissionFilterServiceImp>();
             service.AddTransient<BalanceUpService, BalanceUpServiceImp>();
+            service.AddTransient<ConfigurationService, ConfigurationServiceImp>();
+
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
         }
     }
 }
