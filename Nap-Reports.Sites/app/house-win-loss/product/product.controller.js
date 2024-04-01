@@ -79,7 +79,7 @@ import numeral from "numeral";
                 var productRow = data.bodyRows[i];
                 var customAttr = productRow.CustomAttr;
                 var productName = productRow.Columns[0].Value;
-                var productId = parseInt(productRow.Columns[0].CustomAttr);
+                var productId = parseInt(productRow.Columns[0].customAttr);
                 if (customAttr === 'product') {
                     if(productName != 'SB Adjustment') {
                         productRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateProduct(\'' + productName.replace(/'/g, "\\'") + '\',' + productId + '\)">' + productName + '</a>';

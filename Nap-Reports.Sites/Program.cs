@@ -11,6 +11,8 @@ using Nap_Reports.Sites.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using Nap_Reports.Sites.App_Start;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 internal class Program
 {
@@ -34,6 +36,7 @@ internal class Program
         }).AddNewtonsoftJson(options =>
         {
             options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         });
 
         services.AddHttpContextAccessor();
