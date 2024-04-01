@@ -1,0 +1,38 @@
+.nap-col {
+  float: left;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+
+  .nap-group {
+    label {
+      float: left;
+      width: 80px;
+      line-height: 25px;
+      margin-right: .5em;
+      text-align: right;
+    }
+    .nap-control {
+      float: left;
+      width: 150px;
+    }
+  }
+}
+
+:host /deep/ .month {
+  margin: 0 0 0 85px !important;
+  .form-control {
+      width: 150px;
+    }
+}
+:host /deep/ .year {
+  margin: 0 0 0 70px !important;
+  label {
+    margin-right: .5em;
+  }
+  .form-control {
+    width: 150px;
+  }
+}
+.anually {
+  margin-left: 85px;
+}

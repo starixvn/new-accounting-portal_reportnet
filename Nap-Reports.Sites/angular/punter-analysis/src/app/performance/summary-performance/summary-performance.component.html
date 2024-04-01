@@ -1,0 +1,56 @@
+<div *ngIf="statistic" class="row summary">
+  <div class="col">
+    <div class="box">
+      <p>TURNOVER</p>
+      <p [napDecimalFormat]="statistic.SummaryStatistic.Turnover"></p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="box">
+      <p>WIN LOSS</p>
+      <p class="number" [napDecimalFormat]="statistic.SummaryStatistic.WinLoss"></p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="box">
+      <p>MARGIN %</p>
+      <p class="number" [napPercentFormat]="statistic.SummaryStatistic.WinLoss/statistic.SummaryStatistic.Turnover"></p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="box">
+      <p>BET COUNT</p>
+      <p [napIntegerFormat]="statistic.SummaryStatistic.BetCount"></p>
+    </div>
+  </div>
+</div>
+<div *ngIf="statistic" class="chart-container">
+  <div class="row">
+    <div class="col-6">
+      <div class="box">
+        <canvas style="width: 406px; height: 203px;" napChart [datasets]="marginDatasets" [labels]="monthLabels"
+          chartType="bar" [options]="marginOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="box">
+        <canvas style="width: 406px; height: 203px;" napChart [datasets]="winLossTurnoverDatasets" [labels]="monthLabels"
+          [options]="winLossTurnoverOptions" chartType="bar"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="box">
+        <canvas style="width: 406px; height: 406px;" napChart [datasets]="betCountDatasets" [labels]="monthLabels"
+          chartType="pie" [options]="betCountOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="box">
+        <canvas style="width: 406px; height: 406px;" napChart [data]="productData" [labels]="productLabels" chartType="pie"
+          [options]="productOptions" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

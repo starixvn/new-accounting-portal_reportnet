@@ -1,0 +1,60 @@
+<div class="nap-filter">
+  <nap-legend [legendId]="580" [legendTitle]="'Actual Member Bet Legend'"></nap-legend>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>From Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="endDate" (dateChange)="onDateChangeFrom()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>To Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate" (dateChange)="onDateChangeTo()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Site</label>
+        <div class="nap-control width-100">
+          <select class="form-control" #siteSelect>
+            <option *ngFor="let site of sites" value={{site.SiteType}}>
+              {{site.SiteName}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Currency</label>
+        <div class="nap-control width-100">
+          <select class="form-control" #currencySelect>
+            <option *ngFor="let currency of currencies" value={{currency.CurrencyId}}>
+              {{currency.CurrencyName}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Odds Type</label>
+        <div class="nap-control width-100">
+          <select class="form-control" #oddsSelect>
+            <option *ngFor="let odd of odds" value={{odd.OddsType}}>
+              {{odd.OddsTypeName}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col col-buttons">
+      <button class="btn btn-primary" (click)="onGenerate(siteSelect.value, currencySelect.value, oddsSelect.value)">GENERATE</button>
+    </div>
+  </div>
+</div>

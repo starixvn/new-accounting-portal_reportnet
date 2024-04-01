@@ -1,0 +1,16 @@
+@import "~nap-theme/scss/grid.scss";
+@import "~nap-theme/scss/breadcrumb";
+:host /deep/ .breadcrumb-container {
+  width: 100%;
+}
+.nap-grid {
+  .red-positive.number-positive {
+    color: red;
+  }
+  .red-negative.number-negative {
+    color: red;
+  }
+  .body {
+    overflow-x: hidden;
+  }
+}

@@ -1,0 +1,47 @@
+<ng-template #table let-list="list" let-header="header" let-title="title" let-field="field">
+    <table class="nap-table table-striped">
+        <colgroup>
+            <col style="width: 28%">
+            <col style="width: 28%">
+            <col style="width: 28%">
+            <col style="width: 16%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th colspan="4">{{header}}</th>
+            </tr>
+            <tr>
+                <td>{{title}}</td>
+                <td class="text-right">Turnover</td>
+                <td class="text-right">Win Loss</td>
+                <td class="text-right">Margin %</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list">
+                <td>{{item[field]}}</td>
+                <td class="text-right" [napDecimalFormat]="item.Turnover"></td>
+                <td class="number" [napDecimalFormat]="item.WinLoss"></td>
+                <td class="number" [napPercentFormat]="item.WinLoss/item.Turnover"></td>
+            </tr>
+        </tbody>
+    </table>
+</ng-template>
+<nap-breadcrumb [items]="breadcrumbItems" [config]="breadcrumbConfig"></nap-breadcrumb>
+<div class="performance-container" [class.empty-data]="!hasData">
+    <div *ngIf="statistic && !hasData" class="row">
+        <div class="col-12">
+            There is no data
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div #container></div>
+        </div>
+        <div *ngIf="hasData" class="col-4 table-container">
+            <ng-template [ngTemplateOutlet]="table" [ngTemplateOutletContext]="{list: statistic.SportStatistics, header: 'Top 5 sports', title: 'Sports', field: 'SportName'}"></ng-template>
+            <ng-template [ngTemplateOutlet]="table" [ngTemplateOutletContext]="{list: statistic.BetTypeStatistics, header: 'Top 10 bet types', title: 'Bet type', field: 'BetTypeName'}"></ng-template>
+            <ng-template [ngTemplateOutlet]="table" [ngTemplateOutletContext]="{list: statistic.EventStatistics, header: 'Event choices', title: 'Event type', field: 'EventType'}"></ng-template>
+        </div>
+    </div>
+</div>

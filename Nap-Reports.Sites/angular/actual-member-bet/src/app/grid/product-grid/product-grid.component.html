@@ -1,0 +1,95 @@
+<ng-template #colgroup>
+  <colgroup>
+      <col style="width: 150px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+      <tr>
+          <th rowspan="2">Product</th>
+          <th colspan="3">Member</th>
+          <th colspan="2">House Turnover(RM)</th>
+          <th colspan="2">House</th>
+      </tr>
+      <tr>
+          <th>Bet Count</th>
+          <th>Turnover(RM)</th>
+          <th>Net Win Loss</th>
+          <th>Real</th>
+          <th>Virtual</th>
+          <th>Real Income</th>
+          <th>Virtual Win Loss</th>
+      </tr>
+  </thead>
+</ng-template>
+<ng-template #rowItem let-item="item">
+    <td [ngSwitch]="item.ProductName === 'Soccer Major' || item.ProductName === 'Basketball Major' || item.ProductName === 'Other Sports Major'">
+        <a *ngSwitchCase="true" href="javascript:;" (click)="showBettype(item.KeyId, item.ProductName)">{{ item.ProductName }}</a>
+        <label *ngSwitchCase="false">{{ item.ProductName }}</label>
+    </td>
+  <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberTurnoverRM"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberNetWinLoss"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseRealTurnover"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseVirtualTurnover"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseRealIncome"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseVirtualWinLoss"></td>
+</ng-template>
+<div *ngIf="productData" [ngSwitch]="productData.Entities.length > 0">
+  <div class="nap-grid">
+      <div style="width: 1010px;">
+          <div class="header">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <ng-template [ngTemplateOutlet]="thead"></ng-template>
+              </table>
+          </div>
+          <div *ngSwitchCase="true" class="body">
+              <table class="table-striped">
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tbody>
+                      <tr *ngFor="let item of productData.Entities">
+                          <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+                          </ng-template>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="false" class="body stretch">
+              <table>
+                  <tbody>
+                      <tr>
+                          <th class="no-data" colspan="8">
+                              There is no data
+                          </th>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="true" class="footer">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tfoot>
+                      <tr class="font-weight-bold">
+                          <td>{{ productData.Total.ProductName }}</td>
+                          <td class="text-right" [napIntegerFormat]="productData.Total.BetCount"></td>
+                          <td class="text-right" [napDecimalFormat]="productData.Total.MemberTurnoverRM"></td>
+                          <td class="text-right" [napDecimalFormat]="productData.Total.MemberNetWinLoss"></td>
+                          <td class="text-right" [napDecimalFormat]="productData.Total.HouseRealTurnover"></td>
+                          <td class="text-right" [napDecimalFormat]="productData.Total.HouseVirtualTurnover"></td>
+                          <td class="text-right" [napDecimalFormat]="productData.Total.HouseRealIncome"></td>
+                          <td class="text-right" [napDecimalFormat]="productData.Total.HouseVirtualWinLoss"></td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

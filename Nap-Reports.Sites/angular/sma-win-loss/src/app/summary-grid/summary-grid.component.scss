@@ -1,0 +1,53 @@
+@import "~nap-theme/scss/grid.scss";
+@import "~nap-theme/scss/breadcrumb";
+.nap-grid {
+  .body {
+    overflow-x: hidden;
+  }
+}
+:host /deep/ .breadcrumb-container {
+  width: 100%;
+}
+.number-negative {
+  color: red;
+}
+@media screen and (min-width: 576px) {
+  ::ng-deep .modal-open .modal-dialog {
+    max-width: 80%;
+    width: 520px;
+  }
+  .modal-dialog {
+    .modal-header {
+      padding: 8px 16px;
+    }
+    .modal-title {
+      font-weight: bold;
+    }
+    .modal-body {
+      max-height: 800px;
+      overflow-y: auto;
+      .number-negative {
+        color: black !important;
+      }
+    }
+  }
+}
+.even-row {
+  background-color: #ffffff;
+}
+.odd-row {
+  background-color: #e4f2fd;
+}
+:host /deep/ .footer {
+  .paging nav {
+    > span {
+      font-weight: bold !important;
+    }
+    .d-inline-block {
+      margin: 0 5px;
+    }
+    .page-item.active .page-link {
+      font-weight: bold;
+    }
+  }
+}

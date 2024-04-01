@@ -1,0 +1,17 @@
+@import '~nap-theme/scss/grid';
+@import '~nap-theme/scss/breadcrumb';
+@import '~nap-theme/scss/table';
+
+:host /deep/ .nap-grid {
+    .number {
+        &.number-positive,
+        &>.number-positive {
+            color: red;
+        }
+    }
+
+    .footer{
+        font-weight: bold;
+    }
+}
+

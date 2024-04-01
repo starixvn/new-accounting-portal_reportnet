@@ -1,0 +1,67 @@
+<ng-template #colgroup>
+  <colgroup>
+    <col style="width: 120px" />
+    <col style="width: 100px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+    <tr>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Bet Type</th>
+      <th>Virtual Rate(%)</th>
+    </tr>
+  </thead>
+</ng-template>
+<ng-template #rowItem let-item="item">
+  <td class="text-left">{{ item.Sport }}</td>
+  <td class="text-left">{{ item.IsLive }}</td>
+  <td class="text-left">{{ item.Bettype }}</td>
+  <td class="text-right" [napPercentFormat]="item.VirtualMultiplier"></td>
+</ng-template>
+
+<div *ngIf="data" [ngSwitch]="hasData">
+  <div class="modal-header">
+    <h6 class="modal-title">{{title}}</h6>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="nap-grid">
+      <div style="width: 480px;">
+        <div class="header">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <ng-template [ngTemplateOutlet]="thead"></ng-template>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+          <table class="table-striped">
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tbody>
+              <tr *ngFor="let item of data">
+                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+                </ng-template>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+          <table>
+            <tbody>
+              <tr>
+                <th class="no-data" colspan="4">
+                  There is no data
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

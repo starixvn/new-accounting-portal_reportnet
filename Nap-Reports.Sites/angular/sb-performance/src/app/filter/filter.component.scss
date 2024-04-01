@@ -1,0 +1,46 @@
+@import '~nap-theme/scss/filter';
+.nap-col {
+  .nap-group {
+    &>label {
+      float: left;
+      width: 80px;
+      line-height: 25px;
+    }
+    &>.nap-control {
+      float: left;
+      width: 150px;
+      &>p {
+        color: red;
+        &>span {
+          width: 35px;
+          display: inline-block;
+        }
+      }
+    }
+    &>.form-control {
+      width: 150px;
+    }
+    .col-form-label {
+      width: 150px;
+    }
+  }
+}
+.col-buttons {
+  margin: 0 0 0 30px;
+}
+.width-150 {
+  width: 150px;
+}
+
+.width-65 {
+  width: 65px !important;
+}
+
+.width-180 {
+  width: 180px !important;
+}
+
+.width-545 {
+  width: 545px !important;
+}
+

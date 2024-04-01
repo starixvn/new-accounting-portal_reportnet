@@ -26,4 +26,15 @@
 			<Mapping DataField="MoveBetsDay" ObjectProperty="MoveBetsDate" />
 		</Setting>
 	</Function>
+	<Function Name="SMA Win Loss">
+		<Setting Key="SMAWinLoss-CurrencySel" SpName="Acc_Rpt_SMAWinlossSummary_CurrencySel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SMAWinLoss-Summary" SpName="Acc_Rpt_SMAWinlossSummary" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0" />
+		<Setting Key="SMAWinLoss-SiteSel" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SMAWinLoss-SportSel" SpName="Acc_Rpt_SMAWinlossSummary_SportSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SMAWinLoss-VirtualRate" SpName="Acc_Rpt_SMAWinlossSummary_CustVirtualMultiplierSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SMAWinLoss-LeagueGroupSel" SpName="Acc_Rpt_SMAWinlossSummary_LeagueGroupSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SMAWinLoss-AvailabeDatabaseQuery" SpName="Acc_CheckDailyTaskReadiness" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SMAWinLoss-ReportLatestDate" SpName="Acc_Rpt_SMAWinlossSummary_ReportLatestDate" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SMAWinLoss-BetFromSel" SpName="Acc_Rpt_SMAWinlossSummary_BetfromSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+	</Function>
 </Functions>

@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~nap-theme/css/theme.css';
+@import '~font-awesome/css/font-awesome.min.css';
+.spinner-loading {
+    background-image: url("assets/spinner.gif");
+}
+.navbar-brand {
+    .logo {
+        background-image: url("assets/logo.png");
+        height: 16px;
+        width: 147px;
+    }
+}
+.form-control+.input-group-addon:not(:first-child) {
+    border-left: 0;
+}
+.input-group-addon {
+    padding: .15rem .3rem;
+    margin-bottom: 0;
+    font-size: .8125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #464a4c;
+    text-align: center;
+    background-color: #eceeef;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .2rem;
+    white-space: nowrap;
+    vertical-align: middle;
+}

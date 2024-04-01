@@ -1,0 +1,128 @@
+<ng-template #colgroup>
+  <colgroup>
+    <col style="width: 100px" />
+    <col style="width: 90px" />
+    <col style="width: 60px" />
+    <col style="width: 90px" />
+    <col style="width: 180px" />
+    <col style="width: 180px" />
+    <col style="width: 90px" />
+    <col style="width: 80px" />
+    <col style="width: 80px" />
+    <col style="width: 100px" />
+    <col style="width: 60px" />
+    <col style="width: 60px" />
+    <col style="width: 60px" />
+    <col style="width: 60px" />
+    <col style="width: 60px" />
+    <col style="width: 100px" />
+    <col style="width: 100px" />
+    <col style="width: 80px" />
+    <col style="width: 80px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Licensee</th>
+      <th>Currency</th>
+      <th>Sport</th>
+      <th>League</th>
+      <th>Match</th>
+      <th>Reason</th>
+      <th>Live</th>
+      <th>Bet Count</th>
+      <th>Bet Type</th>
+      <th>Choice</th>
+      <th>Betting Score</th>
+      <th>HDP/OU</th>
+      <th>HT Score</th>
+      <th>Final Score</th>
+      <th>MemberTO</th>
+      <th>MemberTO(RM)</th>
+      <th>AfterPT</th>
+      <th>AfterPT(RM)</th>
+    </tr>
+  </thead>
+</ng-template>
+<ng-template #rowItem let-item="item">
+  <td class="text-center">{{ item.Date }}</td>
+  <td class="text-center">{{ item.Licensee }}</td>
+  <td class="text-center">{{ item.Currency }}</td>
+  <td class="text-center">{{ item.Sport }}</td>
+  <td class="text-center">{{ item.League }}</td>
+  <td class="text-center">{{ item.Match }}</td>
+  <td class="text-center">{{ item.Reason }}</td>
+  <td class="text-center">{{ item.Live }}</td>
+  <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+  <td class="text-center">{{ item.BetType }}</td>
+  <td class="text-center">{{ item.Choice }}</td>
+  <td class="text-center">{{ item.BettingScore }}</td>
+  <td *ngIf='isMixParlay(item.Sport)' class="text-right">-</td>
+  <td *ngIf='!isMixParlay(item.Sport)' class="text-right" [napDecimalFormat]="item.HDPOU"></td>
+  <td class="text-center">{{ item.HTScore }}</td>
+  <td class="text-center">{{ item.FinalScore }}</td>
+  <td class="text-right" [napDecimalFormat]="item.MemberTO"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberTORM"></td>
+  <td class="text-right" [napDecimalFormat]="item.AfterPT"></td>
+  <td class="text-right" [napDecimalFormat]="item.AfterPTRM"></td>
+</ng-template>
+<ng-template #breadcrumbToolboxTemplate>
+  <div class="breadcrumb-toolbox">
+    <div class="toolbox-item">
+      <i class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()"></i>
+    </div>
+  </div>
+</ng-template>
+<div *ngIf="displayLicensee" [ngSwitch]="hasData">
+  <div class="nap-grid">
+    <div style="width: 1730px;">
+      <nap-breadcrumb *ngSwitchCase="true" [items]="breadcrumbItems" [toolboxTemplate]="breadcrumbToolboxTemplate">
+      </nap-breadcrumb>
+      <nap-breadcrumb *ngSwitchCase="false" [items]="breadcrumbItems"></nap-breadcrumb>
+    </div>
+    <div style="width: 1730px;">
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <ng-template [ngTemplateOutlet]="thead"></ng-template>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let item of displayLicensee">
+              <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th class="no-data" colspan="19">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="footer">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tfoot>
+            <tr>
+              <td colspan="19">
+                <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~nap-theme/css/theme.css';
+@import '~font-awesome/css/font-awesome.min.css';
+
+body {
+  padding-top: 2.5rem;
+}
+
+.spinner-loading {
+  background-image: url("assets/spinner.gif");
+}
+
+.navbar-brand {
+  .logo {
+    background-image: url("assets/logo.png");
+    height: 16px;
+    width: 147px;
+  }
+}

@@ -1,0 +1,96 @@
+<ng-template #colgroup>
+  <colgroup>
+      <col style="width: 150px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 150px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+      <tr>
+          <th rowspan="2">Bet Type</th>
+          <th colspan="4">Member</th>
+          <th colspan="2">House Turnover(MY Odds)</th>
+          <th colspan="2">House</th>
+      </tr>
+      <tr>
+          <th>Bet Count</th>
+          <th>Turnover(RM)</th>
+          <th>Turnover(MY Odds)</th>
+          <th>Net Win Loss</th>
+          <th>Real</th>
+          <th>Virtual</th>
+          <th>Real Income</th>
+          <th>Virtual Win Loss</th>
+      </tr>
+  </thead>
+</ng-template>
+<ng-template #rowItem let-item="item">
+  <td>{{ item.BettypeName }}</td>
+  <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberTurnoverRM"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberTurnoverMYOdds"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberNetWinLoss"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseRealTurnoverMYOdds"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseVirtualTurnoverMyOdds"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseRealIncome"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseVirtualWinLoss"></td>
+</ng-template>
+<div *ngIf="bettypeData" [ngSwitch]="bettypeData.Entities.length > 0">
+  <div class="nap-grid">
+      <div style="width: 1160px;">
+          <div class="header">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <ng-template [ngTemplateOutlet]="thead"></ng-template>
+              </table>
+          </div>
+          <div *ngSwitchCase="true" class="body">
+              <table class="table-striped">
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tbody>
+                      <tr *ngFor="let item of bettypeData.Entities">
+                          <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+                          </ng-template>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="false" class="body stretch">
+              <table>
+                  <tbody>
+                      <tr>
+                          <th class="no-data" colspan="9">
+                              There is no data
+                          </th>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="true" class="footer">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tfoot>
+                      <tr class="font-weight-bold">
+                          <td>{{ bettypeData.Total.BettypeName }}</td>
+                          <td class="text-right" [napIntegerFormat]="bettypeData.Total.BetCount"></td>
+                          <td class="text-right" [napDecimalFormat]="bettypeData.Total.MemberTurnoverRM"></td>
+                          <td class="text-right" [napDecimalFormat]="bettypeData.Total.MemberTurnoverMYOdds"></td>
+                          <td class="text-right" [napDecimalFormat]="bettypeData.Total.MemberNetWinLoss"></td>
+                          <td class="text-right" [napDecimalFormat]="bettypeData.Total.HouseRealTurnoverMYOdds"></td>
+                          <td class="text-right" [napDecimalFormat]="bettypeData.Total.HouseVirtualTurnoverMyOdds"></td>
+                          <td class="text-right" [napDecimalFormat]="bettypeData.Total.HouseRealIncome"></td>
+                          <td class="text-right" [napDecimalFormat]="bettypeData.Total.HouseVirtualWinLoss"></td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

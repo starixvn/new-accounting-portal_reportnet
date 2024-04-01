@@ -3,9 +3,9 @@ using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Sites.Services;
 using Nap_Reports.Sites.Settings;
 using Nap_Reports.Utilities.BalanceUpServices;
+using Nap_Reports.Utilities.PermissionFilter;
 
 namespace Nap_Reports.Sites.Controllers
 {
@@ -34,7 +34,7 @@ namespace Nap_Reports.Sites.Controllers
             this.balanceUpService = balanceUpService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewBag.RootUrl = string.Empty;
             ViewBag.LegacyPath = string.Empty;
@@ -50,8 +50,8 @@ namespace Nap_Reports.Sites.Controllers
 
             ViewBag.ProductPermissions = productPermissions;
             var permission = productPermissions.Any() ? productPermissions.FirstOrDefault() : string.Empty;
-            ViewBag.PermissionProfileID = permissionService.GetPermissionProfileId(permission);
-            ViewBag.ModePermissions = this.userService.GetPermissions(
+            ViewBag.PermissionProfileID = await permissionService.GetPermissionProfileId(permission);
+            ViewBag.ModePermissions = userService.GetPermissions(
                 napSession.UserId,
                 napSettings.SiteId,
                 FunctionKeys.HouseWinLossModePermission)

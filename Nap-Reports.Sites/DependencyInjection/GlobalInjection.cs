@@ -6,8 +6,8 @@ using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using Fanex.NAP.Client.Session;
 using Fanex.RemotingRef;
-using Nap_Reports.Sites.Services;
 using Nap_Reports.Utilities.BalanceUpServices;
+using Nap_Reports.Utilities.PermissionFilter;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {

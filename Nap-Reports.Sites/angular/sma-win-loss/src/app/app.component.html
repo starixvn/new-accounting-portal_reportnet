@@ -1,0 +1,13 @@
+<nap-navbar></nap-navbar>
+<div class="container-fluid" style="min-width: 1215px;">
+    <div class="nap-header">
+        <div class="title">
+            Main /
+            <span class="active">SMA Win Loss Summary</span>
+        </div>
+    </div>
+    <app-filter (generated)="generate($event)"></app-filter>
+    <nap-toast></nap-toast>
+    <app-summary-grid [filterModel]="filterModel"></app-summary-grid>
+</div>
+<nap-spinner></nap-spinner>

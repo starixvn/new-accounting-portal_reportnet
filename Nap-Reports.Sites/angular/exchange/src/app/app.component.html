@@ -1,0 +1,14 @@
+<nap-navbar></nap-navbar>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div class="container-fluid" style="min-width: 1215px;">
+  <div class="nap-header">
+    <div class="title">
+      Misc / <span class="active"> EXCHANGE WIN LOSS</span>
+    </div>
+  </div>
+  <app-filter (generated)="generate($event)"></app-filter>
+  <nap-toast></nap-toast>
+  <app-grid [filterModel]="filterModel"></app-grid>
+</div>
+<nap-spinner></nap-spinner>

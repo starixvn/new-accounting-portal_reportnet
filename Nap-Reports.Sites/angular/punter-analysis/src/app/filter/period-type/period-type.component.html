@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-x1">
+        <div class="col-label">
+            <label class="col-form-label">Period type</label>
+        </div>
+        <div class="col-value">
+            <select class="form-control" [(ngModel)]="periodType" (ngModelChange)="onTypeChange()">
+            <option *ngFor="let option of periodTypeOptions" [ngValue]="option.value">{{option.text}}</option>
+        </select>
+        </div>
+    </div>
+    <div [ngSwitch]="periodType">
+        <div *ngSwitchCase="PeriodType.Daily">
+            <div class="col-x2">
+                <div class="col-label">
+                    <label class="col-form-label">From</label>
+                </div>
+                <div class="col-value">
+                    <nap-date-picker [(date)]="dailyFromDate" [minDate]="minDate" [maxDate]="dailyToDate" (dateChange)="onDailyDateChange()"></nap-date-picker>
+                </div>
+            </div>
+            <div class="col-x3">
+                <div class="col-label">
+                    <label class="col-form-label">To</label>
+                </div>
+                <div class="col-value">
+                    <nap-date-picker [(date)]="dailyToDate" [minDate]="dailyFromDate" [maxDate]="maxDate" (dateChange)="onDailyDateChange()"></nap-date-picker>
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchCase="PeriodType.Weekly">
+            <div class="col-x2">
+                <div class="col-label">
+                    <label class="col-form-label">From</label>
+                </div>
+                <div class="col-value">
+                    <nap-week-picker [(date)]="weeklyFromDate" [minDate]="minDate" [maxDate]="weeklyMaxFromDate" (dateChange)="onWeeklyDateChange()"></nap-week-picker>
+                </div>
+            </div>
+            <div class="col-x3">
+                <div class="col-label">
+                    <label class="col-form-label">To</label>
+                </div>
+                <div class="col-value">
+                    <nap-week-picker [(date)]="weeklyToDate" [minDate]="weeklyFromDate" [maxDate]="maxDate" (dateChange)="onWeeklyToDateChange()"></nap-week-picker>
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchCase="PeriodType.Monthly">
+            <div class="col-x2">
+                <nap-month-picker [(date)]="monthlyDate" [minDate]="minDate" [maxDate]="maxDate" (dateChange)="onMonthlyDateChange()"></nap-month-picker>
+            </div>
+        </div>
+        <div *ngSwitchCase="PeriodType.Annually">
+            <div class="col-x2">
+                <nap-year-picker [(date)]="annuallyDate" [minDate]="minDate" [maxDate]="maxDate" (dateChange)="onAnnuallyDateChange()"></nap-year-picker>
+            </div>
+        </div>
+        <div *ngSwitchCase="PeriodType.MonthRange">
+            <div class="col-x2">
+                <div class="col-label">
+                    <label class="col-form-label">From</label>
+                </div>
+                <nap-month-picker class="month-range" [hasYearLabel]="false" [hasMonthLabel]="false" [(date)]="monthRangeFromDate" [minDate]="minDate" [maxDate]="monthRangeToDate"
+                    (dateChange)="onMonthRangeDateChange()"></nap-month-picker>
+            </div>
+            <div class="col-x3">
+                <div class="col-label">
+                    <label class="col-form-label">To</label>
+                </div>
+                <nap-month-picker class="month-range" [hasYearLabel]="false" [hasMonthLabel]="false" [(date)]="monthRangeToDate" [minDate]="monthRangeFromDate" [maxDate]="maxDate"
+                    (dateChange)="onMonthRangeDateChange()"></nap-month-picker>
+            </div>
+        </div>
+    </div>
+</div>

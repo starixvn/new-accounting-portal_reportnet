@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Nap_Reports.HouseWinLoss;
+using SMAWinLoss;
 
 namespace Nap_Reports.Sites.App_Start
 {
@@ -9,6 +10,7 @@ namespace Nap_Reports.Sites.App_Start
         {
             var config = new MapperConfiguration(cfg => {
                 cfg.InitializeHouseWinLoss();
+                cfg.InitializeSMAWinLoss();
             });
 
             var mapper = config.CreateMapper();

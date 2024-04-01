@@ -1,0 +1,73 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col style="width: 250px" />
+        <col style="width: 120px" />
+        <col style="width: 120px" />
+        <col style="width: 90px" />
+        <col style="width: 120px" />
+    </colgroup>
+</ng-template>
+<ng-template #thead>
+    <thead>
+        <tr>
+            <th>League Group</th>
+            <th>Win Loss</th>
+            <th>Turnover</th>
+            <th>Margin</th>
+            <th>Bet Count</th>
+        </tr>
+    </thead>
+</ng-template>
+<div *ngIf="data" class="nap-grid" [ngSwitch]="hasData">
+    <div style="width: 718px">
+        <div class="header">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <ng-template [ngTemplateOutlet]="thead"></ng-template>
+            </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+            <table class="table-striped">
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tbody>
+                    <tr *ngFor="let item of data.Entities">
+                        <td><a href="javascript:;" (click)="showBetTypeGroup(item.LeagueGroupId, item.LeagueGroupName)">{{
+                                item.LeagueGroupName }}</a></td>
+                        <td class="number" [napDecimalFormat]="item.WinLoss"></td>
+                        <td class="text-right" [napDecimalFormat]="item.Turnover"></td>
+                        <td class="number" [napPercentFormat]="item.WinLoss/item.Turnover"></td>
+                        <td class="text-right">
+                            <a href="javascript:;" (click)="showBetCount(item.LeagueGroupId, item.LeagueGroupName)"
+                                [napIntegerFormat]="item.BetCount"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="no-data" colspan="5">
+                            There is no data
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngSwitchCase="true" class="footer">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tfoot>
+                    <tr>
+                        <td style="width:120px" class="text-right">Total</td>
+                        <td class="number" [napDecimalFormat]="data.Total.WinLoss"></td>
+                        <td class="text-right" [napDecimalFormat]="data.Total.Turnover"></td>
+                        <td class="number" [napPercentFormat]="data.Total.WinLoss/data.Total.Turnover"></td>
+                        <td class="text-right" [napIntegerFormat]="data.Total.BetCount"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

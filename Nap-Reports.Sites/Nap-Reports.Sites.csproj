@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="angular\**" />
+    <Content Remove="angular\**" />
+    <EmbeddedResource Remove="angular\**" />
+    <None Remove="angular\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="app\cn88-win-loss\app.js" />
     <None Remove="app\cn88-win-loss\breadcrumb\breadcrumb.service.js" />
     <None Remove="app\cn88-win-loss\breadcrumb\title.service.js" />
@@ -161,6 +168,7 @@
     <None Remove="content\images\show-hide.png" />
     <None Remove="content\scoreInformation.scss" />
     <None Remove="content\site.scss" />
+    <None Remove="ExcelTemplate\SMAWinLoss\Summary.xlsx" />
     <None Remove="fonts\bootstrap\glyphicons-halflings-regular.eot" />
     <None Remove="fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <None Remove="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
@@ -441,6 +449,9 @@
     <Content Include="content\images\show-hide.png" />
     <Content Include="content\scoreInformation.scss" />
     <Content Include="content\site.scss" />
+    <Content Include="ExcelTemplate\SMAWinLoss\Summary.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
@@ -632,7 +643,7 @@
     <PackageReference Include="Fanex.NAP.Client" Version="2.0.0.1" />
     <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.13" />
     <PackageReference Include="Fanex.NAP.Signin" Version="2.0.1.1" />
-    <PackageReference Include="Fanex.RemotingRef" Version="1.5.3" />
+    <PackageReference Include="Fanex.RemotingRef" Version="1.5.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -643,7 +654,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\Main\Nap-Reports.HouseWinLoss\Nap-Reports.HouseWinLoss.csproj" />
+    <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />
     <ProjectReference Include="..\src\Shared\Nap-Reports.Utilities\Nap-Reports.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

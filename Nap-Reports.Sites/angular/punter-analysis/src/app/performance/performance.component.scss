@@ -1,0 +1,57 @@
+@import '~nap-theme/scss/table';
+:host {
+    display: inline-block;
+}
+
+:host /deep/ .performance-container {
+    background: #eceeef;
+    width: 1250px;
+    &.empty-data {
+        color: red;
+        background: #fff;
+        font-weight: bold;
+    }
+    
+    .summary {
+        .box {
+            background-color: #fff;
+            text-align: center;
+            border: 1px solid #c5c5c5;
+            border-top: 3px solid #3c5ea5;
+            box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+            p {
+                &:first-child {
+                    font-weight: bold;
+                }
+                margin-bottom: 0;
+            }
+        }
+    }
+    .chart-container {
+        .row {
+            margin-top: 16px;
+            .box {
+                background-color: #fff;
+                height: 100%;
+            }
+        }
+    }
+    .table-container {
+        .number {
+            text-align: right;
+        }
+    }
+    .number {
+        &.number-positive,
+        &>.number-positive {
+            color: red;
+        }
+    }
+    .nap-table {
+        width: 100%;
+        margin-bottom: 1rem;
+        th {
+            text-align: left !important;
+        }
+    }
+}

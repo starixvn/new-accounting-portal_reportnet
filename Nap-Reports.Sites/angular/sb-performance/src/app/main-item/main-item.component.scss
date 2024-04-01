@@ -1,0 +1,43 @@
+@import '~nap-theme/scss/grid';
+.fa {
+  float: right;
+  line-height: 18px;
+}
+.title {
+  background-color: #ebf0f7;
+  padding: 6px;
+  text-align: center;
+  border: 1px solid #dedfe0;
+  margin: 10px 0px 7px 0px;
+  width: 730px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.title h6 {
+  font-weight: bold;
+  color: #6abdf7;
+  margin: 0px;
+}
+.total td {
+  font-weight: bold;
+}
+
+.nap-grid {
+    .body{
+      max-height: 400px !important;
+      min-height: 400px !important;
+    }
+      .number-negative-black.number-negative {
+        color: black;
+      }
+
+      .number-negative-black.number-positive {
+        color: red;
+      }
+
+      .number-negative
+      {
+          color: red;
+      }
+
+}

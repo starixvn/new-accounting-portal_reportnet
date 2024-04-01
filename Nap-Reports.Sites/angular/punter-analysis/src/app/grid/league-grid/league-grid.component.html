@@ -1,0 +1,85 @@
+<ng-template #col>
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+    <col style="width: 90px" />
+    <col style="width: 120px" />
+</ng-template>
+<div *ngIf="data" class="nap-grid" [ngSwitch]="hasData">
+    <div [ngStyle]="{'width.px': 271 + data.GroupNames.length * 450 }">
+        <div class="header">
+            <table>
+                <colgroup>
+                    <col style="width: 250px" />
+                    <ng-template ngFor [ngForOf]="data.GroupNames">
+                        <ng-template [ngTemplateOutlet]="col"></ng-template>
+                    </ng-template>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th rowspan="2">League</th>
+                        <th *ngFor="let groupName of data.GroupNames" colspan="4">{{groupName}}</th>
+                    </tr>
+                    <tr *ngIf="data.GroupNames.length > 0">
+                        <ng-template ngFor [ngForOf]="data.GroupNames">
+                            <th>Win Loss</th>
+                            <th>Turnover</th>
+                            <th>Margin</th>
+                            <th>Bet Count</th>
+                        </ng-template>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+            <table class="table-striped">
+                <colgroup>
+                    <col style="width: 250px" />
+                    <ng-template ngFor [ngForOf]="data.GroupNames">
+                        <ng-template [ngTemplateOutlet]="col"></ng-template>
+                    </ng-template>
+                </colgroup>
+                <tbody>
+                    <tr *ngFor="let leagueItem of data.Entities">
+                        <td>{{ leagueItem.LeagueName }}</td>
+                        <ng-template ngFor let-i="index" [ngForOf]="data.GroupNames">
+                            <td class="number" [napDecimalFormat]="leagueItem.PeriodGroups[i].WinLoss"></td>
+                            <td class="text-right" [napDecimalFormat]="leagueItem.PeriodGroups[i].Turnover"></td>
+                            <td class="number" [napPercentFormat]="leagueItem.PeriodGroups[i].WinLoss/leagueItem.PeriodGroups[i].Turnover"></td>
+                            <td class="text-right" [napIntegerFormat]="leagueItem.PeriodGroups[i].BetCount"></td>
+                        </ng-template>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+            <table>
+                <tbody>
+                    <tr>
+                        <th [colSpan]="1 + data.GroupNames.length * 4" class="no-data">There is no data</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngSwitchCase="true" class="footer">
+            <table>
+                <colgroup>
+                    <col style="width: 250px" />
+                    <ng-template ngFor [ngForOf]="data.GroupNames">
+                        <ng-template [ngTemplateOutlet]="col"></ng-template>
+                    </ng-template>
+                </colgroup>
+                <tfoot>
+                    <tr>
+                        <td class="text-right">Total</td>
+                        <ng-template ngFor let-i="index" [ngForOf]="data.GroupNames">
+                            <td class="number" [napDecimalFormat]="data.Total.PeriodGroups[i].WinLoss"></td>
+                            <td class="text-right" [napDecimalFormat]="data.Total.PeriodGroups[i].Turnover"></td>
+                            <td class="number" [napPercentFormat]="data.Total.PeriodGroups[i].WinLoss/data.Total.PeriodGroups[i].Turnover"></td>
+                            <td class="text-right" [napIntegerFormat]="data.Total.PeriodGroups[i].BetCount"></td>
+                        </ng-template>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

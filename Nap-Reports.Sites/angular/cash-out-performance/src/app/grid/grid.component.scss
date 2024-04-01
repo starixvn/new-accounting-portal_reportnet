@@ -1,0 +1,11 @@
+@import '~nap-theme/scss/grid';
+@import '~nap-theme/scss/breadcrumb';
+
+.nap-grid {
+    .red-positive.number-positive {
+      color: red;
+    }
+    .red-negative.number-negative {
+      color: red;
+    }
+}
