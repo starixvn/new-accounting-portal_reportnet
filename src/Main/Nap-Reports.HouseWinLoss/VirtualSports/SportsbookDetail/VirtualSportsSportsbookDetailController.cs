@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.VirtualSports.SportsbookDetail
 {
     [Route("api/house-win-loss-by-products/virtual-sports/sportsbook-match-detail")]
+    [ApiController]
     public class VirtualSportsSportsbookDetailController : MatchDetailController
     {
         private readonly IMapper mapper;

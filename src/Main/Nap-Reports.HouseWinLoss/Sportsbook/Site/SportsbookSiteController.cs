@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.Sportsbook.Site
 {
     [Route("api/house-win-loss-by-products/sportsbook/site")]
+    [ApiController]
     public class SportsbookSiteController : SiteWinLossController
     {
         private readonly IMapper mapper;

@@ -10,6 +10,7 @@ namespace Nap_Reports.HouseWinLoss.Soccer.LiveNonLive
     using Nap_Reports.Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer/live-nonlive")]
+    [ApiController]
     public class SoccerLiveNonLiveController : ControllerBase
     {
         private readonly SoccerLiveNonLiveWinLossService service;

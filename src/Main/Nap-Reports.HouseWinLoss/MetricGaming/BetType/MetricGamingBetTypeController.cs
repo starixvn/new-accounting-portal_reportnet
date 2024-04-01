@@ -7,6 +7,7 @@ using Nap_Reports.HouseWinLoss.Common.Criteria;
 namespace Nap_Reports.HouseWinLoss.MetricGaming.BetType
 {
     [Route("api/house-win-loss-by-products/metric-gaming-superlive/bet-type")]
+    [ApiController]
     public class MetricGamingBetTypeController : BasicWinLossController
     {
         private readonly IMapper mapper;

@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.MetricGaming.Site
 {
     [Route("api/house-win-loss-by-products/metric-gaming-superlive/site")]
+    [ApiController]
     public class MetricGamingSiteController : SiteWinLossController
     {
         private readonly IMapper mapper;

@@ -6,6 +6,7 @@ using Nap_Reports.HouseWinLoss.Common.ColumnDecorators;
 namespace Nap_Reports.HouseWinLoss.Soccer.MajorMinor
 {
     [Route("api/house-win-loss-by-products/soccer/major-minor")]
+    [ApiController]
     public class SoccerMajorMinorController : BasicWinLossController
     {
         private readonly IMapper mapper;

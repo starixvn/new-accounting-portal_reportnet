@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.MetricGaming.MatchDetail
 {
     [Route("api/house-win-loss-by-products/metric-gaming-superlive/match-detail")]
+    [ApiController]
     public class MetricGamingMatchDetailController : MatchDetailController
     {
         private readonly IMapper mapper;    

@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.Sportsbook.OutrightMatchDetail
 {
     [Route("api/house-win-loss-by-products/sportsbook/outright-match-detail")]
+    [ApiController]
     public class SportsbookOutrightMatchDetailController : MatchDetailController
     {
         private readonly IMapper mapper;

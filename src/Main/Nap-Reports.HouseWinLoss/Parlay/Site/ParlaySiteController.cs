@@ -7,6 +7,7 @@ using Nap_Reports.Utilities.ExcelResult;
 namespace Nap_Reports.HouseWinLoss.Parlay.Site
 {
     [Route("api/house-win-loss-by-products/parlay/site")]
+    [ApiController]
     public class ParlaySiteController : ControllerBase
     {
         private readonly WinLossService service;

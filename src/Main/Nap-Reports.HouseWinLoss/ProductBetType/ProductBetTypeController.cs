@@ -6,6 +6,7 @@ using Nap_Reports.Utilities.ExcelResult;
 namespace Nap_Reports.HouseWinLoss.ProductBetType
 {
     [Route("api/house-win-loss-by-products/product-bettype")]
+    [ApiController]
     public class ProductBetTypeController : ControllerBase
     {
         private readonly Service service;

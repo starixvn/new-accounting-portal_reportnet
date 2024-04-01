@@ -10,6 +10,7 @@ namespace Nap_Reports.HouseWinLoss.DailyWinLoss2hSoccerMinor.MatchDetail
     using Nap_Reports.Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer-minor/match-detail")]
+    [ApiController]
     public class SoccerMinorMatchDetailController : ControllerBase
     {
         private readonly WinLossService service;

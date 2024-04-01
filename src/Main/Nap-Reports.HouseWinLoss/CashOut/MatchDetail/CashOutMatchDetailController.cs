@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.CashOut.MatchDetail
 {
     [Route("api/house-win-loss-by-products/cash-out/match-detail")]
+    [ApiController]
     public class CashOutMatchDetailController : MatchDetailController
     {
         private readonly IMapper mapper;

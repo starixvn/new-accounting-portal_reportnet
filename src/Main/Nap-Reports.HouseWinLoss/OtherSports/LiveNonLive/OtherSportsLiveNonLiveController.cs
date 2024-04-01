@@ -10,6 +10,7 @@ namespace Nap_Reports.HouseWinLoss.OtherSports.LiveNonLive
     using Nap_Reports.Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/other-sports/live-non-live")]
+    [ApiController]
     public class OtherSportsLiveNonLiveController : ControllerBase
     {
         private readonly OtherSportsLiveNonLiveWinLossService service;

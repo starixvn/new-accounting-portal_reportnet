@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.BetBuilder.MatchDetail
 {
     [Route("api/house-win-loss-by-products/bet-builder/match-detail")]
+    [ApiController]
     public class BetBuilderMatchDetailController : MatchDetailController
     {
         private readonly IMapper mapper;

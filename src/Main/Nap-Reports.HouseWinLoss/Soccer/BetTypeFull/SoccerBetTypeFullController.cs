@@ -6,6 +6,7 @@ using Nap_Reports.Utilities.ExcelResult;
 namespace Nap_Reports.HouseWinLoss.Soccer.BetTypeFull
 {
     [Route("api/house-win-loss-by-products/soccer/bettype-full")]
+    [ApiController]
     public class SoccerBetTypeFullController : ControllerBase
     {
         private readonly AbstractFactory factory;

@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.DailyWinLoss2hSoccerMinor.Site
 {
     [Route("api/house-win-loss-by-products/soccer-minor/site")]
+    [ApiController]
     public class SoccerMinorSiteController : SiteWinLossController
     {
         private readonly IMapper mapper; 

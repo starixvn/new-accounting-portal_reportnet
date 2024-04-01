@@ -9,6 +9,7 @@ using Nap_Reports.Utilities.ExcelResult;
 namespace Nap_Reports.HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType
 {
     [Route("api/house-win-loss-by-products/soccer-minor/bet-type")]
+    [ApiController]
     public class SoccerMinorBetTypeController : ControllerBase
     {
         private readonly BasicWinLossService service;

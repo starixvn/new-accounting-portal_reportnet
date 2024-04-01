@@ -7,6 +7,7 @@ using Nap_Reports.Utilities.ExcelResult;
 namespace Nap_Reports.HouseWinLoss.SimpleGrid
 {
     [Route("api/house-win-loss-by-products/simple-grid")]
+    [ApiController]
     public class SimpleGridController : ControllerBase
     {
         private readonly SimpleCriteriaFactory modelFactory;

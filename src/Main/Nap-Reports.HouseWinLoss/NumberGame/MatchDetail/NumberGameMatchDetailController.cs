@@ -7,6 +7,7 @@ using Nap_Reports.HouseWinLoss.Common.MatchDetailByCode;
 namespace Nap_Reports.HouseWinLoss.NumberGame.MatchDetail
 {
     [Route("api/house-win-loss-by-products/number-game/match-detail")]
+    [ApiController]
     public class NumberGameMatchDetailController : MatchDetailByCodeController
     {
         private readonly IMapper mapper;

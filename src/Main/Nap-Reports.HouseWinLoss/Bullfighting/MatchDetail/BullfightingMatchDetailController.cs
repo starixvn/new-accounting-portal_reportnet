@@ -8,6 +8,7 @@ using Nap_Reports.HouseWinLoss.Configuration;
 namespace Nap_Reports.HouseWinLoss.Bullfighting.MatchDetail
 {
     [Route("api/house-win-loss-by-products/bullfighting/match-detail")]
+    [ApiController]
     public class BullfightingMatchDetailController : MatchDetailController
     {
         private readonly IMapper mapper;        

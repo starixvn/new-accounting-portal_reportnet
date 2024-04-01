@@ -11,6 +11,7 @@ namespace Nap_Reports.HouseWinLoss.MetricGaming.LiveNonLive
     using Nap_Reports.Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/metric-gaming-superlive/live-non-live")]
+    [ApiController]
     public class MetricGamingLiveNonLiveController : ControllerBase
     {
         private readonly MetricGamingLiveNonLiveWinLossService service;

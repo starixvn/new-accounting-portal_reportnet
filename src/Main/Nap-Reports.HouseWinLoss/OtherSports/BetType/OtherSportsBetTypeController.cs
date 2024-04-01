@@ -6,6 +6,7 @@ using Nap_Reports.HouseWinLoss.Common.ColumnDecorators;
 namespace Nap_Reports.HouseWinLoss.OtherSports.BetType
 {
     [Route("api/house-win-loss-by-products/other-sports/bet-type")]
+    [ApiController]
     public class OtherSportsBetTypeController : BasicWinLossController
     {
         private readonly IMapper mapper;    

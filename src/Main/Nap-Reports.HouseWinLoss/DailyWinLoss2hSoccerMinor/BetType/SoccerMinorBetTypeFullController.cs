@@ -11,6 +11,7 @@ namespace Nap_Reports.HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType
     using Nap_Reports.Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer-minor/bet-type-full")]
+    [ApiController]
     public class SoccerMinorBetTypeFullController : ControllerBase
     {
         private readonly BasicWinLossService service;

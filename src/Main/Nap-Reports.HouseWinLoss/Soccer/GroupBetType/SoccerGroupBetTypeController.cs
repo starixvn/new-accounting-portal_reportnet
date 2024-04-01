@@ -7,6 +7,7 @@ using Nap_Reports.Utilities.ExcelResult;
 namespace Nap_Reports.HouseWinLoss.Soccer.GroupBetType
 {
     [Route("api/house-win-loss-by-products/soccer/group-bettype")]
+    [ApiController]
     public class SoccerGroupBetTypeController : ControllerBase
     {
         private readonly GroupBetTypeWinLossService service;

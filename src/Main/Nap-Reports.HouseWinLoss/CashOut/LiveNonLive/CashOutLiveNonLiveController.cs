@@ -11,6 +11,7 @@ namespace Nap_Reports.HouseWinLoss.CashOut.LiveNonLive
     using Nap_Reports.Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/cash-out/live-non-live")]
+    [ApiController]
     public class CashOutLiveNonLiveController : ControllerBase
     {
         private readonly CashOutLiveNonLiveWinLossService service;

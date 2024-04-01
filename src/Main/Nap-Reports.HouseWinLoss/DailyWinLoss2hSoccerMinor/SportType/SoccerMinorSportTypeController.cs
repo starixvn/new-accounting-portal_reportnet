@@ -9,6 +9,7 @@ namespace Nap_Reports.HouseWinLoss.DailyWinLoss2hSoccerMinor.SportType
     using Nap_Reports.Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer-minor/sport-type")]
+    [ApiController]
     public class SoccerMinorSportTypeController : BasicWinLossController
     {
         private readonly IMapper mapper;

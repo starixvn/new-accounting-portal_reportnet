@@ -10,6 +10,7 @@ namespace Nap_Reports.HouseWinLoss.NG2.BetType
     using Microsoft.AspNetCore.Mvc;
     using Nap_Reports.Utilities.ExcelResult;
 
+    [ApiController]
     public class NG2BetTypeController : ControllerBase
     {
         private readonly BasicWinLossService service;

@@ -7,6 +7,7 @@ using Nap_Reports.HouseWinLoss.Common.MatchDetailByCode;
 namespace Nap_Reports.HouseWinLoss.VirtualSports.RacingDetail
 {
     [Route("api/house-win-loss-by-products/virtual-sports/racing-match-detail")]
+    [ApiController]
     public class VirtualSportsRacingDetailController : MatchDetailByCodeController
     {
         private readonly IMapper mapper;

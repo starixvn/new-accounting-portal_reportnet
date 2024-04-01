@@ -9,6 +9,7 @@ using Nap_Reports.HouseWinLoss.Common.Criteria;
 namespace Nap_Reports.HouseWinLoss.Soccer.BetType
 {
     [Route("api/house-win-loss-by-products/soccer/bettype")]
+    [ApiController]
     public class SoccerBetTypeController : BasicWinLossController
     {
         private readonly IMapper mapper;
