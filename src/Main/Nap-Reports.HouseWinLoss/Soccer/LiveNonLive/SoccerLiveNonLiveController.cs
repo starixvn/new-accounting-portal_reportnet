@@ -8,6 +8,7 @@ namespace Nap_Reports.HouseWinLoss.Soccer.LiveNonLive
 {
     using Microsoft.AspNetCore.Mvc;
     using Nap_Reports.Utilities.ExcelResult;
+    using Newtonsoft.Json;
 
     [Route("api/house-win-loss-by-products/soccer/live-nonlive")]
     [ApiController]
@@ -36,8 +37,7 @@ namespace Nap_Reports.HouseWinLoss.Soccer.LiveNonLive
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {
-            var gridOptions = BuildGridOptions(queryModel);
-
+            var gridOptions = await BuildGridOptions(queryModel);
             return Ok(gridOptions);
         }
 

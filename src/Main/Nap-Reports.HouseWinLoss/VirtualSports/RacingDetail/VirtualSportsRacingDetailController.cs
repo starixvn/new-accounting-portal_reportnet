@@ -15,7 +15,7 @@ namespace Nap_Reports.HouseWinLoss.VirtualSports.RacingDetail
         public VirtualSportsRacingDetailController(WinLossService service, GridOptionsBuilder builder, MatchGridOptionColumnDecoratorByCode decorator, IMapper mapper)
             : base(service, builder, decorator)
         {
-            mapper = mapper;
+            this.mapper = mapper;
         }
 
         [Route("")]
