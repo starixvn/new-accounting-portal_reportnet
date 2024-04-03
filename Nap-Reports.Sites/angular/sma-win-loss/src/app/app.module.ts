@@ -76,7 +76,21 @@ import { CommonItemTreeviewPipe } from './filter/common-item-treeview.pipe';
   bootstrap: [AppComponent],
   entryComponents: [VirtualRateGridComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private readonly navbarService: NavbarService) {
+    navbarService.url = 'state-api/application/header';
+    navbarService.userMenus = [
+            {
+                name: 'Change Password',
+                link: 'Auth/ChangePassword'
+            },
+            {
+                name: 'Sign Out',
+                link: 'Auth/LogOut'
+            }
+        ];
+    }
+ }
 
 export function initConfiguration(service: AppService): Function {
   return () => new Promise(resolve => {

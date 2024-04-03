@@ -5,6 +5,7 @@ import { NapDateStruct, DateHelper } from 'nap-components/date';
 import { CONFIG } from '../common/config';
 import { FilterService } from './fiter.service';
 import { ToastService } from 'nap-components/toast';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-filter',
@@ -140,7 +141,10 @@ export class FilterComponent implements OnInit {
   }
 
   private getAvailableDateData() {
-    this.filterService.getAvailableDateData().subscribe(date => this.availableDateData = `* Data is ready up to ${date}`);
+    this.filterService.getAvailableDateData().subscribe(date => {
+      let availableDate = moment(date).format('MMM DD, YYYY');;
+      this.availableDateData = `* Data is ready up to ${availableDate}`
+    });
   }
 
   private getAccountStatus() {

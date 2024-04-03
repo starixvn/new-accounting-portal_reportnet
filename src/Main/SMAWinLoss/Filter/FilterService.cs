@@ -14,7 +14,7 @@ namespace SMAWinLoss.Filter
 
         Task<bool> GetAvailableDatabase();
 
-        Task<string> GetAvailableDateData();
+        Task<DateTime> GetAvailableDateData();
 
         Task<IEnumerable<BetFrom>> GetBetFroms();
     }
@@ -34,11 +34,10 @@ namespace SMAWinLoss.Filter
             return await repository.GetAsync<bool>(criteria);
         }
 
-        public async Task<string> GetAvailableDateData()
+        public async Task<DateTime> GetAvailableDateData()
         {
             var criteria = new AvailableDateDataCriteria();
-            var date = await repository.GetAsync<DateTime>(criteria);
-            return $"{date: MMM dd, yyyy}";
+            return await repository.GetAsync<DateTime>(criteria);
         }
 
         public async Task<IEnumerable<Currency>> GetCurrencies()

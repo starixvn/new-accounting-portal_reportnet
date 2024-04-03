@@ -8,7 +8,7 @@ namespace SMAWinLoss.Filter
         IRequestHandler<SportHttpParameter, IEnumerable<Sport>>,
         IRequestHandler<LeagueGroupHttpParameter, LeagueGroupModel>,
         IRequestHandler<AvailableDatabaseHttpParameter, bool>,
-        IRequestHandler<AvailableDateDataHttpParameter, string>,
+        IRequestHandler<AvailableDateDataHttpParameter, DateTime>,
         IRequestHandler<BetFromHttpParameter, IEnumerable<BetFrom>>,
         IRequestHandler<PermissionHttpParameter, int>
     {
@@ -27,7 +27,7 @@ namespace SMAWinLoss.Filter
             return await service.GetLeagueGroup();
         }
 
-        public async Task<string> Handle(AvailableDateDataHttpParameter request, CancellationToken cancellationToken)
+        public async Task<DateTime> Handle(AvailableDateDataHttpParameter request, CancellationToken cancellationToken)
         {
             return await service.GetAvailableDateData();
         }
