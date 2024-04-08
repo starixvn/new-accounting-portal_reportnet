@@ -32,6 +32,7 @@ namespace Nap_Reports.Sites
         {
             services.RegisterHouseWinLossServices();
             services.RegisterSMAWinLossServices();
+            services.RegisterSBPerformanceServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

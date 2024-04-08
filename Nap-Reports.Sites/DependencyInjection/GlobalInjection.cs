@@ -9,8 +9,8 @@ using Fanex.RemotingRef;
 using Nap_Reports.Utilities.BalanceUpServices;
 using Nap_Reports.Utilities.Configurations;
 using Nap_Reports.Utilities.PermissionFilter;
+using SBPerformance;
 using SMAWinLoss;
-using System.Net.NetworkInformation;
 using System.Reflection;
 
 namespace Nap_Reports.Sites.DependencyInjection
@@ -36,6 +36,7 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<ConfigurationService, ConfigurationServiceImp>();
 
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBPerformanceAttribute).GetTypeInfo().Assembly));
         }
     }
 }

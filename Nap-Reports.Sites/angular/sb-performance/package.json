@@ -44,7 +44,6 @@
     "@angular/language-service": "~7.2.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/lodash": "^4.17.15",
     "@types/node": "~8.9.4",
     "cheerio": "^1.0.0-rc.3",
     "codelyzer": "~4.5.0",

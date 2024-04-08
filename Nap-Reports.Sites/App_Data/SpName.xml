@@ -37,4 +37,11 @@
 		<Setting Key="SMAWinLoss-ReportLatestDate" SpName="Acc_Rpt_SMAWinlossSummary_ReportLatestDate" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="SMAWinLoss-BetFromSel" SpName="Acc_Rpt_SMAWinlossSummary_BetfromSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
+	<Function Name="SBPerformance">
+		<Setting Key="SBPerformanceMonitor-Dashboard" SpName="Acc_Rpt_SBPerformanceMonitor_Dashboard_DWH" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-Site" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Site" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-Sport" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Sport" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-League" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_League" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-Member" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Member" DbName="DBWH.bodb_dwrs.wsv_nap" />
+	</Function>
 </Functions>
