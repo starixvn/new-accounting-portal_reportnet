@@ -645,7 +645,7 @@
     <PackageReference Include="Fanex.NAP.Signin" Version="2.0.1.1" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="ONEbook.UM.AspNetCore" Version="3.1.1.1" />
     <PackageReference Include="ONEbook.UM.AspNetCore.Filters" Version="3.1.1.1" />
@@ -657,6 +657,7 @@
     <ProjectReference Include="..\src\Main\SBPerformance\SBPerformance.csproj" />
     <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />
     <ProjectReference Include="..\src\Misc\AbnormalBet\AbnormalBet.csproj" />
+    <ProjectReference Include="..\src\Misc\ActualMemberBet\ActualMemberBet.csproj" />
     <ProjectReference Include="..\src\Shared\Nap-Reports.Utilities\Nap-Reports.Utilities.csproj" />
   </ItemGroup>
 

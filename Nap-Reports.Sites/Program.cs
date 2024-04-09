@@ -1,18 +1,16 @@
 using Fanex.Data;
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Web;
-using Fanex.NAP.Client;
 using Fanex.NAP.SignIn.Attribute;
 using Microsoft.AspNetCore.Mvc;
 using Nap_Reports.Sites;
-using ONEbook.UM.AspNetCore.Filters;
-using Nap_Reports.Sites.Middleware;
-using Nap_Reports.Sites.DependencyInjection;
-using Newtonsoft.Json.Serialization;
-using AutoMapper;
 using Nap_Reports.Sites.App_Start;
+using Nap_Reports.Sites.DependencyInjection;
+using Nap_Reports.Sites.Middleware;
 using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json.Serialization;
+using ONEbook.UM.AspNetCore.Filters;
 
 internal class Program
 {
@@ -26,6 +24,7 @@ internal class Program
         services.RegisterGlobalServices();
         OnebookUMInjection.RegisterServices(services, configuration);
         AutoMapperConfiguration.Initialize(services);
+        services.RegisterMediAtR();
         services.RegisterInternalServices();
 
         // Add services to the container.

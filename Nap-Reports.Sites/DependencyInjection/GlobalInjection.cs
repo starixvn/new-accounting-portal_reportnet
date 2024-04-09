@@ -1,5 +1,4 @@
-﻿using AbnormalBet;
-using Fanex.Caching;
+﻿using Fanex.Caching;
 using Fanex.Caching.Memory;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client.Configuration;
@@ -10,9 +9,6 @@ using Fanex.RemotingRef;
 using Nap_Reports.Utilities.BalanceUpServices;
 using Nap_Reports.Utilities.Configurations;
 using Nap_Reports.Utilities.PermissionFilter;
-using SBPerformance;
-using SMAWinLoss;
-using System.Reflection;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {
@@ -35,10 +31,6 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<PermissionFilterService, PermissionFilterServiceImp>();
             service.AddTransient<BalanceUpService, BalanceUpServiceImp>();
             service.AddTransient<ConfigurationService, ConfigurationServiceImp>();
-
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBPerformanceAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AbnormalBetAttribute).GetTypeInfo().Assembly));
         }
     }
 }

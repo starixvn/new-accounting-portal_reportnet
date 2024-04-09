@@ -1,0 +1,19 @@
+﻿using AbnormalBet;
+using ActualMemberBet;
+using SBPerformance;
+using SMAWinLoss;
+using System.Reflection;
+
+namespace Nap_Reports.Sites.DependencyInjection
+{
+    public static class MediAtRInjection
+    {
+        public static void RegisterMediAtR(this IServiceCollection service)
+        {
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBPerformanceAttribute).GetTypeInfo().Assembly));
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AbnormalBetAttribute).GetTypeInfo().Assembly));
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ActualMemberBetAttribute).GetTypeInfo().Assembly));
+        }
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using AbnormalBet;
+using ActualMemberBet;
 using AutoMapper;
 using Nap_Reports.HouseWinLoss;
 using SBPerformance;
@@ -15,6 +16,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeSMAWinLoss();
                 cfg.InitializeSBPerformance();
                 cfg.InitializeAbnormalBet();
+                cfg.InitializeActualMemberBet();
             });
 
             var mapper = config.CreateMapper();

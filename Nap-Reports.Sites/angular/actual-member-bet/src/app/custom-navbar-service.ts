@@ -7,8 +7,8 @@ import { NavbarService, UserMenu, Menu, Navbar } from 'nap-components/navbar';
 @Injectable()
 export class CustomNavbarService extends NavbarService {
     url = 'state-api/application/header';
+    menu: Menu[] = [];
     userMenus: UserMenu[] = [];
-    legacyPath: string;
     constructor(
         private customHttpService: HttpService
     ) {
@@ -17,45 +17,54 @@ export class CustomNavbarService extends NavbarService {
 
     query(): Observable<Navbar> {
         const url = 'state-api/application/header';
-        return this.customHttpService.post<Navbar>(url).map(data => {
-            const legacyNavbar = data as any;
-            this.legacyPath = legacyNavbar.legacyPath as string;
+
+        return this.customHttpService.post<any>(url).map(data => {
             this.userMenus = [
                 {
                     name: 'Change Password',
-                    link: this.legacyPath + '/Auth/ChangePassword'
+                    link: 'Auth/ChangePassword'
                 },
                 {
                     name: 'Sign Out',
-                    link: this.legacyPath + '/Auth/LogOut'
+                    link: 'Auth/LogOut'
                 }
             ];
 
-            return data;
+            var result: Navbar =
+            {
+              menus: this.bindingMenuData(data.Menus),
+              username: data.Username
+            };
+
+            return result;
         });
     }
 
-    compileMenus(menus: Menu[]): Menu[] {
-        menus.forEach(menu => {
-            menu.hasChildren = menu.children !== null && menu.children.length > 0;
-            menu.link = this.resolveUniveralUrl(menu.link);
-            if (menu.hasChildren) {
-                menu.children.forEach(childMenu => {
-                    childMenu.hasChildren = false;
-                    childMenu.link = this.resolveUniveralUrl(childMenu.link);
-                });
-            }
-        });
+    private bindingMenuData(data: any): Menu[]
+    {
+      let menus: Menu[] = [];
+      data.forEach(menu => {
+        let hasChildrend = menu.Children !== null && menu.Children.length > 0;
+        let children: Menu[] = [];
 
-        return menus;
-    }
+        if(hasChildrend) {
+          menu.Children.forEach(childMenu => {
+            children.push({
+                id: childMenu.Id,
+                name: childMenu.Name,
+                link:childMenu.Link,
+                children: []
+            } as Menu);
+          });
+        }
+        menus.push({
+          id: menu.Id,
+          name: menu.Name,
+          link: menu.Link,
+          children: children
+        } as Menu);
+      });
 
-    private resolveUniveralUrl(url: string): string {
-        return this.isUniversalUrl(url)
-            ? url
-            : this.legacyPath + url;
-    }
-    private isUniversalUrl(url: string): boolean {
-        return url.indexOf('/UniversalReports') === 0;
+      return menus;
     }
 }

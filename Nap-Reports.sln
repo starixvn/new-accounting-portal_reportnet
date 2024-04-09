@@ -17,11 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nap-Reports.Utilities", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMAWinLoss", "src\Main\SMAWinLoss\SMAWinLoss.csproj", "{DC0ED5BF-0D62-48E6-ABCF-2CE4EC181DA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBPerformance", "src\Main\SBPerformance\SBPerformance.csproj", "{CCED893E-E7FC-4E04-9476-ADBF3FD63515}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBPerformance", "src\Main\SBPerformance\SBPerformance.csproj", "{CCED893E-E7FC-4E04-9476-ADBF3FD63515}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{171618A1-8436-41ED-B06E-E07DEA604F31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbnormalBet", "src\Misc\AbnormalBet\AbnormalBet.csproj", "{F4C11F60-8A83-4E81-BD78-8181A942150F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbnormalBet", "src\Misc\AbnormalBet\AbnormalBet.csproj", "{F4C11F60-8A83-4E81-BD78-8181A942150F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActualMemberBet", "src\Misc\ActualMemberBet\ActualMemberBet.csproj", "{A900FE4C-C30F-4BB7-A041-3CA681C2BA15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{F4C11F60-8A83-4E81-BD78-8181A942150F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4C11F60-8A83-4E81-BD78-8181A942150F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4C11F60-8A83-4E81-BD78-8181A942150F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A900FE4C-C30F-4BB7-A041-3CA681C2BA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A900FE4C-C30F-4BB7-A041-3CA681C2BA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A900FE4C-C30F-4BB7-A041-3CA681C2BA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A900FE4C-C30F-4BB7-A041-3CA681C2BA15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{CCED893E-E7FC-4E04-9476-ADBF3FD63515} = {A9904CC1-6040-4CA6-84CF-568401D7F360}
 		{171618A1-8436-41ED-B06E-E07DEA604F31} = {5FE921E3-BA82-458A-9983-BEA80F74C49D}
 		{F4C11F60-8A83-4E81-BD78-8181A942150F} = {171618A1-8436-41ED-B06E-E07DEA604F31}
+		{A900FE4C-C30F-4BB7-A041-3CA681C2BA15} = {171618A1-8436-41ED-B06E-E07DEA604F31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}

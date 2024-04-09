@@ -54,4 +54,11 @@
 		<Setting Key="Acc_Rpt_AbnormalBet_CurrencySel" SpName="Acc_Rpt_AbnormalBet_CurrencySel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Acc_Rpt_AbnormalBet_LeagueSel" SpName="Acc_Rpt_AbnormalBet_LeagueSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
+	<Function Name="Actual-Member-Bet">
+		<Setting Key="Actual-Member-Bet-Site" SpName="Acc_Rpt_ActualMemberBet_SiteTypeSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Actual-Member-Bet-Odds" SpName="Acc_Rpt_ActualMemberBet_OddsTypeSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Actual-Member-Bet-BetType" SpName="Acc_Rpt_ActualMemberBet_Detail" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Actual-Member-Bet-Product" SpName="Acc_Rpt_ActualMemberBet" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Actual-Member-Bet-Currency" SpName="Acc_Rpt_ActualMemberBet_CurrencySel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+	</Function>
 </Functions>

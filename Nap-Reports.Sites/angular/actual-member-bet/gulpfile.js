@@ -52,7 +52,7 @@ function changeFileNames(outputFolder, transformFolder) {
 }
 
 function readOptions(outputFolder, transformFolder) {
-    let resourceDir = transformFolder.replace(/\.\.\//g, '');
+    let resourceDir = transformFolder.replace(/\.\.\//g, '').replace(/wwwroot/g, '~');
     let content = fs.readFileSync(outputFolder + '/index.html', encoding);
     let $ = cheerio.load(content);
     let files = {
