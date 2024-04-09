@@ -1,4 +1,5 @@
-﻿using Fanex.Caching;
+﻿using AbnormalBet;
+using Fanex.Caching;
 using Fanex.Caching.Memory;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client.Configuration;
@@ -37,6 +38,7 @@ namespace Nap_Reports.Sites.DependencyInjection
 
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBPerformanceAttribute).GetTypeInfo().Assembly));
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AbnormalBetAttribute).GetTypeInfo().Assembly));
         }
     }
 }

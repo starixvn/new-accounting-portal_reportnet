@@ -656,6 +656,7 @@
     <ProjectReference Include="..\src\Main\Nap-Reports.HouseWinLoss\Nap-Reports.HouseWinLoss.csproj" />
     <ProjectReference Include="..\src\Main\SBPerformance\SBPerformance.csproj" />
     <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />
+    <ProjectReference Include="..\src\Misc\AbnormalBet\AbnormalBet.csproj" />
     <ProjectReference Include="..\src\Shared\Nap-Reports.Utilities\Nap-Reports.Utilities.csproj" />
   </ItemGroup>
 

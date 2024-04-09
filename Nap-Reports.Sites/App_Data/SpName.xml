@@ -44,4 +44,14 @@
 		<Setting Key="SBPerformanceMonitor-League" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_League" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="SBPerformanceMonitor-Member" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Member" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
+	<Function Name="Abnormal Bet Report">
+		<Setting Key="Acc_Rpt_AbnormalBet_SportSel" SpName="Acc_Rpt_AbnormalBet_SportSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_AbnormalBet_ReasonSel" SpName="Acc_Rpt_AbnormalBet_ReasonSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_AbnormalBet_Member" SpName="Acc_Rpt_AbnormalBet_Member" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_AbnormalBet_LicenseeSel" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_AbnormalBet_BetTypeSel" SpName="Acc_Rpt_AbnormalBet_BetTypeSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_AbnormalBet_Licensee" SpName="Acc_Rpt_AbnormalBet_Licensee" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_AbnormalBet_CurrencySel" SpName="Acc_Rpt_AbnormalBet_CurrencySel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_AbnormalBet_LeagueSel" SpName="Acc_Rpt_AbnormalBet_LeagueSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+	</Function>
 </Functions>
