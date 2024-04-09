@@ -36,7 +36,7 @@ namespace Nap_Reports.HouseWinLoss.OtherSports.LiveNonLive
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {
-            var gridOptions = BuildGridOptions(queryModel);
+            var gridOptions = await BuildGridOptions(queryModel);
 
             return Ok(gridOptions);
         }
