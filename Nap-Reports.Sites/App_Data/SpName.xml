@@ -61,4 +61,9 @@
 		<Setting Key="Actual-Member-Bet-Product" SpName="Acc_Rpt_ActualMemberBet" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Actual-Member-Bet-Currency" SpName="Acc_Rpt_ActualMemberBet_CurrencySel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
+	<Function Name="Misc - Exchange">
+		<Setting Key="Exchange-ReportQuery" SpName="Acc_Rpt_ExchangePerformance" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Exchange-SportQuery" SpName="Acc_Rpt_ExchangePerformance_SporttypeSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Exchange-LicenseeQuery" SpName="Acc_Rpt_ExchangePerformance_LicenseesSel" DbName="DBEXT.bodb02.wsv_nap" />
+	</Function>
 </Functions>

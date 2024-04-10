@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "src\Shared\Uti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseWinLoss", "src\Main\HouseWinLoss\HouseWinLoss.csproj", "{50057285-34EA-49A3-BD7B-6F9B2927D726}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exchange", "src\Misc\Exchange\Exchange.csproj", "{AEFC7CFD-D750-413B-8876-C46BEE80A5B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{50057285-34EA-49A3-BD7B-6F9B2927D726}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50057285-34EA-49A3-BD7B-6F9B2927D726}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50057285-34EA-49A3-BD7B-6F9B2927D726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEFC7CFD-D750-413B-8876-C46BEE80A5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEFC7CFD-D750-413B-8876-C46BEE80A5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEFC7CFD-D750-413B-8876-C46BEE80A5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEFC7CFD-D750-413B-8876-C46BEE80A5B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{A900FE4C-C30F-4BB7-A041-3CA681C2BA15} = {171618A1-8436-41ED-B06E-E07DEA604F31}
 		{084C8EAE-1986-47D3-9D46-E40519C2D66C} = {E388571F-0CCD-4103-9378-C0A755AD0DE8}
 		{50057285-34EA-49A3-BD7B-6F9B2927D726} = {A9904CC1-6040-4CA6-84CF-568401D7F360}
+		{AEFC7CFD-D750-413B-8876-C46BEE80A5B9} = {171618A1-8436-41ED-B06E-E07DEA604F31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}

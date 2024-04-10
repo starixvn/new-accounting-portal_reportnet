@@ -1,0 +1,46 @@
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Olympus.WebApi.Epplus;
+
+namespace Exchange.Report
+{
+    [Route("api/exchange")]
+    [ApiController]
+    public class ExchangeController : ControllerBase
+    {
+        private readonly IMediator mediator;
+
+        public ExchangeController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
+        [Route("main-report")]
+        public async Task<IActionResult> ExchangeLincensee(LicenseeHttpParameterJson httpParameter)
+        {
+            var viewModel = await mediator.Send(httpParameter);
+            return Ok(viewModel);
+        }
+
+        [Route("main-excel")]
+        public async Task<IActionResult> ExcelExchangeLincensee(LicenseeHttpParameterExcel httpParameter)
+        {
+            var excelPackage = await mediator.Send(httpParameter);
+            return new EpplusExcelResult(excelPackage);
+        }
+
+        [Route("report")]
+        public async Task<IActionResult> Exchange(HttpParameterJson httpParameter)
+        {
+            var viewModel = await mediator.Send(httpParameter);
+            return Ok(viewModel);
+        }
+
+        [Route("excel")]
+        public async Task<IActionResult> Excel(HttpParameterExcel httpParameter)
+        {
+            var excelPackage = await mediator.Send(httpParameter);
+            return new EpplusExcelResult(excelPackage);
+        }
+    }
+}
