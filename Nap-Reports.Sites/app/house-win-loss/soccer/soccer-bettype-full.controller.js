@@ -82,7 +82,7 @@ import angular from "angular";
 
         function createDrilldownLink(betTypeRow, isLive) {
             var betTypeName = betTypeRow.Columns[0].Value;
-            var betTypeId = betTypeRow.Columns[0].CustomAttr;
+            var betTypeId = betTypeRow.Columns[0].customAttr;
 
             if (betTypeRow.SubRows) {
                 betTypeRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateMatchDetail(' + betTypeId + ',\'' + betTypeName.replace(/'/g, "\\'") + '\',' + isLive + ')">' + betTypeName + '</a>';
