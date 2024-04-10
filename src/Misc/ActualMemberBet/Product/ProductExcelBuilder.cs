@@ -3,8 +3,8 @@ using OfficeOpenXml;
 
 namespace ActualMemberBet.Product
 {
-    using Nap_Reports.Utilities.Configurations;
-    using Nap_Reports.Utilities.LinqDynamicSum;
+    using Utilities.Configurations;
+    using Utilities.LinqDynamicSum;
 
     public interface ProductExcelBuilder
     {

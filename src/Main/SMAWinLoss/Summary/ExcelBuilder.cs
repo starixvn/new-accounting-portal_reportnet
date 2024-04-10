@@ -2,7 +2,7 @@
 
 namespace SMAWinLoss.Summary
 {
-    using Nap_Reports.Utilities.Configurations;
+    using Utilities.Configurations;
 
     public interface ExcelBuilder
     {

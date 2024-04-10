@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Nap_Reports.Utilities.LinqDynamicSum;
+using Utilities.LinqDynamicSum;
 
 namespace SBPerformance.MarginBySport
 {

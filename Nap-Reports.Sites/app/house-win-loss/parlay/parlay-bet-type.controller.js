@@ -60,7 +60,7 @@ import moment from "moment";
             for (var i = 0; i < data.bodyRows.length; i++) {
                 var betTypeRow = data.bodyRows[i];
                 var betTypeName = betTypeRow.Columns[0].Value;
-                var betTypeId = parseInt(betTypeRow.Columns[0].CustomAttr);
+                var betTypeId = parseInt(betTypeRow.Columns[0].customAttr);
                 var isEnableLink = checkvalidLinks();
                 if (betTypeId === systemParlayBetType && isEnableLink === true && pane.data.normalMode === true) {
                     betTypeRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateSite(' + betTypeId + ',\'' + betTypeName + '\',\'ALL\')">' + betTypeName + '</a>';

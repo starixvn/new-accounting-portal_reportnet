@@ -67,8 +67,8 @@ import angular from "angular";
             for (var i = 0; i < data.bodyRows.length; i++) {
                 var sportTypeRow = data.bodyRows[i];
                 var sportTypeName = sportTypeRow.Columns[0].Value;
-                var sportType = sportTypeRow.Columns[0].CustomAttr;
-                var isSabaSport = sportTypeRow.Columns[1].CustomAttr;
+                var sportType = sportTypeRow.Columns[0].customAttr;
+                var isSabaSport = sportTypeRow.Columns[1].customAttr;
                 sportTypeRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateBetType(' + sportType + ',\'' + sportTypeName.replace(/'/g, "\\'") + '\',' + isSabaSport + ')">' + sportTypeName + '</a>';
 
                 if (sportTypeRow != null && sportTypeRow.SubRows != null) {

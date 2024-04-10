@@ -115,7 +115,7 @@ import angular from "angular";
                 var betTypeRow = data.bodyRows[i];
                 var betTypeName = betTypeRow.Columns[0].Value;
                 var isHegde = betTypeName.match("hegde") ? true : false;
-                betTypeId = betTypeRow.Columns[0].CustomAttr;
+                betTypeId = betTypeRow.Columns[0].customAttr;
                 betTypeRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateMatchDetail(' + betTypeId + ',\'' + betTypeName.replace(/'/g, "\\'") + '\')">' + betTypeName + '</a>';
                 for (var j = 0; j < betTypeRow.SubRows.length; j++) {
                     var siteRow = data.bodyRows[i].SubRows[j];
@@ -129,7 +129,7 @@ import angular from "angular";
             for (var i = 0; i < data.bodyRows.length; i++) {
                 var row = data.bodyRows[i];
                 var name = row.Columns[0].Value;
-                var isLive = parseInt(row.Columns[0].CustomAttr);
+                var isLive = parseInt(row.Columns[0].customAttr);
                 row.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateBetType(' + isLive + ')">' + name + '</a>';
             }
         }

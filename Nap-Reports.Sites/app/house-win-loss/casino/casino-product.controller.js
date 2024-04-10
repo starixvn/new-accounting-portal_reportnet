@@ -41,7 +41,7 @@ import angular from "angular";
         function createLinks(data) {
             for (var i = 0; i < data.bodyRows.length; i++) {
                 var productColumn = data.bodyRows[i].Columns[0];
-                var productId = productColumn.CustomAttr;
+                var productId = productColumn.customAttr;
                 var productName = productColumn.Value;
                 productColumn.Value = '<a class="drill-down" href data-nap-click="generateBetType(' + productId + ',\'' + productName.replace(/'/g, "\\'") + '\')">' + productName + '</a>';
             }

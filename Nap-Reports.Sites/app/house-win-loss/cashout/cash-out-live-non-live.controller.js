@@ -103,7 +103,7 @@ import angular from "angular";
             for (var i = 0; i < data.bodyRows.length; i++) {
                 var betTypeRow = data.bodyRows[i];
                 var betTypeName = betTypeRow.Columns[0].Value;
-                var betTypeId = parseInt(betTypeRow.Columns[0].CustomAttr);
+                var betTypeId = parseInt(betTypeRow.Columns[0].customAttr);
                 betTypeRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateMatchDetail(' + isLive + ',\'' + betTypeName.replace(/'/g, "\\'") + '\',' + betTypeId + ')">' + betTypeName + '</a>';
                 for (var j = 0; j < betTypeRow.SubRows.length; j++) {
                     var siteRow = data.bodyRows[i].SubRows[j];
@@ -118,7 +118,7 @@ import angular from "angular";
                 var row = data.bodyRows[i];
                 var name = row.Columns[0].Value;
                 var isLive = name.includes('Non-Live') === true ? 0 : 1;
-                var betTypeId = parseInt(row.Columns[0].CustomAttr);
+                var betTypeId = parseInt(row.Columns[0].customAttr);
                 row.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateMatchDetail(' + isLive + ',\'' + name.replace(/'/g, "\\'") + '\',' + betTypeId + ')">' + name + '</a>';
                 for (var j = 0; j < row.SubRows.length; j++) {
                     var siteRow = data.bodyRows[i].SubRows[j];

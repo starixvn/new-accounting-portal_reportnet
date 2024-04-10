@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Nap_Reports.Utilities.LinqDynamicSum;
+using Utilities.LinqDynamicSum;
 
 namespace ActualMemberBet
 {

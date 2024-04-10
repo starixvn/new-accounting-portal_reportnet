@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
-using Nap_Reports.Utilities.LinqDynamicSum;
+using Utilities.LinqDynamicSum;
 
 namespace SBPerformance.TopWinningMember
 {

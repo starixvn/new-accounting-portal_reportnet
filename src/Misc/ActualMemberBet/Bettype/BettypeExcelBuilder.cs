@@ -1,11 +1,10 @@
 ﻿using Epplus.Mapper.Extensions;
+using Utilities.Configurations;
+using Utilities.LinqDynamicSum;
 using OfficeOpenXml;
 
 namespace ActualMemberBet.Bettype
 {
-    using Nap_Reports.Utilities.Configurations;
-    using Nap_Reports.Utilities.LinqDynamicSum;
-
     public interface BettypeExcelBuilder
     {
         ExcelPackage Build(HttpParameterExcel excelParams, SummaryEntity<BetTypeActualMemberBetExcel> bettypeActualMemberBetExcel);

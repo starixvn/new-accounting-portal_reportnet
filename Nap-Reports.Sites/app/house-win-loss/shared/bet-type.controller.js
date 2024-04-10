@@ -46,7 +46,7 @@ import angular from "angular";
 
         function createDrilldownLink(betTypeRow, isLive) {
             var betTypeName = betTypeRow.Columns[0].Value;
-            var betTypeId = betTypeRow.Columns[0].CustomAttr;
+            var betTypeId = betTypeRow.Columns[0].customAttr;
 
             if (isLive === null || isLive === undefined) {
                 isLive = betTypeName.includes('Live') === true ? 1 : 0;

@@ -16,6 +16,6 @@
     <PackageReference Include="Olympus.WebApi.Epplus" Version="1.0.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Nap-Reports.Utilities\Nap-Reports.Utilities.csproj" />
+    <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
   </ItemGroup>
 </Project>

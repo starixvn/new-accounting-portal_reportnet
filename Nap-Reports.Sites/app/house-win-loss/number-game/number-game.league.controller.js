@@ -46,7 +46,7 @@ import angular from "angular";
         function createLinks(data) {
             for (var i = 0; i < data.bodyRows.length; i++) {
                 var sportTypeRow = data.bodyRows[i];
-                var leagueId = sportTypeRow.Columns[0].CustomAttr;
+                var leagueId = sportTypeRow.Columns[0].customAttr;
                 var leagueName = sportTypeRow.Columns[0].Value;
                 sportTypeRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateBetType(' + leagueId + ',\'' + leagueName.replace(/'/g, "\\'") + '\')">' + leagueName + '</a>';
             }

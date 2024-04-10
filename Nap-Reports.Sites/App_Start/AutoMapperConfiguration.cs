@@ -1,7 +1,7 @@
 ﻿using AbnormalBet;
 using ActualMemberBet;
 using AutoMapper;
-using Nap_Reports.HouseWinLoss;
+using HouseWinLoss;
 using SBPerformance;
 using SMAWinLoss;
 

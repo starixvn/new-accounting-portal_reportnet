@@ -4,8 +4,8 @@ using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Mvc;
 using Nap_Reports.Sites.Settings;
-using Nap_Reports.Utilities.BalanceUpServices;
-using Nap_Reports.Utilities.PermissionFilter;
+using Utilities.BalanceUpServices;
+using Utilities.PermissionFilter;
 
 namespace Nap_Reports.Sites.Controllers
 {

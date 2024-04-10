@@ -1,7 +1,7 @@
 ﻿using ActualMemberBet.Common;
 using AutoMapper;
 using MediatR;
-using Nap_Reports.Utilities.LinqDynamicSum;
+using Utilities.LinqDynamicSum;
 
 namespace ActualMemberBet.Product
 {

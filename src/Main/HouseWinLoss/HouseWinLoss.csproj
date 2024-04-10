@@ -1,0 +1,140 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>HouseWinLoss</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <Content Include="bin\Debug\AutoMapper.xml" />
+    <Content Include="bin\Debug\BouncyCastle.Crypto.xml" />
+    <Content Include="bin\Debug\Dapper.xml" />
+    <Content Include="bin\Debug\EPPlus.xml" />
+    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.xml" />
+    <Content Include="bin\Debug\MessagePack.Annotations.xml" />
+    <Content Include="bin\Debug\MessagePack.xml" />
+    <Content Include="bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml" />
+    <Content Include="bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\NPOI.OOXML.xml" />
+    <Content Include="bin\Debug\NPOI.xml" />
+    <Content Include="bin\Debug\SimpleInjector.xml" />
+    <Content Include="bin\Debug\System.Buffers.xml" />
+    <Content Include="bin\Debug\System.Collections.Immutable.xml" />
+    <Content Include="bin\Debug\System.Data.SqlClient.xml" />
+    <Content Include="bin\Debug\System.Memory.xml" />
+    <Content Include="bin\Debug\System.Net.Http.Extensions.xml" />
+    <Content Include="bin\Debug\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\Debug\System.Net.Http.Primitives.xml" />
+    <Content Include="bin\Debug\System.Numerics.Vectors.xml" />
+    <Content Include="bin\Debug\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="bin\Debug\System.Threading.Tasks.Extensions.xml" />
+    <Content Include="bin\Debug\System.ValueTuple.xml" />
+    <Content Include="bin\Debug\System.Web.Http.xml" />
+    <Content Include="obj\Debug\UniversalReports.HouseWinLoss.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Nap-Reports.HouseWinLoss.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\AutoMapper.dll" />
+    <None Include="bin\Debug\AutoMapper.pdb" />
+    <None Include="bin\Debug\BouncyCastle.Crypto.dll" />
+    <None Include="bin\Debug\Dapper.dll" />
+    <None Include="bin\Debug\EPPlus.dll" />
+    <None Include="bin\Debug\EPPlus.Interfaces.dll" />
+    <None Include="bin\Debug\EPPlus.System.Drawing.dll" />
+    <None Include="bin\Debug\Fanex.Caching.dll" />
+    <None Include="bin\Debug\Fanex.Common.dll" />
+    <None Include="bin\Debug\Fanex.Data.dll" />
+    <None Include="bin\Debug\Fanex.Data.Repository.dll" />
+    <None Include="bin\Debug\Fanex.Excel.dll" />
+    <None Include="bin\Debug\Fanex.Logging.Extensions.dll" />
+    <None Include="bin\Debug\Fanex.Logging.Extensions.Web.dll" />
+    <None Include="bin\Debug\Fanex.NAP.Core.Client.dll" />
+    <None Include="bin\Debug\Fanex.RemotingRef.dll" />
+    <None Include="bin\Debug\IBCFile.dll" />
+    <None Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
+    <None Include="bin\Debug\ICSharpCode.SharpZipLib.pdb" />
+    <None Include="bin\Debug\Linq.DynamicSum.dll" />
+    <None Include="bin\Debug\MessagePack.Annotations.dll" />
+    <None Include="bin\Debug\MessagePack.dll" />
+    <None Include="bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <None Include="bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll" />
+    <None Include="bin\Debug\Microsoft.NET.StringTools.dll" />
+    <None Include="bin\Debug\Microsoft.NET.StringTools.pdb" />
+    <None Include="bin\Debug\Microsoft.Web.Infrastructure.dll" />
+    <None Include="bin\Debug\Newtonsoft.Json.dll" />
+    <None Include="bin\Debug\NPOI.dll" />
+    <None Include="bin\Debug\NPOI.OOXML.dll" />
+    <None Include="bin\Debug\NPOI.OOXML.pdb" />
+    <None Include="bin\Debug\NPOI.OpenXml4Net.dll" />
+    <None Include="bin\Debug\NPOI.OpenXml4Net.pdb" />
+    <None Include="bin\Debug\NPOI.OpenXmlFormats.dll" />
+    <None Include="bin\Debug\NPOI.OpenXmlFormats.pdb" />
+    <None Include="bin\Debug\NPOI.pdb" />
+    <None Include="bin\Debug\SimpleInjector.dll" />
+    <None Include="bin\Debug\SPSRemoting.dll" />
+    <None Include="bin\Debug\System.Buffers.dll" />
+    <None Include="bin\Debug\System.Collections.Immutable.dll" />
+    <None Include="bin\Debug\System.Data.SqlClient.dll" />
+    <None Include="bin\Debug\System.Memory.dll" />
+    <None Include="bin\Debug\System.Net.Http.Extensions.dll" />
+    <None Include="bin\Debug\System.Net.Http.Formatting.dll" />
+    <None Include="bin\Debug\System.Net.Http.Primitives.dll" />
+    <None Include="bin\Debug\System.Numerics.Vectors.dll" />
+    <None Include="bin\Debug\System.Runtime.CompilerServices.Unsafe.dll" />
+    <None Include="bin\Debug\System.Threading.Tasks.Extensions.dll" />
+    <None Include="bin\Debug\System.ValueTuple.dll" />
+    <None Include="bin\Debug\System.Web.Http.dll" />
+    <None Include="bin\Debug\UniversalReports.dll" />
+    <None Include="bin\Debug\UniversalReports.dll.config" />
+    <None Include="bin\Debug\UniversalReports.HouseWinLoss.dll" />
+    <None Include="bin\Debug\UniversalReports.HouseWinLoss.dll.config" />
+    <None Include="bin\Debug\UniversalReports.HouseWinLoss.pdb" />
+    <None Include="bin\Debug\UniversalReports.pdb" />
+    <None Include="bin\Debug\WebActivator.dll" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\net8.0\Nap-Reports.HouseWinLoss.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net8.0\Nap-Reports.HouseWinLoss.assets.cache" />
+    <None Include="obj\Debug\net8.0\Nap-Reports.HouseWinLoss.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\UniversalReports.HouseWinLoss.csproj.App.config" />
+    <None Include="obj\Debug\UniversalReports.HouseWinLoss.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\UniversalReports.HouseWinLoss.csproj.CopyComplete" />
+    <None Include="obj\Debug\UniversalReports.HouseWinLoss.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\UniversalReports.HouseWinLoss.dll" />
+    <None Include="obj\Debug\UniversalReports.HouseWinLoss.pdb" />
+    <None Include="obj\Nap-Reports.HouseWinLoss.csproj.nuget.g.props" />
+    <None Include="obj\Nap-Reports.HouseWinLoss.csproj.nuget.g.targets" />
+    <None Include="obj\project.nuget.cache" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\net8.0\" />
+    <Folder Include="obj\Debug\net8.0\refint\" />
+    <Folder Include="obj\Debug\net8.0\ref\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2" />
+    <PackageReference Include="Fanex.Excel" Version="2.6.2" />
+    <PackageReference Include="Fanex.RemotingRef" Version="1.5.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

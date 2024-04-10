@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Nap_Reports.Utilities.PermissionFilter;
+using Utilities.PermissionFilter;
 
 namespace SMAWinLoss.Filter
 {

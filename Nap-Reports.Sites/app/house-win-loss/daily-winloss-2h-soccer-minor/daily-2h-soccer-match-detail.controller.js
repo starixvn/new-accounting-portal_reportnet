@@ -74,7 +74,7 @@ import angular from "angular";
         function createLinks(data) {
             for (var i = 0; i < data.bodyRows.length; i++) {
                 var bodyRow = data.bodyRows[i];
-                var customAttr = bodyRow.Columns[0].CustomAttr;
+                var customAttr = bodyRow.Columns[0].customAttr;
                 if (customAttr) {
                     var matchName = bodyRow.Columns[0].Value;
                     bodyRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="viewMatchInformation(' + customAttr + ')">' + matchName + '</a>';

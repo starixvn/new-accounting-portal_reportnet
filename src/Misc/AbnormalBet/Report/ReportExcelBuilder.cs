@@ -1,6 +1,6 @@
 ﻿using AbnormalBet.Model;
 using Epplus.Mapper.Extensions;
-using Nap_Reports.Utilities.Configurations;
+using Utilities.Configurations;
 using OfficeOpenXml;
 
 namespace AbnormalBet.Report

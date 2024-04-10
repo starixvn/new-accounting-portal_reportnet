@@ -46,7 +46,7 @@ import angular from "angular";
 
         function createDrilldownLink(betTypeRow) {
             var betTypeName = betTypeRow.Columns[0].Value;
-            var betTypeId = betTypeRow.Columns[0].CustomAttr;
+            var betTypeId = betTypeRow.Columns[0].customAttr;
 
             if (betTypeRow.SubRows) {
                 var bettypeIdValue = parseInt(betTypeId);

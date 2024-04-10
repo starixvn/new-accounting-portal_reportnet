@@ -1,20 +1,20 @@
-﻿using Nap_Reports.Utilities.RemotingRef;
-using BasicWinLoss = Nap_Reports.HouseWinLoss.Common.BasicWinLoss;
-using CashOut = Nap_Reports.HouseWinLoss.CashOut;
-using CommonServices = Nap_Reports.HouseWinLoss.Common.Services;
-using Daily2hSoccerBettype = Nap_Reports.HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
-using Daily2hSoccerMinor = Nap_Reports.HouseWinLoss.DailyWinLoss2hSoccerMinor;
-using Decorator = Nap_Reports.HouseWinLoss.Common.ColumnDecorators;
-using MatchDetail = Nap_Reports.HouseWinLoss.Common.MatchDetail;
-using MatchDetailByCode = Nap_Reports.HouseWinLoss.Common.MatchDetailByCode;
-using MetricGaming = Nap_Reports.HouseWinLoss.MetricGaming;
-using OtherSports = Nap_Reports.HouseWinLoss.OtherSports;
-using Parlay = Nap_Reports.HouseWinLoss.Parlay;
-using ProductBetType = Nap_Reports.HouseWinLoss.ProductBetType;
-using Products = Nap_Reports.HouseWinLoss.Products;
-using SimpleGrid = Nap_Reports.HouseWinLoss.SimpleGrid;
-using SiteWinLoss = Nap_Reports.HouseWinLoss.Common.SiteWinLoss;
-using Soccer = Nap_Reports.HouseWinLoss.Soccer;
+﻿using Utilities.RemotingRef;
+using BasicWinLoss = HouseWinLoss.Common.BasicWinLoss;
+using CashOut = HouseWinLoss.CashOut;
+using CommonServices = HouseWinLoss.Common.Services;
+using Daily2hSoccerBettype = HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
+using Daily2hSoccerMinor = HouseWinLoss.DailyWinLoss2hSoccerMinor;
+using Decorator = HouseWinLoss.Common.ColumnDecorators;
+using MatchDetail = HouseWinLoss.Common.MatchDetail;
+using MatchDetailByCode = HouseWinLoss.Common.MatchDetailByCode;
+using MetricGaming = HouseWinLoss.MetricGaming;
+using OtherSports = HouseWinLoss.OtherSports;
+using Parlay = HouseWinLoss.Parlay;
+using ProductBetType = HouseWinLoss.ProductBetType;
+using Products = HouseWinLoss.Products;
+using SimpleGrid = HouseWinLoss.SimpleGrid;
+using SiteWinLoss = HouseWinLoss.Common.SiteWinLoss;
+using Soccer = HouseWinLoss.Soccer;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {

@@ -653,12 +653,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Main\Nap-Reports.HouseWinLoss\Nap-Reports.HouseWinLoss.csproj" />
+    <ProjectReference Include="..\src\Main\HouseWinLoss\HouseWinLoss.csproj" />
     <ProjectReference Include="..\src\Main\SBPerformance\SBPerformance.csproj" />
     <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />
     <ProjectReference Include="..\src\Misc\AbnormalBet\AbnormalBet.csproj" />
     <ProjectReference Include="..\src\Misc\ActualMemberBet\ActualMemberBet.csproj" />
-    <ProjectReference Include="..\src\Shared\Nap-Reports.Utilities\Nap-Reports.Utilities.csproj" />
+    <ProjectReference Include="..\src\Shared\Utilities\Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
