@@ -39,6 +39,10 @@ internal class Program
         });
 
         services.AddHttpContextAccessor();
+        services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
+        });
         services.RegisterRemotingRef(configuration);
         services.AddFanexData(configuration);
         services.RegisterSentry(configuration);

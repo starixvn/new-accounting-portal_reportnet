@@ -1,8 +1,12 @@
 FROM hub.nexdev.net/base/dotnet/core/sdk:8.0-alpine AS builder
 WORKDIR /src
 
-COPY src/Main/Nap-Reports.HouseWinLoss/*.csproj ./src/Main/Nap-Reports.HouseWinLoss/
-COPY src/Shared/Nap-Reports.Utilities/*.csproj ./src/Shared/Nap-Reports.Utilities/
+COPY src/Main/HouseWinLoss/*.csproj ./src/Main/HouseWinLoss/
+COPY src/Main/SBPerformance/*.csproj ./src/Main/SBPerformance/
+COPY src/Main/SMAWinLoss/*.csproj ./src/Main/SMAWinLoss/
+COPY src/Misc/AbnormalBet/*.csproj ./src/Misc/AbnormalBet/
+COPY src/Misc/ActualMemberBet/*.csproj ./Misc/Main/ActualMemberBet/
+COPY src/Shared/Utilities/*.csproj ./src/Shared/Utilities/
 COPY Nap-Reports.Sites/*.csproj ./Nap-Reports.Sites/
 
 
