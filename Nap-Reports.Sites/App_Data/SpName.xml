@@ -73,5 +73,11 @@
 		<Setting Key="Acc_Rpt_COPerformance_LiveStatus_Bettrans" SpName="Acc_Rpt_COPerformance_LiveStatus" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
 		<Setting Key="Acc_Rpt_COPerformance_BetType_Bettrans" SpName="Acc_Rpt_COPerformance_BetType" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
 		<Setting Key="Acc_Rpt_COPerformance_Cust_Bettrans" SpName="Acc_Rpt_COPerformance_Cust" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_SportType_WareHouse" SpName="Acc_Rpt_COPerformance_SportType" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_LiveStatus_WareHouse" SpName="Acc_Rpt_COPerformance_LiveStatus" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_BetType_WareHouse" SpName="Acc_Rpt_COPerformance_BetType" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_Cust_WareHouse" SpName="Acc_Rpt_COPerformance_Cust" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_LeagueSel" SpName="Acc_Rpt_COPerformance_LeagueSel" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_LicenseesSel" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
 </Functions>
