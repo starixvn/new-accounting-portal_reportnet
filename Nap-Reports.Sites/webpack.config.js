@@ -39,9 +39,7 @@ module.exports = {
                     "./app/house-win-loss/other-sports/*.js",
                     "./app/house-win-loss/parlay/*.js",
                     "./app/house-win-loss/filter/*.js"]
-            }),
-        "cn88-win-loss": glob.sync(["./app/cn88-win-loss/*.js", "./app/cn88-win-loss/**/*.js"]),
-        "cn88-win-loss-style": ["./content/cn88-win-loss.scss"]
+            })
     },
     output: {
         path: path.join(__dirname, 'wwwroot/bundle'),

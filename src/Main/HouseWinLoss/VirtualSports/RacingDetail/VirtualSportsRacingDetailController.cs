@@ -22,7 +22,7 @@ namespace HouseWinLoss.VirtualSports.RacingDetail
         public async Task<IActionResult> Json(QueryModel queryModel)
         {
             var criteria = mapper.Map<UniversalThirdPartyMatchDetailCriteria>(queryModel);
-            return Ok(criteria);
+            return await Json(criteria);
         }
 
         [Route("excel")]
