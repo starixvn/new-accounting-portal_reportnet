@@ -23,17 +23,17 @@ namespace HouseWinLoss.BetBuilder.SportType
         }
 
         [Route("")]
-        public Task<IActionResult> Json(QueryModel queryModel)
+        public async Task<IActionResult> Json(QueryModel queryModel)
         {
             var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
-            return Json(criteria, "Sport Type");
+            return await Json(criteria, "Sport Type");
         }
 
         [Route("excel")]
-        public Task<IActionResult> Excel(ExcelQueryModel queryModel)
+        public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
         {
             var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
-            return Excel(criteria, "Sport Type", queryModel.Title);
+            return await Excel(criteria, "Sport Type", queryModel.Title);
         }
     }
 }

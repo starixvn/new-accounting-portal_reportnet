@@ -22,17 +22,17 @@ namespace HouseWinLoss.Soccer.MajorMinor
         }
 
         [Route("")]
-        public Task<IActionResult> Json(QueryModel queryModel)
+        public async Task<IActionResult> Json(QueryModel queryModel)
         {
             var criteria = mapper.Map<Criteria>(queryModel);
-            return Json(criteria, "Major/Minor");
+            return await Json(criteria, "Major/Minor");
         }
 
         [Route("excel")]
-        public Task<IActionResult> Excel(ExcelQueryModel queryModel)
+        public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
         {
             var criteria = mapper.Map<Criteria>(queryModel);
-            return Excel(criteria, "Major/Minor", queryModel.Title);
+            return await Excel(criteria, "Major/Minor", queryModel.Title);
         }
     }
 }

@@ -20,17 +20,17 @@ namespace HouseWinLoss.BetBuilder.Site
         }
 
         [Route("")]
-        public Task<IActionResult> Json(QueryModel queryModel)
+        public async Task<IActionResult> Json(QueryModel queryModel)
         {
             var criteria = mapper.Map<UniversalThirdPartySiteCriteria>(queryModel);
-            return Json(criteria, queryModel.SiteType);
+            return await Json(criteria, queryModel.SiteType);
         }
 
         [Route("excel")]
-        public Task<IActionResult> Excel(ExcelQueryModel queryModel)
+        public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
         {
             var criteria = mapper.Map<UniversalThirdPartySiteCriteria>(queryModel);
-            return Excel(criteria, queryModel.SiteType, queryModel.Title, Constants.SheetName);
+            return await Excel(criteria, queryModel.SiteType, queryModel.Title, Constants.SheetName);
         }
     }
 }

@@ -36,6 +36,7 @@ namespace Nap_Reports.Sites
             services.RegisterAbnormalbetServices();
             services.RegisterActualMemberBetServices();
             services.RegisterExchangeServices();
+            services.RegisterCashOutPerformanceServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

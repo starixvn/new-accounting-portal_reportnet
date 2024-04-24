@@ -66,4 +66,12 @@
 		<Setting Key="Exchange-SportQuery" SpName="Acc_Rpt_ExchangePerformance_SporttypeSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Exchange-LicenseeQuery" SpName="Acc_Rpt_ExchangePerformance_LicenseesSel" DbName="DBEXT.bodb02.wsv_nap" />
 	</Function>
+	<Function Name="CashOutPerformance">
+		<Setting Key="Acc_Rpt_COPerformance_SportSel" SpName="Acc_Rpt_COPerformance_SportSel" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_LeagueGroupSel" SpName="Acc_Rpt_COPerformance_LeagueGroupSel" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_SportType_Bettrans" SpName="Acc_Rpt_COPerformance_SportType" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_LiveStatus_Bettrans" SpName="Acc_Rpt_COPerformance_LiveStatus" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_BetType_Bettrans" SpName="Acc_Rpt_COPerformance_BetType" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_Cust_Bettrans" SpName="Acc_Rpt_COPerformance_Cust" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+	</Function>
 </Functions>

@@ -97,7 +97,7 @@ import angular from "angular";
             for (var i = 0; i < data.bodyRows.length; i++) {
                 var row = data.bodyRows[i];
                 var name = row.Columns[0].Value;
-                var isLive = parseInt(row.Columns[0].CustomAttr);
+                var isLive = parseInt(row.Columns[0].customAttr);
                 row.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateSportType(' + isLive + ')">' + name + '</a>';
 
                 if (row != null && row.SubRows != null) {

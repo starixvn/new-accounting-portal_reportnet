@@ -19,17 +19,17 @@ namespace HouseWinLoss.VirtualSports.RacingDetail
         }
 
         [Route("")]
-        public Task<IActionResult> Json(QueryModel queryModel)
+        public async Task<IActionResult> Json(QueryModel queryModel)
         {
             var criteria = mapper.Map<UniversalThirdPartyMatchDetailCriteria>(queryModel);
-            return Json(criteria);
+            return Ok(criteria);
         }
 
         [Route("excel")]
-        public Task<IActionResult> Excel(ExcelQueryModel queryModel)
+        public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
         {
             var criteria = mapper.Map<UniversalThirdPartyMatchDetailCriteria>(queryModel);
-            return Excel(criteria, queryModel.Title);
+            return await Excel(criteria, queryModel.Title);
         }
     }
 }

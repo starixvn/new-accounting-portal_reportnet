@@ -658,6 +658,7 @@
     <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />
     <ProjectReference Include="..\src\Misc\AbnormalBet\AbnormalBet.csproj" />
     <ProjectReference Include="..\src\Misc\ActualMemberBet\ActualMemberBet.csproj" />
+    <ProjectReference Include="..\src\Misc\CashOutPerformance\CashOutPerformance.csproj" />
     <ProjectReference Include="..\src\Misc\Exchange\Exchange.csproj" />
     <ProjectReference Include="..\src\Shared\Utilities\Utilities.csproj" />
   </ItemGroup>

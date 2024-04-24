@@ -1,5 +1,6 @@
 ﻿using AbnormalBet;
 using ActualMemberBet;
+using CashOutPerformance;
 using Exchange;
 using SBPerformance;
 using SMAWinLoss;
@@ -16,6 +17,7 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AbnormalBetAttribute).GetTypeInfo().Assembly));
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ActualMemberBetAttribute).GetTypeInfo().Assembly));
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ExchangeAttribute).GetTypeInfo().Assembly));
+            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CashOutPerformanceAttribute).GetTypeInfo().Assembly));
         }
     }
 }
