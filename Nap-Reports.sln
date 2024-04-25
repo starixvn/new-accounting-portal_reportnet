@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseWinLoss", "src\Main\Ho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exchange", "src\Misc\Exchange\Exchange.csproj", "{AEFC7CFD-D750-413B-8876-C46BEE80A5B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashOutPerformance", "src\Misc\CashOutPerformance\CashOutPerformance.csproj", "{8FEF679A-68DC-4C94-8068-2D07B29F3F85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashOutPerformance", "src\Misc\CashOutPerformance\CashOutPerformance.csproj", "{8FEF679A-68DC-4C94-8068-2D07B29F3F85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdatedUsernameCredit", "src\Misc\UpdatedUsernameCredit\UpdatedUsernameCredit.csproj", "{19C0E0BA-D3E2-45C1-8BA1-CE09B7BAF341}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{8FEF679A-68DC-4C94-8068-2D07B29F3F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FEF679A-68DC-4C94-8068-2D07B29F3F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FEF679A-68DC-4C94-8068-2D07B29F3F85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19C0E0BA-D3E2-45C1-8BA1-CE09B7BAF341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C0E0BA-D3E2-45C1-8BA1-CE09B7BAF341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C0E0BA-D3E2-45C1-8BA1-CE09B7BAF341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C0E0BA-D3E2-45C1-8BA1-CE09B7BAF341}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{50057285-34EA-49A3-BD7B-6F9B2927D726} = {A9904CC1-6040-4CA6-84CF-568401D7F360}
 		{AEFC7CFD-D750-413B-8876-C46BEE80A5B9} = {171618A1-8436-41ED-B06E-E07DEA604F31}
 		{8FEF679A-68DC-4C94-8068-2D07B29F3F85} = {171618A1-8436-41ED-B06E-E07DEA604F31}
+		{19C0E0BA-D3E2-45C1-8BA1-CE09B7BAF341} = {171618A1-8436-41ED-B06E-E07DEA604F31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}

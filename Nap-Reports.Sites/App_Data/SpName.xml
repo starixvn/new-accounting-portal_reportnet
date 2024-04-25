@@ -80,4 +80,8 @@
 		<Setting Key="Acc_Rpt_COPerformance_LeagueSel" SpName="Acc_Rpt_COPerformance_LeagueSel" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Acc_Rpt_COPerformance_LicenseesSel" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
+	<Function Name="Misc - Updated And Credit List">
+		<Setting Key="Acc_Rpt_AdminUpdateUserName" SpName="Acc_Rpt_AdminUpdateUserName" DbName="DBLOG.bodb_CustomerLog.wsv_nap" TimeOut="0" />
+		<Setting Key="Acc_Rpt_AdminUpdateCredit" SpName="Acc_Rpt_AdminUpdateCredit" DbName="DBLOG.bodb_CustomerLog.wsv_nap" TimeOut="0" />
+	</Function>
 </Functions>

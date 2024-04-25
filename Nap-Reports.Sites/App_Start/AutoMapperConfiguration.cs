@@ -6,6 +6,7 @@ using Exchange;
 using HouseWinLoss;
 using SBPerformance;
 using SMAWinLoss;
+using UpdatedUsernameCredit;
 
 namespace Nap_Reports.Sites.App_Start
 {
@@ -21,6 +22,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeActualMemberBet();
                 cfg.InitializeExchange();
                 cfg.InitializeCashOutPerformance();
+                cfg.InitializeUpdatedUsernameCredit();
             });
 
             var mapper = config.CreateMapper();
