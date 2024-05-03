@@ -38,6 +38,7 @@ namespace Nap_Reports.Sites
             services.RegisterExchangeServices();
             services.RegisterCashOutPerformanceServices();
             services.RegisterUpdatedUsernameAndCreditServices();
+            services.RegisterSBCustomerPerformanceByDangerServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

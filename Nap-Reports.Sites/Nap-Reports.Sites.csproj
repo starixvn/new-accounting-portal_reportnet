@@ -573,6 +573,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\FraudAndRisk\SBCustomerPerformanceByDanger\SBCustomerPerformanceByDanger.csproj" />
     <ProjectReference Include="..\src\Main\HouseWinLoss\HouseWinLoss.csproj" />
     <ProjectReference Include="..\src\Main\SBPerformance\SBPerformance.csproj" />
     <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />

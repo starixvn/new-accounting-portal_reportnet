@@ -84,4 +84,11 @@
 		<Setting Key="Acc_Rpt_AdminUpdateUserName" SpName="Acc_Rpt_AdminUpdateUserName" DbName="DBLOG.bodb_CustomerLog.wsv_nap" TimeOut="0" />
 		<Setting Key="Acc_Rpt_AdminUpdateCredit" SpName="Acc_Rpt_AdminUpdateCredit" DbName="DBLOG.bodb_CustomerLog.wsv_nap" TimeOut="0" />
 	</Function>
+	<Function Name="SBCustomerPerformanceByDangers">
+		<Setting Key="Acc_Rpt_SBCustPerfByDangerLevel_DivisionSel" SpName="Acc_Rpt_SiteList" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_SBCustPerfByDangerLevel_WareHouse" SpName="Acc_Rpt_SBCustPerfByDangerLevel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="150"/>
+		<Setting Key="Acc_Rpt_SBCustPerfByDangerLevel_LeagueBySportSel" SpName="Acc_Rpt_SBCustPerfByDangerLevel_LeagueBySportSel" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_SBCustPerfByDangerLevel_LeagueGroupBySportSel" SpName="Acc_Rpt_SBCustPerfByDangerLevel_LeagueGroupBySportSel" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_SBCustPerfByDangerLevel_SportSel" SpName="Acc_Rpt_SBCustPerfByDangerLevel_SportSel" DbName="DBACC.bodb02.wsv_nap" />
+	</Function>
 </Functions>
