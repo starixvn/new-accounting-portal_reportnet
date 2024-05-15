@@ -8,11 +8,11 @@ namespace PunterAnalysis.Game
 {
     public class HandlerExcel : HandlerExcelBase, IRequestHandler<HttpParameterExcel, ExcelPackage>
     {
-        private readonly GameExcelSettingFactory excelSettingFactory;
+        private readonly GameExcelSetting excelSettingFactory;
 
         private readonly IMapper mapper;
 
-        public HandlerExcel(PunterAnalysisService punterAnalysisService, GameExcelSettingFactory excelSettingFactory, PunterAnalysisExcelBuilder excelBuilder, IMapper mapper)
+        public HandlerExcel(PunterAnalysisService punterAnalysisService, GameExcelSetting excelSettingFactory, PunterAnalysisExcelBuilder excelBuilder, IMapper mapper)
             : base(punterAnalysisService, excelBuilder, mapper)
         {
             this.excelSettingFactory = excelSettingFactory;

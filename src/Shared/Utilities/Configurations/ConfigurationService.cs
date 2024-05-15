@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace Utilities.Configurations
 {
@@ -9,10 +9,10 @@ namespace Utilities.Configurations
         string FraudSystemCategoryApi { get; }
     }
 
-    public class ConfigurationServiceImp : ConfigurationService
+    public class ConfigurationServiceImp(IConfiguration configuration) : ConfigurationService
     {
         public string CurrentDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
-        public string FraudSystemCategoryApi => ConfigurationManager.AppSettings["FraudSystemCategoryAPI"];
+        public string FraudSystemCategoryApi => configuration["FraudSystemCategoryAPI"];
     }
 }
