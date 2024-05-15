@@ -1,5 +1,4 @@
-﻿using Olympus.FPSAPI.Client;
-using PunterAnalysis.Shared;
+﻿using PunterAnalysis.Shared;
 using PunterAnalysis.Summary.Model;
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;
@@ -15,14 +14,14 @@ namespace PunterAnalysis.Summary
     {
         private readonly PunterAnalysisService punterAnalysisService;
 
-        private readonly FraudServiceWrapper fraudServiceWrapper;
+        private readonly FraudServiceWrapperNew fraudServiceWrapper;
 
         private readonly ConfigurationService configurationService;
 
 
         public SummaryServiceImp(
            PunterAnalysisService punterAnalysisService,
-           FraudServiceWrapper fraudServiceWrapper,
+           FraudServiceWrapperNew fraudServiceWrapper,
            ConfigurationService configurationService)
         {
             this.punterAnalysisService = punterAnalysisService;

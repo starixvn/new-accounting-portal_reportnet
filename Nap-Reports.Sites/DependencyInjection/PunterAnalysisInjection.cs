@@ -20,6 +20,7 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<DateTimeService, DateTimeServiceImp>();
             service.AddTransient<LeagueServiceFactory, LeagueServiceFactoryImp>();
             service.AddTransient<FraudServiceWrapper, FraudServiceWrapperImp>();
+            service.AddTransient<FraudServiceWrapperNew, FraudServiceWrapperNewImp>();
             service.AddTransient<PunterAnalysisExcelBuilder, PunterAnalysisExcelBuilderImp>();
             service.AddTransient<BetTypeExcelSetting, BetTypeExcelSettingFactory>();
             service.AddTransient<SportTypeExcelSetting, SportTypeExcelSettingFactory>();
