@@ -46,7 +46,6 @@
     "@angular-devkit/core": "0.0.22",
     "@angular/cli": "1.6.2",
     "@types/jasmine": "^2.8.2",
-    "@types/lodash": "^4.14.91",
     "@types/node": "^8.5.2",
     "@types/numeral": "^0.0.22",
     "gulp": "^3.9.1",
@@ -62,7 +61,7 @@
     "rimraf": "^2.6.1",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "^2.4.2",
+    "typescript": "^2.5.3",
     "yargs": "^8.0.2"
   }
 }
