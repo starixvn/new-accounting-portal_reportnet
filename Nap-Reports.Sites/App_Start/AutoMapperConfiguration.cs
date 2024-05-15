@@ -4,6 +4,7 @@ using AutoMapper;
 using CashOutPerformance;
 using Exchange;
 using HouseWinLoss;
+using PunterAnalysis;
 using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
@@ -25,6 +26,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeCashOutPerformance();
                 cfg.InitializeUpdatedUsernameCredit();
                 cfg.InitializeSBCustomerPerformanceByDanger();
+                cfg.InitializePunterAnalysis();
             });
 
             var mapper = config.CreateMapper();

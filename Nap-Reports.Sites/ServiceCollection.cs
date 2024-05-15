@@ -39,6 +39,7 @@ namespace Nap_Reports.Sites
             services.RegisterCashOutPerformanceServices();
             services.RegisterUpdatedUsernameAndCreditServices();
             services.RegisterSBCustomerPerformanceByDangerServices();
+            services.RegisterPunterAnalysisServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

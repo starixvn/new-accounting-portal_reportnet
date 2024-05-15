@@ -91,4 +91,50 @@
 		<Setting Key="Acc_Rpt_SBCustPerfByDangerLevel_LeagueGroupBySportSel" SpName="Acc_Rpt_SBCustPerfByDangerLevel_LeagueGroupBySportSel" DbName="DBACC.bodb02.wsv_nap" />
 		<Setting Key="Acc_Rpt_SBCustPerfByDangerLevel_SportSel" SpName="Acc_Rpt_SBCustPerfByDangerLevel_SportSel" DbName="DBACC.bodb02.wsv_nap" />
 	</Function>
+	<Function Name="Punter-Analysis">
+		<Setting Key="Punter-BetCount" SpName="Acc_Punter_Top_DrillDownBetcount" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-BetType" SpName="Acc_Punter_Top_DrillDownUsernameSportType" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-League" SpName="Acc_Punter_Top_DrillDownUsernameSportBetType" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-SportType" SpName="Acc_Punter_Top_DrillDownUsername" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-Summary" SpName="Acc_Punter_TopByUsername" DbName="DBWH.bodb_dwrs.wsv_nap" />
+
+		<Setting Key="Punter-ProductSportBetTypeQuery" SpName="Acc_Punter_ProductSportBetType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0">
+			<Mapping DataField="ProductName" ObjectProperty="ProductName" />
+			<Mapping DataField="SportGroup" ObjectProperty="SportGroup" />
+			<Mapping DataField="SportName" ObjectProperty="SportName" />
+			<Mapping DataField="BettypeGroup" ObjectProperty="BetTypeGroup" />
+			<Mapping DataField="BettypeName" ObjectProperty="BetTypeName" />
+			<Mapping DataField="Value" ObjectProperty="Value" />
+			<Mapping DataField="RenderType" ObjectProperty="RenderType" />
+		</Setting>
+		<Setting Key="Punter-AvailabeDatabaseQuery" SpName="Acc_CheckDailyTaskReadiness" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-AvailableDateRangeQuery" SpName="Acc_Punter_GetDateRangeSupport" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-SportsbookSportBetTypeQuery" SpName="Acc_Punter_League_ProductSportBetType" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0">
+			<Mapping DataField="SportType" ObjectProperty="SportType" />
+			<Mapping DataField="SportName" ObjectProperty="SportName" />
+			<Mapping DataField="BettypeName" ObjectProperty="BetTypeName" />
+			<Mapping DataField="CombinationID" ObjectProperty="CombinationId" />
+		</Setting>
+		<Setting Key="Punter-SportTypeLeagueQuery" SpName="Acc_Punter_GetLeagueBySport" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0">
+			<Mapping DataField="leagueids" ObjectProperty="LeagueId" />
+			<Mapping DataField="LeagueName" ObjectProperty="LeagueName" />
+		</Setting>
+		<Setting Key="Punter-Performance-BetType" SpName="Acc_Punter_PerformanceTopBettype" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-Performance-Event" SpName="Acc_Punter_PerformanceEventtype" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-Performance-Month" SpName="Acc_Punter_PerformanceByMonth" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-Performance-ProductTurnover" SpName="Acc_Punter_PerformanceByProduct" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-Performance-Sport" SpName="Acc_Punter_PerformanceTopSporttype" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-Performance-SportsbookBetCount" SpName="Acc_Punter_PerformanceByEventtype" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-Performance-SportsbookSport" SpName="Acc_Punter_PerformanceBySport" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-PerformanceOfMembers" SpName="Acc_Punter_Top_DrillDownAssocAcc" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-LeagueGroupQuery" SpName="Acc_Punter_LeagueGroup" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0">
+			<Mapping DataField="SportType" ObjectProperty="SportType" />
+			<Mapping DataField="Sport" ObjectProperty="Sport" />
+			<Mapping DataField="LeagueGroupID" ObjectProperty="LeagueGroupId" />
+			<Mapping DataField="LeagueGroupName" ObjectProperty="LeagueGroupName" />
+		</Setting>
+		<Setting Key="Punter-Game" SpName="Acc_Punter_Top_DrillDownSportEsport" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-BetTypeGroup" SpName="Acc_Punter_Top_DrillDownLeagueGroupEsport" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Punter-GameBetType" SpName="Acc_Punter_Top_DrillDownBettypeGroupEsport" DbName="DBWH.bodb_dwrs.wsv_nap" />
+	</Function>
 </Functions>

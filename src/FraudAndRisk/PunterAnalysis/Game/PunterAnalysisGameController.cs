@@ -1,0 +1,33 @@
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Olympus.WebApi.Epplus;
+using PunterAnalysis.Game.Model;
+
+namespace PunterAnalysis.Game
+{
+    [Route("api/punter-analysis/game")]
+    [ApiController]
+    public class PunterAnalysisGameController : ControllerBase
+    {
+        private readonly IMediator mediator;
+
+        public PunterAnalysisGameController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
+        [Route("")]
+        public async Task<IActionResult> Index(HttpParameterJson parameter)
+        {
+            var viewModel = await mediator.Send(parameter);
+            return Ok(viewModel);
+        }
+
+        [Route("excel")]
+        public async Task<IActionResult> Excel(HttpParameterExcel parameter)
+        {
+            var excelPackage = await mediator.Send(parameter);
+            return new EpplusExcelResult(excelPackage);
+        }
+    }
+}
