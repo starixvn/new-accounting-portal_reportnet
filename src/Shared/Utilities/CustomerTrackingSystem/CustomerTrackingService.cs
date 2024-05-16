@@ -25,8 +25,6 @@ namespace Nap_Reports.Utilities.CustomerTrackingSystem
 
         private static HttpClient jsonClient = new HttpClient();
 
-        private static HttpClient xmlClient = new HttpClient();
-
         public async Task<List<CustomerDevice>> GetAssociatedCustomers(string host, int custId)
         {
             jsonClient.DefaultRequestHeaders.Accept.Clear();
@@ -60,19 +58,18 @@ namespace Nap_Reports.Utilities.CustomerTrackingSystem
         {
             var result = new List<string>();
 
-            xmlClient.DefaultRequestHeaders.Accept.Clear();
-            xmlClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+            jsonClient.DefaultRequestHeaders.Accept.Clear();
+            jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var path = $"{host}/GetCustomerClassification/?custIdList={custId}";
-            var response = await xmlClient.GetAsync(path).ConfigureAwait(false);
+            var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
                 return string.Empty;
             }
 
-            var responseData = await response.Content.ReadAsStringAsync();
-
-            XDocument xdoc = XDocument.Parse(responseData);
+            var responseData = await response.Content.ReadFromJsonAsync<string>();
+            var xdoc = XDocument.Parse(responseData);
             var elements = xdoc.Descendants("Root").Descendants("CustomerClassification");
             if (elements.Any())
             {
