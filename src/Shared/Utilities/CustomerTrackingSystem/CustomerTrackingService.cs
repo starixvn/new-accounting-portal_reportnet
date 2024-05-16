@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using Olympus.FPSAPI.Client;
-using Olympus.FPSAPI.Client.Model;
+﻿using Nap_Reports.Utilities.CustomerTrackingSystem.Model;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Xml.Linq;
 
-namespace PunterAnalysis.Summary
+namespace Nap_Reports.Utilities.CustomerTrackingSystem
 {
-    public interface FraudServiceWrapperNew
+    public interface CustomerTrackingService
     {
         Task<List<CustomerDevice>> GetAssociatedCustomers(string host, int custId);
 
@@ -19,7 +19,7 @@ namespace PunterAnalysis.Summary
         Task<List<CustomerById>> GetAssociatedCustomersByIp(string host, int custId);
     }
 
-    public class FraudServiceWrapperNewImp : FraudServiceWrapperNew
+    public class CustomerTrackingServiceImp : CustomerTrackingService
     {
         private const int AssociatedByIP = 3;
 
@@ -31,43 +31,52 @@ namespace PunterAnalysis.Summary
         {
             jsonClient.DefaultRequestHeaders.Accept.Clear();
             jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string path = $"{host}/associatedcustomers/{custId}";
-            HttpResponseMessage response = await jsonClient.GetAsync(path).ConfigureAwait(continueOnCapturedContext: false);
-            return (!response.IsSuccessStatusCode) ? new List<CustomerDevice>() : (await response.Content.ReadAsAsync<List<CustomerDevice>>().ConfigureAwait(continueOnCapturedContext: false));
+
+            var path = $"{host}/associatedcustomers/{custId}";
+            var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
+            return response.IsSuccessStatusCode
+                ? await response.Content.ReadFromJsonAsync<List<CustomerDevice>>().ConfigureAwait(false)
+                : new List<CustomerDevice>();
         }
 
         public async Task<string> GetLatestIP(string host, int custId)
         {
             jsonClient.DefaultRequestHeaders.Accept.Clear();
             jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string path = $"{host}/Get10LatestIps/{custId}";
-            HttpResponseMessage response = await jsonClient.GetAsync(path).ConfigureAwait(continueOnCapturedContext: false);
+
+            var path = $"{host}/Get10LatestIps/{custId}";
+            var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
                 return string.Empty;
             }
 
-            return (await response.Content.ReadAsAsync<List<string>>().ConfigureAwait(continueOnCapturedContext: false)).FirstOrDefault((string ip) => ip != "127.0.0.1");
+            var result = await response.Content.ReadFromJsonAsync<List<string>>().ConfigureAwait(false);
+
+            return result.FirstOrDefault(ip => ip != "127.0.0.1");
         }
 
         public async Task<string> GetCategory(string host, string custId)
         {
-            List<string> result = new List<string>();
+            var result = new List<string>();
+
             xmlClient.DefaultRequestHeaders.Accept.Clear();
             xmlClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
-            string path = $"{host}/GetCustomerClassification/?custIdList={custId}";
-            HttpResponseMessage response = await xmlClient.GetAsync(path).ConfigureAwait(continueOnCapturedContext: false);
+
+            var path = $"{host}/GetCustomerClassification/?custIdList={custId}";
+            var response = await xmlClient.GetAsync(path).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
                 return string.Empty;
             }
 
-            var responseContent = await response.Content.ReadAsAsync<string>();
-            XDocument xdoc = XDocument.Parse(await response.Content.ReadAsAsync<string>());
-            IEnumerable<XElement> elements = xdoc.Descendants("Root").Descendants("CustomerClassification");
+            var responseData = await response.Content.ReadAsStringAsync();
+
+            XDocument xdoc = XDocument.Parse(responseData);
+            var elements = xdoc.Descendants("Root").Descendants("CustomerClassification");
             if (elements.Any())
             {
-                foreach (XElement element in elements)
+                foreach (var element in elements)
                 {
                     result.Add(element.Attribute("CategoryName").Value);
                 }
@@ -80,10 +89,13 @@ namespace PunterAnalysis.Summary
         {
             jsonClient.DefaultRequestHeaders.Accept.Clear();
             jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string path = $"{host}/cts/GetAssociationPerType?custId={custId}&associationType={associationType}";
-            HttpResponseMessage response = await jsonClient.GetAsync(path).ConfigureAwait(continueOnCapturedContext: false);
-            string text = ((!response.IsSuccessStatusCode) ? string.Empty : (await response.Content.ReadAsAsync<string>().ConfigureAwait(continueOnCapturedContext: false)));
-            string responseData = text;
+
+            var path = $"{host}/cts/GetAssociationPerType?custId={custId}&associationType={associationType}";
+            var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
+            var responseData = response.IsSuccessStatusCode
+                ? await response.Content.ReadAsStringAsync().ConfigureAwait(false)
+                : string.Empty;
+
             return JsonConvert.DeserializeObject<List<CustomerByUsername>>(responseData);
         }
 
@@ -91,10 +103,13 @@ namespace PunterAnalysis.Summary
         {
             jsonClient.DefaultRequestHeaders.Accept.Clear();
             jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string path = $"{host}/cts/GetAssociationPerType?custId={custId}&associationType={3}";
-            HttpResponseMessage response = await jsonClient.GetAsync(path).ConfigureAwait(continueOnCapturedContext: false);
-            string text = ((!response.IsSuccessStatusCode) ? string.Empty : (await response.Content.ReadAsAsync<string>().ConfigureAwait(continueOnCapturedContext: false)));
-            string responseData = text;
+
+            var path = $"{host}/cts/GetAssociationPerType?custId={custId}&associationType={AssociatedByIP}";
+            var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
+            var responseData = response.IsSuccessStatusCode
+                ? await response.Content.ReadAsStringAsync().ConfigureAwait(false)
+                : string.Empty;
+
             return JsonConvert.DeserializeObject<List<CustomerById>>(responseData);
         }
     }

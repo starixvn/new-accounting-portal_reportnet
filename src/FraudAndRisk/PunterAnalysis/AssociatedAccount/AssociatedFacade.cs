@@ -1,5 +1,5 @@
 ﻿using Fanex.Data.Repository;
-using Olympus.FPSAPI.Client;
+using Nap_Reports.Utilities.CustomerTrackingSystem;
 using PunterAnalysis.AssociatedAccount.Model;
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;
@@ -15,17 +15,17 @@ namespace PunterAnalysis.AssociatedAccount
     {
         private readonly IDynamicRepository repository;
 
-        private readonly FraudServiceWrapper fraudServiceWrapper;
+        private readonly CustomerTrackingService customerTrackingService;
 
         private readonly ConfigurationService configurationService;
 
         public AssociatedFacadeImp(
             IDynamicRepository repository,
-            FraudServiceWrapper fraudServiceWrapper,
+            CustomerTrackingService customerTrackingService,
             ConfigurationService configurationService)
         {
             this.repository = repository;
-            this.fraudServiceWrapper = fraudServiceWrapper;
+            this.customerTrackingService = customerTrackingService;
             this.configurationService = configurationService;
         }
 
@@ -56,7 +56,7 @@ namespace PunterAnalysis.AssociatedAccount
 
             foreach (var item in summaries)
             {
-                item.Category = await fraudServiceWrapper.GetCategory(configurationService.FraudSystemCategoryApi, item.CustId.ToString());
+                item.Category = await customerTrackingService.GetCategory(configurationService.FraudSystemCategoryApi, item.CustId.ToString());
             }
 
             return summaries.ToList();

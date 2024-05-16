@@ -1,5 +1,4 @@
-﻿using Olympus.FPSAPI.Client;
-using PunterAnalysis.AssociatedAccount;
+﻿using PunterAnalysis.AssociatedAccount;
 using PunterAnalysis.BetCount;
 using PunterAnalysis.BetType;
 using PunterAnalysis.BetTypeGroup;
@@ -19,8 +18,6 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<PunterAnalysisService, PunterAnalysisServiceImp>();
             service.AddTransient<DateTimeService, DateTimeServiceImp>();
             service.AddTransient<LeagueServiceFactory, LeagueServiceFactoryImp>();
-            service.AddTransient<FraudServiceWrapper, FraudServiceWrapperImp>();
-            service.AddTransient<FraudServiceWrapperNew, FraudServiceWrapperNewImp>();
             service.AddTransient<PunterAnalysisExcelBuilder, PunterAnalysisExcelBuilderImp>();
             service.AddTransient<BetTypeExcelSetting, BetTypeExcelSettingFactory>();
             service.AddTransient<SportTypeExcelSetting, SportTypeExcelSettingFactory>();

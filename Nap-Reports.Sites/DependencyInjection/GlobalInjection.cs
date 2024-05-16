@@ -6,6 +6,7 @@ using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using Fanex.NAP.Client.Session;
 using Fanex.RemotingRef;
+using Nap_Reports.Utilities.CustomerTrackingSystem;
 using Utilities.BalanceUpServices;
 using Utilities.Configurations;
 using Utilities.PermissionFilter;
@@ -31,6 +32,7 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<PermissionFilterService, PermissionFilterServiceImp>();
             service.AddTransient<BalanceUpService, BalanceUpServiceImp>();
             service.AddTransient<ConfigurationService, ConfigurationServiceImp>();
+            service.AddTransient<CustomerTrackingService, CustomerTrackingServiceImp>();
         }
     }
 }

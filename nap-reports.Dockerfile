@@ -9,6 +9,8 @@ COPY src/Misc/Exchange/*.csproj ./src/Misc/Exchange/
 COPY src/Misc/ActualMemberBet/*.csproj ./Misc/ActualMemberBet/
 COPY src/Misc/CashOutPerformance/*.csproj ./Misc/CashOutPerformance/
 COPY src/Misc/UpdatedUsernameCredit/*.csproj ./Misc/UpdatedUsernameCredit/
+COPY src/FraudAndRisk/PunterAnalysis/*.csproj ./FraudAndRisk/PunterAnalysis/
+COPY src/FraudAndRisk/SBCustomerPerformanceByDanger/*.csproj ./FraudAndRisk/SBCustomerPerformanceByDanger/
 COPY src/Shared/Utilities/*.csproj ./src/Shared/Utilities/
 COPY Nap-Reports.Sites/*.csproj ./Nap-Reports.Sites/
 

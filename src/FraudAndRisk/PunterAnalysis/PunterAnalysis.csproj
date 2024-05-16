@@ -14,7 +14,6 @@
     <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2" />
     <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.13" />
     <PackageReference Include="MediatR" Version="12.2.0" />
-    <PackageReference Include="Olympus.FPSAPI.Client" Version="1.0.0.16" />
     <PackageReference Include="Olympus.WebApi.Epplus" Version="1.0.0.4" />
   </ItemGroup>
   <ItemGroup>

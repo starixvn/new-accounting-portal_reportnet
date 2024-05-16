@@ -1,4 +1,5 @@
-﻿using PunterAnalysis.Shared;
+﻿using Nap_Reports.Utilities.CustomerTrackingSystem;
+using PunterAnalysis.Shared;
 using PunterAnalysis.Summary.Model;
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;
@@ -14,18 +15,18 @@ namespace PunterAnalysis.Summary
     {
         private readonly PunterAnalysisService punterAnalysisService;
 
-        private readonly FraudServiceWrapperNew fraudServiceWrapper;
+        private readonly CustomerTrackingService customerTrackingService;
 
         private readonly ConfigurationService configurationService;
 
 
         public SummaryServiceImp(
            PunterAnalysisService punterAnalysisService,
-           FraudServiceWrapperNew fraudServiceWrapper,
+           CustomerTrackingService customerTrackingService,
            ConfigurationService configurationService)
         {
             this.punterAnalysisService = punterAnalysisService;
-            this.fraudServiceWrapper = fraudServiceWrapper;
+            this.customerTrackingService = customerTrackingService;
             this.configurationService = configurationService;
         }
 
@@ -35,7 +36,7 @@ namespace PunterAnalysis.Summary
 
             foreach (var item in summaries.Entities)
             {
-                item.Category = await fraudServiceWrapper.GetCategory(configurationService.FraudSystemCategoryApi, item.CustId.ToString());
+                item.Category = await customerTrackingService.GetCategory(configurationService.FraudSystemCategoryApi, item.CustId.ToString());
             }
 
             return summaries;
