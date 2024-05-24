@@ -10,7 +10,7 @@ namespace PunterAnalysis.BetCount
 
     public class BetCountExcelSettingFactory : BetCountExcelSetting
     {
-        private const string TemplatePath = @"ExcelTemplate\PunterAnalysis\BetCount.xlsx";
+        private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/BetCount.xlsx";
 
         private readonly ConfigurationService configurationService;
 
@@ -26,7 +26,7 @@ namespace PunterAnalysis.BetCount
             {
                 SheetName = "Punter Analysis",
                 StartRowIndex = startDataRowTemplateIndex,
-                TemplatePath = $"{configurationService.CurrentDirectory}\\{TemplatePath}",
+                TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
                 Title = excelSettingParams.Title,
                 TitleCellRange = "A1:E2",
                 Filter = excelSettingParams.Filter,

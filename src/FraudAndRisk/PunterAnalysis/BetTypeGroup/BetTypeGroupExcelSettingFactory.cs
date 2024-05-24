@@ -10,7 +10,7 @@ namespace PunterAnalysis.BetTypeGroup
 
     public class BetTypeGroupExcelSettingFactory : BetTypeGroupExcelSetting
     {
-        private const string TemplatePath = @"ExcelTemplate\PunterAnalysis\BetTypeGroup.xlsx";
+        private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/BetTypeGroup.xlsx";
 
         private readonly ConfigurationService configurationService;
 
@@ -26,7 +26,7 @@ namespace PunterAnalysis.BetTypeGroup
             {
                 SheetName = "Punter Analysis",
                 StartRowIndex = startDataRowTemplateIndex,
-                TemplatePath = $"{configurationService.CurrentDirectory}\\{TemplatePath}",
+                TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
                 Title = excelSettingParams.Title,
                 TitleCellRange = "A1:E2",
                 Filter = excelSettingParams.Filter,

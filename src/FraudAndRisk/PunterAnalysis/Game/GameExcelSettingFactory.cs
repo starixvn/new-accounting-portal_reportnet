@@ -10,7 +10,7 @@ namespace PunterAnalysis.Game
 
     public class GameExcelSettingFactory : GameExcelSetting
     {
-        private const string TemplatePath = @"ExcelTemplate\PunterAnalysis\Game.xlsx";
+        private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/Game.xlsx";
 
         private readonly ConfigurationService configurationService;
 
@@ -26,7 +26,7 @@ namespace PunterAnalysis.Game
             {
                 SheetName = "Punter Analysis",
                 StartRowIndex = startDataRowTemplateIndex,
-                TemplatePath = $"{configurationService.CurrentDirectory}\\{TemplatePath}",
+                TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
                 Title = excelSettingParams.Title,
                 TitleCellRange = "A1:E2",
                 Filter = excelSettingParams.Filter,

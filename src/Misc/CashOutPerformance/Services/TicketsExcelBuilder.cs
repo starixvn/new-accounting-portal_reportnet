@@ -62,7 +62,7 @@ namespace CashOutPerformance.Services
 
         private void LoadTemplate(string fileExcel)
         {
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\ExcelTemplate\\CashOutPerformance\\{fileExcel}";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/CashOutPerformance/{fileExcel}";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 ExcelPackage = new ExcelPackage(stream);

@@ -10,7 +10,7 @@ namespace PunterAnalysis.AssociatedAccount
 
     public class AssociatedAccountExcelSettingFactory : AssociatedAccountExcelSetting
     {
-        private const string TemplatePath = @"ExcelTemplate\PunterAnalysis\AssociatedAccount.xlsx";
+        private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/AssociatedAccount.xlsx";
 
         private readonly ConfigurationService configurationService;
 
@@ -26,7 +26,7 @@ namespace PunterAnalysis.AssociatedAccount
             {
                 SheetName = "Punter Analysis",
                 StartRowIndex = startDataRowTemplateIndex,
-                TemplatePath = $"{configurationService.CurrentDirectory}\\{TemplatePath}",
+                TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
                 Title = excelSettingParams.Title,
                 TitleCellRange = "A1:F2",
                 Filter = excelSettingParams.Filter,

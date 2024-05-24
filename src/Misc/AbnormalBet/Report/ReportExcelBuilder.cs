@@ -48,7 +48,7 @@ namespace AbnormalBet.Report
 
         private void LoadMemberTemplate()
         {
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\ExcelTemplate\\AbNormalBet\\Member.xlsx";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/AbNormalBet/Member.xlsx";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 ExcelPackage = new ExcelPackage(stream);
@@ -58,7 +58,7 @@ namespace AbnormalBet.Report
 
         private void LoadLicenseeTemplate()
         {
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\ExcelTemplate\\AbNormalBet\\Licensee.xlsx";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/AbNormalBet/Licensee.xlsx";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 ExcelPackage = new ExcelPackage(stream);

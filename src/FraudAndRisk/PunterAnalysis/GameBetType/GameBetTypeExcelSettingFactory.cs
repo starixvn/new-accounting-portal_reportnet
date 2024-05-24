@@ -10,7 +10,7 @@ namespace PunterAnalysis.GameBetType
 
     public class GameBetTypeExcelSettingFactory : GameBetTypeExcelSetting
     {
-        private const string TemplatePath = @"ExcelTemplate\PunterAnalysis\GameBettype.xlsx";
+        private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/GameBettype.xlsx";
 
         private readonly ConfigurationService configurationService;
 
@@ -25,7 +25,7 @@ namespace PunterAnalysis.GameBetType
             {
                 SheetName = "Punter Analysis",
                 StartRowIndex = 12,
-                TemplatePath = $"{configurationService.CurrentDirectory}\\{TemplatePath}",
+                TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
                 Title = excelSettingParams.Title,
                 TitleCellRange = "A1:M2",
                 Filter = excelSettingParams.Filter,

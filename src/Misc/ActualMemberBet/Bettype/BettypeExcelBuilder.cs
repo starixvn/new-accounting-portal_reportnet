@@ -40,7 +40,7 @@ namespace ActualMemberBet.Bettype
 
         private void LoadTemplate()
         {
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\ExcelTemplate\\ActualMemberBet\\BettypeActualMemberBet.xlsx";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/ActualMemberBet/BettypeActualMemberBet.xlsx";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 ExcelPackage = new ExcelPackage(stream);

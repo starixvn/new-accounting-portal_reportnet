@@ -10,7 +10,7 @@ namespace PunterAnalysis.League
 
     public class LeagueExcelSettingFactory : LeagueExcelSetting
     {
-        private const string TemplatePath = @"ExcelTemplate\PunterAnalysis\League.xlsx";
+        private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/League.xlsx";
 
         private readonly ConfigurationService configurationService;
 
@@ -26,7 +26,7 @@ namespace PunterAnalysis.League
             {
                 SheetName = "Punter Analysis",
                 StartRowIndex = startDataRowTemplateIndex,
-                TemplatePath = $"{configurationService.CurrentDirectory}\\{TemplatePath}",
+                TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
                 Title = excelSettingParams.Title,
                 TitleCellRange = "A1:E2",
                 Filter = excelSettingParams.Filter,

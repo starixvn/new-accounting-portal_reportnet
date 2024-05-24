@@ -41,7 +41,7 @@ namespace Exchange.Report
 
         private void LoadTemplate()
         {
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\ExcelTemplate\\Exchange\\Exchange.xlsx";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/Exchange/Exchange.xlsx";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 ExcelPackage = new ExcelPackage(stream);

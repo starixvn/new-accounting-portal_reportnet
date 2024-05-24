@@ -39,7 +39,7 @@ namespace SBCustomerPerformanceByDanger.Report
 
         private void LoadTemplate()
         {
-            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}\\ExcelTemplate\\SBCustomerPerformanceByDangers\\SBCustomerPerformanceByDangers.xlsx";
+            var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/SBCustomerPerformanceByDangers/SBCustomerPerformanceByDangers.xlsx";
             using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
             {
                 ExcelPackage = new ExcelPackage(stream);

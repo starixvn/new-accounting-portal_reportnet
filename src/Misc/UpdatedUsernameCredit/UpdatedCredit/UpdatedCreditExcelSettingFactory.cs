@@ -10,7 +10,7 @@ namespace UpdatedUsernameCredit.UpdatedCredit
 
     public class UpdatedCreditExcelSettingImp : UpdatedCreditExcelSetting
     {
-        private const string TemplatePath = @"ExcelTemplate\UpdatedUsernameAndCredit\UpdatedCredit.xlsx";
+        private const string TemplatePath = @"ExcelTemplate/UpdatedUsernameAndCredit/UpdatedCredit.xlsx";
 
         private readonly ConfigurationService configurationService;
 
@@ -26,7 +26,7 @@ namespace UpdatedUsernameCredit.UpdatedCredit
             {
                 SheetName = "Updated Credit",
                 StartRowIndex = startDataRowTemplateIndex,
-                TemplatePath = $"{configurationService.CurrentDirectory}\\{TemplatePath}",
+                TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
                 Title = $"Updated Credit report From {message.FromDate:MMM dd, yyyy} To {message.ToDate:MMM dd, yyyy}",
                 TitleCellRange = "A1:O2"
             };
