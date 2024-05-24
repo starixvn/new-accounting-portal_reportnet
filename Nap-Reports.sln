@@ -35,7 +35,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FraudAndRisk", "FraudAndRis
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBCustomerPerformanceByDanger", "src\FraudAndRisk\SBCustomerPerformanceByDanger\SBCustomerPerformanceByDanger.csproj", "{673A54B6-9B3B-4D33-BB9E-1EF69F2088AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PunterAnalysis", "src\FraudAndRisk\PunterAnalysis\PunterAnalysis.csproj", "{3F20CC99-6E44-4B9B-844A-E39123C5EDE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PunterAnalysis", "src\FraudAndRisk\PunterAnalysis\PunterAnalysis.csproj", "{3F20CC99-6E44-4B9B-844A-E39123C5EDE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BetList", "BetList", "{B072E82C-940C-48EA-B924-2182B8200BDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetList", "src\BetList\BetList\BetList.csproj", "{FDC03EBE-06AB-4112-8D9D-4C836DDB64ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,10 @@ Global
 		{3F20CC99-6E44-4B9B-844A-E39123C5EDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F20CC99-6E44-4B9B-844A-E39123C5EDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F20CC99-6E44-4B9B-844A-E39123C5EDE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDC03EBE-06AB-4112-8D9D-4C836DDB64ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC03EBE-06AB-4112-8D9D-4C836DDB64ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC03EBE-06AB-4112-8D9D-4C836DDB64ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC03EBE-06AB-4112-8D9D-4C836DDB64ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +119,8 @@ Global
 		{CE6B9B9F-BC24-4444-AC6D-B36D9270AB7F} = {5FE921E3-BA82-458A-9983-BEA80F74C49D}
 		{673A54B6-9B3B-4D33-BB9E-1EF69F2088AC} = {CE6B9B9F-BC24-4444-AC6D-B36D9270AB7F}
 		{3F20CC99-6E44-4B9B-844A-E39123C5EDE3} = {CE6B9B9F-BC24-4444-AC6D-B36D9270AB7F}
+		{B072E82C-940C-48EA-B924-2182B8200BDC} = {5FE921E3-BA82-458A-9983-BEA80F74C49D}
+		{FDC03EBE-06AB-4112-8D9D-4C836DDB64ED} = {B072E82C-940C-48EA-B924-2182B8200BDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}
