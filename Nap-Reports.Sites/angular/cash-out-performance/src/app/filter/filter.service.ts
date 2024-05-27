@@ -81,7 +81,7 @@ export class FilterService {
    }
 
    queryLeagueSuggestion(sportId: string, searchText: string, searchExactly: boolean): Observable<LeagueModel[]> {
-    const url = `${this.url}/leagues`;
+    const url = `${this.url}leagues`;
     return this.httpService.post<LeagueModel[]>(url, {
       sportId,
       searchText,
