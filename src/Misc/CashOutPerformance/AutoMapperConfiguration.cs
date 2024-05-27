@@ -31,6 +31,10 @@ namespace CashOutPerformance
             cfg.CreateMap<SportLevelModel, SportLevelExcelModel>();
             cfg.CreateMap<SportLevelRequest, SportLevelCriteria>();
             cfg.CreateMap<SportLevelExcelRequest, SportLevelCriteria>();
+            cfg.CreateMap<SportLevelModel, SportLevelExcelModel>();
+            cfg.CreateMap<EventStatusLevelModel, EventStatusLevelExcelModel>();
+            cfg.CreateMap<BetTypeLevelModel, BetTypeLevelExcelModel>();
+            cfg.CreateMap<MatchDetailLevelModel, MatchDetailLevelExcelModel>();
         }
     }
 }
