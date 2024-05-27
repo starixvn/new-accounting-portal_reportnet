@@ -71,6 +71,9 @@ namespace HouseWinLoss
             cfg.CreateMap<DailyWinLoss2hSoccerMinor.OutrightMatchDetail.ExcelQueryModel, UniversalSportbookMatchDetailCriteria>();
             cfg.CreateMap<DailyWinLoss2hSoccerMinor.Site.QueryModel, DailyWinLoss2hSoccerMinor.Site.Criteria>();
             cfg.CreateMap<DailyWinLoss2hSoccerMinor.Site.ExcelQueryModel, DailyWinLoss2hSoccerMinor.Site.Criteria>();
+            cfg.CreateMap<DailyWinLoss2hSoccerMinor.Site.QueryModel, UniversalSportbookSiteCriteria>();
+            cfg.CreateMap<DailyWinLoss2hSoccerMinor.Site.ExcelQueryModel, UniversalSportbookSiteCriteria>();
+
 
             cfg.CreateMap<CashOut.LiveNonLive.ExcelQueryModel, UniversalSecondLevelCriteria>();
             cfg.CreateMap<CashOut.LiveNonLive.QueryModel, UniversalSecondLevelCriteria>();
