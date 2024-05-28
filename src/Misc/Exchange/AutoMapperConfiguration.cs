@@ -17,7 +17,7 @@ namespace Exchange
             cfg.CreateMap<SummaryEntity<ExchangeItemModel>, SummaryEntity<ExchangeExcelEntity>>();
             cfg.CreateMap<ExchangeModel, ExchangeExcelModel>();
             cfg.CreateMap<ExchangeEntity, ExchangeItemModel>();
-            cfg.CreateMap<IEnumerable<ExchangeEntity>, IEnumerable<ExchangeItemModel>>();
+            cfg.CreateMap<IEnumerable<ExchangeEntity>, List<ExchangeItemModel>>();
         }
     }
 }
