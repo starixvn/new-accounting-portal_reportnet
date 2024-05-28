@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
+using Org.BouncyCastle.Asn1.Pkcs;
 using Utilities.LinqDynamicSum;
 
 namespace Exchange.Report
@@ -66,6 +67,11 @@ namespace Exchange.Report
 
         private SummaryEntity<ExchangeItemModel> CalculateLicenseeGroupItems(IEnumerable<ExchangeEntity> rawLicensee)
         {
+            if (rawLicensee != null && !rawLicensee.Any())
+            {
+                return new SummaryEntity<ExchangeItemModel>();
+            }
+
             var licenseeGroup = mapper.Map<IEnumerable<ExchangeItemModel>>(rawLicensee);
             return licenseeGroup.CalculateSummaryEntity();
         }
@@ -83,6 +89,11 @@ namespace Exchange.Report
 
         private ExchangeItemModel CalculateTotalByMarketItems(IEnumerable<ExchangeEntity> rawLicensee, string marketType)
         {
+            if (rawLicensee != null && !rawLicensee.Any())
+            {
+                return new ExchangeItemModel();
+            }
+
             var marketGroupRawData = mapper.Map<IEnumerable<ExchangeItemModel>>(rawLicensee);
             
             var total =  marketGroupRawData.DynamicSum();
@@ -93,6 +104,11 @@ namespace Exchange.Report
 
         private ExchangeItemModel CalculateGrandTotal(IEnumerable<ExchangeEntity> rawData)
         {
+            if(rawData != null && !rawData.Any())
+            {
+                return new ExchangeItemModel();
+            }
+
             var exchangeRawData = mapper.Map<IEnumerable<ExchangeItemModel>>(rawData);
            
             var grandTotal = exchangeRawData.DynamicSum();
