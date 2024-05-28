@@ -7,7 +7,6 @@ namespace Exchange
     {
         public static void InitializeExchange(this IProfileExpression cfg)
         {
-
             cfg.CreateMap<HttpParameterJson, Criteria>();
             cfg.CreateMap<HttpParameterExcel, HttpParameterJson>();
             cfg.CreateMap<ExchangeEntity, ExchangeExcelEntity>();

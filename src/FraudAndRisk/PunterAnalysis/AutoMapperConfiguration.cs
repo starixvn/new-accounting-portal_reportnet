@@ -7,10 +7,17 @@ namespace PunterAnalysis
     {
         public static void InitializePunterAnalysis(this IProfileExpression cfg)
         {
+            cfg.CreateMap<BetCount.Model.BetCountModel, BetCount.Model.BetCountExcelModel>();
+            cfg.CreateMap<BetType.Model.BetTypeModel, BetType.Model.BetTypeExcelModel>();
+            cfg.CreateMap<SportType.Model.SportTypeModel, SportType.Model.SportTypeExcelModel>();
+            cfg.CreateMap<Summary.Model.SummaryModel, Summary.Model.SummaryExcelModel>();
+            cfg.CreateMap<Game.Model.GameModel, Game.Model.GameExcelModel>();
+            cfg.CreateMap<GameBetType.Model.GameBetTypeModel, GameBetType.Model.GameBetTypeExcelModel>();
+            cfg.CreateMap<BetTypeGroup.Model.BetTypeGroupModel, BetTypeGroup.Model.BetTypeGroupExcelModel>();
+
             cfg.CreateMap<SummaryEntity<BetCount.Model.BetCountModel>, SummaryEntity<BetCount.Model.BetCountExcelModel>>();
             cfg.CreateMap<SummaryEntity<BetType.Model.BetTypeModel>, SummaryEntity<BetType.Model.BetTypeExcelModel>>();
             cfg.CreateMap<SummaryEntity<SportType.Model.SportTypeModel>, SummaryEntity<SportType.Model.SportTypeExcelModel>>();
-            cfg.CreateMap<Summary.Model.SummaryModel, Summary.Model.SummaryExcelModel>();
             cfg.CreateMap<SummaryEntity<Summary.Model.SummaryModel>, SummaryEntity<Summary.Model.SummaryExcelModel>>();
             cfg.CreateMap<SummaryEntity<Game.Model.GameModel>, SummaryEntity<Game.Model.GameExcelModel>>();
             cfg.CreateMap<SummaryEntity<GameBetType.Model.GameBetTypeModel>, SummaryEntity<GameBetType.Model.GameBetTypeExcelModel>>();
