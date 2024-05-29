@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
+using Org.BouncyCastle.Asn1.Pkcs;
 using Utilities.LinqDynamicSum;
 
 namespace Exchange.Report
@@ -27,7 +28,8 @@ namespace Exchange.Report
         {
             var criteria = mapper.Map<Criteria>(message);
             var rawData = await repository.FetchAsync<ExchangeEntity>(criteria);
-            var data = mapper.Map<List<ExchangeItemModel>>(rawData);
+
+            var data =  mapper.Map<List<ExchangeItemModel>>(rawData);
 
             return data.CalculateSummaryEntity();
         }
@@ -35,7 +37,7 @@ namespace Exchange.Report
         public async Task<ExchangeModel> QueryLicensee(LicenseeHttpParameterJson message)
         {
             var criteria = mapper.Map<Criteria>(message);
-            var rawData = await repository.FetchAsync<ExchangeEntity>(criteria);
+            var rawData = (await repository.FetchAsync<ExchangeEntity>(criteria)).ToList();
 
 
             var licenseeExchange = CalculateExchangeByLicensee(rawData);
@@ -53,37 +55,38 @@ namespace Exchange.Report
             return result;
         }
 
-        private IEnumerable<SummaryEntity<ExchangeItemModel>> CalculateExchangeByLicensee(IEnumerable<ExchangeEntity> rawData)
+        private List<SummaryEntity<ExchangeItemModel>> CalculateExchangeByLicensee(List<ExchangeEntity> rawData)
         {
             var groups = rawData.Select(x => new { x.Name }).Distinct();
 
             var result = from @group in groups
-                       let licenseeGroupRawData = rawData.Where(x => x.Name == @group.Name).ToArray()
+                       let licenseeGroupRawData = rawData.Where(x => x.Name == @group.Name).ToList()
                        select CalculateLicenseeGroupItems(licenseeGroupRawData);
 
-            return result;
+            return result.ToList();
         }
 
-        private SummaryEntity<ExchangeItemModel> CalculateLicenseeGroupItems(IEnumerable<ExchangeEntity> rawLicensee)
+        private SummaryEntity<ExchangeItemModel> CalculateLicenseeGroupItems(List<ExchangeEntity> rawLicensee)
         {
-            var licenseeGroup = mapper.Map<IEnumerable<ExchangeItemModel>>(rawLicensee);
+            var licenseeGroup = mapper.Map<List<ExchangeItemModel>>(rawLicensee);
             return licenseeGroup.CalculateSummaryEntity();
         }
 
-        private IEnumerable<ExchangeItemModel> CalculateTotal(IEnumerable<ExchangeEntity> rawData)
+        private List<ExchangeItemModel> CalculateTotal(IEnumerable<ExchangeEntity> rawData)
         {
             var groups = rawData.Select(x => new { x.MarketType }).Distinct();
 
             var result = from @group in groups
-                         let marketGroupRawData = rawData.Where(x => x.MarketType == @group.MarketType).ToArray()
+                         let marketGroupRawData = rawData.Where(x => x.MarketType == @group.MarketType).ToList()
                          select CalculateTotalByMarketItems(marketGroupRawData, @group.MarketType);
 
-            return result;
+            return result.ToList();
         }
 
-        private ExchangeItemModel CalculateTotalByMarketItems(IEnumerable<ExchangeEntity> rawLicensee, string marketType)
+        private ExchangeItemModel CalculateTotalByMarketItems(List<ExchangeEntity> rawLicensee, string marketType)
         {
-            var marketGroupRawData = mapper.Map<IEnumerable<ExchangeItemModel>>(rawLicensee);
+
+            var marketGroupRawData = mapper.Map<List<ExchangeItemModel>>(rawLicensee);
             
             var total =  marketGroupRawData.DynamicSum();
             total.MarketType = marketType;
@@ -91,9 +94,9 @@ namespace Exchange.Report
             return total;
         }
 
-        private ExchangeItemModel CalculateGrandTotal(IEnumerable<ExchangeEntity> rawData)
+        private ExchangeItemModel CalculateGrandTotal(List<ExchangeEntity> rawData)
         {
-            var exchangeRawData = mapper.Map<IEnumerable<ExchangeItemModel>>(rawData);
+            var exchangeRawData = mapper.Map<List<ExchangeItemModel>>(rawData);
            
             var grandTotal = exchangeRawData.DynamicSum();
             grandTotal.MarketType = "Grand Total";

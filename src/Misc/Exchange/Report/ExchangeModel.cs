@@ -4,10 +4,10 @@ namespace Exchange.Report
 {
     public class ExchangeModel
     {
-        public IEnumerable<SummaryEntity<ExchangeItemModel>> ExchangeLicensees { get; set; }
+        public List<SummaryEntity<ExchangeItemModel>> ExchangeLicensees { get; set; }
 
         public ExchangeItemModel GrandTotal { get; set; }
 
-        public IEnumerable<ExchangeItemModel> MarketTypeTotal { get; set; }
+        public List<ExchangeItemModel> MarketTypeTotal { get; set; }
     }
 }

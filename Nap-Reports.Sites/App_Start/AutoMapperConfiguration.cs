@@ -17,7 +17,6 @@ namespace Nap_Reports.Sites.App_Start
         public static void Initialize(this IServiceCollection services)
         {
             var config = new MapperConfiguration(cfg => {
-                cfg.AllowNullCollections = true;
                 cfg.InitializeHouseWinLoss();
                 cfg.InitializeSMAWinLoss();
                 cfg.InitializeSBPerformance();
