@@ -18,6 +18,7 @@ export class CustomNavbarService extends NavbarService {
     query(): Observable<Navbar> {
         const url = 'state-api/application/header';
 
+
         return this.customHttpService.post<any>(url).map(data => {
             this.userMenus = [
                 {
@@ -39,6 +40,10 @@ export class CustomNavbarService extends NavbarService {
             return result;
         });
     }
+
+    // compileMenus(menus: Menu[]): Menu[] {
+    //   return menus;
+    // }
 
     private bindingMenuData(data: any): Menu[]
     {

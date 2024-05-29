@@ -22,7 +22,7 @@ namespace PunterAnalysis
             cfg.CreateMap<SummaryEntity<Game.Model.GameModel>, SummaryEntity<Game.Model.GameExcelModel>>();
             cfg.CreateMap<SummaryEntity<GameBetType.Model.GameBetTypeModel>, SummaryEntity<GameBetType.Model.GameBetTypeExcelModel>>();
             cfg.CreateMap<SummaryEntity<BetTypeGroup.Model.BetTypeGroupModel>, SummaryEntity<BetTypeGroup.Model.BetTypeGroupExcelModel>>();
-            cfg.CreateMap<SummaryEntity<SummaryEntity<AssociatedAccount.Model.AssociatedSummaryModel>>, SummaryEntity<AssociatedAccount.Model.AssociatedSummaryExcelModel>>();
+            cfg.CreateMap<SummaryEntity<AssociatedAccount.Model.AssociatedSummaryModel>, SummaryEntity<AssociatedAccount.Model.AssociatedSummaryExcelModel>>();
             cfg.CreateMap<BetCount.Model.HttpParameterExcel, BetCount.Model.Criteria>();
             cfg.CreateMap<BetCount.Model.HttpParameterExcel, Shared.ExcelSettingParams>();
             cfg.CreateMap<BetCount.Model.HttpParameterJson, BetCount.Model.Criteria>();
