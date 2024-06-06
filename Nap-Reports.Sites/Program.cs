@@ -44,6 +44,7 @@ internal class Program
             options.SuppressModelStateInvalidFilter = true;
         });
         services.RegisterRemotingRef(configuration);
+        services.RegisterResultCore(configuration);
         services.AddFanexData(configuration);
         services.RegisterSentry(configuration);
 

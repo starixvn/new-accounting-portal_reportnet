@@ -1,6 +1,8 @@
 ﻿using Fanex.Logging;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.RemotingRef;
+using Fanex.Result.Core.Base;
+using Fanex.Result.Core.RemotingRef;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Nap_Reports.Sites.DependencyInjection;
 using SharpRaven;
@@ -28,6 +30,11 @@ namespace Nap_Reports.Sites
                 .FromApplication("Nap-Reports");
         }
 
+        public static void RegisterResultCore(this IServiceCollection services, IConfiguration configuration)
+        {
+            ResultCoreManager.RegisterRefDataHelper(new RefDataHelper());
+        }
+
         public static void RegisterInternalServices(this IServiceCollection services)
         {
             services.RegisterHouseWinLossServices();
@@ -40,6 +47,7 @@ namespace Nap_Reports.Sites
             services.RegisterUpdatedUsernameAndCreditServices();
             services.RegisterSBCustomerPerformanceByDangerServices();
             services.RegisterPunterAnalysisServices();
+            services.RegisterBetListServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

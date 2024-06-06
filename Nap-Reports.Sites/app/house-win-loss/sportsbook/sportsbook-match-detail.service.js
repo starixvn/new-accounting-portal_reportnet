@@ -25,7 +25,7 @@ import angular from "angular";
                 liveIndicator: data.isLive
             };
 
-            var url = legacyService.resolveUrl('/ScoreInformation/GetScoreInformation');
+            var url = 'api/bet-list/score';
             return $http.post(url, httpData)
                 .then(httpResponseService.getDataComplete)
                 .catch(httpResponseService.getDataFailed);

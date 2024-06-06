@@ -563,6 +563,9 @@
     <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.13" />
     <PackageReference Include="Fanex.NAP.Signin" Version="2.0.1.1" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.4" />
+    <PackageReference Include="Fanex.Result.Core-NumberGame" Version="2.0.0" />
+    <PackageReference Include="Fanex.Result.Core-Sportsbook" Version="2.0.0.9-upgrade-01" />
+    <PackageReference Include="Fanex.Result.Core.RemotingRef" Version="2.0.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -572,6 +575,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\BetList\BetList\BetList.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\PunterAnalysis\PunterAnalysis.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\SBCustomerPerformanceByDanger\SBCustomerPerformanceByDanger.csproj" />
     <ProjectReference Include="..\src\Main\HouseWinLoss\HouseWinLoss.csproj" />
