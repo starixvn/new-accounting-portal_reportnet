@@ -39,6 +39,10 @@ namespace DailyMixParlayWinLoss.Services
             if (rawData != null)
             {
                 var combinationGroups = rawData.GroupBy(data => data.Combinations);
+
+                var aa = from combinationGroup in combinationGroups
+                         let combinationGroupRawData = rawData.Where(x =>x.Combinations == combinationGroup.Key)
+                         select CalculateCombinationGroup(combinationGroupRawData);
                
                 foreach (var combinationGroup in combinationGroups)
                 {
@@ -68,6 +72,7 @@ namespace DailyMixParlayWinLoss.Services
                         };
 
                         liveTypeWinLoss.Name = this.ConvertLiveType(liveTypeWinLoss.Id);
+
                         foreach (var data in liveTypeGroup)
                         {
                             WinLossInfo info = new WinLossInfo
@@ -120,7 +125,17 @@ namespace DailyMixParlayWinLoss.Services
             return report;
         }
 
-        
+        private WinLoss CalculateCombinationGroup(IEnumerable<WinLossItem> rawData)
+        {
+            return new WinLoss();
+        }
+
+        private WinLoss CalculateCombinationGroupByLiveType(IEnumerable<WinLossItem> rawData)
+        {
+            return new WinLoss();
+        }
+
+
         public WinLossInfo GetAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
         {
             WinLossInfo report = new WinLossInfo
