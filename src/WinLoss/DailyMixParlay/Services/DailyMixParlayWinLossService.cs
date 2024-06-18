@@ -2,13 +2,15 @@ using DailyMixParlay.Constant;
 using DailyMixParlay.Criteria;
 using DailyMixParlay.Models;
 using Fanex.Data.Repository;
+using System.Reflection.Emit;
+using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;
 
 namespace DailyMixParlayWinLoss.Services
 {
     public interface DailyMixParlayWinLossService
     {
-        Task<WinLoss> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria);
+        Task<WinLossByCombination> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria);
     }
 
     public class DailyMixParlayWinLossServiceImp : DailyMixParlayWinLossService
@@ -23,9 +25,9 @@ namespace DailyMixParlayWinLoss.Services
             this.remotingRefService = remotingRefService;
         }
 
-        public async Task<WinLoss> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria)
+        public async Task<WinLossByCombination> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria)
         {
-            var report = new WinLoss
+            var report = new WinLossByCombination
             {
                 GrandTotal = new WinLossItem
                 {
@@ -42,11 +44,11 @@ namespace DailyMixParlayWinLoss.Services
 
                 var aa = from combinationGroup in combinationGroups
                          let combinationGroupRawData = rawData.Where(x =>x.Combinations == combinationGroup.Key)
-                         select CalculateCombinationGroup(combinationGroupRawData);
+                         select CalculateCombinationGroup(combinationGroup.Key, combinationGroupRawData);
                
                 foreach (var combinationGroup in combinationGroups)
                 {
-                    var combinationWinLoss = new WinLoss
+                    var combinationWinLoss = new WinLossByCombination
                     {
                         WinLosses = new List<WinLossItem>(),
                         GrandTotal = new WinLossItem
@@ -125,16 +127,63 @@ namespace DailyMixParlayWinLoss.Services
             return report;
         }
 
-        private WinLoss CalculateCombinationGroup(IEnumerable<WinLossItem> rawData)
+        private WinLossByCombination CalculateCombinationGroup(string combination, IEnumerable<WinLossItem> rawData)
         {
-            return new WinLoss();
+            var combinationName = this.ConvertCombinationType(combination);
+
+            var total = rawData.DynamicSum();
+            total.Name = "Grand Total";
+
+            return new WinLossByCombination
+            {
+                Name = combinationName,
+                
+                Total = total
+            };
         }
 
-        private WinLoss CalculateCombinationGroupByLiveType(IEnumerable<WinLossItem> rawData)
+        private WinLossByCombination CalculateCombinationByLiveType(IEnumerable<WinLossItem> rawData)
         {
-            return new WinLoss();
+            var liveTypeGroups = rawData.GroupBy(x => x.LiveType);
+
+            var liveTypeWinLoss = from liveTypeGroup in liveTypeGroups
+                      let liveTypeRawData = rawData.Where(x => x.LiveType == liveTypeGroup.Key)
+                      select CalculateCombinationByLiveTypeGroup(liveTypeGroup.Key, liveTypeRawData);
+
+            var total = rawData.DynamicSum();
+            total.Name = "Total";
+
+            return new WinLossByCombination
+            {
+                Name = string.Empty,
+                WinLosses = liveTypeWinLoss.ToList(),
+                Total = total
+            };
         }
 
+        private WinLossByLiveStatus CalculateCombinationByLiveTypeGroup(bool liveType, IEnumerable<WinLossItem> rawData)
+        {
+            var total = rawData.DynamicSum();
+            total.Name = "Sub Total";
+
+            var winlosses = from item in rawData
+                      select CalculateWinLossItem(item);
+
+            return new WinLossByLiveStatus
+            { 
+                Name = liveType ? "Live" : "Non-Live",
+                WinLosses = winlosses.ToList(),
+                Total = total
+            };
+        }
+
+        private WinLossItem CalculateWinLossItem(WinLossItem item)
+        {
+            var result = item;
+            result.Name = $"Mix Parlay ({item.Status})";
+            
+            return result;
+        }
 
         public WinLossInfo GetAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
         {

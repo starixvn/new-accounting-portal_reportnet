@@ -1,11 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace DailyMixParlay.Models
 {
     public class WinLoss
     {
-        public string Name { get; set; }
+        public List<WinLossByCombination> WinLosses { get; set; }
 
-        public List<WinLossItem> WinLosses { get; set; }
-
-        public WinLossItem GrandTotal { get; set; }
+        public WinLossItem Total { get;set; }
     }
 }
