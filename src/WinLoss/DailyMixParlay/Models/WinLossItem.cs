@@ -20,9 +20,7 @@
 
         public decimal RealTurnover { get; set; }
 
-        public decimal Margin { get; set; }
-
-        public decimal ExtraPT { get; set; }
+        public decimal Margin => RealTurnover == 0 ? 0 : RealIncome/RealTurnover;
 
         public decimal MemberBonus { get; set; }
 

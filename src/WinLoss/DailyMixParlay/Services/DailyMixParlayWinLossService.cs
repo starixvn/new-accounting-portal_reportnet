@@ -2,7 +2,6 @@ using DailyMixParlay.Constant;
 using DailyMixParlay.Criteria;
 using DailyMixParlay.Models;
 using Fanex.Data.Repository;
-using System.Reflection.Emit;
 using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;
 
@@ -10,7 +9,7 @@ namespace DailyMixParlayWinLoss.Services
 {
     public interface DailyMixParlayWinLossService
     {
-        Task<WinLossByCombination> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria);
+        Task<WinLoss> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria);
     }
 
     public class DailyMixParlayWinLossServiceImp : DailyMixParlayWinLossService
@@ -25,16 +24,9 @@ namespace DailyMixParlayWinLoss.Services
             this.remotingRefService = remotingRefService;
         }
 
-        public async Task<WinLossByCombination> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria)
+        public async Task<WinLoss> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria)
         {
-            var report = new WinLossByCombination
-            {
-                GrandTotal = new WinLossItem
-                {
-                    Name = "Grand Total"
-                },
-                WinLosses = new List<WinLossItem>()
-            };
+            var report = new WinLoss();
 
             var rawData = await repository.FetchAsync<WinLossItem>(criteria);
 
@@ -42,86 +34,16 @@ namespace DailyMixParlayWinLoss.Services
             {
                 var combinationGroups = rawData.GroupBy(data => data.Combinations);
 
-                var aa = from combinationGroup in combinationGroups
+                var combinationWinLosses = from combinationGroup in combinationGroups
                          let combinationGroupRawData = rawData.Where(x =>x.Combinations == combinationGroup.Key)
                          select CalculateCombinationGroup(combinationGroup.Key, combinationGroupRawData);
+
+                var total = rawData.DynamicSum();
+                total.Name = "GrandTotal";
+
+                report.WinLosses = combinationWinLosses.ToList();
+                report.Total = total;
                
-                foreach (var combinationGroup in combinationGroups)
-                {
-                    var combinationWinLoss = new WinLossByCombination
-                    {
-                        WinLosses = new List<WinLossItem>(),
-                        GrandTotal = new WinLossItem
-                        {
-                            Name = "Total"
-                        }
-                    };
-
-                    combinationWinLoss.Name = this.ConvertCombinationType(combinationGroup.Key);
-                    
-                    var liveTypeGroups = combinationGroup.GroupBy(data => data.LiveType);
-
-                    foreach (var liveTypeGroup in liveTypeGroups)
-                    {
-                        var liveTypeWinLoss = new WinLossInfo
-                        {
-                            Id = Converter.ToInt(liveTypeGroup.Key),
-                            ChildsInfo = new List<WinLossInfo>(),
-                            GrandTotal = new WinLossInfo
-                            {
-                                Name = Labels.Sub_Total
-                            }
-                        };
-
-                        liveTypeWinLoss.Name = this.ConvertLiveType(liveTypeWinLoss.Id);
-
-                        foreach (var data in liveTypeGroup)
-                        {
-                            WinLossInfo info = new WinLossInfo
-                            {
-                                Status = Converter.ToString2(data.Status),
-                                MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
-                                MemberTurnover = Converter.ToDecimal(data.MemberTurnover),
-                                BetCount = Converter.ToInt(data.BetCount),
-                                SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
-                                Commission = Converter.ToDecimal(data.Commission),
-                                RealIncome = Converter.ToDecimal(data.RealIncome),
-                                RealTurnover = Converter.ToDecimal(data.RealTurnover),
-                                ExtraPT = Converter.ToDecimal(data.ExtraPT),
-                                MemberBonus = Converter.ToDecimal(data.MemberBonus),
-                                HouseBonus = Converter.ToDecimal(data.HouseBonus)
-                            };
-
-                            info.Name = string.Format(Labels.Mix_Parlay + " ({0})", info.Status);
-                            info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
-                            liveTypeWinLoss.GrandTotal.Add(info);
-                            info = this.FormatWinLossInfo(info);
-                            liveTypeWinLoss.ChildsInfo.Add(info);
-
-                            liveTypeWinLoss.TotalRowDetail++;
-                            combinationWinLoss.TotalRowDetail++;
-                        }
-
-                        liveTypeWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                            liveTypeWinLoss.GrandTotal.RealIncome,
-                            liveTypeWinLoss.GrandTotal.RealTurnover);
-                        combinationWinLoss.GrandTotal.Add(liveTypeWinLoss.GrandTotal);
-                        liveTypeWinLoss.GrandTotal = this.FormatWinLossInfo(liveTypeWinLoss.GrandTotal);
-                        combinationWinLoss.ChildsInfo.Add(liveTypeWinLoss);
-                    }
-
-                    combinationWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                        combinationWinLoss.GrandTotal.RealIncome,
-                        combinationWinLoss.GrandTotal.RealTurnover);
-                    report.GrandTotal.Add(combinationWinLoss.GrandTotal);
-                    combinationWinLoss.GrandTotal = this.FormatWinLossInfo(combinationWinLoss.GrandTotal);
-                    report.ChildsInfo.Add(combinationWinLoss);
-                }
-
-                report.GrandTotal.Margin = this.CalculateMargin(
-                    report.GrandTotal.RealIncome,
-                    report.GrandTotal.RealTurnover);
-                report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
             }
 
             return report;
@@ -131,15 +53,10 @@ namespace DailyMixParlayWinLoss.Services
         {
             var combinationName = this.ConvertCombinationType(combination);
 
-            var total = rawData.DynamicSum();
-            total.Name = "Grand Total";
+            var result = CalculateCombinationByLiveType(rawData);
+            result.Name = combinationName;
 
-            return new WinLossByCombination
-            {
-                Name = combinationName,
-                
-                Total = total
-            };
+            return result;
         }
 
         private WinLossByCombination CalculateCombinationByLiveType(IEnumerable<WinLossItem> rawData)
@@ -331,7 +248,7 @@ namespace DailyMixParlayWinLoss.Services
                     DailyMixParlayConstant.DailyMixParlayReportMaxCombination,
                     StringComparison.OrdinalIgnoreCase))
                 {
-                    name += DailyMixParlayConstant.MaxCombinationSuffix;  // Exp: 2XCombinations & up
+                    name = $"{name}{DailyMixParlayConstant.MaxCombinationSuffix}";  // Exp: 2XCombinations & up
                 }
             }
             else
@@ -361,17 +278,6 @@ namespace DailyMixParlayWinLoss.Services
             }
 
             return name;
-        }
-
-        private decimal CalculateMargin(decimal lineTotal, decimal turnover)
-        {
-            decimal result = 0;
-            if (turnover != 0)
-            {
-                result = lineTotal / turnover;
-            }
-
-            return result;
         }
 
         private string GetSportName(int sportType)
