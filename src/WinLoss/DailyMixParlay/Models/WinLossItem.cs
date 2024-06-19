@@ -31,5 +31,9 @@
         public string Combinations { get;set; }
 
         public bool LiveType { get;set; }
+
+        public int BetType { get; set; }
+
+        public int SportType { get;set; }
     }
 }

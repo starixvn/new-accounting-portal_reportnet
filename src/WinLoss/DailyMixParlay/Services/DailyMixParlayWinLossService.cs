@@ -49,7 +49,7 @@ namespace DailyMixParlayWinLoss.Services
             return report;
         }
 
-        private WinLossByCombination CalculateCombinationGroup(string combination, IEnumerable<WinLossItem> rawData)
+        private ParentGroupItem CalculateCombinationGroup(string combination, IEnumerable<WinLossItem> rawData)
         {
             var combinationName = this.ConvertCombinationType(combination);
 
@@ -59,7 +59,7 @@ namespace DailyMixParlayWinLoss.Services
             return result;
         }
 
-        private WinLossByCombination CalculateCombinationByLiveType(IEnumerable<WinLossItem> rawData)
+        private ParentGroupItem CalculateCombinationByLiveType(IEnumerable<WinLossItem> rawData)
         {
             var liveTypeGroups = rawData.GroupBy(x => x.LiveType);
 
@@ -70,7 +70,7 @@ namespace DailyMixParlayWinLoss.Services
             var total = rawData.DynamicSum();
             total.Name = "Total";
 
-            return new WinLossByCombination
+            return new ParentGroupItem
             {
                 Name = string.Empty,
                 WinLosses = liveTypeWinLoss.ToList(),
@@ -78,7 +78,7 @@ namespace DailyMixParlayWinLoss.Services
             };
         }
 
-        private WinLossByLiveStatus CalculateCombinationByLiveTypeGroup(bool liveType, IEnumerable<WinLossItem> rawData)
+        private ChildGroupItem CalculateCombinationByLiveTypeGroup(bool liveType, IEnumerable<WinLossItem> rawData)
         {
             var total = rawData.DynamicSum();
             total.Name = "Sub Total";
@@ -86,7 +86,7 @@ namespace DailyMixParlayWinLoss.Services
             var winlosses = from item in rawData
                       select CalculateWinLossItem(item);
 
-            return new WinLossByLiveStatus
+            return new ChildGroupItem
             { 
                 Name = liveType ? "Live" : "Non-Live",
                 WinLosses = winlosses.ToList(),
@@ -102,134 +102,76 @@ namespace DailyMixParlayWinLoss.Services
             return result;
         }
 
-        public WinLossInfo GetAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
+        public async Task<WinLoss> GetAdvanceMixParlayReport(GetAdvanceMixParlayCriteria criteria)
         {
-            WinLossInfo report = new WinLossInfo
-            {
-                GrandTotal = new WinLossInfo
-                {
-                    Name = Labels.Grand_Total
-                },
-                ChildsInfo = new List<WinLossInfo>()
-            };
+            var report = new WinLoss();
 
-            var rawData = this.GetReportData<dynamic>(criteria);
+            var rawData = await repository.FetchAsync<WinLossItem>(criteria);
+
             if (rawData != null)
             {
-                var sportTypeList = rawData.Select(data => Converter.ToInt(data.SportType))
-                                           .ToList();
-                this.GetSportName(sportTypeList, ref this._sportTypeNameCache);
 
                 var liveTypeGroups = rawData.GroupBy(data => data.LiveType);
-                foreach (var liveTypeGroup in liveTypeGroups)
-                {
-                    var liveTypeWinLoss = new WinLossInfo
-                    {
-                        Id = Converter.ToInt(liveTypeGroup.Key),
-                        ChildsInfo = new List<WinLossInfo>(),
-                        GrandTotal = new WinLossInfo
-                        {
-                            Name = Labels.Total
-                        }
-                    };
 
-                    liveTypeWinLoss.Name = this.ConvertLiveType(liveTypeWinLoss.Id);
-                    var sportGroups = liveTypeGroup.GroupBy(data => data.SportType);
-                    foreach (var sportGroup in sportGroups)
-                    {
-                        var sportWinLoss = new WinLossInfo
-                        {
-                            Id = Converter.ToInt(sportGroup.Key),
-                            ChildsInfo = new List<WinLossInfo>(),
-                            GrandTotal = new WinLossInfo
-                            {
-                                Name = Labels.Sub_Total
-                            }
-                        };
+                var liveTypeWinLosses = from liveTypeGroup in liveTypeGroups
+                                        let liveTypeGroupRawData = rawData.Where(x => x.LiveType == liveTypeGroup.Key)
+                                        select CalculateLiveTypeGroup(liveTypeGroup.Key, liveTypeGroupRawData);
 
-                        sportWinLoss.Name = this._sportTypeNameCache[sportWinLoss.Id];
-                        foreach (var data in sportGroup)
-                        {
-                            WinLossInfo info = new WinLossInfo
-                            {
-                                Id = criteria.Bettype,
-                                Status = Converter.ToString2(data.status),
-                                MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
-                                SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
-                                Commission = Converter.ToDecimal(data.Commission),
-                                RealIncome = Converter.ToDecimal(data.RealIncome),
-                                RealTurnover = Converter.ToDecimal(data.RealTurnover),
-                                ExtraPT = Converter.ToDecimal(data.ExtraPT),
-                                MemberBonus = Converter.ToDecimal(data.MemberBonus),
-                                HouseBonus = Converter.ToDecimal(data.HouseBonus)
-                            };
+                var total = rawData.DynamicSum();
+                total.Name = "GrandTotal";
 
-                            info.Name = string.Format(Labels.Mix_Parlay + " ({0})", info.Status);
-                            info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
-                            sportWinLoss.GrandTotal.Add(info);
-                            info = this.FormatWinLossInfo(info);
-                            sportWinLoss.ChildsInfo.Add(info);
-
-                            sportWinLoss.TotalRowDetail++;
-                            liveTypeWinLoss.TotalRowDetail++;
-                        }
-
-                        sportWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                           sportWinLoss.GrandTotal.RealIncome,
-                           sportWinLoss.GrandTotal.RealTurnover);
-                        liveTypeWinLoss.GrandTotal.Add(sportWinLoss.GrandTotal);
-                        sportWinLoss.GrandTotal = this.FormatWinLossInfo(sportWinLoss.GrandTotal);
-                        liveTypeWinLoss.ChildsInfo.Add(sportWinLoss);
-                    }
-
-                    liveTypeWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                      liveTypeWinLoss.GrandTotal.RealIncome,
-                      liveTypeWinLoss.GrandTotal.RealTurnover);
-                    report.GrandTotal.Add(liveTypeWinLoss.GrandTotal);
-                    liveTypeWinLoss.GrandTotal = this.FormatWinLossInfo(liveTypeWinLoss.GrandTotal);
-                    report.ChildsInfo.Add(liveTypeWinLoss);
-                }
-
-                report.GrandTotal.Margin = this.CalculateMargin(
-                    report.GrandTotal.RealIncome,
-                    report.GrandTotal.RealTurnover);
-                report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
+                report.WinLosses = liveTypeWinLosses.ToList();
+                report.Total = total;
             }
 
             return report;
         }
 
-        public Dictionary<object, string> GetSportName(
-            List<dynamic> sportIdList,
-            ref Dictionary<object, string> currentStorage)
+        private ParentGroupItem CalculateLiveTypeGroup(bool liveType, IEnumerable<WinLossItem> rawData)
         {
-            currentStorage = currentStorage ?? new Dictionary<object, string>();
-            foreach (var sportIdInfo in sportIdList)
+            var liveTypeName = liveType ? "Live" : "Non-Live";
+
+            var result = CalculateParlayBySportType(rawData);
+            result.Name = liveTypeName;
+
+            return result;
+        }
+
+        private ParentGroupItem CalculateParlayBySportType(IEnumerable<WinLossItem> rawData)
+        {
+            var sportTypeGroups = rawData.GroupBy(x => x.SportType);
+
+            var sportTypeWinLoss = from sportTypeGroup in sportTypeGroups
+                                   let sportTypeRawData = rawData.Where(x => x.SportType == sportTypeGroup.Key)
+                                  select CalculateParlayBySportTypeGroup(sportTypeGroup.Key, sportTypeRawData);
+
+            var total = rawData.DynamicSum();
+            total.Name = "Total";
+
+            return new ParentGroupItem
             {
-                if (!currentStorage.ContainsKey(sportIdInfo))
-                {
-                    var name = string.Empty;
-                    int id = Converter.ToInt(sportIdInfo);
-                    switch (id)
-                    {
-                        case -1:
-                            name = "Mixed Sports";
-                            break;
+                Name = string.Empty,
+                WinLosses = sportTypeWinLoss.ToList(),
+                Total = total
+            };
+        }
 
-                        case -2:
-                            name = "Mixed Other Sports";
-                            break;
+        private ChildGroupItem CalculateParlayBySportTypeGroup(int sportType, IEnumerable<WinLossItem> rawData)
+        {
+            var total = rawData.DynamicSum();
+            total.Name = "Sub Total";
 
-                        default:
-                            name = CacheRef.GetSportName(id);
-                            break;
-                    }
+            var winlosses = from item in rawData
+                            select CalculateWinLossItem(item);
 
-                    currentStorage.Add(sportIdInfo, name);
-                }
-            }
+            var sportName = remotingRefService.GetSportName(sportType);
 
-            return currentStorage;
+            return new ChildGroupItem
+            {
+                Name = sportName,
+                WinLosses = winlosses.ToList(),
+                Total = total
+            };
         }
         
         private string ConvertCombinationType(string combination)
@@ -257,48 +199,6 @@ namespace DailyMixParlayWinLoss.Services
             }
 
             return name;
-        }
-
-        private string ConvertLiveType(int liveType)
-        {
-            string name = string.Empty;
-            switch (liveType)
-            {
-                case LiveTypeConstants.NonLive:
-                    name = Labels.Non_Live;
-                    break;
-
-                case LiveTypeConstants.Live:
-                    name = Labels.Live;
-                    break;
-
-                case LiveTypeConstants.MixLiveTypes:
-                    name = Labels.Mix_Live_and_Non_Live;
-                    break;
-            }
-
-            return name;
-        }
-
-        private string GetSportName(int sportType)
-        {
-            var sportTotalName = string.Empty;
-            switch (sportType)
-            {
-                case SportContants.Soccer:
-                    sportTotalName = Labels.Soccer + " " + Labels.Sport;
-                    break;
-
-                case SportContants.CombinationMixParlay:
-                    sportTotalName = Labels.Multi + " " + Labels.Sport;
-                    break;
-
-                default:
-                    sportTotalName = Labels.Others + " " + Labels.Sport;
-                    break;
-            }
-
-            return sportTotalName;
         }
     }
 }

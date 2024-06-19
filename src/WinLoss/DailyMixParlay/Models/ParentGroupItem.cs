@@ -1,6 +1,6 @@
 namespace DailyMixParlay.Models
 {
-    public class WinLoss
+    public class WinLossByCombination
     {
         public string Name { get; set; }
 
