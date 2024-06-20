@@ -1,6 +1,6 @@
 ﻿namespace DailyMixParlay.Models
 {
-    public class WinLossByLiveStatus
+    public class ChildGroupItem
     {
         public string Name { get; set; }
 

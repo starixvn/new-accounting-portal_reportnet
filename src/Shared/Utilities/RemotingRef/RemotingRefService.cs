@@ -81,5 +81,11 @@ namespace Utilities.RemotingRef
 
             return remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
         }
+
+        public string GetSportName(int sportId)
+        {
+            var sportIdString = sportId.ToString();
+            return remotingRefService.GetSportName(sportIdString, "en");
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace DailyMixParlayWinLoss.Services
     public interface DailyMixParlayWinLossService
     {
         Task<WinLoss> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria);
+
+        Task<WinLoss> GetAdvanceMixParlayReport(GetAdvanceMixParlayCriteria criteria);
     }
 
     public class DailyMixParlayWinLossServiceImp : DailyMixParlayWinLossService

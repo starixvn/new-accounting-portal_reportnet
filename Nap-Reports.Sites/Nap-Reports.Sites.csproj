@@ -587,6 +587,7 @@
     <ProjectReference Include="..\src\Misc\Exchange\Exchange.csproj" />
     <ProjectReference Include="..\src\Misc\UpdatedUsernameCredit\UpdatedUsernameCredit.csproj" />
     <ProjectReference Include="..\src\Shared\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\src\WinLoss\DailyMixParlay\DailyMixParlay.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,7 +8,7 @@ namespace DailyMixParlay.Models
 {
     public class WinLoss
     {
-        public List<WinLossByCombination> WinLosses { get; set; }
+        public List<ParentGroupItem> WinLosses { get; set; }
 
         public WinLossItem Total { get;set; }
     }

@@ -48,6 +48,7 @@ namespace Nap_Reports.Sites
             services.RegisterSBCustomerPerformanceByDangerServices();
             services.RegisterPunterAnalysisServices();
             services.RegisterBetListServices();
+            services.RegisterDailyMixParlayServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
