@@ -11,9 +11,13 @@
 
   <ItemGroup>
     <Compile Remove="angular\**" />
+    <Compile Remove="Services\**" />
     <Content Remove="angular\**" />
+    <Content Remove="Services\**" />
     <EmbeddedResource Remove="angular\**" />
+    <EmbeddedResource Remove="Services\**" />
     <None Remove="angular\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -566,6 +570,7 @@
     <PackageReference Include="Fanex.Result.Core-NumberGame" Version="2.0.0" />
     <PackageReference Include="Fanex.Result.Core-Sportsbook" Version="2.0.0.9-upgrade-01" />
     <PackageReference Include="Fanex.Result.Core.RemotingRef" Version="2.0.0.2" />
+    <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.405" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -591,7 +596,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Folder Include="Scripts\_lib\BlockUI\img\" />
   </ItemGroup>
 
   <ItemGroup>

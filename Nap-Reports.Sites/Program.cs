@@ -27,6 +27,8 @@ internal class Program
         services.RegisterMediAtR();
         services.RegisterInternalServices();
 
+        services.ProcessWebOptimizer();
+
         // Add services to the container.
         services.AddControllersWithViews(options =>
         {
@@ -47,7 +49,7 @@ internal class Program
         services.RegisterResultCore(configuration);
         services.AddFanexData(configuration);
         services.RegisterSentry(configuration);
-
+       
         var app = builder.Build();
 
         NapClientManager
@@ -61,6 +63,7 @@ internal class Program
         });
 
         app.UseDeveloperExceptionPage();
+        app.UseWebOptimizer();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseCookiePolicy();

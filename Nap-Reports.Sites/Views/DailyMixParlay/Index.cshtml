@@ -1,16 +1,10 @@
-﻿@using Fanex.AccountingReports.Core.Services.Impl;
-@using Fanex.AccountingReports.WinLoss.Resources;
-@using Fanex.AccountingReports.Core.Web;
-@using Fanex.AccountingReports.Core.Configurations;
-@using Fanex.AccountingReports.Core;
-@using Fanex.AccountingReports.Core.Extensions;
-@using Fanex.Common;
+﻿@using Nap_Reports.Utilities.DateTimes;
 @{
     ViewBag.Title = "Daily Mix Parlay Win Loss";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style")
+    <link rel="stylesheet" type="text/css" href="/style/month-picker.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less" />
@@ -152,29 +146,28 @@
     bool isRedirect = false;
     if (Request["IsRedirect"] != null)
     {
-        isRedirect = Converter.ToBool(Request["IsRedirect"]);
+
+        isRedirect = Boolean.TryParse(Request["IsRedirect"]);
     }
     if (Request["reportDate"] != null)
     {
-        reportDate = Converter.ToString2(Request["reportDate"]);
+        reportDate = Request["reportDate"].ToString();
     }
-
-    var noteMessage = Html.Raw(string.Format(WinLossResources.DailyMixParlayWinLoss_FilterNote,
-        ReportService.BalanceUp.MoveBetsDay.ToShortFormatedDate()));
 }
 @section scripts
 {
     <script type="text/javascript">
-        var labelFrom = '@Labels.From';
-        var labelTo = '@Labels.To';
+        var labelFrom = 'From';
+        var labelTo = 'To';
         var today = '@DateTime.Today.ToShortFormatedDate()';
         var yesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
-        var minDate = '@ReportService.BalanceUp.MoveBetsDay.AddDays(1).ToShortDateString()';
-        var noteMessage = '@noteMessage'; var minHistoryReportDate = '@(new DateTime(2011, 1, 1))';
+        var minDate = '';
+        var noteMessage = '';
+        var minHistoryReportDate = '@(new DateTime(2011, 1, 1))';
         var maxHistoryReportDate = '@DateTime.Today.AddDays(-2).ToShortFormatedDate()';
         var reportDate = '@reportDate';
         var isredirect = '@isRedirect';
-        var movebetday = '@ReportService.BalanceUp.MoveBetsDay.ToShortDateString()';
+        var movebetday = '';
         var viewResources = {
             Credit_Site: 'Credit Site',
             Deposit_Site: 'Deposit Site',
