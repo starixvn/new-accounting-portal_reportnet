@@ -646,8 +646,6 @@
     <None Include="wwwroot\scripts\_lib\jquery.validate.min.js" />
     <None Include="wwwroot\scripts\_lib\jquery.validate.unobtrusive.js" />
     <None Include="wwwroot\scripts\_lib\jquery.validate.unobtrusive.min.js" />
-    <None Include="wwwroot\scripts\_lib\knockout-2.0.0.debug.js" />
-    <None Include="wwwroot\scripts\_lib\knockout-2.0.0.js" />
     <None Include="wwwroot\scripts\_lib\modernizr-2.0.6-development-only.js" />
     <None Include="wwwroot\scripts\_lib\MonthPicker\images\bg-demo-docs-param.gif" />
     <None Include="wwwroot\scripts\_lib\MonthPicker\images\demo-spindown-closed.gif" />

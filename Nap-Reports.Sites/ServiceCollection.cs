@@ -114,7 +114,8 @@ namespace Nap_Reports.Sites
                "/scripts/_lib/MonthPicker/monPickr-0.0.3.css");
 
                 pipeline.AddJavaScriptBundle("/scripts/nap-report-common.js",
-                    "/scripts/_lib/jquery-*",
+                    "/scripts/_lib/jquery-1.8.2.js",
+                    "/scripts/_lib/jquery-ui-1.9.1.js",
                     "/scripts/_lib/BlockUI/jquery.blockUI.1.33.js",
                     "/scripts/_lib/FormatLibs/NumberFormat/numeral.js",
                     "/scripts/_lib/Fanex.Grid/Fanex.Grid.js",
