@@ -16,9 +16,10 @@
     <link rel="shortcut icon" href="~/content/Themes/img/site.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <link href="@Url.Content("~/content/themes/style.css")" rel="stylesheet" />
+    <link type="text/css" rel="Stylesheet" href="~/style/reset.css" />
+    <link type="text/css" rel="Stylesheet" href="~/themes/base/style.css" />
     <link href="@Url.Content("~/scripts/libs/tipsy/tipsy.css")" rel="stylesheet" />
-    @RenderSection("Styles", false)
+    @RenderSection("Head", false)
     <script type="text/javascript">
         var napConfig = @Html.Raw(Json.Serialize(napConfig));
     </script>
@@ -55,6 +56,8 @@
         </div>
     </section>
     <div id="dialog-popup"></div>
+    <script type="text/javascript" src="/scripts/nap-report-common.js"></script>
     @RenderSection("Scripts", false)
+    @RenderSection("Foot", false)
 </body>
 </html>

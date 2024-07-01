@@ -22,5 +22,6 @@
         public const string DailyTurnoverComparison = "DailyTurnoverComparison";
         public const string SBCustomerPerformanceByDangers = "SBCustomerPerformanceByDangers";
         public const string CashOutPerformance = "CashOutPerformance";
+        public const string DailyMixParlayWinLoss = "DailyMixParlayWinLoss";
     }
 }

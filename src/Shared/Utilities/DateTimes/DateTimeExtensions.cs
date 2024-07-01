@@ -16,53 +16,53 @@
             date.Value.ToShortFormatedDate() :
             string.Empty;
 
-        public static string ToShortFormatedDate(this DateTime date) => $"{date:DateTimeFormatConstants.ShortDate}";
+        public static string ToShortFormatedDate(this DateTime date) => $"{date:MMM dd, yyyy}";
 
         public static string ToShortFormatedDateWithHourMinute(this DateTime? date) => date.HasValue ?
             date.Value.ToShortFormatedDateWithHourMinute() :
             string.Empty;
 
-        public static string ToShortFormatedDateWithHourMinute(this DateTime date) => $"{date:DateTimeFormatConstants.ShortDateWithHourMinute}";
+        public static string ToShortFormatedDateWithHourMinute(this DateTime date) => $"{date:MMM dd, yyyy hh:mm}";
 
         public static string ToLongFormatedDate(this DateTime? date) => date.HasValue ?
             date.Value.ToLongFormatedDate() :
             string.Empty;
 
-        public static string ToLongFormatedDate(this DateTime date) => $"{date:DateTimeFormatConstants.LongDate}";
+        public static string ToLongFormatedDate(this DateTime date) => $"{date:dd MMM, yyyy hh:mm:ss tt}";
 
         public static string ToMonthAndDay(this DateTime? date) => date.HasValue ?
             date.Value.ToMonthAndDay() :
             string.Empty;
 
-        public static string ToMonthAndDay(this DateTime date) => $"{date:DateTimeFormatConstants.MonthDay}";
+        public static string ToMonthAndDay(this DateTime date) => $"{date:dd-MMM}";
 
         public static string ToMonthAndDayWithNoHyphen(this DateTime? date) => date.HasValue ?
             date.Value.ToMonthAndDayWithNoHyphen() :
             string.Empty;
 
-        public static string ToMonthAndDayWithNoHyphen(this DateTime date) => $"{date:DateTimeFormatConstants.MonthDayWithNoHyphen}";
+        public static string ToMonthAndDayWithNoHyphen(this DateTime date) => $"{date:dd MMM}";
 
         public static string ToMonthYear(this DateTime? date) => date.HasValue ?
             date.Value.ToMonthYear() :
             string.Empty;
 
-        public static string ToMonthYear(this DateTime date) => $"{date:DateTimeFormatConstants.MonthYear}";
+        public static string ToMonthYear(this DateTime date) => $"{date:MMM yyyy}";
 
         public static string ToShortFormatedDateWithSlash(this DateTime? date) => date.HasValue ?
             date.Value.ToShortFormatedDateWithSlash() :
             string.Empty;
 
-        public static string ToLongFormatedDateWithSlash(this DateTime date) => $"{date:DateTimeFormatConstants.LongDateWithSlash}";
+        public static string ToLongFormatedDateWithSlash(this DateTime date) => $"{date:MM/dd/yyyy hh:mm:ss tt}";
 
-        public static string ToShortFormatedDateWithSlash(this DateTime date) => $"{date:DateTimeFormatConstants.ShortDateWithSlash}";
+        public static string ToShortFormatedDateWithSlash(this DateTime date) => $"{date:MM/dd/yyyy}";
 
         public static string ToMonthYearWithSlash(this DateTime? date) => date.HasValue ?
             date.Value.ToMonthYearWithSlash() :
             string.Empty;
 
-        public static string ToMonthYearWithSlash(this DateTime date) => $"{date:DateTimeFormatConstants.MonthYearWithSlash}";
+        public static string ToMonthYearWithSlash(this DateTime date) => $"{date:MM/yyyy}";
 
-        public static string GetFullMonthName(int month) => $"{new DateTime(1, month, 1):DateTimeFormatConstants.FullMonthName}";
+        public static string GetFullMonthName(int month) => $"{new DateTime(1, month, 1):MMMM}";
 
         public static DateTime FirstDateOfWeek(int year, int week)
         {
@@ -86,6 +86,6 @@
             return date;
         }
 
-        public static string ToLongMMMddFormatedDate(this DateTime date) => $"{date:DateTimeFormatConstants.LongDateMMMdd}";
+        public static string ToLongMMMddFormatedDate(this DateTime date) => $"{date:MMM dd, yyyy hh:mm:ss tt}";
     }
 }
