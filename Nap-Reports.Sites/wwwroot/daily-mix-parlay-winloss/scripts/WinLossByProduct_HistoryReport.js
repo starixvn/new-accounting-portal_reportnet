@@ -47,7 +47,7 @@ WinLossByProduct_HistoryReport.prototype.GetReport = function (dateType) {
     self.GetParams(dateType);
     $.ajax({
         type: "POST",
-        url: window.rootUrl + "WinLoss/DailyMixParlayWinLoss/GetAdvanceMixParlayReport",
+        url: window.rootUrl + "api/parlay/product",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(self.Params.reportParams),

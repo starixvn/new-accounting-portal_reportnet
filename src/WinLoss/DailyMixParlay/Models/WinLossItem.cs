@@ -35,5 +35,27 @@
         public int BetType { get; set; }
 
         public int SportType { get;set; }
+
+        public static WinLossItem operator +(WinLossItem a, WinLossItem b)
+        {
+            return new WinLossItem
+            {
+                Name = "Total",
+                Id = 0,
+                BetCount = a.BetCount + b.BetCount,
+                MemberTurnover = a.MemberTurnover + b.MemberTurnover,
+                MemberWinLoss = a.MemberWinLoss + b.MemberWinLoss,
+                SMAWinLoss = a.SMAWinLoss + b.SMAWinLoss,
+                Commission = a.Commission + b.Commission,
+                RealIncome = a.RealIncome + b.RealIncome,
+                RealTurnover = a.RealTurnover + b.RealTurnover,
+                MemberBonus = a.MemberBonus + b.MemberBonus,
+                Status = string.Empty,
+                Combinations = string.Empty,
+                LiveType = a.LiveType,
+                BetType = a.BetType,
+                SportType = a.SportType
+            };
+        }
     }
 }

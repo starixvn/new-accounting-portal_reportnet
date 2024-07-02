@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Fanex.NAP.Client.Configuration
+@{
     var showMenus = ViewBag.ShowMenus != null ? (bool)ViewBag.ShowMenus : true;
     var napConfig = new
     {
@@ -58,6 +59,10 @@
         </div>
     </section>
     <div id="dialog-popup"></div>
+        <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~")';
+        window.rootWebPath = '@(Context.Request.Path)';
+    </script>
     <script type="text/javascript" src="/scripts/nap-report-common.js"></script>
     @RenderSection("Scripts", false)
     @RenderSection("Foot", false)
