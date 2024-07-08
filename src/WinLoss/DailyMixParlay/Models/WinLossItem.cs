@@ -36,11 +36,13 @@
 
         public int SportType { get;set; }
 
+        public decimal ExtraPT { get;set; }
+
         public static WinLossItem operator +(WinLossItem a, WinLossItem b)
         {
             return new WinLossItem
             {
-                Name = "Total",
+                Name = string.Empty,
                 Id = 0,
                 BetCount = a.BetCount + b.BetCount,
                 MemberTurnover = a.MemberTurnover + b.MemberTurnover,

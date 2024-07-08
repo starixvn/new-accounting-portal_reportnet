@@ -7,5 +7,7 @@ namespace DailyMixParlay.Models
         public List<ChildGroupItem> WinLosses { get; set; }
 
         public WinLossItem Total { get; set; }
+
+        public int MergeRowNumber { get; set; }
     }
 }

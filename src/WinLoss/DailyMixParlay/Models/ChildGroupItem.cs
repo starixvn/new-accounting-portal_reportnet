@@ -7,5 +7,7 @@
         public List<WinLossItem> WinLosses { get; set; }
 
         public WinLossItem Total { get; set; }
+
+        public int MergeRowNumber { get; set; }
     }
 }

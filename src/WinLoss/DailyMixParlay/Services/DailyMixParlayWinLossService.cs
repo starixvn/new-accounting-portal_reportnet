@@ -37,15 +37,15 @@ namespace DailyMixParlayWinLoss.Services
                 var combinationGroups = rawData.GroupBy(data => data.Combinations);
 
                 var combinationWinLosses = from combinationGroup in combinationGroups
-                         let combinationGroupRawData = rawData.Where(x =>x.Combinations == combinationGroup.Key)
-                         select CalculateCombinationGroup(combinationGroup.Key, combinationGroupRawData);
+                                           let combinationGroupRawData = rawData.Where(x => x.Combinations == combinationGroup.Key)
+                                           select CalculateCombinationGroup(combinationGroup.Key, combinationGroupRawData);
 
                 var total = rawData.DynamicSum();
                 total.Name = "GrandTotal";
 
                 report.WinLosses = combinationWinLosses.ToList();
                 report.Total = total;
-               
+
             }
 
             return report;
@@ -65,42 +65,75 @@ namespace DailyMixParlayWinLoss.Services
         {
             var liveTypeGroups = rawData.GroupBy(x => x.LiveType);
 
-            var liveTypeWinLoss = from liveTypeGroup in liveTypeGroups
-                      let liveTypeRawData = rawData.Where(x => x.LiveType == liveTypeGroup.Key)
-                      select CalculateCombinationByLiveTypeGroup(liveTypeGroup.Key, liveTypeRawData);
+            var numberLiveTypeGroup = liveTypeGroups.Count();
+            var numberRawDataItems = rawData.Count();
 
-            var total = rawData.DynamicSum();
-            total.Name = "Total";
+            var liveTypeWinLoss = from liveTypeGroup in liveTypeGroups
+                                  let liveTypeRawData = rawData.Where(x => x.LiveType == liveTypeGroup.Key)
+                                  select CalculateCombinationByLiveTypeGroup(liveTypeGroup.Key, liveTypeRawData);
+
+            var total = CalculateSum(rawData, "Total");
+
+            var mergeRowNumbers = numberLiveTypeGroup + numberRawDataItems + 1;
 
             return new ParentGroupItem
             {
                 Name = string.Empty,
                 WinLosses = liveTypeWinLoss.ToList(),
-                Total = total
+                Total = total,
+                MergeRowNumber = mergeRowNumbers
             };
         }
 
-        private ChildGroupItem CalculateCombinationByLiveTypeGroup(bool liveType, IEnumerable<WinLossItem> rawData)
+        private WinLossItem CalculateSum(IEnumerable<WinLossItem> rawData, string totalType)
         {
             var total = rawData.DynamicSum();
-            total.Name = "Sub Total";
+            total.Name = totalType;
 
+            return total;
+        }
+        private ChildGroupItem CalculateCombinationByLiveTypeGroup(bool liveType, IEnumerable<WinLossItem> rawData)
+        {
             var winlosses = from item in rawData
-                      select CalculateWinLossItem(item);
+                            select CalculateWinLossItem(item);
+
+            var numberRawDataItems = rawData.Count();
+            var mergeRowNumber = numberRawDataItems + 1;
+
+            var total = CalculateSum(rawData, "Sub Total");
 
             return new ChildGroupItem
-            { 
+            {
                 Name = liveType ? "Live" : "Non-Live",
                 WinLosses = winlosses.ToList(),
-                Total = total
+                Total = total,
+                MergeRowNumber = mergeRowNumber
             };
         }
 
         private WinLossItem CalculateWinLossItem(WinLossItem item)
         {
-            var result = item;
-            result.Name = $"Mix Parlay ({item.Status})";
-            
+            var result = new WinLossItem
+            {
+                Name = $"Mix Parlay ({item.Status})",
+                Id = item.Id,
+                BetCount = item.BetCount,
+                MemberTurnover = item.MemberTurnover,
+                MemberWinLoss = item.MemberWinLoss,
+                SMAWinLoss = item.SMAWinLoss,
+                Commission = item.Commission,
+                RealIncome = item.RealIncome,
+                RealTurnover = item.RealTurnover,
+                MemberBonus = item.MemberBonus,
+                HouseBonus = item.HouseBonus,
+                Status = item.Status,
+                Combinations = item.Combinations,
+                LiveType = item.LiveType,
+                BetType = item.BetType,
+                SportType = item.SportType,
+                ExtraPT = item.ExtraPT
+            };
+
             return result;
         }
 
@@ -145,16 +178,21 @@ namespace DailyMixParlayWinLoss.Services
 
             var sportTypeWinLoss = from sportTypeGroup in sportTypeGroups
                                    let sportTypeRawData = rawData.Where(x => x.SportType == sportTypeGroup.Key)
-                                  select CalculateParlayBySportTypeGroup(sportTypeGroup.Key, sportTypeRawData);
+                                   select CalculateParlayBySportTypeGroup(sportTypeGroup.Key, sportTypeRawData);
 
             var total = rawData.DynamicSum();
             total.Name = "Total";
+
+            var numberGroup = sportTypeGroups.Count();
+            var numberRawDataItems = rawData.Count();
+            var mergeRowNumber = numberGroup + numberRawDataItems + 1;
 
             return new ParentGroupItem
             {
                 Name = string.Empty,
                 WinLosses = sportTypeWinLoss.ToList(),
-                Total = total
+                Total = total,
+                MergeRowNumber = mergeRowNumber
             };
         }
 
@@ -167,15 +205,19 @@ namespace DailyMixParlayWinLoss.Services
                             select CalculateWinLossItem(item);
 
             var sportName = remotingRefService.GetSportName(sportType);
+            
+            var numberRawDataItems = rawData.Count();
+            var mergeRowNumber = numberRawDataItems + 1;
 
             return new ChildGroupItem
             {
                 Name = sportName,
                 WinLosses = winlosses.ToList(),
-                Total = total
+                Total = total,
+                MergeRowNumber = mergeRowNumber
             };
         }
-        
+
         private string ConvertCombinationType(string combination)
         {
             var name = string.Empty;

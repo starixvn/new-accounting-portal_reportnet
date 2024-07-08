@@ -98,6 +98,12 @@ namespace Nap_Reports.Sites
                 pipeline.AddCssBundle("/style/reset.css",
                   "/themes/reset.css");
 
+                pipeline.AddCssBundle("/style/scrollbars.css",
+               "/scripts/_lib/CustomScrollbar/Styles/scrollbars.css");
+
+                pipeline.AddCssBundle("/style/fanex-grid.css",
+                "/scripts/_lib/Fanex.Grid/Fanex.Grid.css");
+
                 pipeline.AddCssBundle("/style/fanex-grid-paging.css",
                  "/scripts/_lib/Fanex.Grid/Fanex.Pagination.css");
 

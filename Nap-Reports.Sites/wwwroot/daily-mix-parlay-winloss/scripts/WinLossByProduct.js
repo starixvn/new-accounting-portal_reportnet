@@ -116,24 +116,24 @@ WinLossByProduct.prototype.RenderReport = function (report) {
     self.Tables.report.addClass("display-none");
     var bodyData = [];
     var footerData = [];
-    if (report && report.ChildsInfo.length > 0) {
-        var len = report.ChildsInfo.length;
+    if (report && report.WinLosses.length > 0) {
+        var len = report.WinLosses.length;
         var currentRow = null;
         var info = null;
         for (var i = 0; i < len; i++) {
-            var liveTypeGroup = report.ChildsInfo[i];
-            var liveTypeGroupLength = liveTypeGroup.ChildsInfo.length;
+            var liveTypeGroup = report.WinLosses[i];
+            var liveTypeGroupLength = liveTypeGroup.WinLosses.length;
             for (var j = 0; j < liveTypeGroupLength; j++) {
-                var sportGroup = liveTypeGroup.ChildsInfo[j];
-                var sportGroupLength = sportGroup.ChildsInfo.length;
+                var sportGroup = liveTypeGroup.WinLosses[j];
+                var sportGroupLength = sportGroup.WinLosses.length;
                 for (var k = 0; k < sportGroupLength; k++) {
-                    info = sportGroup.ChildsInfo[k];
+                    info = sportGroup.WinLosses[k];
                     var columns = [];
                     if (j == 0 && k == 0) {
                         columns.push({
                             Name: "ColLiveType",
                             Value: liveTypeGroup.Name,
-                            MergeRowNumber: liveTypeGroup.TotalRowDetail + liveTypeGroupLength + 1,
+                            MergeRowNumber: liveTypeGroup.MergeRowNumber,
                             TdClass: "bold col" + liveTypeGroup.Name.replace(/\s+/g, '')
                         });
                     }
@@ -142,71 +142,71 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                         columns.push({
                             Name: "ColSportType",
                             Value: sportGroup.Name,
-                            MergeRowNumber: sportGroupLength + 1,
+                            MergeRowNumber: sportGroup.MergeRowNumber,
                             CssClass: "bold align-center"
                         });
                     }
 
                     columns.push({ Name: "ColBetType", Value: info.Name });
-                    columns.push({ Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.MemberWinLoss, true, false, false) });
+                    columns.push({ Name: "ColWinLoss", Value: info.MemberWinLoss });
                     columns.push({ Name: "ColPosition", Value: info.SMAWinLoss });
                     columns.push({ Name: "ColExtraPT", Value: info.ExtraPT });
                     columns.push({ Name: "ColComm", Value: info.Commission });
-                    columns.push({ Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome, true, false, false) });
+                    columns.push({ Name: "ColLineTotal", Value: info.RealIncome });
                     columns.push({ Name: "ColTurnover", Value: info.RealTurnover });
-                    columns.push({ Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin, true, false, true) });
-                    columns.push({ Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.MemberBonus, true, false, false) });
-                    columns.push({ Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus, true, false, false) });
+                    columns.push({ Name: "ColMargin", Value: info.Margin });
+                    columns.push({ Name: "ColMemberBonus", Value: info.MemberBonus });
+                    columns.push({ Name: "ColHouseBonus", Value: info.HouseBonus });
                     bodyData.push({
                         Columns: columns
                     });
                 }
 
-                info = sportGroup.GrandTotal;
+                info = sportGroup.Total;
                 bodyData.push({
                     CssClass: "betTypeTotal",
                     Columns: [{ Name: "ColBetType", Value: info.Name, CssClass: "align-center" },
-                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.MemberWinLoss, true, false, false) },
+                    { Name: "ColWinLoss", Value: info.MemberWinLoss },
                     { Name: "ColPosition", Value: info.SMAWinLoss },
                     { Name: "ColExtraPT", Value: info.ExtraPT },
                     { Name: "ColComm", Value: info.Commission },
-                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome, true, false, false) },
+                    { Name: "ColLineTotal", Value: info.RealIncome },
                     { Name: "ColTurnover", Value: info.RealTurnover },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin, true, false, true) },
-                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.MemberBonus, true, false, false) },
-                    { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus, true, false, false) }]
+                    { Name: "ColMargin", Value: info.Margin },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus }]
                 });
             }
 
-            info = liveTypeGroup.GrandTotal;
+            info = liveTypeGroup.Total;
             bodyData.push({
                 CssClass: "subTotal",
                 Columns: [{ Name: "ColSportType", Value: "" },
                     { Name: "ColBetType", Value: info.Name, CssClass: "align-center" },
-                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.MemberWinLoss, true, false, false) },
+                    { Name: "ColWinLoss", Value: info.MemberWinLoss },
                     { Name: "ColPosition", Value: info.SMAWinLoss },
                     { Name: "ColExtraPT", Value: info.ExtraPT },
                     { Name: "ColComm", Value: info.Commission },
-                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome, true, false, false) },
+                    { Name: "ColLineTotal", Value: info.RealIncome },
                     { Name: "ColTurnover", Value: info.RealTurnover },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin, true, false, true) },
-                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.MemberBonus, true, false, false)},
-                    { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus, true, false, false) }]
+                    { Name: "ColMargin", Value: info.Margin },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus }]
             });
         }
 
-        info = report.GrandTotal;
+        info = report.Total;
         footerData.push({
             Columns: [{ Name: "ColLiveType", Value: info.Name, MergeColNumber: 3 },
-                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.MemberWinLoss, true, false, false) },
+                    { Name: "ColWinLoss", Value: info.MemberWinLoss },
                     { Name: "ColPosition", Value: info.SMAWinLoss },
                     { Name: "ColExtraPT", Value: info.ExtraPT },
                     { Name: "ColComm", Value: info.Commission },
-                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome, true, false, false), TdClass: "colLineTotal" },
+                    { Name: "ColLineTotal", Value: info.RealIncome, TdClass: "colLineTotal" },
                     { Name: "ColTurnover", Value: info.RealTurnover },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin, true, false, true) },
-                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.MemberBonus, true, false, false) },
-                    { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus, true, false, false) }]
+                    { Name: "ColMargin", Value: info.Margin },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus }]
         });
     }
 
@@ -215,15 +215,15 @@ WinLossByProduct.prototype.RenderReport = function (report) {
         columns: [{ HeaderText: "", Width: 140, Name: "ColLiveType", HeaderAlign: "center", CellAlign: "center" },
                       { HeaderText: "Sport Type", Width: 140, Name: "ColSportType", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Bet Type", Width: 120, Name: "ColBetType", HeaderAlign: "center", CellAlign: "left" },
-                      { HeaderText: "Member Win Loss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "SMA Win Loss", Width: 100, Name: "ColPosition", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Extra PT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Commission", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Real Income", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Member Bonus", Width: 120, Name: "ColMemberBonus", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "House Bonus", Width: 120, Name: "ColHouseBonus", HeaderAlign: "center", CellAlign: "right" }],
+                      { HeaderText: "Member Win Loss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                      { HeaderText: "SMA Win Loss", Width: 100, Name: "ColPosition", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                      { HeaderText: "Extra PT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                      { HeaderText: "Commission", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                      { HeaderText: "Real Income", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                      { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER },
+                      { HeaderText: "Member Bonus", Width: 120, Name: "ColMemberBonus", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                      { HeaderText: "House Bonus", Width: 120, Name: "ColHouseBonus", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }],
         showTitle: true,
         showFooter: true,
         titleInfo:
