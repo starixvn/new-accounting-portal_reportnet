@@ -116,26 +116,6 @@
     <None Remove="app\root\legacy\check-in.js" />
     <None Remove="app\root\legacy\legacy.service.js" />
     <None Remove="App_Data\SpName.xml" />
-    <None Remove="content\cn88-win-loss.scss" />
-    <None Remove="content\house-win-loss.scss" />
-    <None Remove="content\images\1F.gif" />
-    <None Remove="content\images\1L.gif" />
-    <None Remove="content\images\date-picker\calendar.png" />
-    <None Remove="content\images\filter\legend-information-hover.png" />
-    <None Remove="content\images\filter\legend-information.png" />
-    <None Remove="content\images\filter\note-collapse.png" />
-    <None Remove="content\images\filter\note-expand.png" />
-    <None Remove="content\images\firstGoal.gif" />
-    <None Remove="content\images\goal-icon.png" />
-    <None Remove="content\images\header\bgmenu-more.png" />
-    <None Remove="content\images\header\logo.png" />
-    <None Remove="content\images\header\small-arrow-down.png" />
-    <None Remove="content\images\header\user.png" />
-    <None Remove="content\images\lastGoal.gif" />
-    <None Remove="content\images\loading\loading.gif" />
-    <None Remove="content\images\show-hide.png" />
-    <None Remove="content\scoreInformation.scss" />
-    <None Remove="content\site.scss" />
     <None Remove="fonts\bootstrap\glyphicons-halflings-regular.eot" />
     <None Remove="fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <None Remove="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
@@ -350,26 +330,6 @@
     <Content Include="App_Data\SpName.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\cn88-win-loss.scss" />
-    <Content Include="content\house-win-loss.scss" />
-    <Content Include="content\images\1F.gif" />
-    <Content Include="content\images\1L.gif" />
-    <Content Include="content\images\date-picker\calendar.png" />
-    <Content Include="content\images\filter\legend-information-hover.png" />
-    <Content Include="content\images\filter\legend-information.png" />
-    <Content Include="content\images\filter\note-collapse.png" />
-    <Content Include="content\images\filter\note-expand.png" />
-    <Content Include="content\images\firstGoal.gif" />
-    <Content Include="content\images\goal-icon.png" />
-    <Content Include="content\images\header\bgmenu-more.png" />
-    <Content Include="content\images\header\logo.png" />
-    <Content Include="content\images\header\small-arrow-down.png" />
-    <Content Include="content\images\header\user.png" />
-    <Content Include="content\images\lastGoal.gif" />
-    <Content Include="content\images\loading\loading.gif" />
-    <Content Include="content\images\show-hide.png" />
-    <Content Include="content\scoreInformation.scss" />
-    <Content Include="content\site.scss" />
     <Content Include="ExcelTemplate\SMAWinLoss\Summary.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
