@@ -126,25 +126,16 @@
             <div id="combinationReport" class="freegrid display-none">
             </div>
         </div>
-        <div id="advanceMixParlayReportContainer">
-            <div id="advanceMixParlayReport" class="freegrid display-none">
-            </div>
-        </div>
     </div>
     <div id="historyMixParlayReport" class="display-none">
         <div id="combinationReportContainer_HistoryReport">
             <div id="combinationReport_HistoryReport" class="freegrid display-none">
             </div>
         </div>
-        <div id="advanceMixParlayReportContainer_HistoryReport">
-            <div id="advanceMixParlayReport_HistoryReport" class="freegrid display-none">
-            </div>
-        </div>
     </div>
 </div>
 @{
     string reportDate = DateTime.Today.ToShortFormatedDate();
-    string betType = string.Empty;
     bool isRedirect = false;
      var noteMessage = Html.Raw($"<ul class=\"filter-note\"><li>+ Data is available {ViewBag.MoveBetDate} onward. For more historical data, please click to <span class=\"bold-tip\">HISTORY REPORT</span></li></ul>");
 }

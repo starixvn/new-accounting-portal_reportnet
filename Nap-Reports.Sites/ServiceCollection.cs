@@ -148,6 +148,9 @@ namespace Nap_Reports.Sites
                     "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css", 
                     "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");
                 pipeline.AddLessBundle(
+                    "/daily-mix-parlay-2hlink/styles/DailyMixParlayWinLoss.css",
+                    "/daily-mix-parlay-2hlink/styles/DailyMixParlayWinLoss.less");
+                pipeline.AddLessBundle(
                     "/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.css",
                     "/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less");
                 pipeline.AddLessBundle(
