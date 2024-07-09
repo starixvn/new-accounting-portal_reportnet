@@ -1,3 +1,4 @@
+using AutoMapper;
 using DailyMixParlay.Constant;
 using DailyMixParlay.Criteria;
 using DailyMixParlay.Models;
@@ -20,10 +21,13 @@ namespace DailyMixParlayWinLoss.Services
 
         private readonly RemotingRefService remotingRefService;
 
-        public DailyMixParlayWinLossServiceImp(IDynamicRepository repository, RemotingRefService remotingRefService)
+        private readonly IMapper mapper;
+
+        public DailyMixParlayWinLossServiceImp(IDynamicRepository repository, RemotingRefService remotingRefService, IMapper mapper)
         {
             this.repository = repository;
             this.remotingRefService = remotingRefService;
+            this.mapper = mapper;
         }
 
         public async Task<WinLoss> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria)
@@ -113,26 +117,28 @@ namespace DailyMixParlayWinLoss.Services
 
         private WinLossItem CalculateWinLossItem(WinLossItem item)
         {
-            var result = new WinLossItem
-            {
-                Name = $"Mix Parlay ({item.Status})",
-                Id = item.Id,
-                BetCount = item.BetCount,
-                MemberTurnover = item.MemberTurnover,
-                MemberWinLoss = item.MemberWinLoss,
-                SMAWinLoss = item.SMAWinLoss,
-                Commission = item.Commission,
-                RealIncome = item.RealIncome,
-                RealTurnover = item.RealTurnover,
-                MemberBonus = item.MemberBonus,
-                HouseBonus = item.HouseBonus,
-                Status = item.Status,
-                Combinations = item.Combinations,
-                LiveType = item.LiveType,
-                BetType = item.BetType,
-                SportType = item.SportType,
-                ExtraPT = item.ExtraPT
-            };
+            var result = mapper.Map<WinLossItem>(item);
+            result.Name = $"Mix Parlay ({item.Status})";
+            //var result = new WinLossItem
+            //{
+            //    Name = $"Mix Parlay ({item.Status})",
+            //    Id = item.Id,
+            //    BetCount = item.BetCount,
+            //    MemberTurnover = item.MemberTurnover,
+            //    MemberWinLoss = item.MemberWinLoss,
+            //    SMAWinLoss = item.SMAWinLoss,
+            //    Commission = item.Commission,
+            //    RealIncome = item.RealIncome,
+            //    RealTurnover = item.RealTurnover,
+            //    MemberBonus = item.MemberBonus,
+            //    HouseBonus = item.HouseBonus,
+            //    Status = item.Status,
+            //    Combinations = item.Combinations,
+            //    LiveType = item.LiveType,
+            //    BetType = item.BetType,
+            //    SportType = item.SportType,
+            //    ExtraPT = item.ExtraPT
+            //};
 
             return result;
         }

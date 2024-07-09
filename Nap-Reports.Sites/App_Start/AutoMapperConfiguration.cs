@@ -9,6 +9,7 @@ using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
 using UpdatedUsernameCredit;
+using DailyMixParlay;
 
 namespace Nap_Reports.Sites.App_Start
 {
@@ -27,6 +28,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeUpdatedUsernameCredit();
                 cfg.InitializeSBCustomerPerformanceByDanger();
                 cfg.InitializePunterAnalysis();
+                cfg.InitializeParlay();
             });
 
             var mapper = config.CreateMapper();
