@@ -12,15 +12,15 @@ module.exports = {
     debug: false,
     entry: {
         "app": glob.sync([
-                  "./Scripts/Fanex.Grid.js",
-                  "./Scripts/Fanex.Pagination.js",
+                  "./wwwroot/scripts/Fanex.Grid.js",
+                  "./wwwroot/scripts/Fanex.Pagination.js",
                   "./app/root/app.js",
                   "./app/root/app.constant.js",
                   "./app/root/**/*.js"]),
         "app-style": glob.sync([
-            "./content/site.scss",
-            "./scripts/Fanex.Grid.css",
-            "./scripts/Fanex.Pagination.css",
+            "./wwwroot/content/site.scss",
+            "./wwwroot/scripts/Fanex.Grid.css",
+            "./wwwroot/scripts/Fanex.Pagination.css",
             "./app/root/**/*.scss",
             "./app/root/**/*.css",
             "./app/root/**/*.less",
@@ -28,7 +28,7 @@ module.exports = {
         "house-win-loss": glob.sync(["./app/house-win-loss/*.js",
             "./app/house-win-loss/**/*.js"],
             { ignore: ["./app/house-win-loss/daily-winloss-2h-soccer-minor/*.js"] }),
-        "house-win-loss-style": ["./content/house-win-loss.scss"],
+        "house-win-loss-style": ["./wwwroot/content/house-win-loss.scss"],
         "daily-winloss-2h-soccer-minor": glob.sync(["./app/house-win-loss/*.js",
             "./app/house-win-loss/**/*.js"],
             {
