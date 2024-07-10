@@ -145,4 +145,8 @@
 		<Setting Key="DailyMixParlayWinLoss_GetCombinationWinLoss" SpName="Acc_Rpt_DailyParlayWinloss_DW" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="600" />
 		<Setting Key="DailyMixParlayWinLoss_GetAdvanceMixParlay" SpName="Acc_Rpt_MixParlay_Advance_Dw" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="600" />
 	</Function>
+	<Function Name="ResultAnalysis">
+		<Setting Key="Acc_Rpt_ResultAnalysis_LeagueSel" SpName="Acc_Rpt_ResultAnalysis_LeagueSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Acc_Rpt_ResultAnalysis" SpName="Acc_Rpt_ResultAnalysis" DbName="DBWH.bodb_dwrs.wsv_nap" />
+	</Function>
 </Functions>

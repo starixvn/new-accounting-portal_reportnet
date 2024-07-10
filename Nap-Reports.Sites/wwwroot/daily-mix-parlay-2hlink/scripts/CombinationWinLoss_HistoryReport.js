@@ -246,6 +246,18 @@ CombinationWinLoss_HistoryReport.prototype.HideReport = function () {
 };
 
 CombinationWinLoss_HistoryReport.prototype.ExportReport = function () {
-    AccReport.downloadFile(window.rootUrl + "WinLoss/DailyMixParlayWinLoss/ExportCombinationWinLossReport",
-        this.Params.reportParams);
+    AccReport.utility.CallAjaxForDownload(this,
+        window.rootUrl + "/api/parlay/excel-combination",
+        this.Params.reportParams,
+        function (rs, fileName) {
+            element = document.createElement('a');
+            element.href = window.URL.createObjectURL(rs);
+            element.download = fileName;
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            element.remove();
+        },
+        null,
+        AccReport.enableInput());
 };

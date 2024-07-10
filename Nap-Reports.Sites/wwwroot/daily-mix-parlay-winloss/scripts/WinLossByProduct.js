@@ -256,7 +256,6 @@ WinLossByProduct.prototype.HideReport = function () {
 };
 
 WinLossByProduct.prototype.ExportReport = function () {
-    var self = this;
     AccReport.utility.CallAjaxForDownload(this,
         window.rootUrl + "/api/parlay/excel-product",
         this.Params.reportParams,

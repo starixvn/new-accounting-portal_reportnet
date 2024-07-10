@@ -40,20 +40,22 @@ export class CustomNavbarService extends NavbarService {
         });
     }
 
-    private bindingMenuData(data: any): Menu[]
+    private bindingMenuData(data: any[]): Menu[]
     {
       let menus: Menu[] = [];
       data.forEach(menu => {
-        let hasChildren = menu.Children !== null && menu.Children.length > 0;
+        let hasChildrend = menu.Children !== null && menu.Children.length > 0;
         let children: Menu[] = [];
 
-        if(hasChildren) {
-          menu.Children.forEach(childMenu => {
+        if(hasChildrend) {
+          let childMenus = menu.Children as any[];
+          childMenus.forEach(childMenu => {
             children.push({
                 id: childMenu.Id,
                 name: childMenu.Name,
                 link:childMenu.Link,
-                children: []
+                children: [],
+                hasChildren: false
             } as Menu);
           });
         }

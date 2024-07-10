@@ -27,6 +27,7 @@
     "font-awesome": "^4.7.0",
     "gulp": "^4.0.2",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "nap-components": "^12.2.20",
     "nap-theme": "^12.2.11",
     "ngx-pagination": "^6.0.3",
