@@ -1,5 +1,4 @@
-﻿@using Fanex.NAP.Client.Configuration
-@{
+﻿@{
     var showMenus = ViewBag.ShowMenus != null ? (bool)ViewBag.ShowMenus : true;
     var napConfig = new
     {
@@ -17,12 +16,9 @@
     <link rel="shortcut icon" href="~/content/Themes/img/site.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <link type="text/css" rel="Stylesheet" href="~/style/reset.css" />
-    <link type="text/css" rel="Stylesheet" href="~/style/tipsy.css" />
-    <link type="text/css" rel="Stylesheet" href="~/style/jquery-custom.css" />
-    <link type="text/css" rel="Stylesheet" href="~/themes/base/style.css" />
-    
-    @RenderSection("Head", false)
+    <link href="@Url.Content("~/content/themes/style.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/scripts/libs/tipsy/tipsy.css")" rel="stylesheet" />
+    @RenderSection("Styles", false)
     <script type="text/javascript">
         var napConfig = @Html.Raw(Json.Serialize(napConfig));
     </script>
@@ -59,12 +55,6 @@
         </div>
     </section>
     <div id="dialog-popup"></div>
-    <script type="text/javascript">
-        window.rootUrl = '@Url.Content("~")';
-        window.rootWebPath = '@(Context.Request.Path)';
-    </script>
-    <script type="text/javascript" src="/scripts/nap-report-common.js"></script>
     @RenderSection("Scripts", false)
-    @RenderSection("Foot", false)
 </body>
 </html>

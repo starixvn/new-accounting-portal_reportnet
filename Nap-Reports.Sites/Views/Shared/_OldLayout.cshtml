@@ -1,0 +1,70 @@
+﻿@using Fanex.NAP.Client.Configuration
+@{
+    var showMenus = ViewBag.ShowMenus != null ? (bool)ViewBag.ShowMenus : true;
+    var napConfig = new
+    {
+        Today = Convert.ToInt64(DateTime.Now
+           .Subtract(new DateTime(1970, 1, 1, 0, 0, 0))
+           .TotalMilliseconds),
+        RootUrl = Url.Content("~").TrimEnd(new[] { '/' })
+    };
+}
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app.@ViewBag.AngularAppName" data-ng-strict-di>
+<head>
+    <meta charset="utf-8" />
+    <title>Accounting Reports - @ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/content/Themes/img/site.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link type="text/css" rel="Stylesheet" href="~/style/reset.css" />
+    <link type="text/css" rel="Stylesheet" href="~/style/tipsy.css" />
+    <link type="text/css" rel="Stylesheet" href="~/style/jquery-custom.css" />
+    <link type="text/css" rel="Stylesheet" href="~/themes/base/style.css" />
+    
+    @RenderSection("Head", false)
+    <script type="text/javascript">
+        var napConfig = @Html.Raw(Json.Serialize(napConfig));
+    </script>
+</head>
+<body>
+    @if (showMenus)
+    {
+        <header>
+            <div class="logo">
+                <a href="~/?ref=logo"></a>
+            </div>
+            @await Component.InvokeAsync("Menu")
+            <div class="user-info">
+                <div class="greeting">
+                    <h2>Welcome <span class="info-acc">@Context.User.Identity.Name</span><span class="info-more"></span></h2>
+                    <ul>
+                        <li><a href="@Url.Content("~/Auth/ChangePassword")">Change Password</a></li>
+                        <li><a href="@Url.Content("~/Auth/LogOut")">Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    }
+    <section id="headline">
+        @if (showMenus)
+        {
+            <span class="server-time">@string.Format("{0} GMT-4", DateTime.Now)</span>
+        }
+        @RenderSection("Headline", false)
+    </section>
+    <section id="body">
+        <div class="content">
+            @RenderBody()
+        </div>
+    </section>
+    <div id="dialog-popup"></div>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~")';
+        window.rootWebPath = '@(Context.Request.Path)';
+    </script>
+    <script type="text/javascript" src="/scripts/nap-report-common.js"></script>
+    @RenderSection("Scripts", false)
+    @RenderSection("Foot", false)
+</body>
+</html>
