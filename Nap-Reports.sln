@@ -43,7 +43,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BetList", "src\BetList\BetL
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinLoss", "WinLoss", "{C624ABA7-115D-4B19-9B1E-A3082E324FB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyMixParlay", "src\WinLoss\DailyMixParlay\DailyMixParlay.csproj", "{860D7800-411E-48C5-B5C7-80A40F495B9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyMixParlay", "src\WinLoss\DailyMixParlay\DailyMixParlay.csproj", "{860D7800-411E-48C5-B5C7-80A40F495B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResultAnalysis", "src\Misc\ResultAnalysis\ResultAnalysis.csproj", "{935E5679-1907-4093-8439-1838394B9324}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,10 @@ Global
 		{860D7800-411E-48C5-B5C7-80A40F495B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{860D7800-411E-48C5-B5C7-80A40F495B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{860D7800-411E-48C5-B5C7-80A40F495B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{935E5679-1907-4093-8439-1838394B9324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{935E5679-1907-4093-8439-1838394B9324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{935E5679-1907-4093-8439-1838394B9324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{935E5679-1907-4093-8439-1838394B9324}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{FDC03EBE-06AB-4112-8D9D-4C836DDB64ED} = {B072E82C-940C-48EA-B924-2182B8200BDC}
 		{C624ABA7-115D-4B19-9B1E-A3082E324FB6} = {5FE921E3-BA82-458A-9983-BEA80F74C49D}
 		{860D7800-411E-48C5-B5C7-80A40F495B9F} = {C624ABA7-115D-4B19-9B1E-A3082E324FB6}
+		{935E5679-1907-4093-8439-1838394B9324} = {171618A1-8436-41ED-B06E-E07DEA604F31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}

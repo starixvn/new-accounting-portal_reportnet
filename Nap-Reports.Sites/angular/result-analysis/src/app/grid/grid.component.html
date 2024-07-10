@@ -1,0 +1,14 @@
+<ng-template #breadcrumbToolboxTemplate>
+    <div class="breadcrumb-toolbox">
+        <div class="toolbox-item">
+            <i *ngIf="data !== undefined && data.Items.length > 0" class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()">
+            </i>
+        </div>
+    </div>
+</ng-template>
+<div *ngIf="data !== undefined">
+    <nap-breadcrumb [ngStyle]="{'width': isShowTGResult() ? '1458px' : '1138px'}" class="excel-title" [items]="[title]" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+    <app-summary-grid [data]="data.Summary" [isShowTGResult]="isShowTGResult()"></app-summary-grid>
+    <br/>
+    <app-item-grid [data]="data.Items" [isShowTGResult]="isShowTGResult()"></app-item-grid>
+</div>

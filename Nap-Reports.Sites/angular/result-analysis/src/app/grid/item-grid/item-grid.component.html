@@ -1,0 +1,108 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 80px" />
+      <col style="width: 200px" />
+      <col style="width: 250px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col *ngIf="isShowTGResult" style="width: 80px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+        <tr>
+            <th scope="col" rowspan="2">Date</th>
+            <th scope="col" rowspan="2">League</th>
+            <th scope="col" rowspan="2">Match</th>
+            <th scope="col" rowspan="2">HDP</th>
+            <th scope="col" rowspan="2">OU</th>
+            <th scope="col" rowspan="2">FAV</th>
+            <th scope="col" colspan="2">HT Score</th>
+            <th scope="col" colspan="2">FT Score</th>
+            <th scope="col" rowspan="2">HDP RESULT</th>
+            <th scope="col" rowspan="2">OU RESULT</th>
+            <th scope="col" rowspan="2">1x2 RESULT</th>
+            <th *ngIf="isShowTGResult" scope="col" rowspan="2">TG RESULT</th>
+        </tr>
+        <tr>
+            <th scope="col">Home</th>
+            <th scope="col">Away</th>
+            <th scope="col">Home</th>
+            <th scope="col">Away</th>
+        </tr>
+    </thead>
+  </ng-template>
+  <ng-template #detailedData let-item="item">
+    <td class="text-center">{{item.Date | date: 'dd-MMM-yy'}}</td>
+    <td>{{item.League}}</td>
+    <td [innerHtml]="formatMatch(item.Match, item.Fav)"></td>
+    <td *ngIf="item.HDP === '-'" class="text-center">-</td>
+    <td *ngIf="item.HDP !== '-'" class="text-center" [napDecimalFormat]="item.HDP"></td>
+    <td *ngIf="item.OU === '-'" class="text-center">-</td>
+    <td *ngIf="item.OU !== '-'" class="text-center" [napDecimalFormat]="item.OU"></td>
+    <td class="text-center">{{item.Fav}}</td>
+    <td class="text-center">{{item.HtScoreHome}}</td>
+    <td class="text-center">{{item.HtScoreAway}}</td>
+    <td class="text-center">{{item.FtScoreHome}}</td>
+    <td class="text-center">{{item.FtScoreAway}}</td>
+    <td class="text-center">{{item.ResultHDP}}</td>
+    <td class="text-center">{{item.ResultOU}}</td>
+    <td class="text-center">{{item.Result1x2}}</td>
+    <td *ngIf="isShowTGResult" class="text-center">{{item.ResultTG}}</td>
+  </ng-template>
+  <div [ngStyle]="{'width': isShowTGResult ? '1427px' : '1347px'}">
+    <div [ngSwitch]="displayedData.length > 0">
+        <div class="nap-grid">
+            <div class="header">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <ng-template [ngTemplateOutlet]="thead"></ng-template>
+                </table>
+            </div>
+            <div *ngSwitchCase="true" class="body">
+                <table class="table-striped">
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tbody>
+                        <ng-container *ngFor="let item of displayedData">
+                            <tr>
+                                <ng-template [ngTemplateOutlet]="detailedData" [ngTemplateOutletContext]="{ item: item }">
+                                </ng-template>
+                            </tr>
+                        </ng-container>
+                      </tbody>
+                </table>
+            </div>
+            <div *ngSwitchCase="false" class="body stretch">
+                <table>
+                  <tbody>
+                    <tr>
+                      <th scope="col" class="no-data" colspan="14">
+                        There is no data
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            <div class="footer" *ngIf="displayedData.length > 0">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tfoot>
+                        <tr>
+                            <td colspan="14">
+                                <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange()"></nap-pagination>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -50,6 +50,7 @@ namespace Nap_Reports.Sites
             services.RegisterPunterAnalysisServices();
             services.RegisterBetListServices();
             services.RegisterDailyMixParlayServices();
+            services.RegisterResultAnalysisServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

@@ -1,0 +1,85 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 200px" />
+      <col style="width: 200px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col *ngIf="isShowTGResult" style="width: 80px" />
+      <col *ngIf="isShowTGResult" style="width: 80px" />
+      <col *ngIf="isShowTGResult" style="width: 80px" />
+      <col *ngIf="isShowTGResult" style="width: 80px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+        <tr>
+            <th scope="col" rowspan="2" class="bg-5b9bd5">Total League</th>
+            <th scope="col" rowspan="2" class="bg-5b9bd5">Total Match</th>
+            <th scope="col" colspan="3" class="bg-375623">HDP RESULT</th>
+            <th scope="col" colspan="3" class="bg-833c0c">OU RESULT</th>
+            <th scope="col" colspan="3" class="bg-375623">1x2 RESULT</th>
+            <th *ngIf="isShowTGResult" scope="col" colspan="4" class="bg-833c0c">TG RESULT</th>
+        </tr>
+        <tr>
+            <th scope="col" class="bg-c6e0b4 text-black">FAV</th>
+            <th scope="col" class="bg-c6e0b4 text-black">Underdog</th>
+            <th scope="col" class="bg-c6e0b4 text-black">Draw</th>
+            <th scope="col" class="bg-f8cbad text-black">Over</th>
+            <th scope="col" class="bg-f8cbad text-black">Under</th>
+            <th scope="col" class="bg-f8cbad text-black">Draw</th>
+            <th scope="col" class="bg-c6e0b4 text-black">FAV</th>
+            <th scope="col" class="bg-c6e0b4 text-black">Underdog</th>
+            <th scope="col" class="bg-c6e0b4 text-black">Draw</th>
+            <th *ngIf="isShowTGResult" scope="col" class="bg-f8cbad text-black">0-1</th>
+            <th *ngIf="isShowTGResult" scope="col" class="bg-f8cbad text-black">2-3</th>
+            <th *ngIf="isShowTGResult" scope="col" class="bg-f8cbad text-black">4-6</th>
+            <th *ngIf="isShowTGResult" scope="col" class="bg-f8cbad text-black">7+</th>
+        </tr>
+    </thead>
+  </ng-template>
+  <ng-template #rowItem let-item="item">
+    <td class="text-center">{{item.TotalLeague}}</td>
+    <td class="text-center">{{item.TotalMatch}}</td>
+    <td class="text-center bg-e2efda">{{item.FavHdpResult}}</td>
+    <td class="text-center bg-e2efda">{{item.UnderdogHdpResult}}</td>
+    <td class="text-center bg-e2efda">{{item.DrawHdpResult}}</td>
+    <td class="text-center bg-fce4d6">{{item.OverOuResult}}</td>
+    <td class="text-center bg-fce4d6">{{item.UnderOuResult}}</td>
+    <td class="text-center bg-fce4d6">{{item.DrawOuResult}}</td>
+    <td class="text-center bg-e2efda">{{item.Fav1x2Result}}</td>
+    <td class="text-center bg-e2efda">{{item.Underdog1x2Result}}</td>
+    <td class="text-center bg-e2efda">{{item.Draw1x2Result}}</td>
+    <td *ngIf="isShowTGResult" class="text-center bg-fce4d6">{{item.TgResult01}}</td>
+    <td *ngIf="isShowTGResult" class="text-center bg-fce4d6">{{item.TgResult23}}</td>
+    <td *ngIf="isShowTGResult" class="text-center bg-fce4d6">{{item.TgResult46}}</td>
+    <td *ngIf="isShowTGResult" class="text-center bg-fce4d6">{{item.TgResult7}}</td>
+  </ng-template>
+  <div [ngStyle]="{'width': isShowTGResult ? '1458px' : '1138px'}">
+    <div class="nap-grid">
+        <div class="header">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <ng-template [ngTemplateOutlet]="thead"></ng-template>
+            </table>
+        </div>
+        <div class="body">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <tbody>
+                    <tr>
+                        <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: data }">
+                        </ng-template>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+  

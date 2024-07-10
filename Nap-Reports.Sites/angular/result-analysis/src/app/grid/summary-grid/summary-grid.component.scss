@@ -1,0 +1,46 @@
+@import '~nap-theme/scss/grid';
+@import '~nap-theme/scss/breadcrumb';
+
+.nap-grid {
+    .body {
+      overflow-x: hidden;
+      td {
+        font-weight: bold;
+      }
+    }
+    table {
+        font-size: 14px;
+    }
+}
+
+.bg-5b9bd5 {
+    background-color: #5b9bd5;
+}
+
+.bg-375623 {
+    background-color: #375623;
+}
+
+.bg-833c0c {
+    background-color: #833c0c;
+}
+
+.bg-c6e0b4 {
+    background-color: #c6e0b4;
+}
+
+.bg-f8cbad {
+    background-color: #f8cbad;
+}
+
+.bg-e2efda {
+    background-color: #e2efda;
+}
+
+.bg-fce4d6 {
+    background-color: #fce4d6;
+}
+
+.text-black {
+    color: black;
+}
