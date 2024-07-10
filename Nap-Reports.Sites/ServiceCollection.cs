@@ -156,6 +156,9 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
                    "/themes/base/style.css",
                    "/themes/base/style.less");
+
+                pipeline.AddJavaScriptBundle("/scripts/jquery.fileDownload.js",
+                    "/scripts/_lib/jquery.fileDownload.js");
             });
         }
     }

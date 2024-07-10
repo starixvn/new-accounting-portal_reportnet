@@ -1389,6 +1389,12 @@
     <None Update="ExcelTemplate\CashOutPerformance\SimpleCashOutPerformance.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelTemplate\DailyMixParlay\Daily_Mix_Parlay_Win_Loss_Combination.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\DailyMixParlay\Daily_Mix_Parlay_Win_Loss_Product.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelTemplate\Exchange\Exchange.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
