@@ -56,7 +56,9 @@
                 Combinations = string.Empty,
                 LiveType = a.LiveType,
                 BetType = a.BetType,
-                SportType = a.SportType
+                SportType = a.SportType,
+                HouseBonus = a.HouseBonus + b.HouseBonus,
+                ExtraPT = a.ExtraPT + b.ExtraPT
             };
         }
     }
