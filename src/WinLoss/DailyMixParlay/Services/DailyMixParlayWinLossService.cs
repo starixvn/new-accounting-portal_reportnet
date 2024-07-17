@@ -193,7 +193,7 @@ namespace DailyMixParlayWinLoss.Services
             var winlosses = from item in rawData
                             select CalculateWinLossItem(item);
 
-            var sportName = remotingRefService.GetSportName(sportType);
+            var sportName = ConvertSportTypeName(sportType);
             
             var numberRawDataItems = rawData.Count();
             var mergeRowNumber = numberRawDataItems + 1;
@@ -236,19 +236,36 @@ namespace DailyMixParlayWinLoss.Services
 
         private string ConvertLiveTypeName(int liveType)
         {
-            string name = string.Empty;
+            string name = "Live";
             switch (liveType)
             {
                 case DailyMixParlayConstant.NonLive:
                     name = "Non-Live";
                     break;
-
-                case DailyMixParlayConstant.Live:
-                    name = "Live";
-                    break;
-
                 case DailyMixParlayConstant.MixLiveTypes:
                     name = "Mix Live and Non-Live";
+                    break;
+                default:
+                    name = "Live";
+                    break;
+            }
+
+            return name;
+        }
+
+        private string ConvertSportTypeName(int sportType)
+        {
+            var name = string.Empty;
+            switch (sportType)
+            {
+                case DailyMixParlayConstant.MixedSports:
+                    name = "Mixed Sports";
+                    break;
+                case DailyMixParlayConstant.MixedOtherSports:
+                    name = "Mixed Other Sports";
+                    break;
+                default:
+                    name = remotingRefService.GetSportName(sportType);
                     break;
             }
 
