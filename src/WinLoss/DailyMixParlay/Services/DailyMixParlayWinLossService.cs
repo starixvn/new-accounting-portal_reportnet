@@ -3,6 +3,7 @@ using DailyMixParlay.Constant;
 using DailyMixParlay.Criteria;
 using DailyMixParlay.Models;
 using Fanex.Data.Repository;
+using System.Reflection.Emit;
 using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;
 
@@ -96,7 +97,7 @@ namespace DailyMixParlayWinLoss.Services
 
             return total;
         }
-        private ChildGroupItem CalculateCombinationByLiveTypeGroup(bool liveType, IEnumerable<WinLossItem> rawData)
+        private ChildGroupItem CalculateCombinationByLiveTypeGroup(int liveType, IEnumerable<WinLossItem> rawData)
         {
             var winlosses = from item in rawData
                             select CalculateWinLossItem(item);
@@ -106,9 +107,11 @@ namespace DailyMixParlayWinLoss.Services
 
             var total = CalculateSum(rawData, "Sub Total");
 
+            var childGroupName = ConvertLiveTypeName(liveType);
+
             return new ChildGroupItem
             {
-                Name = liveType ? "Live" : "Non-Live",
+                Name = childGroupName,
                 WinLosses = winlosses.ToList(),
                 Total = total,
                 MergeRowNumber = mergeRowNumber
@@ -119,26 +122,6 @@ namespace DailyMixParlayWinLoss.Services
         {
             var result = mapper.Map<WinLossItem>(item);
             result.Name = $"Mix Parlay ({item.Status})";
-            //var result = new WinLossItem
-            //{
-            //    Name = $"Mix Parlay ({item.Status})",
-            //    Id = item.Id,
-            //    BetCount = item.BetCount,
-            //    MemberTurnover = item.MemberTurnover,
-            //    MemberWinLoss = item.MemberWinLoss,
-            //    SMAWinLoss = item.SMAWinLoss,
-            //    Commission = item.Commission,
-            //    RealIncome = item.RealIncome,
-            //    RealTurnover = item.RealTurnover,
-            //    MemberBonus = item.MemberBonus,
-            //    HouseBonus = item.HouseBonus,
-            //    Status = item.Status,
-            //    Combinations = item.Combinations,
-            //    LiveType = item.LiveType,
-            //    BetType = item.BetType,
-            //    SportType = item.SportType,
-            //    ExtraPT = item.ExtraPT
-            //};
 
             return result;
         }
@@ -168,9 +151,9 @@ namespace DailyMixParlayWinLoss.Services
             return report;
         }
 
-        private ParentGroupItem CalculateLiveTypeGroup(bool liveType, IEnumerable<WinLossItem> rawData)
+        private ParentGroupItem CalculateLiveTypeGroup(int liveType, IEnumerable<WinLossItem> rawData)
         {
-            var liveTypeName = liveType ? "Live" : "Non-Live";
+            var liveTypeName = ConvertLiveTypeName(liveType);
 
             var result = CalculateParlayBySportType(rawData);
             result.Name = liveTypeName;
@@ -246,6 +229,27 @@ namespace DailyMixParlayWinLoss.Services
             else
             {
                 name = DailyMixParlayConstant.Unknow;
+            }
+
+            return name;
+        }
+
+        private string ConvertLiveTypeName(int liveType)
+        {
+            string name = string.Empty;
+            switch (liveType)
+            {
+                case DailyMixParlayConstant.NonLive:
+                    name = "Non-Live";
+                    break;
+
+                case DailyMixParlayConstant.Live:
+                    name = "Live";
+                    break;
+
+                case DailyMixParlayConstant.MixLiveTypes:
+                    name = "Mix Live and Non-Live";
+                    break;
             }
 
             return name;

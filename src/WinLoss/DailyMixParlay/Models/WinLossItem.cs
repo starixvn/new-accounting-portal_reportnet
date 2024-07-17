@@ -30,7 +30,7 @@
 
         public string Combinations { get;set; }
 
-        public bool LiveType { get;set; }
+        public int LiveType { get;set; }
 
         public int BetType { get; set; }
 
