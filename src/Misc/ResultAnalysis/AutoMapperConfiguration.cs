@@ -12,10 +12,10 @@ namespace ResultAnalysis
             cfg.CreateMap<LeagueRequest, LeagueCriteria>();
             cfg.CreateMap<ResultAnalysisRequest, ResultAnalysisCriteria>();
             cfg.CreateMap<ResultAnalysisExcelRequest, ResultAnalysisCriteria>();
-            cfg.CreateMap<ResultAnalysisSummaryExcelModel, ResultAnalysisSummaryModel>();
-            cfg.CreateMap<DetailedResultAnalysisExcelModel, DetailedResultAnalysisModel>();
-            cfg.CreateMap<IEnumerable<DetailedResultAnalysisExcelModel>, IEnumerable<DetailedResultAnalysisModel>>();
-            cfg.CreateMap<ResultAnalysisExcelModel, ResultAnalysisModel>();
+
+            cfg.CreateMap<ResultAnalysisSummaryModel, ResultAnalysisSummaryExcelModel>();
+            cfg.CreateMap<DetailedResultAnalysisModel, DetailedResultAnalysisExcelModel>();
+            cfg.CreateMap<ResultAnalysisModel, ResultAnalysisExcelModel>();
         }
     }
 }
