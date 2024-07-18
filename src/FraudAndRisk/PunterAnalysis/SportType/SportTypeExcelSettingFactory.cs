@@ -21,7 +21,7 @@ namespace PunterAnalysis.SportType
 
         public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
         {
-            const int startDataRowTemplateIndex = 10;
+            const int startDataRowTemplateIndex = 8;
             return new ExcelSetting
             {
                 SheetName = "Punter Analysis",
@@ -30,7 +30,7 @@ namespace PunterAnalysis.SportType
                 Title = excelSettingParams.Title,
                 TitleCellRange = "A1:E2",
                 Filter = excelSettingParams.Filter,
-                FilterCellRange = "A3:E7"
+                FilterCellRange = "A3:E5"
             };
         }
     }

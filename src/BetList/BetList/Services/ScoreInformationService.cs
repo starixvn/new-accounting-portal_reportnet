@@ -4,6 +4,8 @@ using Fanex.Data.Repository;
 using Fanex.Result.Core;
 using Fanex.Result.Core.Base;
 using Fanex.Result.Core.Sportsbook.DTO;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace BetList.Services
 {
@@ -26,6 +28,7 @@ namespace BetList.Services
             var rawData = await repository.FetchMultipleAsync<Sportsbook, GameDetail>(criteria);
             var sportsBooks = BindingScoreInformation(rawData);
             scoreInformation.MatchId = criteria.MatchId;
+            scoreInformation.TraderName = criteria.TraderName;
             var resultSettings = GetFanexResultSetting(criteria);
 
 
@@ -36,7 +39,6 @@ namespace BetList.Services
             }
 
             scoreInformation.MatchInformation = ResultEngine.HtmlGameDetailParser(sportsBooks[0], resultSettings);
-            scoreInformation.TraderName = criteria.TraderName;
             return scoreInformation;
         }
 
@@ -62,8 +64,11 @@ namespace BetList.Services
 
                 if (rawData.Item2 != null && rawData.Item2.Any())
                 {
-                    var gameDetail = rawData.Item2.FirstOrDefault();
-                    item.GameDetails.Add(gameDetail);
+                    item.GameDetails.AddRange(rawData.Item2);
+                }
+                else
+                {
+                    item.GameDetails.Add(new GameDetail());
                 }
 
                 result.Add(item);
