@@ -47,10 +47,6 @@
         </header>
     }
     <section id="headline">
-        @if (showMenus)
-        {
-            <span class="server-time">@string.Format("{0} GMT-4", DateTime.Now)</span>
-        }
         @RenderSection("Headline", false)
     </section>
     <section id="body">

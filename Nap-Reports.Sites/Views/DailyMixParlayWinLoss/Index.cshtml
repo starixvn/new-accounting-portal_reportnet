@@ -145,7 +145,8 @@
 @{
     string reportDate = DateTime.Today.ToShortFormatedDate();
     bool isRedirect = false;
-     var noteMessage = Html.Raw($"<ul class=\"filter-note\"><li>+ Data is available {ViewBag.MoveBetDate} onward. For more historical data, please click to <span class=\"bold-tip\">HISTORY REPORT</span></li></ul>");
+    DateTime moveBetDate = @ViewBag.MoveBetDate;
+     var noteMessage = Html.Raw($"<ul class=\"filter-note\"><li>+ Data is available {moveBetDate.ToShortFormatedDate()} onward. For more historical data, please click to <span class=\"bold-tip\">HISTORY REPORT</span></li></ul>");
 }
 @section scripts
 {
