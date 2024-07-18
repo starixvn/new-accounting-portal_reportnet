@@ -12,6 +12,8 @@ using NPOI.SS.Formula.Functions;
 using System.Xml.Linq;
 using DailyMixParlay.Criteria;
 using System.Reflection;
+using System.Reflection.Emit;
+using DailyMixParlay.Constant;
 
 namespace DailyMixParlay.Services;
 
@@ -65,7 +67,8 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
 
     private void GetCombinationTitle(GetCombinationWinLossCriteria criteria)
     {
-        sheet.Cells["A1:N2"].Value = $"Parlay Combination Win Loss by All Sites - From {criteria.FromDate: MMM dd, yyyy} To {criteria.ToDate: MMM dd, yyyy}";
+        var siteName = GetSiteTypeName(criteria.Site);
+        sheet.Cells["A1:N2"].Value = $"Parlay Combination Win Loss by {siteName} - From {criteria.FromDate: MMM dd, yyyy} To {criteria.ToDate: MMM dd, yyyy}";
     }
 
     private void ExportCombinationData(WinLoss data)
@@ -359,7 +362,8 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
 
     private void GetProductTitle(GetAdvanceMixParlayCriteria criteria)
     {
-        productSheet.Cells["A1:L2"].Value = $"Parlay Win Loss by Product by All Sites - From {criteria.FromDate: MMM dd, yyyy} To {criteria.ToDate: MMM dd, yyyy}";
+        var siteName = GetSiteTypeName(criteria.Site);
+        productSheet.Cells["A1:L2"].Value = $"Parlay Win Loss by Product by {siteName} - From {criteria.FromDate: MMM dd, yyyy} To {criteria.ToDate: MMM dd, yyyy}";
     }
 
     private void DeleteProductTemplate()
@@ -370,5 +374,23 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
         ExcelPackage.Workbook.Worksheets.Delete("SubTotalTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("GrandTotalTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("TotalTemplate");
+    }
+
+    public static string GetSiteTypeName(int siteType)
+    {
+        switch (siteType)
+        {
+            case DailyMixParlayConstant.AllSites:
+                return "All Sites";
+
+            case DailyMixParlayConstant.Credit:
+                return "Credit";
+
+            case DailyMixParlayConstant.Deposit:
+                return "Deposit";
+
+            default:
+                return string.Empty;
+        }
     }
 }

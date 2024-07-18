@@ -46,7 +46,7 @@ namespace DailyMixParlayWinLoss.Services
                                            select CalculateCombinationGroup(combinationGroup.Key, combinationGroupRawData);
 
                 var total = rawData.DynamicSum();
-                total.Name = "GrandTotal";
+                total.Name = "Grand Total";
 
                 report.WinLosses = combinationWinLosses.ToList();
                 report.Total = total;
@@ -142,7 +142,7 @@ namespace DailyMixParlayWinLoss.Services
                                         select CalculateLiveTypeGroup(liveTypeGroup.Key, liveTypeGroupRawData);
 
                 var total = rawData.DynamicSum();
-                total.Name = "GrandTotal";
+                total.Name = "Grand Total";
 
                 report.WinLosses = liveTypeWinLosses.ToList();
                 report.Total = total;

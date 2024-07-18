@@ -25,5 +25,11 @@
         public const int MixedSports = -1;
 
         public const int MixedOtherSports = -2;
+
+        public const int AllSites = 0;
+
+        public const int Credit = 1;
+
+        public const int Deposit = 2;
     }
 }
