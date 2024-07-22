@@ -1,39 +1,60 @@
 ﻿using AutoMapper;
+using Fanex.Excel.Models;
 using HouseWinLoss.Common.BasicWinLoss;
 using HouseWinLoss.Common.ColumnDecorators;
 using HouseWinLoss.Common.Criteria;
+using HouseWinLoss.Configuration;
 using Microsoft.AspNetCore.Mvc;
+using Utilities.ExcelResult;
 
 namespace HouseWinLoss.BetBuilder.SportType
 {
     [Route("api/house-win-loss-by-products/bet-builder/sport-type")]
     [ApiController]
-    public class BetBuilderSportTypeController : BasicWinLossController
+    public class BetBuilderSportTypeController(BetBuilderSportTypeWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper) : ControllerBase
     {
-        private readonly IMapper mapper;
-
-        public BetBuilderSportTypeController(
-            BasicWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecoratorFull decorator,
-            IMapper mapper)
-        : base(service, builder, decorator)
-        {
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {
-            var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
-            return await Json(criteria, "Sport Type");
+            var gridOptions = await BuildGridOptions(queryModel);
+
+            return Ok(gridOptions);
         }
 
         [Route("excel")]
         public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
         {
             var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
-            return await Excel(criteria, "Sport Type", queryModel.Title);
+            var winlosses = (await service.Query(criteria)).ToArray();
+
+            var majorMinorGridOptions = builder.Build(winlosses.First(), queryModel.BetTypeTitle);
+            const int mainColumnWidth = 220;
+            majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
+
+            var liveNonLiveGridOptions = builder.Build(winlosses.Last(), queryModel.LiveNonLiveTitle);
+            liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
+
+            return new FanexExcelResult(
+                [majorMinorGridOptions, liveNonLiveGridOptions],
+                Constants.SheetName);
+        }
+
+        private async Task<IEnumerable<GridOptions>> BuildGridOptions(QueryModel queryModel)
+        {
+            var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
+            var winlosses = (await service.Query(criteria)).ToArray();
+
+            var majorMinorGridOptions = builder.Build(winlosses.First(), "Sport Type");
+            const int mainColumnWidth = 220;
+            var majorMinorDecorationGridOptions = decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
+
+            var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
+            var liveNonLiveDecoratGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
+
+            return new GridOptions[] { majorMinorDecorationGridOptions, liveNonLiveDecoratGridOptions };
         }
     }
 }

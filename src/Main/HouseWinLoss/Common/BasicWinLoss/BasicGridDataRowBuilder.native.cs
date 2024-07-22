@@ -16,12 +16,13 @@ namespace HouseWinLoss.Common.BasicWinLoss
         {
             var columnIndex = 0;
             var customAttributes = $"{item.Id}";
-            var isSabaSport = GetSabaSportValue(item.Id, item.Name);
+            var name = string.IsNullOrEmpty(item.Name) ? string.Empty : item.Name;
+            var isSabaSport = GetSabaSportValue(item.Id, name);
             var sabaSportCustomAttributes = $"{isSabaSport}";
             var sportTypeAttribute = $"{item.SportType}";
             var columns = new List<Columns>
             {
-                new Columns { ColumnIndex = columnIndex++, Name = "Main", Value = string.IsNullOrEmpty(item.Name) ? string.Empty : item.Name, DisplayValue = item.Name, CustomAttributes = customAttributes, CellAlignment = mainTextAlignment },
+                new Columns { ColumnIndex = columnIndex++, Name = "Main", Value = name, DisplayValue = item.Name, CustomAttributes = customAttributes, CellAlignment = mainTextAlignment },
                 new Columns { ColumnIndex= columnIndex++, Name = "MemberWinLoss", Value = item.MemberWinLoss, CustomAttributes = sabaSportCustomAttributes },
                 new Columns { ColumnIndex = columnIndex++, Name = "SMAWinLoss", Value =  item.SMAWinLoss, CustomAttributes = sportTypeAttribute },
                  new Columns(columnIndex++, "ExtraPT", item.ExtraPT),
@@ -41,8 +42,7 @@ namespace HouseWinLoss.Common.BasicWinLoss
         private static int GetSabaSportValue(int id, string name)
         {
             var isSabaSport = 0;
-            
-            if(id < 0)
+            if (id < 0)
             {
                 isSabaSport = 1;
             }

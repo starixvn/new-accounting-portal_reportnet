@@ -15,6 +15,8 @@ using Products = HouseWinLoss.Products;
 using SimpleGrid = HouseWinLoss.SimpleGrid;
 using SiteWinLoss = HouseWinLoss.Common.SiteWinLoss;
 using Soccer = HouseWinLoss.Soccer;
+using BetBuilder = HouseWinLoss.BetBuilder;
+
 
 namespace Nap_Reports.Sites.DependencyInjection
 {
@@ -72,6 +74,8 @@ namespace Nap_Reports.Sites.DependencyInjection
 
             service.AddTransient<ProductBetType.Service, ProductBetType.ServiceImp>();
             service.AddTransient<ProductBetType.GridOptionsBuilder, ProductBetType.GridOptionsBuilderImp>();
+
+            service.AddTransient<BetBuilder.SportType.BetBuilderSportTypeWinLossService, BetBuilder.SportType.BetBuilderSportTypeWinLossServiceImp>();
         }
     }
 }
