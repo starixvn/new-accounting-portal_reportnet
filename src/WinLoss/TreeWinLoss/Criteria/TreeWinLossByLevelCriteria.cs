@@ -1,9 +1,8 @@
+using Fanex.Data;
+using Fanex.Data.Repository;
+
 namespace TreeWinLoss.Criteria
 {
-    using Fanex.Data;
-    using Fanex.Data.Repository;
-    using System;
-
     public class TreeWinLossByLevelCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]

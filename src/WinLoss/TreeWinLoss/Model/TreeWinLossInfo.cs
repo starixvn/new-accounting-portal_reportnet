@@ -1,9 +1,5 @@
 namespace WinLoss.Models.TreeWinLoss
 {
-    using System;
-    using Core.Resources;
-
-    [Serializable]
     public class TreeWinLossInfo
     {
         public int Id { get; set; }
@@ -49,7 +45,7 @@ namespace WinLoss.Models.TreeWinLoss
                 }
                 else
                 {
-                    return Labels.NotAvailable;
+                    return "N/A";
                 }
             }
         }
@@ -64,7 +60,7 @@ namespace WinLoss.Models.TreeWinLoss
                 }
                 else
                 {
-                    return Labels.NotAvailable;
+                    return "N/A";
                 }
             }
         }
@@ -79,7 +75,7 @@ namespace WinLoss.Models.TreeWinLoss
                 }
                 else
                 {
-                    return Labels.NotAvailable;
+                    return "N/A";
                 }
             }
         }

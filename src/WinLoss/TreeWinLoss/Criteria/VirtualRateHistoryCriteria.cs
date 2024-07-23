@@ -1,7 +1,7 @@
+using Fanex.Data.Repository;
+
 namespace TreeWinLoss.Criteria
 {
-    using Fanex.Data.Repository;
-
     public class VirtualRateHistoryCriteria : CriteriaBase
     {
         public int CustId { get; set; }
