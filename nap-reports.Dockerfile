@@ -14,6 +14,7 @@ COPY src/FraudAndRisk/PunterAnalysis/*.csproj ./FraudAndRisk/PunterAnalysis/
 COPY src/WinLoss/DailyMixParlay/*.csproj ./src/WinLoss/DailyMixParlay/
 COPY src/FraudAndRisk/SBCustomerPerformanceByDanger/*.csproj ./FraudAndRisk/SBCustomerPerformanceByDanger/
 COPY src/Shared/Utilities/*.csproj ./src/Shared/Utilities/
+COPY src/LegendManagement/LegendManagement/*.csproj ./src/LegendManagement/LegendManagement/
 COPY Nap-Reports.Sites/*.csproj ./Nap-Reports.Sites/
 
 

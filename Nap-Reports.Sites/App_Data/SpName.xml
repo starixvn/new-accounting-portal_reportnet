@@ -149,4 +149,10 @@
 		<Setting Key="Acc_Rpt_ResultAnalysis_LeagueSel" SpName="Acc_Rpt_ResultAnalysis_LeagueSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Acc_Rpt_ResultAnalysis" SpName="Acc_Rpt_ResultAnalysis" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
+	<Function Name="Legend Management - Core">
+		<Setting Key="LegendManagement_SelReportLegend" SpName="Acc_FunctionLegendSel" DbName="DBMA.bodb_Maintenance.wsv_nap" > </Setting>
+		<Setting Key="LegendManagement_SaveReportLegend" SpName="Acc_FunctionLegendUpd" DbName="DBMA.bodb_Maintenance.wsv_nap" > </Setting>
+		<Setting Key="LegendManagement_SaveReportLegendMapping" SpName="Acc_FunctionLegendCopy" DbName="DBMA.bodb_Maintenance.wsv_nap" > </Setting>
+		<Setting Key="LegendManagement_GetInputedLegend" SpName="ReportLegend_GetInputedLegend" DbName="DBMA.bodb_Maintenance.wsv_nap" > </Setting>
+	</Function>
 </Functions>

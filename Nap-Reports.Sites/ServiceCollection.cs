@@ -51,6 +51,7 @@ namespace Nap_Reports.Sites
             services.RegisterBetListServices();
             services.RegisterDailyMixParlayServices();
             services.RegisterResultAnalysisServices();
+            services.RegisterLegendManagementServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

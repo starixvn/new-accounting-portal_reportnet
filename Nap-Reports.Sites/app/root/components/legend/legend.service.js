@@ -14,7 +14,7 @@ import angular from "angular";
         return service;
 
         function getData(menuId) {
-            var url = legacyService.resolveUrl('/LegendManagement/LegendManagement/GetReportLegend');
+            var url = 'LegendManagement/GetReportLegend';
             return $http.post(url, {
                 menuId: menuId
             }).then(httpResponseService.getDataComplete);

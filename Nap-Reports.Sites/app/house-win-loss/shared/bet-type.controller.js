@@ -12,7 +12,7 @@ import angular from "angular";
         var showHideColumnBuilder = new showHideColumnService(pane);
         var tab = $scope.tab;
         var gridElement = $element.find('.freegrid');
-        const betradarVirtualSportsMixParlayBettype = 2799;
+        const betradarVirtualSportsMixParlayBettype = [2799, 10449];
         $scope.show = showHideColumnBuilder.toggle;
         $scope.generate = generate;
         $scope.generateSite = generateSite;
@@ -55,7 +55,7 @@ import angular from "angular";
             var isFreePlay = betTypeName === 'Colossus Bets (Free Play)';
 
             var template = houseWinlossService.getViewSetting(pane.data.productName, 'matchDetail', pane.data);
-            var hasDetailDrilldown = angular.isDefined(template) && parseInt(betTypeId) !== betradarVirtualSportsMixParlayBettype;
+            var hasDetailDrilldown = angular.isDefined(template) && !betradarVirtualSportsMixParlayBettype.includes(parseInt(betTypeId));
 
             if (betTypeRow.SubRows && hasDetailDrilldown) {
                 betTypeRow.Columns[0].Value = '<a class="drill-down" href data-nap-click="generateMatchDetail(' + betTypeId + ',\'' + betTypeName.replace(/'/g, "\\'") + '\',' + isLive + ')">' + betTypeName + '</a>';
