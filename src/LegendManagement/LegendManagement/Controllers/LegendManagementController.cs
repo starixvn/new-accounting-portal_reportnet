@@ -7,7 +7,7 @@ namespace LegendManagement.Controllers;
 public class LegendManagementController(LegendManagementService legendManagementService) : Controller
 {
     [HttpPost]
-    public IActionResult GetReportLegend(GetReportLegendCriteria criteria)
+    public IActionResult GetReportLegend([FromBody]GetReportLegendCriteria criteria)
     {
         var legendContent = legendManagementService.GetReportLegend(criteria);
         return new JsonResult(legendContent);
