@@ -1,4 +1,4 @@
-﻿namespace WinLoss.Models.TreeWinLoss
+﻿namespace TreeWinLoss.Model
 {
     public class Sport
     {

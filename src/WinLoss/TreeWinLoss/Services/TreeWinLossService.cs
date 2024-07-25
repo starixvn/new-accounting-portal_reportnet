@@ -1,24 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fanex.Data.Repository;
+using TreeWinLoss.Criteria;
+using TreeWinLoss.Model;
 
 namespace TreeWinLoss.Services
 {
-    internal class TreeWinLossService
+    public interface TreeWinLossService
     {
-        //public List<TreeWinLossProduct> GetProduct()
-        //{
-        //    var dynamicRipository = new DynamicRepository();
-        //    return dynamicRipository.Fetch<TreeWinLossProduct>(new GetTreeWinLossListProduct()).ToList();
-        //}
+        Task<IEnumerable<TreeWinLossProduct>> GetProduct();
 
-        //public List<Sport> GetSport()
-        //{
-        //    var dynamicRipository = new DynamicRepository();
-        //    return dynamicRipository.Fetch<Sport>(new GetSportCriteria()).ToList();
-        //}
+        Task<IEnumerable<Sport>> GetSport();
+    }
+
+    public class TreeWinLossServiceImp : TreeWinLossService
+    {
+        private readonly IDynamicRepository repository;
+
+        public TreeWinLossServiceImp(IDynamicRepository repository)
+        {
+                this.repository = repository;
+        }
+
+        public async Task<IEnumerable<TreeWinLossProduct>> GetProduct()
+        {
+            var criteria = new TreeWinLossListProductCriteria();
+            var products = await repository.FetchAsync<TreeWinLossProduct>(criteria);
+
+            return products;
+        }
+
+        public async Task<IEnumerable<Sport>> GetSport()
+        {
+            var criteria = new SportCriteria();
+            var sports = await repository.FetchAsync<Sport>(criteria);
+
+            return sports;
+        }
 
 
         //public TreeWinLoss GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)

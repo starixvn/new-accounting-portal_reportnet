@@ -1,9 +1,7 @@
-namespace WinLoss.Models.TreeWinLoss
-{
-    using System;
-    using System.Collections.Generic;
+using TreeWinLoss.Model;
 
-    [Serializable]
+namespace WTreeWinLoss.Model
+{
     public class TreeWinLossVirtualRate
     {
         public TreeWinLossVirtualRate()

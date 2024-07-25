@@ -1,5 +1,5 @@
-namespace WinLoss.Models.TreeWinLoss
-{
+namespace TreeWinLoss.Model
+{ 
     public class TreeWinLossInfo
     {
         public int Id { get; set; }

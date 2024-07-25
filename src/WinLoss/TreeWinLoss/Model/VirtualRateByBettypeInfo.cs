@@ -1,8 +1,5 @@
-namespace WinLoss.Models.TreeWinLoss
+namespace TreeWinLoss.Model
 {
-    using System;
-
-    [Serializable]
     public class VirtualRateByBettypeInfo
     {
         public string BettypeName { get; set; }

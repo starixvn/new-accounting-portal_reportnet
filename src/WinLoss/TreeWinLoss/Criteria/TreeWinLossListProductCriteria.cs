@@ -2,7 +2,7 @@
 
 namespace TreeWinLoss.Criteria
 {
-    public class TreeWinLossListProduct : CriteriaBase
+    public class TreeWinLossListProductCriteria : CriteriaBase
     {
         public override bool IsValid() => true;
 
