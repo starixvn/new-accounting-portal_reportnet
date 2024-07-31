@@ -1,9 +1,11 @@
 ﻿using Fanex.Data.Repository;
 using TreeWinLoss.Criteria;
-using TreeWinLoss.Model;
+
 
 namespace TreeWinLoss.Services
 {
+    using TreeWinLoss.Model;
+
     public interface TreeWinLossService
     {
         Task<IEnumerable<TreeWinLossProduct>> GetProduct();
@@ -37,15 +39,15 @@ namespace TreeWinLoss.Services
         }
 
 
-        //public TreeWinLoss GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
-        //{
-        //    criteria.Products = criteria.ProductSelection;
+        public TreeWinLoss GetTreeWinLossByProduct(TreeWinLossByProductCriteria criteria)
+        {
+            criteria.Products = criteria.ProductSelection;
 
-        //    var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-        //    treeWinLoss.IsShowNotAvailableTurnover = false;
+            var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
+            treeWinLoss.IsShowNotAvailableTurnover = false;
 
-        //    return treeWinLoss;
-        //}
+            return treeWinLoss;
+        }
 
 
         //public TreeWinLoss GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
@@ -109,83 +111,84 @@ namespace TreeWinLoss.Services
         //}
 
 
-        //private TreeWinLoss GetTreeWinLossDateRangeByProduct(GetTreeWinLossByProductCriteria criteria)
-        //{
-        //    var treeWinLoss = new TreeWinLoss
-        //    {
-        //        ChildsInfo = new List<TreeWinLossInfo>(),
-        //        TotalInfo = new List<TreeWinLossInfo>(),
-        //        IsShowNotAvailableTurnover = false
-        //    };
-        //    var currencies = ReportService.ExchangeCurrencies;
-        //    var outputParam = new Hashtable();
-        //    var rawData = this._treeWinLossRepository.GetTreeWinLossByProduct(criteria, ref outputParam);
-        //    if (rawData != null)
-        //    {
-        //        var totalWinLoss = new TreeWinLossInfo
-        //        {
-        //            Name = string.Empty
-        //        };
-        //        var grandTotalWinLoss = new TreeWinLossInfo
-        //        {
-        //            Name = Labels.Total
-        //        };
-        //        var total8RMWinLoss = new TreeWinLossInfo
-        //        {
-        //            Name = Labels._8RM
-        //        };
-        //        var totalBARMWinLoss = new TreeWinLossInfo
-        //        {
-        //            Name = Labels.BARM
-        //        };
-        //        foreach (TreeWinLossInfo row in rawData)
-        //        {
-        //            var winLoss = new TreeWinLossInfo()
-        //            {
-        //                Id = row.Id,
-        //                Name = currencies[row.Id],
-        //                Turnover = row.Turnover,
-        //                WinLoss = row.WinLoss,
-        //                Comm = row.Comm,
-        //                WinLossTotal = row.WinLossTotal,
-        //                BaseRMTurnover = row.BaseRMTurnover,
-        //                BaseRMVirtualTurnover = row.BaseRMVirtualTurnover,
-        //                BaseRMTOVariancePlus = row.BaseRMTOVariancePlus,
-        //                BaseRMTOVarianceMinus = row.BaseRMTOVarianceMinus,
-        //                BaseRMWLVariancePlus = row.BaseRMWLVariancePlus,
-        //                BaseRMWLVarianceMinus = row.BaseRMWLVarianceMinus,
-        //                BaseRMTotal = row.BaseRMTotal,
-        //                BaseRMVirtualTotal = row.BaseRMVirtualTotal,
-        //                BaseRMTOVarianceAbsoluteTotal = row.BaseRMTOVarianceAbsoluteTotal,
-        //                BaseRMWinlostVarianceTotal = row.BaseRMWinlostVarianceTotal,
-        //                ExtraAmount = row.ExtraAmount
-        //            };
+        private TreeWinLoss GetTreeWinLossDateRangeByProduct(TreeWinLossByProductCriteria criteria)
+        {
+            var treeWinLoss = new TreeWinLoss
+            {
+                ChildsInfo = new List<TreeWinLossInfo>(),
+                TotalInfo = new List<TreeWinLossInfo>(),
+                IsShowNotAvailableTurnover = false
+            };
 
-        //            winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
-        //            treeWinLoss.ChildsInfo.Add(winLoss);
-        //            TreeWinLossUtil.AddToTotal(winLoss, ref totalWinLoss);
-        //            TreeWinLossUtil.AddToTotal(winLoss, ref grandTotalWinLoss);
-        //        }
+            //var currencies = ReportService.ExchangeCurrencies;
+            //var outputParam = new Hashtable();
+            //var rawData = this._treeWinLossRepository.GetTreeWinLossByProduct(criteria, ref outputParam);
+            //if (rawData != null)
+            //{
+            //    var totalWinLoss = new TreeWinLossInfo
+            //    {
+            //        Name = string.Empty
+            //    };
+            //    var grandTotalWinLoss = new TreeWinLossInfo
+            //    {
+            //        Name = Labels.Total
+            //    };
+            //    var total8RMWinLoss = new TreeWinLossInfo
+            //    {
+            //        Name = Labels._8RM
+            //    };
+            //    var totalBARMWinLoss = new TreeWinLossInfo
+            //    {
+            //        Name = Labels.BARM
+            //    };
+            //    foreach (TreeWinLossInfo row in rawData)
+            //    {
+            //        var winLoss = new TreeWinLossInfo()
+            //        {
+            //            Id = row.Id,
+            //            Name = currencies[row.Id],
+            //            Turnover = row.Turnover,
+            //            WinLoss = row.WinLoss,
+            //            Comm = row.Comm,
+            //            WinLossTotal = row.WinLossTotal,
+            //            BaseRMTurnover = row.BaseRMTurnover,
+            //            BaseRMVirtualTurnover = row.BaseRMVirtualTurnover,
+            //            BaseRMTOVariancePlus = row.BaseRMTOVariancePlus,
+            //            BaseRMTOVarianceMinus = row.BaseRMTOVarianceMinus,
+            //            BaseRMWLVariancePlus = row.BaseRMWLVariancePlus,
+            //            BaseRMWLVarianceMinus = row.BaseRMWLVarianceMinus,
+            //            BaseRMTotal = row.BaseRMTotal,
+            //            BaseRMVirtualTotal = row.BaseRMVirtualTotal,
+            //            BaseRMTOVarianceAbsoluteTotal = row.BaseRMTOVarianceAbsoluteTotal,
+            //            BaseRMWinlostVarianceTotal = row.BaseRMWinlostVarianceTotal,
+            //            ExtraAmount = row.ExtraAmount
+            //        };
 
-        //        treeWinLoss.TotalInfo.Add(totalWinLoss);
-        //        total8RMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_8rm"]);
-        //        TreeWinLossUtil.AddToTotal(total8RMWinLoss, ref grandTotalWinLoss);
-        //        total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
-        //        total8RMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
-        //        total8RMWinLoss.BaseRMVirtualTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
-        //        treeWinLoss.TotalInfo.Add(total8RMWinLoss);
+            //        winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
+            //        treeWinLoss.ChildsInfo.Add(winLoss);
+            //        TreeWinLossUtil.AddToTotal(winLoss, ref totalWinLoss);
+            //        TreeWinLossUtil.AddToTotal(winLoss, ref grandTotalWinLoss);
+            //    }
 
-        //        totalBARMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_barm"]);
-        //        TreeWinLossUtil.AddToTotal(totalBARMWinLoss, ref grandTotalWinLoss);
-        //        totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
-        //        totalBARMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_barm"]);
-        //        totalBARMWinLoss.BaseRMVirtualTurnover = totalBARMWinLoss.BaseRMTurnover;
-        //        treeWinLoss.TotalInfo.Add(totalBARMWinLoss);
-        //        treeWinLoss.TotalInfo.Add(grandTotalWinLoss);
-        //    }
+            //    treeWinLoss.TotalInfo.Add(totalWinLoss);
+            //    total8RMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_8rm"]);
+            //    TreeWinLossUtil.AddToTotal(total8RMWinLoss, ref grandTotalWinLoss);
+            //    total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
+            //    total8RMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
+            //    total8RMWinLoss.BaseRMVirtualTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
+            //    treeWinLoss.TotalInfo.Add(total8RMWinLoss);
 
-        //    return treeWinLoss;
-        //}
+            //    totalBARMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_barm"]);
+            //    TreeWinLossUtil.AddToTotal(totalBARMWinLoss, ref grandTotalWinLoss);
+            //    totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
+            //    totalBARMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_barm"]);
+            //    totalBARMWinLoss.BaseRMVirtualTurnover = totalBARMWinLoss.BaseRMTurnover;
+            //    treeWinLoss.TotalInfo.Add(totalBARMWinLoss);
+            //    treeWinLoss.TotalInfo.Add(grandTotalWinLoss);
+            //}
+
+            return treeWinLoss;
+        }
 
 
         //private TreeWinLoss GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)

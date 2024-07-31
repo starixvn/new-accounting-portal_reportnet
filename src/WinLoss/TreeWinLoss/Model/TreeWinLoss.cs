@@ -1,9 +1,5 @@
 namespace TreeWinLoss.Model
 {
-    using System;
-    using System.Collections.Generic;
-
-    [Serializable]
     public class TreeWinLoss
     {
         public List<TreeWinLossInfo> ChildsInfo { get; set; }
