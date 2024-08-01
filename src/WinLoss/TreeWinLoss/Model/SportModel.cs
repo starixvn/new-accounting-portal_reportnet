@@ -1,6 +1,6 @@
 ﻿namespace TreeWinLoss.Model
 {
-    public class Sport
+    public class SportModel
     {
         public int SportType { get; set; }
 

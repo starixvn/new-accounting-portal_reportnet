@@ -4,47 +4,70 @@ using TreeWinLoss.Criteria;
 
 namespace TreeWinLoss.Services
 {
+    using AutoMapper;
+    using TreeWinLoss.Entities;
     using TreeWinLoss.Model;
+    using Utilities.LinqDynamicSum;
 
     public interface TreeWinLossService
     {
-        Task<IEnumerable<TreeWinLossProduct>> GetProduct();
+        Task<IEnumerable<TreeWinLossProductModel>> GetProduct();
 
-        Task<IEnumerable<Sport>> GetSport();
+        Task<IEnumerable<SportModel>> GetSport();
+
+        Task<TreeWinLossModel> GetTreeWinLossByProduct(TreeWinLossByProductCriteria criteria);
     }
 
     public class TreeWinLossServiceImp : TreeWinLossService
     {
         private readonly IDynamicRepository repository;
 
-        public TreeWinLossServiceImp(IDynamicRepository repository)
+        private readonly IMapper mapper;
+
+        public TreeWinLossServiceImp(IDynamicRepository repository, IMapper mapper)
         {
-                this.repository = repository;
+            this.repository = repository;
+            this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<TreeWinLossProduct>> GetProduct()
+        public async Task<IEnumerable<TreeWinLossProductModel>> GetProduct()
         {
             var criteria = new TreeWinLossListProductCriteria();
-            var products = await repository.FetchAsync<TreeWinLossProduct>(criteria);
+            var products = await repository.FetchAsync<TreeWinLossProductModel>(criteria);
 
             return products;
         }
 
-        public async Task<IEnumerable<Sport>> GetSport()
+        public async Task<IEnumerable<SportModel>> GetSport()
         {
             var criteria = new SportCriteria();
-            var sports = await repository.FetchAsync<Sport>(criteria);
+            var sports = await repository.FetchAsync<SportModel>(criteria);
 
             return sports;
         }
 
-
-        public TreeWinLoss GetTreeWinLossByProduct(TreeWinLossByProductCriteria criteria)
+        public async Task<TreeWinLossModel> GetTreeWinLossByProduct(TreeWinLossByProductCriteria criteria)
         {
             criteria.Products = criteria.ProductSelection;
 
-            var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-            treeWinLoss.IsShowNotAvailableTurnover = false;
+            var treeWinLoss = new TreeWinLossModel
+            {
+                WinLosses = new List<TreeWinLossItemModel>(),
+                Total = new List<TreeWinLossItemModel>(),
+                IsShowNotAvailableTurnover = false
+            };
+
+            var rawData = await repository.FetchAsync<WinLossRawItem>(criteria);
+
+            if (rawData.Any())
+            {
+                var winLosses = mapper.Map<List<TreeWinLossItemModel>>(rawData);
+
+                var allTotal = CalculateAllTotal(rawData, criteria);
+
+                treeWinLoss.WinLosses = winLosses;
+                treeWinLoss.Total = allTotal;
+            }
 
             return treeWinLoss;
         }
@@ -110,84 +133,49 @@ namespace TreeWinLoss.Services
         //    return treeWinLossVirtualRate;
         //}
 
-
-        private TreeWinLoss GetTreeWinLossDateRangeByProduct(TreeWinLossByProductCriteria criteria)
+        private List<TreeWinLossItemModel> CalculateAllTotal(
+            IEnumerable<WinLossRawItem> rawData,
+            TreeWinLossByProductCriteria criteria)
         {
-            var treeWinLoss = new TreeWinLoss
+            var allTotal = new List<TreeWinLossItemModel>();
+
+            var rawTotal = rawData.DynamicSum();
+
+            var total = mapper.Map<TreeWinLossItemModel>(rawTotal);
+            total.Name = string.Empty;
+
+            var grandTotal = mapper.Map<TreeWinLossItemModel>(rawTotal);
+            grandTotal.Name = "Total";
+
+            var rmTotal = new TreeWinLossItemModel
             {
-                ChildsInfo = new List<TreeWinLossInfo>(),
-                TotalInfo = new List<TreeWinLossInfo>(),
-                IsShowNotAvailableTurnover = false
+                Name = "8RM",
+                BaseRMTotal = criteria.RMTotal,
+                BaseRMVirtualTotal = criteria.RMVirtualTotal,
+                BaseRMTurnover = criteria.RMTurnover,
+                BaseRMVirtualTurnover = criteria.RMTurnover
             };
 
-            //var currencies = ReportService.ExchangeCurrencies;
-            //var outputParam = new Hashtable();
-            //var rawData = this._treeWinLossRepository.GetTreeWinLossByProduct(criteria, ref outputParam);
-            //if (rawData != null)
-            //{
-            //    var totalWinLoss = new TreeWinLossInfo
-            //    {
-            //        Name = string.Empty
-            //    };
-            //    var grandTotalWinLoss = new TreeWinLossInfo
-            //    {
-            //        Name = Labels.Total
-            //    };
-            //    var total8RMWinLoss = new TreeWinLossInfo
-            //    {
-            //        Name = Labels._8RM
-            //    };
-            //    var totalBARMWinLoss = new TreeWinLossInfo
-            //    {
-            //        Name = Labels.BARM
-            //    };
-            //    foreach (TreeWinLossInfo row in rawData)
-            //    {
-            //        var winLoss = new TreeWinLossInfo()
-            //        {
-            //            Id = row.Id,
-            //            Name = currencies[row.Id],
-            //            Turnover = row.Turnover,
-            //            WinLoss = row.WinLoss,
-            //            Comm = row.Comm,
-            //            WinLossTotal = row.WinLossTotal,
-            //            BaseRMTurnover = row.BaseRMTurnover,
-            //            BaseRMVirtualTurnover = row.BaseRMVirtualTurnover,
-            //            BaseRMTOVariancePlus = row.BaseRMTOVariancePlus,
-            //            BaseRMTOVarianceMinus = row.BaseRMTOVarianceMinus,
-            //            BaseRMWLVariancePlus = row.BaseRMWLVariancePlus,
-            //            BaseRMWLVarianceMinus = row.BaseRMWLVarianceMinus,
-            //            BaseRMTotal = row.BaseRMTotal,
-            //            BaseRMVirtualTotal = row.BaseRMVirtualTotal,
-            //            BaseRMTOVarianceAbsoluteTotal = row.BaseRMTOVarianceAbsoluteTotal,
-            //            BaseRMWinlostVarianceTotal = row.BaseRMWinlostVarianceTotal,
-            //            ExtraAmount = row.ExtraAmount
-            //        };
+            var barmTotal = new TreeWinLossItemModel
+            {
+                Name = "BARM",
+                BaseRMTotal = criteria.BARMTotal,
+                BaseRMVirtualTotal = criteria.BARMVirtualTotal,
+                BaseRMTurnover = criteria.BARMTurnover,
+                BaseRMVirtualTurnover = criteria.BARMTurnover
+            };
 
-            //        winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
-            //        treeWinLoss.ChildsInfo.Add(winLoss);
-            //        TreeWinLossUtil.AddToTotal(winLoss, ref totalWinLoss);
-            //        TreeWinLossUtil.AddToTotal(winLoss, ref grandTotalWinLoss);
-            //    }
+            grandTotal.BaseRMTotal += rmTotal.BaseRMTotal + barmTotal.BaseRMTotal;
+            grandTotal.BaseRMVirtualTotal += rmTotal.BaseRMVirtualTotal + barmTotal.BaseRMVirtualTotal;
+            grandTotal.BaseRMTurnover += rmTotal.BaseRMTurnover + barmTotal.BaseRMTurnover;
+            grandTotal.BaseRMVirtualTurnover += rmTotal.BaseRMVirtualTurnover + barmTotal.BaseRMVirtualTurnover;
 
-            //    treeWinLoss.TotalInfo.Add(totalWinLoss);
-            //    total8RMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_8rm"]);
-            //    TreeWinLossUtil.AddToTotal(total8RMWinLoss, ref grandTotalWinLoss);
-            //    total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
-            //    total8RMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
-            //    total8RMWinLoss.BaseRMVirtualTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
-            //    treeWinLoss.TotalInfo.Add(total8RMWinLoss);
+            allTotal.Add(total);
+            allTotal.Add(rmTotal);
+            allTotal.Add(barmTotal);
+            allTotal.Add(grandTotal);
 
-            //    totalBARMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_barm"]);
-            //    TreeWinLossUtil.AddToTotal(totalBARMWinLoss, ref grandTotalWinLoss);
-            //    totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
-            //    totalBARMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_barm"]);
-            //    totalBARMWinLoss.BaseRMVirtualTurnover = totalBARMWinLoss.BaseRMTurnover;
-            //    treeWinLoss.TotalInfo.Add(totalBARMWinLoss);
-            //    treeWinLoss.TotalInfo.Add(grandTotalWinLoss);
-            //}
-
-            return treeWinLoss;
+            return allTotal;
         }
 
 

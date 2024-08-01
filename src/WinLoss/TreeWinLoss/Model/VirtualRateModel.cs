@@ -1,11 +1,11 @@
 namespace TreeWinLoss.Model
 {
-    public class VirtualRateInfo
+    public class VirtualRateModel
     {
-        public VirtualRateInfo()
+        public VirtualRateModel()
         {
-            ReportRows = new List<VirtualRateInfo>();
-            VirtualRateByBettype = new List<VirtualRateByBettypeInfo>();
+            ReportRows = new List<VirtualRateModel>();
+            VirtualRateByBettype = new List<VirtualRateByBettypeModel>();
         }
 
         public bool EnableVirtualRate { get; set; }
@@ -16,13 +16,13 @@ namespace TreeWinLoss.Model
 
         public string LiveStatus { get; set; }
 
-        public List<VirtualRateByBettypeInfo> VirtualRateByBettype { get; set; }
+        public List<VirtualRateByBettypeModel> VirtualRateByBettype { get; set; }
 
         public string ChangedBy { get; set; }
 
         public int NumberMergeRows { get; set; }
 
-        public List<VirtualRateInfo> ReportRows { get; set; }
+        public List<VirtualRateModel> ReportRows { get; set; }
 
         public void CalculateNumberMergeRows()
         {
@@ -32,7 +32,7 @@ namespace TreeWinLoss.Model
                 numberMergeRows += row.VirtualRateByBettype.Count;
             }
 
-            this.NumberMergeRows = numberMergeRows;
+            NumberMergeRows = numberMergeRows;
         }
     }
 }

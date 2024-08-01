@@ -1,6 +1,6 @@
 namespace TreeWinLoss.Model
 {
-    public class VirtualRateByBettypeInfo
+    public class VirtualRateByBettypeModel
     {
         public string BettypeName { get; set; }
 

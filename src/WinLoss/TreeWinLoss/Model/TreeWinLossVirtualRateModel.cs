@@ -2,17 +2,17 @@ using TreeWinLoss.Model;
 
 namespace WTreeWinLoss.Model
 {
-    public class TreeWinLossVirtualRate
+    public class TreeWinLossVirtualRateModel
     {
-        public TreeWinLossVirtualRate()
+        public TreeWinLossVirtualRateModel()
         {
-            SMAVirtualRate = new SMAVirtualRate();
+            SMAVirtualRate = new SMAVirtualRateModel();
         }
 
         public int NumberUserEnabledVirtualRate { get; set; }
 
         public Dictionary<string, int> EnabledVirtualRateUser { get; set; }
 
-        public SMAVirtualRate SMAVirtualRate { get; set; }
+        public SMAVirtualRateModel SMAVirtualRate { get; set; }
     }
 }

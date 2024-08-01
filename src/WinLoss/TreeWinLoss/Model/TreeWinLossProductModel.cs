@@ -1,6 +1,6 @@
 namespace TreeWinLoss.Model
 {
-    public class TreeWinLossProduct
+    public class TreeWinLossProductModel
     {
         public int ProductId { get; set; }
 

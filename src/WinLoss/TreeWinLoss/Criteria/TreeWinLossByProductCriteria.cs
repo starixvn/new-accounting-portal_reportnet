@@ -17,19 +17,38 @@ namespace TreeWinLoss.Criteria
 
         public string Products { get; set; }
 
-        public decimal Turnover_8RM { get; set; }
+        //public decimal Turnover_8RM { get; set; }
 
-        public decimal Total_8RM { get; set; }
+        //public decimal Total_8RM { get; set; }
 
-        public decimal VirtualTotal_8RM { get; set; }
+        //public decimal VirtualTotal_8RM { get; set; }
 
-        public decimal Turnover_BARM { get; set; }
+        //public decimal Turnover_BARM { get; set; }
 
-        public decimal Total_BARM { get; set; }
+        //public decimal Total_BARM { get; set; }
 
-        public decimal VirtualTotal_BARM { get; set; }
+        //public decimal VirtualTotal_BARM { get; set; }
 
         public string SportType { get; set; }
+
+        [SpParam(SqlParamName = "Total_8RM")]
+        public decimal RMTotal { get; set; }
+
+        [SpParam(SqlParamName = "VirtualTotal_8RM")]
+        public decimal RMVirtualTotal { get; set; }
+
+        [SpParam(SqlParamName = "Turnover_8RM")]
+        public decimal RMTurnover { get; set; }
+
+
+        [SpParam(SqlParamName = "Total_BARM")]
+        public decimal BARMTotal { get; set; }
+
+        [SpParam(SqlParamName = "VirtualTotal_BARM")]
+        public decimal BARMVirtualTotal { get; set; }
+
+        [SpParam(SqlParamName = "Turnover_BARM")]
+        public decimal BARMTurnover { get; set; }
 
         public override bool IsValid()
         {
