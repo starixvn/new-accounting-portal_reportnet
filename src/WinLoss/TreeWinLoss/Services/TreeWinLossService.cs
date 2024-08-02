@@ -1,14 +1,13 @@
-﻿using Fanex.Data.Repository;
+﻿using AutoMapper;
+using Fanex.Data.Repository;
 using TreeWinLoss.Criteria;
+using TreeWinLoss.Entities;
+using TreeWinLoss.Model;
+using Utilities.LinqDynamicSum;
 
 
 namespace TreeWinLoss.Services
 {
-    using AutoMapper;
-    using TreeWinLoss.Entities;
-    using TreeWinLoss.Model;
-    using Utilities.LinqDynamicSum;
-
     public interface TreeWinLossService
     {
         Task<IEnumerable<TreeWinLossProductModel>> GetProduct();
@@ -16,6 +15,8 @@ namespace TreeWinLoss.Services
         Task<IEnumerable<SportModel>> GetSport();
 
         Task<TreeWinLossModel> GetTreeWinLossByProduct(TreeWinLossByProductCriteria criteria);
+
+        Task<TreeWinLossModel> GetTreeWinLossByLevel(TreeWinLossByLevelCriteria criteria);
     }
 
     public class TreeWinLossServiceImp : TreeWinLossService
@@ -24,10 +25,13 @@ namespace TreeWinLoss.Services
 
         private readonly IMapper mapper;
 
-        public TreeWinLossServiceImp(IDynamicRepository repository, IMapper mapper)
+        private readonly CriteriaFactory criteriaFactory;
+
+        public TreeWinLossServiceImp(IDynamicRepository repository, IMapper mapper, CriteriaFactory criteriaFactory)
         {
             this.repository = repository;
             this.mapper = mapper;
+            this.criteriaFactory = criteriaFactory;
         }
 
         public async Task<IEnumerable<TreeWinLossProductModel>> GetProduct()
@@ -73,16 +77,17 @@ namespace TreeWinLoss.Services
         }
 
 
-        //public TreeWinLoss GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
-        //{
-        //    criteria.Products = criteria.ProductSelection;
+        public async Task<TreeWinLossModel> GetTreeWinLossByLevel(TreeWinLossByLevelCriteria criteria)
+        {
+            criteria.Products = criteria.ProductSelection;
 
-        //    var winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
-        //    winLossByComm.IsShowNotAvailableTurnover = false;
+            var treeWinLossByLevelCriteria = criteriaFactory.CreateCriteria(criteria);
 
+            var result = await GetTreeWinlossByLevelData(treeWinLossByLevelCriteria);
+            result.IsShowNotAvailableTurnover = false;
 
-        //    return winLossByComm;
-        //}
+            return result;
+        }
 
         //public VirtualRateInfo GetVirtualRate(int custId)
         //{
@@ -178,101 +183,28 @@ namespace TreeWinLoss.Services
             return allTotal;
         }
 
+        private async Task<TreeWinLossModel> GetTreeWinlossByLevelData(CriteriaBase criteria)
+        {
+            var treeWinLoss = new TreeWinLossModel
+            {
+                WinLosses = new List<TreeWinLossItemModel>(),
+                Total = new List<TreeWinLossItemModel>()
+            };
 
-        //private TreeWinLoss GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
-        //{
-        //    switch (criteria.RoleId)
-        //    {
-        //        case 5:
-        //            return GetTreeWinlossData(
-        //                new GetTreeWinLossByComCriteria
-        //                {
-        //                    Currency = criteria.Currency,
-        //                    FromDate = criteria.FromDate,
-        //                    ToDate = criteria.ToDate,
-        //                    ProductSelection = criteria.ProductSelection,
-        //                    Products = criteria.Products,
-        //                    IsNormalMode = criteria.IsNormalMode,
-        //                    SportType = criteria.SportType
-        //                },
-        //            criteria.RoleId);
+            var rawData = await repository.FetchAsync<WinLossRawItem>(criteria);
 
-        //        case 4:
-        //            return GetTreeWinlossData(
-        //                new GetTreeWinLossBySuperCriteria
-        //                {
-        //                    SRecommend = criteria.SRecommend,
-        //                    FromDate = criteria.FromDate,
-        //                    ToDate = criteria.ToDate,
-        //                    ProductSelection = criteria.ProductSelection,
-        //                    Products = criteria.Products,
-        //                    IsNormalMode = criteria.IsNormalMode,
-        //                    SportType = criteria.SportType
-        //                },
-        //            criteria.RoleId);
+            if (rawData != null && rawData.Any())
+            {
+                var winlosses = mapper.Map<List<TreeWinLossItemModel>>(rawData);
+                var total = winlosses.DynamicSum();
+                total.Name = "Total";
 
-        //        case 3:
-        //            return GetTreeWinlossData(
-        //                new GetTreeWinLossByMasterCriteria
-        //                {
-        //                    MRecommend = criteria.MRecommend,
-        //                    FromDate = criteria.FromDate,
-        //                    ToDate = criteria.ToDate,
-        //                    ProductSelection = criteria.ProductSelection,
-        //                    Products = criteria.Products,
-        //                    IsNormalMode = criteria.IsNormalMode,
-        //                    SportType = criteria.SportType
-        //                },
-        //            criteria.RoleId);
+                treeWinLoss.WinLosses = winlosses;
+                treeWinLoss.Total.Add(total);
+            }
 
-        //        case 2:
-        //            return GetTreeWinlossData(
-        //                new GetTreeWinLossByAgentCriteria
-        //                {
-        //                    Recommend = criteria.Recommend,
-        //                    FromDate = criteria.FromDate,
-        //                    ToDate = criteria.ToDate,
-        //                    ProductSelection = criteria.ProductSelection,
-        //                    Products = criteria.Products,
-        //                    IsNormalMode = criteria.IsNormalMode,
-        //                    SportType = criteria.SportType
-        //                },
-        //            criteria.RoleId);
-        //    }
-
-        //    return new TreeWinLoss();
-        //}
-
-        //private TreeWinLoss GetTreeWinlossData(CriteriaBase criteria, int roleId)
-        //{
-        //    var treeWinLoss = new TreeWinLoss
-        //    {
-        //        ChildsInfo = new List<TreeWinLossInfo>(),
-        //        TotalInfo = new List<TreeWinLossInfo>()
-        //    };
-
-        //    using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
-        //    {
-        //        IDataReader reader = objectDb.ExecuteReader(criteria);
-        //        var totalWinLoss = new TreeWinLossInfo
-        //        {
-        //            Name = Labels.Total
-        //        };
-
-        //        while (reader.Read())
-        //        {
-        //            var winLoss = MapTreeWinLossData(reader, roleId);
-        //            winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
-        //            treeWinLoss.ChildsInfo.Add(winLoss);
-        //            TreeWinLossUtil.AddToTotal(winLoss, ref totalWinLoss);
-        //        }
-
-        //        treeWinLoss.TotalInfo.Add(totalWinLoss);
-        //        reader.Close();
-        //    }
-
-        //    return treeWinLoss;
-        //}
+            return treeWinLoss;
+        }
 
 
         //private VirtualRateInfo GetVirtualRateBySportAndLiveStatus(GetVirtualRateCriteria criteria)

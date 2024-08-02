@@ -4,9 +4,7 @@ namespace TreeWinLoss.Model
     {
         public string Name { get; set; }
 
-        public int Currency { get; set; }
-
-        public string CurrencyName { get; set; }
+        public int Id { get; set; }
 
         public decimal Turnover { get; set; }
 
@@ -52,5 +50,24 @@ namespace TreeWinLoss.Model
         public string VirtualRate { get; set; }
 
         public decimal ExtraAmount { get; set; }
+
+        public static TreeWinLossItemModel operator +(TreeWinLossItemModel a, TreeWinLossItemModel b)
+        {
+            return new TreeWinLossItemModel
+            {
+                Name = string.Empty,
+                Id = 0,
+                BaseRMTurnover = a.BaseRMTurnover + b.BaseRMTurnover,
+                BaseRMVirtualTurnover = a.BaseRMVirtualTurnover + b.BaseRMVirtualTurnover,
+                BaseRMTurnoverVariancePlus = a.BaseRMTurnoverVariancePlus + b.BaseRMTurnoverVariancePlus,
+                BaseRMTurnoverVarianceMinus = a.BaseRMTurnoverVarianceMinus + b.BaseRMTurnoverVarianceMinus,
+                BaseRMTotal = a.BaseRMTotal + b.BaseRMTotal,
+                BaseRMVirtualTotal = a.BaseRMVirtualTotal + b.BaseRMVirtualTotal,
+                BaseRMWinLossVarianceTotal = a.BaseRMWinLossVarianceTotal + b.BaseRMWinLossVarianceTotal,
+                BaseRMTurnoverVarianceAbsoluteTotal = a.BaseRMTurnoverVarianceAbsoluteTotal + b.BaseRMTurnoverVarianceAbsoluteTotal,
+                BaseRMWinLossVariancePlus = a.BaseRMWinLossVariancePlus + b.BaseRMWinLossVariancePlus,
+                BaseRMWinLossVarianceMinus = a.BaseRMWinLossVarianceMinus + b.BaseRMWinLossVarianceMinus,
+            };
+        }
     }
 }

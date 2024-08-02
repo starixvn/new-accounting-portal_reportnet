@@ -2,9 +2,9 @@
 {
     public class WinLossRawItem
     {
-        public int Currency { get;set; }
+        public int Id { get;set; }
 
-        public string CurrencyName { get;set; }
+        public string Name { get;set; }
 
         public decimal Turnover { get;set; }
 
