@@ -2,15 +2,16 @@
 using ActualMemberBet;
 using AutoMapper;
 using CashOutPerformance;
+using DailyMixParlay;
 using Exchange;
 using HouseWinLoss;
 using PunterAnalysis;
+using ResultAnalysis;
 using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
+using TreeWinLoss;
 using UpdatedUsernameCredit;
-using DailyMixParlay;
-using ResultAnalysis;
 
 namespace Nap_Reports.Sites.App_Start
 {
@@ -31,6 +32,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializePunterAnalysis();
                 cfg.InitializeParlay();
                 cfg.InitializeResultAnalysis();
+                cfg.InitializeTreeWinLoss();
             });
 
             var mapper = config.CreateMapper();

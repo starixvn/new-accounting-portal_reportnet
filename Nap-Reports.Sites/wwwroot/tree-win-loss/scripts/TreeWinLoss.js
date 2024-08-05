@@ -140,7 +140,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
     var getProduct = function () {
         AccReport.disableInput();
         AccReport.utility.CallAjax(this,
-        window.rootUrl + "WinLoss/TreeWinLoss/GetProduct",
+        window.rootUrl + "/api/tree-win-loss/product",
         null,
         renderProductsDropdown,
         renderProductsDropdown,
@@ -203,7 +203,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
     var getSport = function () {
         AccReport.disableInput();
         AccReport.utility.CallAjax(this,
-        window.rootUrl + "WinLoss/TreeWinLoss/GetSport",
+        window.rootUrl + "/api/tree-win-loss/sport",
         null,
         renderSportDropdown,
         renderSportDropdown,
@@ -281,7 +281,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         if (validateParams() == true) {
             $.ajax({
                 type: "POST",
-                url: window.rootUrl + "WinLoss/TreeWinLoss/GetTreeWinLossByProduct",
+                url: window.rootUrl + "/api/tree-win-loss/main",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: JSON.stringify(self.Params.reportParams),
@@ -403,11 +403,11 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         var bodyData = [];
         var footerData = [];
         var isShowNA = report.IsShowNotAvailableTurnover;
-        if (report && report.ChildsInfo.length > 0) {
-            var len = report.ChildsInfo.length;
+        if (report && report.WinLosses.length > 0) {
+            var len = report.WinLosses.length;
             var info = null;
             for (var i = 0; i < len; i++) {
-                info = report.ChildsInfo[i];
+                info = report.WinLosses[i];
                 info.BaseRMTurnover = isShowNA ? "N/A" : info.BaseRMTurnover;
                 info.BaseRMVirtualTurnover = isShowNA ? "N/A" : info.BaseRMVirtualTurnover;
                 info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
@@ -426,16 +426,16 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                         { Name: "ColTurnover", Value: info.Turnover },
                         { Name: "ColExtraPT", Value: info.ExtraAmount },
                         { Name: "ColWinLoss", Value: info.WinLoss },
-                        { Name: "ColCommission", Value: info.Comm },
+                        { Name: "ColCommission", Value: info.Commission },
                         { Name: "ColWinLossTotal", Value: info.WinLossTotal },
                         { Name: "ColBaseRMTurnover", Value: info.BaseRMTurnover },
                         { Name: "ColBaseRMVirtualTurnover", Value: info.BaseRMVirtualTurnover },
-                        { Name: "ColBaseRMTOVariancePlus", Value: info.BaseRMTOVariancePlus },
-                        { Name: "ColBaseRMTOVarianceMinus", Value: info.BaseRMTOVarianceMinus },
-                        { Name: "ColBaseRMTOVarianceAbsoluteTotal", Value: info.BaseRMTOVarianceAbsoluteTotal },
-                        { Name: "ColBaseRMWLVariancePlus", Value: info.BaseRMWLVariancePlus },
-                        { Name: "ColBaseRMWLVarianceMinus", Value: info.BaseRMWLVarianceMinus },
-                        { Name: "ColBaseRMWLVarianceTotal", Value: info.BaseRMWinlostVarianceTotal },
+                        { Name: "ColBaseRMTOVariancePlus", Value: info.BaseRMTurnoverVariancePlus },
+                        { Name: "ColBaseRMTOVarianceMinus", Value: info.BaseRMTurnoverVarianceMinus },
+                        { Name: "ColBaseRMTOVarianceAbsoluteTotal", Value: info.BaseRMTurnoverVarianceAbsoluteTotal },
+                        { Name: "ColBaseRMWLVariancePlus", Value: info.BaseRMWinLossVariancePlus },
+                        { Name: "ColBaseRMWLVarianceMinus", Value: info.BaseRMWinLossVarianceMinus },
+                        { Name: "ColBaseRMWLVarianceTotal", Value: info.BaseRMWinLossVarianceTotal },
                         { Name: "ColBaseRMVarianceMargin", Value: info.BaseRMVarianceMargin },
                         { Name: "ColBaseRMTotal", Value: info.BaseRMTotal },
                         { Name: "ColBaseRMVirtualTotal", Value: info.BaseRMVirtualTotal },
@@ -445,21 +445,21 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 });
             }
 
-            for (var j = 0; j < report.TotalInfo.length; j++) {
-                info = report.TotalInfo[j];
+            for (var j = 0; j < report.Total.length; j++) {
+                info = report.Total[j];
                 info.BaseRMTurnover = isShowNA ? "N/A" : info.BaseRMTurnover;
                 info.BaseRMVirtualTurnover = isShowNA ? "N/A" : info.BaseRMVirtualTurnover;
                 info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
                 footerData.push({
-                    Columns: [{ Name: "ColCurrencyName", Value: info.Name, MergeColNumber: 6, CellAlign: "right" },
+                    Columns: [{ Name: "ColCurrencyName", Value: j === 0 ? "" : info.Name, MergeColNumber: 6, CellAlign: "right" },
                         { Name: "ColBaseRMTurnover", Value: info.BaseRMTurnover },
                         { Name: "ColBaseRMVirtualTurnover", Value: info.BaseRMVirtualTurnover },
-                        { Name: "ColBaseRMTOVariancePlus", Value: info.BaseRMTOVariancePlus },
-                        { Name: "ColBaseRMTOVarianceMinus", Value: info.BaseRMTOVarianceMinus },
-                        { Name: "ColBaseRMTOVarianceAbsoluteTotal", Value: info.BaseRMTOVarianceAbsoluteTotal },
-                        { Name: "ColBaseRMWLVariancePlus", Value: info.BaseRMWLVariancePlus },
-                        { Name: "ColBaseRMWLVarianceMinus", Value: info.BaseRMWLVarianceMinus },
-                        { Name: "ColBaseRMWLVarianceTotal", Value: info.BaseRMWinlostVarianceTotal },
+                        { Name: "ColBaseRMTOVariancePlus", Value: info.BaseRMTurnoverVariancePlus },
+                        { Name: "ColBaseRMTOVarianceMinus", Value: info.BaseRMTurnoverVarianceMinus },
+                        { Name: "ColBaseRMTOVarianceAbsoluteTotal", Value: info.BaseRMTurnoverVarianceAbsoluteTotal },
+                        { Name: "ColBaseRMWLVariancePlus", Value: info.BaseRMWinLossVariancePlus },
+                        { Name: "ColBaseRMWLVarianceMinus", Value: info.BaseRMWinLossVarianceMinus },
+                        { Name: "ColBaseRMWLVarianceTotal", Value: info.BaseRMWinLossVarianceTotal },
                         { Name: "ColBaseRMVarianceMargin", Value: info.BaseRMVarianceMargin },
                         { Name: "ColBaseRMTotal", Value: info.BaseRMTotal },
                         { Name: "ColBaseRMVirtualTotal", Value: info.BaseRMVirtualTotal },

@@ -1252,10 +1252,12 @@
     <ProjectReference Include="..\src\Misc\UpdatedUsernameCredit\UpdatedUsernameCredit.csproj" />
     <ProjectReference Include="..\src\Shared\Utilities\Utilities.csproj" />
     <ProjectReference Include="..\src\WinLoss\DailyMixParlay\DailyMixParlay.csproj" />
+    <ProjectReference Include="..\src\WinLoss\TreeWinLoss\TreeWinLoss.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\scripts\_lib\BlockUI\img\" />
+    <Folder Include="wwwroot\tree-win-loss\scripts\" />
   </ItemGroup>
 
   <ItemGroup>

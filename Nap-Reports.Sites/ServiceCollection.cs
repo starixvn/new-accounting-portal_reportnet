@@ -4,7 +4,6 @@ using Fanex.RemotingRef;
 using Fanex.Result.Core.Base;
 using Fanex.Result.Core.RemotingRef;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.DependencyInjection;
 using Nap_Reports.Sites.DependencyInjection;
 using SharpRaven;
 
@@ -52,6 +51,7 @@ namespace Nap_Reports.Sites
             services.RegisterDailyMixParlayServices();
             services.RegisterResultAnalysisServices();
             services.RegisterLegendManagementServices();
+            services.RegisterTreeWinLossServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -161,6 +161,10 @@ namespace Nap_Reports.Sites
 
                 pipeline.AddJavaScriptBundle("/scripts/jquery.fileDownload.js",
                     "/scripts/_lib/jquery.fileDownload.js");
+
+                pipeline.AddLessBundle(
+                   "/tree-win-loss/styles/TreeWinLoss.css",
+                   "/tree-win-loss/styles/TreeWinLoss.less");
             });
         }
     }

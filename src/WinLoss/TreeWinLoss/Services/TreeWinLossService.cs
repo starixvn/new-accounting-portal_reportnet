@@ -143,13 +143,14 @@ namespace TreeWinLoss.Services
             TreeWinLossByProductCriteria criteria)
         {
             var allTotal = new List<TreeWinLossItemModel>();
+            
+            var winLossData = mapper.Map<List<TreeWinLossItemModel>>(rawData);
+            var tempTotal = winLossData.DynamicSum();
 
-            var rawTotal = rawData.DynamicSum();
-
-            var total = mapper.Map<TreeWinLossItemModel>(rawTotal);
+            var total = mapper.Map<TreeWinLossItemModel>(tempTotal);
             total.Name = string.Empty;
 
-            var grandTotal = mapper.Map<TreeWinLossItemModel>(rawTotal);
+            var grandTotal = mapper.Map<TreeWinLossItemModel>(tempTotal);
             grandTotal.Name = "Total";
 
             var rmTotal = new TreeWinLossItemModel
