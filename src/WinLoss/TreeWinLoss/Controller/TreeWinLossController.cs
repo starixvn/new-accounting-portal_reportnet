@@ -36,5 +36,12 @@ namespace TreeWinLoss.Controller
             var result = await service.GetTreeWinLossByLevel(criteria);
             return Ok(result);
         }
+
+        [Route("virtual-rate")]
+        public async Task<IActionResult> GetTreeWinLossVirtualRate(int custId)
+        {
+            var result = await service.GetVirtualRate(custId);
+            return Ok(result);
+        }
     }
 }

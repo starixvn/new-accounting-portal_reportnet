@@ -11,6 +11,8 @@ namespace Utilities.RemotingRef
         string GetMatchCode(string matchCode);
 
         string GetSportName(int sportId);
+
+        string GetBetTypeName(int betTypeId);
     }
 
     public class RemotingRefServiceImp : RemotingRefService
@@ -49,6 +51,12 @@ namespace Utilities.RemotingRef
             var sportIdString = sportId.ToString();
             return remotingRefService.GetSportName(sportIdString, "en");
         }
+
+        public string GetBetTypeName(int betTypeId)
+        {
+            var betTypeIdString = betTypeId.ToString();
+            return remotingRefService.GetBetTypeName(betTypeIdString, "en");
+        }
     }
 
     public class RemotingRef3rdServiceImp : RemotingRefService
@@ -86,6 +94,12 @@ namespace Utilities.RemotingRef
         {
             var sportIdString = sportId.ToString();
             return remotingRefService.GetSportName(sportIdString, "en");
+        }
+
+        public string GetBetTypeName(int betTypeId)
+        {
+            var betTypeIdString = betTypeId.ToString();
+            return remotingRefService.GetBetTypeName(betTypeIdString, "en");
         }
     }
 }

@@ -40,7 +40,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.VirtualRateHistory = function () {
         getParams(params);
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "WinLoss/TreeWinLoss/GetVirtualRate",
+            url: window.rootUrl + "/api/tree-win-loss/virtual-rate",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(self.Params.reportParams),

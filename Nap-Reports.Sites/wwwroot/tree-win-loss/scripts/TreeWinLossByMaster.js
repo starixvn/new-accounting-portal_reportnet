@@ -174,7 +174,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByMaster = function () {
                 info.BaseRMVirtualTurnover = isShowNA ? "N/A" : info.BaseRMVirtualTurnover;
                 info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
                 footerData.push({
-                    Columns: [{ Name: "ColNo", Value: info.Name, MergeColNumber: 7, CellAlign: "right" },
+                    Columns: [{ Name: "ColNo", Value: "Total", MergeColNumber: 7, CellAlign: "right" },
                         { Name: "ColBaseRMTurnover", Value: info.BaseRMTurnover },
                         { Name: "ColBaseRMVirtualTurnover", Value: info.BaseRMVirtualTurnover },
                         { Name: "ColBaseRMTOVariancePlus", Value: info.BaseRMTurnoverVariancePlus },

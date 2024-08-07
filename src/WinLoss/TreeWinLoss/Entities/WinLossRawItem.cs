@@ -36,5 +36,6 @@
 
         public decimal BaseRMTurnoverVarianceAbsoluteTotal { get; set; }
 
+        public string VirtualRate { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-using TreeWinLoss.Model;
-
-namespace WTreeWinLoss.Model
+namespace TreeWinLoss.Model
 {
     public class TreeWinLossVirtualRateModel
     {

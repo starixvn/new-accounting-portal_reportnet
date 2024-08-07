@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
+using Nap_Reports.Utilities.DateTimes;
+using System.Xml.Linq;
+using TreeWinLoss.Constants;
 using TreeWinLoss.Criteria;
 using TreeWinLoss.Entities;
 using TreeWinLoss.Model;
 using Utilities.LinqDynamicSum;
+using Utilities.RemotingRef;
 
 
 namespace TreeWinLoss.Services
@@ -17,6 +21,8 @@ namespace TreeWinLoss.Services
         Task<TreeWinLossModel> GetTreeWinLossByProduct(TreeWinLossByProductCriteria criteria);
 
         Task<TreeWinLossModel> GetTreeWinLossByLevel(TreeWinLossByLevelCriteria criteria);
+
+        Task<VirtualRateModel> GetVirtualRate(int custId);
     }
 
     public class TreeWinLossServiceImp : TreeWinLossService
@@ -27,11 +33,20 @@ namespace TreeWinLoss.Services
 
         private readonly CriteriaFactory criteriaFactory;
 
-        public TreeWinLossServiceImp(IDynamicRepository repository, IMapper mapper, CriteriaFactory criteriaFactory)
+        private readonly RemotingRefService remotingRefService;
+
+        private readonly Dictionary<int, int> bettypes = new Dictionary<int, int>();
+
+        public TreeWinLossServiceImp(
+            IDynamicRepository repository, 
+            IMapper mapper,
+            CriteriaFactory criteriaFactory,
+            RemotingRefService remotingRefService)
         {
             this.repository = repository;
             this.mapper = mapper;
             this.criteriaFactory = criteriaFactory;
+            this.remotingRefService = remotingRefService;   
         }
 
         public async Task<IEnumerable<TreeWinLossProductModel>> GetProduct()
@@ -89,54 +104,54 @@ namespace TreeWinLoss.Services
             return result;
         }
 
-        //public VirtualRateInfo GetVirtualRate(int custId)
-        //{
-        //    VirtualRateInfo virtualRateInfo = new VirtualRateInfo();
-        //    VirtualRateInfo virtualRateItem = new VirtualRateInfo
-        //    {
-        //        Date = "Current"
-        //    };
-        //    GetVirtualRateCriteria getVirtualRateCriteria = new GetVirtualRateCriteria
-        //    {
-        //        CustId = custId
-        //    };
-        //    GetVirtualRateHistoryCriteria criteria = new GetVirtualRateHistoryCriteria
-        //    {
-        //        CustId = custId
-        //    };
+        public async Task<VirtualRateModel> GetVirtualRate(int custId)
+        {
+            VirtualRateModel virtualRateInfo = new VirtualRateModel();
+            VirtualRateModel virtualRateItem = new VirtualRateModel
+            {
+                Date = "Current"
+            };
+            VirtualRateCriteria getVirtualRateCriteria = new VirtualRateCriteria
+            {
+                CustId = custId
+            };
+            VirtualRateHistoryCriteria criteria = new VirtualRateHistoryCriteria
+            {
+                CustId = custId
+            };
 
-        //    var virtualRateBySportAndLiveStatus = GetVirtualRateBySportAndLiveStatus(getVirtualRateCriteria);
-        //    virtualRateItem.ReportRows = virtualRateBySportAndLiveStatus.ReportRows;
-        //    virtualRateItem.CalculateNumberMergeRows();
-        //    virtualRateInfo.ReportRows.Add(virtualRateItem);
+            var virtualRateBySportAndLiveStatus = await GetVirtualRateBySportAndLiveStatus(getVirtualRateCriteria);
+            virtualRateItem.ReportRows = virtualRateBySportAndLiveStatus.ReportRows;
+            virtualRateItem.CalculateNumberMergeRows();
+            virtualRateInfo.ReportRows.Add(virtualRateItem);
 
-        //    var virtualRateHistoryLog = GetVirtualRateHistory(criteria);
-        //    foreach (var historyLogItem in virtualRateHistoryLog.ReportRows)
-        //    {
-        //        historyLogItem.CalculateNumberMergeRows();
-        //        virtualRateInfo.ReportRows.Add(historyLogItem);
-        //    }
+            var virtualRateHistoryLog = await GetVirtualRateHistory(criteria);
+            foreach (var historyLogItem in virtualRateHistoryLog.ReportRows)
+            {
+                historyLogItem.CalculateNumberMergeRows();
+                virtualRateInfo.ReportRows.Add(historyLogItem);
+            }
 
-        //    return virtualRateInfo;
-        //}
+            return virtualRateInfo;
+        }
 
-        //public TreeWinLossVirtualRate GetAllVirtualRate(TreeWinLoss report)
-        //{
-        //    var custIdEnableVirtualRate = string.Join(",", report.ChildsInfo.Where(x => x.VirtualRate != "N/A" || x.VirtualRate != "Disabled").Select(x => x.Id));
-        //    var getAllVirtualRateCriteria = new GetAllVirtualRateCriteria
-        //    {
-        //        CustIDs = custIdEnableVirtualRate
-        //    };
+        public async Task<TreeWinLossVirtualRateModel> GetAllVirtualRate(TreeWinLossModel report)
+        {
+            var custIdEnableVirtualRate = string.Join(",", report.WinLosses.Where(x => x.VirtualRate != "N/A" || x.VirtualRate != "Disabled").Select(x => x.Id));
+            var getAllVirtualRateCriteria = new AllVirtualRateCriteria
+            {
+                CustIDs = custIdEnableVirtualRate
+            };
 
-        //    var allVirtualRate = GetAllVirtualRate(getAllVirtualRateCriteria);
+            var allVirtualRate = await GetAllVirtualRate(getAllVirtualRateCriteria);
 
-        //    var treeWinLossVirtualRate = new TreeWinLossVirtualRate();
-        //    treeWinLossVirtualRate.SMAVirtualRate = allVirtualRate;
-        //    treeWinLossVirtualRate.NumberUserEnabledVirtualRate = allVirtualRate.ReportRows.Count;
-        //    treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.ChildsInfo.Where(x => x.VirtualRate != "N/A" || x.VirtualRate != "Disabled").ToList());
+            var treeWinLossVirtualRate = new TreeWinLossVirtualRateModel();
+            treeWinLossVirtualRate.SMAVirtualRate = allVirtualRate;
+            treeWinLossVirtualRate.NumberUserEnabledVirtualRate = allVirtualRate.ReportRows.Count;
+            treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.WinLosses.Where(x => x.VirtualRate != "N/A" || x.VirtualRate != "Disabled").ToList());
 
-        //    return treeWinLossVirtualRate;
-        //}
+            return treeWinLossVirtualRate;
+        }
 
         private List<TreeWinLossItemModel> CalculateAllTotal(
             IEnumerable<WinLossRawItem> rawData,
@@ -148,10 +163,8 @@ namespace TreeWinLoss.Services
             var tempTotal = winLossData.DynamicSum();
 
             var total = mapper.Map<TreeWinLossItemModel>(tempTotal);
-            total.Name = string.Empty;
 
             var grandTotal = mapper.Map<TreeWinLossItemModel>(tempTotal);
-            grandTotal.Name = "Total";
 
             var rmTotal = new TreeWinLossItemModel
             {
@@ -197,8 +210,8 @@ namespace TreeWinLoss.Services
             if (rawData != null && rawData.Any())
             {
                 var winlosses = mapper.Map<List<TreeWinLossItemModel>>(rawData);
+                
                 var total = winlosses.DynamicSum();
-                total.Name = "Total";
 
                 treeWinLoss.WinLosses = winlosses;
                 treeWinLoss.Total.Add(total);
@@ -208,349 +221,284 @@ namespace TreeWinLoss.Services
         }
 
 
-        //private VirtualRateInfo GetVirtualRateBySportAndLiveStatus(GetVirtualRateCriteria criteria)
-        //{
-        //    VirtualRateInfo virtualRateBySportAndLiveStatus = new VirtualRateInfo();
-        //    bool enableVirtualRate = false;
-        //    using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
-        //    {
-        //        IDataReader reader = objectDb.ExecuteReader(criteria);
-        //        while (reader.Read())
-        //        {
-        //            enableVirtualRate = Converter.ToDecimal(reader["EnableVirtualrate"]) == 1;
-        //        }
+        private async Task<VirtualRateModel> GetVirtualRateBySportAndLiveStatus(VirtualRateCriteria criteria)
+        {
+            VirtualRateModel virtualRateBySportAndLiveStatus = new VirtualRateModel();
+            bool enableVirtualRate = false;
+            
+            var rawData = await repository.FetchMultipleAsync<SummaryVirtualRate, DetailVirtualRate>(criteria);
+           
+            var summaryVirtualRate = rawData.Item1;
+            var detailVirtualRate = rawData.Item2;
+           
+                if (summaryVirtualRate.Any())
+                {
+                    enableVirtualRate = summaryVirtualRate.FirstOrDefault().EnableVirtualRate == 1;
+                }
 
-        //        if (enableVirtualRate)
-        //        {
-        //            if (reader.NextResult())
-        //            {
-        //                VirtualRateInfo virtualRateItem = null;
-        //                string preLiveAndSportType = string.Empty;
-        //                virtualRateBySportAndLiveStatus.EnableVirtualRate = true;
-        //                while (reader.Read())
-        //                {
-        //                    int sportId = Converter.ToInt(reader["sporttype"]);
-        //                    bool isLive = Converter.ToBool(reader["isLive"]);
-        //                    int bettypeId = Converter.ToInt(reader["bettype"]);
-        //                    decimal virtualRate = Converter.ToDecimal(reader["virtualMultiplier"]);
-        //                    string liveAndSportType = string.Join(
-        //                        string.Empty,
-        //                        Converter.ToString2(reader["sporttype"]),
-        //                        Converter.ToString2(reader["isLive"]));
+                if (enableVirtualRate)
+                {
+                    if (detailVirtualRate.Any())
+                    {
+                        VirtualRateModel virtualRateItem = null;
+                        string preLiveAndSportType = string.Empty;
+                        virtualRateBySportAndLiveStatus.EnableVirtualRate = true;
+                    foreach (var detailItem in detailVirtualRate)
+                        {
+                            int sportId = detailItem.SportType;
+                            bool isLive = detailItem.IsLive;
+                            int bettypeId = detailItem.BetType;
+                            decimal virtualRate = detailItem.VirtualMultiplier;
+                            string liveAndSportType = string.Join(string.Empty, detailItem.SportType, detailItem.IsLive);
 
-        //                    if (liveAndSportType != preLiveAndSportType)
-        //                    {
-        //                        if (virtualRateItem != null)
-        //                        {
-        //                            virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
-        //                        }
+                            if (liveAndSportType != preLiveAndSportType)
+                            {
+                                if (virtualRateItem != null)
+                                {
+                                    virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
+                                }
 
-        //                        string liveStatusTitle = isLive ? Labels.Live : Labels.Non_Live;
-        //                        virtualRateItem = new VirtualRateInfo
-        //                        {
-        //                            Sport = GetSportName(sportId),
-        //                            LiveStatus = liveStatusTitle
-        //                        };
-        //                        preLiveAndSportType = liveAndSportType;
-        //                    }
+                                string liveStatusTitle = isLive ? "Live" : "Non-Live";
+                                virtualRateItem = new VirtualRateModel
+                                {
+                                    Sport = GetSportName(sportId),
+                                    LiveStatus = liveStatusTitle
+                                };
 
-        //                    virtualRateItem.VirtualRateByBettype.Add(new VirtualRateByBettypeInfo
-        //                    {
-        //                        BettypeName = CacheRef.GetBettype(bettypeId),
-        //                        VirtualRate = virtualRate - 1
-        //                    });
-        //                }
+                                preLiveAndSportType = liveAndSportType;
+                            }
 
-        //                if (virtualRateItem != null)
-        //                {
-        //                    virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            virtualRateBySportAndLiveStatus.ReportRows.Add(new VirtualRateInfo
-        //            {
-        //                Sport = "Virtual Rate: Disabled",
-        //                EnableVirtualRate = false
-        //            });
-        //        }
+                            virtualRateItem.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
+                            {
+                                BettypeName = remotingRefService.GetBetTypeName(bettypeId),
+                                VirtualRate = virtualRate - 1
+                            });
+                        }
 
-        //        reader.Close();
-        //    }
+                        if (virtualRateItem != null)
+                        {
+                            virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
+                        }
+                    }
+                }
+                else
+                {
+                    virtualRateBySportAndLiveStatus.ReportRows.Add(new VirtualRateModel
+                    {
+                        Sport = "Virtual Rate: Disabled",
+                        EnableVirtualRate = false
+                    });
+                }
 
-        //    return virtualRateBySportAndLiveStatus;
-        //}
+            return virtualRateBySportAndLiveStatus;
+        }
 
-        //private VirtualRateInfo GetVirtualRateHistory(GetVirtualRateHistoryCriteria criteria)
-        //{
-        //    VirtualRateInfo virtualRateInfo = new VirtualRateInfo();
+        private async Task<VirtualRateModel> GetVirtualRateHistory(VirtualRateHistoryCriteria criteria)
+        {
+            VirtualRateModel virtualRateInfo = new VirtualRateModel();
 
-        //    using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
-        //    {
-        //        IDataReader reader = objectDb.ExecuteReader(criteria);
-        //        while (reader.Read())
-        //        {
-        //            int actionId = Converter.ToInt(reader["ActionID"]);
-        //            string trackingValue = Converter.ToString2(reader["TrackingValue"]);
-        //            XElement xmlTrackingValue = XElement.Parse(trackingValue);
-        //            var virturalRateHistoryItem = GetVirtualRateLogHistory(actionId, xmlTrackingValue);
-        //            if (virturalRateHistoryItem.ReportRows.Count != 0)
-        //            {
-        //                virturalRateHistoryItem.ChangedBy = Converter.ToString2(reader["Username"]);
-        //                virturalRateHistoryItem.Date = Converter.ToDateTime(reader["logdate"]).ToLongFormatedDateWithSlash();
-        //                virtualRateInfo.ReportRows.Add(virturalRateHistoryItem);
-        //            }
-        //        }
-
-        //        reader.Close();
-        //    }
-
-        //    return virtualRateInfo;
-        //}
-
-        //private void InitBettype()
-        //{
-        //    this._bettype.Add(0, BetTypeConstants.Handicap);
-        //    this._bettype.Add(1, BetTypeConstants.OverUnder2);
-        //    this._bettype.Add(2, BetTypeConstants.OddEvenBetType);
-        //    this._bettype.Add(3, BetTypeConstants._1stHandicap);
-        //    this._bettype.Add(4, BetTypeConstants._1stOverUnder);
-        //    this._bettype.Add(5, BetTypeConstants._1stOddEvenBetType);
-        //    this._bettype.Add(6, BetTypeConstants.MoneyLineBettype);
-        //    this._bettype.Add(7, BetTypeConstants._1stMoneyLineBettype);
-        //    this._bettype.Add(8, BetTypeConstants.SetXGameYWinner);
-        //}
-
-        //private string GetSportName(int sportId)
-        //{
-        //    string sportName = sportId == 99 ? "Other Sports" : CacheRef.GetSportName(sportId);
-        //    return sportName;
-        //}
-
-        //private List<VirtualRateByBettypeInfo> InitVirtualRateByBettypeInfo()
-        //{
-        //    var virtualRateByBettype = new List<VirtualRateByBettypeInfo>(this._bettype.Count);
-        //    for (int i = 0; i < _bettype.Count; i++)
-        //    {
-        //        var virtualRateByBettypeItem = new VirtualRateByBettypeInfo
-        //        {
-        //            BettypeName = CacheRef.GetBettype(_bettype[i])
-        //        };
-
-        //        virtualRateByBettype.Add(virtualRateByBettypeItem);
-        //    }
-
-        //    return virtualRateByBettype;
-        //}
+            var rawData = await repository.FetchAsync<HistoryVirtualRate>(criteria);
+            
+                foreach (var historyVirtualRateItem in rawData)
+            {
+                int actionId = historyVirtualRateItem.ActionId;
+                string trackingValue = historyVirtualRateItem.TrackingValue;
+                XElement xmlTrackingValue = XElement.Parse(trackingValue);
+                var virturalRateHistoryItem = GetVirtualRateLogHistory(actionId, xmlTrackingValue);
+                if (virturalRateHistoryItem.ReportRows.Count != 0)
+                {
+                    virturalRateHistoryItem.ChangedBy = historyVirtualRateItem.UserName;
+                    virturalRateHistoryItem.Date = historyVirtualRateItem.LogDate.ToLongFormatedDateWithSlash();
+                    virtualRateInfo.ReportRows.Add(virturalRateHistoryItem);
+                }
+            }
 
 
-        //private VirtualRateInfo GetVirtualRateLogHistory(int actionId, XElement xmlTrackingValue)
-        //{
-        //    string preLiveAndSportType = string.Empty;
-        //    VirtualRateInfo virtualRateHistory = new VirtualRateInfo();
-        //    VirtualRateInfo virtualRateUpdatedItem = null;
-        //    if (actionId == 806 || actionId == 2802)
-        //    {
-        //        bool enabledVirtualRate = Converter.ToInt(xmlTrackingValue.Attribute("EnableVirtualrate").Value) == 1;
-        //        virtualRateUpdatedItem = new VirtualRateInfo
-        //        {
-        //            Sport = string.Format("Virtual Rate: {0}", enabledVirtualRate ? "Enabled" : "Disabled")
-        //        };
-        //    }
-        //    else
-        //    {
-        //        foreach (XElement element in xmlTrackingValue.Nodes())
-        //        {
-        //            int sportId = Converter.ToInt(element.Attribute("SportType").Value);
-        //            int bettypeId = Converter.ToInt(element.Attribute("BetType").Value);
-        //            bool isLive = Converter.ToInt(element.Attribute("IsLive").Value) == 1;
-        //            decimal virtualRate = Converter.ToDecimal(element.Attribute("VirtualMultiplier").Value);
-        //            string liveAndSportType = string.Join(string.Empty, sportId, isLive);
+            return virtualRateInfo;
+        }
 
-        //            if (liveAndSportType != preLiveAndSportType)
-        //            {
-        //                if (virtualRateUpdatedItem != null)
-        //                {
-        //                    virtualRateHistory.ReportRows.Add(virtualRateUpdatedItem);
-        //                }
+        private void InitBettype()
+        {
+            this.bettypes.Add(0, BetTypeConstants.Handicap);
+            this.bettypes.Add(1, BetTypeConstants.OverUnder2);
+            this.bettypes.Add(2, BetTypeConstants.OddEvenBetType);
+            this.bettypes.Add(3, BetTypeConstants.FirstHalfHandicap);
+            this.bettypes.Add(4, BetTypeConstants.FirstHalfOverUnder);
+            this.bettypes.Add(5, BetTypeConstants.FirstHalfOddEvenBetType);
+            this.bettypes.Add(6, BetTypeConstants.MoneyLineBettype);
+            this.bettypes.Add(7, BetTypeConstants.FirstHalfMoneyLineBettype);
+            this.bettypes.Add(8, BetTypeConstants.SetXWinnerBettype);
+        }
 
-        //                string liveStatusTitle = isLive ? Labels.Live : Labels.Non_Live;
-        //                virtualRateUpdatedItem = new VirtualRateInfo
-        //                {
-        //                    Sport = GetSportName(sportId),
-        //                    LiveStatus = liveStatusTitle
-        //                };
-        //                preLiveAndSportType = liveAndSportType;
-        //            }
+        private string GetSportName(int sportId)
+        {
+            string sportName = sportId == 99 ? "Other Sports" : remotingRefService.GetSportName(sportId);
+            return sportName;
+        }
 
-        //            virtualRateUpdatedItem.VirtualRateByBettype.Add(new VirtualRateByBettypeInfo
-        //            {
-        //                BettypeName = CacheRef.GetBettype(bettypeId),
-        //                VirtualRate = virtualRate - 1
-        //            });
-        //        }
-        //    }
+        private List<VirtualRateByBettypeModel> InitVirtualRateByBettypeInfo()
+        {
+            var virtualRateByBettype = new List<VirtualRateByBettypeModel>(this.bettypes.Count);
+            for (int i = 0; i < bettypes.Count; i++)
+            {
+                var virtualRateByBettypeItem = new VirtualRateByBettypeModel
+                {
+                    BettypeName = remotingRefService.GetBetTypeName(bettypes[i])
+                };
 
-        //    if (virtualRateUpdatedItem != null)
-        //    {
-        //        virtualRateHistory.ReportRows.Add(virtualRateUpdatedItem);
-        //    }
+                virtualRateByBettype.Add(virtualRateByBettypeItem);
+            }
 
-        //    return virtualRateHistory;
-        //}
+            return virtualRateByBettype;
+        }
 
+        private VirtualRateModel GetVirtualRateLogHistory(int actionId, XElement xmlTrackingValue)
+        {
+            string preLiveAndSportType = string.Empty;
+            VirtualRateModel virtualRateHistory = new VirtualRateModel();
+            VirtualRateModel virtualRateUpdatedItem = null;
+            if (actionId == 806 || actionId == 2802)
+            {
+                bool enabledVirtualRate = Convert.ToInt32(xmlTrackingValue.Attribute("EnableVirtualrate").Value) == 1;
+                virtualRateUpdatedItem = new VirtualRateModel
+                {
+                    Sport = string.Format("Virtual Rate: {0}", enabledVirtualRate ? "Enabled" : "Disabled")
+                };
+            }
+            else
+            {
+                foreach (XElement element in xmlTrackingValue.Nodes())
+                {
+                    int sportId = Convert.ToInt32(element.Attribute("SportType").Value);
+                    int bettypeId = Convert.ToInt32(element.Attribute("BetType").Value);
+                    bool isLive = Convert.ToInt32(element.Attribute("IsLive").Value) == 1;
+                    decimal virtualRate = Convert.ToDecimal(element.Attribute("VirtualMultiplier").Value);
+                    string liveAndSportType = string.Join(string.Empty, sportId, isLive);
 
-        //private SMAVirtualRate MapSMAVirtualRateData(IDataReader reader)
-        //{
-        //    SMAVirtualRate report = new SMAVirtualRate();
-        //    string preUserName = string.Empty;
-        //    string preSportAndLiveStatus = string.Empty;
-        //    SMAVirtualRate virtualRateByUser = null;
-        //    SMAVirtualRate virtualRateBySportAndLiveStatus = null;
-        //    while (reader.Read())
-        //    {
-        //        string userName = Converter.ToString2(reader["username"]);
-        //        int sportId = Converter.ToInt(reader["sporttype"]);
-        //        int bettypeId = Converter.ToInt(reader["bettype"]);
-        //        bool isLive = Converter.ToBool(reader["islive"]);
-        //        decimal virtualRate = Converter.ToDecimal(reader["virtualMultiplier"]);
-        //        string sportAndLiveStatus = string.Join(string.Empty, sportId, isLive);
-        //        string liveStatusTitle = isLive ? "Live" : "None-Live";
-        //        int bettypeIndex = _bettype.FirstOrDefault(x => x.Value == bettypeId).Key;
+                    if (liveAndSportType != preLiveAndSportType)
+                    {
+                        if (virtualRateUpdatedItem != null)
+                        {
+                            virtualRateHistory.ReportRows.Add(virtualRateUpdatedItem);
+                        }
 
-        //        if (userName != preUserName)
-        //        {
-        //            if (virtualRateBySportAndLiveStatus != null)
-        //            {
-        //                virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
-        //                virtualRateBySportAndLiveStatus = null;
-        //            }
+                        string liveStatusTitle = isLive ? "Live" : "Non-Live";
+                        virtualRateUpdatedItem = new VirtualRateModel
+                        {
+                            Sport = GetSportName(sportId),
+                            LiveStatus = liveStatusTitle
+                        };
+                        preLiveAndSportType = liveAndSportType;
+                    }
 
-        //            if (virtualRateByUser != null)
-        //            {
-        //                report.ReportRows.Add(virtualRateByUser);
-        //            }
+                    virtualRateUpdatedItem.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
+                    {
+                        BettypeName = remotingRefService.GetBetTypeName(bettypeId),
+                        VirtualRate = virtualRate - 1
+                    });
+                }
+            }
 
-        //            virtualRateByUser = new SMAVirtualRate
-        //            {
-        //                UserName = userName
-        //            };
+            if (virtualRateUpdatedItem != null)
+            {
+                virtualRateHistory.ReportRows.Add(virtualRateUpdatedItem);
+            }
 
-        //            preUserName = userName;
-        //        }
+            return virtualRateHistory;
+        }
 
-        //        if (sportAndLiveStatus != preSportAndLiveStatus)
-        //        {
-        //            if (virtualRateBySportAndLiveStatus != null)
-        //            {
-        //                virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
-        //            }
+        private SMAVirtualRateModel MapSMAVirtualRateData(IEnumerable<DetailVirtualRate> rawData)
+        {
+            SMAVirtualRateModel report = new SMAVirtualRateModel();
+            string preUserName = string.Empty;
+            string preSportAndLiveStatus = string.Empty;
+            SMAVirtualRateModel virtualRateByUser = null;
+            SMAVirtualRateModel virtualRateBySportAndLiveStatus = null;
+            foreach (var detailItem in rawData)
+            {
+                string userName = detailItem.UserName;
+                int sportId = detailItem.SportType;
+                int bettypeId = detailItem.BetType;
+                bool isLive = detailItem.IsLive;
+                decimal virtualRate = detailItem.VirtualMultiplier;
+                string sportAndLiveStatus = string.Join(string.Empty, sportId, isLive);
+                string liveStatusTitle = isLive ? "Live" : "None-Live";
+                int bettypeIndex = bettypes.FirstOrDefault(x => x.Value == bettypeId).Key;
 
-        //            virtualRateBySportAndLiveStatus = new SMAVirtualRate
-        //            {
-        //                Sport = string.Format("{0} ({1})", GetSportName(sportId), liveStatusTitle),
-        //                VirtualRateByBettypeInfo = InitVirtualRateByBettypeInfo()
-        //            };
-        //            preSportAndLiveStatus = sportAndLiveStatus;
-        //        }
+                if (userName != preUserName)
+                {
+                    if (virtualRateBySportAndLiveStatus != null)
+                    {
+                        virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
+                        virtualRateBySportAndLiveStatus = null;
+                    }
 
-        //        virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[bettypeIndex].VirtualRate = virtualRate - 1;
-        //    }
+                    if (virtualRateByUser != null)
+                    {
+                        report.ReportRows.Add(virtualRateByUser);
+                    }
 
-        //    if (virtualRateBySportAndLiveStatus != null)
-        //    {
-        //        virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
-        //    }
+                    virtualRateByUser = new SMAVirtualRateModel
+                    {
+                        UserName = userName
+                    };
 
-        //    if (virtualRateByUser != null)
-        //    {
-        //        report.ReportRows.Add(virtualRateByUser);
-        //    }
+                    preUserName = userName;
+                }
 
-        //    return report;
-        //}
+                if (sportAndLiveStatus != preSportAndLiveStatus)
+                {
+                    if (virtualRateBySportAndLiveStatus != null)
+                    {
+                        virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
+                    }
 
-        //private TreeWinLossInfo MapTreeWinLossData(IDataReader reader, int roleId)
-        //{
-        //    string recommend = string.Empty;
-        //    switch (roleId)
-        //    {
-        //        case 2:
-        //            recommend = "custid";
-        //            break;
+                    virtualRateBySportAndLiveStatus = new SMAVirtualRateModel
+                    {
+                        Sport = string.Format("{0} ({1})", GetSportName(sportId), liveStatusTitle),
+                        VirtualRateByBettypeInfo = InitVirtualRateByBettypeInfo()
+                    };
+                    preSportAndLiveStatus = sportAndLiveStatus;
+                }
 
-        //        case 3:
-        //            recommend = "recommend";
-        //            break;
+                virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[bettypeIndex].VirtualRate = virtualRate - 1;
+            }
 
-        //        case 4:
-        //            recommend = "mrecommend";
-        //            break;
+            if (virtualRateBySportAndLiveStatus != null)
+            {
+                virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
+            }
 
-        //        case 5:
-        //            recommend = "srecommend";
-        //            break;
+            if (virtualRateByUser != null)
+            {
+                report.ReportRows.Add(virtualRateByUser);
+            }
 
-        //        default:
-        //            break;
-        //    }
+            return report;
+        }
 
-        //    var winLoss = new TreeWinLossInfo()
-        //    {
-        //        Id = Converter.ToInt(reader[recommend]),
-        //        Name = Converter.ToString2(reader["username"]),
-        //        Turnover = Converter.ToDecimal(reader["turnover"]),
-        //        WinLoss = Converter.ToDecimal(reader["winloss"]),
-        //        Comm = Converter.ToDecimal(reader["commission"]),
-        //        WinLossTotal = Converter.ToDecimal(reader["total"]),
-        //        BaseRMTurnover = Converter.ToDecimal(reader["turnoverRM"]),
-        //        BaseRMVirtualTurnover = Converter.ToDecimal(reader["Virtual_Turnover"]),
-        //        BaseRMTotal = Converter.ToDecimal(reader["totalRM"]),
-        //        BaseRMVirtualTotal = Converter.ToDecimal(reader["virtual_total"]),
-        //        BaseRMTOVariancePlus = Converter.ToDecimal(reader["TOVariance+"]),
-        //        BaseRMTOVarianceMinus = Converter.ToDecimal(reader["TOVariance-"]),
-        //        BaseRMWLVarianceMinus = Converter.ToDecimal(reader["WLVariance-"]),
-        //        BaseRMWLVariancePlus = Converter.ToDecimal(reader["WLVariance+"]),
-        //        VirtualRate = Converter.ToString2(reader["VirtualRate"]),
-        //        ExtraAmount = Converter.ToDecimal(reader["ExtraAmount"]),
-        //        BaseRMWinlostVarianceTotal = Converter.ToDecimal(reader["WLVarianceTotal"]),
-        //        BaseRMTOVarianceAbsoluteTotal = Converter.ToDecimal(reader["TOVarianceTotal"])
-        //    };
+        private Dictionary<string, int> MapEnabledVirtualRateUserData(List<TreeWinLossItemModel> enabledVirtualRateUser)
+        {
+            int index = 0;
+            Dictionary<string, int> enabledVirtualRateUserDictionary = new Dictionary<string, int>();
+            foreach (var user in enabledVirtualRateUser)
+            {
+                enabledVirtualRateUserDictionary.Add(user.Name, index);
+                index++;
+            }
 
-        //    return winLoss;
-        //}
+            return enabledVirtualRateUserDictionary;
+        }
 
-        //private Dictionary<string, int> MapEnabledVirtualRateUserData(List<TreeWinLossInfo> enabledVirtualRateUser)
-        //{
-        //    int index = 0;
-        //    Dictionary<string, int> enabledVirtualRateUserDictionary = new Dictionary<string, int>();
-        //    foreach (var user in enabledVirtualRateUser)
-        //    {
-        //        enabledVirtualRateUserDictionary.Add(user.Name, index);
-        //        index++;
-        //    }
+        private async Task<SMAVirtualRateModel> GetAllVirtualRate(AllVirtualRateCriteria criteria)
+        {
+            SMAVirtualRateModel virtualRate = new SMAVirtualRateModel();
 
-        //    return enabledVirtualRateUserDictionary;
-        //}
+            var rawData = await repository.FetchAsync<DetailVirtualRate>(criteria);
 
-        //private SMAVirtualRate GetAllVirtualRate(GetAllVirtualRateCriteria criteria)
-        //{
-        //    SMAVirtualRate virtualRate = new SMAVirtualRate();
+            virtualRate = MapSMAVirtualRateData(rawData);
 
-        //    using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
-        //    {
-        //        IDataReader reader = objectDb.ExecuteReader(criteria);
-
-        //        while (reader.Read())
-        //        {
-        //            virtualRate = MapSMAVirtualRateData(reader);
-        //        }
-
-        //        reader.Close();
-        //    }
-
-        //    return virtualRate;
-        //}
+            return virtualRate;
+        }
     }
 }
