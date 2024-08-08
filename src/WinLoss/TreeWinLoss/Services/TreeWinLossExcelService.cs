@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TreeWinLoss.Services
+namespace TreeWinLoss.Services;
+
+public class TreeWinLossExcelService
 {
-    internal class TreeWinLossExcelService
-    {
-    }
 }

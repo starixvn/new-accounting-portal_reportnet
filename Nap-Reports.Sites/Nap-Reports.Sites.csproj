@@ -1256,6 +1256,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ExcelTemplate\TreeWinLoss\" />
     <Folder Include="wwwroot\scripts\_lib\BlockUI\img\" />
     <Folder Include="wwwroot\tree-win-loss\scripts\" />
   </ItemGroup>

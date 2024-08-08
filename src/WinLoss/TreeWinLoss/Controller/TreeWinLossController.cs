@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TreeWinLoss.Criteria;
+using TreeWinLoss.Model;
 using TreeWinLoss.Services;
 
 namespace TreeWinLoss.Controller
@@ -38,9 +39,9 @@ namespace TreeWinLoss.Controller
         }
 
         [Route("virtual-rate")]
-        public async Task<IActionResult> GetTreeWinLossVirtualRate(int custId)
+        public async Task<IActionResult> GetTreeWinLossVirtualRate(VirtualRateRequestModel model)
         {
-            var result = await service.GetVirtualRate(custId);
+            var result = await service.GetVirtualRate(model.CustId);
             return Ok(result);
         }
     }
