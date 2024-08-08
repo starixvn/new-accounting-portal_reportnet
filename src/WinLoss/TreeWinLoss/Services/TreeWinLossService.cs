@@ -23,6 +23,8 @@ namespace TreeWinLoss.Services
         Task<TreeWinLossModel> GetTreeWinLossByLevel(TreeWinLossByLevelCriteria criteria);
 
         Task<VirtualRateModel> GetVirtualRate(int custId);
+
+        Task<TreeWinLossVirtualRateModel> GetAllVirtualRate(TreeWinLossModel report);
     }
 
     public class TreeWinLossServiceImp : TreeWinLossService
@@ -183,6 +185,7 @@ namespace TreeWinLoss.Services
                 BaseRMVirtualTurnover = criteria.BARMTurnover
             };
 
+            grandTotal.Name = "Total";
             grandTotal.BaseRMTotal += rmTotal.BaseRMTotal + barmTotal.BaseRMTotal;
             grandTotal.BaseRMVirtualTotal += rmTotal.BaseRMVirtualTotal + barmTotal.BaseRMVirtualTotal;
             grandTotal.BaseRMTurnover += rmTotal.BaseRMTurnover + barmTotal.BaseRMTurnover;

@@ -8,6 +8,7 @@ namespace Nap_Reports.Sites.DependencyInjection
         {
             service.AddTransient<CriteriaFactory, CriteriaFactoryImp>();
             service.AddTransient<TreeWinLossService, TreeWinLossServiceImp>();
+            service.AddTransient<TreeWinLossExcelService, TreeWinLossExcelServiceImp>();
         }
     }
 }

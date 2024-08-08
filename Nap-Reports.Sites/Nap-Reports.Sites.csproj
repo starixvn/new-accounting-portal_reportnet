@@ -1332,6 +1332,12 @@
     <None Update="ExcelTemplate\SBCustomerPerformanceByDangers\SBCustomerPerformanceByDangers.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelTemplate\TreeWinLoss\Tree_Win_Loss_By_Level.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\TreeWinLoss\Tree_Win_Loss_By_Product.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelTemplate\UpdatedUsernameAndCredit\UpdatedCredit.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

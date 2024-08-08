@@ -9,6 +9,7 @@ namespace TreeWinLoss
         public static void InitializeTreeWinLoss(this IProfileExpression cfg)
         {
             cfg.CreateMap<WinLossRawItem, TreeWinLossItemModel>();
+            cfg.CreateMap<TreeWinLossItemModel, TreeWinLossItemByProductExcelModel>();
         }
     }
 }

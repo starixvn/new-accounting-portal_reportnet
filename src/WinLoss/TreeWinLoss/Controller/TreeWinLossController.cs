@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Nap_Reports.Utilities.DateTimes;
 using TreeWinLoss.Criteria;
 using TreeWinLoss.Model;
 using TreeWinLoss.Services;
@@ -8,7 +9,7 @@ namespace TreeWinLoss.Controller
     [Route("api/tree-win-loss")]
 
     [ApiController]
-    public class TreeWinLossController(TreeWinLossService service) : ControllerBase
+    public class TreeWinLossController(TreeWinLossService service, TreeWinLossExcelService excelService) : ControllerBase
     {
         [Route("product")]
         public async Task<IActionResult> GetProduct()
@@ -43,6 +44,16 @@ namespace TreeWinLoss.Controller
         {
             var result = await service.GetVirtualRate(model.CustId);
             return Ok(result);
+        }
+
+        [Route("excel-winloss-by-product")]
+        public async Task<IActionResult> ExportTreeWinLossByProduct(TreeWinLossByProductCriteria criteria)
+        {
+            var excelPackage = await excelService.ExportExcelTreeWinLossByProduct(criteria);
+            var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+            var fileName =
+                $"Tree_Win_Loss_Report_From_{criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_')}_To_{criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_')}.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
     }
 }
