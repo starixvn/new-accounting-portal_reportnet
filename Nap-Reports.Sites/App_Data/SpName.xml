@@ -266,4 +266,8 @@
 		<Setting Key="WinLoss_TreeWinLoss_GetSport" SpName="Acc_Rpt_TreeWinlost_SporttypeSel" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
 		<Setting Key="WinLoss_TreeWinLoss_VirtualRateHistory" SpName="Acc_CustomerSelVirtualRateHistory" DbName="DBLOG.bodb_CustomerLog.wsv_nap" TimeOut="600"></Setting>
 	</Function>
+	<Function Name="Licensee - Negative Balance">
+		<Setting Key="Licensee_NegativeBalance_GetReport" SpName="Acc_Rpt_NegativeBalanceMember_Dep" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600" />
+		<Setting Key="Licensee_NegativeBalance_GetLicensee" SpName="Acc_Rpt_NegativeBalance_GetLicensees" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600" />
+	 </Function>
 </Functions>

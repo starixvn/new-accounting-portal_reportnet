@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Negative Balance";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/style/jquery-multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/nex-date-picker.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid-paging.css" />
+    <link rel="stylesheet" type="text/css" href="~/negative-balance/styles/negative-balance.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>Licensee / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    Licensee
+                </div>
+                <div class="edit-field col_5 omega">
+                    @Html.DropDownList("dllSite", ViewBag.LicensseSiteList as SelectList, new { id = "dllSite" })
+                </div>
+                <div class="submit">
+                    <input id="btnSubmit" value="Generate" type="submit" />
+                </div>
+            </div>
+            <div id="inforMessage" class="col_35 display-none width-auto">
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="InformationMssg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-grid  width-100percent">
+    <div class="grid-title display-none">
+        <div class="grid-title-label" id="reporttile">
+            Negative Balance Report 
+        </div>
+        <div class="grid-toolbox">
+            <input type="button" id="btnExport" class="btnExcel" title="Export to Excel" />
+        </div>
+
+    </div>
+    <div id="negativeBalance" class="freegrid display-none">
+        <div class="free-cell free-top-left">
+            <table class="grid-fixed-table free-cell-top-left">
+                <thead>
+                </thead>
+            </table>
+        </div>
+        <div class="row_header_wrapper">
+            <div class="row_header row-headers-background">
+                <table class="grid-fixed-table row_header_content" id="tblContentHeader">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col_header row-headers-background scroll-y">
+            <div class="header-container">
+                <table id="tblContainer" class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell withrowNo">
+                                    No
+                                </div>
+                            </th>
+                            <th>
+                                <div id="username" class="table-cell widthUsername">
+                                    Username
+                                </div>
+                            </th>
+                            <th>
+                                <div id="balance" class="table-cell widthBalance colSorter" onclick="negativeBalance.sort('BALANCE','balanceSorter');">
+                                    <div class="display-inline-block">Balance</div>
+                                    <div id="balanceSorter" class="divSorter">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div id="currency" class="table-cell widthCurrency ">
+                                    Currency
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="grid-container container">
+            <div class="content-container">
+                <table id="tblContent" class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell rowNo">
+                                    &nbsp;
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell widthUsername">
+                                    Username
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell widthCurrency ">
+                                    Balance
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell widthCurrency">
+                                    Currency
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row_footer row-footer-background z999">
+            <table class="grid-fixed-table row_footer_content">
+                <thead>
+                </thead>
+            </table>
+        </div>
+        <div class="col_footer row-footer-background scroll-y">
+            <div class="footer-container">
+                <table class="col_footer_content grid-fixed-table">
+                    <thead>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe id="frm" width="0" height="0" style="display: none"></iframe>
+@section scripts
+{
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/jquery-multiselect.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/do-t.js"></script>
+    <script type="text/javascript" src="~/negative-balance/scripts/NegativeBalance.js"></script>
+}

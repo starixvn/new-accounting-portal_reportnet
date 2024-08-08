@@ -91,7 +91,6 @@ namespace TreeWinLoss.Services
             return treeWinLoss;
         }
 
-
         public async Task<TreeWinLossModel> GetTreeWinLossByLevel(TreeWinLossByLevelCriteria criteria)
         {
             criteria.Products = criteria.ProductSelection;

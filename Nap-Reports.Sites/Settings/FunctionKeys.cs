@@ -24,5 +24,6 @@
         public const string CashOutPerformance = "CashOutPerformance";
         public const string DailyMixParlayWinLoss = "DailyMixParlayWinLoss";
         public const string ResultAnalysis = "ResultAnalysis";
+        public const string NegativeBalance = "NegativeBalance";
     }
 }

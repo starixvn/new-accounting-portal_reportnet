@@ -52,6 +52,7 @@ namespace Nap_Reports.Sites
             services.RegisterResultAnalysisServices();
             services.RegisterLegendManagementServices();
             services.RegisterTreeWinLossServices();
+            services.RegisterNegativeBalanceServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -153,7 +154,7 @@ namespace Nap_Reports.Sites
                     "/daily-mix-parlay-2hlink/styles/DailyMixParlayWinLoss.css",
                     "/daily-mix-parlay-2hlink/styles/DailyMixParlayWinLoss.less");
                 pipeline.AddLessBundle(
-                    "/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.css",
+                    "/styles/month-picker-custom.css",
                     "/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less");
                 pipeline.AddLessBundle(
                    "/themes/base/style.css",
@@ -165,6 +166,10 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
                    "/tree-win-loss/styles/TreeWinLoss.css",
                    "/tree-win-loss/styles/TreeWinLoss.less");
+
+                pipeline.AddLessBundle(
+                  "/negative-balance/styles/negative-balance.css",
+                  "/negative-balance/styles/NegativeBalance.less");
             });
         }
     }
