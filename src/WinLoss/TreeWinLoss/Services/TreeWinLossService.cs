@@ -48,7 +48,8 @@ namespace TreeWinLoss.Services
             this.repository = repository;
             this.mapper = mapper;
             this.criteriaFactory = criteriaFactory;
-            this.remotingRefService = remotingRefService;   
+            this.remotingRefService = remotingRefService;
+            InitBettype();
         }
 
         public async Task<IEnumerable<TreeWinLossProductModel>> GetProduct()

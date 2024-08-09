@@ -10,6 +10,7 @@ namespace TreeWinLoss
         {
             cfg.CreateMap<WinLossRawItem, TreeWinLossItemModel>();
             cfg.CreateMap<TreeWinLossItemModel, TreeWinLossItemByProductExcelModel>();
+            cfg.CreateMap<TreeWinLossItemModel, TreeWinLossItemByLevelExcelModel>();
         }
     }
 }

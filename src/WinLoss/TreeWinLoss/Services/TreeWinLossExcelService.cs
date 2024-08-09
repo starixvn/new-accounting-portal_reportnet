@@ -2,6 +2,7 @@
 using Epplus.Mapper.Extensions;
 using Nap_Reports.Utilities.DateTimes;
 using OfficeOpenXml;
+using System;
 using TreeWinLoss.Criteria;
 using TreeWinLoss.Model;
 using Utilities.Configurations;
@@ -29,6 +30,22 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
 
     private const int StartRowIndex = 6;
 
+    private ExcelWorksheet levelSheet;
+
+    private ExcelWorksheet levelOddSheet;
+
+    private ExcelWorksheet levelEvenSheet;
+
+    private ExcelWorksheet levelTotalSheet;
+
+    private ExcelWorksheet virtualRateEvenSheet;
+
+    private ExcelWorksheet virtualRateOddSheet;
+
+    private const int MaxUserPerSheet = 2000;
+
+    private const int StartRowIndexOfVirtualRate = 5;
+
     private ExcelPackage ExcelPackage { get; set; }
 
     public async Task<ExcelPackage> ExportExcelTreeWinLossByProduct(TreeWinLossByProductCriteria criteria)
@@ -37,9 +54,9 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
         var title =
             $"Win Loss By Currency From {criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_')} To {criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_')}";
         LoadTemplateForWinLossByProduct("Tree_Win_Loss_By_Product.xlsx");
-        BuildTitle(title, "A1:S1");
+        BuildTitle(productSheet, title, "A1:S1");
         var winLosses = mapper.Map<IEnumerable<TreeWinLossItemByProductExcelModel>>(data.WinLosses);
-        BuildBodyRowForWinLossByProduct(winLosses, StartRowIndex);
+        BuildBodyRow( productSheet, productEvenSheet, productOddSheet, winLosses, StartRowIndex, false);
         var total = mapper.Map<IEnumerable<TreeWinLossItemByProductExcelModel>>(data.Total);
         BuildTotalRowForWinLossByProduct(total, StartRowIndex + data.WinLosses.Count);
         ClearTemplateForWinLossByProduct();
@@ -48,9 +65,76 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
 
     public async Task<ExcelPackage> ExportExcelTreeWinLossByLevel(TreeWinLossByLevelCriteria criteria)
     {
+        var title = GetReportTitleByLevel(criteria);
+        LoadTemplateForWinLossByLevel("Tree_Win_Loss_By_Level.xlsx");
         var data = await service.GetTreeWinLossByLevel(criteria);
+        ExportTreeWinLossInfo(data, title);
         var allVirtualRate = await service.GetAllVirtualRate(data);
-        throw new NotImplementedException();
+        ExportExcelVirtualRateInfo(allVirtualRate, title);
+        ClearTemplateForWinLossByLevel();
+        return ExcelPackage;
+    }
+
+    public void ExportTreeWinLossInfo(TreeWinLossModel data, string title)
+    {
+        BuildTitle(levelSheet, title, "A1:U1");
+        var winLosses = mapper.Map<IEnumerable<TreeWinLossItemByLevelExcelModel>>(data.WinLosses);
+        BuildBodyRow(levelSheet, levelEvenSheet, levelOddSheet, winLosses, StartRowIndex, true);
+        var total = mapper.Map<IEnumerable<TreeWinLossItemByLevelExcelModel>>(data.Total);
+        var totalRowIndex = StartRowIndex + data.WinLosses.Count;
+        levelSheet.ApplyModel(levelTotalSheet, total.FirstOrDefault(), totalRowIndex);
+        levelSheet.Cells[$"A{totalRowIndex}:G{totalRowIndex}"].Merge = true;
+        levelSheet.Cells[$"A{totalRowIndex}:G{totalRowIndex}"].Value = "Total";
+    }
+
+    private void ExportExcelVirtualRateInfo(TreeWinLossVirtualRateModel data, string title)
+    {
+        var maxUserPerSheet = MaxUserPerSheet;
+        var redundancyUsers = data.NumberUserEnabledVirtualRate % maxUserPerSheet;
+        var numberSheetBeforeRounding = data.NumberUserEnabledVirtualRate / maxUserPerSheet;
+        var numberSheet = redundancyUsers == 0 ? numberSheetBeforeRounding : numberSheetBeforeRounding + 1;
+        for (var sheetIndex = 0; sheetIndex < numberSheet; sheetIndex++)
+        {
+            var virtualRateByUserInSheet = data.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
+            var sheetName = $"VirtualRate {sheetIndex + 1}";
+            var workSheet = ExcelPackage.Workbook.Worksheets.Copy("VirtualRateTemplate", sheetName);
+            BuildTitle(workSheet, title, "A1:L1");
+            ExportExcelVirtualRateByUser(workSheet, virtualRateByUserInSheet);
+        }
+    }
+
+    private void ExportExcelVirtualRateByUser(ExcelWorksheet sheet, IEnumerable<SMAVirtualRateModel> data)
+    {
+        var index = 1;
+        var startRowIndex = StartRowIndexOfVirtualRate;
+        foreach (var item in data)
+        {
+            foreach (var virtualRate in item.ReportRows)
+            {
+                var excelModel = new VirtualRateExcelModel
+                {
+                    No = index,
+                    User = item.UserName,
+                    Sport = virtualRate.Sport,
+                    Hdp = virtualRate.VirtualRateByBettypeInfo[0].VirtualRate,
+                    Ou = virtualRate.VirtualRateByBettypeInfo[1].VirtualRate,
+                    Oe = virtualRate.VirtualRateByBettypeInfo[2].VirtualRate,
+                    Hdp1 = virtualRate.VirtualRateByBettypeInfo[3].VirtualRate,
+                    Ou1 = virtualRate.VirtualRateByBettypeInfo[4].VirtualRate,
+                    Oe1 = virtualRate.VirtualRateByBettypeInfo[5].VirtualRate,
+                    MoneyLine = virtualRate.VirtualRateByBettypeInfo[6].VirtualRate,
+                    MoneyLine1 = virtualRate.VirtualRateByBettypeInfo[7].VirtualRate,
+                    SetXGameYWinner = virtualRate.VirtualRateByBettypeInfo[8].VirtualRate
+                };
+                var sheetTemplate = index % 2 == 0 ? virtualRateOddSheet : virtualRateEvenSheet;
+                sheet.ApplyModel(sheetTemplate, excelModel, startRowIndex++);
+            }
+
+            var mergedCellsAddress = $"A{startRowIndex - item.ReportRows.Count}:A{startRowIndex - 1}";
+            sheet.Cells[mergedCellsAddress].Merge = true;
+            sheet.Cells[mergedCellsAddress].Value = index;
+            index++;
+        }
     }
 
     private void LoadTemplateForWinLossByProduct(string fileExcel)
@@ -64,9 +148,22 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
         productTotalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
     }
 
-    private void BuildTitle(string title, string cellRange)
+    private void LoadTemplateForWinLossByLevel(string fileExcel)
     {
-        productSheet.Cells[cellRange].Value = title;
+        var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/TreeWinLoss/{fileExcel}";
+        using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+        ExcelPackage = new ExcelPackage(stream);
+        levelSheet = ExcelPackage.Workbook.Worksheets["TreeWinLoss"];
+        levelEvenSheet = ExcelPackage.Workbook.Worksheets["EvenTemplate"];
+        levelOddSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
+        levelTotalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
+        virtualRateOddSheet = ExcelPackage.Workbook.Worksheets["OddVRTemplate"];
+        virtualRateEvenSheet = ExcelPackage.Workbook.Worksheets["EvenVRTemplate"];
+    }
+
+    private void BuildTitle(ExcelWorksheet sheet, string title, string cellRange)
+    {
+        sheet.Cells[cellRange].Value = title;
     }
 
     private void ClearTemplateForWinLossByProduct()
@@ -76,12 +173,27 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
         ExcelPackage.Workbook.Worksheets.Delete("EvenTemplate");
     }
 
-    private void BuildBodyRowForWinLossByProduct(IEnumerable<TreeWinLossItemByProductExcelModel> list, int startRowIndex)
+    private void ClearTemplateForWinLossByLevel()
     {
+        ExcelPackage.Workbook.Worksheets.Delete("TotalTemplate");
+        ExcelPackage.Workbook.Worksheets.Delete("OddTemplate");
+        ExcelPackage.Workbook.Worksheets.Delete("EvenTemplate");
+        ExcelPackage.Workbook.Worksheets.Delete("VirtualRateTemplate");
+        ExcelPackage.Workbook.Worksheets.Delete("OddVRTemplate");
+        ExcelPackage.Workbook.Worksheets.Delete("EvenVRTemplate");
+    }
+
+    private void BuildBodyRow<T>(ExcelWorksheet sheet, ExcelWorksheet evenSheet, ExcelWorksheet oddSheet, IEnumerable<T> list, int startRowIndex, bool isHasNoColumn)
+    {
+        var index = 1;
         foreach (var item in list)
         {
-            var template = startRowIndex % 2 == 0 ? productEvenSheet : productOddSheet;
-            productSheet.ApplyModel(template, item, startRowIndex);
+            var template = startRowIndex % 2 == 0 ? evenSheet : oddSheet;
+            sheet.ApplyModel(template, item, startRowIndex);
+            if (isHasNoColumn)
+            {
+                sheet.Cells[$"A{startRowIndex}"].Value = index++;
+            }
             startRowIndex++;
         }
     }
@@ -96,5 +208,22 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
         }
 
         productSheet.Cells[$"A{startRowIndex - 4}:F{startRowIndex - 4}"].Value = string.Empty;
+    }
+
+    private static string GetReportTitleByLevel(TreeWinLossByLevelCriteria criteria)
+    {
+        var title = criteria.RoleId switch
+        {
+            5 => $"Super Win Loss ({criteria.Name} currency)",
+            4 => $"Master Win Loss ({criteria.Name} currency)",
+            3 => $"Agent Win Loss ({criteria.Name} currency)",
+            2 => $"Member Win Loss ({criteria.Name} currency)",
+            _ => string.Empty
+        };
+
+        title +=
+            $" - From {criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_')} To {criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_')}";
+
+        return title;
     }
 }
