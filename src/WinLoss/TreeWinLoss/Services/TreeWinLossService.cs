@@ -189,9 +189,6 @@ namespace TreeWinLoss.Services
 
             grandTotal.Name = "Total";
             grandTotal.BaseRMTotal = grandTotal.BaseRMTotal + rmTotal.BaseRMTotal + barmTotal.BaseRMTotal;
-            grandTotal.BaseRMVirtualTotal = grandTotal.BaseRMTotal + rmTotal.BaseRMVirtualTotal + barmTotal.BaseRMVirtualTotal;
-            grandTotal.BaseRMTurnover = grandTotal.BaseRMTurnover + rmTotal.BaseRMTurnover + barmTotal.BaseRMTurnover;
-            grandTotal.BaseRMVirtualTurnover = grandTotal.BaseRMVirtualTurnover + rmTotal.BaseRMVirtualTurnover + barmTotal.BaseRMVirtualTurnover;
 
             allTotal.Add(total);
             allTotal.Add(rmTotal);
