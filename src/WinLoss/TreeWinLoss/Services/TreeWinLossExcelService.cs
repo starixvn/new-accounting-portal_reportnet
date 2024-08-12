@@ -87,6 +87,9 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
         levelSheet.ApplyModel(levelTotalSheet, total.FirstOrDefault(), totalRowIndex);
         levelSheet.Cells[$"A{totalRowIndex}:G{totalRowIndex}"].Merge = true;
         levelSheet.Cells[$"A{totalRowIndex}:G{totalRowIndex}"].Value = "Total";
+        ConvertValueFromStringToDecimal(levelSheet.Cells[$"P{totalRowIndex}"]);
+        ConvertValueFromStringToDecimal(levelSheet.Cells[$"S{totalRowIndex}"]);
+        ConvertValueFromStringToDecimal(levelSheet.Cells[$"T{totalRowIndex}"]);
     }
 
     private void ExportExcelVirtualRateInfo(TreeWinLossVirtualRateModel data, string title)
@@ -195,6 +198,15 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
             if (isHasNoColumn)
             {
                 sheet.Cells[$"A{startRowIndex}"].Value = index++;
+                ConvertValueFromStringToDecimal(sheet.Cells[$"P{startRowIndex}"]);
+                ConvertValueFromStringToDecimal(sheet.Cells[$"S{startRowIndex}"]);
+                ConvertValueFromStringToDecimal(sheet.Cells[$"T{startRowIndex}"]);
+            }
+            else
+            {
+                ConvertValueFromStringToDecimal(sheet.Cells[$"O{startRowIndex}"]);
+                ConvertValueFromStringToDecimal(sheet.Cells[$"R{startRowIndex}"]);
+                ConvertValueFromStringToDecimal(sheet.Cells[$"S{startRowIndex}"]);
             }
             startRowIndex++;
         }
@@ -206,10 +218,21 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
         {
             productSheet.ApplyModel(productTotalSheet, item, startRowIndex);
             productSheet.Cells[$"A{startRowIndex}:F{startRowIndex}"].Merge = true;
+            ConvertValueFromStringToDecimal(productSheet.Cells[$"O{startRowIndex}"]);
+            ConvertValueFromStringToDecimal(productSheet.Cells[$"R{startRowIndex}"]);
+            ConvertValueFromStringToDecimal(productSheet.Cells[$"S{startRowIndex}"]);
             startRowIndex++;
         }
 
         productSheet.Cells[$"A{startRowIndex - 4}:F{startRowIndex - 4}"].Value = string.Empty;
+    }
+
+    private static void ConvertValueFromStringToDecimal(ExcelRangeBase cell)
+    {
+        if ((string)cell.Value != "N/A")
+        {
+            cell.Value = Convert.ToDecimal(cell.Value);
+        }
     }
 
     private static string GetReportTitleByLevel(TreeWinLossByLevelCriteria criteria)
@@ -217,9 +240,9 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
         var title = criteria.RoleId switch
         {
             5 => $"Super Win Loss ({criteria.Name} currency)",
-            4 => $"Master Win Loss ({criteria.Name} currency)",
-            3 => $"Agent Win Loss ({criteria.Name} currency)",
-            2 => $"Member Win Loss ({criteria.Name} currency)",
+            4 => $"Master Win Loss (Super {criteria.Name})",
+            3 => $"Agent Win Loss (Master {criteria.Name})",
+            2 => $"Member Win Loss (Agent {criteria.Name})",
             _ => string.Empty
         };
 
