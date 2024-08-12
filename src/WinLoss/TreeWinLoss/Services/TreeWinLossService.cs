@@ -330,7 +330,7 @@ namespace TreeWinLoss.Services
             this.bettypes.Add(5, BetTypeConstants.FirstHalfOddEvenBetType);
             this.bettypes.Add(6, BetTypeConstants.MoneyLineBettype);
             this.bettypes.Add(7, BetTypeConstants.FirstHalfMoneyLineBettype);
-            this.bettypes.Add(8, BetTypeConstants.SetXWinnerBettype);
+            this.bettypes.Add(8, BetTypeConstants.SetXGameYWinner);
         }
 
         private string GetSportName(int sportId)

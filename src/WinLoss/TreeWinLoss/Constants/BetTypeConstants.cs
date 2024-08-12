@@ -16,5 +16,6 @@
         public const int MoneyLineBettype = 20;
         public const int FirstHalfMoneyLineBettype = 21;
         public const int SetXWinnerBettype = 154;
+        public const int SetXGameYWinner = 1324;
     }
 }
