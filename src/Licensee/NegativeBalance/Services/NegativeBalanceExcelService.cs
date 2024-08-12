@@ -29,19 +29,29 @@ public class NegativeBalanceExcelServiceImp(ConfigurationService configurationSe
     private ExcelPackage ExcelPackage { get; set; }
 
 
-    public Task<ExcelPackage> ExportExcelTreeWinLossByProduct(NegativeBalanceCriteria criteria)
+    public async Task<ExcelPackage> ExportExcelTreeWinLossByProduct(NegativeBalanceCriteria criteria)
     {
-        throw new NotImplementedException();
+        
+        LoadTemplate("Licensee-NegativeBalance.xlsx");
+        ClearTemplate();
+        return ExcelPackage;
     }
 
-    private void LoadTemplateForWinLossByProduct(string fileExcel)
+    private void LoadTemplate(string fileExcel)
     {
-        var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/TreeWinLoss/{fileExcel}";
+        var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/NegativeBalance/{fileExcel}";
         using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
         ExcelPackage = new ExcelPackage(stream);
-        sheet = ExcelPackage.Workbook.Worksheets["TreeWinLoss"];
+        sheet = ExcelPackage.Workbook.Worksheets["NegativeBalance"];
         evenSheet = ExcelPackage.Workbook.Worksheets["EvenTemplate"];
         oddSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
-        licenseesSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
+        licenseesSheet = ExcelPackage.Workbook.Worksheets["LicenseesTemplate"];
+    }
+
+    private void ClearTemplate()
+    {
+        ExcelPackage.Workbook.Worksheets.Delete("EvenTemplate");
+        ExcelPackage.Workbook.Worksheets.Delete("OddTemplate");
+        ExcelPackage.Workbook.Worksheets.Delete("LicenseesTemplate");
     }
 }
