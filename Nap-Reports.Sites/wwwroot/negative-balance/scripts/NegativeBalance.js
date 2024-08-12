@@ -215,11 +215,20 @@ var negativeBalance = {
         }
     },
     exportExcel: function () {
-        var parameters = $.param({
-            Site: negativeBalance.selNegativeBalanceCriteria.Site
-        });
-        var url = window.rootUrl + "Licensee/NegativeBalance/ExportNegativeBalanceReport?" + parameters;
-        $('#frm').attr('src', url);
+        AccReport.utility.CallAjaxForDownload(this,
+        window.rootUrl + "/api/negative-balance/excel",
+        negativeBalance.selNegativeBalanceCriteria,
+        function (rs, fileName) {
+            element = document.createElement('a');
+            element.href = window.URL.createObjectURL(rs);
+            element.download = fileName;
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            element.remove();
+        },
+        null,
+        AccReport.enableInput());
     }
 };
 

@@ -7,6 +7,7 @@ namespace Nap_Reports.Sites.DependencyInjection
         public static void RegisterNegativeBalanceServices(this IServiceCollection service)
         {
             service.AddTransient<NegativeBalanceService, NegativeBalanceServiceImp>();
+            service.AddTransient<NegativeBalanceExcelService, NegativeBalanceExcelServiceImp>();
         }
     }
 }

@@ -8,7 +8,7 @@ public class NegativeBalanceUserExcelModel
     public string UserName { get; set; }
 
     [Cell("B4")]
-    public double Balance { get; set; }
+    public double? Balance { get; set; }
 
     [Cell("C4")]
     public string CurrencyName { get; set; }

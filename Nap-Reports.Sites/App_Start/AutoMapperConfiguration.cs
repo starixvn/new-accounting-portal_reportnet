@@ -5,6 +5,7 @@ using CashOutPerformance;
 using DailyMixParlay;
 using Exchange;
 using HouseWinLoss;
+using NegativeBalance;
 using PunterAnalysis;
 using ResultAnalysis;
 using SBCustomerPerformanceByDanger;
@@ -33,6 +34,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeParlay();
                 cfg.InitializeResultAnalysis();
                 cfg.InitializeTreeWinLoss();
+                cfg.InitializeNegativeBalance();
             });
 
             var mapper = config.CreateMapper();
