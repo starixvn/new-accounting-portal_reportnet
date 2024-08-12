@@ -90,6 +90,7 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
         ConvertValueFromStringToDecimal(levelSheet.Cells[$"P{totalRowIndex}"]);
         ConvertValueFromStringToDecimal(levelSheet.Cells[$"S{totalRowIndex}"]);
         ConvertValueFromStringToDecimal(levelSheet.Cells[$"T{totalRowIndex}"]);
+        levelSheet.Cells[$"U{totalRowIndex}"].Value = string.Empty;
     }
 
     private void ExportExcelVirtualRateInfo(TreeWinLossVirtualRateModel data, string title)

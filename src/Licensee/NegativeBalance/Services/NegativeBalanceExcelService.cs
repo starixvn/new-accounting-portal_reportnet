@@ -31,8 +31,12 @@ public class NegativeBalanceExcelServiceImp(ConfigurationService configurationSe
 
     public async Task<ExcelPackage> ExportExcelTreeWinLossByProduct(NegativeBalanceCriteria criteria)
     {
-        
         LoadTemplate("Licensee-NegativeBalance.xlsx");
+        var siteName = (criteria.Site == "All" ?
+            "All Licensees" :
+            criteria.Site);
+        var title = $"Accounting system - Negative Balance Report for {siteName} ";
+        BuildTitle(sheet, title, "A1:C1");
         ClearTemplate();
         return ExcelPackage;
     }
@@ -46,6 +50,11 @@ public class NegativeBalanceExcelServiceImp(ConfigurationService configurationSe
         evenSheet = ExcelPackage.Workbook.Worksheets["EvenTemplate"];
         oddSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
         licenseesSheet = ExcelPackage.Workbook.Worksheets["LicenseesTemplate"];
+    }
+
+    private void BuildTitle(ExcelWorksheet sheet, string title, string cellRange)
+    {
+        sheet.Cells[cellRange].Value = title;
     }
 
     private void ClearTemplate()
