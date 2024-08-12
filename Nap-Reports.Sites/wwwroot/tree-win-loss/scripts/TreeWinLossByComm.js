@@ -135,7 +135,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByComm = function () {
                         { Name: "ColTurnover", Value: info.Turnover },
                         { Name: "ColExtraPT", Value: info.ExtraAmount },
                         { Name: "ColWinLoss", Value: info.WinLoss },
-                        { Name: "ColCommission", Value: info.Comm },
+                        { Name: "ColCommission", Value: info.Commission },
                         { Name: "ColWinLossTotal", Value: info.WinLossTotal },
                         { Name: "ColBaseRMTurnover", Value: info.BaseRMTurnover },
                         { Name: "ColBaseRMVirtualTurnover", Value: info.BaseRMVirtualTurnover },
