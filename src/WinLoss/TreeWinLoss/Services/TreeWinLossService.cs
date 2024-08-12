@@ -40,7 +40,7 @@ namespace TreeWinLoss.Services
         private readonly Dictionary<int, int> bettypes = new Dictionary<int, int>();
 
         public TreeWinLossServiceImp(
-            IDynamicRepository repository, 
+            IDynamicRepository repository,
             IMapper mapper,
             CriteriaFactory criteriaFactory,
             RemotingRefService remotingRefService)
@@ -160,12 +160,13 @@ namespace TreeWinLoss.Services
             TreeWinLossByProductCriteria criteria)
         {
             var allTotal = new List<TreeWinLossItemModel>();
-            
+
             var winLossData = mapper.Map<List<TreeWinLossItemModel>>(rawData);
+
+            var total = winLossData.DynamicSum();
+            total.Name = string.Empty;
+
             var tempTotal = winLossData.DynamicSum();
-
-            var total = mapper.Map<TreeWinLossItemModel>(tempTotal);
-
             var grandTotal = mapper.Map<TreeWinLossItemModel>(tempTotal);
 
             var rmTotal = new TreeWinLossItemModel
@@ -187,10 +188,10 @@ namespace TreeWinLoss.Services
             };
 
             grandTotal.Name = "Total";
-            grandTotal.BaseRMTotal += rmTotal.BaseRMTotal + barmTotal.BaseRMTotal;
-            grandTotal.BaseRMVirtualTotal += rmTotal.BaseRMVirtualTotal + barmTotal.BaseRMVirtualTotal;
-            grandTotal.BaseRMTurnover += rmTotal.BaseRMTurnover + barmTotal.BaseRMTurnover;
-            grandTotal.BaseRMVirtualTurnover += rmTotal.BaseRMVirtualTurnover + barmTotal.BaseRMVirtualTurnover;
+            grandTotal.BaseRMTotal = grandTotal.BaseRMTotal + rmTotal.BaseRMTotal + barmTotal.BaseRMTotal;
+            grandTotal.BaseRMVirtualTotal = grandTotal.BaseRMTotal + rmTotal.BaseRMVirtualTotal + barmTotal.BaseRMVirtualTotal;
+            grandTotal.BaseRMTurnover = grandTotal.BaseRMTurnover + rmTotal.BaseRMTurnover + barmTotal.BaseRMTurnover;
+            grandTotal.BaseRMVirtualTurnover = grandTotal.BaseRMVirtualTurnover + rmTotal.BaseRMVirtualTurnover + barmTotal.BaseRMVirtualTurnover;
 
             allTotal.Add(total);
             allTotal.Add(rmTotal);
@@ -213,7 +214,7 @@ namespace TreeWinLoss.Services
             if (rawData != null && rawData.Any())
             {
                 var winlosses = mapper.Map<List<TreeWinLossItemModel>>(rawData);
-                
+
                 var total = winlosses.DynamicSum();
 
                 treeWinLoss.WinLosses = winlosses;
@@ -228,70 +229,70 @@ namespace TreeWinLoss.Services
         {
             VirtualRateModel virtualRateBySportAndLiveStatus = new VirtualRateModel();
             bool enableVirtualRate = false;
-            
+
             var rawData = await repository.FetchMultipleAsync<SummaryVirtualRate, DetailVirtualRate>(criteria);
-           
+
             var summaryVirtualRate = rawData.Item1;
             var detailVirtualRate = rawData.Item2;
-           
-                if (summaryVirtualRate.Any())
-                {
-                    enableVirtualRate = summaryVirtualRate.FirstOrDefault().EnableVirtualRate == 1;
-                }
 
-                if (enableVirtualRate)
+            if (summaryVirtualRate.Any())
+            {
+                enableVirtualRate = summaryVirtualRate.FirstOrDefault().EnableVirtualRate == 1;
+            }
+
+            if (enableVirtualRate)
+            {
+                if (detailVirtualRate.Any())
                 {
-                    if (detailVirtualRate.Any())
-                    {
-                        VirtualRateModel virtualRateItem = null;
-                        string preLiveAndSportType = string.Empty;
-                        virtualRateBySportAndLiveStatus.EnableVirtualRate = true;
+                    VirtualRateModel virtualRateItem = null;
+                    string preLiveAndSportType = string.Empty;
+                    virtualRateBySportAndLiveStatus.EnableVirtualRate = true;
                     foreach (var detailItem in detailVirtualRate)
+                    {
+                        int sportId = detailItem.SportType;
+                        bool isLive = detailItem.IsLive;
+                        int bettypeId = detailItem.BetType;
+                        decimal virtualRate = detailItem.VirtualMultiplier;
+                        string liveAndSportType = string.Join(string.Empty, detailItem.SportType, detailItem.IsLive);
+
+                        if (liveAndSportType != preLiveAndSportType)
                         {
-                            int sportId = detailItem.SportType;
-                            bool isLive = detailItem.IsLive;
-                            int bettypeId = detailItem.BetType;
-                            decimal virtualRate = detailItem.VirtualMultiplier;
-                            string liveAndSportType = string.Join(string.Empty, detailItem.SportType, detailItem.IsLive);
-
-                            if (liveAndSportType != preLiveAndSportType)
+                            if (virtualRateItem != null)
                             {
-                                if (virtualRateItem != null)
-                                {
-                                    virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
-                                }
-
-                                string liveStatusTitle = isLive ? "Live" : "Non-Live";
-                                virtualRateItem = new VirtualRateModel
-                                {
-                                    Sport = GetSportName(sportId),
-                                    LiveStatus = liveStatusTitle
-                                };
-
-                                preLiveAndSportType = liveAndSportType;
+                                virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
                             }
 
-                            virtualRateItem.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
+                            string liveStatusTitle = isLive ? "Live" : "Non-Live";
+                            virtualRateItem = new VirtualRateModel
                             {
-                                BettypeName = remotingRefService.GetBetTypeName(bettypeId),
-                                VirtualRate = virtualRate - 1
-                            });
+                                Sport = GetSportName(sportId),
+                                LiveStatus = liveStatusTitle
+                            };
+
+                            preLiveAndSportType = liveAndSportType;
                         }
 
-                        if (virtualRateItem != null)
+                        virtualRateItem.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
                         {
-                            virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
-                        }
+                            BettypeName = remotingRefService.GetBetTypeName(bettypeId),
+                            VirtualRate = virtualRate - 1
+                        });
+                    }
+
+                    if (virtualRateItem != null)
+                    {
+                        virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
                     }
                 }
-                else
+            }
+            else
+            {
+                virtualRateBySportAndLiveStatus.ReportRows.Add(new VirtualRateModel
                 {
-                    virtualRateBySportAndLiveStatus.ReportRows.Add(new VirtualRateModel
-                    {
-                        Sport = "Virtual Rate: Disabled",
-                        EnableVirtualRate = false
-                    });
-                }
+                    Sport = "Virtual Rate: Disabled",
+                    EnableVirtualRate = false
+                });
+            }
 
             return virtualRateBySportAndLiveStatus;
         }
@@ -301,8 +302,8 @@ namespace TreeWinLoss.Services
             VirtualRateModel virtualRateInfo = new VirtualRateModel();
 
             var rawData = await repository.FetchAsync<HistoryVirtualRate>(criteria);
-            
-                foreach (var historyVirtualRateItem in rawData)
+
+            foreach (var historyVirtualRateItem in rawData)
             {
                 int actionId = historyVirtualRateItem.ActionId;
                 string trackingValue = historyVirtualRateItem.TrackingValue;
