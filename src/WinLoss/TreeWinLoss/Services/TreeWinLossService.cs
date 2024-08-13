@@ -39,6 +39,8 @@ namespace TreeWinLoss.Services
 
         private readonly Dictionary<int, int> bettypes = new Dictionary<int, int>();
 
+        private const int MaxCustIds = 5000;
+
         public TreeWinLossServiceImp(
             IDynamicRepository repository,
             IMapper mapper,
@@ -494,10 +496,21 @@ namespace TreeWinLoss.Services
         private async Task<SMAVirtualRateModel> GetAllVirtualRate(AllVirtualRateCriteria criteria)
         {
             SMAVirtualRateModel virtualRate = new SMAVirtualRateModel();
+            var custIds = criteria.CustIDs.Split(",");
+            var detailVirtualRate = new List<DetailVirtualRate>();
+            while (custIds.Length > 0)
+            {
+                var tempCustIds = custIds.Take(MaxCustIds);
+                var request = new AllVirtualRateCriteria
+                {
+                    CustIDs = string.Join(",", tempCustIds)
+                };
+                var rawData = await repository.FetchAsync<DetailVirtualRate>(request);
+                detailVirtualRate.AddRange(rawData);
+                custIds = custIds.Length > MaxCustIds ? custIds.Skip(MaxCustIds).Take(custIds.Length - MaxCustIds).ToArray() : [];
+            }
 
-            var rawData = await repository.FetchAsync<DetailVirtualRate>(criteria);
-
-            virtualRate = MapSMAVirtualRateData(rawData);
+            virtualRate = MapSMAVirtualRateData(detailVirtualRate);
 
             return virtualRate;
         }

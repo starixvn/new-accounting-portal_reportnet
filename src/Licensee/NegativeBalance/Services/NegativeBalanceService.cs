@@ -1,7 +1,6 @@
 using Fanex.Data.Repository;
 using NegativeBalance.Criteria;
 using NegativeBalance.Model;
-using System.ComponentModel;
 
 namespace NegativeBalance.Services
 {
