@@ -36,7 +36,7 @@ public class NegativeBalanceExcelServiceImp(ConfigurationService configurationSe
         var siteName = isAllLicensees ? "All Licensees" : criteria.Site;
         var title = $"Accounting system - Negative Balance Report for {siteName} ";
         BuildTitle(title, "A1:C1");
-        var data = await service.GetNegativeBalance(criteria);
+        var data = await service.GetAllNegativeBalance(criteria);
         BuildBody(data.NegativeBalanceUsers, StartRowIndex, isAllLicensees);
         ClearTemplate();
         return ExcelPackage;

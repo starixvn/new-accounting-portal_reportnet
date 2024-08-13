@@ -9,6 +9,8 @@ namespace NegativeBalance.Services
     {
         Task<NegativeBalanceModel> GetNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria);
 
+        Task<NegativeBalanceModel> GetAllNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria);
+
         Task<List<LicenseeModel>> GetLicensee();
     }
 
@@ -64,6 +66,32 @@ namespace NegativeBalance.Services
                 model.TotalNegativeBalanceUser = rawData.Count();
             }
 
+            return model;
+        }
+
+        public async Task<NegativeBalanceModel> GetAllNegativeBalance(NegativeBalanceCriteria criteria)
+        {
+            var model = new NegativeBalanceModel();
+            var rawData = (await repository.FetchAsync<NegativeBalanceUser>(criteria)).ToList();
+            SiteNegativeBalanceModel currentNegative = null;
+            var tempUsersOderBySite = rawData.OrderBy(negativeBalanceUser => negativeBalanceUser.Site).ToList();
+            tempUsersOderBySite.ForEach(data =>
+            {
+                if (currentNegative == null || currentNegative.LicenseeSite != data.Site)
+                {
+                    currentNegative = new SiteNegativeBalanceModel
+                    {
+                        LicenseeSite = data.Site,
+                        NegativeBalanceUsers = new List<NegativeBalanceUser>()
+                    };
+
+                    model.NegativeBalanceUsers.Add(currentNegative);
+                }
+
+                currentNegative.NegativeBalanceUsers.Add(data);
+            });
+
+            model.TotalNegativeBalanceUser = rawData.Count();
             return model;
         }
     }
