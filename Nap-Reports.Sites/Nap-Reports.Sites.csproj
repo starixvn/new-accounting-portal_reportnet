@@ -1242,6 +1242,7 @@
     <ProjectReference Include="..\src\FraudAndRisk\SBCustomerPerformanceByDanger\SBCustomerPerformanceByDanger.csproj" />
     <ProjectReference Include="..\src\LegendManagement\LegendManagement\LegendManagement.csproj" />
     <ProjectReference Include="..\src\Licensee\NegativeBalance\NegativeBalance.csproj" />
+    <ProjectReference Include="..\src\Licensee\PeakConcurrentUsers\PeakConcurrentUsers.csproj" />
     <ProjectReference Include="..\src\Main\HouseWinLoss\HouseWinLoss.csproj" />
     <ProjectReference Include="..\src\Main\SBPerformance\SBPerformance.csproj" />
     <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />

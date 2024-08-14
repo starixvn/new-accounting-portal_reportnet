@@ -270,4 +270,10 @@
 		<Setting Key="Licensee_NegativeBalance_GetReport" SpName="Acc_Rpt_NegativeBalanceMember_Dep" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600" />
 		<Setting Key="Licensee_NegativeBalance_GetLicensee" SpName="Acc_Rpt_NegativeBalance_GetLicensees" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600" />
 	 </Function>
+	<Function Name="Licensee - Peak Concurrent User">
+		<Setting Key="Licensee_PeakConcurrentUser_GetLicensee" SpName="Acc_Rpt_PeakConcurrentUser_GetLicensees" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600">
+			<Mapping DataField="EnableBA" ObjectProperty="IsEnabledBA" />
+		</Setting>
+		<Setting Key="Licensee_PeakConcurrentUser_GetReport" SpName="Acc_Rpt_LicenseeOnlineUserSel" DbName="DBONUSER.ON_USER.wsv_nap" />
+	</Function>
 </Functions>

@@ -53,6 +53,7 @@ namespace Nap_Reports.Sites
             services.RegisterLegendManagementServices();
             services.RegisterTreeWinLossServices();
             services.RegisterNegativeBalanceServices();
+            services.RegisterPeakConCurrentUsersServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -170,6 +171,10 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
                   "/negative-balance/styles/negative-balance.css",
                   "/negative-balance/styles/NegativeBalance.less");
+
+                pipeline.AddLessBundle(
+                  "/peak-concurrent-user/styles/peak-concurrent-user.css",
+                  "/peak-concurrent-user/styles/PeakConcurrentUser.less");
             });
         }
     }
