@@ -272,19 +272,6 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
     };
 
     self.exportExcel = function () {
-        AccReport.utility.CallAjaxForDownload(this,
-        window.rootUrl + "/api/tree-win-loss/excel-winloss-by-level",
-        this.Params.reportParams,
-        function (rs, fileName) {
-            element = document.createElement('a');
-            element.href = window.URL.createObjectURL(rs);
-            element.download = fileName;
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            element.click();
-            element.remove();
-        },
-        null,
-        AccReport.enableInput());
+        AccReport.downloadFile(window.rootUrl + "/api/tree-win-loss/export-winloss-by-level", this.Params.reportParams);
     }
 };

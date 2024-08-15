@@ -56,14 +56,14 @@ namespace TreeWinLoss.Controller
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
 
-        [Route("excel-winloss-by-level")]
-        public async Task<IActionResult> ExportTreeWinLossByProduct(TreeWinLossByLevelCriteria criteria)
+        [HttpGet]
+        [Route("export-winloss-by-level")]
+        public async Task<IActionResult> ExportTreeWinLossByLevel([FromQuery]TreeWinLossByLevelCriteria criteria)
         {
             var excelPackage = await excelService.ExportExcelTreeWinLossByLevel(criteria);
-            var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
             var fileName =
                 $"Tree_Win_Loss_Report_From_{criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_')}_To_{criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_')}.xlsx";
-            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            return File(await excelPackage.GetAsByteArrayAsync(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
     }
 }
