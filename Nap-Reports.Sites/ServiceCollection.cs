@@ -54,6 +54,7 @@ namespace Nap_Reports.Sites
             services.RegisterTreeWinLossServices();
             services.RegisterNegativeBalanceServices();
             services.RegisterPeakConCurrentUsersServices();
+            services.RegisterCompanyWinLossServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -122,6 +123,9 @@ namespace Nap_Reports.Sites
 
                 pipeline.AddCssBundle("/style/month-picker.css",
                "/scripts/_lib/MonthPicker/monPickr-0.0.3.css");
+                
+                pipeline.AddLessBundle("/style/month-picker-custom.css",
+                "/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less");
 
                 pipeline.AddJavaScriptBundle("/scripts/nap-report-common.js",
                     "/scripts/_lib/jquery-1.8.2.js",
@@ -175,7 +179,12 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
                   "/peak-concurrent-user/styles/peak-concurrent-user.css",
                   "/peak-concurrent-user/styles/PeakConcurrentUser.less");
+
+                pipeline.AddLessBundle(
+                "/company-win-loss/styles/index.css",
+                "/company-win-loss/styles/Index.less");
             });
+
         }
     }
 }

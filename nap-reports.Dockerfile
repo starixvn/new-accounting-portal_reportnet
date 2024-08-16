@@ -18,6 +18,7 @@ COPY src/Shared/Utilities/*.csproj ./src/Shared/Utilities/
 COPY src/LegendManagement/LegendManagement/*.csproj ./src/LegendManagement/LegendManagement/
 COPY src/Licensee/NegativeBalance/*.csproj ./src/Licensee/NegativeBalance/
 COPY src/Licensee/PeakConcurrentUsers/*.csproj ./src/Licensee/PeakConcurrentUsers/
+COPY src/Licensee/CompanyWinLoss/*.csproj ./src/Licensee/CompanyWinLoss/
 COPY Nap-Reports.Sites/*.csproj ./Nap-Reports.Sites/
 
 

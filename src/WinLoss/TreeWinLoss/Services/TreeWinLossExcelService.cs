@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Epplus.Mapper.Extensions;
 using Nap_Reports.Utilities.DateTimes;
-using NPOI.SS.UserModel;
 using OfficeOpenXml;
-using System;
 using TreeWinLoss.Criteria;
 using TreeWinLoss.Model;
 using Utilities.Configurations;
