@@ -6,6 +6,7 @@ using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using Fanex.NAP.Client.Session;
 using Fanex.RemotingRef;
+using Nap_Reports.Utilities.Currencies;
 using Nap_Reports.Utilities.CustomerTrackingSystem;
 using Utilities.BalanceUpServices;
 using Utilities.Configurations;
@@ -33,6 +34,7 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<BalanceUpService, BalanceUpServiceImp>();
             service.AddTransient<ConfigurationService, ConfigurationServiceImp>();
             service.AddTransient<CustomerTrackingService, CustomerTrackingServiceImp>();
+            service.AddTransient<CurrenciesService, CurrenciesServiceImp>();
         }
     }
 }

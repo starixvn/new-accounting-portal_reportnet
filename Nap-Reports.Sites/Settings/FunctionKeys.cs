@@ -25,5 +25,6 @@
         public const string DailyMixParlayWinLoss = "DailyMixParlayWinLoss";
         public const string ResultAnalysis = "ResultAnalysis";
         public const string NegativeBalance = "NegativeBalance";
+        public const string SuperBalance = "SuperBalance";
     }
 }

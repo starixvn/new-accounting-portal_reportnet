@@ -1237,6 +1237,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\Balance\SuperBalance\SuperBalance.csproj" />
     <ProjectReference Include="..\src\BetList\BetList\BetList.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\PunterAnalysis\PunterAnalysis.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\SBCustomerPerformanceByDanger\SBCustomerPerformanceByDanger.csproj" />

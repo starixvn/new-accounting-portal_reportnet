@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Super Balance";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/super-balance/styles/super-balance.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>Balance / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div id="directBalanceReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="BalanceType" class="lbl-field col_11 align-left">
+                        <div class="col_5 alpha">
+                            <input type="radio" name="rdBalance" id="radio-totalbalance" checked="checked" value="1" />
+                            <label for="rdTotalBalance">
+                                Total Balance
+                            </label>
+                        </div>
+                        <div class="col_6 omega">
+                            <input type="radio" name="rdBalance" id="radio-yesterdaybalance" value="2" checked="checked" />
+                            <label for="rdYesterdayBalance">
+                                Yesterday's Balance
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_3 align-right">
+                        Username
+                    </div>
+                    <div class="edit-field col_6 align-left">
+                        <input id="txtUsername" type="text" value="Search All" class="defaultSuggestionBox" />
+                    </div>
+                    <div class="lbl-field width-152">
+                        First Letter
+                    </div>
+                    <div class="edit-field align-left">
+                        <select id="ddlFirstLetter" class="ddlFirstLetter">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_3 align-right">
+                        Currency
+                    </div>
+                    <div class="edit-field col_6 align-left">
+                        <select id="ddlCurrency" class="ddlCurrency">
+                        </select>
+                    </div>
+                    <div class="col_6">
+                        <input type="checkbox" id="chkViewTotalOnly" class="chkViewTotalOnly" value="View Total Only" checked="checked" />
+                        <label for="chkViewTotalOnly">View Total Only</label>
+                    </div>
+                    <div class="submit col_6 width-auto">
+                        <input id="btnGenerate" name="btnGenerate" type="submit" value="Generate" />
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="ErrMsg" class="col_35 display-none width-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="superBalanceGrid" class="display-none content-grid width-100percent">
+    <div id="superBalanceMainGrid" class="freegrid">
+    </div>
+</div>
+<div id="superBalanceViewTotalContainerGrid" class="display-none content-grid width-100percent">
+    <div id="superBalanceViewTotalGrid" class="freegrid">
+    </div>
+</div>
+<div id="superBalanceMasterContainerGrid" class="display-none content-grid width-100percent">
+    <div id="superBalanceMasterGrid" class="freegrid">
+    </div>
+</div>
+<div id="superBalanceAgentContainerGrid" class="display-none content-grid width-100percent">
+    <div id="superBalanceAgentGrid" class="freegrid">
+    </div>
+</div>
+<div id="superBalanceMemberContainerGrid" class="display-none content-grid width-100percent">
+    <div id="superBalanceMemberGrid" class="freegrid">
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var viewResources = {
+            Search_All: 'Search All'
+        };
+
+    </script>
+}
+@section Foot
+{
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/super-balance/scripts/SuperBalance.js?v=2"></script>
+    <script type="text/javascript" src="~/super-balance/scripts/SuperBalanceReportManager.js"></script>
+}
