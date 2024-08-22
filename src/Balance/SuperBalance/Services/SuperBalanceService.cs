@@ -112,34 +112,7 @@ namespace SuperBalance.Service
 
         public async Task<SuperBalanceModel> GetSuperBalanceDownLine(SuperDownlineCriteria criteria)
         {
-            var result = new SuperBalanceModel
-            {
-                SuperBalanceItems = new List<BalanceItemModel>(),
-                BaseBalanceTotal = new BalanceItemModel(),
-            };
-
-
-            var rawData = await repository.FetchAsync<BalanceItemModel>(criteria);
-
-            if (rawData == null)
-            {
-                return result;
-            }
-
-            foreach (var row in rawData)
-            {
-                var balance = row.Balance;
-                var baseBalance = row.BaseBalance;
-
-                if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                    Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                {
-                    continue;
-                }
-
-                result.BaseBalanceTotal.AddToBaseBalance(row);
-                result.SuperBalanceItems.Add(row);
-            }
+            var result = await GetBalanceDownline(criteria);
 
             return result;
         }
@@ -147,33 +120,7 @@ namespace SuperBalance.Service
 
         public async Task<SuperBalanceModel>GetMasterDownLine(MasterDownlineCriteria criteria)
         {
-            var result = new SuperBalanceModel
-            {
-                SuperBalanceItems = new List<BalanceItemModel>(),
-                BaseBalanceTotal = new BalanceItemModel(),
-            };
-
-            var rawData = await repository.FetchAsync<BalanceItemModel>(criteria);
-
-            if (rawData == null)
-            {
-                return result;
-            }
-
-            foreach (var row in rawData)
-            {
-                var balance = row.Balance;
-                var baseBalance = row.BaseBalance;
-
-                if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                    Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                {
-                    continue;
-                }
-
-                result.BaseBalanceTotal.AddToBaseBalance(row);
-                result.SuperBalanceItems.Add(row);
-            }
+            var result = await GetBalanceDownline(criteria);
 
             return result;
         }
@@ -181,34 +128,7 @@ namespace SuperBalance.Service
 
         public async Task<SuperBalanceModel> GetAgentDownLine(AgentDownlineCriteria criteria)
         {
-            var result = new SuperBalanceModel
-            {
-                SuperBalanceItems = new List<BalanceItemModel>(),
-                BaseBalanceTotal = new BalanceItemModel(),
-            };
-
-
-            var rawData = await repository.FetchAsync<BalanceItemModel>(criteria);
-
-            if (rawData == null)
-            {
-                return result;
-            }
-
-            foreach (var row in rawData)
-            {
-                var balance = row.Balance;
-                var baseBalance = row.BaseBalance;
-
-                if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                    Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                {
-                    continue;
-                }
-             
-                result.BaseBalanceTotal.AddToBaseBalance(row);
-                result.SuperBalanceItems.Add(row);
-            }
+            var result = await GetBalanceDownline(criteria);
 
             return result;
         }
@@ -247,6 +167,40 @@ namespace SuperBalance.Service
             }
 
             return balanceType;
+        }
+
+        private async Task<SuperBalanceModel> GetBalanceDownline(CriteriaBase criteria)
+        {
+            var result = new SuperBalanceModel
+            {
+                SuperBalanceItems = new List<BalanceItemModel>(),
+                BaseBalanceTotal = new BalanceItemModel(),
+            };
+
+
+            var rawData = await repository.FetchAsync<BalanceItemModel>(criteria);
+
+            if (rawData == null)
+            {
+                return result;
+            }
+
+            foreach (var row in rawData)
+            {
+                var balance = row.Balance;
+                var baseBalance = row.BaseBalance;
+
+                if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
+                    Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
+                {
+                    continue;
+                }
+
+                result.BaseBalanceTotal.AddToBaseBalance(row);
+                result.SuperBalanceItems.Add(row);
+            }
+
+            return result;
         }
     }
 }
