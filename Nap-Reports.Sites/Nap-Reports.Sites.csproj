@@ -1261,6 +1261,7 @@
 
   <ItemGroup>
     <Folder Include="ExcelTemplate\NegativeBalance\" />
+    <Folder Include="ExcelTemplate\PeakConcurrentUser\" />
     <Folder Include="ExcelTemplate\TreeWinLoss\" />
     <Folder Include="wwwroot\scripts\_lib\BlockUI\img\" />
     <Folder Include="wwwroot\tree-win-loss\scripts\" />
@@ -1298,6 +1299,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\NegativeBalance\Licensee-NegativeBalance.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\PeakConcurrentUser\PeakConcurrentUser.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\PlayForFun\Summary.xlsx">

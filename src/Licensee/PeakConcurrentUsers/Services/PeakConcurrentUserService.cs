@@ -25,7 +25,7 @@ namespace PeakConcurrentUsers.Services
             if (rawData != null && rawData.Any())
             {
                 var concurrentUsers = new List<ConcurrentUser>();
-                var totalUser = 0;
+                double totalUser = 0;
 
                 foreach (var row in rawData)
                 {
@@ -40,7 +40,7 @@ namespace PeakConcurrentUsers.Services
                 }
 
                 peakCocurrentUser.ListConcurrentUser = concurrentUsers;
-                peakCocurrentUser.AverageUsers = $"{totalUser / concurrentUsers.Count:N2}";
+                peakCocurrentUser.AverageUsers = $"{(totalUser / concurrentUsers.Count):N2}";
                 peakCocurrentUser.Total = $"{totalUser:N0}";
                 peakCocurrentUser.MinUsers = $"{rawData.Select(x => x.TotalUser).Min():N0}";
                 peakCocurrentUser.MaxUsers = $"{rawData.Select(x => x.TotalUser).Max():N0}";
