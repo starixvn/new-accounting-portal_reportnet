@@ -301,6 +301,9 @@
 		<Setting Key="Balance_SuperBalance_MemberYesterday" SpName="Acc_Rpt_Balance_Member_Yesterday" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
 	</Function>
 	<Function Name="Core - Currencies">
-		<Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.wsv_nap"/>
+		<Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.wsv_nap">
+			<Mapping DataField="exchangeid" ObjectProperty="CurrencyId" />
+			<Mapping DataField="currency" ObjectProperty="CurrencyName" />
+		</Setting>
 	</Function>
 </Functions>

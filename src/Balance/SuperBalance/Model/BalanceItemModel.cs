@@ -8,6 +8,8 @@
 
         public string Currency { get; set; }
 
+        public string CurrencyName { get; set; }
+
         public bool HeadlineEnabled { get; set; }
 
         public decimal Balance { get; set; }

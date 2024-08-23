@@ -80,6 +80,7 @@ namespace SuperBalance.Service
                     CustId = null,
                     Username = null,
                     Currency = null,
+                    CurrencyName = null,
                     Balance = 0,
                     BaseBalance = total
                 };
@@ -135,7 +136,7 @@ namespace SuperBalance.Service
 
         public async Task<List<CurrenciesModel>> GetCurrencies()
         {
-            var result = await currenciesService.GetCurrencies(); ;
+            var result = await currenciesService.GetCurrencies();
 
             return result.OrderBy(x => x.CurrencyName).ToList();
         }

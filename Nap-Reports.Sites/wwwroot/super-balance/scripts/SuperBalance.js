@@ -71,7 +71,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
         var rsLength = rs.length;
         for (var i = 0; i < rsLength; i++) {
             var currency = rs[i];
-            _tables.ddlCurrency.append('<option value="' + currency.Id + '">' + currency.Name + '</option>');
+            _tables.ddlCurrency.append('<option value="' + currency.CurrencyId + '">' + currency.CurrencyName + '</option>');
         }
     };
 
@@ -185,7 +185,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
                         Columns: [
                                 { Name: "Number", Value: customerIndex + 1 },
                                 { Name: "CustomerType", Value: currentCustomer },
-                                { Name: "Currency", Value: currentCustomer.Currency },
+                                { Name: "Currency", Value: currentCustomer.CurrencyName },
                                 { Name: "Balance", Value: currentCustomer.Balance },
                                 { Name: "BaseRM", Value: currentCustomer.BaseBalance }
                             ]
@@ -196,7 +196,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
                         Columns: [
                                 { Name: "Number", Value: customerIndex + 1 },
                                 { Name: "CustomerType", Value: currentCustomer.Username },
-                                { Name: "Currency", Value: currentCustomer.Currency },
+                                { Name: "Currency", Value: currentCustomer.CurrencyName },
                                 { Name: "Balance", Value: currentCustomer.Balance },
                                 { Name: "BaseRM", Value: currentCustomer.BaseBalance }
                             ]
