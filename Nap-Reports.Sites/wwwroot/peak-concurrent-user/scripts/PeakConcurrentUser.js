@@ -126,8 +126,7 @@ var peakCocurrentUser = {
             fromDate: peakCocurrentUser.selPeakCocurrentUserCriteria.FromDate,
             toDate: peakCocurrentUser.selPeakCocurrentUserCriteria.ToDate
         });
-
-        var url = window.rootUrl + "Licensee/PeakConcurrentUsers/ExportGamePeakReport?" + parameters;
+        var url = window.rootUrl + "/api/peak-concurrent-user/excel?" + parameters;
         $('#frm').attr('src', url);
     }
 };
