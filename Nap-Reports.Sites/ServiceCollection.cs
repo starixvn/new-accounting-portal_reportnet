@@ -56,6 +56,7 @@ namespace Nap_Reports.Sites
             services.RegisterPeakConCurrentUsersServices();
             services.RegisterCompanyWinLossServices();
             services.RegisterSuperBalanceServices();
+            services.RegisterDirectBalanceServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -188,8 +189,11 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
                  "/super-balance/styles/super-balance.css",
                  "/super-balance/styles/SuperBalance.less");
-            });
 
+                pipeline.AddLessBundle(
+                "/direct-balance/styles/direct-balance.css",
+                "/direct-balance/styles/DirectBalance.less");
+            });
         }
     }
 }

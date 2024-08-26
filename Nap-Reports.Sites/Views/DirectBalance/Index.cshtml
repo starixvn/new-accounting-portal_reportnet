@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Direct Balance";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/style/nex-date-picker.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/direct-balance/styles/direct-balance.css" />
+}
+@section Headline{
+    <div class="title">
+        <div>
+            <span>Balance / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div id="directBalanceReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_3 align-right">
+                        Report
+                    </div>
+                    <div class="edit-field col_6 align-left">
+                        <select id="ddlReport" class="alpha">
+                            <option value="2">Direct Master</option>
+                            <option value="3">Direct Agent</option>
+                            <option value="4">Direct Member</option>
+                        </select>
+                    </div>
+                    <div id="BalanceType" class="lbl-field col_11 align-left">
+                        <div class="col_5 alpha">
+                            <input type="radio" name="rdBalance" id="rdTotalBalance" checked="checked" value="1" />
+                            <label for="rdTotalBalance">
+                                Total Balance
+                            </label>
+                        </div>
+                        <div class="col_6 omega">
+                            <input type="radio" name="rdBalance" id="rdYesterdayBalance" value="2" />
+                            <label for="rdYesterdayBalance">
+                                Yesterday's Balance
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_3 align-right">
+                        Username
+                    </div>
+                    <div class="edit-field col_6 align-left">
+                        <input type="text" id="txtUsername" name="txtUsername" value="All" />
+                    </div>
+                    <div class="lbl-field col_3 align-right width-auto">
+                        Currency
+                    </div>
+                    <div class="edit-field col_5 align-left">
+                        <select id="ddlCurrency"></select>
+                    </div>
+                    <div class="lbl-field col_6 align-left">
+                        <input type="checkbox" id="checkbox-excludetest" class="checkbox-excludetest" name="chbExcludeTest" checked="checked" />
+                        <label for="chbExcludeTest">
+                            Exclude test data
+                        </label>
+                    </div>
+                    <div class="submit col_6 width-auto">
+                        <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="ErrMsg" class="col_35 display-none width-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="directBalanceGrid" class="display-none content-grid width-100percent">
+    <div id="directBalanceMainGrid" class="freegrid">
+    </div>
+</div>
+<div id="directBalanceDownlineGrid" class="display-none content-grid width-100percent">
+    <div id="directBalanceDownlineMainGrid" class="freegrid">
+    </div>
+</div>
+@section Foot
+{
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/direct-balance/scripts/ReportManager.js"></script>
+    <script type="text/javascript" src="~/direct-balance/scripts/DirectBalance.js"></script>
+    <script type="text/javascript" src="~/direct-balance/scripts/DirectBalanceDownline.js"></script>
+}

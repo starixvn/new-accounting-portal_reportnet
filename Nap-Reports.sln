@@ -63,7 +63,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyWinLoss", "src\Licen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Balance", "Balance", "{AE44C31A-2274-4C85-9015-17D4270982E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperBalance", "src\Balance\SuperBalance\SuperBalance.csproj", "{15E7D225-E76D-45EB-A4C1-872D6A30AC5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperBalance", "src\Balance\SuperBalance\SuperBalance.csproj", "{15E7D225-E76D-45EB-A4C1-872D6A30AC5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectBalance", "src\Balance\DirectBalance\DirectBalance.csproj", "{39A837C0-2B24-414E-BA49-38B7458DE170}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +157,10 @@ Global
 		{15E7D225-E76D-45EB-A4C1-872D6A30AC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15E7D225-E76D-45EB-A4C1-872D6A30AC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15E7D225-E76D-45EB-A4C1-872D6A30AC5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39A837C0-2B24-414E-BA49-38B7458DE170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39A837C0-2B24-414E-BA49-38B7458DE170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39A837C0-2B24-414E-BA49-38B7458DE170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39A837C0-2B24-414E-BA49-38B7458DE170}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -189,6 +195,7 @@ Global
 		{689002AB-C62F-4C52-9A13-4ABDF1A03980} = {2E92F5F8-4566-45AB-96C6-0CFB7F54BFEC}
 		{AE44C31A-2274-4C85-9015-17D4270982E7} = {5FE921E3-BA82-458A-9983-BEA80F74C49D}
 		{15E7D225-E76D-45EB-A4C1-872D6A30AC5C} = {AE44C31A-2274-4C85-9015-17D4270982E7}
+		{39A837C0-2B24-414E-BA49-38B7458DE170} = {AE44C31A-2274-4C85-9015-17D4270982E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}
