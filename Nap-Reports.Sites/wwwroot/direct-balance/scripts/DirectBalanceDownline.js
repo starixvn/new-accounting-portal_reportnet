@@ -122,7 +122,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                         {
                             Columns: [
                                         { Name: "Number", Value: "Total", MergeColNumber: 4 },
-                                        { Name: "BaseRM", Value: rs.Total.BaseBalanceTotal }
+                                        { Name: "BaseRM", Value: rs.Total.BaseBalance }
                             ]
                         }]
                         self.RenderGrid("Agent", _title, bodyData, footerData);
@@ -180,7 +180,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                         {
                             Columns: [
                                         { Name: "Number", Value: "Total", MergeColNumber: 4 },
-                                        { Name: "BaseRM", Value: rs.Total.BaseBalanceTotal }
+                                        { Name: "BaseRM", Value: rs.Total.BaseBalance }
                             ]
                         }]
                         self.RenderGrid("Member", _title, bodyData, footerData);

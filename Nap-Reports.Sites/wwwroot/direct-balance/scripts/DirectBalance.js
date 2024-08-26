@@ -211,7 +211,7 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 						{
 						    Columns: [
 										{ Name: "Number", Value: "Total", MergeColNumber: 4 },
-										{ Name: "BaseRM", Value: rs.Total.BaseBalanceTotal }
+										{ Name: "BaseRM", Value: rs.Total.BaseBalance }
 						    ]
 						}]
                     }
