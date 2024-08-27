@@ -21,6 +21,7 @@ COPY src/Licensee/PeakConcurrentUsers/*.csproj ./src/Licensee/PeakConcurrentUser
 COPY src/Licensee/CompanyWinLoss/*.csproj ./src/Licensee/CompanyWinLoss/
 COPY src/Balance/SuperBalance/*.csproj ./src/Balance/SuperBalance/
 COPY src/Balance/DirectBalance/*.csproj ./src/Balance/DirectBalance/
+COPY src/Balance/CompanyBalanceDifference/*.csproj ./src/Balance/CompanyBalanceDifference/
 COPY Nap-Reports.Sites/*.csproj ./Nap-Reports.Sites/
 
 

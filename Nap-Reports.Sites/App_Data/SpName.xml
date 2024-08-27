@@ -306,4 +306,10 @@
 			<Mapping DataField="currency" ObjectProperty="CurrencyName" />
 		</Setting>
 	</Function>
+	<Function Name="Balance - Company Balance Difference">
+		<Setting Key="Balance_CompanyBalanceDifference_GetReport" SpName="Acc_Rpt_Balance_Company_History" DbName="DBSUM.bodb_Summary.wsv_nap" TimeOut="600">
+			<Mapping DataField="ComBalBefore" ObjectProperty="CompanyBalanceBefore" />
+			<Mapping DataField="ComBalAfter" ObjectProperty="CompanyBalanceAfter" />
+		</Setting>
+	</Function>
 </Functions>

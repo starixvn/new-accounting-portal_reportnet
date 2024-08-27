@@ -57,6 +57,7 @@ namespace Nap_Reports.Sites
             services.RegisterCompanyWinLossServices();
             services.RegisterSuperBalanceServices();
             services.RegisterDirectBalanceServices();
+            services.RegisterCompanyBalanceDifferenceServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
