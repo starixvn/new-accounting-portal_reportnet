@@ -17,7 +17,9 @@ namespace CompanyWinLoss.Services
         Task<List<Product>> GetProductListByLicense(ProductByLicenseCriteria criteria);
 
         Task<GridOptions> GetCompanyWinLoss(CompanyWinLossCriteria criteria);
-        
+
+        Task<GridOptions> GetFullReportFromCache(CompanyWinLossCriteria criteria);
+
         Task<List<Licensee>> GetLicensee();
     }
 

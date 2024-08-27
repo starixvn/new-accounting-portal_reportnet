@@ -411,7 +411,7 @@ Fanex.AccountingReports.Licensee.CompanyWinLoss = function () {
     };
 
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "Licensee/CompanyWinLoss/ExportReport", self.params);
+        AccReport.downloadFile(window.rootUrl + "/api/company-win-loss/export", self.params);
     };
 };
 
