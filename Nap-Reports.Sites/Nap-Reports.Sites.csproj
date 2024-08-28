@@ -1241,6 +1241,7 @@
     <ProjectReference Include="..\src\Balance\DirectBalance\DirectBalance.csproj" />
     <ProjectReference Include="..\src\Balance\SuperBalance\SuperBalance.csproj" />
     <ProjectReference Include="..\src\BetList\BetList\BetList.csproj" />
+    <ProjectReference Include="..\src\FraudAndRisk\Margin\Margin.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\PunterAnalysis\PunterAnalysis.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\SBCustomerPerformanceByDanger\SBCustomerPerformanceByDanger.csproj" />
     <ProjectReference Include="..\src\LegendManagement\LegendManagement\LegendManagement.csproj" />

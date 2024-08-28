@@ -1,0 +1,19 @@
+﻿namespace Margin.Model
+{
+    public class MarginWinLossModel
+    {
+        public string UserName { get; set; }
+
+        public int BettypeId { get; set; }
+
+        public string BettypeName { get; set; }
+
+        public decimal WinningAmount { get; set; }
+
+        public decimal Turnover { get; set; }
+
+        public decimal Ratio { get; set; }
+
+        public int TotalBet { get; set; }
+    }
+}

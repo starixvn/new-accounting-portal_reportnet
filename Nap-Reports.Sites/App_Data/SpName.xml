@@ -312,4 +312,11 @@
 			<Mapping DataField="ComBalAfter" ObjectProperty="CompanyBalanceAfter" />
 		</Setting>
 	</Function>
+	<Function Name="Fraud and Risk - Margin Report">
+		<Setting Key ="Special_MarginReport_BetRatioByUser" SpName="Acc_Rpt_BetRatioByUser" DbName="DBACC.bodb02.wsv_nap">
+			<Mapping DataField="TotalWon" ObjectProperty="WinningAmount" />
+			<Mapping DataField="n" ObjectProperty="TotalBet" />
+			<Mapping DataField="bettype" ObjectProperty="BettypeId" />
+		</Setting>
+	</Function>
 </Functions>

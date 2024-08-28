@@ -10,14 +10,8 @@ namespace PeakConcurrentUsers.Criteria
 
         public string LicenseeName { get; set; }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
 
-        public override string GetSettingKey()
-        {
-            return "Licensee_PeakConcurrentUser_GetReport";
-        }
+        public override string GetSettingKey() => "Licensee_PeakConcurrentUser_GetReport";
     }
 }

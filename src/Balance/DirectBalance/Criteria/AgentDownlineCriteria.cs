@@ -13,10 +13,7 @@ namespace DirectBalance.Criteria
 
         public int AgentId { get; set; }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
 
         public override string GetSettingKey()
         {

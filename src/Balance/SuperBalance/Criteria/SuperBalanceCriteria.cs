@@ -22,10 +22,7 @@ namespace SuperBalance.Criteria
 
         public decimal Total { get; set; }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
 
         public override string GetSettingKey()
         {

@@ -45,14 +45,8 @@ namespace CompanyWinLoss.Criteria
         [SpParam(Ignored = true)]
         public int PageSize { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "Acc_Rpt_CompanyWinloss";
-        }
+        public override string GetSettingKey() => "Acc_Rpt_CompanyWinloss";
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
     }
 }

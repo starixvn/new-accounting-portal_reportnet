@@ -13,14 +13,8 @@ namespace NegativeBalance.Criteria
         [SpParam(Ignored = true)]
         public int PageIndex { get; set; }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
 
-        public override string GetSettingKey()
-        {
-            return "Licensee_NegativeBalance_GetReport";
-        }
+        public override string GetSettingKey() => "Licensee_NegativeBalance_GetReport";
     }
 }

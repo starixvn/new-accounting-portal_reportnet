@@ -13,10 +13,7 @@ namespace SuperBalance.Criteria
 
         public int MasterId { get; set; }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
 
         public override string GetSettingKey()
         {

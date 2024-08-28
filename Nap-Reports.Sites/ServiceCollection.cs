@@ -58,6 +58,7 @@ namespace Nap_Reports.Sites
             services.RegisterSuperBalanceServices();
             services.RegisterDirectBalanceServices();
             services.RegisterCompanyBalanceDifferenceServices();
+            services.RegisterMarginReportServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -194,6 +195,9 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
                 "/direct-balance/styles/direct-balance.css",
                 "/direct-balance/styles/DirectBalance.less");
+
+                pipeline.AddCssBundle("/style/pager-pagination.css",
+               "/scripts/_lib/Pager/pagination.css");
             });
         }
     }

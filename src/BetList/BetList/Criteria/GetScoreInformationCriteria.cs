@@ -52,14 +52,8 @@ namespace BetList.Criteria
         [SpParam(Ignored = true)]
         public string BetId { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "BetList_ScoreInformation";
-        }
+        public override string GetSettingKey() => "BetList_ScoreInformation";
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
     }
 }

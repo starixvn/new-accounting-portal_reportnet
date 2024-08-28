@@ -4,14 +4,8 @@ namespace NegativeBalance.Criteria
 {
     public class LicenseeCriteria : CriteriaBase, ICriteria
     {
-        public override string GetSettingKey()
-        {
-            return "Licensee_NegativeBalance_GetLicensee";
-        }
+        public override string GetSettingKey() => "Licensee_NegativeBalance_GetLicensee";
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public override bool IsValid() => true;
     }
 }

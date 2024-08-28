@@ -26,5 +26,6 @@
         public const string ResultAnalysis = "ResultAnalysis";
         public const string NegativeBalance = "NegativeBalance";
         public const string SuperBalance = "SuperBalance";
+        public const string MarginReport = "MarginReport";
     }
 }
