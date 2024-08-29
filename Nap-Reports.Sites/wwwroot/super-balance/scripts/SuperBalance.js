@@ -425,7 +425,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             IsViewTotalOnly: _params.superBalanceReport.ViewTotalOny
         };
 
-        AccReport.downloadFile(window.rootUrl + "Balance/SuperBalance/ExportReport", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/super-balance/export-super", exportParams);
     };
 
     self.ExportMasterBalanceReport = function () {

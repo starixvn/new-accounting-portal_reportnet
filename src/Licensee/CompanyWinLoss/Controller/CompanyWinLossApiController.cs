@@ -1,14 +1,8 @@
-﻿using System.Net;
-using CompanyWinLoss.Criteria;
+﻿using CompanyWinLoss.Criteria;
 using CompanyWinLoss.Services;
 using Fanex.Excel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nap_Reports.Utilities.DateTimes;
-using NPOI.HPSF;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using Utilities.ExcelResult;
 
 namespace CompanyWinLoss.Controller
 {

@@ -6,12 +6,12 @@ using DailyMixParlay;
 using Exchange;
 using HouseWinLoss;
 using NegativeBalance;
-using PeakConcurrentUsers;
 using PunterAnalysis;
 using ResultAnalysis;
 using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
+using SuperBalance;
 using TreeWinLoss;
 using UpdatedUsernameCredit;
 
@@ -36,6 +36,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeResultAnalysis();
                 cfg.InitializeTreeWinLoss();
                 cfg.InitializeNegativeBalance();
+                cfg.InitializeSuperBalance();
             });
 
             var mapper = config.CreateMapper();
