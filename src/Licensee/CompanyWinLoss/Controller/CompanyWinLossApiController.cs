@@ -1,8 +1,11 @@
-﻿using CompanyWinLoss.Criteria;
+﻿using System.Net;
+using CompanyWinLoss.Criteria;
 using CompanyWinLoss.Services;
 using Fanex.Excel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nap_Reports.Utilities.DateTimes;
+using NPOI.HPSF;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using Utilities.ExcelResult;
@@ -48,10 +51,12 @@ namespace CompanyWinLoss.Controller
         {
             var gridOptions = await service.GetFullReportFromCache(criteria);
             var excel = new FanexExcel(gridOptions);
-            var stream = new MemoryStream(((HSSFWorkbook)excel.ToExcel2003("Company Win Loss")).GetBytes());
+            var workBook = excel.ToExcel2003("Company Win Loss");
+            var memoryStream = new MemoryStream();
+            workBook.Write(memoryStream);
             var fileName =
-                $"CompanyWinLoss_From_{criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_')}_To_{criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_')}.xlsx";
-            return File(stream, "application/vnd.ms-excel", fileName);
+                $"CompanyWinLoss_From_{criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_')}_To_{criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_')}.xls";
+            return File(memoryStream.ToArray(), "application/vnd.ms-excel", fileName);
         }
     }
 }

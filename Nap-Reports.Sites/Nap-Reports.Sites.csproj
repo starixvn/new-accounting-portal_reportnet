@@ -1215,6 +1215,7 @@
 
   <ItemGroup>
     <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
+    <PackageReference Include="EPPlus" Version="7.0.0" />
     <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.4" />
     <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2" />
     <PackageReference Include="Fanex.Logging" Version="2.0.1.1" />
@@ -1229,6 +1230,7 @@
     <PackageReference Include="Fanex.Result.Core.RemotingRef" Version="2.0.0.2" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.405" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.3.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="ONEbook.UM.AspNetCore" Version="3.1.1.1" />

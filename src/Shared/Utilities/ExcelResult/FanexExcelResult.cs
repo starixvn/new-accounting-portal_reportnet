@@ -1,11 +1,10 @@
 ﻿using Fanex.Excel;
 using Fanex.Excel.Models;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.HPSF;
 using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using System.Net;
 using System.Net.Http.Headers;
-using NPOI.HSSF.UserModel;
 
 namespace Utilities.ExcelResult
 {
@@ -27,16 +26,17 @@ namespace Utilities.ExcelResult
 
         public async Task ExecuteResultAsync(ActionContext context)
         {
+            using var memoryStream = new MemoryStream();
+            Workbook.Write(memoryStream);
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ByteArrayContent(((HSSFWorkbook)Workbook).GetBytes())
+                Content = new ByteArrayContent(memoryStream.ToArray())
             };
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/vnd.ms-excel");
             response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
                 FileName = "undefined.xls"
             };
-
             await response.Content.CopyToAsync(context.HttpContext.Response.Body);
         }
     }
