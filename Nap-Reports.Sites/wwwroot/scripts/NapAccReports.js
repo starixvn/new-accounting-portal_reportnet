@@ -230,6 +230,47 @@ var AccReport = function ($) {
                 }
             }
         },
+        downloadFileWithLoadingIcon: function(url, data)
+        {
+            AccReport.disableInput();
+            data = typeof data == 'string' ? data : $.param(data);
+            var downloadUrl = url + "?" + data;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', downloadUrl, true);
+            xhr.responseType = 'blob';
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var blob = xhr.response;
+                    var url = window.URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    var contentDisposition = xhr.getResponseHeader('Content-Disposition');
+                    var filename = 'downloadedFile.xlsx';
+                    if (contentDisposition && contentDisposition.indexOf('attachment') !== -1) {
+                        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        var matches = filenameRegex.exec(contentDisposition);
+                        if (matches != null && matches[1]) {
+                            filename = matches[1].replace(/['"]/g, '');
+                        }
+                    }
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+                    AccReport.enableInput();
+                } else {
+                    console.error('Failed to download file. Status:', xhr.status);
+                }
+            };
+
+            xhr.onerror = function () {
+                console.error('There was an error downloading the file.');
+            };
+
+            xhr.send();
+        },
         reCheckIn: function () {
             $.ajax({
                 url: AccReport.accReportRoot + "UserLogin/Login/ReCheckLogin",

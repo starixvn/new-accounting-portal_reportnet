@@ -424,8 +424,8 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             Currency: _params.superBalanceReport.Currency,
             IsViewTotalOnly: _params.superBalanceReport.ViewTotalOny
         };
-
-        AccReport.downloadFile(window.rootUrl + "/api/super-balance/export-super", exportParams);
+        
+        AccReport.downloadFileWithLoadingIcon(window.rootUrl + "/api/super-balance/export-super", exportParams);
     };
 
     self.ExportMasterBalanceReport = function () {
@@ -434,8 +434,8 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             CustomerType: _params.superBalanceReport.CustomerType,
             SuperId: _balanceUserId.superId
         };
-
-        AccReport.downloadFile(window.rootUrl + "Balance/SuperBalance/ExportMasterBalance", exportParams);
+        
+        AccReport.downloadFileWithLoadingIcon(window.rootUrl + "/api/super-balance/export-super-downline", exportParams);
     };
 
     self.ExportAgentBalanceReport = function () {
@@ -445,7 +445,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             MasterId: _balanceUserId.masterId
         };
 
-        AccReport.downloadFile(window.rootUrl + "Balance/SuperBalance/ExportAgentBalance", exportParams);
+        AccReport.downloadFileWithLoadingIcon(window.rootUrl + "/api/super-balance/export-master-downline", exportParams);
     };
 
     self.ExportMemberBalanceReport = function () {
@@ -455,7 +455,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             AgentId: _balanceUserId.agentId
         };
 
-        AccReport.downloadFile(window.rootUrl + "Balance/SuperBalance/ExportMemberBalance", exportParams);
+        AccReport.downloadFileWithLoadingIcon(window.rootUrl + "/api/super-balance/export-agent-downline", exportParams);
     };
 
     viewSuperBalanceDownline = function (customerType, custId, username) {

@@ -36,6 +36,17 @@ namespace SuperBalance.Controller
             return Ok(result);
         }
 
+        [HttpGet("export-super-downline")]
+        public async Task<IActionResult> ExportExcelSuperBalanceDownLine([FromQuery] SuperDownlineCriteria criteria)
+        {
+            var data = await service.GetSuperBalanceDownLine(criteria);
+            var title =
+                $"{ReportService.GetRoleName(RoleConstants.Master)} {ReportService.GetBalanceType(criteria.BalanceType)} Balance";
+            var excelPackage = await excelService.ExportExcelSuperBalance(data, title);
+            var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{title.Replace(" ", "")}.xlsx");
+        }
+
         [Route("master-downline")]
         public async Task<IActionResult> GetMasterBalanceDownLine(MasterDownlineCriteria criteria)
         {
@@ -43,11 +54,33 @@ namespace SuperBalance.Controller
             return Ok(result);
         }
 
+        [HttpGet("export-master-downline")]
+        public async Task<IActionResult> ExportExcelMasterBalanceDownLine([FromQuery] MasterDownlineCriteria criteria)
+        {
+            var data = await service.GetMasterDownLine(criteria);
+            var title =
+                $"{ReportService.GetRoleName(RoleConstants.Agent)} {ReportService.GetBalanceType(criteria.BalanceType)} Balance";
+            var excelPackage = await excelService.ExportExcelSuperBalance(data, title);
+            var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{title.Replace(" ", "")}.xlsx");
+        }
+
         [Route("agent-downline")]
         public async Task<IActionResult> GetAgentBalanceDownLine(AgentDownlineCriteria criteria)
         {
             var result = await service.GetAgentDownLine(criteria);
             return Ok(result);
+        }
+
+        [HttpGet("export-agent-downline")]
+        public async Task<IActionResult> ExportExcelAgentBalanceDownLine([FromQuery] AgentDownlineCriteria criteria)
+        {
+            var data = await service.GetAgentDownLine(criteria);
+            var title =
+                $"{ReportService.GetRoleName(RoleConstants.Member)} {ReportService.GetBalanceType(criteria.BalanceType)} Balance";
+            var excelPackage = await excelService.ExportExcelSuperBalance(data, title);
+            var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{title.Replace(" ", "")}.xlsx");
         }
 
         [Route("currencies")]
