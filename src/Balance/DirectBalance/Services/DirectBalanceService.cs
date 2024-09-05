@@ -67,7 +67,7 @@ namespace DirectBalance.Service
 
             if (rawData != null)
             {
-                result.DirectBalanceItems = rawData;
+                result.DirectBalanceItems = rawData.Where(item => item.Balance != 0);
 
                 var total = rawData.DynamicSum();
                 result.Total = total;

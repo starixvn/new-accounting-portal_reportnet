@@ -45,7 +45,7 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
                 dlCurrency.append('<option value="0">All</option>');
                 for (var i = 0; i < rs.length; i++) {
                     var currency = rs[i];
-                    dlCurrency.append('<option value="' + currency.Id + '">' + currency.Name + '</option>');
+                    dlCurrency.append('<option value="' + currency.CurrencyId + '">' + currency.CurrencyName + '</option>');
                 }
             },
             error: function (event, jqXHR, ajaxSettings) {
