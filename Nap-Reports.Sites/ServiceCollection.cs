@@ -59,6 +59,7 @@ namespace Nap_Reports.Sites
             services.RegisterDirectBalanceServices();
             services.RegisterCompanyBalanceDifferenceServices();
             services.RegisterMarginReportServices();
+            services.RegisterDailyCreatedCustomersServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -198,6 +199,10 @@ namespace Nap_Reports.Sites
 
                 pipeline.AddCssBundle("/style/pager-pagination.css",
                "/scripts/_lib/Pager/pagination.css");
+
+                pipeline.AddLessBundle(
+               "/daily-created-customers/styles/daily-created-customers.css",
+               "/daily-created-customers/styles/DailyCreatedCustomers.less");
             });
         }
     }

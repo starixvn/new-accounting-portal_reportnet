@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Daily Created Customers";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/style/nex-date-picker.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/pager-pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/daily-created-customers/styles/daily-created-customers.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>Misc / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div id="betCountReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="display-inline-block">
+    <div class="display-inline-block">
+        <div id="dailyCreatedCustomersReport" class="display-none content-grid">  
+            <div id="dailyCreatedCustomersReportGrid" class="freegrid">
+            </div>      
+        </div>
+    </div>
+    <div class="display-inline-block reportDetailsDiv">
+        <div id="dailyCreatedCustomersContainer" class="grid-container display-none">   
+            <div id="dailyCreatedCustomersContent" class="freegrid">
+            </div>  
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var labelFrom = 'From';
+        var labelTo = 'To';
+        var today = '@DateTime.Today.ToShortDateString()';
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/daily-created-customers/scripts/ReportManager.js"></script>
+    <script type="text/javascript" src="~/daily-created-customers/scripts/DailyCreatedCustomers.js"></script>
+    <script type="text/javascript" src="~/daily-created-customers/scripts/DailyCreatedCustomersDetails.js"></script>
+}

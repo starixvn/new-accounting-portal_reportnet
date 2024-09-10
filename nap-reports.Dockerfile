@@ -10,6 +10,7 @@ COPY src/Misc/ActualMemberBet/*.csproj ./Misc/ActualMemberBet/
 COPY src/Misc/CashOutPerformance/*.csproj ./Misc/CashOutPerformance/
 COPY src/Misc/UpdatedUsernameCredit/*.csproj ./Misc/UpdatedUsernameCredit/
 COPY src/Misc/ResultAnalysis/*.csproj ./Misc/ResultAnalysis/
+COPY src/Misc/DailyCreatedCustomers/*.csproj ./Misc/DailyCreatedCustomers/
 COPY src/FraudAndRisk/PunterAnalysis/*.csproj ./FraudAndRisk/PunterAnalysis/
 COPY src/FraudAndRisk/Margin/*.csproj ./FraudAndRisk/Margin/
 COPY src/WinLoss/DailyMixParlay/*.csproj ./src/WinLoss/DailyMixParlay/

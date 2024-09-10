@@ -319,4 +319,18 @@
 			<Mapping DataField="bettype" ObjectProperty="BettypeId" />
 		</Setting>
 	</Function>
+	<Function Name="Misc - Daily Created Customers">
+		<Setting Key="Misc_DailyCreatedCustomers_GetReport" SpName="Acc_DailyCreatedCustomer" DbName="DBACC.bodb02.wsv_nap" TimeOut="600">
+			<Mapping DataField="CreateDate" ObjectProperty="CreatedDate" />
+			<Mapping DataField="AmountSAg" ObjectProperty="SuperAmount" />
+			<Mapping DataField="AmountMAg" ObjectProperty="MasterAmount" />
+			<Mapping DataField="AmountAg" ObjectProperty="AgentAmount" />
+			<Mapping DataField="AmountMaster" ObjectProperty="DirectMasterAmount" />
+			<Mapping DataField="AmountAgent" ObjectProperty="DirectAgentAmount" />
+			<Mapping DataField="AmountMember" ObjectProperty="MemberAmount" />
+		</Setting>
+		<Setting Key="Misc_DailyCreatedCustomers_GetDetailReport" SpName="Acc_DailyCreatedCustomer_Details" DbName="DBACC.bodb02.wsv_nap" TimeOut="600">
+			<Mapping DataField="CreatDate" ObjectProperty="CreatedDate" />
+		</Setting>
+	</Function>
 </Functions>

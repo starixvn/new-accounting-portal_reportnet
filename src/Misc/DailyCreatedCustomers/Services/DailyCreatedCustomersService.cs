@@ -1,68 +1,72 @@
-//using DailyCreatedCustomers.Criteria;
-//using DailyCreatedCustomers.Model;
+using DailyCreatedCustomers.Criteria;
+using DailyCreatedCustomers.Entities;
+using DailyCreatedCustomers.Model;
+using Fanex.Data.Repository;
+using Nap_Reports.Utilities.DateTimes;
+using Utilities.LinqDynamicSum;
 
-//namespace Fanex.AccountingReports.Misc.Services.Implement
-//{
-//    public class DailyCreatedCustomersServiceImp
-//    {
-//        public SummaryModel GetReport(DailyCreatedCustomersCriteria criteria)
-//        {
-//            var report = new SummaryModel
-//            {
-//                CreatingDetails = new List<SummaryModel>(),
-//            };
+namespace DailyCreatedCustomers.Services
+{
+    public interface DailyCreatedCustomersService
+    {
+        Task<SummaryModel> GetReport(DailyCreatedCustomersCriteria criteria);
 
-//            if (!criteria.IsValid())
-//            {
-//                return report;
-//            }
+        Task<List<DetailModel>> GetDetailReport(DailyCreatedCustomersDetailsCriteria criteria);
+    }
 
-//            var rawData = GetReportData<dynamic>(criteria);
-//            foreach (var row in rawData)
-//            {
-//                DateTime createdDate = Converter.ToDateTime(row.CreateDate);
-//                SummaryModel info = new SummaryModel
-//                {
-//                    CreatedDate = createdDate.ToShortFormatedDate(),
-//                    SuperAmount = Converter.ToInt(row.AmountSAg),
-//                    DirectMasterAmount = Converter.ToInt(row.AmountMAg),
-//                    DirectAgentAmount = Converter.ToInt(row.AmountAg),
-//                    MasterAmount = Converter.ToInt(row.AmountMaster),
-//                    AgentAmount = Converter.ToInt(row.AmountAgent),
-//                    MemberAmount = Converter.ToInt(row.AmountMember)
-//                };
+    public class DailyCreatedCustomersServiceImp(IDynamicRepository repository) : DailyCreatedCustomersService
+    {
+        public async Task<SummaryModel> GetReport(DailyCreatedCustomersCriteria criteria)
+        {
+            var report = new SummaryModel
+            {
+                Summaries = new List<SummaryItemModel>()
+            };
 
-//                report.SumDataToTotal(info);
-//                report.CreatingDetails.Add(info);
-//            }
+            var rawData = await repository.FetchAsync<SummaryEntity>(criteria);
 
-//            return report;
-//        }
+            foreach (var row in rawData)
+            {
+                var item = new SummaryItemModel
+                {
+                    CreatedDate = row.CreatedDate.ToShortFormatedDate(),
+                    SuperAmount = row.SuperAmount,
+                    DirectMasterAmount = row.DirectMasterAmount,
+                    DirectAgentAmount = row.DirectAgentAmount,
+                    MasterAmount = row.MasterAmount,
+                    AgentAmount = row.AgentAmount,
+                    MemberAmount = row.MemberAmount
+                };
 
-//        public List<DetailModel> GetReportDetails(DailyCreatedCustomersDetailsCriteria criteria)
-//        {
-//            var report = new List<DetailModel>();
-//            if (!criteria.IsValid())
-//            {
-//                return report;
-//            }
+                report.Summaries.Add(item);
+            }
 
-//            var rawData = GetReportData<dynamic>(criteria);
-//            foreach (var row in rawData)
-//            {
-//                DateTime createdDate = Converter.ToDateTime(row.creatdate);
-//                DetailModel info = new DetailModel
-//                {
-//                    CreatedDate = createdDate.ToLongFormatedDate(),
-//                    UserId = Converter.ToInt(row.custid),
-//                    UserName = Converter.ToString2(row.username),
-//                    Creator = Converter.ToString2(row.creator)
-//                };
+            var total = report.Summaries.DynamicSum();
+            report.Total = total;
+            
+            return report;
+        }
 
-//                report.Add(info);
-//            }
+        public async Task<List<DetailModel>> GetDetailReport(DailyCreatedCustomersDetailsCriteria criteria)
+        {
+            var report = new List<DetailModel>();
 
-//            return report;
-//        }
-//    }
-//}
+            var rawData = await repository.FetchAsync<DetailEntity>(criteria);
+
+            foreach (var row in rawData)
+            {
+                var item = new DetailModel
+                {
+                    CreatedDate = row.CreatedDate.ToLongFormatedDate(),
+                    UserId = row.CustId,
+                    UserName = row.UserName,
+                    Creator = row.Creator
+                };
+
+                report.Add(item);
+            }
+
+            return report;
+        }
+    }
+}
