@@ -3,6 +3,7 @@ using ActualMemberBet;
 using AutoMapper;
 using CashOutPerformance;
 using DailyMixParlay;
+using DirectBalance;
 using Exchange;
 using HouseWinLoss;
 using NegativeBalance;
@@ -37,6 +38,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeTreeWinLoss();
                 cfg.InitializeNegativeBalance();
                 cfg.InitializeSuperBalance();
+                cfg.InitializeDirectBalance();
             });
 
             var mapper = config.CreateMapper();

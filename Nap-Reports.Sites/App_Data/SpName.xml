@@ -277,7 +277,9 @@
 		<Setting Key="Licensee_PeakConcurrentUser_GetReport" SpName="Acc_Rpt_LicenseeOnlineUserSel" DbName="DBONUSER.ON_USER.wsv_nap" />
 	</Function>
 	<Function Name="Licensee - Company Win Loss">
-		<Setting Key="Licensee_Core_GetCurrencies" SpName="Acc_SelCurrencyByLicensee" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Licensee_Core_GetCurrencies" SpName="Acc_SelCurrencyByLicensee" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600">
+			<Mapping DataField="currency" ObjectProperty="CurrencyId" />
+		</Setting>
 		<Setting Key="Acc_GetProductListByLicenseId" SpName="Acc_GetProductListByLicenseId" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600"></Setting>
 		<Setting Key="Acc_Rpt_CompanyWinloss" SpName="Acc_Rpt_CompanyWinloss" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600">
 			<Mapping DataField="CompanyWL" ObjectProperty="CompanyWinLoss" />
@@ -308,8 +310,8 @@
 	</Function>
 	<Function Name="Balance - Company Balance Difference">
 		<Setting Key="Balance_CompanyBalanceDifference_GetReport" SpName="Acc_Rpt_Balance_Company_History" DbName="DBSUM.bodb_Summary.wsv_nap" TimeOut="600">
-			<Mapping DataField="ComBalBefore" ObjectProperty="CompanyBalanceBefore" />
-			<Mapping DataField="ComBalAfter" ObjectProperty="CompanyBalanceAfter" />
+			<Mapping DataField="CompBalBefore" ObjectProperty="CompanyBalanceBefore" />
+			<Mapping DataField="CompBalAfter" ObjectProperty="CompanyBalanceAfter" />
 		</Setting>
 	</Function>
 	<Function Name="Fraud and Risk - Margin Report">

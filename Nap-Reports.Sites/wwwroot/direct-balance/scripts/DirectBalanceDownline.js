@@ -211,7 +211,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
             BalanceType: self._params.balanceType
         };
 
-        AccReport.downloadFile(window.rootUrl + "Balance/DirectBalance/ExportAgentBalance", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/direct-balance/export-master-downline", exportParams);
     };
 
     self.exportMemberBalance = function () {
@@ -220,7 +220,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
             customerType: "Member",
             BalanceType: self._params.balanceType
         };
-        AccReport.downloadFile(window.rootUrl + "Balance/DirectBalance/ExportMemberBalance", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/direct-balance/export-agent-downline", exportParams);
     };
 
     self.hideReport = function () {

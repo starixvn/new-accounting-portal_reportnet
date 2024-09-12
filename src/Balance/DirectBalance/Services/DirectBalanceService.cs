@@ -4,7 +4,7 @@ using Fanex.Data.Repository;
 using Nap_Reports.Utilities.Currencies;
 using Utilities.LinqDynamicSum;
 
-namespace DirectBalance.Service
+namespace DirectBalance.Services
 {
     public interface DirectBalanceService
     {

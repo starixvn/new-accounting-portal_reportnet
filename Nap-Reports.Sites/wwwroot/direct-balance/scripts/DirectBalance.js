@@ -234,9 +234,10 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
             RoleID: _params.directBalanceReport.RoleId,
             Username: _params.directBalanceReport.Username,
             BalanceType: _params.directBalanceReport.BalanceType,
-            Currency: _params.directBalanceReport.Currency
+            Currency: _params.directBalanceReport.Currency,
+            ExclTestCurr: _params.directBalanceReport.ExclTestCurr
         };
-        AccReport.downloadFile(window.rootUrl + "Balance/DirectBalance/ExportReport", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/direct-balance/export-main", exportParams);
     };
 
     function bindingEvent() {
