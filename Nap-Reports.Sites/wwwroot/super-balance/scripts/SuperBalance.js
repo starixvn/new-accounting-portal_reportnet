@@ -228,11 +228,11 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             bodyRows: bodyData,
             footerRows: footerData,
             gridExpandHeight: 220,
-            showPager: false,
+            showPager: customerType == 'Member',
             pagerOption: {
-                itemsPerPage: 50,
+                itemsPerPage: 10000,
                 currentPage: 0,
-                itemsPerPageArray: [50, 100, 200, 500],
+                itemsPerPageArray: [1000, 2000, 3000, 10000],
                 totalItem: bodyData.length
             }
         };

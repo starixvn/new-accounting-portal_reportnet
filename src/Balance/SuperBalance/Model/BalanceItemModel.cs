@@ -16,14 +16,12 @@
 
         public decimal BaseBalance { get; set; }
 
-        public void AddToBaseBalance(BalanceItemModel item)
+        public static BalanceItemModel operator +(BalanceItemModel a, BalanceItemModel b)
         {
-            if (item == null)
+            return new BalanceItemModel
             {
-                return;
-            }
-
-            this.BaseBalance += item.BaseBalance;
+                BaseBalance = a.BaseBalance + b.BaseBalance
+            };
         }
     }
 }

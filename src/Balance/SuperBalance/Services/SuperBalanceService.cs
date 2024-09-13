@@ -2,6 +2,7 @@ using Fanex.Data.Repository;
 using Nap_Reports.Utilities.Currencies;
 using SuperBalance.Criteria;
 using SuperBalance.Model;
+using Utilities.LinqDynamicSum;
 
 namespace SuperBalance.Service
 {
@@ -90,20 +91,9 @@ namespace SuperBalance.Service
             }
             else
             {
-                foreach (var row in rawData)
-                {
-                    var balance = row.Balance;
-                    var baseBalance = row.BaseBalance;
-
-                    if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                        Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                    {
-                        continue;
-                    }
-
-                    result.BaseBalanceTotal.AddToBaseBalance(row);
-                    result.SuperBalanceItems.Add(row);
-                }
+                result.SuperBalanceItems = rawData.Where(item => Math.Round(item.Balance, 2, MidpointRounding.AwayFromZero) != 0
+                                                                 && Math.Round(item.BaseBalance, 2, MidpointRounding.AwayFromZero) != 0).ToList();
+                result.BaseBalanceTotal = result.SuperBalanceItems.DynamicSum();
 
             }
 
@@ -186,20 +176,9 @@ namespace SuperBalance.Service
                 return result;
             }
 
-            foreach (var row in rawData)
-            {
-                var balance = row.Balance;
-                var baseBalance = row.BaseBalance;
-
-                if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                    Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                {
-                    continue;
-                }
-
-                result.BaseBalanceTotal.AddToBaseBalance(row);
-                result.SuperBalanceItems.Add(row);
-            }
+            result.SuperBalanceItems = rawData.Where(item => Math.Round(item.Balance, 2, MidpointRounding.AwayFromZero) != 0
+                                                             && Math.Round(item.BaseBalance, 2, MidpointRounding.AwayFromZero) != 0).ToList();
+            result.BaseBalanceTotal = result.SuperBalanceItems.DynamicSum();
 
             return result;
         }
