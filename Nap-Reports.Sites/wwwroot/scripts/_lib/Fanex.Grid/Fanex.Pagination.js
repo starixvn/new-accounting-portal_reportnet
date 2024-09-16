@@ -168,11 +168,12 @@
 
                 //GotoPage Pane
                 $(drawGoToPage()).appendTo(panel);
-                panel.find("#pagenav_ibtn").bind("click", function () {
-                    if (isNumberNotNull("txtpage")) {
-                        var curr_page = Math.min(parseInt(parseFloat($("#txtpage").val())) - 1, np - 1);
+                panel.find('input[id^="pagenav_ibtn"]').bind("click", function () {
+                    var pageEle = $(this).parent().parent().find("input")[0];
+                    if (isNumberNotNull(pageEle)) {
+                        var curr_page = Math.min(parseInt(parseFloat($(pageEle).val())) - 1, np - 1);
                         if (curr_page < 0) {
-                            $("#txtpage").val(0);
+                            $(pageEle).val(0);
                             curr_page = 0;
                         }
 
@@ -208,7 +209,7 @@
 
                     if (code == 13) {
                         try {
-                            panel.find("#pagenav_ibtn").click();
+                            panel.find('input[id^="pagenav_ibtn"]').click();
                             return true;
                         } catch (error)
                     { return false; }
@@ -217,11 +218,11 @@
             }
 
             //check Numeric input field by id
-            function isNumberNotNull(id) {
+            function isNumberNotNull(element) {
                 var result = false;
                 try {
-                    if (!$.trim($("#" + id).val()) == "") {
-                        result = !isNaN($("#" + id).val());
+                    if (!$.trim($(element).val()) == "") {
+                        result = !isNaN($(element).val());
                     }
                 } catch (error) {
                 }
