@@ -8,6 +8,7 @@ namespace Nap_Reports.Sites.DependencyInjection
         public static void RegisterDailyCreatedCustomersServices(this IServiceCollection service)
         {
             service.AddTransient<DailyCreatedCustomersService, DailyCreatedCustomersServiceImp>();
+            service.AddTransient<DailyCreatedCustomersExcelService, DailyCreatedCustomersExcelServiceImp>();
         }
     }
 }

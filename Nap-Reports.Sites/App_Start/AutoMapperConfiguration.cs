@@ -2,6 +2,7 @@
 using ActualMemberBet;
 using AutoMapper;
 using CashOutPerformance;
+using DailyCreatedCustomers;
 using DailyMixParlay;
 using DirectBalance;
 using Exchange;
@@ -39,6 +40,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeNegativeBalance();
                 cfg.InitializeSuperBalance();
                 cfg.InitializeDirectBalance();
+                cfg.InitializeDailyCreatedCustomers();
             });
 
             var mapper = config.CreateMapper();

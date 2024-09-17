@@ -148,6 +148,6 @@ Fanex.AccountingReports.Misc.DailyCreatedCustomers.DailyCreatedCustomersDetails 
     };
 
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "Misc/DailyCreatedCustomers/ExportReportDetails", _params.reportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/daily-created-customer/export-detail", _params.reportParams);
     };
 }

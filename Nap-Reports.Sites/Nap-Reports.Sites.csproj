@@ -1267,6 +1267,7 @@
 
   <ItemGroup>
     <Folder Include="ExcelTemplate\NegativeBalance\" />
+    <Folder Include="ExcelTemplate\DailyCreatedCustomer\" />
     <Folder Include="ExcelTemplate\SuperBalance\" />
     <Folder Include="ExcelTemplate\PeakConcurrentUser\" />
     <Folder Include="ExcelTemplate\TreeWinLoss\" />
@@ -1291,6 +1292,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\CashOutPerformance\SimpleCashOutPerformance.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\DailyCreatedCustomer\DailyCreatedCustomer.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\DailyCreatedCustomer\DetailDailyCreatedCustomer.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\DailyMixParlay\Daily_Mix_Parlay_Win_Loss_Combination.xlsx">
