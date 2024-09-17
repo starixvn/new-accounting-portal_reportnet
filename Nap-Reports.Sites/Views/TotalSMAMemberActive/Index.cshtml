@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Total SMA and Member Active";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/style/jquery-multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/nex-date-picker.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid-paging.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/total-sma-active-member/styles/total-sma-active-member.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>Misc / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div id="filter-form" class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="datepickerplugin" class="lbl-field col_27 align-right">
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_2 align-right">
+                    Site
+                </div>
+                <div class="edit-field col_7 align-left ddlSiteContainer">
+                    <select id="ddlSite" class="col_7 alpha">
+                    </select>
+                </div>
+                <div class="submit width-auto prefix_2">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="Generate" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="reportContainer" class="display-none">
+        <div class="freegrid" id="reportSummary">
+        </div>
+    </div>
+    <div id="reportActiveContainer" class="display-none">
+        <div class="grid-title" id="reportActiveDetail-grid-title">
+            <div id="reporttile" class="grid-title-label">Total SMA and Member Active Report from {0} to {1}</div>
+            <div class="grid-toolbox">
+            </div>
+        </div>
+        <div id="reportActiveDetail">
+            <table id="tblActiveDetail">
+                <thead>
+                    <tr id="trSiteName">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="trSMA">
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br style="clear: both;" />
+    <div id="detailContainer" class="display-none">
+        <div class="freegrid" id="reportDetail">
+        </div>
+    </div>
+</div>
+@{
+    var today = DateTime.Today;
+    var minDate = today.AddMonths(-1);
+    minDate = new DateTime(minDate.Year, minDate.Month, 1);
+    var noteMessage = Html.Raw("<b>Some accounts may be closed/suspended when you&#39;re viewing the report and keeping it idle for some time.<br/>So, suspended/closed numbers between the main and drilldown reports may not match.<br/>In that case, please refresh by clicking Generate button again to make sure numbers are updated.</b>");
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var today = '@today.ToShortDateString()';
+        var minDate = '@minDate.ToShortDateString()';
+        var viewResources = {
+            From: 'From',
+            To: 'To',
+            // grid columns
+            NewCreated: 'NewCreated',
+            Active: 'Active',
+            Suspended: 'Suspended',
+            Closed: 'Closed',
+            Date: 'Date',
+            GroupHeadline: 'GroupHeadline',
+            Username: 'UserName',
+            Status: 'Status',
+            Site: 'Site',
+            Currency: 'Currency',
+            Position: 'Position',
+            CreatedTime: 'CreatedTime',
+            Creator: 'Creator',
+            NoSiteSelected: 'NoSiteSelected',
+            reportTitle: 'Total SMA and Member Active Report from {0} to {1}',
+            Details: 'Details',
+            NoteMessage: '@noteMessage'
+        };
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
+    <script type="text/javascript" src="~/total-sma-active-member/scripts/StatusDetail.js"></script>
+    <script type="text/javascript" src="~/total-sma-active-member/scripts/ReportManager.js"></script>
+}

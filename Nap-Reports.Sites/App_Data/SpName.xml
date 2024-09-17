@@ -335,4 +335,12 @@
 			<Mapping DataField="CreatDate" ObjectProperty="CreatedDate" />
 		</Setting>
 	</Function>
+	<Function Name="Misc - Total SMA Member Active">
+		<Setting Key="Misc_TotalSMAMemberActive_GetReport" SpName="Acc_rpt_CustStatus" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600" />
+		<Setting Key="Misc_TotalSMAMemberActive_GetStatusDetail" SpName="Acc_rpt_CustStatusDetails" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600" />
+		<Setting Key="Misc_TotalSMAMemberActive_GetSites" SpName="Acc_Rpt_TotalSMAMemberActive_SiteSel" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600">
+			<Mapping DataField="SiteId" ObjectProperty="Id" />
+			<Mapping DataField="Site" ObjectProperty="Name" />
+		</Setting>
+	</Function>
 </Functions>

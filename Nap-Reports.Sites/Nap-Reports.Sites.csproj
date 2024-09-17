@@ -1259,6 +1259,7 @@
     <ProjectReference Include="..\src\Misc\DailyCreatedCustomers\DailyCreatedCustomers.csproj" />
     <ProjectReference Include="..\src\Misc\Exchange\Exchange.csproj" />
     <ProjectReference Include="..\src\Misc\ResultAnalysis\ResultAnalysis.csproj" />
+    <ProjectReference Include="..\src\Misc\TotalSMAAndActiveMember\TotalSMAAndActiveMember.csproj" />
     <ProjectReference Include="..\src\Misc\UpdatedUsernameCredit\UpdatedUsernameCredit.csproj" />
     <ProjectReference Include="..\src\Shared\Utilities\Utilities.csproj" />
     <ProjectReference Include="..\src\WinLoss\DailyMixParlay\DailyMixParlay.csproj" />

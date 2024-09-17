@@ -12,7 +12,6 @@
     <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
   </ItemGroup>
 </Project>
