@@ -87,18 +87,15 @@ namespace TotalSMAAndActiveMember.Services
             var status = (StatusConstant)criteria.Status;
 
             var report = new List<GroupStatusDetailModel>();
-
+            criteria.PageIndex++;
             var rawData = await repository.FetchAsync<StatusDetailItem>(criteria);
 
             var totalRow = criteria.TotalRow;
 
 
-            if (totalRow > 0)
-            {
-                criteria.TotalRow = totalRow;
-                report = this.GetStatusDetails(rawData, status);
-
-            }
+            if (totalRow <= 0) return report;
+            criteria.TotalRow = totalRow;
+            report = GetStatusDetails(rawData, status);
 
             return report;
         }
@@ -114,7 +111,7 @@ namespace TotalSMAAndActiveMember.Services
                 var groupStatusDetail = new GroupStatusDetailModel
                 {
                     Name = groupHeadline.Key,
-                    ChildItems = new List<StatusDetailModel>()
+                    ChildItems = []
                 };
 
                 foreach (var item in groupHeadline)

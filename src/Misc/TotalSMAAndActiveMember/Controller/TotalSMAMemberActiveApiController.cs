@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TotalSMAAndActiveMember.Criteria;
+using TotalSMAAndActiveMember.Model;
 using TotalSMAAndActiveMember.Services;
 
 namespace TotalSMAAndActiveMember.Controller
@@ -29,7 +30,7 @@ namespace TotalSMAAndActiveMember.Controller
         {
             var result = await service.GetStatusDetails(criteria);
 
-            return Ok(result);
+            return Ok(new StatusDetailViewModel { Report = result, TotalRow = criteria.TotalRow });
         }
     }
 }

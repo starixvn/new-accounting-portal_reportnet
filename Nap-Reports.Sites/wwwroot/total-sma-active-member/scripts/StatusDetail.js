@@ -83,8 +83,8 @@ Fanex.AccountingReports.Misc.TotalSMAMemberActive.StatusDetail = function () {
 			for (var i = 0; i < len; i++) {
 				var evenClass = i % 2 === 0 ? 'freegrid-even' : '';
 				var group = report[i];
-				var groupName = group.GroupHeadline.Name;
-				var childsInfo = group.ChildsInfo;
+				var groupName = group.Name;
+				var childsInfo = group.ChildItems;
 
 				var childsLen = childsInfo.length;
 				for (var j = 0; j < childsLen; j++) {
