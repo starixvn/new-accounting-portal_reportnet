@@ -1,6 +1,5 @@
 namespace BetCount.Model
 {
-    [Serializable]
     public class ProductModel
     {
         public int Id { get; set; }

@@ -10,7 +10,7 @@ namespace BetCount.Model
 
         public decimal MemberWinLoss { get; set; }
 
-        public decimal MarginPercent { get; set; }
+        public decimal MarginPercent => Turnover == 0 ? 0 : MemberWinLoss / Turnover * 100;
 
         public decimal AgentWinLoss { get; set; }
 
@@ -25,6 +25,24 @@ namespace BetCount.Model
         public decimal Commission { get; set; }
 
         public decimal ExtraPT { get; set; }
+
+        public static TransactionModel operator +(TransactionModel a, TransactionModel b)
+        {
+            return new TransactionModel
+            {
+                SiteName = string.Empty,
+                BetCount = a.BetCount + b.BetCount,
+                Turnover = a.Turnover + b.Turnover,
+                MemberWinLoss = a.MemberWinLoss + b.MemberWinLoss,
+                AgentWinLoss = a.AgentWinLoss + b.AgentWinLoss,
+                MasterWinLoss = a.MasterWinLoss + b.MasterWinLoss,
+                SuperWinLoss = a.SuperWinLoss + b.SuperWinLoss,
+                CompanyWinLoss = a.CompanyWinLoss + b.CompanyWinLoss,
+                TotalWinLoss = a.TotalWinLoss + b.TotalWinLoss,
+                Commission = a.Commission + b.Commission,
+                ExtraPT = a.ExtraPT + b.ExtraPT
+            };
+        }
 
         public List<TransactionModel> Items { get; set; }
 

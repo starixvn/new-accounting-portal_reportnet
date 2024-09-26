@@ -208,6 +208,10 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
               "/total-sma-active-member/styles/total-sma-active-member.css",
               "/total-sma-active-member/styles/TotalSMAMemberActive.less");
+
+                pipeline.AddLessBundle(
+              "/bet-count/styles/bet-count.css",
+              "/bet-count/styles/BetCount.less");
             });
         }
     }

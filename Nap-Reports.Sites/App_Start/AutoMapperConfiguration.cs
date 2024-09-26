@@ -16,6 +16,7 @@ using SMAWinLoss;
 using SuperBalance;
 using TreeWinLoss;
 using UpdatedUsernameCredit;
+using BetCount;
 
 namespace Nap_Reports.Sites.App_Start
 {
@@ -41,6 +42,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeSuperBalance();
                 cfg.InitializeDirectBalance();
                 cfg.InitializeDailyCreatedCustomers();
+                cfg.InitializeBetCount();
             });
 
             var mapper = config.CreateMapper();

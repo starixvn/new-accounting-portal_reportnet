@@ -1,0 +1,527 @@
+﻿using AutoMapper;
+using BetCount.Constants;
+using BetCount.Criteria;
+using BetCount.Entities;
+using BetCount.Model;
+using Fanex.Data.Repository;
+using Nap_Reports.Utilities.Sorting;
+using Utilities.LinqDynamicSum;
+using Utilities.RemotingRef;
+
+namespace BetCount.Services
+{
+    public interface BetCountService
+    {
+        Task<TransactionModel> GetReport(BetCountCriteria criteria);
+
+        Task<TransactionModel> SortReport(BetCountCriteria criteria);
+
+        Task<List<ProductModel>> GetProduct(ProductCriteria criteria);
+
+        Task<List<ProductModel>> GetSport(ProductCriteria criteria);
+    }
+
+    public class BetCountServiceImp(
+        IDynamicRepository repository, 
+        RemotingRefService remotingRefService,
+        IMapper mapper) : BetCountService
+    {
+        private enum ReportRowType
+        {
+            NormalRow = 1,
+
+            Total = 2,
+
+            GrandTotal = 3
+        }
+
+
+        public async Task<TransactionModel> GetReport(BetCountCriteria criteria)
+        {
+            var rawData = await repository.FetchAsync<BetCountEntity>(criteria);
+
+            var report = new TransactionModel
+            {
+                Items = new List<TransactionModel>(),
+                Total = new TransactionModel
+                {
+                    SiteName = "Total"
+                }
+            };
+
+            rawData.GroupBy(data => data.IsDeposit)
+                   .ToList()
+                   .ForEach(group =>
+                   {
+                       var transByIsDepositionGroup = new TransactionModel
+                       {
+                           Items = new List<TransactionModel>(),
+                           Total = new TransactionModel()
+                       };
+
+                       transByIsDepositionGroup.SiteName = group.Key ? "Deposite" : "Credit";
+
+                       transByIsDepositionGroup.Total.SiteName = transByIsDepositionGroup.SiteName;
+
+                       group.ToList()
+                            .ForEach(transaction =>
+                            {
+                                var transactionData = mapper.Map<BetCountEntity, TransactionModel>(transaction);
+                                transByIsDepositionGroup.Items.Add(transactionData);
+                            });
+
+                       var groupTotal = transByIsDepositionGroup.Items.DynamicSum();
+                       transByIsDepositionGroup.Total = groupTotal;
+                       
+                       report.Items.Add(transByIsDepositionGroup);
+                   });
+
+
+            var total = report.Items.DynamicSum();
+            report.Total = total;
+
+            return report;
+        }
+
+        public async Task<TransactionModel> SortReport(BetCountCriteria criteria)
+        {
+            var report =  await GetReport(criteria);
+
+            if (report != null &&
+                report.Items != null &&
+                report.Items.Count > 0)
+            {
+                var siteGroupLength = report.Items.Count;
+                for (int i = 0; i < siteGroupLength; i++)
+                {
+                    var propertyName = this.GetSortedColumnName(criteria.SortBy);
+                    report.Items[i].Items.SortByProperty<TransactionModel>(
+                        criteria.SortDirection,
+                        propertyName);
+                }
+            }
+
+            return report;
+        }
+
+        public async Task<List<ProductModel>> GetProduct(ProductCriteria criteria)
+        {
+            var rawData = await repository.FetchAsync<ProductEntity>(criteria);
+
+            List<ProductModel> products = new List<ProductModel>();
+
+            var productGroups = rawData.GroupBy(rawInfo => rawInfo.ProductName);
+
+            foreach (var productGroup in productGroups)
+            {
+                var product = new ProductModel
+                {
+                    Name = productGroup.Key,
+                    Items = new List<ProductModel>()
+                };
+
+                if (BetCountConstants.ProductsHaveSports.Contains(product.Name.ToLower()))
+                {
+                    products.Add(product);
+                    continue;
+                }
+
+                var sportGroups = productGroup.GroupBy(x => new { x.SportId, x.SportName });
+
+                foreach (var sportGroup in sportGroups)
+                {
+                    var sport = CreateSport(sportGroup.Key);
+                    foreach (var data in sportGroup)
+                    {
+                        sport.Items.Add(CreateProduct(data));
+                    }
+
+                    product.Items.Add(sport);
+                }
+
+                products.Add(product);
+            }
+
+            return products;
+        }
+
+        public async Task<List<ProductModel>> GetSport(ProductCriteria criteria)
+        {
+            var rawData = await repository.FetchAsync<ProductEntity>(criteria);
+
+            var sports = new List<ProductModel>();
+
+            var sportIds = rawData.Select(info => info.SportId).Distinct().ToList();
+
+            CalculateSportData(rawData, sports);
+
+            return sports;
+        }
+
+        private string GetSortedColumnName(string sortBy)
+        {
+            var columnName = string.Empty;
+
+            switch (sortBy)
+            {
+                case "TotalTurnover":
+                    columnName = "Turnover";
+                    break;
+
+                case "MemberWinLoss":
+                    columnName = "MemberWinLoss";
+                    break;
+
+                case "MarginPercent":
+                    columnName = "MarginPercent";
+                    break;
+
+                case "AgentWinLoss":
+                    columnName = "AgentWinLoss";
+                    break;
+
+                case "MasterWinLoss":
+                    columnName = "MasterWinLoss";
+                    break;
+
+                case "SuperWinLoss":
+                    columnName = "SuperWinLoss";
+                    break;
+
+                case "TotalWinLoss":
+                    columnName = "TotalWinLoss";
+                    break;
+
+                case "CompanyWinLoss":
+                    columnName = "CompanyWinLoss";
+                    break;
+
+                case "Commission":
+                    columnName = "Commission";
+                    break;
+
+                case "ExtraPT":
+                    columnName = "ExtraPT";
+                    break;
+            }
+
+            return columnName;
+        }
+
+        private ProductModel GenerateSports(IEnumerable<ProductEntity> rawData)
+        {
+            if (!rawData.Any())
+            {
+                return new ProductModel
+                {
+                    Id = 0,
+                    Items = new List<ProductModel>()
+                };
+            }
+
+            var indGroup = new ProductModel
+            {
+                Id = rawData.FirstOrDefault().SportId,
+                Items = new List<ProductModel>()
+            };
+
+            indGroup.Name = this.GetSportName(indGroup.Id);
+            indGroup.Id = GetGroupId(indGroup.Id);
+
+            foreach (var data in rawData)
+            {
+                indGroup.Items.Add(CreateProduct(data));
+            }
+
+            return indGroup;
+        }
+
+        private int GetGroupId(int id)
+        {
+            if (id == BetCountConstants.MiscSoccerGroupId ||
+                id == BetCountConstants.MiscParLayGroupId ||
+                id == BetCountConstants.MiscBasketballGroupId ||
+                id == BetCountConstants.MiscEsportsGroupId ||
+                id == BetCountConstants.SBAdjustmentId)
+            { 
+                return id;
+            }
+            else
+            { 
+                return -111; 
+            }
+
+        }
+
+        private ProductModel GenerateOtherSports(IEnumerable<dynamic> rawData)
+        {
+            var indGroup = CreateGroup(BetCountConstants.MiscOtherSportId);
+            indGroup.Name = "Others";
+            var sportGroups = rawData.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            foreach (var sportGroup in sportGroups)
+            {
+                var sport = CreateSport(sportGroup.Key);
+                foreach (var data in sportGroup)
+                {
+                    sport.Items.Add(CreateProduct(data));
+                }
+
+                indGroup.Items.Add(sport);
+            }
+
+            return indGroup;
+        }
+
+        private ProductModel CreateSport(dynamic sportGroup)
+        {
+            return new ProductModel
+            {
+                Id = sportGroup.SportId,
+                Name = sportGroup.SportName,
+                Items = new List<ProductModel>()
+            };
+        }
+
+        private ProductModel CreateProduct(dynamic data)
+        {
+            return new ProductModel
+            {
+                Id = data.Bettype,
+                Name = data.BettypeName
+            };
+        }
+
+        private ProductModel CreateGroup(int key)
+        {
+            return new ProductModel
+            {
+                Id = key,
+                Items = new List<ProductModel>()
+            };
+        }
+
+        private ProductModel AddSportGroup(IGrouping<dynamic, dynamic> rawData)
+        {
+            var indGroup = CreateGroup(rawData.Key.SportId);
+            indGroup.Name = rawData.Key.SportName;
+            foreach (var data in rawData)
+            {
+                indGroup.ChildsInfo.Add(CreateProduct(data));
+            }
+
+            return indGroup;
+        }
+
+        private List<ProductModel> CalculateSportData(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscSportbookId).Any())
+            {
+                CreateSportBookGroups(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscVirtualSportsId).Any())
+            {
+                CreateVirtualSportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscNG2ProductID).Any())
+            {
+                CreateNG2SportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductId == 3).Any())
+            {
+                CreateNGSportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscBetradarVirtualSportsId).Any())
+            {
+                CreateBetradarVirtualSportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductId == BetCountConstants.BetBuilderProductID).Any())
+            {
+                CreateBetBuilderSportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductId == BetCountConstants.SabaClubProductId).Any())
+            {
+                CreateSportGroup(rawData, sports, BetCountConstants.SabaClubProductId);
+            }
+
+            if (rawData.Where(x => x.ProductId == BetCountConstants.VGaming).Any())
+            {
+                CreateSportGroup(rawData, sports, BetCountConstants.VGaming);
+            }
+
+            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscVirtualSportsThirdId).Any())
+            {
+                CreateVirtualSportThirdGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscVirtualSportsThirdIdOld).Any())
+            {
+                CreateVirtualSportThirdOldGroup(rawData, sports);
+            }
+
+            return sports;
+        }
+
+        private List<ProductModel> CreateSportBookGroups(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            var sportbookRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscSportbookId);
+            var soccerGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.MiscSoccerGroupId);
+            var otherSportGroupData = sportbookRaw.Where(r =>
+                r.SportId != BetCountConstants.MiscSoccerGroupId
+                && r.SportId != BetCountConstants.MiscParLaySportId
+                && r.SportId != BetCountConstants.MiscBasketballGroupId
+                && r.SportId != BetCountConstants.MiscEsportsGroupId
+                && r.SportId != BetCountConstants.SBAdjustmentId);
+            
+            var parlayGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.MiscParLaySportId);
+            var basketballGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.MiscBasketballGroupId);
+            var esportsGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.MiscEsportsGroupId);
+            var sbAdjustmentGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.SBAdjustmentId);
+
+            sports.Add(GenerateSports(soccerGroupData));
+            sports.Add(GenerateSports(basketballGroupData));
+            sports.Add(GenerateSports(esportsGroupData));
+            sports.Add(GenerateOtherSports(otherSportGroupData));
+            sports.Add(GenerateSports(parlayGroupData));
+            sports.Add(GenerateSports(sbAdjustmentGroupData));
+
+            return sports;
+        }
+
+        private List<ProductModel> CreateVirtualSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            var virtualsportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscVirtualSportsId);
+            var virtualsportGroups = virtualsportRaw.GroupBy(x => new { x.SportId, x.SportName });
+            foreach (var virtualsportGroup in virtualsportGroups)
+            {
+                sports.Add(AddSportGroup(virtualsportGroup));
+            }
+
+            return sports;
+        }
+
+        private List<ProductModel> CreateBetradarVirtualSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            var virtualsportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscBetradarVirtualSportsId);
+            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportId, rawinfo.SportName });
+            foreach (var virtualsportGroup in virtualsportGroups)
+            {
+                sports.Add(AddSportGroup(virtualsportGroup));
+            }
+
+            return sports;
+        }
+
+        private List<ProductModel> CreateNG2SportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            var numberGame2sportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscNG2ProductID);
+            var numberGame2sportGroups = numberGame2sportRaw.GroupBy(rawinfo => new { rawinfo.SportId, rawinfo.SportName });
+            foreach (var numberGame2sportGroup in numberGame2sportGroups)
+            {
+                sports.Add(AddSportGroup(numberGame2sportGroup));
+            }
+
+            return sports;
+        }
+
+        private List<ProductModel> CreateNGSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            var numberGamesportRaw = rawData.Where(r => r.ProductId == 3);
+            var numberGamesportGroups = numberGamesportRaw.GroupBy(rawinfo => new { rawinfo.SportId, rawinfo.SportName });
+            foreach (var numberGamesportGroup in numberGamesportGroups)
+            {
+                sports.Add(AddSportGroup(numberGamesportGroup));
+            }
+
+            return sports;
+        }
+
+        private List<ProductModel> CreateBetBuilderSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            var betBuilderRaw = rawData.Where(r => r.ProductId == BetCountConstants.BetBuilderProductID);
+            var betBuilderSportGroups = betBuilderRaw.GroupBy(rawinfo => new { rawinfo.SportId, rawinfo.SportName });
+            foreach (var group in betBuilderSportGroups)
+            {
+                if (sports.FirstOrDefault(x => x.Name == group.Key.SportName) != null)
+                {
+                    foreach (var item in group)
+                    {
+                        sports.FirstOrDefault(x => x.Name == group.Key.SportName).Items.Add(new ProductModel
+                        {
+                            Id = item.Bettype,
+                            Name = item.BettypeName
+                        });
+                    }
+                }
+                else
+                {
+                    sports.Add(AddSportGroup(group));
+                }
+            }
+
+            return sports;
+        }
+
+        private List<ProductModel> CreateSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports, int productId)
+        {
+            var sportRaw = rawData.Where(r => r.ProductId == productId);
+            var sportGroups = sportRaw.GroupBy(rawinfo => new { rawinfo.SportId, rawinfo.SportName });
+            foreach (var sportGroup in sportGroups)
+            {
+                sports.Add(AddSportGroup(sportGroup));
+            }
+
+            return sports;
+        }
+
+        private string GetSportName(int sportId)
+        {
+            switch (sportId)
+            {
+                case BetCountConstants.MiscSoccerGroupId:
+                case BetCountConstants.MiscBasketballGroupId:
+                    return remotingRefService.GetSportName(sportId);
+
+                case BetCountConstants.MiscParLayGroupId:
+                    return "Parlay";
+
+                case BetCountConstants.MiscEsportsGroupId:
+                    return "E-Sports";
+
+                case BetCountConstants.SBAdjustmentId:
+                    return "SB Adjustment";
+            }
+
+            return string.Empty;
+        }
+
+        private List<ProductModel> CreateVirtualSportThirdGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            var virtualsportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscVirtualSportsThirdId);
+            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportId, rawinfo.SportName });
+            foreach (var virtualsportGroup in virtualsportGroups)
+            {
+                sports.Add(AddSportGroup(virtualsportGroup));
+            }
+
+            return sports;
+        }
+
+        private List<ProductModel> CreateVirtualSportThirdOldGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        {
+            var virtualsportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscVirtualSportsThirdIdOld);
+            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportId, rawinfo.SportName });
+            foreach (var virtualsportGroup in virtualsportGroups)
+            {
+                sports.Add(AddSportGroup(virtualsportGroup));
+            }
+
+            return sports;
+        }
+    }
+}
