@@ -343,4 +343,8 @@
 			<Mapping DataField="Site" ObjectProperty="Name" />
 		</Setting>
 	</Function>
+	<Function Name="Misc - Bet Count">
+		<Setting Key="Misc_Bet_Count_GetProducts" SpName="Acc_Rpt_BetCount_SelProductSportBettypes" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="600" />
+	</Function>
 </Functions>

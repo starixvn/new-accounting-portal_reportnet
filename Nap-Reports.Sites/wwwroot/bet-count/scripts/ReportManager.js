@@ -38,7 +38,7 @@ Fanex.AccountingReports.Misc.BetCount.ReportManager = function () {
         $.ajax({
             type: "POST",
             async: false,
-            url: window.rootUrl + "Misc/BetCount/GetProducts",
+            url: window.rootUrl + "/api/bet-count/product",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: null,
@@ -65,7 +65,7 @@ Fanex.AccountingReports.Misc.BetCount.ReportManager = function () {
         $.ajax({
             type: "POST",
             async: false,
-            url: window.rootUrl + "Misc/BetCount/GetSports",
+            url: window.rootUrl + "/api/bet-count/sport",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(data),

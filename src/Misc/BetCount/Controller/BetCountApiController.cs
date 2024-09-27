@@ -25,7 +25,6 @@ namespace BetCount.Controller
             return Ok(result);
         }
 
-
         [Route("product")]
         public async Task<IActionResult> GetProduct(ProductCriteria criteria)
         {
@@ -34,9 +33,7 @@ namespace BetCount.Controller
             return Ok(result);
         }
 
-
-
-        [Route("sports")]
+        [Route("sport")]
         public async Task<IActionResult> GetSport(ProductCriteria criteria)
         {
             var result = await service.GetSport(criteria);

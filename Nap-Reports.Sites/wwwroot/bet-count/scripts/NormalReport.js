@@ -157,7 +157,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         var data = { ProductID: productIds };
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "Misc/BetCount/GetSports",
+            url: window.rootUrl + "/api/bet-count/main",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(data),
@@ -280,11 +280,11 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             if (productGroup.Name.toLowerCase() == "saba casino") {
                 var values = '';
 
-                for (var currentProduct = 0; currentProduct < productGroup.ChildsInfo.length; currentProduct++) {
-                    var mbcGroup = productGroup.ChildsInfo[currentProduct];
+                for (var currentProduct = 0; currentProduct < productGroup.Items.length; currentProduct++) {
+                    var mbcGroup = productGroup.Items[currentProduct];
                     var mbcGroupId = mbcGroup.Id;
-                    for (var currentGameType = 0; currentGameType < mbcGroup.ChildsInfo.length; currentGameType++) {
-                        var bettype = mbcGroup.ChildsInfo[currentGameType];
+                    for (var currentGameType = 0; currentGameType < mbcGroup.Items.length; currentGameType++) {
+                        var bettype = mbcGroup.Items[currentGameType];
                         var bettypeId = bettype.Id;
                         values += mbcGroupId + '_' + bettypeId + ',';
                     }
@@ -303,13 +303,13 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             }
 
             if (productGroup.Name.toLowerCase() == "poker games") {
-                var porkerSportLength = productGroup.ChildsInfo.length;
+                var porkerSportLength = productGroup.Items.length;
                 var porkerBetTypeList = [];
                 for (var j = 0; j < porkerSportLength; j++) {
-                    var porkerSportGroup = productGroup.ChildsInfo[j];
-                    var porkerBetTypeLength = porkerSportGroup.ChildsInfo.length;
+                    var porkerSportGroup = productGroup.Items[j];
+                    var porkerBetTypeLength = porkerSportGroup.Items.length;
                     for (var k = 0; k < porkerBetTypeLength; k++) {
-                        var betType = porkerSportGroup.ChildsInfo[k];
+                        var betType = porkerSportGroup.Items[k];
                         porkerBetTypeList.push({
                             id: "#" + ddId + "_Product_Sport" + porkerSportGroup.Id + "_BetType" + betType.Id,
                             value: porkerSportGroup.Id + "_" + betType.Id,
@@ -371,14 +371,14 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 continue;
             }
 
-            var sportLength = productGroup.ChildsInfo.length;
+            var sportLength = productGroup.Items.length;
             for (var j = 0; j < sportLength; j++) {
-                var sportGroup = productGroup.ChildsInfo[j];
-                var betTypeLength = sportGroup.ChildsInfo.length;
+                var sportGroup = productGroup.Items[j];
+                var betTypeLength = sportGroup.Items.length;
                 var betTypeList = [];
 
                 for (var k = 0; k < betTypeLength; k++) {
-                    var betType = sportGroup.ChildsInfo[k];
+                    var betType = sportGroup.Items[k];
                     betTypeList.push({
                         id: "#" + ddId + "_Product_Sport" + sportGroup.Id + "_BetType" + betType.Id,
                         value: sportGroup.Id + "_" + betType.Id,
@@ -476,7 +476,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             var sportGrouplength = sports ? sports.length : 0;
             for (var i = 0; i < sportGrouplength; i++) {
                 var sportGroup = sports[i];
-                var sportLength = sportGroup.ChildsInfo ? sportGroup.ChildsInfo.length : 0;
+                var sportLength = sportGroup.Items ? sportGroup.Items.length : 0;
                 var ddSportGroup = [];
 
                 if ((_cachedData.Sportbook_SportID.contains(sportGroup.Id) && isExistsSportbook == true) ||
@@ -528,11 +528,11 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
 
     self.generateSportbyProduct = function (sportGroup, sportLength, ddSportGroup, ddSport, ddId) {
         for (var j = 0; j < sportLength; j++) {
-            var sport = sportGroup.ChildsInfo[j];
-            var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
+            var sport = sportGroup.Items[j];
+            var betTypeLength = sport.Items ? sport.Items.length : 0;
             var ddBetType = [];
             for (var k = 0; k < betTypeLength; k++) {
-                var betType = sport.ChildsInfo[k];
+                var betType = sport.Items[k];
                 ddBetType.push({
                     id: "#" + ddId + "SportGroup" + sportGroup.Id +
                                             "_Sport" + sport.Id +
@@ -555,7 +555,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 items: ddBetType
             });
         }
-        if (sportGroup.Name != "Parlay" || (sportGroup.ChildsInfo && sportGroup.ChildsInfo.length > 0)) {
+        if (sportGroup.Name != "Parlay" || (sportGroup.Items && sportGroup.Items.length > 0)) {
             ddSport.push({
                 id: "#" + ddId + "SportGroup" + sportGroup.Id.toString(),
                 value: sportGroup.Id.toString(),
@@ -594,7 +594,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         if (validateParams() == true) {
             $.ajax({
                 type: "POST",
-                url: window.rootUrl + "Misc/BetCount/GetReport",
+                url: window.rootUrl + "/api/bet-count/main",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: JSON.stringify({
@@ -780,7 +780,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
 
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "Misc/BetCount/SortReport",
+            url: window.rootUrl + "/api/bet-count/sort",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify({

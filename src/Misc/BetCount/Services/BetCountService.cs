@@ -22,7 +22,7 @@ namespace BetCount.Services
     }
 
     public class BetCountServiceImp(
-        IDynamicRepository repository, 
+        IDynamicRepository repository,
         RemotingRefService remotingRefService,
         IMapper mapper) : BetCountService
     {
@@ -72,7 +72,7 @@ namespace BetCount.Services
 
                        var groupTotal = transByIsDepositionGroup.Items.DynamicSum();
                        transByIsDepositionGroup.Total = groupTotal;
-                       
+
                        report.Items.Add(transByIsDepositionGroup);
                    });
 
@@ -85,7 +85,7 @@ namespace BetCount.Services
 
         public async Task<TransactionModel> SortReport(BetCountCriteria criteria)
         {
-            var report =  await GetReport(criteria);
+            var report = await GetReport(criteria);
 
             if (report != null &&
                 report.Items != null &&
@@ -106,6 +106,8 @@ namespace BetCount.Services
 
         public async Task<List<ProductModel>> GetProduct(ProductCriteria criteria)
         {
+            criteria ??= new ProductCriteria();
+
             var rawData = await repository.FetchAsync<ProductEntity>(criteria);
 
             List<ProductModel> products = new List<ProductModel>();
@@ -147,6 +149,8 @@ namespace BetCount.Services
 
         public async Task<List<ProductModel>> GetSport(ProductCriteria criteria)
         {
+            criteria ??= new ProductCriteria();
+
             var rawData = await repository.FetchAsync<ProductEntity>(criteria);
 
             var sports = new List<ProductModel>();
@@ -243,21 +247,21 @@ namespace BetCount.Services
                 id == BetCountConstants.MiscBasketballGroupId ||
                 id == BetCountConstants.MiscEsportsGroupId ||
                 id == BetCountConstants.SBAdjustmentId)
-            { 
+            {
                 return id;
             }
             else
-            { 
-                return -111; 
+            {
+                return -111;
             }
 
         }
 
-        private ProductModel GenerateOtherSports(IEnumerable<dynamic> rawData)
+        private ProductModel GenerateOtherSports(IEnumerable<ProductEntity> rawData)
         {
             var indGroup = CreateGroup(BetCountConstants.MiscOtherSportId);
             indGroup.Name = "Others";
-            var sportGroups = rawData.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            var sportGroups = rawData.GroupBy(rawinfo => new { rawinfo.SportId, rawinfo.SportName });
             foreach (var sportGroup in sportGroups)
             {
                 var sport = CreateSport(sportGroup.Key);
@@ -377,7 +381,7 @@ namespace BetCount.Services
                 && r.SportId != BetCountConstants.MiscBasketballGroupId
                 && r.SportId != BetCountConstants.MiscEsportsGroupId
                 && r.SportId != BetCountConstants.SBAdjustmentId);
-            
+
             var parlayGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.MiscParLaySportId);
             var basketballGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.MiscBasketballGroupId);
             var esportsGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.MiscEsportsGroupId);

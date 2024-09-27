@@ -61,6 +61,7 @@ namespace Nap_Reports.Sites
             services.RegisterMarginReportServices();
             services.RegisterDailyCreatedCustomersServices();
             services.RegisterTotalSMAAndActiveMemberServices();
+            services.RegisterBetCountServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
