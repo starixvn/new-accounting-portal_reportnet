@@ -71,13 +71,15 @@ namespace BetCount.Services
                             });
 
                        var groupTotal = transByIsDepositionGroup.Items.DynamicSum();
+                       groupTotal.SiteName = transByIsDepositionGroup.SiteName;
                        transByIsDepositionGroup.Total = groupTotal;
 
                        report.Items.Add(transByIsDepositionGroup);
                    });
 
 
-            var total = report.Items.DynamicSum();
+            var total = report.Items.Select(x => x.Total).DynamicSum();
+            total.SiteName = "Total";
             report.Total = total;
 
             return report;

@@ -345,6 +345,13 @@
 	</Function>
 	<Function Name="Misc - Bet Count">
 		<Setting Key="Misc_Bet_Count_GetProducts" SpName="Acc_Rpt_BetCount_SelProductSportBettypes" DbName="DBWH.bodb_dwrs.wsv_nap" />
-		<Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="600" />
+		<Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="600">
+			<Mapping DataField="Site" ObjectProperty="SiteName" />
+			<Mapping DataField="MemberWL" ObjectProperty="MemberWinLoss" />
+			<Mapping DataField="AgentWL" ObjectProperty="AgentWinLoss" />
+			<Mapping DataField="MasterWL" ObjectProperty="MasterWinLoss" />
+			<Mapping DataField="SuperWL" ObjectProperty="SuperWinLoss" />
+			<Mapping DataField="SMAWL" ObjectProperty="SMAWinLoss" />
+		</Setting>
 	</Function>
 </Functions>

@@ -579,7 +579,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
 
         _tables.reportSorter.click(function () {
             if (_cachedData.betCountReport &&
-                _cachedData.betCountReport.TransactionList.length > 0) {
+                _cachedData.betCountReport.Items.length > 0) {
                 AccReport.gridSorterManager.sortColumn($(this).find(".divSorter"), self.sortReport);
             }
         });
@@ -683,22 +683,22 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         _tables.reportTitle.html(reportTitle);
 
         if (report &&
-            report.TransactionList &&
-            report.TransactionList.length > 0) {
+            report.Items &&
+            report.Items.length > 0) {
             _tables.reportExportExcel.removeClass("display-none");
             _tables.reportDivSorter.addClass("divSorter");
             self.resetTempHtml();
             var frozenHtml = '';
 
-            var siteGroupNumber = report.TransactionList.length;
+            var siteGroupNumber = report.Items.length;
             for (var i = 0; i < siteGroupNumber; i++) {
-                var siteGroup = report.TransactionList[i];
-                var transactionLength = siteGroup.TransactionList.length;
+                var siteGroup = report.Items[i];
+                var transactionLength = siteGroup.Items.length;
                 var siteGroupTotal = siteGroup.Total;
                 self.renderReportRow(siteGroupTotal, true);
 
                 for (var j = 0; j < transactionLength; j++) {
-                    var reportItem = siteGroup.TransactionList[j];
+                    var reportItem = siteGroup.Items[j];
                     self.renderReportRow(reportItem);
                 }
             }
@@ -828,7 +828,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         _tables.reportFilter.removeClass("display-none");
         _tables.filterNote.removeClass("display-none");
         if (_cachedData.betCountReport &&
-            _cachedData.betCountReport.TransactionList.length > 0) {
+            _cachedData.betCountReport.Items.length > 0) {
             _tables.reportHeader.removeClass("display-none");
             _tables.report.removeClass("display-none");
         }

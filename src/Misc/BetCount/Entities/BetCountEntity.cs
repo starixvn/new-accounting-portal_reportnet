@@ -2,7 +2,7 @@
 {
     public class BetCountEntity
     {
-        public string Site { get; set; }
+        public string SiteName { get; set; }
 
         public bool IsDeposit { get; set; } 
 
