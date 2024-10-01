@@ -19,8 +19,7 @@ namespace CreditMovementMonitor.Controller
         }
 
         [Route("report")]
-        [HttpPost]
-        public async Task<IActionResult> GetReport([FromBody]CreditMovementCriteria criteria)
+        public async Task<IActionResult> GetReport(CreditMovementCriteria criteria)
         {
             var result = await service.GetReport(criteria);
 

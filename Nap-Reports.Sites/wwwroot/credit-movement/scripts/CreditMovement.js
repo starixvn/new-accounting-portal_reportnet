@@ -264,7 +264,7 @@ Fanex.AccountingReports.Misc.CreditMovement = function () {
             $.ajax({
                 type: "POST",
                 url: window.rootUrl + "/api/credit-movement/report",
-                contentType: "application/json; charset=utf-8",
+                contentType: "application/json",
                 dataType: "json",
                 data: JSON.stringify(_params),
                 beforeSend: function () {
@@ -311,6 +311,14 @@ Fanex.AccountingReports.Misc.CreditMovement = function () {
 
         if (_params.pageSize == null) {
             _params.pageSize = 20;
+        }
+
+        if (_params.isPagingCallBack == null) {
+             _params.isPagingCallBack = false;
+        }
+
+        if (_params.amount == null || isNaN(_params.amount)) {
+             _params.amount = 0;
         }
     };
 

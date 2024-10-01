@@ -10,6 +10,7 @@ namespace Nap_Reports.Sites.Controllers
         [NapAuth(FunctionKey = AccReportFunctionKeys.CreditMovement, Policy = Constant.Policy.Read)]
         public IActionResult Index()
         {
+            ViewBag.Amount = "300,000";
             return View();
         }
     }

@@ -22,14 +22,8 @@ namespace CreditMovementMonitor.Criteria
         [SpParam(Ignored = true)]
         public int PageSize { get; set; }
 
-        public override bool IsValid()
-        {
-            return this.FromDate <= this.ToDate;
-        }
+        public override bool IsValid() => FromDate <= ToDate;
 
-        public override string GetSettingKey()
-        {
-            return "Misc_CreditMovement_GetReport";
-        }
+        public override string GetSettingKey() => "Misc_CreditMovement_GetReport";
     }
 }
