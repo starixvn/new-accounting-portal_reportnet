@@ -1257,6 +1257,7 @@
     <ProjectReference Include="..\src\Misc\ActualMemberBet\ActualMemberBet.csproj" />
     <ProjectReference Include="..\src\Misc\BetCount\BetCount.csproj" />
     <ProjectReference Include="..\src\Misc\CashOutPerformance\CashOutPerformance.csproj" />
+    <ProjectReference Include="..\src\Misc\CreditMovementMonitor\CreditMovementMonitor.csproj" />
     <ProjectReference Include="..\src\Misc\DailyCreatedCustomers\DailyCreatedCustomers.csproj" />
     <ProjectReference Include="..\src\Misc\Exchange\Exchange.csproj" />
     <ProjectReference Include="..\src\Misc\ResultAnalysis\ResultAnalysis.csproj" />

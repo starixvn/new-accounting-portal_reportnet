@@ -2,7 +2,7 @@ using DailyCreatedCustomers.Criteria;
 using DailyCreatedCustomers.Entities;
 using DailyCreatedCustomers.Model;
 using Fanex.Data.Repository;
-using Nap_Reports.Utilities.DateTimes;
+using Utilities.DateTimes;
 using Utilities.LinqDynamicSum;
 
 namespace DailyCreatedCustomers.Services

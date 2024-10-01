@@ -2,7 +2,7 @@
 using CompanyWinLoss.Services;
 using Fanex.Excel;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Utilities.DateTimes;
+using Utilities.DateTimes;
 
 namespace CompanyWinLoss.Controller
 {

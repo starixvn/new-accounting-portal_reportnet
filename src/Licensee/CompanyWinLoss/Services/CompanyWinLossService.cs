@@ -5,7 +5,7 @@ using Fanex.Data.Repository;
 using Fanex.Excel.Enums;
 using Fanex.Excel.Models;
 using Fanex.NAP.Client.Helpers.Web;
-using Nap_Reports.Utilities.DateTimes;
+using Utilities.DateTimes;
 using Utilities.BalanceUpServices;
 
 namespace CompanyWinLoss.Services

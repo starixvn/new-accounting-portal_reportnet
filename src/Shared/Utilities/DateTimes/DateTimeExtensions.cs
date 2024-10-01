@@ -1,4 +1,4 @@
-﻿namespace Nap_Reports.Utilities.DateTimes
+﻿namespace Utilities.DateTimes
 {
     public static class DateTimeExtensions
     {

@@ -1,4 +1,4 @@
-using Nap_Reports.Utilities.DateTimes;
+using Utilities.DateTimes;
 
 namespace TotalSMAAndActiveMember.Model
 {

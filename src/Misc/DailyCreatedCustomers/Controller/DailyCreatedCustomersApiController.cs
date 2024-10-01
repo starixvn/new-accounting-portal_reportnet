@@ -1,7 +1,7 @@
 ﻿using DailyCreatedCustomers.Criteria;
 using DailyCreatedCustomers.Services;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Utilities.DateTimes;
+using Utilities.DateTimes;
 
 namespace DailyCreatedCustomers.Controller
 {
