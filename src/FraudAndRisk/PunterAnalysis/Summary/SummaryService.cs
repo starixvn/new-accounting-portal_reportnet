@@ -1,4 +1,4 @@
-﻿using Nap_Reports.Utilities.CustomerTrackingSystem;
+﻿using Utilities.CustomerTrackingSystem;
 using PunterAnalysis.Shared;
 using PunterAnalysis.Summary.Model;
 using Utilities.Configurations;

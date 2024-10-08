@@ -1,4 +1,4 @@
-﻿namespace Nap_Reports.Utilities.Constants;
+﻿namespace Utilities.Constants;
 
 public static class BalanceTypeConstants
 {

@@ -4,7 +4,7 @@ using LegendManagement.Criteria;
 using LegendManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 using Nap_Reports.Utilities;
-using Nap_Reports.Utilities.Controller;
+using Utilities.Controller;
 
 namespace LegendManagement.Controllers;
 

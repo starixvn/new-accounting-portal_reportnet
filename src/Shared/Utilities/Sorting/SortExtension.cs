@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Nap_Reports.Utilities.Sorting
+namespace Utilities.Sorting
 {
     public static class SortExtension
     {

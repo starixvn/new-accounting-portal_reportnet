@@ -1,7 +1,7 @@
 using DirectBalance.Criteria;
 using DirectBalance.Model;
 using Fanex.Data.Repository;
-using Nap_Reports.Utilities.Currencies;
+using Utilities.Currencies;
 using Utilities.LinqDynamicSum;
 
 namespace DirectBalance.Services

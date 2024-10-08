@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Utilities.Constants;
-using Nap_Reports.Utilities.Services;
+using Utilities.Constants;
+using Utilities.Services;
 using SuperBalance.Criteria;
 using SuperBalance.Service;
 using SuperBalance.Services;

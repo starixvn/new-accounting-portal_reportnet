@@ -4,7 +4,7 @@ using BetCount.Criteria;
 using BetCount.Entities;
 using BetCount.Model;
 using Fanex.Data.Repository;
-using Nap_Reports.Utilities.Sorting;
+using Utilities.Sorting;
 using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;
 

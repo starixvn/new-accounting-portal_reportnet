@@ -1,4 +1,4 @@
-﻿namespace Nap_Reports.Utilities.CustomerTrackingSystem.Model
+﻿namespace Utilities.CustomerTrackingSystem.Model
 {
     public class CustomerById
     {

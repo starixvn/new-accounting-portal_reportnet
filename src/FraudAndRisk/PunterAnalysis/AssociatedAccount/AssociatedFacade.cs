@@ -1,5 +1,5 @@
 ﻿using Fanex.Data.Repository;
-using Nap_Reports.Utilities.CustomerTrackingSystem;
+using Utilities.CustomerTrackingSystem;
 using PunterAnalysis.AssociatedAccount.Model;
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;

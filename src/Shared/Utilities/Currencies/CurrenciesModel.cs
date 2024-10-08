@@ -1,4 +1,4 @@
-﻿namespace Nap_Reports.Utilities.Currencies
+﻿namespace Utilities.Currencies
 {
     public class CurrenciesModel
     {

@@ -1,6 +1,6 @@
 ﻿using Fanex.Data.Repository;
 
-namespace Nap_Reports.Utilities.Currencies
+namespace Utilities.Currencies
 {
     public class CurrenciesCriteria : CriteriaBase
     {

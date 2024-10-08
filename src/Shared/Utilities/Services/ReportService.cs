@@ -1,6 +1,6 @@
-﻿using Nap_Reports.Utilities.Constants;
+﻿using Utilities.Constants;
 
-namespace Nap_Reports.Utilities.Services;
+namespace Utilities.Services;
 
 public static class ReportService
 {

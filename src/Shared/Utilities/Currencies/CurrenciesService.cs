@@ -1,7 +1,7 @@
 ﻿using Fanex.Caching;
 using Fanex.Data.Repository;
 
-namespace Nap_Reports.Utilities.Currencies
+namespace Utilities.Currencies
 {
     public interface CurrenciesService
     {

@@ -1,7 +1,7 @@
 using DirectBalance.Criteria;
 using DirectBalance.Services;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Utilities.Services;
+using Utilities.Services;
 
 namespace DirectBalance.Controller
 {

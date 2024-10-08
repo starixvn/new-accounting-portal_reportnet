@@ -358,4 +358,15 @@
 		<Setting Key="Misc_CreditMovement_GetReport" SpName="Acc_Rpt_CreditMovement" DbName="DBLOG.bodb_CustomerLog.wsv_nap" TimeOut="600" />
 		<Setting Key="Misc_CreditMovement_GetSites" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="600" />
 	</Function>
+	<Function Name="Fraud and Risk - Parlay Won">
+		<Setting Key="ParlayWon_GetReport" SpName="Acc_Rpt_ParlayWon" DbName="DBAGE.bodb02.wsv_nap">
+			<Mapping DataField="Actual_Stake" ObjectProperty="ActualStake" />
+			<Mapping DataField="Winlost" ObjectProperty="WinLoss" />
+			<Mapping DataField="Actual_Stake_RM" ObjectProperty="ActualStakeRM" />
+			<Mapping DataField="Winlost_RM" ObjectProperty="WinLossRM" />
+			<Mapping DataField="CompanyStake_RM" ObjectProperty="CompanyStakeRM" />
+			<Mapping DataField="CompanyActual_Stake_RM" ObjectProperty="CompanyActualStakeRM" />
+			<Mapping DataField="CompanyWinlost_RM" ObjectProperty="CompanyWinLossRM" />
+		</Setting>
+	</Function>
 </Functions>

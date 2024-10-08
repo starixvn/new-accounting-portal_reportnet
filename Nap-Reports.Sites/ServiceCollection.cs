@@ -63,6 +63,7 @@ namespace Nap_Reports.Sites
             services.RegisterTotalSMAAndActiveMemberServices();
             services.RegisterBetCountServices();
             services.RegisterCreditMovementServices();
+            services.RegisterParlayWonServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -214,6 +215,10 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
               "/bet-count/styles/bet-count.css",
               "/bet-count/styles/BetCount.less");
+
+                pipeline.AddLessBundle(
+              "/parlay-won/styles/parlay-won.css",
+              "/parlay-won/styles/ParlayWon.less");
             });
         }
     }

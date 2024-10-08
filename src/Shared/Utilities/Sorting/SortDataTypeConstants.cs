@@ -1,4 +1,4 @@
-﻿namespace Nap_Reports.Utilities.Sorting
+﻿namespace Utilities.Sorting
 {
     public static class SortDataTypeConstants
     {

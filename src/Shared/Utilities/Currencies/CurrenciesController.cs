@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Nap_Reports.Utilities.Currencies
+namespace Utilities.Currencies
 {
     [Route("api/currencies")]
     [ApiController]

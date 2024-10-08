@@ -1,5 +1,5 @@
 using Fanex.Data.Repository;
-using Nap_Reports.Utilities.Currencies;
+using Utilities.Currencies;
 using SuperBalance.Criteria;
 using SuperBalance.Model;
 using Utilities.LinqDynamicSum;

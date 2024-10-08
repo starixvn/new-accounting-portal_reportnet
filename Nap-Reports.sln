@@ -77,7 +77,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TotalSMAAndActiveMember", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BetCount", "src\Misc\BetCount\BetCount.csproj", "{82609863-0A67-4584-9E66-7497B28E99A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditMovementMonitor", "src\Misc\CreditMovementMonitor\CreditMovementMonitor.csproj", "{9FD9E778-BFC3-4694-BE65-6B2AB9178165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditMovementMonitor", "src\Misc\CreditMovementMonitor\CreditMovementMonitor.csproj", "{9FD9E778-BFC3-4694-BE65-6B2AB9178165}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParlayWon", "src\FraudAndRisk\ParlayWon\ParlayWon.csproj", "{12D59581-B586-46F5-8055-8B5585D61E4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -197,6 +199,10 @@ Global
 		{9FD9E778-BFC3-4694-BE65-6B2AB9178165}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FD9E778-BFC3-4694-BE65-6B2AB9178165}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FD9E778-BFC3-4694-BE65-6B2AB9178165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D59581-B586-46F5-8055-8B5585D61E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D59581-B586-46F5-8055-8B5585D61E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D59581-B586-46F5-8055-8B5585D61E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D59581-B586-46F5-8055-8B5585D61E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,6 +244,7 @@ Global
 		{51179581-86D1-48E4-A01E-CB5B8733FDDB} = {171618A1-8436-41ED-B06E-E07DEA604F31}
 		{82609863-0A67-4584-9E66-7497B28E99A2} = {171618A1-8436-41ED-B06E-E07DEA604F31}
 		{9FD9E778-BFC3-4694-BE65-6B2AB9178165} = {171618A1-8436-41ED-B06E-E07DEA604F31}
+		{12D59581-B586-46F5-8055-8B5585D61E4D} = {CE6B9B9F-BC24-4444-AC6D-B36D9270AB7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}

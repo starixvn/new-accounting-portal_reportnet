@@ -1,4 +1,4 @@
-﻿namespace Nap_Reports.Utilities.Controller;
+﻿namespace Utilities.Controller;
 
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;

@@ -1,10 +1,10 @@
-﻿using Nap_Reports.Utilities.CustomerTrackingSystem.Model;
+﻿using Utilities.CustomerTrackingSystem.Model;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Xml.Linq;
 
-namespace Nap_Reports.Utilities.CustomerTrackingSystem
+namespace Utilities.CustomerTrackingSystem
 {
     public interface CustomerTrackingService
     {
