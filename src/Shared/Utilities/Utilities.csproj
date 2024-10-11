@@ -11,8 +11,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="7.0.0" />
-    <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.4" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2" />
+    <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.5" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.4" />
     <PackageReference Include="Fanex.Excel" Version="2.6.2" />
     <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.13" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.4" />

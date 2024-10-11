@@ -1216,18 +1216,18 @@
   <ItemGroup>
     <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
     <PackageReference Include="EPPlus" Version="7.0.0" />
-    <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.4" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2" />
+    <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.5" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.4" />
     <PackageReference Include="Fanex.Logging" Version="2.0.1.1" />
     <PackageReference Include="Fanex.Logging.Extensions" Version="1.0.6.1" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1.2" />
-    <PackageReference Include="Fanex.NAP.Client" Version="2.0.0.1" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.1.3" />
     <PackageReference Include="Fanex.NAP.Client.AspNetCore" Version="2.0.0.13" />
-    <PackageReference Include="Fanex.NAP.Signin" Version="2.0.1.1" />
+    <PackageReference Include="Fanex.NAP.Signin" Version="2.0.1.3" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.4" />
     <PackageReference Include="Fanex.Result.Core-NumberGame" Version="2.0.0" />
-    <PackageReference Include="Fanex.Result.Core-Sportsbook" Version="2.0.0.9-upgrade-01" />
-    <PackageReference Include="Fanex.Result.Core.RemotingRef" Version="2.0.0.2" />
+    <PackageReference Include="Fanex.Result.Core-Sportsbook" Version="2.0.1.3" />
+    <PackageReference Include="Fanex.Result.Core.RemotingRef" Version="2.0.0.3" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.405" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.3.2" />
@@ -1254,6 +1254,7 @@
     <ProjectReference Include="..\src\Main\HouseWinLoss\HouseWinLoss.csproj" />
     <ProjectReference Include="..\src\Main\SBPerformance\SBPerformance.csproj" />
     <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />
+    <ProjectReference Include="..\src\Main\TraderPerformanceSoccer\TraderPerformanceSoccer.csproj" />
     <ProjectReference Include="..\src\Misc\AbnormalBet\AbnormalBet.csproj" />
     <ProjectReference Include="..\src\Misc\ActualMemberBet\ActualMemberBet.csproj" />
     <ProjectReference Include="..\src\Misc\BetCount\BetCount.csproj" />
