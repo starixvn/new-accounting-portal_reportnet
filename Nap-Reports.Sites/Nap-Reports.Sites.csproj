@@ -1217,7 +1217,7 @@
     <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
     <PackageReference Include="EPPlus" Version="7.0.0" />
     <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.5" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.4" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="0.0.2" />
     <PackageReference Include="Fanex.Logging" Version="2.0.1.1" />
     <PackageReference Include="Fanex.Logging.Extensions" Version="1.0.6.1" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1.2" />
