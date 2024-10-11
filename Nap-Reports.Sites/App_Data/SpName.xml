@@ -369,4 +369,10 @@
 			<Mapping DataField="CompanyWinlost_RM" ObjectProperty="CompanyWinLossRM" />
 		</Setting>
 	</Function>
+	 <Function Name="Main - Trader Performance">
+		<Setting Key="Main_TraderPerformance_GetReport" SpName="Acc_Rpt_TraderPerformanceSum" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />
+		<Setting Key="Main_TraderPerformance_GetDetailReport" SpName="Acc_Rpt_TraderPerformanceDetail" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />
+		<Setting Key="Main_TraderPerformance_GetReport_PH" SpName="Acc_Rpt_TraderPerformanceSum_SoccerPH" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />
+		<Setting Key="Main_TraderPerformance_GetDetailReport_PH" SpName="Acc_Rpt_TraderPerformanceDetail_SoccerPH" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />
+	  </Function>
 </Functions>

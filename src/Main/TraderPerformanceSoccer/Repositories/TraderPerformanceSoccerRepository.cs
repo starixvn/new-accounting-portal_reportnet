@@ -201,10 +201,10 @@ namespace TraderPerformanceSoccer.Repositories
             var traderGroupInfo = new TraderPerformanceSoccerModel
             {
                 Hdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
-                FirstHalfHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}__1sthdp"]),
-                FifteenMinHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}__15minhdp"]),
-                FirstHalfOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}__1stou"]),
-                OU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}__ou"]),
+                FirstHalfHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
+                FifteenMinHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minhdp"]),
+                FirstHalfOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
+                OU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
                 FirstHalfOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
                 OneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
                 FifteenMinOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15min1x2"]),

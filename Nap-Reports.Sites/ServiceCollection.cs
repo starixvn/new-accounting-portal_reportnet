@@ -64,6 +64,7 @@ namespace Nap_Reports.Sites
             services.RegisterBetCountServices();
             services.RegisterCreditMovementServices();
             services.RegisterParlayWonServices();
+            services.RegisterTradePerformanceSoccerServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -219,6 +220,10 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
               "/parlay-won/styles/parlay-won.css",
               "/parlay-won/styles/ParlayWon.less");
+
+                pipeline.AddLessBundle(
+              "/trader-performance-soccer/styles/rader-performance-soccer.css",
+              "/trader-performance-soccer/styles/TraderPerformanceSoccer.less");
             });
         }
     }

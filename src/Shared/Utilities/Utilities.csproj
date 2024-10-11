@@ -18,5 +18,18 @@
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.4" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.3.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\MainLabels.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainLabels.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\MainLabels.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainLabels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>

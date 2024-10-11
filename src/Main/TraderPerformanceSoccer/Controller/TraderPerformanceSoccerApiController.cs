@@ -4,7 +4,7 @@ using TraderPerformanceSoccer.Services;
 
 namespace TraderPerformanceSoccer.Controller
 {
-    [Route("api/sma-win-loss/summary")]
+    [Route("api/trader-performance-soccer")]
     [ApiController]
     public class TraderPerformanceSoccerApiController(TraderPerformanceSoccerService service) : ControllerBase
     {
