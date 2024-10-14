@@ -222,8 +222,12 @@ namespace Nap_Reports.Sites
               "/parlay-won/styles/ParlayWon.less");
 
                 pipeline.AddLessBundle(
-              "/trader-performance-soccer/styles/rader-performance-soccer.css",
-              "/trader-performance-soccer/styles/TraderPerformanceSoccer.less");
+              "/trader-performance/styles/trader-performance-soccer.css",
+              "/trader-performance/styles/TraderPerformanceSoccer.less");
+
+                pipeline.AddLessBundle(
+              "/trader-performance/styles/trader-performance-other-sports.css",
+              "/trader-performance/styles/TraderPerformanceOtherSports.less");
             });
         }
     }

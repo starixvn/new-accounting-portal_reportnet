@@ -1254,7 +1254,7 @@
     <ProjectReference Include="..\src\Main\HouseWinLoss\HouseWinLoss.csproj" />
     <ProjectReference Include="..\src\Main\SBPerformance\SBPerformance.csproj" />
     <ProjectReference Include="..\src\Main\SMAWinLoss\SMAWinLoss.csproj" />
-    <ProjectReference Include="..\src\Main\TraderPerformanceSoccer\TraderPerformanceSoccer.csproj" />
+    <ProjectReference Include="..\src\Main\TraderPerformanceSoccer\TraderPerformance.csproj" />
     <ProjectReference Include="..\src\Misc\AbnormalBet\AbnormalBet.csproj" />
     <ProjectReference Include="..\src\Misc\ActualMemberBet\ActualMemberBet.csproj" />
     <ProjectReference Include="..\src\Misc\BetCount\BetCount.csproj" />

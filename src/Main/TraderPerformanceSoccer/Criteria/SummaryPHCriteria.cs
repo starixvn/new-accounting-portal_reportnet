@@ -1,6 +1,6 @@
 using Fanex.Data.Repository;
 
-namespace TraderPerformanceSoccer.Criteria
+namespace TraderPerformance.Criteria
 {
     public class SummaryPHCriteria : CriteriaBase
     {

@@ -1,11 +1,11 @@
 using Fanex.Data.Repository;
 using System.Data;
-using TraderPerformanceSoccer.Criteria;
-using TraderPerformanceSoccer.Model;
+using TraderPerformance.Criteria;
+using TraderPerformance.Model;
 using Utilities.DateTimes;
 using Utilities.RemotingRef;
 
-namespace TraderPerformanceSoccer.Repositories
+namespace TraderPerformance.Repositories
 {
     public interface TraderPerformanceSoccerRepository
     {
@@ -13,6 +13,7 @@ namespace TraderPerformanceSoccer.Repositories
 
         Task<TraderPerformanceSoccerDetailModel> GetTraderPerformanceSoccerDetailReport(DetailReportCriteria criteria);
     }
+
     public class TraderPerformanceSoccerRepositoryImp(
         IDynamicRepository repository, 
         RemotingRefService remotingRefService) 

@@ -1,4 +1,4 @@
-namespace TraderPerformanceSoccer.Model
+namespace TraderPerformance.Model
 {
     public class TraderPerformanceSoccerDetailModel
     {
@@ -94,157 +94,157 @@ namespace TraderPerformanceSoccer.Model
 
         public void CalculateTotal(TraderPerformanceSoccerDetailModel traderInfo)
         {
-            this.FirstHalfHdp += traderInfo.FirstHalfHdp;
-            this.Hdp += traderInfo.Hdp;
-            this.FifteenMinHdp += traderInfo.FifteenMinHdp;
-            this.FirstHalfOU += traderInfo.FirstHalfOU;
-            this.OU += traderInfo.OU;
-            this.FirstHalfOneXTwo += traderInfo.FirstHalfOneXTwo;
-            this.OneXTwo += traderInfo.OneXTwo;
-            this.FifteenMinOneXTwo += traderInfo.FifteenMinOneXTwo;
-            this.FirstHalfNoOfCorners += traderInfo.FirstHalfNoOfCorners;
-            this.FifteenMinNoOfCorners += traderInfo.FifteenMinNoOfCorners;
-            this.NoOfCorners += traderInfo.NoOfCorners;
-            this.FifteenMinOU += traderInfo.FifteenMinOU;
-            this.TenMinOU += traderInfo.TenMinOU;
-            this.SingleTeamOU += traderInfo.SingleTeamOU;
-            this.FirstHalfTotalBookings += traderInfo.FirstHalfTotalBookings;
-            this.TotalBookings += traderInfo.TotalBookings;
-            this.TotalBookingsFifteenMinOU += traderInfo.TotalBookingsFifteenMinOU;
-            this.TotalBookingsFifteenMinHDP += traderInfo.TotalBookingsFifteenMinHDP;
-            this.NextBookings += traderInfo.NextBookings;            
-            this.NextCorner += traderInfo.NextCorner;
-            this.Overall += traderInfo.Overall;
-            this.TenMinHdp += traderInfo.TenMinHdp;
-            this.TenMinOneXTwo += traderInfo.TenMinOneXTwo;
+            FirstHalfHdp += traderInfo.FirstHalfHdp;
+            Hdp += traderInfo.Hdp;
+            FifteenMinHdp += traderInfo.FifteenMinHdp;
+            FirstHalfOU += traderInfo.FirstHalfOU;
+            OU += traderInfo.OU;
+            FirstHalfOneXTwo += traderInfo.FirstHalfOneXTwo;
+            OneXTwo += traderInfo.OneXTwo;
+            FifteenMinOneXTwo += traderInfo.FifteenMinOneXTwo;
+            FirstHalfNoOfCorners += traderInfo.FirstHalfNoOfCorners;
+            FifteenMinNoOfCorners += traderInfo.FifteenMinNoOfCorners;
+            NoOfCorners += traderInfo.NoOfCorners;
+            FifteenMinOU += traderInfo.FifteenMinOU;
+            TenMinOU += traderInfo.TenMinOU;
+            SingleTeamOU += traderInfo.SingleTeamOU;
+            FirstHalfTotalBookings += traderInfo.FirstHalfTotalBookings;
+            TotalBookings += traderInfo.TotalBookings;
+            TotalBookingsFifteenMinOU += traderInfo.TotalBookingsFifteenMinOU;
+            TotalBookingsFifteenMinHDP += traderInfo.TotalBookingsFifteenMinHDP;
+            NextBookings += traderInfo.NextBookings;            
+            NextCorner += traderInfo.NextCorner;
+            Overall += traderInfo.Overall;
+            TenMinHdp += traderInfo.TenMinHdp;
+            TenMinOneXTwo += traderInfo.TenMinOneXTwo;
         }
 
         
         public void CalculateMarginTotal(TraderPerformanceSoccerDetailModel winLossInfo, TraderPerformanceSoccerDetailModel turnOverInfo)
         {
-            this.FirstHalfHdp = turnOverInfo.FirstHalfHdp == 0 ?
+            FirstHalfHdp = turnOverInfo.FirstHalfHdp == 0 ?
                 0 :
                 (winLossInfo.FirstHalfHdp / turnOverInfo.FirstHalfHdp) * 100;
-            this.Hdp = turnOverInfo.Hdp == 0 ?
+            Hdp = turnOverInfo.Hdp == 0 ?
                 0 :
                 (winLossInfo.Hdp / turnOverInfo.Hdp) * 100;
-            this.FifteenMinHdp = turnOverInfo.FifteenMinHdp == 0 ?
+            FifteenMinHdp = turnOverInfo.FifteenMinHdp == 0 ?
                 0 :
                 (winLossInfo.FifteenMinHdp / turnOverInfo.FifteenMinHdp) * 100;
-            this.FirstHalfOU = turnOverInfo.FirstHalfOU == 0 ?
+            FirstHalfOU = turnOverInfo.FirstHalfOU == 0 ?
                 0 :
                 (winLossInfo.FirstHalfOU / turnOverInfo.FirstHalfOU) * 100;
-            this.OU = turnOverInfo.OU == 0 ?
+            OU = turnOverInfo.OU == 0 ?
                 0 :
                 (winLossInfo.OU / turnOverInfo.OU) * 100;
-            this.FirstHalfOneXTwo = turnOverInfo.FirstHalfOneXTwo == 0 ?
+            FirstHalfOneXTwo = turnOverInfo.FirstHalfOneXTwo == 0 ?
                 0 :
                 (winLossInfo.FirstHalfOneXTwo / turnOverInfo.FirstHalfOneXTwo) * 100;
-            this.OneXTwo = turnOverInfo.OneXTwo == 0 ?
+            OneXTwo = turnOverInfo.OneXTwo == 0 ?
                 0 :
                 (winLossInfo.OneXTwo / turnOverInfo.OneXTwo) * 100;
-            this.FifteenMinOneXTwo = turnOverInfo.FifteenMinOneXTwo == 0 ?
+            FifteenMinOneXTwo = turnOverInfo.FifteenMinOneXTwo == 0 ?
                 0 :
                 (winLossInfo.FifteenMinOneXTwo / turnOverInfo.FifteenMinOneXTwo) * 100;
-            this.FirstHalfNoOfCorners = turnOverInfo.FirstHalfNoOfCorners == 0 ?
+            FirstHalfNoOfCorners = turnOverInfo.FirstHalfNoOfCorners == 0 ?
                 0 :
                 (winLossInfo.FirstHalfNoOfCorners / turnOverInfo.FirstHalfNoOfCorners) * 100;
-            this.FifteenMinNoOfCorners = turnOverInfo.FifteenMinNoOfCorners == 0 ?
+            FifteenMinNoOfCorners = turnOverInfo.FifteenMinNoOfCorners == 0 ?
                 0 :
                 (winLossInfo.FifteenMinNoOfCorners / turnOverInfo.FifteenMinNoOfCorners) * 100;
-            this.NoOfCorners = turnOverInfo.NoOfCorners == 0 ?
+            NoOfCorners = turnOverInfo.NoOfCorners == 0 ?
                 0 :
                 (winLossInfo.NoOfCorners / turnOverInfo.NoOfCorners) * 100;
-            this.FifteenMinOU = turnOverInfo.FifteenMinOU == 0 ?
+            FifteenMinOU = turnOverInfo.FifteenMinOU == 0 ?
                 0 :
                 (winLossInfo.FifteenMinOU / turnOverInfo.FifteenMinOU) * 100;
-            this.TenMinOU = turnOverInfo.TenMinOU == 0 ?
+            TenMinOU = turnOverInfo.TenMinOU == 0 ?
                 0 :
                 (winLossInfo.TenMinOU / turnOverInfo.TenMinOU) * 100;
-            this.SingleTeamOU = turnOverInfo.SingleTeamOU == 0 ?
+            SingleTeamOU = turnOverInfo.SingleTeamOU == 0 ?
                 0 :
                 (winLossInfo.SingleTeamOU / turnOverInfo.SingleTeamOU) * 100;
-            this.FirstHalfTotalBookings = turnOverInfo.FirstHalfTotalBookings == 0 ?
+            FirstHalfTotalBookings = turnOverInfo.FirstHalfTotalBookings == 0 ?
                 0 :
                 (winLossInfo.FirstHalfTotalBookings / turnOverInfo.FirstHalfTotalBookings) * 100;
-            this.TotalBookings = turnOverInfo.TotalBookings == 0 ?
+            TotalBookings = turnOverInfo.TotalBookings == 0 ?
                 0 :
                 (winLossInfo.TotalBookings / turnOverInfo.TotalBookings) * 100;
-            this.TotalBookingsFifteenMinOU = turnOverInfo.TotalBookingsFifteenMinOU == 0 ?
+            TotalBookingsFifteenMinOU = turnOverInfo.TotalBookingsFifteenMinOU == 0 ?
                 0 :
                 (winLossInfo.TotalBookingsFifteenMinOU / turnOverInfo.TotalBookingsFifteenMinOU) * 100;
-            this.TotalBookingsFifteenMinHDP = turnOverInfo.TotalBookingsFifteenMinHDP == 0 ?
+            TotalBookingsFifteenMinHDP = turnOverInfo.TotalBookingsFifteenMinHDP == 0 ?
                 0 :
                 (winLossInfo.TotalBookingsFifteenMinHDP / turnOverInfo.TotalBookingsFifteenMinHDP) * 100;
-            this.NextBookings = turnOverInfo.NextBookings == 0 ?
+            NextBookings = turnOverInfo.NextBookings == 0 ?
                 0 :
                 (winLossInfo.NextBookings / turnOverInfo.NextBookings) * 100;            
-            this.NextCorner = turnOverInfo.NextCorner == 0 ?
+            NextCorner = turnOverInfo.NextCorner == 0 ?
                 0 :
                 (winLossInfo.NextCorner / turnOverInfo.NextCorner) * 100;
-            this.Overall = turnOverInfo.Overall == 0 ?
+            Overall = turnOverInfo.Overall == 0 ?
                 0 :
                 (winLossInfo.Overall / turnOverInfo.Overall) * 100;
-            this.TenMinHdp = turnOverInfo.TenMinHdp == 0 ?
+            TenMinHdp = turnOverInfo.TenMinHdp == 0 ?
                 0 :
                 (winLossInfo.TenMinHdp / turnOverInfo.TenMinHdp) * 100;
-            this.TenMinOneXTwo = turnOverInfo.TenMinOneXTwo == 0 ?
+            TenMinOneXTwo = turnOverInfo.TenMinOneXTwo == 0 ?
                 0 :
                 (winLossInfo.TenMinOneXTwo / turnOverInfo.TenMinOneXTwo) * 100; 
         }
 
         public void FormatTwoDecimalNumberData(TraderPerformanceSoccerDetailModel traderInfo)
         {
-            this.FirstHalfHdp = Math.Round(traderInfo.FirstHalfHdp, 2, MidpointRounding.AwayFromZero);
-            this.Hdp = Math.Round(traderInfo.Hdp, 2, MidpointRounding.AwayFromZero);
-            this.FifteenMinHdp = Math.Round(traderInfo.FifteenMinHdp, 2, MidpointRounding.AwayFromZero);
-            this.FirstHalfOU = Math.Round(traderInfo.FirstHalfOU, 2, MidpointRounding.AwayFromZero);
-            this.OU = Math.Round(traderInfo.OU, 2, MidpointRounding.AwayFromZero);
-            this.FirstHalfOneXTwo = Math.Round(traderInfo.FirstHalfOneXTwo, 2, MidpointRounding.AwayFromZero);
-            this.OneXTwo = Math.Round(traderInfo.OneXTwo, 2, MidpointRounding.AwayFromZero);
-            this.FifteenMinOneXTwo = Math.Round(traderInfo.FifteenMinOneXTwo, 2, MidpointRounding.AwayFromZero);
-            this.FirstHalfNoOfCorners = Math.Round(traderInfo.FirstHalfNoOfCorners, 2, MidpointRounding.AwayFromZero);
-            this.FifteenMinNoOfCorners = Math.Round(traderInfo.FifteenMinNoOfCorners, 2, MidpointRounding.AwayFromZero);
-            this.NoOfCorners = Math.Round(traderInfo.NoOfCorners, 2, MidpointRounding.AwayFromZero);
-            this.FifteenMinOU = Math.Round(traderInfo.FifteenMinOU, 2, MidpointRounding.AwayFromZero);
-            this.TenMinOU = Math.Round(traderInfo.TenMinOU, 2, MidpointRounding.AwayFromZero);
-            this.SingleTeamOU = Math.Round(traderInfo.SingleTeamOU, 2, MidpointRounding.AwayFromZero);
-            this.FirstHalfTotalBookings = Math.Round(traderInfo.FirstHalfTotalBookings, 2, MidpointRounding.AwayFromZero);
-            this.TotalBookings = Math.Round(traderInfo.TotalBookings, 2, MidpointRounding.AwayFromZero);
-            this.TotalBookingsFifteenMinOU = Math.Round(traderInfo.TotalBookingsFifteenMinOU, 2, MidpointRounding.AwayFromZero);
-            this.TotalBookingsFifteenMinHDP = Math.Round(traderInfo.TotalBookingsFifteenMinHDP, 2, MidpointRounding.AwayFromZero);
-            this.NextBookings = Math.Round(traderInfo.NextBookings, 2, MidpointRounding.AwayFromZero);            
-            this.NextCorner = Math.Round(traderInfo.NextCorner, 2, MidpointRounding.AwayFromZero);
-            this.Overall = Math.Round(traderInfo.Overall, 2, MidpointRounding.AwayFromZero);
-            this.TenMinHdp = Math.Round(traderInfo.TenMinHdp, 2, MidpointRounding.AwayFromZero);
-            this.TenMinOneXTwo = Math.Round(traderInfo.TenMinOneXTwo, 2, MidpointRounding.AwayFromZero); 
+            FirstHalfHdp = Math.Round(traderInfo.FirstHalfHdp, 2, MidpointRounding.AwayFromZero);
+            Hdp = Math.Round(traderInfo.Hdp, 2, MidpointRounding.AwayFromZero);
+            FifteenMinHdp = Math.Round(traderInfo.FifteenMinHdp, 2, MidpointRounding.AwayFromZero);
+            FirstHalfOU = Math.Round(traderInfo.FirstHalfOU, 2, MidpointRounding.AwayFromZero);
+            OU = Math.Round(traderInfo.OU, 2, MidpointRounding.AwayFromZero);
+            FirstHalfOneXTwo = Math.Round(traderInfo.FirstHalfOneXTwo, 2, MidpointRounding.AwayFromZero);
+            OneXTwo = Math.Round(traderInfo.OneXTwo, 2, MidpointRounding.AwayFromZero);
+            FifteenMinOneXTwo = Math.Round(traderInfo.FifteenMinOneXTwo, 2, MidpointRounding.AwayFromZero);
+            FirstHalfNoOfCorners = Math.Round(traderInfo.FirstHalfNoOfCorners, 2, MidpointRounding.AwayFromZero);
+            FifteenMinNoOfCorners = Math.Round(traderInfo.FifteenMinNoOfCorners, 2, MidpointRounding.AwayFromZero);
+            NoOfCorners = Math.Round(traderInfo.NoOfCorners, 2, MidpointRounding.AwayFromZero);
+            FifteenMinOU = Math.Round(traderInfo.FifteenMinOU, 2, MidpointRounding.AwayFromZero);
+            TenMinOU = Math.Round(traderInfo.TenMinOU, 2, MidpointRounding.AwayFromZero);
+            SingleTeamOU = Math.Round(traderInfo.SingleTeamOU, 2, MidpointRounding.AwayFromZero);
+            FirstHalfTotalBookings = Math.Round(traderInfo.FirstHalfTotalBookings, 2, MidpointRounding.AwayFromZero);
+            TotalBookings = Math.Round(traderInfo.TotalBookings, 2, MidpointRounding.AwayFromZero);
+            TotalBookingsFifteenMinOU = Math.Round(traderInfo.TotalBookingsFifteenMinOU, 2, MidpointRounding.AwayFromZero);
+            TotalBookingsFifteenMinHDP = Math.Round(traderInfo.TotalBookingsFifteenMinHDP, 2, MidpointRounding.AwayFromZero);
+            NextBookings = Math.Round(traderInfo.NextBookings, 2, MidpointRounding.AwayFromZero);            
+            NextCorner = Math.Round(traderInfo.NextCorner, 2, MidpointRounding.AwayFromZero);
+            Overall = Math.Round(traderInfo.Overall, 2, MidpointRounding.AwayFromZero);
+            TenMinHdp = Math.Round(traderInfo.TenMinHdp, 2, MidpointRounding.AwayFromZero);
+            TenMinOneXTwo = Math.Round(traderInfo.TenMinOneXTwo, 2, MidpointRounding.AwayFromZero); 
         }
 
         public void GetMarginValue(TraderPerformanceSoccerDetailModel marginInfo)
         {
-            this.FirstHalfHdp = 100 * marginInfo.FirstHalfHdp;
-            this.Hdp = 100 * marginInfo.Hdp;
-            this.FifteenMinHdp = 100 * marginInfo.FifteenMinHdp;
-            this.FirstHalfOU = 100 * marginInfo.FirstHalfOU;
-            this.OU = 100 * marginInfo.OU;
-            this.FirstHalfOneXTwo = 100 * marginInfo.FirstHalfOneXTwo;
-            this.OneXTwo = 100 * marginInfo.OneXTwo;
-            this.FifteenMinOneXTwo = 100 * marginInfo.FifteenMinOneXTwo;
-            this.FirstHalfNoOfCorners = 100 * marginInfo.FirstHalfNoOfCorners;
-            this.FifteenMinNoOfCorners = 100 * marginInfo.FifteenMinNoOfCorners;
-            this.NoOfCorners = 100 * marginInfo.NoOfCorners;
-            this.FifteenMinOU = 100 * marginInfo.FifteenMinOU;
-            this.TenMinOU = 100 * marginInfo.TenMinOU;
-            this.SingleTeamOU = 100 * marginInfo.SingleTeamOU;
-            this.FirstHalfTotalBookings = 100 * marginInfo.FirstHalfTotalBookings;
-            this.TotalBookings = 100 * marginInfo.TotalBookings;
-            this.TotalBookingsFifteenMinOU = 100 * marginInfo.TotalBookingsFifteenMinOU;
-            this.TotalBookingsFifteenMinHDP = 100 * marginInfo.TotalBookingsFifteenMinHDP;
-            this.NextBookings = 100 * marginInfo.NextBookings;            
-            this.NextCorner = 100 * marginInfo.NextCorner;
-            this.Overall = 100 * marginInfo.Overall;
-            this.TenMinOneXTwo = 100 * marginInfo.TenMinOneXTwo;
-            this.TenMinHdp = 100 * marginInfo.TenMinHdp; 
+            FirstHalfHdp = 100 * marginInfo.FirstHalfHdp;
+            Hdp = 100 * marginInfo.Hdp;
+            FifteenMinHdp = 100 * marginInfo.FifteenMinHdp;
+            FirstHalfOU = 100 * marginInfo.FirstHalfOU;
+            OU = 100 * marginInfo.OU;
+            FirstHalfOneXTwo = 100 * marginInfo.FirstHalfOneXTwo;
+            OneXTwo = 100 * marginInfo.OneXTwo;
+            FifteenMinOneXTwo = 100 * marginInfo.FifteenMinOneXTwo;
+            FirstHalfNoOfCorners = 100 * marginInfo.FirstHalfNoOfCorners;
+            FifteenMinNoOfCorners = 100 * marginInfo.FifteenMinNoOfCorners;
+            NoOfCorners = 100 * marginInfo.NoOfCorners;
+            FifteenMinOU = 100 * marginInfo.FifteenMinOU;
+            TenMinOU = 100 * marginInfo.TenMinOU;
+            SingleTeamOU = 100 * marginInfo.SingleTeamOU;
+            FirstHalfTotalBookings = 100 * marginInfo.FirstHalfTotalBookings;
+            TotalBookings = 100 * marginInfo.TotalBookings;
+            TotalBookingsFifteenMinOU = 100 * marginInfo.TotalBookingsFifteenMinOU;
+            TotalBookingsFifteenMinHDP = 100 * marginInfo.TotalBookingsFifteenMinHDP;
+            NextBookings = 100 * marginInfo.NextBookings;            
+            NextCorner = 100 * marginInfo.NextCorner;
+            Overall = 100 * marginInfo.Overall;
+            TenMinOneXTwo = 100 * marginInfo.TenMinOneXTwo;
+            TenMinHdp = 100 * marginInfo.TenMinHdp; 
         }
     }
 }

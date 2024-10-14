@@ -1,10 +1,9 @@
-using Fanex.NAP.Client.Helpers.Web;
-using TraderPerformanceSoccer.Criteria;
-using TraderPerformanceSoccer.Model;
-using TraderPerformanceSoccer.Repositories;
+using TraderPerformance.Criteria;
+using TraderPerformance.Model;
+using TraderPerformance.Repositories;
 using Utilities.Sorting;
 
-namespace TraderPerformanceSoccer.Services
+namespace TraderPerformance.Services
 {
     public interface TraderPerformanceSoccerService
     {
@@ -18,16 +17,9 @@ namespace TraderPerformanceSoccer.Services
     }
 
     public class TraderPerformanceSoccerServiceImp(
-        INapSession napSession,
         TraderPerformanceSoccerRepository repository) 
         : TraderPerformanceSoccerService
     {
-        private readonly TraderPerformanceSoccerRepository _traderPerformanceSoccerRepository;
-
-        private string _traderPerformanceSessionKey = $"Fanex.AccountingReports.Main.TraderPerformance.{napSession.UserName}";
-
-        private string _traderPerformanceDetailSessionKey = $"Fanex.AccountingReports.Main.TraderPerformanceDetail.{napSession.UserName}"; 
-
         public async Task<TraderPerformanceSoccerModel> GetReport(ReportCriteria criteria)
         {
             var result = new TraderPerformanceSoccerModel();

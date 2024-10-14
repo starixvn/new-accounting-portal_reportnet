@@ -1,7 +1,7 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace TraderPerformanceSoccer.Criteria
+namespace TraderPerformance.Criteria
 {
     public class ReportCriteria : CriteriaBase
     {

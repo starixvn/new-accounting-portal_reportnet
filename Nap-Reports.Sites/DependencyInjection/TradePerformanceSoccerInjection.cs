@@ -1,5 +1,5 @@
-﻿using TraderPerformanceSoccer.Repositories;
-using TraderPerformanceSoccer.Services;
+﻿using TraderPerformance.Repositories;
+using TraderPerformance.Services;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {
@@ -9,6 +9,8 @@ namespace Nap_Reports.Sites.DependencyInjection
         {
             service.AddTransient<TraderPerformanceSoccerRepository, TraderPerformanceSoccerRepositoryImp>();
             service.AddTransient<TraderPerformanceSoccerService, TraderPerformanceSoccerServiceImp>();
+            service.AddTransient<TraderPerformanceOtherSportsRepository, TraderPerformanceOtherSportsRepositoryImp>();
+            service.AddTransient<TraderPerformanceOtherSportsService, TraderPerformanceOtherSportsServiceImp>();
         }
     }
 }
