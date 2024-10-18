@@ -157,7 +157,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         var data = { ProductID: productIds };
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "/api/bet-count/main",
+            url: window.rootUrl + "/api/bet-count/sport",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(data),

@@ -312,7 +312,7 @@ namespace BetCount.Services
             indGroup.Name = rawData.Key.SportName;
             foreach (var data in rawData)
             {
-                indGroup.ChildsInfo.Add(CreateProduct(data));
+                indGroup.Items.Add(CreateProduct(data));
             }
 
             return indGroup;
