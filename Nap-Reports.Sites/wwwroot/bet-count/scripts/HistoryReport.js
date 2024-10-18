@@ -769,7 +769,8 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                 Product: _params.historyBetCountReport.Products,
                 IsHistoryReport: true,
                 SortBy: sortBy,
-                SortDirection: newSortDirection
+                SortDirection: newSortDirection,
+                SportBettype: _params.historyBetCountReport.SportBettype
             }),
             beforeSend: function () {
                 AccReport.disableInput();

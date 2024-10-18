@@ -788,7 +788,8 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 Dateend: _params.betCountReport.ToDate,
                 Product: _params.betCountReport.Products,
                 SortBy: sortBy,
-                SortDirection: newSortDirection
+                SortDirection: newSortDirection,
+                SportBettype: _params.betCountReport.SportBettype
             }),
             beforeSend: function () {
                 AccReport.disableInput();
