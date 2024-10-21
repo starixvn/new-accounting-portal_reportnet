@@ -160,18 +160,18 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
                     AccReport.popUp.show("Sorry, File not found in docker.");
                 }
                 else {
-                    var bytes = self.base64ToBytes(response.Data.fileContents);
-                    var blob = new Blob([bytes], { type: response.Data.contentType });
+                    var bytes = self.base64ToBytes(response.Data.FileContents);
+                    var blob = new Blob([bytes], { type: response.Data.ContentType });
                     var isIE = false || !!document.documentMode;
                     if (isIE) {
-                        window.navigator.msSaveBlob(blob, response.Data.fileDownloadName);
+                        window.navigator.msSaveBlob(blob, response.Data.FileDownloadName);
                     } else {
                         var url = window.URL || window.webkitURL;
                         link = url.createObjectURL(blob);
                         var a = $("<a />");
-                        a.attr("download", response.Data.fileDownloadName);
+                        a.attr("download", response.Data.FileDownloadName);
                         a.attr("href", link);
-                        a.attr("id", 'file_' + response.Data.fileDownloadName);
+                        a.attr("id", 'file_' + response.Data.FileDownloadName);
                         $("body").append(a);
                         a[0].click();
                         $(a).remove();
