@@ -18,6 +18,7 @@ COPY src/Misc/BetCount/*.csproj ./Misc/BetCount/
 COPY src/FraudAndRisk/PunterAnalysis/*.csproj ./FraudAndRisk/PunterAnalysis/
 COPY src/FraudAndRisk/Margin/*.csproj ./FraudAndRisk/Margin/
 COPY src/FraudAndRisk/ParlayWon/*.csproj ./FraudAndRisk/ParlayWon/
+COPY src/FraudAndRisk/SaveBetReport/*.csproj ./FraudAndRisk/SaveBetReport/
 COPY src/WinLoss/DailyMixParlay/*.csproj ./src/WinLoss/DailyMixParlay/
 COPY src/WinLoss/TreeWinLoss/*.csproj ./src/WinLoss/TreeWinLoss/
 COPY src/FraudAndRisk/SBCustomerPerformanceByDanger/*.csproj ./FraudAndRisk/SBCustomerPerformanceByDanger/

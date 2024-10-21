@@ -85,6 +85,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraderPerformance", "src\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraderPerformanceOtherSports", "src\Main\TraderPerformanceOtherSports\TraderPerformanceOtherSports.csproj", "{A5BBB1F1-852B-444A-AA6F-82CD9B415F17}"
 EndProject
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveBetReport", "src\FraudAndRisk\SaveBetReport\SaveBetReport.csproj", "{ED461A35-2D9F-478C-96FC-4F1AECE58E5A}"
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -215,6 +217,10 @@ Global
 		{A5BBB1F1-852B-444A-AA6F-82CD9B415F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5BBB1F1-852B-444A-AA6F-82CD9B415F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5BBB1F1-852B-444A-AA6F-82CD9B415F17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED461A35-2D9F-478C-96FC-4F1AECE58E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED461A35-2D9F-478C-96FC-4F1AECE58E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED461A35-2D9F-478C-96FC-4F1AECE58E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED461A35-2D9F-478C-96FC-4F1AECE58E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -259,6 +265,7 @@ Global
 		{12D59581-B586-46F5-8055-8B5585D61E4D} = {CE6B9B9F-BC24-4444-AC6D-B36D9270AB7F}
 		{F2CB98A4-278A-48DB-BC51-664F249AC969} = {A9904CC1-6040-4CA6-84CF-568401D7F360}
 		{A5BBB1F1-852B-444A-AA6F-82CD9B415F17} = {A9904CC1-6040-4CA6-84CF-568401D7F360}
+		{ED461A35-2D9F-478C-96FC-4F1AECE58E5A} = {CE6B9B9F-BC24-4444-AC6D-B36D9270AB7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4BEC316-BFFB-4874-93D0-95BB1C7DE9BA}

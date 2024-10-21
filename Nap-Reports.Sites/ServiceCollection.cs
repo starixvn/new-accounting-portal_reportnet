@@ -65,6 +65,7 @@ namespace Nap_Reports.Sites
             services.RegisterCreditMovementServices();
             services.RegisterParlayWonServices();
             services.RegisterTradePerformanceSoccerServices();
+            services.RegisterSaveBetServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

@@ -1246,6 +1246,7 @@
     <ProjectReference Include="..\src\FraudAndRisk\Margin\Margin.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\ParlayWon\ParlayWon.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\PunterAnalysis\PunterAnalysis.csproj" />
+    <ProjectReference Include="..\src\FraudAndRisk\SaveBetReport\SaveBetReport.csproj" />
     <ProjectReference Include="..\src\FraudAndRisk\SBCustomerPerformanceByDanger\SBCustomerPerformanceByDanger.csproj" />
     <ProjectReference Include="..\src\LegendManagement\LegendManagement\LegendManagement.csproj" />
     <ProjectReference Include="..\src\Licensee\CompanyWinLoss\CompanyWinLoss.csproj" />
@@ -1276,6 +1277,7 @@
     <Folder Include="ExcelTemplate\SuperBalance\" />
     <Folder Include="ExcelTemplate\PeakConcurrentUser\" />
     <Folder Include="ExcelTemplate\TreeWinLoss\" />
+    <Folder Include="wwwroot\save-bet\images\" />
     <Folder Include="wwwroot\scripts\_lib\BlockUI\img\" />
     <Folder Include="wwwroot\tree-win-loss\scripts\" />
   </ItemGroup>
