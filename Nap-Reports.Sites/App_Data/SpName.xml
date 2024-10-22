@@ -380,4 +380,7 @@
 		<Setting Key="Special_SaveBet_GetListLeague" SpName="NAP_SaveBet_ListLeagueBySport" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
 		<Setting Key="Special_SaveBet_GetListMatch" SpName="NAP_SaveBet_ListMatchByLeague" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
 	</Function>
+	<Function Name="Misc - Auto Generated Report">
+		<Setting Key="Acc_UserLog_AttachmentDownload_TrackingIns" SpName="Acc_UserLog_AttachmentDownload_TrackingIns" DbName="DBWH.bodb_dwrs.wsv_nap" />
+	</Function>
 </Functions>
