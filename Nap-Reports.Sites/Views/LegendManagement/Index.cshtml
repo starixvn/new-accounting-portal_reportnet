@@ -1,5 +1,154 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Nap_Reports.Sites.Constants
+@using RazorEngine.Text
 @{
+	ViewBag.Title = "Legend Management";
+	Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_Lib/CustomScrollbar/Styles/scrollbars.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_Lib/CustomScrollbar/Styles/scrollbars-itunes.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_Lib/Fanex.Grid/Fanex.Grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/legend-management/styles/legend-management.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>Legend Management</span>
+        </div>
+    </div>
+}
+<div id="editLegendView">
+    <div id="filter-bar">
+        <div class="filter-form">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_2 align-right bold">
+                        Menu
+                    </div>
+                    <div class="edit-field col_11 width-auto">
+                        <select id="ddlMenu">
+                        </select>
+                    </div>
+                    <div class="edit-field col_1 display-none">
+                        <input id="chbIsNote" type="checkbox" class="lbl-field col_1" />
+                    </div>
+                    <label for="chbIsNote" class="lbl-field col_3 width-auto align-left bold display-none">
+	                    Is Note</label>
+                    <div class="edit-field col_1">
+                        <input id="chbIsReviewed" type="checkbox" class="lbl-field col_1 display-none" />
+                    </div>
+                    <label for="chbIsReviewed" class="lbl-field col_4 width-auto align-left bold display-none">
+	                    Is Reviewed</label>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="submit col_4 prefix_2">
+                        <input id="btnLoad" name="btnLoad" type="submit" value="Load" class="btn" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnClear" name="btnClear" type="submit" value="Clear" class="btn" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnSave" name="btnSave" type="submit" value="Save" class="btn" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnPreview" name="btnPreview" type="submit" value="Preview" class="btn" />
+                    </div>
+                    <div class="submit col_5">
+                        <input id="btnCopyLegend" name="btnCopyLegend" type="submit" value="Copy Legend" class="btn display-none"/>
+                    </div>
+                    <div class="submit col_5">
+                        <input id="button-inputedlegend-report" name="button-inputedlegend-report" type="submit" value="View Inputed" class="btn display-none"/>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="submit col_4 prefix_2">
+                        <input id="btnAddTab" name="btnAddTab" type="submit" value="Add Tab" class="btn"/>
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnAddSubTab" name="btnAddSubTab" type="submit" value="Add Session" class="btn"/>
+                    </div>
+                    <div class="submit col_4 ">
+                        <input id="btnRemoveTab" name="btnRemoveTab" type="submit" value="Remove Tab" class="btn"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-grid display-inline-block">
+        <div id="htmlEditor">
+        </div>
+        <div id="previewReportLegendDialog" class="display-none">
+        </div>
+        <div id="uploadImageDialog" class="display-none">
+        </div>
+        <div id="uploadImageDialogTemplate" class="display-none">
+            <ul id="uploadbox-tab">
+                <li><a id="tab-url-a" href="javascript:;" class="tab-item current">From URL</a></li>
+                <li><a id="tab-choose-a" href="javascript:;" class="tab-item">Upload Image</a></li>
+            </ul>
+            <div id="tab-url" class="tab-url chooseimg display-none">
+                <div class="bold image-location">Image location</div>
+                <input id="txt_url" type="input" value="" />
+            </div>
+            <div id="tab-choose" class="tab-choose chooseimg display-none">
+                <div class="bold label-choosing-image">Choosing image</div>
+                <div>
+                    <input id="txtInputfile" type="input" name="txtInputfile" size="40" class="inputfile"
+                        readonly="true" />
+                    <input id="btnInputfile" type="submit" class="contentButton" value="Browse..." />
+                    <input id="txtfile" type="file" name="txtfile" size="40" class="inputfile display-none" />
+                    <input id="txtfileIE" type="file" name="txtfile" size="40" class="inputfile display-none" />
+                </div>
+                <small>(Max size: 2M. File type: jpg, jpeg, gif, png, bmp)</small>
+            </div>
+            <div class="uploadbuttonbar">
+                <input id="btnUpload" type="submit" class="contentButton" value="Upload" />
+                <input id="btnCancelUpload" type="submit" class="contentButton" value="Cancel" />
+            </div>
+            <div id="upload_message" class="display-none">
+            </div>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("~/Views/LegendManagement/CopyLegend.cshtml")
+@await Html.PartialAsync("~/Views/LegendManagement/InputedLegendReport.cshtml")
+@section scripts
+{
+    <script type="text/javascript">
+        var defaultTabTemplate = '@Html.Raw(LegendManagementConstants.DefaultTabTemplate)';
+        var defaultReportTemplate = '@Html.Raw(LegendManagementConstants.SampleTemplate)';
+        var inlineImageExpand = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACxJREFUeNpi/P//PwM+wMRAAKAr+E+MCf+JseI/IQWM+BQw4rOCEV01QIABAMpJBg00Znx5AAAAAElFTkSuQmCC';
+        var inlineImageCollapse = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACVJREFUeNpi/P//PwM+wEhVBdhUMqKbgMxhxGXFf5gkdRwJEGAAEK0a8Uj/akQAAAAASUVORK5CYII=';
+        var viewResources = {
+            System: "System",
+            Report_Id: "Report Id",
+            Report_Name: "Report Name",
+            Content: "Content",
+            Inputed_Legend_Report_Title: "Inputed Legend Report"
+        };
+
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_Lib/TinyMCE/ajax.upload.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/TinyMCE/jquery.tinymce.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/FileUpload/ajaxFileUpload.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/CustomScrollbar/jquery.event.drag-2.0.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/CustomScrollbar/jquery.ba-resize.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/CustomScrollbar/mousehold.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/CustomScrollbar/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/CustomScrollbar/aplweb.scrollbars.js"></script>
+    <script type="text/javascript" src="~/scripts/_Lib/Fanex.Grid/Fanex.Grid.js"></script>
+    <script type="text/javascript" src="~/legend-management/scripts/guide-man.js"></script>
+    <script type="text/javascript" src="~/legend-management/scripts/guide-man-message.js"></script>
+    <script type="text/javascript" src="~/legend-management/scripts/upload-image-popup.js"></script>
+    <script type="text/javascript" src="~/legend-management/scripts/legend-management.js"></script>
+    <script type="text/javascript" src="~/legend-management/scripts/copy-legend.js"></script>
+    <script type="text/javascript" src="~/legend-management/scripts/inputed-legend-manager.js"></script>
 }

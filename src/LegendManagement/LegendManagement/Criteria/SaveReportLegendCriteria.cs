@@ -4,7 +4,7 @@ using LegendManagement.Configurations;
 
 namespace LegendManagement.Criteria;
 
-public class SaveReportLegendCriteria : CriteriaBase
+public class SaveReportLegendCriteria : CriteriaBase, INonQueryCommand
 {
     public SaveReportLegendCriteria()
     {
@@ -25,8 +25,7 @@ public class SaveReportLegendCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public bool IsReviewed { get; set; }
 
-    [SpParam(Ignored = true)]
-    public string ConfigPath { get; set; }
+    public string ErrMsg { get; set; }
 
     public override string GetSettingKey() => "LegendManagement_SaveReportLegend";
 

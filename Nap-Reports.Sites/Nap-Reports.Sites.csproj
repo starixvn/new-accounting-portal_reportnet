@@ -1279,6 +1279,7 @@
     <Folder Include="ExcelTemplate\PeakConcurrentUser\" />
     <Folder Include="ExcelTemplate\TreeWinLoss\" />
     <Folder Include="wwwroot\auto-generated-report\images\" />
+    <Folder Include="wwwroot\legend-management\uploaded-image\" />
     <Folder Include="wwwroot\save-bet\images\" />
     <Folder Include="wwwroot\scripts\_lib\BlockUI\img\" />
     <Folder Include="wwwroot\tree-win-loss\scripts\" />
