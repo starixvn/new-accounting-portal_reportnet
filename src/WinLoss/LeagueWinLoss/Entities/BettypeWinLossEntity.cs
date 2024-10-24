@@ -1,0 +1,17 @@
+﻿namespace LeagueWinLoss.Entities
+{
+    public class BettypeWinLossEntity : BaseEntity
+    {
+        public int Bettype { get; set; }
+
+        public string BettypeName { get; set; }
+
+        public string SiteType { get; set; }
+
+        public bool IsHedge { get; set; }
+
+        public int TraderID { get; set; }
+
+        public string TraderName { get; set; }
+    }
+}
