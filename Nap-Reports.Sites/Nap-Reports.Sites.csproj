@@ -242,6 +242,7 @@
 
   <ItemGroup>
     <None Include="Views\Shared\Components\Menu\Default.cshtml" />
+    <None Include="wwwroot\content\fanex-result\fanex.result.less" />
     <None Include="wwwroot\content\sites\login\fonts\YanoneKaffeesatz.svg" />
     <None Include="wwwroot\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <None Include="wwwroot\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
@@ -1282,6 +1283,7 @@
     <Folder Include="wwwroot\auto-generated-report\images\" />
     <Folder Include="wwwroot\legend-management\uploaded-image\" />
     <Folder Include="wwwroot\save-bet\images\" />
+    <Folder Include="wwwroot\score-information\styles\" />
     <Folder Include="wwwroot\scripts\_lib\BlockUI\img\" />
     <Folder Include="wwwroot\tree-win-loss\scripts\" />
   </ItemGroup>

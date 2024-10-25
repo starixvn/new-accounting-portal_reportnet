@@ -1,7 +1,7 @@
+using Fanex.Data.Repository;
 using LeagueWinLoss.Criteria;
 using LeagueWinLoss.Entities;
 using LeagueWinLoss.Model;
-using LeagueWinLoss.Repositories;
 
 namespace LeagueWinLoss.Services
 {
@@ -21,7 +21,7 @@ namespace LeagueWinLoss.Services
 
         List<Status> GetStatus();
 
-        Task<int> GetPermissionProfileId(string functionKeyValue);
+        int GetPermissionProfileId(string functionKeyValue);
 
         Task<MatchWinLossModel> GetMatches(MatchesCriteria criteria);
 
@@ -35,12 +35,12 @@ namespace LeagueWinLoss.Services
     }
 
     public class LeagueWinLossServiceImp(
-        LeagueWinLossRepository repository,
+        IDynamicRepository repository,
         SortingService sortingService) : LeagueWinLossService
     {
         public async Task<LeagueWinLossModel> GetLeagueWinLoss(LeagueWinLossCriteria criteria)
         {
-            var rawData = await repository.GetLeagueWinLoss(criteria);
+            var rawData = (await repository.FetchAsync<LeagueWinLossEntity>(criteria)).ToList();
             var leagueWinLoss = new LeagueWinLossModel
             {
                 SportWinLoss = new List<SportWinLoss>(),
@@ -131,7 +131,7 @@ namespace LeagueWinLoss.Services
         {
             var sportGroups = new List<SportGroup>();
             var criteria = new SportCriteria();
-            var rawData =  await repository.GetSport(criteria);
+            var rawData = (await repository.FetchAsync<SportEntity>(criteria)).ToList();
 
             var groups = rawData.GroupBy(x => new { x.SportGroupType, x.SportGroupName });
             foreach (var group in groups)
@@ -195,7 +195,7 @@ namespace LeagueWinLoss.Services
             var result = new List<SiteGroup>();
             var criteria = new SiteFilterCriteria();
 
-            var rawData = await repository.GetSiteFilter(criteria);
+            var rawData = (await repository.FetchAsync<SiteFilterEntity>(criteria)).ToList();
             var groups = rawData.GroupBy(x => x.SiteGroup);
 
             foreach (var group in groups)
@@ -234,7 +234,7 @@ namespace LeagueWinLoss.Services
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = await repository.GetBetTypes(criteria);
+            var rawData = (await repository.FetchAsync<BettypeWinLossEntity>(criteria)).ToList();
 
             if (!rawData.Any())
             {
@@ -338,14 +338,24 @@ namespace LeagueWinLoss.Services
                 };
         }
 
-        public async Task<int> GetPermissionProfileId(string functionKeyValue)
+        public int GetPermissionProfileId(string functionKeyValue)
         {
             var criteria = new PermissionCriteria
             {
                 FunctionKey = functionKeyValue
             };
 
-            return await repository.GetPermissionProfileID(criteria);
+            var dataSet = repository.FetchDataSet(criteria);
+
+            if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+            {
+                var firstRow = dataSet.Tables[0].Rows[0];
+                var permissionProfileId = Convert.ToInt32(firstRow["PermisionProfileID"]);
+
+                return permissionProfileId;
+            }
+
+            return 0;
         }
 
         private async Task<BetTypeWinLossLiveModel> GetBetTypesLive(BetTypesCriteria criteria)
@@ -360,7 +370,7 @@ namespace LeagueWinLoss.Services
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = await repository.GetBetTypes(criteria);
+            var rawData = (await repository.FetchAsync<BettypeWinLossEntity>(criteria)).ToList();
 
             if (!rawData.Any())
             {
@@ -421,7 +431,7 @@ namespace LeagueWinLoss.Services
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = await repository.GetBetTypes(criteria);
+            var rawData = (await repository.FetchAsync<BettypeWinLossEntity>(criteria)).ToList();
 
             if (!rawData.Any())
             {
@@ -450,7 +460,7 @@ namespace LeagueWinLoss.Services
 
         public async Task<MatchWinLossModel> GetMatches(MatchesCriteria criteria)
         {
-            var rawData = await repository.GetMatches(criteria);
+            var rawData = (await repository.FetchAsync<MatchEntity>(criteria)).ToList();
 
             var leagueWinLoss = new MatchWinLossModel
             {
@@ -496,7 +506,7 @@ namespace LeagueWinLoss.Services
 
         public async Task<MatchWinLossFromBetTypeStatusModel> GetMatchesFromBetTypeStatus(MatchesCriteria criteria)
         {
-            var rawData = await repository.GetMatches(criteria);
+            var rawData = (await repository.FetchAsync<MatchEntity>(criteria)).ToList();
             var leagueWinLoss = new MatchWinLossFromBetTypeStatusModel
             {
                 Match = new List<MatchWinLossByLiveStatus>(),
@@ -527,7 +537,7 @@ namespace LeagueWinLoss.Services
 
         public async Task<SiteWinLossModel> GetSites(SitesCriteria criteria)
         {
-            var rawData = await repository.GetSites(criteria);
+            var rawData = (await repository.FetchAsync<SiteEntity>(criteria)).ToList();
             var leagueWinLoss = new SiteWinLossModel
             {
                 Sites = new List<SiteWinLossItem>(),
@@ -566,7 +576,7 @@ namespace LeagueWinLoss.Services
 
         public async Task<SuperWinLossModel> GetSupers(SuperCriteria criteria)
         {
-            var rawData = await repository.GetSupers(criteria);
+            var rawData = (await repository.FetchAsync<SuperEntity>(criteria)).ToList();
             var leagueWinLoss = new SuperWinLossModel
             {
                 Supers = new List<SuperWinLossItem>(),
@@ -600,7 +610,7 @@ namespace LeagueWinLoss.Services
 
         public async Task<List<VirtualRateModel>> GetVirtualRate(VirtualRateCriteria criteria)
         {
-            var rawData = await repository.GetVirtualRate(criteria);
+            var rawData = (await repository.FetchAsync<VirtualRateEntity>(criteria)).ToList();
             var leagueWinLoss = new List<VirtualRateModel>();
             foreach (var item in rawData)
             {

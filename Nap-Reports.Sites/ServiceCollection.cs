@@ -235,6 +235,10 @@ namespace Nap_Reports.Sites
                 pipeline.AddLessBundle(
               "/league-win-loss/styles/league-win-loss.css",
               "/league-win-loss/styles/LeagueWinLoss.less");
+
+                pipeline.AddLessBundle(
+                    "/score-information/styles/score-information.css",
+                    "/score-information/styles/ScoreInformation.less");
             });
         }
     }
