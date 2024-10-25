@@ -1269,6 +1269,7 @@
     <ProjectReference Include="..\src\Misc\UpdatedUsernameCredit\UpdatedUsernameCredit.csproj" />
     <ProjectReference Include="..\src\Shared\Utilities\Utilities.csproj" />
     <ProjectReference Include="..\src\WinLoss\DailyMixParlay\DailyMixParlay.csproj" />
+    <ProjectReference Include="..\src\WinLoss\LeagueWinLoss\LeagueWinLoss.csproj" />
     <ProjectReference Include="..\src\WinLoss\TreeWinLoss\TreeWinLoss.csproj" />
   </ItemGroup>
 
