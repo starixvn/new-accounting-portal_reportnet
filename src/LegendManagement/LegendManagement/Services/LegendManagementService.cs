@@ -7,6 +7,8 @@ using LegendManagement.Configurations;
 using LegendManagement.Constants;
 using LegendManagement.Criteria;
 using LegendManagement.Models;
+using Microsoft.AspNetCore.Http;
+using System.Collections;
 
 namespace LegendManagement.Services;
 
@@ -19,6 +21,12 @@ public interface LegendManagementService
     List<string> MakeInlineImages(List<string> imagesPath, string imageFolder);
 
     string SaveReportLegend(SaveReportLegendCriteria criteria);
+
+    Task<string> UploadImage(UploadFileCriteria criteria);
+
+    string SaveReportLegendMapping(SaveReportLegendMappingCriteria criteria);
+
+    List<InputedLegend> GetInputedLegendReport(GetInputedLegendReportCriteria criteria);
 }
 
 public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISiteService siteService, INapSettings napSetting) : LegendManagementService
@@ -84,6 +92,87 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
         });
         dynamicRepository.Execute(criteria);
         return Converter.ToString2(criteria.ErrMsg);
+    }
+
+    public async Task<string> UploadImage(UploadFileCriteria criteria)
+    {
+        var fileName = criteria.FileName[(criteria.FileName.LastIndexOf('\\') + 1)..];
+        var savePath = $"{criteria.SavePath}/{fileName}";
+        await using (var stream = new FileStream(savePath, FileMode.Create))
+        {
+            await criteria.File.CopyToAsync(stream);
+        }
+        var inlineData = MakeInlineImage(criteria.File);
+        SaveInlineData(inlineData, savePath + InlineFileDataSuffix);
+        return criteria.FileName;
+    }
+
+    public string SaveReportLegendMapping(SaveReportLegendMappingCriteria criteria)
+    {
+        criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria
+        {
+            MenuId = criteria.AccMenuId,
+            System = WebSettings.System
+        });
+
+        if (criteria.LegendId == 0) return "Not exist legend for report!";
+        dynamicRepository.Execute(criteria);
+        return Converter.ToString2(criteria.Errmsg);
+
+    }
+
+    public List<InputedLegend> GetInputedLegendReport(GetInputedLegendReportCriteria criteria)
+    {
+        var result = new List<InputedLegend>
+        {
+            new InputedLegend
+            {
+                System = "Accounting",
+                ReportId = 101,
+                ReportName = "Daily Win Loss 2h",
+                Content = "abc"
+            },
+            new InputedLegend
+            {
+                System = "NAP",
+                ReportId = 101,
+                ReportName = "Daily Win Loss 2h",
+                Content = "abc"
+            },
+            new InputedLegend
+            {
+                System = "NAP",
+                ReportId = 103,
+                ReportName = "Bet Count",
+                Content = "Bet Count"
+            }
+        };
+
+        return result;
+    }
+
+    private static string MakeInlineImage(IFormFile file)
+    {
+        using var br = new BinaryReader(file.OpenReadStream());
+        var buffer = new byte[16 * 5000];
+        using var ms = new MemoryStream();
+        int read;
+        while ((read = br.Read(buffer, 0, buffer.Length)) > 0)
+        {
+            ms.Write(buffer, 0, read);
+        }
+
+        var content = ms.ToArray();
+        var base64String = Convert.ToBase64String(content, 0, content.Length);
+
+        return base64String;
+    }
+
+    private static void SaveInlineData(string inlineData, string filePath)
+    {
+        using var file = new StreamWriter(filePath);
+        file.WriteLine(inlineData);
+        file.Flush();
     }
 
     private int MappingLegendId(GetReportLegendCriteria criteria)

@@ -2,7 +2,7 @@ using Fanex.Data.Repository;
 
 namespace LegendManagement.Criteria;
 
-public class SaveReportLegendMappingCriteria : CriteriaBase
+public class SaveReportLegendMappingCriteria : CriteriaBase, INonQueryCommand
 {
     public int AccMenuId { get; set; }
 
@@ -13,6 +13,8 @@ public class SaveReportLegendMappingCriteria : CriteriaBase
     public int LegendId { get; set; }
 
     public bool IsNote { get; set; }
+
+    public string Errmsg { get; set; }
 
     public override string GetSettingKey() => "LegendManagement_SaveReportLegendMapping";
 

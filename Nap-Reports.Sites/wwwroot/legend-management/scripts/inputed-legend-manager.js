@@ -56,7 +56,7 @@ var inputedLegendManager = {
 
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "LegendManagement/LegendManagement/GetInputedLegendReport",
+            url: window.rootUrl + "/LegendManagement/GetInputedLegendReport",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(inputedLegendManager._params.getInputedLegendReport),

@@ -51,7 +51,7 @@ legendManagement = {
         uploadImageDialogTemplate: null,
         btnCancelUpload: null,
         upload_message: null,
-        saveImagePath: window.rootWebPath + "/Areas/LegendManagement/Views/LegendManagement/UploadedImage/",
+        saveImagePath: window.rootWebPath + "/legend-management/uploaded-image/",
         disableModifyMenu: [-1],
         chbIsReviewed: null
     },
@@ -185,7 +185,7 @@ legendManagement = {
             legendManagement._tables.htmlEditor.tinymce({
                 valid_children: "+body[style]",
                 // Location of TinyMCE script
-                script_url: '/scripts/_Lib/TinyMCE/tiny_mce.js',
+                script_url: '/scripts/_lib/TinyMCE/tiny_mce.js',
 
                 // General options
                 theme: "advanced",
@@ -554,7 +554,7 @@ legendManagement = {
         });
 
         legendManagement._tables.uploadImageDialog.ajaxUpload({
-            ajaxFile: window.rootUrl + "LegendManagement/LegendManagement/UploadImage",
+            ajaxFile: window.rootUrl + "/LegendManagement/UploadImage",
             file_types: "jpg,jpeg,gif,png,bmp"
         });
 
@@ -646,7 +646,7 @@ legendManagement = {
             legendManagement._tables.uploadImageDialog.find('#myUploadForm').submit();
             legendManagement.cancelUploadImage();
             setTimeout(function () {
-                var html = '<img src="' + (window.rootWebPath + "/Areas/LegendManagement/Views/LegendManagement/UploadedImage/" + fileName) + '"/>';
+                var html = '<img src="' + (window.rootWebPath + "/legend-management/uploaded-image/" + fileName) + '"/>';
                 tinyMCE.execCommand('mceInsertContent', false, html);
             }, 500);
         }
@@ -748,7 +748,7 @@ legendManagement = {
         } else {
             fileName = legendManagement.normalizeFileName(fileName);
             $.ajaxFileUpload({
-                url: window.rootUrl + "LegendManagement/LegendManagement/UploadImage",
+                url: window.rootUrl + "/LegendManagement/UploadImage",
                 secureuri: false,
                 fileElementId: 'txtfileIE',
                 fileElement: legendManagement._tables.txtfileIE,
@@ -861,9 +861,8 @@ legendManagement = {
             currentButton = tabManager._cacheData.currentTab;
             currentContent = legendManagement._tables.tinymceContent.find("#" + currentButton.attr("rel"));
 
-            _cacheData.fistTabContent = '';
+            legendManagement._cacheData.fistTabContent = '';
             tinyMCE.activeEditor.setContent(currentContent.html());
-            legendManagement._tables.btnAddSubTab.attr("disabled", "disabled");
             tabManager.initPage();
         }
     },

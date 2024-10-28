@@ -181,7 +181,7 @@ var copyLegend = {
         if (copyLegend.validSaveReportLegendMapping()) {
             $.ajax({
                 type: "POST",
-                url: window.rootUrl + "LegendManagement/LegendManagement/SaveReportLegendMapping",
+                url: window.rootUrl + "/LegendManagement/SaveReportLegendMapping",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: JSON.stringify(copyLegend._params.saveReportLegendMapping),

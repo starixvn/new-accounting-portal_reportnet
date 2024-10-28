@@ -1,6 +1,7 @@
 ﻿using LegendManagement.Criteria;
 using LegendManagement.Services;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LegendManagement.Controllers;
@@ -36,6 +37,35 @@ public class LegendManagementApiController(LegendManagementService legendManagem
     public IActionResult SaveReportLegend(SaveReportLegendCriteria criteria)
     {
         var result = legendManagementService.SaveReportLegend(criteria);
+        return Ok(result);
+    }
+
+    [Route("UploadImage")]
+    public IActionResult UploadImage([FromForm] IFormFile file)
+    {
+        var webRoot = env.WebRootPath;
+        var imageFolder = Path.Combine(webRoot, "legend-management/uploaded-image");
+        var criteria = new UploadFileCriteria
+        {
+            File = file,
+            SavePath = imageFolder,
+            FileName = file.FileName
+        };
+        var result = legendManagementService.UploadImage(criteria);
+        return Ok(result);
+    }
+
+    [Route("SaveReportLegendMapping")]
+    public IActionResult SaveReportLegendMapping(SaveReportLegendMappingCriteria criteria)
+    {
+        var result = legendManagementService.SaveReportLegendMapping(criteria);
+        return Ok(result);
+    }
+
+    [Route("GetInputedLegendReport")]
+    public IActionResult GetInputedLegendReport(GetInputedLegendReportCriteria criteria)
+    {
+        var result = legendManagementService.GetInputedLegendReport(criteria);
         return Ok(result);
     }
 }
