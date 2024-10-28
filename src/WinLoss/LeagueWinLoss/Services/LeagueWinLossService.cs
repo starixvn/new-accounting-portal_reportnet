@@ -32,6 +32,8 @@ namespace LeagueWinLoss.Services
         Task<SuperWinLossModel> GetSupers(SuperCriteria criteria);
 
         Task<List<VirtualRateModel>> GetVirtualRate(VirtualRateCriteria criteria);
+
+        Task<LeagueSuggestionViewModel> GetLeagueSuggestion(LeagueSuggestionCriteria criteria);
     }
 
     public class LeagueWinLossServiceImp(
@@ -624,6 +626,19 @@ namespace LeagueWinLoss.Services
             }
 
             return leagueWinLoss;
+        }
+
+        public async Task<LeagueSuggestionViewModel> GetLeagueSuggestion(LeagueSuggestionCriteria criteria)
+        {
+            var leagues = await repository.FetchAsync<string>(criteria);
+            var suggestionResult = new LeagueSuggestionViewModel
+            {
+                Query = criteria.SearchText,
+                Suggestions = [],
+                DataInfo = [string.Empty]
+            };
+            leagues.ToList().ForEach(x => suggestionResult.Suggestions.Add(x));
+            return suggestionResult;
         }
 
         private LeagueWinLossItem CalculateSportTotal(string sport, IEnumerable<LeagueWinLossEntity> sportGroup)

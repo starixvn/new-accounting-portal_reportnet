@@ -262,7 +262,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
     var makeLeagueSuggestion = function () {
         self.Params.autoCompleteManager = _tables.txtLeague.autocomplete({
-            serviceUrl: window.rootWebPath.replace(/\/$/g, '') + '/ReportHelper/LeagueSuggestion?' +
+            serviceUrl: window.rootUrl + '/api/league-win-loss/league-suggestion?' +
             $.param(getLeagueSuggestionParams()),
             minChars: 2
         });

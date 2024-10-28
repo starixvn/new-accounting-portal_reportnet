@@ -85,5 +85,18 @@ namespace LeagueWinLoss.Controller
             var result = await service.GetSupers(criteria);
             return Ok(result);
         }
+
+        [Route("league-suggestion")]
+        [HttpGet]
+        public async Task<IActionResult> GetLeagueSuggestion(string sportBettype, string query)
+        {
+            var criteria = new LeagueSuggestionCriteria
+            {
+                SportBettype = sportBettype,
+                SearchText = query
+            };
+            var result = await service.GetLeagueSuggestion(criteria);
+            return Ok(result);
+        }
     }
 }

@@ -22,6 +22,7 @@ COPY src/FraudAndRisk/ParlayWon/*.csproj ./FraudAndRisk/ParlayWon/
 COPY src/FraudAndRisk/SaveBetReport/*.csproj ./FraudAndRisk/SaveBetReport/
 COPY src/WinLoss/DailyMixParlay/*.csproj ./src/WinLoss/DailyMixParlay/
 COPY src/WinLoss/TreeWinLoss/*.csproj ./src/WinLoss/TreeWinLoss/
+COPY src/WinLoss/LeagueWinLoss/*.csproj ./src/WinLoss/LeagueWinLoss/
 COPY src/FraudAndRisk/SBCustomerPerformanceByDanger/*.csproj ./FraudAndRisk/SBCustomerPerformanceByDanger/
 COPY src/Shared/Utilities/*.csproj ./src/Shared/Utilities/
 COPY src/LegendManagement/LegendManagement/*.csproj ./src/LegendManagement/LegendManagement/
