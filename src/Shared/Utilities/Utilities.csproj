@@ -6,6 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
   <ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
@@ -30,9 +36,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MainLabels.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

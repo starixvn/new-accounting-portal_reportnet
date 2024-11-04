@@ -18,6 +18,8 @@
 
         public int Bettype { get; set; }
 
+        public string RefNo { get; set; }
+
         public int RefNoGroup { get; set; }
 
         public int MatchId { get; set; }
@@ -33,5 +35,13 @@
         public DateTime BetTime { get; set; }
 
         public string Status { get; set; }  
+
+        public int StatusId { get; set; }
+
+        public string TransDesc { get; set; }
+
+        public string BetFrom { get; set; }
+
+        public string SiteName { get; set; }
     }
 }

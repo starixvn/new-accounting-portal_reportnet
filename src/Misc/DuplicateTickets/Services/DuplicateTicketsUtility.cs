@@ -22,83 +22,81 @@ namespace DuplicateTickets.Services
         public List<TicketModel> AssignSubTicketInfo(IGrouping<dynamic, DuplicateTicketEntity> duplicateTicketByUserName)
         {
             List<TicketModel> groups = new List<TicketModel>();
-            //DateTime prevBetTimeGroup = new DateTime(2014, 7, 11);
-            //DateTime prevBetTimeTicket = new DateTime(2014, 7, 11);
-            //int ticketIndex = 0;
-            //double timeDifferenceGroup = 0;
-            //double timeDifferenceTicket = 0;
-            //int groupNo = 0;
+            DateTime prevBetTimeGroup = new DateTime(2014, 7, 11);
+            DateTime prevBetTimeTicket = new DateTime(2014, 7, 11);
+            int ticketIndex = 0;
+            double timeDifferenceGroup = 0;
+            double timeDifferenceTicket = 0;
+            int groupNo = 0;
 
-            //foreach (var duplicateTicket in duplicateTicketByUserName)
-            //{
-            //    var betTime = duplicateTicket.BetTime;
-            //    TimeSpan timeSpanGroup = betTime.Subtract(prevBetTimeGroup);
-            //    TimeSpan timeSpanTicket = betTime.Subtract(prevBetTimeTicket);
-            //    timeDifferenceGroup = timeSpanGroup.TotalMilliseconds;
-            //    timeDifferenceTicket = timeSpanTicket.TotalMilliseconds;
+            foreach (var duplicateTicket in duplicateTicketByUserName)
+            {
+                var betTime = duplicateTicket.BetTime;
+                TimeSpan timeSpanGroup = betTime.Subtract(prevBetTimeGroup);
+                TimeSpan timeSpanTicket = betTime.Subtract(prevBetTimeTicket);
+                timeDifferenceGroup = timeSpanGroup.TotalMilliseconds;
+                timeDifferenceTicket = timeSpanTicket.TotalMilliseconds;
 
-            //    if (ticketIndex == 0)
-            //    {
-            //        timeDifferenceGroup = 0;
-            //        timeDifferenceTicket = 0;
-            //    }
+                if (ticketIndex == 0)
+                {
+                    timeDifferenceGroup = 0;
+                    timeDifferenceTicket = 0;
+                }
 
-            //    if (timeDifferenceGroup < 0)
-            //    {
-            //        continue;
-            //    }
+                if (timeDifferenceGroup < 0)
+                {
+                    continue;
+                }
 
-            //    if (timeDifferenceGroup >= TotalMilliseconds)
-            //    {
-            //        groupNo++;
-            //        ticketIndex = 0;
-            //        timeDifferenceTicket = 0;
-            //    }
+                if (timeDifferenceGroup >= TotalMilliseconds)
+                {
+                    groupNo++;
+                    ticketIndex = 0;
+                    timeDifferenceTicket = 0;
+                }
 
-            //    var ticketInfo = new TicketModel()
-            //    {
-            //        Status = Convert.ToString(duplicateTicket.Status),
-            //        ReferenceNumber = Convert.ToString(duplicateTicket.Re),
-            //        BetTime = betTime.ToLongMMMddFormatedDate(),
-            //        TimeDifference = timeDifferenceTicket,
-            //        GroupNo = groupNo,
-            //        TransDesc = duplicateTicket.transdesc,
-            //        Site = Convert.ToString(duplicateTicket.sitename),
-            //        BetFrom = Convert.ToString(duplicateTicket.betfrom)
-            //    };
+                var ticketInfo = new TicketModel()
+                {
+                    Status = duplicateTicket.Status,
+                    ReferenceNumber = duplicateTicket.RefNo,
+                    BetTime = betTime.ToLongMMMddFormatedDate(),
+                    TimeDifference = timeDifferenceTicket,
+                    GroupNo = groupNo,
+                    TransDesc = duplicateTicket.TransDesc,
+                    Site = duplicateTicket.SiteName,
+                    BetFrom = duplicateTicket.BetFrom
+                };
 
-            //    if (ticketIndex == 0)
-            //    {
-            //        prevBetTimeGroup = betTime;
-            //    }
+                if (ticketIndex == 0)
+                {
+                    prevBetTimeGroup = betTime;
+                }
 
-            //    prevBetTimeTicket = betTime;
+                prevBetTimeTicket = betTime;
 
-            //    ticketIndex++;
-            //    groups.Add(ticketInfo);
-            //}
+                ticketIndex++;
+                groups.Add(ticketInfo);
+            }
 
             return groups;
         }
 
         public DuplicateTicketsByUserNameModel AssignMainTicketInfo(IGrouping<dynamic, DuplicateTicketEntity> duplicateTicketByUserName)
         {
-            //DateTime winlostDate = Convert.ToDateTime(duplicateTicketByUserName.Key.winlostdate);
-            //var ticket = new DuplicateTicketsByUserNameModel
-            //{
-            //    UserName = Convert.ToString(duplicateTicketByUserName.Key.username),
-            //    CustId = Convert.ToInt32(duplicateTicketByUserName.Key.custid),
-            //    BetType = Convert.ToString(duplicateTicketByUserName.Key.typename),
-            //    WinLostDate = winlostDate.ToShortFormatedDate(),
-            //    BalanceBeforeBet = Convert.ToDecimal(duplicateTicketByUserName.Key.balance),
-            //    Stake = Convert.ToDecimal(duplicateTicketByUserName.Key.stake),
-            //    Odds = Convert.ToDecimal(duplicateTicketByUserName.Key.odds),
-            //    BetTypeId = Convert.ToInt32(duplicateTicketByUserName.Key.bettype)
-            //};
+            DateTime winlostDate = duplicateTicketByUserName.Key.WinLostDate;
+            var ticket = new DuplicateTicketsByUserNameModel
+            {
+                UserName = duplicateTicketByUserName.Key.UserName,
+                CustId = duplicateTicketByUserName.Key.CustId,
+                BetType = duplicateTicketByUserName.Key.TypeName,
+                WinLostDate = winlostDate.ToShortFormatedDate(),
+                BalanceBeforeBet = duplicateTicketByUserName.Key.Balance,
+                Stake = duplicateTicketByUserName.Key.Stake,
+                Odds = duplicateTicketByUserName.Key.Odds,
+                BetTypeId = duplicateTicketByUserName.Key.Bettype
+            };
 
-            //return ticket;
-
-            return new DuplicateTicketsByUserNameModel();
+            return ticket;
         }
 
         public string GetMD5Hash(string input)

@@ -416,4 +416,8 @@
 			<Mapping DataField="islive" ObjectProperty="LiveStatus" />
 		</Setting>
 	</Function>
+	<Function Name="Misc - Duplicate Tickets">
+		<Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600" />
+		<Setting Key="Acc_Rpt_DuplicatedTicketsCheckCashOut" SpName="Acc_Rpt_DuplicatedTicketsCheckCashOut" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600" />
+	</Function>
 </Functions>
