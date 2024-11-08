@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Nap_Reports.Utilities.Resources {
+namespace Utilities.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Nap_Reports.Utilities.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Nap_Reports.Utilities.Resources.MainLabels", typeof(MainLabels).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Utilities.Resources.MainLabels", typeof(MainLabels).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -59,7 +59,7 @@ namespace Nap_Reports.Utilities.Resources {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to 10 mins O/U.
         /// </summary>
@@ -68,7 +68,7 @@ namespace Nap_Reports.Utilities.Resources {
                 return ResourceManager.GetString("_10_min_OU", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to 10mins 1x2.
         /// </summary>
@@ -77,7 +77,7 @@ namespace Nap_Reports.Utilities.Resources {
                 return ResourceManager.GetString("_10mins1x2", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to 10mins HDP.
         /// </summary>
