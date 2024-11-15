@@ -1,12 +1,12 @@
-﻿using Fanex.Excel.Models;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Configuration;
-using Microsoft.AspNetCore.Mvc;
-using Utilities.ExcelResult;
-
-namespace HouseWinLoss.Common.BasicWinLoss
+﻿namespace HouseWinLoss.Common.BasicWinLoss
 {
+    using Fanex.Excel.Models;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Configuration;
+    using Microsoft.AspNetCore.Mvc;
+    using Utilities.ExcelResult;
+
     public class BasicWinLossController : ControllerBase
     {
         public BasicWinLossController(

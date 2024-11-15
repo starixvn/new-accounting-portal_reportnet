@@ -1,7 +1,7 @@
-﻿using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.ProductBetType
+﻿namespace HouseWinLoss.ProductBetType
 {
+    using HouseWinLoss.Configuration;
+
     public class QueryModel
     {
         public DateTime StartDate { get; set; }

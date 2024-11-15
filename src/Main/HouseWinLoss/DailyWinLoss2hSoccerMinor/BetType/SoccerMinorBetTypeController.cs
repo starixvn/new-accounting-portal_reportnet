@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.Models;
-using HouseWinLoss.Configuration;
-using Microsoft.AspNetCore.Mvc;
-using Utilities.ExcelResult;
-
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType
 {
+    using AutoMapper;
+    using Fanex.Excel.Models;
+    using HouseWinLoss.Common.BasicWinLoss;
+    using HouseWinLoss.Common.Models;
+    using HouseWinLoss.Configuration;
+    using Microsoft.AspNetCore.Mvc;
+    using Utilities.ExcelResult;
+
     [Route("api/house-win-loss-by-products/soccer-minor/bet-type")]
     [ApiController]
     public class SoccerMinorBetTypeController : ControllerBase

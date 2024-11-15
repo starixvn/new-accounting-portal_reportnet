@@ -1,10 +1,10 @@
-﻿using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Configuration;
-using Microsoft.AspNetCore.Mvc;
-using Utilities.ExcelResult;
-
-namespace HouseWinLoss.Products
+﻿namespace HouseWinLoss.Products
 {
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Configuration;
+    using Microsoft.AspNetCore.Mvc;
+    using Utilities.ExcelResult;
+
     [Route("api/house-win-loss-by-products/product")]
     [ApiController]
     public class ProductController : ControllerBase

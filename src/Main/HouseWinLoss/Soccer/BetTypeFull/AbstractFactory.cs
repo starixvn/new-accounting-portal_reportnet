@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Configuration;
-using HouseWinLoss.Soccer.GroupBetType;
-using HouseWinLoss.Soccer.SumBetType;
-
-namespace HouseWinLoss.Soccer.BetTypeFull
+﻿namespace HouseWinLoss.Soccer.BetTypeFull
 {
+    using AutoMapper;
+    using HouseWinLoss.Common.BasicWinLoss;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Configuration;
+    using HouseWinLoss.Soccer.GroupBetType;
+    using HouseWinLoss.Soccer.SumBetType;
+
     public interface AbstractFactory
     {
         GridOptionFactory CreateGridOptionFactory(bool isMajor, int isLive);

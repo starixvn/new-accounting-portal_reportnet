@@ -1,12 +1,11 @@
-﻿using AutoMapper;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.CashOut.LiveNonLive
+﻿namespace HouseWinLoss.CashOut.LiveNonLive
 {
+    using AutoMapper;
+    using Fanex.Excel.Models;
+    using HouseWinLoss.Common.BasicWinLoss;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 

@@ -1,7 +1,7 @@
-﻿using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.Soccer.MajorMinor
+﻿namespace HouseWinLoss.Soccer.MajorMinor
 {
+    using HouseWinLoss.Configuration;
+
     public class QueryModel
     {
         public DateTime StartDate { get; set; }

@@ -1,7 +1,8 @@
-﻿using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.Soccer.BetTypeFull
+﻿namespace HouseWinLoss.Soccer.BetTypeFull
 {
+    using HouseWinLoss.Configuration;
+
+
     public class ExcelQueryModel
     {
         public DateTime StartDate { get; set; }

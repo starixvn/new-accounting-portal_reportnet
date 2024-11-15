@@ -1,7 +1,7 @@
-﻿using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.MatchDetail
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.MatchDetail
 {
+    using HouseWinLoss.Configuration;
+
     public class QueryModel
     {
         public DateTime StartDate { get; set; }

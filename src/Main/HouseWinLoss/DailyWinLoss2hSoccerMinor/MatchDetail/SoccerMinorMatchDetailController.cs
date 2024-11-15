@@ -1,11 +1,10 @@
-﻿using AutoMapper;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.MatchDetail;
-using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.MatchDetail
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.MatchDetail
 {
+    using AutoMapper;
+    using Fanex.Excel.Models;
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Common.MatchDetail;
+    using HouseWinLoss.Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 

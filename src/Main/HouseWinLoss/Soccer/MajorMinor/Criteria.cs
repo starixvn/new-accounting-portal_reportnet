@@ -1,8 +1,8 @@
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Configuration;
-
 namespace HouseWinLoss.Soccer.MajorMinor
 {
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Configuration;
+
     public class Criteria : WinLossCriteria
     {
         public int IsLive { get; set; } = Constants.LiveDefault;

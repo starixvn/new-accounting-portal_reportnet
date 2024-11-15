@@ -1,7 +1,7 @@
-using HouseWinLoss.Configuration;
-
 namespace HouseWinLoss.Common.Criteria
 {
+    using HouseWinLoss.Configuration;
+
     public class UniversalSportbookSiteCriteria : WinLossCriteria
     {
         public int SportType { get; set; }

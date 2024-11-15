@@ -1,10 +1,10 @@
-﻿using Fanex.Excel.Models;
-using HouseWinLoss.Configuration;
-using Microsoft.AspNetCore.Mvc;
-using Utilities.ExcelResult;
-
-namespace HouseWinLoss.Soccer.BetTypeFull
+﻿namespace HouseWinLoss.Soccer.BetTypeFull
 {
+    using Fanex.Excel.Models;
+    using HouseWinLoss.Configuration;
+    using Microsoft.AspNetCore.Mvc;
+    using Utilities.ExcelResult;
+
     [Route("api/house-win-loss-by-products/soccer/bettype-full")]
     [ApiController]
     public class SoccerBetTypeFullController : ControllerBase

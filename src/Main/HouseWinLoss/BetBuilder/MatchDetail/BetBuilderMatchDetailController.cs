@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.MatchDetail;
-using HouseWinLoss.Configuration;
-using Microsoft.AspNetCore.Mvc;
-
-namespace HouseWinLoss.BetBuilder.MatchDetail
+﻿namespace HouseWinLoss.BetBuilder.MatchDetail
 {
+    using AutoMapper;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Common.MatchDetail;
+    using HouseWinLoss.Configuration;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/house-win-loss-by-products/bet-builder/match-detail")]
     [ApiController]
     public class BetBuilderMatchDetailController : MatchDetailController

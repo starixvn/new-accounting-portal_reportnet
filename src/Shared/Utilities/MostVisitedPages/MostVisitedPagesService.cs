@@ -2,7 +2,7 @@
 {
     public class MostVisitedPagesService
     {
-        //public IEnumerable<MostVisitedPage> GetMostVisitedPages()
+        //public IEnumerable<MostVisitedPageModel> GetMostVisitedPages()
         //{
         //    if (AppSettings.IsDisableMostvisitedPage)
         //    {
@@ -10,13 +10,13 @@
         //    }
 
         //    var rawData = this._mostVisitedPagesRepository.FetchMostVisitedPages(new SelectMostVisitedPageCriteria());
-        //    var mostvisitedPages = new List<MostVisitedPage>();
+        //    var mostvisitedPages = new List<MostVisitedPageModel>();
         //    foreach (var row in rawData)
         //    {
         //        var menu = this._menuService.GetMenuById(Converter.ToInt(row.MenuId));
         //        if (menu != null)
         //        {
-        //            mostvisitedPages.Add(new MostVisitedPage
+        //            mostvisitedPages.Add(new MostVisitedPageModel
         //            {
         //                MenuName = menu.Name,
         //                MenuURL = menu.Url.Trim(),
@@ -32,7 +32,7 @@
         //    return mostvisitedPages;
         //}
 
-        //public void UpdateCount(MostVisitedPage mostVisitedPage)
+        //public void UpdateCount(MostVisitedPageModel mostVisitedPage)
         //{
         //    if (AppSettings.IsDisableMostvisitedPage || mostVisitedPage == null)
         //    {
@@ -41,10 +41,10 @@
 
         //    lock (CommonConstants.MostVisitedPageLockObject)
         //    {
-        //        List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
+        //        List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPageModel>>(CommonConstants.MistVisitedPageCacheKey);
         //        if (mostVisitedPages == null)
         //        {
-        //            mostVisitedPages = new List<MostVisitedPage>();
+        //            mostVisitedPages = new List<MostVisitedPageModel>();
         //        }
 
         //        var mostVisitedPagesCount = mostVisitedPages.Count;
@@ -99,7 +99,7 @@
         //    return position >= 1 && position <= maxPages;
         //}
 
-        //private void SortMostVisitedPages(ref List<MostVisitedPage> mostVisitedPages)
+        //private void SortMostVisitedPages(ref List<MostVisitedPageModel> mostVisitedPages)
         //{
         //    if (mostVisitedPages == null)
         //    {

@@ -1,8 +1,8 @@
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Configuration;
-
 namespace HouseWinLoss.Soccer.BetType
 {
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Configuration;
+
     public class BetTypeCriteria : WinLossCriteria
     {
         public int IsMajor { get; set; }

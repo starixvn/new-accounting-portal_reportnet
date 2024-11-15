@@ -1,10 +1,11 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Configuration;
+﻿
 
 namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.SportType
 {
+    using AutoMapper;
+    using HouseWinLoss.Common.BasicWinLoss;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 

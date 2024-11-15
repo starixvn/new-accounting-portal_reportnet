@@ -1,8 +1,8 @@
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Configuration;
-
 namespace HouseWinLoss.OtherSports.BetType
 {
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Configuration;
+
     public class Criteria : WinLossCriteria
     {
         public int SportType { get; set; }

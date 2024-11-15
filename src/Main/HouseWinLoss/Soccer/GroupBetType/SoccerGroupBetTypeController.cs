@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Configuration;
-using Microsoft.AspNetCore.Mvc;
-using Utilities.ExcelResult;
-
-namespace HouseWinLoss.Soccer.GroupBetType
+﻿namespace HouseWinLoss.Soccer.GroupBetType
 {
+    using AutoMapper;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Configuration;
+    using Microsoft.AspNetCore.Mvc;
+    using Utilities.ExcelResult;
+
     [Route("api/house-win-loss-by-products/soccer/group-bettype")]
     [ApiController]
     public class SoccerGroupBetTypeController : ControllerBase

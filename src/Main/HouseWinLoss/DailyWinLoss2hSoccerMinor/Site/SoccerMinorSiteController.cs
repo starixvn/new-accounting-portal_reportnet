@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.SiteWinLoss;
-using HouseWinLoss.Configuration;
-using Microsoft.AspNetCore.Mvc;
-
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.Site
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.Site
 {
+    using AutoMapper;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Common.SiteWinLoss;
+    using HouseWinLoss.Configuration;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/house-win-loss-by-products/soccer-minor/site")]
     [ApiController]
     public class SoccerMinorSiteController : SiteWinLossController

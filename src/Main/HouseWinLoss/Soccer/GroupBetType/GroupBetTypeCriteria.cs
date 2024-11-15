@@ -1,8 +1,8 @@
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Configuration;
-
 namespace HouseWinLoss.Soccer.GroupBetType
 {
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Configuration;
+
     public class GroupBetTypeCriteria : WinLossCriteria
     {
         public bool IsMajor { get; set; }

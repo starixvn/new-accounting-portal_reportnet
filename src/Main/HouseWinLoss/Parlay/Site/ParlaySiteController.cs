@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Configuration;
-using Microsoft.AspNetCore.Mvc;
-using Utilities.ExcelResult;
-
-namespace HouseWinLoss.Parlay.Site
+﻿namespace HouseWinLoss.Parlay.Site
 {
+    using AutoMapper;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Configuration;
+    using Microsoft.AspNetCore.Mvc;
+    using Utilities.ExcelResult;
+
     [Route("api/house-win-loss-by-products/parlay/site")]
     [ApiController]
     public class ParlaySiteController : ControllerBase

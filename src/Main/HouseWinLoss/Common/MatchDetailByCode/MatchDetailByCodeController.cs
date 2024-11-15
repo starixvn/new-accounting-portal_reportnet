@@ -1,10 +1,9 @@
-﻿using Fanex.Excel.Models;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.Common.MatchDetailByCode
+﻿namespace HouseWinLoss.Common.MatchDetailByCode
 {
+    using Fanex.Excel.Models;
+    using HouseWinLoss.Common.ColumnDecorators;
+    using HouseWinLoss.Common.Criteria;
+    using HouseWinLoss.Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 

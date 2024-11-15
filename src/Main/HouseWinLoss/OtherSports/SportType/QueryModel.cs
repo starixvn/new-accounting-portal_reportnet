@@ -1,7 +1,7 @@
-﻿using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.OtherSports.SportType
+﻿namespace HouseWinLoss.OtherSports.SportType
 {
+    using HouseWinLoss.Configuration;
+
     public class QueryModel
     {
         public int IsLive { get; set; } = Constants.LiveDefault;

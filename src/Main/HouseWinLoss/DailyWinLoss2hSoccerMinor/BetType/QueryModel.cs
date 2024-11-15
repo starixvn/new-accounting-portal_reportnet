@@ -1,7 +1,7 @@
-﻿using HouseWinLoss.Configuration;
-
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType
 {
+    using HouseWinLoss.Configuration;
+
     public class QueryModel
     {
         private const int AllLiveAndNonLive = 2;
