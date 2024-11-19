@@ -420,4 +420,14 @@
 		<Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600" />
 		<Setting Key="Acc_Rpt_DuplicatedTicketsCheckCashOut" SpName="Acc_Rpt_DuplicatedTicketsCheckCashOut" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600" />
 	</Function>
+	<Function Name="Home - Most Visited Page">
+		<Setting Key="Home_MostVisitedPage_GetMostvisitedPage" SpName="Acc_FunctionUsageSel" DbName="DBMA.bodb_Maintenance.wsv_nap">
+		</Setting>
+		<Setting Key="Home_MostVisitedPage_UpdateMostvisitedPageCount" SpName="Acc_FunctionUsageUpdVisitedCount" DbName="DBMA.bodb_Maintenance.wsv_nap">
+		</Setting>
+		<Setting Key="Home_MostVisitedPage_UpdateMostvisitedPagePosition" SpName="Acc_FunctionUsageUpdPosition" DbName="DBMA.bodb_Maintenance.wsv_nap">
+		</Setting>
+		<Setting Key="Home_MostVisitedPage_DeleteMostvisitedPage" SpName="Acc_FunctionUsageDel" DbName="DBMA.bodb_Maintenance.wsv_nap">
+		</Setting>
+	</Function>
 </Functions>

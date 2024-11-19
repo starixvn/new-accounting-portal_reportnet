@@ -286,6 +286,7 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\most-visited-pages\styles\MostVisitedPages.less" />
     <None Include="wwwroot\nap-auth\cryptojs.js" />
     <None Include="wwwroot\nap-auth\jquery-1.8.0.min.js" />
     <None Include="wwwroot\nap-auth\jquery.validate.min.js" />

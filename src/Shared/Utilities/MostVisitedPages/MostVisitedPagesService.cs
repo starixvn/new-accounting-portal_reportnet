@@ -1,132 +1,171 @@
-﻿namespace Utilities.MostVisitedPages
+﻿using Fanex.Caching;
+using Fanex.Data.Repository;
+using Fanex.NAP.Client.Configuration;
+using Fanex.NAP.Client.Helpers.Web;
+using Utilities.Configurations;
+
+namespace Utilities.MostVisitedPages
 {
-    public class MostVisitedPagesService
+    public interface MostVisitedPagesService
     {
-        //public IEnumerable<MostVisitedPageModel> GetMostVisitedPages()
-        //{
-        //    if (AppSettings.IsDisableMostvisitedPage)
-        //    {
-        //        return null;
-        //    }
+        Task<IEnumerable<MostVisitedPageModel>> GetMostVisitedPages();
 
-        //    var rawData = this._mostVisitedPagesRepository.FetchMostVisitedPages(new SelectMostVisitedPageCriteria());
-        //    var mostvisitedPages = new List<MostVisitedPageModel>();
-        //    foreach (var row in rawData)
-        //    {
-        //        var menu = this._menuService.GetMenuById(Converter.ToInt(row.MenuId));
-        //        if (menu != null)
-        //        {
-        //            mostvisitedPages.Add(new MostVisitedPageModel
-        //            {
-        //                MenuName = menu.Name,
-        //                MenuURL = menu.Url.Trim(),
-        //                MenuId = menu.Id,
-        //                Count = row.Count,
-        //                Position = Converter.ToInt(row.Position),
-        //                Title = menu.ParentName + MenuService.UrlSeparator + menu.Name
-        //            });
-        //        }
-        //    }
+        void UpdateCount(MostVisitedPageModel mostVisitedPage);
 
-        //    this.SortMostVisitedPages(ref mostvisitedPages);
-        //    return mostvisitedPages;
-        //}
+        Task<int> UpdatePosition(INonQueryCommand mostVisitedPage);
 
-        //public void UpdateCount(MostVisitedPageModel mostVisitedPage)
-        //{
-        //    if (AppSettings.IsDisableMostvisitedPage || mostVisitedPage == null)
-        //    {
-        //        return;
-        //    }
+        Task<int> Delete(INonQueryCommand mostVisitedPage);
+    }
 
-        //    lock (CommonConstants.MostVisitedPageLockObject)
-        //    {
-        //        List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPageModel>>(CommonConstants.MistVisitedPageCacheKey);
-        //        if (mostVisitedPages == null)
-        //        {
-        //            mostVisitedPages = new List<MostVisitedPageModel>();
-        //        }
+    public class MostVisitedPagesServiceImp(
+        ConfigurationService configurationService, 
+        IDynamicRepository repository,
+        INapSettings napSettings,
+        INapSession napSession,
+        MenuService menuService,
+        ICacheService cacheService) : MostVisitedPagesService
+    {
+        public const string MistVisitedPageCacheKey = "Fanex.AccountingReports.Core.Contants.AppSession.IntervalGetMostVisitedPage";
 
-        //        var mostVisitedPagesCount = mostVisitedPages.Count;
-        //        var isExist = false;
-        //        for (int i = 0; i < mostVisitedPagesCount; i++)
-        //        {
-        //            if (mostVisitedPages[i] != null &&
-        //                mostVisitedPages[i].MenuId == mostVisitedPage.MenuId)
-        //            {
-        //                mostVisitedPages[i].Count++;
-        //                isExist = true;
-        //                break;
-        //            }
-        //        }
+        public const char UrlSeparator = '/';
 
-        //        if (!isExist && AppSession.CurrentUser != null)
-        //        {
-        //            mostVisitedPages.Add(new MostVisitedPage
-        //            {
-        //                UserId = AppSession.CurrentUser.Id,
-        //                MenuId = mostVisitedPage.MenuId
-        //            });
-        //        }
+        public static readonly object MostVisitedPageLockObject = new object();
 
-        //        // Save to cache.
-        //        CacheExtension.Set(CommonConstants.MistVisitedPageCacheKey, mostVisitedPages);
-        //    }
-        //}
+        public async Task<IEnumerable<MostVisitedPageModel>> GetMostVisitedPages()
+        {
+            if (configurationService.IsDisableMostvisitedPage)
+            {
+                return null;
+            }
 
-        //public void UpdatePosition(ICriteria mostVisitedPage)
-        //{
-        //    if (AppSettings.IsDisableMostvisitedPage)
-        //    {
-        //        return;
-        //    }
+            var criteria = new SelectMostVisitedPageCriteria
+            {
+                Environment = napSettings.Environment,
+                UserId = napSession.UserId,
+                SiteId = napSettings.SiteId
+            };
 
-        //    this._mostVisitedPagesRepository.UpdatePosition(mostVisitedPage);
-        //}
+            var rawData =  await repository.FetchAsync<MostVisitedPageModel>(criteria);
 
-        //public void Delete(ICriteria mostVisitedPage)
-        //{
-        //    if (AppSettings.IsDisableMostvisitedPage)
-        //    {
-        //        return;
-        //    }
+            var mostvisitedPages = new List<MostVisitedPageModel>();
 
-        //    this._mostVisitedPagesRepository.Delete(mostVisitedPage);
-        //}
+            foreach (var row in rawData)
+            {
+                var menu = menuService.GetMenuById(row.MenuId);
 
-        //private bool IsInRange(int position, int maxPages)
-        //{
-        //    return position >= 1 && position <= maxPages;
-        //}
+                if (menu != null)
+                {
+                    mostvisitedPages.Add(new MostVisitedPageModel
+                    {
+                        MenuName = menu.Name,
+                        MenuURL = menu.Url.Trim(),
+                        MenuId = menu.Id,
+                        Count = row.Count,
+                        Position = row.Position,
+                        Title = menu.ParentName + UrlSeparator + menu.Name
+                    });
+                }
+            }
 
-        //private void SortMostVisitedPages(ref List<MostVisitedPageModel> mostVisitedPages)
-        //{
-        //    if (mostVisitedPages == null)
-        //    {
-        //        return;
-        //    }
+            this.SortMostVisitedPages(ref mostvisitedPages);
+            return mostvisitedPages;
+        }
 
-        //    mostVisitedPages = mostVisitedPages.Take(SelectMostVisitedPageCriteria.MaxPages)
-        //                                       .ToList();
+        public void UpdateCount(MostVisitedPageModel mostVisitedPage)
+        {
+            if (configurationService.IsDisableMostvisitedPage || mostVisitedPage == null)
+            {
+                return;
+            }
 
-        //    var pinSite = mostVisitedPages.Where(mvp =>
-        //        this.IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
-        //    var unpinSite = mostVisitedPages.Where(mvp =>
-        //        !this.IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
-        //    mostVisitedPages = unpinSite;
+            lock (MostVisitedPageLockObject)
+            {
+                List<MostVisitedPageModel> mostVisitedPages = cacheService.Get<List<MostVisitedPageModel>>(MistVisitedPageCacheKey);
+                if (mostVisitedPages == null)
+                {
+                    mostVisitedPages = new List<MostVisitedPageModel>();
+                }
 
-        //    for (int i = 0; i < pinSite.Count; i++)
-        //    {
-        //        var mostVisitedPage = pinSite[i];
-        //        if (mostVisitedPage.Position <= mostVisitedPages.Count)
-        //        {
-        //            mostVisitedPages.Insert(mostVisitedPage.Position - 1, mostVisitedPage);
-        //        }
-        //        else
-        //        {
-        //            mostVisitedPages.Add(mostVisitedPage);
-        //        }
-        //    }
-        //}
+                var mostVisitedPagesCount = mostVisitedPages.Count;
+                var isExist = false;
+                for (int i = 0; i < mostVisitedPagesCount; i++)
+                {
+                    if (mostVisitedPages[i] != null &&
+                        mostVisitedPages[i].MenuId == mostVisitedPage.MenuId)
+                    {
+                        mostVisitedPages[i].Count++;
+                        isExist = true;
+                        break;
+                    }
+                }
+
+                if (!isExist && napSession.UserId != 0)
+                {
+                    mostVisitedPages.Add(new MostVisitedPageModel
+                    {
+                        UserId = napSession.UserId,
+                        MenuId = mostVisitedPage.MenuId
+                    });
+                }
+
+                // Save to cache.
+                cacheService.Set(MistVisitedPageCacheKey, mostVisitedPages);
+            }
+        }
+
+        public async Task<int> UpdatePosition(INonQueryCommand mostVisitedPage)
+        {
+            if (configurationService.IsDisableMostvisitedPage)
+            {
+                return -1;
+            }
+
+            return await repository.ExecuteAsync(mostVisitedPage);
+        }
+
+        public async Task<int> Delete(INonQueryCommand mostVisitedPage)
+        {
+            if (configurationService.IsDisableMostvisitedPage)
+            {
+                return -1;
+            }
+
+            return await repository.ExecuteAsync(mostVisitedPage);
+        }
+
+        private bool IsInRange(int position, int maxPages)
+        {
+            return position >= 1 && position <= maxPages;
+        }
+
+        private void SortMostVisitedPages(ref List<MostVisitedPageModel> mostVisitedPages)
+        {
+            if (mostVisitedPages == null)
+            {
+                return;
+            }
+
+            mostVisitedPages = mostVisitedPages.Take(SelectMostVisitedPageCriteria.MaxPages)
+                                               .ToList();
+
+            var pinSite = mostVisitedPages.Where(mvp =>
+                this.IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
+            var unpinSite = mostVisitedPages.Where(mvp =>
+                !this.IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
+            mostVisitedPages = unpinSite;
+
+            for (int i = 0; i < pinSite.Count; i++)
+            {
+                var mostVisitedPage = pinSite[i];
+                if (mostVisitedPage.Position <= mostVisitedPages.Count)
+                {
+                    mostVisitedPages.Insert(mostVisitedPage.Position - 1, mostVisitedPage);
+                }
+                else
+                {
+                    mostVisitedPages.Add(mostVisitedPage);
+                }
+            }
+        }
     }
 }

@@ -7,6 +7,8 @@ namespace Utilities.Configurations
         string CurrentDirectory { get; }
 
         string FraudSystemCategoryApi { get; }
+
+        bool IsDisableMostvisitedPage { get; }
     }
 
     public class ConfigurationServiceImp(IConfiguration configuration) : ConfigurationService
@@ -14,5 +16,7 @@ namespace Utilities.Configurations
         public string CurrentDirectory => AppDomain.CurrentDomain.BaseDirectory;
 
         public string FraudSystemCategoryApi => configuration["FraudSystemCategoryAPI"];
+
+        public bool IsDisableMostvisitedPage => configuration.GetValue<bool>("IsDisableMostvisitedPage");
     }
 }

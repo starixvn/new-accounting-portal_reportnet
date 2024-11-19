@@ -193,7 +193,7 @@ var AccReport = function ($) {
                 if (typeof (isDisableMostvisitedPage) != 'undefined' && isDisableMostvisitedPage == false && currentMenuId != 0) {
                     $.ajax({
                         type: "POST",
-                        url: window.rootUrl + "Home/UpdateMostVisitedPageCount",
+                        url: window.rootUrl + "/api/most-visited-page/update-count",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         data: JSON.stringify({

@@ -16,7 +16,7 @@ namespace Utilities.MostVisitedPages
         string GetMenuNameByURL(string menuURL);
     }
 
-    public class MenuServiceImp(INapSession napSession)
+    public class MenuServiceImp(INapSession napSession) : MenuService
     {
         public const char UrlSeparator = '/';
 

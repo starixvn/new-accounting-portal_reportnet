@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace RiskControl.Sites.ViewComponents;
+namespace Nap_Reports.Sites.ViewComponents;
 
 public class MenuViewComponent(INapSession napSession) : ViewComponent
 {

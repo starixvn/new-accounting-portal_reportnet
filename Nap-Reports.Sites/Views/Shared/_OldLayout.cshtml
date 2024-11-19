@@ -1,4 +1,4 @@
-﻿@using Fanex.NAP.Client.Configuration
+﻿@inject IConfiguration configuration
 @{
     var showMenus = ViewBag.ShowMenus != null ? (bool)ViewBag.ShowMenus : true;
     var napConfig = new
@@ -58,7 +58,10 @@
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
         window.rootWebPath = '@(Context.Request.Path)';
+        var currentMenuId = 0;
+        var isDisableMostvisitedPage = @(configuration.GetValue<bool>("IsDisableMostvisitedPage").ToString().ToLower());
     </script>
+
     <script type="text/javascript" src="/scripts/nap-report-common.js?v=2"></script>
     @RenderSection("Scripts", false)
     @RenderSection("Foot", false)

@@ -1,20 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Nap_Reports.Sites.Models;
 using System.Diagnostics;
+using Utilities.Configurations;
 
 namespace Nap_Reports.Sites.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger, ConfigurationService config) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index()
         {
+            ViewBag.IsDisableMostvisitedPage = config.IsDisableMostvisitedPage;
             return View();
         }
 
