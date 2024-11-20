@@ -69,6 +69,46 @@ internal class Program
         app.UseAuthorization();
 
         app.MapControllerRoute(
+            name: "universalreports",
+            pattern: "UniversalReports/{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" });
+
+        app.MapControllerRoute(
+            name: "main",
+            pattern: "Main/{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" });
+
+        app.MapControllerRoute(
+            name: "balance",
+            pattern: "Balance/{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" });
+
+        app.MapControllerRoute(
+            name: "winloss",
+            pattern: "WinLoss/{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" });
+
+        app.MapControllerRoute(
+            name: "licensee",
+            pattern: "Licensee/{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" });
+
+        app.MapControllerRoute(
+            name: "misc",
+            pattern: "Misc/{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" });
+
+        app.MapControllerRoute(
+            name: "special",
+            pattern: "Special/{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" });
+
+        app.MapControllerRoute(
+            name: "legendmanagement",
+            pattern: "LegendManagement/{controller}/{action}",
+            defaults: new { controller = "Home", action = "Index" });
+
+        app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
