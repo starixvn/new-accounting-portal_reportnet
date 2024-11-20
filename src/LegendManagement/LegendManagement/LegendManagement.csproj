@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fanex.Common" Version="1.1.1.1" />
+    <PackageReference Include="Fanex.Common" Version="1.1.2.1" />
     <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
   </ItemGroup>
 

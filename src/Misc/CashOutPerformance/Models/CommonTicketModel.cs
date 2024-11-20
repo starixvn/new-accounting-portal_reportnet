@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CashOutPerformance.Models
+﻿namespace CashOutPerformance.Models
 {
     public class CommonTicketModel
     {

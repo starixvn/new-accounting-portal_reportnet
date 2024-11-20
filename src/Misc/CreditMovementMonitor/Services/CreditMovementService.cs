@@ -5,11 +5,12 @@ using Fanex.Caching;
 using Fanex.Data.Repository;
 using Fanex.Excel.Enums;
 using Fanex.Excel.Models;
-using Fanex.NAP.Client.Helpers.Web;
 using Utilities.DateTimes;
 
 namespace CreditMovementMonitor.Services
 {
+    using Fanex.NAP.Client;
+
     public interface CreditMovementService
     {
         Task<GridOptions> GetReport(CreditMovementCriteria criteria);

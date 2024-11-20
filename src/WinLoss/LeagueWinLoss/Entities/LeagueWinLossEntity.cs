@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LeagueWinLoss.Entities
+﻿namespace LeagueWinLoss.Entities
 {
     [Serializable]
     public class LeagueWinLossEntity : BaseEntity

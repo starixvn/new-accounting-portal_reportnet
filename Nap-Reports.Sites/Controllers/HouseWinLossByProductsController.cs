@@ -1,6 +1,5 @@
 ﻿using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Business;
-using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Mvc;
 using Nap_Reports.Sites.Settings;
@@ -9,6 +8,8 @@ using Utilities.PermissionFilter;
 
 namespace Nap_Reports.Sites.Controllers
 {
+    using Fanex.NAP.Client;
+
     public class HouseWinLossByProductsController : Controller
     {
         private readonly IUserService userService;

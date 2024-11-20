@@ -3,7 +3,7 @@ using DuplicateTickets.Entities;
 using DuplicateTickets.Model;
 using Fanex.Data.Repository;
 using Fanex.Logging;
-using Fanex.NAP.Client.Helpers.Web;
+using Fanex.NAP.Client;
 using Newtonsoft.Json;
 
 namespace DuplicateTickets.Services

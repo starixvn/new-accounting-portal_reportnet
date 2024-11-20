@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Epplus.Mapper" Version="7.0.0" />
+    <PackageReference Include="Epplus.Mapper" Version="7.5.0" />
     <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
   </ItemGroup>
 

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace CashOutPerformance.Constants
+﻿namespace CashOutPerformance.Constants
 {
     public enum ExcelType
     {

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using UpdatedUsernameCredit.Common;
+﻿using UpdatedUsernameCredit.Common;
 using UpdatedUsernameCredit.UpdatedCredit;
 using UpdatedUsernameCredit.UpdatedUsername;
 

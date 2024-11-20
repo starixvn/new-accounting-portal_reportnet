@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CashOutPerformance.Models
+﻿namespace CashOutPerformance.Models
 {
     public class FilterGroupItemModel
     {

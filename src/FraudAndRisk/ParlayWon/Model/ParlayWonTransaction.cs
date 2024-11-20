@@ -1,6 +1,4 @@
-﻿using System.Transactions;
-
-namespace ParlayWon.Model
+﻿namespace ParlayWon.Model
 {
     public class ParlayWonTransaction
     {

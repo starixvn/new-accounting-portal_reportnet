@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SMAWinLoss.Summary
+﻿namespace SMAWinLoss.Summary
 {
     public class WinLossEntity
     {

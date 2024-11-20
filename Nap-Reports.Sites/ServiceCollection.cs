@@ -1,36 +1,20 @@
-﻿using Fanex.Logging;
-using Fanex.Logging.Sentry.RavenClient;
-using Fanex.RemotingRef;
+﻿using Fanex.RemotingRef;
 using Fanex.Result.Core.Base;
 using Fanex.Result.Core.RemotingRef;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Nap_Reports.Sites.DependencyInjection;
-using SharpRaven;
 
 namespace Nap_Reports.Sites
 {
     public static class ServiceCollection
     {
-        public static void RegisterSentry(this IServiceCollection services, IConfiguration configuration)
-        {
-            LogManager
-                .SetDefaultLogCategory(configuration.GetSection("CategorySentryLog").Value)
-                .Use(new List<ILogEngine>
-                {
-                new SentryLogging(new SentryEngineOptions
-                {
-                    Dsn = new Dsn(configuration.GetSection("SentryClientKey").Value)
-                })
-                });
-        }
-
-        public static void RegisterRemotingRef(this IServiceCollection services, IConfiguration configuration)
+        public static void AddRemotingRef(this IServiceCollection services, IConfiguration configuration)
         {
             RefDataTypeContainer.ConnectTo(new Uri(configuration["Fanex.RemotingRef.Service.Url"]))
                 .FromApplication("Nap-Reports");
         }
 
-        public static void RegisterResultCore(this IServiceCollection services, IConfiguration configuration)
+        public static void AddResultCore(this IServiceCollection services, IConfiguration configuration)
         {
             ResultCoreManager.RegisterRefDataHelper(new RefDataHelper());
         }

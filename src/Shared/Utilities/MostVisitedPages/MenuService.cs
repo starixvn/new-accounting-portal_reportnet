@@ -1,8 +1,9 @@
-﻿using Fanex.NAP.Client.Helpers.Web;
-using Fanex.NAP.Client.Models;
+﻿using Fanex.NAP.Client.Models;
 
 namespace Utilities.MostVisitedPages
 {
+    using Fanex.NAP.Client;
+
     public interface MenuService
     {
         string GetMenuPathFromRequestFilePath(string filePath, string applicationPath);

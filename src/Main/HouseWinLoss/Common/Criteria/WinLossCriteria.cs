@@ -1,5 +1,4 @@
-﻿using System;
-using Fanex.Data;
+﻿using Fanex.Data;
 using Fanex.Data.Repository;
 
 namespace HouseWinLoss.Common.Criteria

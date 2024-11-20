@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SBCustomerPerformanceByDanger.Filter
+﻿namespace SBCustomerPerformanceByDanger.Filter
 {
     public class BettypeGroupModel
     {

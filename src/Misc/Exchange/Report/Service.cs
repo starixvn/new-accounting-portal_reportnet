@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Fanex.Data.Repository;
-using Org.BouncyCastle.Asn1.Pkcs;
 using Utilities.LinqDynamicSum;
 
 namespace Exchange.Report

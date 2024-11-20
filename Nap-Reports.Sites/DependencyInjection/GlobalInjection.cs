@@ -2,9 +2,7 @@
 using Fanex.Caching.Memory;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
-using Fanex.NAP.Client.Session;
 using Fanex.RemotingRef;
 using Utilities.Currencies;
 using Utilities.CustomerTrackingSystem;
@@ -14,6 +12,8 @@ using Utilities.PermissionFilter;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {
+    using Fanex.NAP.Client;
+
     public static class GlobalInjection
     {
         public static void RegisterGlobalServices(this IServiceCollection service)

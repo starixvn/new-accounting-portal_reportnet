@@ -1,18 +1,7 @@
 ﻿using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DailyMixParlay.Models;
-using NPOI.SS.UserModel;
 using Utilities.Configurations;
-using System.Linq.Expressions;
-using NPOI.SS.Formula.Functions;
-using System.Xml.Linq;
 using DailyMixParlay.Criteria;
-using System.Reflection;
-using System.Reflection.Emit;
 using DailyMixParlay.Constant;
 
 namespace DailyMixParlay.Services;

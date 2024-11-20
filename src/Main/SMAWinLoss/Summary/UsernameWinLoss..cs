@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SMAWinLoss.Summary
+﻿namespace SMAWinLoss.Summary
 {
     public class UsernameWinLoss
     {

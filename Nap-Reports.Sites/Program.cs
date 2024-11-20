@@ -1,8 +1,6 @@
 using Fanex.Data;
-using Fanex.NAP.Client;
-using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
-using Fanex.NAP.SignIn.Attribute;
+using Fanex.Logging.Sentry.RavenClient;
+using Fanex.NAP.Client.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Nap_Reports.Sites;
 using Nap_Reports.Sites.App_Start;
@@ -45,17 +43,14 @@ internal class Program
         {
             options.SuppressModelStateInvalidFilter = true;
         });
-        services.RegisterRemotingRef(configuration);
-        services.RegisterResultCore(configuration);
+        services.AddRemotingRef(configuration);
+        services.AddResultCore(configuration);
         services.AddFanexData(configuration);
-        services.RegisterSentry(configuration);
+        services.AddNapClient(configuration);
+        services.AddFanexLogSentry(configuration);
        
         var app = builder.Build();
-
-        NapClientManager
-           .UseConfig(app.Services.GetService<INapSettings>())
-           .UseSession(app.Services.GetService<INapSession>());
-
+        
         app.Use((context, next) =>
         {
             context.Request.PathBase = new PathString(configuration.GetSection("PathBase").Value);

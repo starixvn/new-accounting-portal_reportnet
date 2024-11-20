@@ -4,8 +4,6 @@ using Fanex.Data.Repository;
 using Fanex.Result.Core;
 using Fanex.Result.Core.Base;
 using Fanex.Result.Core.Sportsbook.DTO;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 
 namespace BetList.Services
 {

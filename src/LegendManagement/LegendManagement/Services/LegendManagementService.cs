@@ -8,7 +8,6 @@ using LegendManagement.Constants;
 using LegendManagement.Criteria;
 using LegendManagement.Models;
 using Microsoft.AspNetCore.Http;
-using System.Collections;
 
 namespace LegendManagement.Services;
 

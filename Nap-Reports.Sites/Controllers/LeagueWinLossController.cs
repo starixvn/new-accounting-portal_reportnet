@@ -1,7 +1,6 @@
 ﻿using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Business;
-using Fanex.NAP.Client.Helpers.Web;
 using Fanex.NAP.Client.Services;
 using LeagueWinLoss.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,8 @@ using Utilities.BalanceUpServices;
 
 namespace Nap_Reports.Sites.Controllers
 {
+    using Fanex.NAP.Client;
+
     public class LeagueWinLossController(
         INapSettings napSettings,
         INapSession napSession,

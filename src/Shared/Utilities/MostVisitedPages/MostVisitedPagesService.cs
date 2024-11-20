@@ -1,7 +1,7 @@
 ﻿using Fanex.Caching;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Web;
+using Fanex.NAP.Client;
 using Utilities.Configurations;
 
 namespace Utilities.MostVisitedPages

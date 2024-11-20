@@ -1,7 +1,4 @@
-﻿using Fanex.NAP.Client.Attributes;
-using Fanex.NAP.Client.Helpers.Business;
-using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Sites.Settings;
+﻿using Microsoft.AspNetCore.Mvc;
 using Utilities.BalanceUpServices;
 
 namespace Nap_Reports.Sites.Controllers
