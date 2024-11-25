@@ -11,6 +11,7 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<TraderPerformanceSoccerService, TraderPerformanceSoccerServiceImp>();
             service.AddTransient<TraderPerformanceOtherSportsRepository, TraderPerformanceOtherSportsRepositoryImp>();
             service.AddTransient<TraderPerformanceOtherSportsService, TraderPerformanceOtherSportsServiceImp>();
+            service.AddTransient<TraderPerformanceOtherSportsExcelService, TraderPerformanceOtherSportsExcelServiceImp>();
         }
     }
 }

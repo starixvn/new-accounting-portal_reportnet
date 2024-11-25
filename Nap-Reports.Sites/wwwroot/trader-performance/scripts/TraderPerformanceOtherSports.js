@@ -554,7 +554,7 @@ Fanex.AccountingReports.Main.TraderPerformanceOtherSports = function () {
             IsSoccer: false
         };
 
-        AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceOtherSports/ExportReport", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/trader-performance-other-sports/export-main", exportParams);
     };
 
     self.exportDetailData = function () {
@@ -564,7 +564,7 @@ Fanex.AccountingReports.Main.TraderPerformanceOtherSports = function () {
             IsSoccer: false
         };
 
-        AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceOtherSports/ExportDetailReport", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/trader-performance-other-sports/export-detail-detail", exportParams);
     };
 
     self.compareCriteria = function (oldCriteria, currentCriteria) {
