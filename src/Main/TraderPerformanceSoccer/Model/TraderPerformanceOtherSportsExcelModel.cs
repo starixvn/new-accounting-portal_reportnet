@@ -14,16 +14,16 @@ public class TraderPerformanceOtherSportsExcelModel
     public int MatchNumber { get; set; }
 
     [Cell("D6")]
-    public int Major { get; set; }
+    public int? Major { get; set; }
 
     [Cell("E6")]
-    public int Minor1 { get; set; }
+    public int? Minor1 { get; set; }
 
     [Cell("F6")]
-    public int Minor2 { get; set; }
+    public int? Minor2 { get; set; }
 
     [Cell("G6")]
-    public int Minor3 { get; set; }
+    public int? Minor3 { get; set; }
 
     [Cell("H6")]
     public int Others { get; set; }

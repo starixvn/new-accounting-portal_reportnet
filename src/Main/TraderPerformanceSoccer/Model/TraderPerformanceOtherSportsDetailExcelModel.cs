@@ -1,13 +1,8 @@
 ﻿using Epplus.Mapper.Annotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TraderPerformance.Model;
 
-public class TraderPerformanceSoccerDetailExcelModel
+public class TraderPerformanceOtherSportsDetailExcelModel
 {
     [Cell("A6")]
     public int No { get; set; }

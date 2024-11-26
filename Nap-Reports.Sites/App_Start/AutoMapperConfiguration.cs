@@ -44,7 +44,6 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeDirectBalance();
                 cfg.InitializeDailyCreatedCustomers();
                 cfg.InitializeBetCount();
-                cfg.InitializeTraderPerformance();
             });
 
             var mapper = config.CreateMapper();

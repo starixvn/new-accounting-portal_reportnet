@@ -126,10 +126,10 @@ namespace TraderPerformance.Services
 
             var reportPagingData = new TraderPerformanceOtherSportsDetailModel
             {
-                ReportRows = result.ReportRows
+                ReportRows = criteria.PageIndex > 0 ? result.ReportRows
                     .Skip(startIndex)
                     .Take(criteria.PageSize)
-                    .ToList(),
+                    .ToList() : result.ReportRows.ToList(),
                 GrandTotal = result.GrandTotal,
                 ReportLength = result.ReportLength
             };
