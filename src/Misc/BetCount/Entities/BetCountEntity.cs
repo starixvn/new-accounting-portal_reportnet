@@ -18,12 +18,12 @@
 
         public decimal SuperWinLoss { get; set; }
 
-        public decimal SMAWinLoss { get; set; }
-
         public decimal Commission { get; set; }
 
         public decimal ExtraPT { get; set; }
 
-        public decimal RealIncome { get; set; }
+        public decimal CompanyWinLoss { get; set; }
+
+        public decimal TotalWinLoss { get; set; }
     }
 }

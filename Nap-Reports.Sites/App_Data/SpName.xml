@@ -351,7 +351,8 @@
 			<Mapping DataField="AgentWL" ObjectProperty="AgentWinLoss" />
 			<Mapping DataField="MasterWL" ObjectProperty="MasterWinLoss" />
 			<Mapping DataField="SuperWL" ObjectProperty="SuperWinLoss" />
-			<Mapping DataField="SMAWL" ObjectProperty="SMAWinLoss" />
+			<Mapping DataField="SMAWL" ObjectProperty="TotalWinLoss" />
+			<Mapping DataField="RealIncome" ObjectProperty="CompanyWinLoss" />
 		</Setting>
 	</Function>
 	<Function Name="Misc - Credit movement">
