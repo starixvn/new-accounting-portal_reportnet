@@ -1,6 +1,7 @@
 ﻿using AbnormalBet;
 using ActualMemberBet;
 using AutoMapper;
+using BetCount;
 using CashOutPerformance;
 using DailyCreatedCustomers;
 using DailyMixParlay;
@@ -16,8 +17,7 @@ using SMAWinLoss;
 using SuperBalance;
 using TreeWinLoss;
 using UpdatedUsernameCredit;
-using BetCount;
-using TraderPerformance;
+using ParlayWon;
 
 namespace Nap_Reports.Sites.App_Start
 {
@@ -44,6 +44,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeDirectBalance();
                 cfg.InitializeDailyCreatedCustomers();
                 cfg.InitializeBetCount();
+                cfg.InitializeParlayWon();
             });
 
             var mapper = config.CreateMapper();

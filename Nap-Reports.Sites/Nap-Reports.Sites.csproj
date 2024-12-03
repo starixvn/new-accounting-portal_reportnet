@@ -1332,6 +1332,9 @@
     <None Update="ExcelTemplate\NegativeBalance\Licensee-NegativeBalance.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelTemplate\ParlayWon\ParlayWon.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelTemplate\PeakConcurrentUser\PeakConcurrentUser.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

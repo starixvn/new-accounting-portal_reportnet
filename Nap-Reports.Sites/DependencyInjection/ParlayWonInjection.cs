@@ -7,6 +7,7 @@ namespace Nap_Reports.Sites.DependencyInjection
         public static void RegisterParlayWonServices(this IServiceCollection service)
         {
             service.AddTransient<ParlayWonService, ParlayWonServiceImp>();
+            service.AddTransient<ParlayWonExportExcelService, ParlayWonExportExcelServiceImp>();
         }
     }
 }

@@ -418,6 +418,6 @@ Fanex.AccountingReports.Special.ParlayWon.ReportManager = function () {
             IsPagingCallBack: false
         };
 
-        AccReport.downloadFile(window.rootUrl + "Special/ParlayWon/ExportReport", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/parlay-won/export", exportParams);
     };
 }

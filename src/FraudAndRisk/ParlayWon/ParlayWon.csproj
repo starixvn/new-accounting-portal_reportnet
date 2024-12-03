@@ -9,7 +9,11 @@
 	<FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="EPPlus" Version="7.5.0" />
+    <PackageReference Include="Epplus.Mapper" Version="7.5.0" />
     <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
+    <PackageReference Include="Olympus.WebApi.Epplus" Version="1.0.0.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
