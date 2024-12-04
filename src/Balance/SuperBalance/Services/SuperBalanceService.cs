@@ -92,7 +92,7 @@ namespace SuperBalance.Service
             else
             {
                 result.SuperBalanceItems = rawData.Where(item => Math.Round(item.Balance, 2, MidpointRounding.AwayFromZero) != 0
-                                                                 && Math.Round(item.BaseBalance, 2, MidpointRounding.AwayFromZero) != 0).ToList();
+                                                                 || Math.Round(item.BaseBalance, 2, MidpointRounding.AwayFromZero) != 0).ToList();
                 result.BaseBalanceTotal = result.SuperBalanceItems.DynamicSum();
 
             }
