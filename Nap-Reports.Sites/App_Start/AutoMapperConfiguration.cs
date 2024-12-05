@@ -8,7 +8,9 @@ using DailyMixParlay;
 using DirectBalance;
 using Exchange;
 using HouseWinLoss;
+using Margin;
 using NegativeBalance;
+using ParlayWon;
 using PunterAnalysis;
 using ResultAnalysis;
 using SBCustomerPerformanceByDanger;
@@ -17,7 +19,6 @@ using SMAWinLoss;
 using SuperBalance;
 using TreeWinLoss;
 using UpdatedUsernameCredit;
-using ParlayWon;
 
 namespace Nap_Reports.Sites.App_Start
 {
@@ -45,6 +46,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeDailyCreatedCustomers();
                 cfg.InitializeBetCount();
                 cfg.InitializeParlayWon();
+                cfg.InitializeMarginReport();
             });
 
             var mapper = config.CreateMapper();

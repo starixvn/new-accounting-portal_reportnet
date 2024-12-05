@@ -124,7 +124,7 @@ Fanex.AccountingReports.Special.Margin.MarginReport = function () {
     };
 
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "Special/MarginReport/ExportMarginReport", self.Params.reportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/margin-win-loss/export", self.Params.reportParams);
     };
 
     self.checkDecimal = function () {

@@ -1329,6 +1329,9 @@
     <None Update="ExcelTemplate\Exchange\LicenseeExchange.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelTemplate\Margin\MarginReport.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelTemplate\NegativeBalance\Licensee-NegativeBalance.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

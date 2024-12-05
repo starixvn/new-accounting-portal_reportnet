@@ -45,7 +45,7 @@ namespace ParlayWon.Services
             ExcelPackage = new ExcelPackage(stream);
             sheet = ExcelPackage.Workbook.Worksheets["ParlayWon"];
             oddSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
-            evenSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
+            evenSheet = ExcelPackage.Workbook.Worksheets["EvenTemplate"];
             totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
         }
 
