@@ -9,7 +9,8 @@
 	<FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
+	  <PackageReference Include="Epplus.Mapper" Version="7.5.0" />
+	  <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
