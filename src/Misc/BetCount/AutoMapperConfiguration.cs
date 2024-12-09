@@ -9,6 +9,7 @@ namespace BetCount
         public static void InitializeBetCount(this IProfileExpression cfg)
         {
             cfg.CreateMap<BetCountEntity, TransactionModel>();
+            cfg.CreateMap<TransactionModel, TransactionExcelModel>();
         }
     }
 }

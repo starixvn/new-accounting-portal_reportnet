@@ -786,6 +786,8 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
             }
         });
     };
+
+
     var exportReport = function () {
         var exportParams = {
             Datestart: _params.historyBetCountReport.FromDate,
@@ -793,11 +795,28 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
             Product: _params.historyBetCountReport.Products,
             IsHistoryReport: true,
             SortBy: _params.historyBetCountReport.SortBy,
-            SortDirection: ''
+            SortDirection: '',
+            SportBettype: _params.historyBetCountReport.SportBettype
         };
 
-        AccReport.downloadFile(window.rootUrl + "Misc/BetCount/ExportReport", exportParams);
+        AccReport.utility.CallAjaxForDownload(this,
+            window.rootUrl + "/api/bet-count/export",
+            exportParams,
+            self.downloadFile,
+            null,
+            null);
     };
+
+    self.downloadFile = function (rs, fileName) {
+        element = document.createElement('a');
+        element.href = window.URL.createObjectURL(rs);
+        element.download = fileName;
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        element.remove();
+    };
+
     self.showPage = function () {
         AccReport.popUp.removeHighLight();
         _tables.reportFilter.removeClass("display-none");

@@ -18,6 +18,11 @@ internal class Program
         var services = builder.Services;
         var configuration = builder.Configuration;
 
+        builder.WebHost.ConfigureKestrel(options =>
+        {
+            options.Limits.MaxRequestLineSize = 302768;
+        });
+
         services.RegisterAuthentication(configuration);
         services.RegisterGlobalServices();
         OnebookUMInjection.RegisterServices(services, configuration);

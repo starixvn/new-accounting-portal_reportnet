@@ -812,11 +812,28 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             Product: _params.betCountReport.Products,
             IsHistoryReport: false,
             SortBy: _params.betCountReport.SortBy,
-            SortDirection: ''
+            SortDirection: '',
+            SportBettype: _params.betCountReport.SportBettype
         };
 
-        AccReport.downloadFile(window.rootUrl + "Misc/BetCount/ExportReport", exportParams);
+        AccReport.utility.CallAjaxForDownload(this,
+            window.rootUrl + "/api/bet-count/export",
+            exportParams,
+            self.downloadFile,
+            null,
+            null);
     };
+
+    self.downloadFile = function (rs, fileName) {
+        element = document.createElement('a');
+        element.href = window.URL.createObjectURL(rs);
+        element.download = fileName;
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        element.remove();
+    };
+
     self.hidePage = function () {
         AccReport.popUp.removeHighLight();
         _tables.reportFilter.addClass("display-none");

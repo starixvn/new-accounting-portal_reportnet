@@ -1302,6 +1302,9 @@
     <None Update="ExcelTemplate\ActualMemberBet\ProductActualMemberBet.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelTemplate\BetCount\BetCount.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelTemplate\CashOutPerformance\CashOutPerformance.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
