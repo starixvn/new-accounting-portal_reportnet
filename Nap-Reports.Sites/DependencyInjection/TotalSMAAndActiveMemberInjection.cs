@@ -7,6 +7,7 @@ namespace Nap_Reports.Sites.DependencyInjection
         public static void RegisterTotalSMAAndActiveMemberServices(this IServiceCollection service)
         {
             service.AddTransient<TotalSMAMemberActiveService, TotalSMAMemberActiveServiceImp>();
+            service.AddTransient<TotalSMAMemberActiveExcelService, TotalSMAMemberActiveExcelServiceImp>();
         }
     }
 }

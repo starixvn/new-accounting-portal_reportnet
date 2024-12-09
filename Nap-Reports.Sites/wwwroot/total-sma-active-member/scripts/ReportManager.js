@@ -317,7 +317,7 @@ Fanex.AccountingReports.Misc.TotalSMAMemberActive.ReportManager = function () {
 		});
 	};
 	var exportReport = function () {
-		AccReport.downloadFile(window.rootUrl + 'Misc/TotalSMAMemberActive/ExportReport', _params.reportParams);
+		AccReport.downloadFile(window.rootUrl + '/api/total-sma-active-member/export-summary', _params.reportParams);
 	};
 	self.ViewDetail = function (status, roleId) {
 		var sitename = null;

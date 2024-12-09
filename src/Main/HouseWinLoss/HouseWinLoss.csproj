@@ -131,6 +131,7 @@
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.CodeDom" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
