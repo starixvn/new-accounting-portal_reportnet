@@ -64,10 +64,10 @@ public class TotalSMAMemberActiveExcelServiceImp(ConfigurationService configurat
             sheet.Cells[DetailRowIndex + 1, i - 3].Value = $"{data[i].Super}/{data[i].Master}/{data[i].Agent}";
         }
 
-        sheet.Cells[TitleDetailRowIndex, length - 4, TitleDetailRowIndex + 1, length - 4].Merge = true;
-        sheet.Cells[TitleDetailRowIndex, length - 4, TitleDetailRowIndex + 1, length - 4]
-            .CopyStyles(sheet.Cells[titleCellRange]);
-        sheet.Cells[TitleDetailRowIndex, length - 4, TitleDetailRowIndex + 1, length - 4].Value =
+        sheet.Cells[titleCellRange]
+            .CopyStyles(sheet.Cells[TitleDetailRowIndex, 1, TitleDetailRowIndex + 1, length - 4]);
+        sheet.Cells[TitleDetailRowIndex, 1, TitleDetailRowIndex + 1, length - 4].Merge = true;
+        sheet.Cells[TitleDetailRowIndex, 1, TitleDetailRowIndex + 1, length - 4].Value =
             "Member Site (Active)";
     }
 }
