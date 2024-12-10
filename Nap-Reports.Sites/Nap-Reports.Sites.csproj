@@ -1277,7 +1277,6 @@
   <ItemGroup>
     <Folder Include="ExcelTemplate\NegativeBalance\" />
     <Folder Include="ExcelTemplate\DailyCreatedCustomer\" />
-    <Folder Include="ExcelTemplate\TotalSMAAndMemberActiveReport\" />
     <Folder Include="ExcelTemplate\TraderPerformanceOtherSports\" />
     <Folder Include="ExcelTemplate\SuperBalance\" />
     <Folder Include="ExcelTemplate\PeakConcurrentUser\" />
@@ -1388,6 +1387,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\TotalSMAAndMemberActiveReport\TotalSMAAndMemberActiveReport.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\TotalSMAAndMemberActiveReport\TotalSMAandMemberActiveReport_Detail.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\TraderPerformanceOtherSports\TraderPerformance_OtherSports.xlsx">

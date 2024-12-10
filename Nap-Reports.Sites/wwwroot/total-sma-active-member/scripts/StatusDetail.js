@@ -175,6 +175,6 @@ Fanex.AccountingReports.Misc.TotalSMAMemberActive.StatusDetail = function () {
 		self.getReport();
 	};
 	var exportReport = function () {
-		AccReport.downloadFile(window.rootUrl + 'Misc/TotalSMAMemberActive/ExportStatusDetails', _params.reportParams);
+		AccReport.downloadFile(window.rootUrl + '/api/total-sma-active-member/export-detail', _params.reportParams);
 	};
 }

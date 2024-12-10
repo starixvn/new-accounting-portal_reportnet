@@ -17,6 +17,7 @@ using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
 using SuperBalance;
+using TotalSMAAndActiveMember;
 using TreeWinLoss;
 using UpdatedUsernameCredit;
 
@@ -47,6 +48,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeBetCount();
                 cfg.InitializeParlayWon();
                 cfg.InitializeMarginReport();
+                cfg.InitializeTotalSmaAndMemberActive();
             });
 
             var mapper = config.CreateMapper();
