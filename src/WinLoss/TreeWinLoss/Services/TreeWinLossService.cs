@@ -307,12 +307,12 @@ namespace TreeWinLoss.Services
                 int actionId = historyVirtualRateItem.ActionId;
                 string trackingValue = historyVirtualRateItem.TrackingValue;
                 XElement xmlTrackingValue = XElement.Parse(trackingValue);
-                var virturalRateHistoryItem = GetVirtualRateLogHistory(actionId, xmlTrackingValue);
-                if (virturalRateHistoryItem.ReportRows.Count != 0)
+                var virtualRateHistoryItem = GetVirtualRateLogHistory(actionId, xmlTrackingValue);
+                if (virtualRateHistoryItem.ReportRows.Count != 0)
                 {
-                    virturalRateHistoryItem.ChangedBy = historyVirtualRateItem.UserName;
-                    virturalRateHistoryItem.Date = historyVirtualRateItem.LogDate.ToLongFormatedDateWithSlash();
-                    virtualRateInfo.ReportRows.Add(virturalRateHistoryItem);
+                    virtualRateHistoryItem.ChangedBy = historyVirtualRateItem.UserName;
+                    virtualRateHistoryItem.Date = historyVirtualRateItem.LogDate.ToLongFormatedDateWithSlash();
+                    virtualRateInfo.ReportRows.Add(virtualRateHistoryItem);
                 }
             }
 

@@ -41,7 +41,7 @@ namespace SMAWinLoss.Summary
         public ExcelPackage Build(int year, string title, WinLossModel winlosses)
         {
             LoadTemplate();
-            BuilTitle(title);
+            BuildTitle(title);
             BuildHeader(year);
             BuildBody(winlosses);
             BuildTotal(winlosses);
@@ -63,7 +63,7 @@ namespace SMAWinLoss.Summary
             }
         }
 
-        private void BuilTitle(string title)
+        private void BuildTitle(string title)
         {
             summarySheet.Cells["A1:Q1"].Value = title;
         }

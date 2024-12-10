@@ -61,30 +61,30 @@ namespace PunterAnalysis.League
                    .ToList();
         }
 
-        private IEnumerable<PeriodGroup> GetPeriodGroupOfLeague(IEnumerable<LeagueMappingModel> enitiesByLeague, IDictionary<int, List<int>> monthGroups)
+        private IEnumerable<PeriodGroup> GetPeriodGroupOfLeague(IEnumerable<LeagueMappingModel> entitiesByLeague, IDictionary<int, List<int>> monthGroups)
         {
             foreach (var year in monthGroups.Keys)
             {
-                var entittiesByYear = enitiesByLeague.Where(e => e.Year == year).ToArray();
-                yield return GetPeriodGroupBySumOf(entittiesByYear);
+                var entitiesByYear = entitiesByLeague.Where(e => e.Year == year).ToArray();
+                yield return GetPeriodGroupBySumOf(entitiesByYear);
 
                 foreach (var month in monthGroups[year])
                 {
-                    var entitiesByMonth = entittiesByYear.Where(e => e.MonthOrWeek == month).ToArray();
+                    var entitiesByMonth = entitiesByYear.Where(e => e.MonthOrWeek == month).ToArray();
                     yield return GetPeriodGroupBySumOf(entitiesByMonth);
                 }
             }
 
-            yield return GetPeriodGroupBySumOf(enitiesByLeague);
+            yield return GetPeriodGroupBySumOf(entitiesByLeague);
         }
 
-        private PeriodGroup GetPeriodGroupBySumOf(IEnumerable<LeagueMappingModel> enities)
+        private PeriodGroup GetPeriodGroupBySumOf(IEnumerable<LeagueMappingModel> entities)
         {
             return new PeriodGroup
             {
-                BetCount = enities.Sum(e => e.BetCount),
-                WinLoss = enities.Sum(e => e.WinLoss),
-                Turnover = enities.Sum(e => e.Turnover)
+                BetCount = entities.Sum(e => e.BetCount),
+                WinLoss = entities.Sum(e => e.WinLoss),
+                Turnover = entities.Sum(e => e.Turnover)
             };
         }
 

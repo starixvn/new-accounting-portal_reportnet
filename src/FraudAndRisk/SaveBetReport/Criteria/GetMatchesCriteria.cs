@@ -2,7 +2,7 @@
 
 namespace SaveBetReport.Criteria;
 
-public class GetMatchsCriteria : CriteriaBase
+public class GetMatchesCriteria : CriteriaBase
 {
     public DateTime Date { get; set; }
 

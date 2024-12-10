@@ -30,7 +30,7 @@ namespace SBCustomerPerformanceByDanger.Report
         public ExcelPackage Build(string title, SummaryEntity<CustomerPerformanceByDangerExcelModel> model)
         {
             LoadTemplate();
-            BuilTitle(title, "A1:P1");
+            BuildTitle(title, "A1:P1");
             sheet.ApplyVertical(model.Entities, StartRowIndex);
             BuildTotalRow(model);
             ClearTemplate();
@@ -57,7 +57,7 @@ namespace SBCustomerPerformanceByDanger.Report
             sheet.Cells[cellAddressOfTotalText.Address].Merge = true;
         }
 
-        private void BuilTitle(string title, string cellRange)
+        private void BuildTitle(string title, string cellRange)
         {
             sheet.Cells[cellRange].Value = title;
         }

@@ -227,7 +227,7 @@ namespace DailyMixParlayWinLoss.Services
             }
             else
             {
-                name = DailyMixParlayConstant.Unknow;
+                name = DailyMixParlayConstant.Unknown;
             }
 
             return name;

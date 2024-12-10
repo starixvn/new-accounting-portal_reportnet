@@ -79,12 +79,12 @@ namespace HouseWinLoss.Products
 
         private GridDataRow EmptyRow()
         {
-            var colummns = new List<Columns>
+            var columns = new List<Columns>
             {
                 new Columns { ColumnIndex = 1, Name = "Main", Value = string.Empty, MergeColNumber = 13 }
             };
 
-            return new GridDataRow { Columns = colummns, RowType = RowType.Normal, CssClass = string.Empty };
+            return new GridDataRow { Columns = columns, RowType = RowType.Normal, CssClass = string.Empty };
         }
 
         private GridDataRow BuildSiteWinLossSummary(SiteWinLossSummary winloss)

@@ -12,9 +12,9 @@ using UpdatedUsernameCredit;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {
-    public static class MediAtRInjection
+    public static class MediatRInjection
     {
-        public static void RegisterMediAtR(this IServiceCollection service)
+        public static void RegisterMediatR(this IServiceCollection service)
         {
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBPerformanceAttribute).GetTypeInfo().Assembly));

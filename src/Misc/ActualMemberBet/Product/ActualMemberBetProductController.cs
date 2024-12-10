@@ -6,11 +6,11 @@ namespace ActualMemberBet.Product
 {
     [Route("api/actual-member-bet/product")]
     [ApiController]
-    public class ActutalMemberBetProductController : ControllerBase
+    public class ActualMemberBetProductController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public ActutalMemberBetProductController(IMediator mediator)
+        public ActualMemberBetProductController(IMediator mediator)
         {
             this.mediator = mediator;
         }

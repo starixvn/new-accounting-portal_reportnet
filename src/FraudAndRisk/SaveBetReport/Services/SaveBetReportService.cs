@@ -12,7 +12,7 @@ public interface SaveBetReportService
 
     Task<IEnumerable<Sport>> GetSports(GetSportsCriteria criteria);
 
-    Task<IEnumerable<Match>> GetMatches(GetMatchsCriteria criteria);
+    Task<IEnumerable<Match>> GetMatches(GetMatchesCriteria criteria);
 }
 
 public class SaveBetReportServiceImp(IDynamicRepository repository) : SaveBetReportService
@@ -27,7 +27,7 @@ public class SaveBetReportServiceImp(IDynamicRepository repository) : SaveBetRep
         return repository.FetchAsync<Sport>(criteria);
     }
 
-    public async Task<IEnumerable<Match>> GetMatches(GetMatchsCriteria criteria)
+    public async Task<IEnumerable<Match>> GetMatches(GetMatchesCriteria criteria)
     {
         var result = (await repository.FetchAsync<Match>(criteria)).ToList();
         result.ForEach(item =>

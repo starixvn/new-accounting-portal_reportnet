@@ -14,7 +14,7 @@
 
         public const string MaxCombinationSuffix  = " & up";
 
-        public const string Unknow = "Unknow";
+        public const string Unknown = "Unknow";
 
         public const int Live = 1;
 

@@ -27,7 +27,7 @@ internal class Program
         services.RegisterGlobalServices();
         OnebookUMInjection.RegisterServices(services, configuration);
         AutoMapperConfiguration.Initialize(services);
-        services.RegisterMediAtR();
+        services.RegisterMediatR();
         services.RegisterInternalServices();
 
         services.ProcessWebOptimizer();

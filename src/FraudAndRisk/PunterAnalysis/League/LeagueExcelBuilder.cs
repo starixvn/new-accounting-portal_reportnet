@@ -126,7 +126,7 @@ namespace PunterAnalysis.League
                 {
                     templateSheet.Cells["B12:E12"].Copy(
                         statisticSheet.Cells[RowIndex, columnIndex, RowIndex, columnIndex + 3]);
-                    MappGroupValue(group, columnIndex);
+                    MapGroupValue(group, columnIndex);
                     columnIndex += 4;
                 });
 
@@ -143,12 +143,12 @@ namespace PunterAnalysis.League
             {
                 totalTemplateSheet.Cells["B12:E12"].Copy(
                     statisticSheet.Cells[RowIndex, columnIndex, RowIndex, columnIndex + 3]);
-                MappGroupValue(group, columnIndex);
+                MapGroupValue(group, columnIndex);
                 columnIndex += 4;
             });
         }
 
-        private void MappGroupValue(PeriodGroup group, int columnIndex)
+        private void MapGroupValue(PeriodGroup group, int columnIndex)
         {
             statisticSheet.Cells[RowIndex, columnIndex].Value = group.WinLoss;
             statisticSheet.Cells[RowIndex, columnIndex + 1].Value = group.Turnover;

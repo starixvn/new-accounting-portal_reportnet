@@ -73,13 +73,13 @@ namespace HouseWinLoss.Common.MatchDetailByCode
         private GridDataRow BuildLeagueNameRow(string leagueName)
         {
             var columnIndex = 0;
-            var colummns = new List<Columns>
+            var columns = new List<Columns>
                {
                     new Columns(columnIndex++, "MatchCode", string.Empty),
                     new Columns { ColumnIndex = columnIndex, Name = "MemberWinLoss", Value = leagueName, MergeColNumber = 7, Bold = true, CellAlignment = HAlignment.Left }
                };
 
-            return new GridDataRow { Columns = colummns, RowType = RowType.ParentLevelOne, CssClass = "league-match-header" };
+            return new GridDataRow { Columns = columns, RowType = RowType.ParentLevelOne, CssClass = "league-match-header" };
         }
 
         private List<GridDataRow> BuildFooter(WinLoss item)

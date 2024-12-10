@@ -30,7 +30,7 @@ public class SaveBetReportApiController(SaveBetReportService service, IConfigura
 
     [Route("reports")]
     [HttpPost]
-    public async Task<IActionResult> GetSaveBetReport(GetMatchsCriteria criteria)
+    public async Task<IActionResult> GetSaveBetReport(GetMatchesCriteria criteria)
     {
         var result = await service.GetMatches(criteria);
         return Ok(result);

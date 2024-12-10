@@ -247,7 +247,7 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
                 BindProductSecondMergeValue(liveGroup.Name, liveGroup.MergeRowNumber);
                 foreach (var item in liveGroup.WinLosses)
                 {
-                    ExportPrductDataRow(item);
+                    ExportProductDataRow(item);
                     productRowIndex++;
                 }
 
@@ -307,7 +307,7 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
 
     }
 
-    private void ExportPrductDataRow(WinLossItem item)
+    private void ExportProductDataRow(WinLossItem item)
     {
         nonLiveSheet.Cells["C5:L5"]
             .Copy(productSheet.Cells[$"C{productRowIndex}:L{productRowIndex}"]);

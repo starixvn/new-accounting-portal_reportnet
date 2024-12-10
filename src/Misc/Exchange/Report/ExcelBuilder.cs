@@ -31,7 +31,7 @@ namespace Exchange.Report
         public ExcelPackage Build(HttpParameterExcel excelParams, SummaryEntity<ExchangeExcelEntity> model)
         {
             LoadTemplate();
-            BuilTitle(excelParams);
+            BuildTitle(excelParams);
             exchangeSheet.ApplyVertical(model.Entities, StartRowIndex);
             exchangeSheet.ApplyModel(totalSheet, model.Total, StartRowIndex + model.Entities.Count);
             SetNameForFirstHeaderColumn(excelParams.DrillLevel);
@@ -50,7 +50,7 @@ namespace Exchange.Report
             }
         }
 
-        private void BuilTitle(HttpParameterExcel excelParams)
+        private void BuildTitle(HttpParameterExcel excelParams)
         {
             var fromDate = $"{excelParams.FromDate: MMM dd, yyyy}";
             var toDate = $"{excelParams.ToDate: MMM dd, yyyy}";

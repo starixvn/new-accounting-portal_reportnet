@@ -46,7 +46,7 @@ namespace HouseWinLoss.Common.MatchDetail
         {
             var dataRows = new List<GridDataRow>();
             var leagueNameRow = BuildLeagueNameRow(league.LeagueName);
-            var matchRows = league.Matches.Select(m => BuidMatchRow(m, league.LeagueName));
+            var matchRows = league.Matches.Select(m => BuildMatchRow(m, league.LeagueName));
 
             dataRows.Add(leagueNameRow);
             dataRows.AddRange(matchRows);
@@ -62,7 +62,7 @@ namespace HouseWinLoss.Common.MatchDetail
         private GridDataRow BuildLeagueNameRow(string leagueName)
         {
             var columnIndex = 0;
-            var colummns = new List<Columns>
+            var columns = new List<Columns>
             {
                 new Columns(columnIndex++, "MatchCode", string.Empty),
                 new Columns
@@ -78,20 +78,20 @@ namespace HouseWinLoss.Common.MatchDetail
 
             return new GridDataRow
             {
-                Columns = colummns,
+                Columns = columns,
                 RowType = RowType.ParentLevelOne,
                 CssClass = "league-match-header"
             };
         }
 
-        private GridDataRow BuidMatchRow(WinLoss item, string leagueName)
+        private GridDataRow BuildMatchRow(WinLoss item, string leagueName)
         {
             string homeName = teamNameService.GetTeamNameWithSuffixByMatchCode(item.HomeName, item.MatchCode);
             string awayName = teamNameService.GetTeamNameWithSuffixByMatchCode(item.AwayName, item.MatchCode);
 
             var columnIndex = 0;
             var customAttributes = $"{item.SportType},{item.MatchId},'{item.EventDate:MMM dd, yyyy}','{leagueName}','{item.MatchCode}'";
-            var colummns = new List<Columns>
+            var columns = new List<Columns>
             {
                 new Columns(0, "MatchCode", item.MatchCode)
                 {
@@ -106,11 +106,11 @@ namespace HouseWinLoss.Common.MatchDetail
             };
 
             var baseColumns = CreateBaseColumns(columnIndex, item);
-            colummns.AddRange(baseColumns);
+            columns.AddRange(baseColumns);
 
             return new GridDataRow
             {
-                Columns = colummns,
+                Columns = columns,
                 RowType = RowType.Normal
             };
         }
@@ -128,7 +128,7 @@ namespace HouseWinLoss.Common.MatchDetail
         private GridDataRow BuildTotalRow(WinLoss item, string totalText)
         {
             const int BaseColumnIndex = 4;
-            var colummns = new List<Columns>
+            var columns = new List<Columns>
             {
                 new Columns
                 {
@@ -141,9 +141,9 @@ namespace HouseWinLoss.Common.MatchDetail
             };
 
             var baseColumns = CreateBaseColumns(BaseColumnIndex, item);
-            colummns.AddRange(baseColumns);
+            columns.AddRange(baseColumns);
 
-            return new GridDataRow { Columns = colummns };
+            return new GridDataRow { Columns = columns };
         }
 
         private static List<Columns> CreateBaseColumns(int columnIndex, WinLoss item)

@@ -6,7 +6,7 @@ namespace SBPerformance.MarginBySport
 {
     public interface MarginBySportService
     {
-        Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parammeter);
+        Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parameter);
     }
 
     public class MarginBySportServiceImp : MarginBySportService
@@ -20,12 +20,12 @@ namespace SBPerformance.MarginBySport
             this.mapper = mapper;
         }
 
-        public async Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parammeter)
+        public async Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parameter)
         {
-            var criteria = mapper.Map<MarginBySportCriteria>(parammeter);
+            var criteria = mapper.Map<MarginBySportCriteria>(parameter);
             var summaryEntities = (await repository.FetchAsync<MarginBySportEntity>(criteria)).CalculateSummaryEntity();
 
-            var result = BindingItems(parammeter.IsShowFullColumn, summaryEntities);
+            var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
             return result;
         }
 

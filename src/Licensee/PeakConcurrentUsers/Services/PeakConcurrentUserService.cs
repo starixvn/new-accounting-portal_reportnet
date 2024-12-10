@@ -16,7 +16,7 @@ namespace PeakConcurrentUsers.Services
     { 
         public async Task<PeakConcurrentUser> GetConcurrentUserList(PeakConcurrentUserCriteria criteria)
         {
-            var peakCocurrentUser = new PeakConcurrentUser();
+            var peakConcurrentUser = new PeakConcurrentUser();
 
             criteria.ToDate = criteria.ToDate.AddDays(1).AddSeconds(-1);
             
@@ -39,16 +39,16 @@ namespace PeakConcurrentUsers.Services
                     totalUser += row.TotalUser;
                 }
 
-                peakCocurrentUser.ListConcurrentUser = concurrentUsers;
-                peakCocurrentUser.AverageUsers = $"{totalUser / concurrentUsers.Count:N2}";
-                peakCocurrentUser.Total = $"{totalUser:N0}";
-                peakCocurrentUser.MinUsers = $"{rawData.Select(x => x.TotalUser).Min():N0}";
-                peakCocurrentUser.MaxUsers = $"{rawData.Select(x => x.TotalUser).Max():N0}";
+                peakConcurrentUser.ListConcurrentUser = concurrentUsers;
+                peakConcurrentUser.AverageUsers = $"{totalUser / concurrentUsers.Count:N2}";
+                peakConcurrentUser.Total = $"{totalUser:N0}";
+                peakConcurrentUser.MinUsers = $"{rawData.Select(x => x.TotalUser).Min():N0}";
+                peakConcurrentUser.MaxUsers = $"{rawData.Select(x => x.TotalUser).Max():N0}";
             }
 
 
 
-            return peakCocurrentUser;
+            return peakConcurrentUser;
         }
 
         public async Task<List<LicenseeModel>> GetLicensee()

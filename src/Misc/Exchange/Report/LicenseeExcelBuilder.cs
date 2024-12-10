@@ -34,7 +34,7 @@ namespace Exchange.Report
         public ExcelPackage Build(LicenseeHttpParameterExcel excelParams, ExchangeExcelModel model)
         {
             LoadTemplate();
-            BuilTitle(excelParams);
+            BuildTitle(excelParams);
             BuildBody(model);
             BuildTotal(model);
             SetNameForFirstHeaderColumn();
@@ -55,7 +55,7 @@ namespace Exchange.Report
             }
         }
 
-        private void BuilTitle(LicenseeHttpParameterExcel excelParams)
+        private void BuildTitle(LicenseeHttpParameterExcel excelParams)
         {
             var fromDate = $"{excelParams.FromDate: MMM dd, yyyy}";
             var toDate = $"{excelParams.ToDate: MMM dd, yyyy}";

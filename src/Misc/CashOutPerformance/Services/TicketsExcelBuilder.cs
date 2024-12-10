@@ -50,7 +50,7 @@ namespace CashOutPerformance.Services
                 totalLength = 1;
             }
             LoadTemplate(fileExcel);
-            BuilTitle(title, cellAddressOfTitle);
+            BuildTitle(title, cellAddressOfTitle);
             BuildBreadCrumb(breadCrumb, cellAddressOfBreadCrumb);
             RenameFirstColumn(excelType);
             sheet.ApplyVertical(model.TicketList, StartRowIndex);
@@ -82,7 +82,7 @@ namespace CashOutPerformance.Services
             sheet.Cells[cellAddressOfTotalText.Address].Merge = true;
         }
 
-        private void BuilTitle(string title, string cellRange)
+        private void BuildTitle(string title, string cellRange)
         {
             sheet.Cells[cellRange].Value = title;
         }
@@ -125,7 +125,7 @@ namespace CashOutPerformance.Services
             var updateRowIndex = new List<int>();
     
             LoadTemplate(fileExcel);
-            BuilTitle(title, cellAddressOfTitle);
+            BuildTitle(title, cellAddressOfTitle);
             BuildBreadCrumb(breadCrumb, cellAddressOfBreadCrumb);
             
             foreach(var sportItem in model.Sports)

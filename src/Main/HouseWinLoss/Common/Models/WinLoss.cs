@@ -2,7 +2,7 @@
 {
     public class WinLoss
     {
-        private const int NumberDigitOfDecimalRouding = 4;
+        private const int NumberDigitOfDecimalRounding = 4;
 
         public string Name { get; set; }
 
@@ -31,11 +31,11 @@
         public int SportType { get; set; }
 
         public decimal VirtualMargin => VirtualTurnover != 0
-            ? Math.Round(VirtualIncome / VirtualTurnover, NumberDigitOfDecimalRouding, MidpointRounding.AwayFromZero)
+            ? Math.Round(VirtualIncome / VirtualTurnover, NumberDigitOfDecimalRounding, MidpointRounding.AwayFromZero)
             : 0;
 
         public decimal RealMargin => RealTurnover != 0
-            ? Math.Round(RealIncome / RealTurnover, NumberDigitOfDecimalRouding, MidpointRounding.AwayFromZero)
+            ? Math.Round(RealIncome / RealTurnover, NumberDigitOfDecimalRounding, MidpointRounding.AwayFromZero)
             : 0;
 
         public bool IsEmpty

@@ -24,7 +24,7 @@ namespace Nap_Reports.Sites
             services.RegisterHouseWinLossServices();
             services.RegisterSMAWinLossServices();
             services.RegisterSBPerformanceServices();
-            services.RegisterAbnormalbetServices();
+            services.RegisterAbnormalBetServices();
             services.RegisterActualMemberBetServices();
             services.RegisterExchangeServices();
             services.RegisterCashOutPerformanceServices();

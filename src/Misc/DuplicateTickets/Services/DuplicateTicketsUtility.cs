@@ -106,7 +106,7 @@ namespace DuplicateTickets.Services
             // Convert the input string to a byte array and compute the hash. 
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-            // Create a new Stringbuilder to collect the bytes 
+            // Create a new String builder to collect the bytes 
             // and create a string.
             StringBuilder builder = new StringBuilder();
 

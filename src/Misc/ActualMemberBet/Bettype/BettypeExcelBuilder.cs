@@ -31,7 +31,7 @@ namespace ActualMemberBet.Bettype
         public ExcelPackage Build(HttpParameterExcel excelParams, SummaryEntity<BetTypeActualMemberBetExcel> bettypeActualMemberBetExcel)
         {
             LoadTemplate();
-            BuilTitle(excelParams);
+            BuildTitle(excelParams);
             bettypeActualMemberBetSheet.ApplyVertical(bettypeActualMemberBetExcel.Entities, StartRowIndex);
             bettypeActualMemberBetSheet.ApplyModel(totalSheet, bettypeActualMemberBetExcel.Total, StartRowIndex + bettypeActualMemberBetExcel.Entities.Count);
             ClearTemplate();
@@ -49,7 +49,7 @@ namespace ActualMemberBet.Bettype
             }
         }
 
-        private void BuilTitle(HttpParameterExcel excelParams)
+        private void BuildTitle(HttpParameterExcel excelParams)
         {
             bettypeActualMemberBetSheet.Cells["A1:I1"].Value = $"Main > {excelParams.ProductName}";
         }

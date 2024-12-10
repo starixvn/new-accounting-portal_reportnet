@@ -52,9 +52,9 @@
             var majorMinorDecorationGridOptions =  decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
 
             var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
-            var liveNonLiveDecoratGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
+            var liveNonLiveDecorateGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
-            return new GridOptions[] { majorMinorDecorationGridOptions , liveNonLiveDecoratGridOptions };
+            return new GridOptions[] { majorMinorDecorationGridOptions , liveNonLiveDecorateGridOptions };
         }
 
         [Route("excel")]

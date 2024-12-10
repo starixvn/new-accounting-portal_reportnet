@@ -6,7 +6,7 @@ namespace SBPerformance.TopWinningMember
 {
     public interface TopWinningMemberService
     {
-        Task<SummaryEntity<TopWinningMemberItemModel>> Query(TopWinningMemberHttpParameter parammeter);
+        Task<SummaryEntity<TopWinningMemberItemModel>> Query(TopWinningMemberHttpParameter parameter);
     }
 
     public class TopWinningMemberServiceImp : TopWinningMemberService
@@ -20,12 +20,12 @@ namespace SBPerformance.TopWinningMember
             this.mapper = mapper;
         }
 
-        public async Task<SummaryEntity<TopWinningMemberItemModel>> Query(TopWinningMemberHttpParameter parammeter)
+        public async Task<SummaryEntity<TopWinningMemberItemModel>> Query(TopWinningMemberHttpParameter parameter)
         {
-            var criteria = mapper.Map<TopWinningMemberCriteria>(parammeter);
+            var criteria = mapper.Map<TopWinningMemberCriteria>(parameter);
             var summaryEntities = (await repository.FetchAsync<TopWinningMemberEntity>(criteria)).CalculateSummaryEntity();
 
-            var result = BindingItems(parammeter.IsShowFullColumn, summaryEntities);
+            var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
             return result;
         }
 

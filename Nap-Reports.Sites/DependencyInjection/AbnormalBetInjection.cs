@@ -6,7 +6,7 @@ namespace Nap_Reports.Sites.DependencyInjection
 {
     public static class AbnormalBetInjection
     {
-        public static void RegisterAbnormalbetServices(this IServiceCollection service)
+        public static void RegisterAbnormalBetServices(this IServiceCollection service)
         {
             service.AddTransient<FilterService, FilterServiceImp>();
             service.AddTransient<ReportService, ReportServiceImp>();

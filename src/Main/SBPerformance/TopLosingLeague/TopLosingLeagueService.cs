@@ -6,7 +6,7 @@ namespace SBPerformance.TopLosingLeague
 {
     public interface TopLosingLeagueService
     {
-        Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parammeter);
+        Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parameter);
     }
 
     public class TopLosingLeagueServiceImp : TopLosingLeagueService
@@ -20,12 +20,12 @@ namespace SBPerformance.TopLosingLeague
             this.mapper = mapper;
         }
 
-        public async Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parammeter)
+        public async Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parameter)
         {
-            var criteria = mapper.Map<TopLosingLeagueCriteria>(parammeter);
+            var criteria = mapper.Map<TopLosingLeagueCriteria>(parameter);
             var summaryEntities = (await repository.FetchAsync<TopLosingLeagueEntity>(criteria)).CalculateSummaryEntity();
 
-            var result = BindingItems(parammeter.IsShowFullColumn, summaryEntities);
+            var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
             return result;
         }
 

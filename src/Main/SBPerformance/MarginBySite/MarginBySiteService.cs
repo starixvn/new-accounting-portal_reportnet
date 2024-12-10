@@ -6,7 +6,7 @@ namespace SBPerformance.MarginBySite
 {
     public interface MarginBySiteService
     {
-        Task<SummaryEntity<MarginBySiteItemModel>> Query(MarginBySiteHttpParameter parammeter);
+        Task<SummaryEntity<MarginBySiteItemModel>> Query(MarginBySiteHttpParameter parameter);
     }
 
     public class MarginBySiteServiceImp : MarginBySiteService
@@ -20,12 +20,12 @@ namespace SBPerformance.MarginBySite
             this.mapper = mapper;
         }
 
-        public async Task<SummaryEntity<MarginBySiteItemModel>> Query(MarginBySiteHttpParameter parammeter)
+        public async Task<SummaryEntity<MarginBySiteItemModel>> Query(MarginBySiteHttpParameter parameter)
         {
-            var criteria = mapper.Map<MarginBySiteCriteria>(parammeter);
+            var criteria = mapper.Map<MarginBySiteCriteria>(parameter);
             var summaryEntities = (await repository.FetchAsync<MarginBySiteEntity>(criteria)).CalculateSummaryEntity();
 
-            var result = BindingItems(parammeter.IsShowFullColumn, summaryEntities);
+            var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
             return result;
         }
 

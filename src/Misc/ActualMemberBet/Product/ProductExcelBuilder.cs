@@ -32,7 +32,7 @@ namespace ActualMemberBet.Product
         public ExcelPackage Build(SummaryEntity<ProductActualMemberBetExcel> productActualMemberBetExcel)
         {
             LoadTemplate();
-            BuilTitle();
+            BuildTitle();
             productActualMemberBetSheet.ApplyVertical(productActualMemberBetExcel.Entities, StartRowIndex);
             productActualMemberBetSheet.ApplyModel(totalSheet, productActualMemberBetExcel.Total, StartRowIndex + productActualMemberBetExcel.Entities.Count);
             ClearTemplate();
@@ -50,7 +50,7 @@ namespace ActualMemberBet.Product
             }
         }
 
-        private void BuilTitle()
+        private void BuildTitle()
         {
             productActualMemberBetSheet.Cells["A1:H1"].Value = "Main";
         }

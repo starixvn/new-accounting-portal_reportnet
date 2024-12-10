@@ -31,7 +31,7 @@ namespace AbnormalBet.Report
         public ExcelPackage Build(string title, IEnumerable<MemberExcelModel> memberModel)
         {
             LoadMemberTemplate();
-            BuilTitle(title, "A1:M2");
+            BuildTitle(title, "A1:M2");
             sheet.ApplyVertical(memberModel, StartRowIndex);
             ClearTemplate();
             return ExcelPackage;
@@ -40,7 +40,7 @@ namespace AbnormalBet.Report
         public ExcelPackage Build(string title, IEnumerable<LicenseeExcelModel> licenseeModel)
         {
             LoadLicenseeTemplate();
-            BuilTitle(title, "A1:S2");
+            BuildTitle(title, "A1:S2");
             sheet.ApplyVertical(licenseeModel, StartRowIndex);
             ClearTemplate();
             return ExcelPackage;
@@ -66,7 +66,7 @@ namespace AbnormalBet.Report
             }
         }
 
-        private void BuilTitle(string title, string cellRange)
+        private void BuildTitle(string title, string cellRange)
         {
             sheet.Cells[cellRange].Value = title;
         }

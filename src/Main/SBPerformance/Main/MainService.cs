@@ -6,7 +6,7 @@ namespace SBPerformance.Main
 {
     public interface MainService
     {
-        Task<SummaryEntity<ItemModel>> Query(HttpParameter parammeter);
+        Task<SummaryEntity<ItemModel>> Query(HttpParameter parameter);
     }
 
     public class MainServiceImp : MainService
@@ -20,12 +20,12 @@ namespace SBPerformance.Main
             this.mapper = mapper;
         }
 
-        public async Task<SummaryEntity<ItemModel>> Query(HttpParameter parammeter)
+        public async Task<SummaryEntity<ItemModel>> Query(HttpParameter parameter)
         {
-            var criteria = mapper.Map<Criteria>(parammeter);
+            var criteria = mapper.Map<Criteria>(parameter);
             var summaryEntities = (await repository.FetchAsync<Entity>(criteria)).CalculateSummaryEntity();
 
-            var result = BindingItems(parammeter.IsShowFullColumn, summaryEntities);
+            var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
             return result;
         }
 

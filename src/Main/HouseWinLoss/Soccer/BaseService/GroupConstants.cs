@@ -16,7 +16,7 @@
             OneXTwoBetType = 5,
             DoubleChanceBetType = 24,
             DrawNoBetBetType = 25,
-            ThreeWayyHandicap = 28,
+            ThreeWayHandicap = 28,
             HomeNoBetBetType = 121,
             AwayNoBetBetType = 122,
             DrawNoDrawBetType = 123,
