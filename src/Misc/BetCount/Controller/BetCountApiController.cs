@@ -45,7 +45,7 @@ namespace BetCount.Controller
         public async Task<IActionResult> ExportExcel(BetCountCriteria criteria)
         {
             var data = await service.GetReport(criteria);
-            var title = "Margin Report";
+            var title = $"Bet count report from {criteria.Datestart: MM dd, yyyy} to {criteria.Dateend: MM dd, yyyy} ";
             var excelPackage = await excelService.ExportExcel(data, title);
             var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
             var fileDownloadName = $"Bet_Count_Report_From_{criteria.Datestart: MM_dd_yyyy}_To_{criteria.Dateend: MM_dd_yyyy}.xlsx";

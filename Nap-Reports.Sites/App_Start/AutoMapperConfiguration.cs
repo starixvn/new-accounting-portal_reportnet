@@ -6,6 +6,7 @@ using CashOutPerformance;
 using DailyCreatedCustomers;
 using DailyMixParlay;
 using DirectBalance;
+using DuplicateTickets;
 using Exchange;
 using HouseWinLoss;
 using Margin;
@@ -49,6 +50,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeParlayWon();
                 cfg.InitializeMarginReport();
                 cfg.InitializeTotalSmaAndMemberActive();
+                cfg.InitializeDuplicateTickets();
             });
 
             var mapper = config.CreateMapper();

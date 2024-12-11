@@ -9,6 +9,7 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<DuplicateTicketsCashOutService, DuplicateTicketsCashOutServiceImp>();
             service.AddTransient<DuplicateTicketsUtility, DuplicateTicketsUtilityImp>();
             service.AddTransient<DuplicateTicketsService, DuplicateTicketsServiceImp>();
+            service.AddTransient<DuplicateTicketsExcelService, DuplicateTicketsExcelServiceImp>();
         }
     }
 }

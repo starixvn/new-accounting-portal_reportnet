@@ -459,7 +459,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
     };
 
     self.exportDuplicateTicketReport = function () {
-        AccReport.downloadFile(window.rootUrl + "Misc/DuplicateTickets/ExportDuplicateTicketReport", _params);
+        AccReport.downloadFile(window.rootUrl + "/api/duplicate-tickets/export", _params);
     };
 }
 
