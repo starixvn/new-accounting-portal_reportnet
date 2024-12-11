@@ -1,3 +1,4 @@
+using System.Data;
 using TraderPerformance.Criteria;
 using TraderPerformance.Model;
 using TraderPerformance.Repositories;
@@ -14,6 +15,8 @@ namespace TraderPerformance.Services
         Task<TraderPerformanceSoccerDetailModel> GetDetailReport(DetailReportCriteria criteria);
 
         Task<TraderPerformanceSoccerDetailModel> SortDetailReportData(DetailReportCriteria criteria);
+
+        Task<DataTable> GetSummaryPH<T>(T criteria);
     }
 
     public class TraderPerformanceSoccerServiceImp(
@@ -124,10 +127,10 @@ namespace TraderPerformance.Services
 
             var reportPagingData = new TraderPerformanceSoccerDetailModel
             {
-                ReportRows = result.ReportRows
+                ReportRows = criteria.PageIndex > 0 ? result.ReportRows
                     .Skip(startIndex)
                     .Take(criteria.PageSize)
-                    .ToList(),
+                    .ToList() : result.ReportRows.ToList(),
                 GrandTotal = result.GrandTotal,
                 ReportLength = result.ReportLength
             };
@@ -153,7 +156,12 @@ namespace TraderPerformance.Services
 
             return pagingReport;
         }
-        
+
+        public Task<DataTable> GetSummaryPH<T>(T criteria)
+        {
+            return repository.GetSummaryPH(criteria);
+        }
+
         private TraderPerformanceSoccerModel SortReportData(TraderPerformanceSoccerModel report, ReportCriteria criteria)
         {
             bool isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);

@@ -1401,6 +1401,18 @@
     <None Update="ExcelTemplate\TraderPerformanceOtherSports\TraderPerformance_OtherSports_Detail.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelTemplate\TraderPerformanceSoccer\TraderPerformanceSoccer.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\TraderPerformanceSoccer\TraderPerformanceSoccer_Detail.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\TraderPerformanceSoccer\TraderPerformance_Soccer_Detail.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\TraderPerformanceSoccer\TraderPerformance_Soccer_Sum.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelTemplate\TreeWinLoss\Tree_Win_Loss_By_Level.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

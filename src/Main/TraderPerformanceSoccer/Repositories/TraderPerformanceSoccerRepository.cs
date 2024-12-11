@@ -12,6 +12,8 @@ namespace TraderPerformance.Repositories
         Task<TraderPerformanceSoccerModel> GetTraderPerformanceSoccerReport(ReportCriteria criteria);
 
         Task<TraderPerformanceSoccerDetailModel> GetTraderPerformanceSoccerDetailReport(DetailReportCriteria criteria);
+
+        Task<DataTable> GetSummaryPH<T>(T criteria);
     }
 
     public class TraderPerformanceSoccerRepositoryImp(
@@ -192,6 +194,11 @@ namespace TraderPerformance.Repositories
             result.GrandTotal.ChildInfo.Add(commissionTotal);
 
             return result;
+        }
+
+        public async Task<DataTable> GetSummaryPH<T>(T criteria)
+        {
+            return (await repository.FetchDataSetAsync((ICriteria)criteria)).Tables[0];
         }
 
         private TraderPerformanceSoccerModel GetTraderGroupInfo(

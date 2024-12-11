@@ -564,7 +564,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
             IsSoccer: true
         };
 
-        AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceSoccer/ExportReport", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/trader-performance-soccer/export-main", exportParams);
     };
 
     self.exportDetailData = function () {
@@ -575,7 +575,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
             IsSoccer: true
         };
 
-        AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceSoccer/ExportDetailReport", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/trader-performance-soccer/export-detail", exportParams);
     };
 
     self.exportSummaryPH = function () {
@@ -586,7 +586,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
             IsSoccer: true
         };
 
-        AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceSoccer/ExportSummaryPH", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/trader-performance-soccer/export-sum-ph", exportParams);
     };
 
     self.exportDetailPH = function () {
@@ -597,7 +597,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
             IsSoccer: true
         };
 
-        AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceSoccer/ExportDetailPH", exportParams);
+        AccReport.downloadFile(window.rootUrl + "/api/trader-performance-soccer/export-sum-ph-detail", exportParams);
     };
 
     self.compareCriteria = function (oldCriteria, currentCriteria) {
