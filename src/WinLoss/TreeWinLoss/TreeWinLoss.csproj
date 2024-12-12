@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Epplus.Mapper" Version="7.5.0" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,12 +14,12 @@
     <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />
     <PackageReference Include="EPPlus" Version="7.5.0" />
     <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.5" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.2" />
     <PackageReference Include="Fanex.Logging" Version="2.0.1.1" />
     <PackageReference Include="Fanex.Logging.Extensions" Version="1.1.0" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.1.0" />
     <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
-    <PackageReference Include="Fanex.NAP.Signin" Version="2.0.2.3" />
+    <PackageReference Include="Fanex.NAP.Signin" Version="2.0.2.5" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.5.1" />
     <PackageReference Include="Fanex.Result.Core-NumberGame" Version="2.0.0" />
     <PackageReference Include="Fanex.Result.Core-Sportsbook" Version="4.0.0-upgrade-03" />
