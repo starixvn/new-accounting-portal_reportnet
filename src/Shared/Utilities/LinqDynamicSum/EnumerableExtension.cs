@@ -4,23 +4,6 @@ namespace Utilities.LinqDynamicSum
 {
     public static class EnumerableExtension
     {
-        // Summary:
-        //     Returns the the sum object of a sequence.
-        //
-        // Parameters:
-        //   source:
-        //     The System.Collections.Generic.IEnumerable`1 to return the sum value element of.
-        //
-        // Type parameters:
-        //   TSource:
-        //     The type of the elements of source.
-        //
-        // Returns:
-        //     Returns the the sum object of a sequence.
-        //     Returns new object if source is null
-        // Exceptions:
-        //   T:System.ArgumentNullException:
-        //     source is null.
         public static TSource DynamicSum<TSource>(this IEnumerable<TSource> source)
         {
             if (source.Any())
@@ -32,23 +15,6 @@ namespace Utilities.LinqDynamicSum
             return Activator.CreateInstance<TSource>();
         }
 
-        // Summary:
-        //     Returns the the sum object of a sequence.
-        //
-        // Parameters:
-        //   source:
-        //     The System.Collections.Generic.IEnumerable`1 to return the sum value element of.
-        //
-        // Type parameters:
-        //   TSource:
-        //     The type of the elements of source.
-        //
-        // Returns:
-        //     Returns the the sum object of a sequence.
-        //     Returns @default if source is null
-        // Exceptions:
-        //   T:System.ArgumentNullException:
-        //     source is null.
         public static TSource DynamicSum<TSource>(this IEnumerable<TSource> source, TSource @default)
         {
             if (source.Any())
@@ -74,23 +40,6 @@ namespace Utilities.LinqDynamicSum
                             .Compile();
         }
 
-        // Summary:
-        //     Returns the the SummaryEntity object of a sequence.
-        //
-        // Parameters:
-        //   source:
-        //     The System.Collections.Generic.IEnumerable`1 to return the sum value element of.
-        //
-        // Type parameters:
-        //   TSource:
-        //     The type of the elements of source.
-        //
-        // Returns:
-        //     Returns the the sum object of a sequence.
-        //     Returns @default if source is null
-        // Exceptions:
-        //   T:System.ArgumentNullException:
-        //     source is null.
         public static SummaryEntity<TSource> CalculateSummaryEntity<TSource>(this IEnumerable<TSource> source)
         {
             return new SummaryEntity<TSource>

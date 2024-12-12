@@ -1,7 +1,5 @@
 ﻿namespace ActualMemberBet
 {
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class ActualMemberBetAttribute : Attribute
-    {
-    }
+    public sealed class ActualMemberBetAttribute : Attribute;
 }

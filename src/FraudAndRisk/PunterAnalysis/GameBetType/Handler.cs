@@ -6,12 +6,10 @@ using Utilities.LinqDynamicSum;
 
 namespace PunterAnalysis.GameBetType
 {
-    public class Handler : HandlerBase, IRequestHandler<HttpParameterJson, SummaryEntity<GameBetTypeModel>>
+    public class Handler(PunterAnalysisService punterAnalysisService, IMapper mapper)
+        : HandlerBase(punterAnalysisService, mapper),
+            IRequestHandler<HttpParameterJson, SummaryEntity<GameBetTypeModel>>
     {
-        public Handler(PunterAnalysisService punterAnalysisService, IMapper mapper) : base(punterAnalysisService, mapper)
-        {
-        }
-
         public async Task<SummaryEntity<GameBetTypeModel>> Handle(HttpParameterJson request, CancellationToken cancellationToken)
         {
             return await Handle<Criteria, GameBetTypeModel>(request);

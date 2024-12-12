@@ -6,15 +6,8 @@ using Utilities.BalanceUpServices;
 
 namespace Nap_Reports.Sites.Controllers
 {
-    public class DailyMixParlayWinLossController : Controller
+    public class DailyMixParlayWinLossController(BalanceUpService balanceUpService) : Controller
     {
-        private readonly BalanceUpService balanceUpService; 
-
-        public DailyMixParlayWinLossController(BalanceUpService balanceUpService)
-        {
-                this.balanceUpService = balanceUpService;
-        }
-
         [NapAuth(FunctionKey = FunctionKeys.DailyMixParlayWinLoss, Policy = Constant.Policy.Read)]
         public IActionResult Index()
         {

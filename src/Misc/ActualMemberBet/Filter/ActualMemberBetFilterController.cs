@@ -5,15 +5,8 @@ namespace ActualMemberBet.Filter
 {
     [Route("api/actual-member-bet/filter")]
     [ApiController]
-    public class ActualMemberBetFilterController : ControllerBase
+    public class ActualMemberBetFilterController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ActualMemberBetFilterController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("currency")]
         public async Task<IActionResult> Currency()
         {

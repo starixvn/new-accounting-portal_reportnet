@@ -2,12 +2,7 @@ namespace PeakConcurrentUsers.Model
 {
     public class PeakConcurrentUser
     {
-        public PeakConcurrentUser()
-        {
-            ListConcurrentUser = new List<ConcurrentUser>();
-        }
-
-        public List<ConcurrentUser> ListConcurrentUser { get; set; }
+        public List<ConcurrentUser> ListConcurrentUser { get; set; } = [];
 
         public string AverageUsers { get; set; }
 

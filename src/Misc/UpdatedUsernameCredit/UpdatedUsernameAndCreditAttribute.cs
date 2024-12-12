@@ -1,7 +1,5 @@
 ﻿namespace UpdatedUsernameCredit
 {
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class UpdatedUsernameAndCreditAttribute : Attribute
-    {
-    }
+    public sealed class UpdatedUsernameAndCreditAttribute : Attribute;
 }

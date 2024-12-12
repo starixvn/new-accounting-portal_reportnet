@@ -29,7 +29,7 @@ namespace PeakConcurrentUsers.Services
 
                 foreach (var row in rawData)
                 {
-                    var concurrentUser = new ConcurrentUser()
+                    var concurrentUser = new ConcurrentUser
                     {
                         Date = $"{row.LogDate:MM/dd/yyyy}",
                         TotalUser = $"{row.TotalUser:N0}"

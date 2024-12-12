@@ -6,24 +6,12 @@ using Utilities.ExcelResult;
 
 namespace HouseWinLoss.Common.MatchDetail
 {
-    public class MatchDetailController : ControllerBase
+    public class MatchDetailController(
+        WinLossService service,
+        GridOptionsBuilder builder,
+        MatchGridOptionColumnDecorator decorator)
+        : ControllerBase
     {
-        private readonly WinLossService service;
-
-        private readonly GridOptionsBuilder builder;
-
-        private readonly MatchGridOptionColumnDecorator decorator;
-
-        public MatchDetailController(
-            WinLossService service,
-            GridOptionsBuilder builder,
-            MatchGridOptionColumnDecorator decorator)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-        }
-
         protected async Task<IActionResult> Json(WinLossCriteria criteria)
         {
             var gridOptions = await GetGridOptions(criteria, string.Empty);

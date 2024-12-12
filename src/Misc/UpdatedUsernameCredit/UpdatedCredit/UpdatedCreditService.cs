@@ -9,18 +9,8 @@ namespace UpdatedUsernameCredit.UpdatedCredit
         Task<IEnumerable<UpdatedCreditModel>> GetUpdatedCredit(BaseMessage message);
     }
 
-    public class UpdatedCreditServiceImp : UpdatedCreditService
+    public class UpdatedCreditServiceImp(IDynamicRepository repository, IMapper mapper) : UpdatedCreditService
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly IMapper mapper;
-
-        public UpdatedCreditServiceImp(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<IEnumerable<UpdatedCreditModel>> GetUpdatedCredit(BaseMessage message)
         {
             var criteria = mapper.Map<Criteria>(message);

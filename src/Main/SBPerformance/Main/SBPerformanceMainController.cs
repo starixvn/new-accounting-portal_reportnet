@@ -5,15 +5,8 @@ namespace SBPerformance.Main
 {
     [Route("api/sb-performance/main")]
     [ApiController]
-    public class SBPerformanceMainController : ControllerBase
+    public class SBPerformanceMainController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public SBPerformanceMainController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Main(HttpParameter httpParameters)
         {

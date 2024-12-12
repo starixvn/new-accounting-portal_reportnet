@@ -9,17 +9,8 @@ namespace SBPerformance.MarginBySite
         Task<SummaryEntity<MarginBySiteItemModel>> Query(MarginBySiteHttpParameter parameter);
     }
 
-    public class MarginBySiteServiceImp : MarginBySiteService
+    public class MarginBySiteServiceImp(IDynamicRepository repository, IMapper mapper) : MarginBySiteService
     {
-        private readonly IDynamicRepository repository;
-        private readonly IMapper mapper;
-
-        public MarginBySiteServiceImp(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<SummaryEntity<MarginBySiteItemModel>> Query(MarginBySiteHttpParameter parameter)
         {
             var criteria = mapper.Map<MarginBySiteCriteria>(parameter);

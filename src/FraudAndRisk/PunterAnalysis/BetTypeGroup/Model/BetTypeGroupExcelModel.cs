@@ -15,8 +15,8 @@ namespace PunterAnalysis.BetTypeGroup.Model
 
         [Cell("D8")]
         public object Margin => Turnover == 0
-            ? (object)"N/A" :
-            (object)(WinLoss / Turnover);
+            ? "N/A" :
+            WinLoss / Turnover;
 
         [Cell("E8")]
         public int BetCount { get; set; }

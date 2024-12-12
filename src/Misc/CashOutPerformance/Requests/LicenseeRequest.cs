@@ -3,7 +3,5 @@ using MediatR;
 
 namespace CashOutPerformance.Requests
 {
-    public class LicenseeRequest : IRequest<IEnumerable<SiteModel>>
-    {
-    }
+    public class LicenseeRequest : IRequest<IEnumerable<SiteModel>>;
 }

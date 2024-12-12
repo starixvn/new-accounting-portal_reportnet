@@ -16,6 +16,6 @@
 
         public string SiteType { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_LvlN_3rd_Site";
+        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_3rd_Site";
     }
 }

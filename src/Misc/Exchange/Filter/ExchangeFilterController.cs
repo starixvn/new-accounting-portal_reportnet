@@ -7,15 +7,8 @@ namespace Exchange.Filter
 {
     [Route("api/exchange/filter")]
     [ApiController]
-    public class ExchangeFilterController : ControllerBase
+    public class ExchangeFilterController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ExchangeFilterController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("licensee")]
         public async Task<IActionResult> Licensee()
         {

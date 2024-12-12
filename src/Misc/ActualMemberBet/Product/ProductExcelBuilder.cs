@@ -11,11 +11,8 @@ namespace ActualMemberBet.Product
         ExcelPackage Build(SummaryEntity<ProductActualMemberBetExcel> productActualMemberBetExcel);
     }
 
-    public class ProductExcelBuilderImp : ProductExcelBuilder
+    public class ProductExcelBuilderImp(ConfigurationService configurationService) : ProductExcelBuilder
     {
-
-        private readonly ConfigurationService configurationService;
-
         private ExcelWorksheet productActualMemberBetSheet;
 
         private ExcelWorksheet totalSheet;
@@ -23,11 +20,6 @@ namespace ActualMemberBet.Product
         private const int StartRowIndex = 5;
 
         private ExcelPackage ExcelPackage { get; set; }
-
-        public ProductExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelPackage Build(SummaryEntity<ProductActualMemberBetExcel> productActualMemberBetExcel)
         {
@@ -42,12 +34,10 @@ namespace ActualMemberBet.Product
         private void LoadTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/ActualMemberBet/ProductActualMemberBet.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                productActualMemberBetSheet = ExcelPackage.Workbook.Worksheets.Copy("ActualMemberBetTemplate", "ActualMemberBet");
-                totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            productActualMemberBetSheet = ExcelPackage.Workbook.Worksheets.Copy("ActualMemberBetTemplate", "ActualMemberBet");
+            totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
         }
 
         private void BuildTitle()

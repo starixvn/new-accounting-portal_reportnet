@@ -6,22 +6,15 @@ using PunterAnalysis.Performance.Sportsbook.Model;
 
 namespace PunterAnalysis.Performance.Sportsbook
 {
-    public class Handler : IRequestHandler<SportsbookHttpParameterJson, ViewModelJson>
+    public class Handler(IDynamicRepository repository, IMapper mapper)
+        : IRequestHandler<SportsbookHttpParameterJson, ViewModelJson>
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly IMapper mapper;
-
-        public Handler(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<ViewModelJson> Handle(SportsbookHttpParameterJson request, CancellationToken cancellationToken)
         {
-            var viewModel = new ViewModelJson();
-            viewModel.SportStatistics = await Query<SportStatistic, SportCriteria>(request);
+            var viewModel = new ViewModelJson
+            {
+                SportStatistics = await Query<SportStatistic, SportCriteria>(request)
+            };
             viewModel.SummaryStatistic = QuerySummaryStatistics(viewModel.SportStatistics);
             return viewModel;
         }
@@ -32,7 +25,7 @@ namespace PunterAnalysis.Performance.Sportsbook
             {
                 BetCount = sportStatistics.Sum(m => m.BetCount),
                 Turnover = sportStatistics.Sum(m => m.Turnover),
-                WinLoss = sportStatistics.Sum(m => m.WinLoss),
+                WinLoss = sportStatistics.Sum(m => m.WinLoss)
             };
         }
 

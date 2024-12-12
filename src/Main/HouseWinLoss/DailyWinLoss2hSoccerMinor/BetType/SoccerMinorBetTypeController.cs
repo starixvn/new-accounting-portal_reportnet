@@ -2,36 +2,21 @@
 {
     using AutoMapper;
     using Fanex.Excel.Models;
-    using HouseWinLoss.Common.BasicWinLoss;
-    using HouseWinLoss.Common.Models;
-    using HouseWinLoss.Configuration;
+    using Common.BasicWinLoss;
+    using Common.Models;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer-minor/bet-type")]
     [ApiController]
-    public class SoccerMinorBetTypeController : ControllerBase
+    public class SoccerMinorBetTypeController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        BettypeGridOptionColumnDecorator decorator,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly BasicWinLossService service;
-
-        private readonly BasicGridOptionsBuilder builder;
-
-        private readonly BettypeGridOptionColumnDecorator decorator;
-
-        private readonly IMapper mapper;
-
-        public SoccerMinorBetTypeController(
-            BasicWinLossService service,
-            BasicGridOptionsBuilder builder,
-            BettypeGridOptionColumnDecorator decorator,
-            IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

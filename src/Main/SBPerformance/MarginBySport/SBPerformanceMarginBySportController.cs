@@ -5,15 +5,8 @@ namespace SBPerformance.MarginBySport
 {
     [Route("api/sb-performance/main")]
     [ApiController]
-    public class SBPerformanceMarginBySportController : ControllerBase
+    public class SBPerformanceMarginBySportController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public SBPerformanceMarginBySportController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("margin-by-sport")]
         public async Task<IActionResult> Sport(MarginBySportHttpParameter httpParameters)
         {

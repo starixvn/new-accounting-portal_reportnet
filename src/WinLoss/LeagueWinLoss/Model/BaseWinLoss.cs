@@ -14,32 +14,14 @@
 
         public decimal VirtualWinLoss { get; set; }
 
-        public decimal VarianceIncome
-        {
-            get
-            {
-                return RealIncome - VirtualWinLoss;
-            }
-        }
+        public decimal VarianceIncome => RealIncome - VirtualWinLoss;
 
         public decimal RealTurnover { get; set; }
 
         public decimal VirtualTurnover { get; set; }
 
-        public decimal VirtualMargin
-        {
-            get
-            {
-                return VirtualTurnover != 0 ? VirtualWinLoss / VirtualTurnover : 0;
-            }
-        }
+        public decimal VirtualMargin => VirtualTurnover != 0 ? VirtualWinLoss / VirtualTurnover : 0;
 
-        public decimal RealMargin
-        {
-            get
-            {
-                return RealTurnover != 0 ? RealIncome / RealTurnover : 0;
-            }
-        }
+        public decimal RealMargin => RealTurnover != 0 ? RealIncome / RealTurnover : 0;
     }
 }

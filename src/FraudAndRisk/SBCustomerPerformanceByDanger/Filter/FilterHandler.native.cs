@@ -3,23 +3,14 @@ using MediatR;
 
 namespace SBCustomerPerformanceByDanger.Filter
 {
-    public class FilterHandler : IRequestHandler<BalanceUpDateQueryHttpParameter, DateTime>,
-        IRequestHandler<SportQueryHttpParameter, List<SportModel>>,
-        IRequestHandler<DivisionQueryHttpParameter, IEnumerable<DivisionModel>>,
-        IRequestHandler<LeagueGroupQueryHttpParameter, IEnumerable<LeagueGroupModel>>,
-        IRequestHandler<LeagueQueryHttpParameter, IEnumerable<string>>
-        
+    public class FilterHandler(FilterService filterService, IMapper mapper)
+        : IRequestHandler<BalanceUpDateQueryHttpParameter, DateTime>,
+            IRequestHandler<SportQueryHttpParameter, List<SportModel>>,
+            IRequestHandler<DivisionQueryHttpParameter, IEnumerable<DivisionModel>>,
+            IRequestHandler<LeagueGroupQueryHttpParameter, IEnumerable<LeagueGroupModel>>,
+            IRequestHandler<LeagueQueryHttpParameter, IEnumerable<string>>
+
     {
-        private readonly FilterService filterService;
-
-        private readonly IMapper mapper;    
-
-        public FilterHandler(FilterService filterService, IMapper mapper)
-        {
-            this.filterService = filterService;
-            this.mapper = mapper;
-        }
-
         public async Task<IEnumerable<LeagueGroupModel>> Handle(LeagueGroupQueryHttpParameter request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<LeagueGroupQueryCriteria>(request);

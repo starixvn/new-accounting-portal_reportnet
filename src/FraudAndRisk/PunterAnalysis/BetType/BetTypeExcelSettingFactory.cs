@@ -8,16 +8,9 @@ namespace PunterAnalysis.BetType
         ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
     }
 
-    public class BetTypeExcelSettingFactory : BetTypeExcelSetting
+    public class BetTypeExcelSettingFactory(ConfigurationService configurationService) : BetTypeExcelSetting
     {
         private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/Bettype.xlsx";
-
-        private readonly ConfigurationService configurationService;
-
-        public BetTypeExcelSettingFactory(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
         {

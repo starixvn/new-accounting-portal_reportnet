@@ -1,7 +1,7 @@
 ﻿namespace HouseWinLoss.ProductBetType
 {
     using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class Criteria : WinLossCriteria
     {
@@ -21,6 +21,6 @@
 
         public int IsMajor { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_Lvl2_BettypePerformance";
+        public override string GetSettingKey() => "HouseWinlossByProducts_Lvl2_BettypePerformance";
     }
 }

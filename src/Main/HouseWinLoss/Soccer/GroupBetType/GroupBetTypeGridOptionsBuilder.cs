@@ -10,13 +10,9 @@ namespace HouseWinLoss.Soccer.GroupBetType
         GridOptions Build(GroupBetTypeWinLossModel winLoss, string title);
     }
 
-    public class GroupBetTypeGridOptionsBuilderImp : BaseBetTypeGridOptionsBuilder, GroupBetTypeGridOptionsBuilder
+    public class GroupBetTypeGridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder)
+        : BaseBetTypeGridOptionsBuilder(gridDataRowBuilder), GroupBetTypeGridOptionsBuilder
     {
-        public GroupBetTypeGridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder)
-            : base(gridDataRowBuilder)
-        {
-        }
-
         public GridOptions Build(GroupBetTypeWinLossModel winLoss, string title)
         {
             return new GridOptions

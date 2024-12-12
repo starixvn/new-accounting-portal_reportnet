@@ -10,11 +10,8 @@ namespace Exchange.Report
         ExcelPackage Build(HttpParameterExcel excelParams, SummaryEntity<ExchangeExcelEntity> model);
     }
 
-    public class ExcelBuilderImp : ExcelBuilder
+    public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelBuilder
     {
-
-        private readonly ConfigurationService configurationService;
-
         private ExcelWorksheet exchangeSheet;
 
         private ExcelWorksheet totalSheet;
@@ -22,11 +19,6 @@ namespace Exchange.Report
         private const int StartRowIndex = 5;
 
         private ExcelPackage ExcelPackage { get; set; }
-
-        public ExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelPackage Build(HttpParameterExcel excelParams, SummaryEntity<ExchangeExcelEntity> model)
         {
@@ -42,12 +34,10 @@ namespace Exchange.Report
         private void LoadTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/Exchange/Exchange.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                exchangeSheet = ExcelPackage.Workbook.Worksheets.Copy("ExchangeTemplate", "Exchange");
-                totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            exchangeSheet = ExcelPackage.Workbook.Worksheets.Copy("ExchangeTemplate", "Exchange");
+            totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
         }
 
         private void BuildTitle(HttpParameterExcel excelParams)

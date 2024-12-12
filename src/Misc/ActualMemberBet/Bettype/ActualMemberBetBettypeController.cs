@@ -7,15 +7,8 @@ namespace ActualMemberBet.Bettype
 
     [Route("api/actual-member-bet/bettype")]
     [ApiController]
-    public class ActualMemberBetBettypeController : ControllerBase
+    public class ActualMemberBetBettypeController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ActualMemberBetBettypeController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Index(HttpParameter parameter)
         {

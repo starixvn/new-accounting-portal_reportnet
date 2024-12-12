@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.OtherSports.SportType
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

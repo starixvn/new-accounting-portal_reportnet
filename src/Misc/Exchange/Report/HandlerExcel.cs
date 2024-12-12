@@ -5,21 +5,9 @@ using Utilities.LinqDynamicSum;
 
 namespace Exchange.Report
 {
-    public class HandlerExcel : IRequestHandler<HttpParameterExcel, ExcelPackage>
+    public class HandlerExcel(Service service, ExcelBuilder excelBuilder, IMapper mapper)
+        : IRequestHandler<HttpParameterExcel, ExcelPackage>
     {
-        private readonly Service service;
-
-        private readonly ExcelBuilder excelBuilder;
-
-        private readonly IMapper mapper;
-
-        public HandlerExcel(Service service, ExcelBuilder excelBuilder, IMapper mapper)
-        {
-            this.service = service;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(HttpParameterExcel request, CancellationToken cancellationToken)
         {
             var jsonMessage = mapper.Map<HttpParameterJson>(request);

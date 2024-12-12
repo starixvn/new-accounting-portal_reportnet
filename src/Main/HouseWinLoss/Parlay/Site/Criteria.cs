@@ -8,6 +8,6 @@ namespace HouseWinLoss.Parlay.Site
 
         public int PermissionProfileID { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_LvlN_Parlay";
+        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Parlay";
     }
 }

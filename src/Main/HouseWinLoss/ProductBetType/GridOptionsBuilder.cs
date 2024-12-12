@@ -10,14 +10,8 @@ namespace HouseWinLoss.ProductBetType
         GridOptions Build(ProductBetTypeWinLoss winLoss, string title);
     }
 
-    public class GridOptionsBuilderImp : GridOptionsBuilder
+    public class GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : GridOptionsBuilder
     {
-        private readonly BasicGridDataRowBuilder gridDataRowBuilder;
-
-        public GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder)
-        {
-            this.gridDataRowBuilder = gridDataRowBuilder;
-        }
         public GridOptions Build(ProductBetTypeWinLoss winLoss, string title)
         {
             var bodyRows = BuildBodyRows(winLoss);

@@ -4,12 +4,7 @@ namespace LegendManagement.Criteria;
 
 public class GetInputedLegendReportCriteria : CriteriaBase
 {
-    public GetInputedLegendReportCriteria()
-    {
-        System = string.Empty;
-    }
-
-    public string System { get; set; }
+    public string System { get; set; } = string.Empty;
 
     public override string GetSettingKey() => "LegendManagement_GetInputedLegend";
 

@@ -194,19 +194,17 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
     private void LoadCombinationTemplate(string fileExcel)
     {
         var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/DailyMixParlay/{fileExcel}";
-        using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-        {
-            ExcelPackage = new ExcelPackage(stream);
-            sheet = ExcelPackage.Workbook.Worksheets.Copy("DailyMixParlayWinLossTemplate", "Daily Mix Parlay Win Loss");
-            twoXCombinationsSheet = ExcelPackage.Workbook.Worksheets["2XCombinationsTemplate"];
-            threeXCombinationsSheet = ExcelPackage.Workbook.Worksheets["3XCombinationsTemplate"];
-            fourXCombinationsSheet = ExcelPackage.Workbook.Worksheets["4XCombinationsTemplate"];
-            fiveXCombinationsSheet = ExcelPackage.Workbook.Worksheets["5XCombinationsTemplate"];
-            sixXCombinationsSheet = ExcelPackage.Workbook.Worksheets["6XCombinationsTemplate"];
-            subTotalSheet = ExcelPackage.Workbook.Worksheets["SubTotalTemplate"];
-            grandTotalSheet = ExcelPackage.Workbook.Worksheets["GrandTotalTemplate"];
-            totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-        }
+        using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+        ExcelPackage = new ExcelPackage(stream);
+        sheet = ExcelPackage.Workbook.Worksheets.Copy("DailyMixParlayWinLossTemplate", "Daily Mix Parlay Win Loss");
+        twoXCombinationsSheet = ExcelPackage.Workbook.Worksheets["2XCombinationsTemplate"];
+        threeXCombinationsSheet = ExcelPackage.Workbook.Worksheets["3XCombinationsTemplate"];
+        fourXCombinationsSheet = ExcelPackage.Workbook.Worksheets["4XCombinationsTemplate"];
+        fiveXCombinationsSheet = ExcelPackage.Workbook.Worksheets["5XCombinationsTemplate"];
+        sixXCombinationsSheet = ExcelPackage.Workbook.Worksheets["6XCombinationsTemplate"];
+        subTotalSheet = ExcelPackage.Workbook.Worksheets["SubTotalTemplate"];
+        grandTotalSheet = ExcelPackage.Workbook.Worksheets["GrandTotalTemplate"];
+        totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
     }
 
     private void DeleteCombinationTemplate()
@@ -225,16 +223,14 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
     private void LoadProductTemplate(string fileExcel)
     {
         var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/DailyMixParlay/{fileExcel}";
-        using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-        {
-            ExcelPackage = new ExcelPackage(stream);
-            productSheet = ExcelPackage.Workbook.Worksheets.Copy("DailyMixParlayWinLossTemplate", "Daily Mix Parlay Win Loss");
-            nonLiveSheet = ExcelPackage.Workbook.Worksheets["NonLiveTemplate"];
-            liveSheet = ExcelPackage.Workbook.Worksheets["LiveTemplate"];
-            productSubTotalSheet = ExcelPackage.Workbook.Worksheets["SubTotalTemplate"];
-            productGrandTotalSheet = ExcelPackage.Workbook.Worksheets["GrandTotalTemplate"];
-            productTotalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-        }
+        using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+        ExcelPackage = new ExcelPackage(stream);
+        productSheet = ExcelPackage.Workbook.Worksheets.Copy("DailyMixParlayWinLossTemplate", "Daily Mix Parlay Win Loss");
+        nonLiveSheet = ExcelPackage.Workbook.Worksheets["NonLiveTemplate"];
+        liveSheet = ExcelPackage.Workbook.Worksheets["LiveTemplate"];
+        productSubTotalSheet = ExcelPackage.Workbook.Worksheets["SubTotalTemplate"];
+        productGrandTotalSheet = ExcelPackage.Workbook.Worksheets["GrandTotalTemplate"];
+        productTotalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
     }
 
     private void ExportProductData(WinLoss data)

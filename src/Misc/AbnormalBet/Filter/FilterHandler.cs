@@ -4,20 +4,14 @@ using MediatR;
 
 namespace AbnormalBet.Filter
 {
-    public class FilterHandler : IRequestHandler<SiteHttpParameter, IEnumerable<SiteModel>>,
-         IRequestHandler<SportHttpParameter, IEnumerable<FilterItemModel>>,
-         IRequestHandler<BetTypeHttpParameter, IEnumerable<FilterItemModel>>,
-         IRequestHandler<ReasonHttpParameter, IEnumerable<FilterItemModel>>,
-         IRequestHandler<CurrencyHttpParameter, IEnumerable<FilterItemModel>>,
-         IRequestHandler<LeagueHttpParameter, IEnumerable<LeagueModel>>
+    public class FilterHandler(FilterService filterService)
+        : IRequestHandler<SiteHttpParameter, IEnumerable<SiteModel>>,
+            IRequestHandler<SportHttpParameter, IEnumerable<FilterItemModel>>,
+            IRequestHandler<BetTypeHttpParameter, IEnumerable<FilterItemModel>>,
+            IRequestHandler<ReasonHttpParameter, IEnumerable<FilterItemModel>>,
+            IRequestHandler<CurrencyHttpParameter, IEnumerable<FilterItemModel>>,
+            IRequestHandler<LeagueHttpParameter, IEnumerable<LeagueModel>>
     {
-        private readonly FilterService filterService;
-
-        public FilterHandler(FilterService filterService)
-        {
-            this.filterService = filterService;
-        }
-
         public async Task<IEnumerable<FilterItemModel>> Handle(CurrencyHttpParameter request, CancellationToken cancellationToken)
         {
             return await filterService.QueryCurrency();

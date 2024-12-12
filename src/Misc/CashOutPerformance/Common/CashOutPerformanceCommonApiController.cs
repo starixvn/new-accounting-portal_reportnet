@@ -8,21 +8,12 @@ namespace CashOutPerformance.Common
 {
     [Route("api/cash-out-performance/common")]
     [ApiController]
-    public class CashOutPerformanceCommonApiController : ControllerBase
+    public class CashOutPerformanceCommonApiController(
+        IUserService userService,
+        INapSession napSession,
+        INapSettings napSettings)
+        : ControllerBase
     {
-        private readonly IUserService userService;
-
-        private readonly INapSession napSession;
-
-        private readonly INapSettings napSettings;
-
-        public CashOutPerformanceCommonApiController(IUserService userService, INapSession napSession, INapSettings napSettings)
-        {
-            this.userService = userService;
-            this.napSession = napSession;
-            this.napSettings = napSettings;
-    }
-
         [Route("check-full-view")]
         public IActionResult FullView()
         {

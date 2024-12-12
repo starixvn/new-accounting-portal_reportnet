@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.MetricGaming.BetType
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

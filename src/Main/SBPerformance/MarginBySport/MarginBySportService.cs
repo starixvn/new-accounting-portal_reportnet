@@ -9,17 +9,8 @@ namespace SBPerformance.MarginBySport
         Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parameter);
     }
 
-    public class MarginBySportServiceImp : MarginBySportService
+    public class MarginBySportServiceImp(IDynamicRepository repository, IMapper mapper) : MarginBySportService
     {
-        private readonly IDynamicRepository repository;
-        private readonly IMapper mapper;
-
-        public MarginBySportServiceImp(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parameter)
         {
             var criteria = mapper.Map<MarginBySportCriteria>(parameter);

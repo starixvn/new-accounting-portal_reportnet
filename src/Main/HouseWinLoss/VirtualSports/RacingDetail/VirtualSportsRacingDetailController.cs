@@ -8,16 +8,13 @@ namespace HouseWinLoss.VirtualSports.RacingDetail
 {
     [Route("api/house-win-loss-by-products/virtual-sports/racing-match-detail")]
     [ApiController]
-    public class VirtualSportsRacingDetailController : MatchDetailByCodeController
+    public class VirtualSportsRacingDetailController(
+        WinLossService service,
+        GridOptionsBuilder builder,
+        MatchGridOptionColumnDecoratorByCode decorator,
+        IMapper mapper)
+        : MatchDetailByCodeController(service, builder, decorator)
     {
-        private readonly IMapper mapper;
-
-        public VirtualSportsRacingDetailController(WinLossService service, GridOptionsBuilder builder, MatchGridOptionColumnDecoratorByCode decorator, IMapper mapper)
-            : base(service, builder, decorator)
-        {
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

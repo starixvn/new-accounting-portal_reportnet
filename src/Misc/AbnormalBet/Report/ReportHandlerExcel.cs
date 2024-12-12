@@ -7,22 +7,10 @@ using OfficeOpenXml;
 
 namespace AbnormalBet.Report
 {
-    public class ReportHandlerExcel : IRequestHandler<LicenseeHttpParameterExcel, ExcelPackage>,
-        IRequestHandler<MemberHttpParameterExcel, ExcelPackage>
+    public class ReportHandlerExcel(ReportService service, ReportExcelBuilder excelBuilder, IMapper mapper)
+        : IRequestHandler<LicenseeHttpParameterExcel, ExcelPackage>,
+            IRequestHandler<MemberHttpParameterExcel, ExcelPackage>
     {
-        private readonly ReportService service;
-
-        private readonly ReportExcelBuilder excelBuilder;
-
-        private readonly IMapper mapper;
-
-        public ReportHandlerExcel(ReportService service, ReportExcelBuilder excelBuilder, IMapper mapper)
-        {
-            this.service = service;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(MemberHttpParameterExcel request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<MemberQueryCriteria>(request);

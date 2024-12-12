@@ -3,12 +3,8 @@ using PunterAnalysis.League.Model;
 
 namespace PunterAnalysis.League
 {
-    public class LeagueServiceByMonth : LeagueServiceBase
+    public class LeagueServiceByMonth(IDynamicRepository repository) : LeagueServiceBase(repository)
     {
-        public LeagueServiceByMonth(IDynamicRepository repository) : base(repository)
-        {
-        }
-
         protected override LeagueMappingModel Transform(LeagueRawModel rawModel)
         {
             return new LeagueMappingModel

@@ -7,8 +7,8 @@ namespace BetCount.Criteria
     {
         public BetCountCriteria()
         {
-            this.Datestart = DateTime.Now.AddDays(-1);
-            this.Dateend = this.Datestart;
+            Datestart = DateTime.Now.AddDays(-1);
+            Dateend = Datestart;
         }
 
         public DateTime Datestart { get; set; }
@@ -33,7 +33,7 @@ namespace BetCount.Criteria
 
         public override bool IsValid()
         {
-            return this.Datestart <= this.Dateend;
+            return Datestart <= Dateend;
         }
     }
 }

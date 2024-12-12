@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.Soccer.BetTypeFull
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
 
     public class ExcelQueryModel

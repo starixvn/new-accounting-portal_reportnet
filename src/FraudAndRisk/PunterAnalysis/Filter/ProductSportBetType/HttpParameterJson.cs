@@ -2,7 +2,5 @@
 
 namespace PunterAnalysis.Filter.ProductSportBetType
 {
-    public class HttpParameterJson : IRequest<IEnumerable<ProductSportBetTypeEntity>>
-    {
-    }
+    public class HttpParameterJson : IRequest<IEnumerable<ProductSportBetTypeEntity>>;
 }

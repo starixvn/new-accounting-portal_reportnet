@@ -1,13 +1,6 @@
-﻿using NPOI.SS.UserModel;
-using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OfficeOpenXml;
 using AutoMapper;
 using Epplus.Mapper.Extensions;
-using NPOI.HSSF.Record.Chart;
 using TotalSMAAndActiveMember.Model;
 using Utilities.Configurations;
 using TotalSMAAndActiveMember.Constant;

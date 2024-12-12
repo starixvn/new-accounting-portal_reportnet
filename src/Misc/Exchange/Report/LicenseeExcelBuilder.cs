@@ -9,11 +9,8 @@ namespace Exchange.Report
         ExcelPackage Build(LicenseeHttpParameterExcel excelParams, ExchangeExcelModel model);
     }
 
-    public class LicenseeExcelBuilderImp : LicenseeExcelBuilder
+    public class LicenseeExcelBuilderImp(ConfigurationService configurationService) : LicenseeExcelBuilder
     {
-
-        private readonly ConfigurationService configurationService;
-
         private ExcelWorksheet exchangeSheet;
 
         private ExcelWorksheet dataSheet;
@@ -25,11 +22,6 @@ namespace Exchange.Report
         private int StartRowIndex = 5;
 
         private ExcelPackage ExcelPackage { get; set; }
-
-        public LicenseeExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelPackage Build(LicenseeHttpParameterExcel excelParams, ExchangeExcelModel model)
         {
@@ -45,14 +37,12 @@ namespace Exchange.Report
         private void LoadTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/Exchange/LicenseeExchange.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                exchangeSheet = ExcelPackage.Workbook.Worksheets.Copy("ExchangeTemplate", "Exchange");
-                dataSheet = ExcelPackage.Workbook.Worksheets["DataTemplate"];
-                subTotalSheet = ExcelPackage.Workbook.Worksheets["SubTotalTemplate"];
-                totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            exchangeSheet = ExcelPackage.Workbook.Worksheets.Copy("ExchangeTemplate", "Exchange");
+            dataSheet = ExcelPackage.Workbook.Worksheets["DataTemplate"];
+            subTotalSheet = ExcelPackage.Workbook.Worksheets["SubTotalTemplate"];
+            totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
         }
 
         private void BuildTitle(LicenseeHttpParameterExcel excelParams)

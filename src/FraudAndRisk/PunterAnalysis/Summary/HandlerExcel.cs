@@ -7,28 +7,13 @@ using Utilities.LinqDynamicSum;
 
 namespace PunterAnalysis.Summary
 {
-    public class HandlerExcel : IRequestHandler<HttpParameterExcel, ExcelPackage>
+    public class HandlerExcel(
+        SummaryService summaryService,
+        SummaryExcelSetting excelSettingFactory,
+        PunterAnalysisExcelBuilder excelBuilder,
+        IMapper mapper)
+        : IRequestHandler<HttpParameterExcel, ExcelPackage>
     {
-        private readonly SummaryService summaryService;
-
-        private readonly SummaryExcelSetting excelSettingFactory;
-
-        private readonly PunterAnalysisExcelBuilder excelBuilder;
-
-        private readonly IMapper mapper;
-
-        public HandlerExcel(
-            SummaryService summaryService,
-            SummaryExcelSetting excelSettingFactory,
-            PunterAnalysisExcelBuilder excelBuilder,
-            IMapper mapper)
-        {
-            this.summaryService = summaryService;
-            this.excelSettingFactory = excelSettingFactory;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(HttpParameterExcel request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<Criteria>(request);

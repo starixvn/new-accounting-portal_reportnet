@@ -8,30 +8,30 @@
 
         public const string Soccer = "Soccer";
 
-        public static string[] NameSportsbook => new[]
-        {
+        public static string[] NameSportsbook =>
+        [
             "Soccer",
             "Other Sports",
             "Parlay",
             "SB Adjustment",
             "SABA Soccer",
             "SABA Soccer PinGoal"
-        };
+        ];
 
-        public static string[] SoccerPermissionProducts => new[]
-       {
+        public static string[] SoccerPermissionProducts =>
+        [
             "Soccer",
             "Parlay",
             "RM",
             "SB Adjustment",
             "SABA Soccer",
             "SABA Soccer PinGoal"
-        };
+        ];
 
-        public static string[] OtherSportsPermissionProducts => new[]
-        {
+        public static string[] OtherSportsPermissionProducts =>
+        [
             "Other Sports",
             "Parlay"
-        };
+        ];
     }
 }

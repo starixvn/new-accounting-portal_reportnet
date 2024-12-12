@@ -12,11 +12,9 @@ namespace ResultAnalysis.Services
 		ExcelPackage Build(string title, ResultAnalysisExcelModel model, int sportId);
 	}
 
-	public class ExcelBuilderServiceImp : ExcelBuilderService
-	{
-		private readonly ConfigurationService configurationService;
-
-		private ExcelWorksheet sheet;
+	public class ExcelBuilderServiceImp(ConfigurationService configurationService) : ExcelBuilderService
+    {
+        private ExcelWorksheet sheet;
 
 		private ExcelPackage ExcelPackage { get; set; }
 
@@ -26,12 +24,7 @@ namespace ResultAnalysis.Services
 
 		private const int Soccer = 1;
 
-		public ExcelBuilderServiceImp(ConfigurationService configurationService)
-		{
-			this.configurationService = configurationService;
-		}
-
-		public ExcelPackage Build(string title, ResultAnalysisExcelModel model, int sportId)
+        public ExcelPackage Build(string title, ResultAnalysisExcelModel model, int sportId)
 		{
 			var isSoccer = sportId == Soccer;
 			var fileExcel = isSoccer ? "ResultAnalysis.xlsx" : "SimpleResultAnalysis.xlsx";
@@ -53,12 +46,10 @@ namespace ResultAnalysis.Services
 		private void LoadTemplate(string fileExcel)
 		{
 			var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/ResultAnalysis/{fileExcel}";
-			using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-			{
-				ExcelPackage = new ExcelPackage(stream);
-				sheet = ExcelPackage.Workbook.Worksheets["Results"];
-			}
-		}
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            sheet = ExcelPackage.Workbook.Worksheets["Results"];
+        }
 
 		private void BuildTitle(string title, string cellRange)
 		{
@@ -78,7 +69,7 @@ namespace ResultAnalysis.Services
 
         private void FormatSheet(List<DetailedResultAnalysisExcelModel> data, bool isSoccer)
         {
-            string[] separatingString = { " -vs- " };
+            string[] separatingString = [" -vs- "];
             for (var i = 0; i < data.Count; i++)
             {
                 FormatOddEvenBackground(isSoccer, i);

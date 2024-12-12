@@ -6,27 +6,20 @@ using PunterAnalysis.Performance.Summary.Model;
 
 namespace PunterAnalysis.Performance.Summary
 {
-    public class Handler : IRequestHandler<SummaryHttpParameterJson, ViewModelJson>
+    public class Handler(IDynamicRepository repository, IMapper mapper)
+        : IRequestHandler<SummaryHttpParameterJson, ViewModelJson>
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly IMapper mapper;
-
-        public Handler(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<ViewModelJson> Handle(SummaryHttpParameterJson request, CancellationToken cancellationToken)
         {
-            var viewModel = new ViewModelJson();
+            var viewModel = new ViewModelJson
+            {
+                MonthStatistics = await Query<MonthStatistic, MonthCriteria>(request),
+                ProductTurnoverStatistics = await Query<ProductTurnoverStatistic, ProductTurnoverCriteria>(request),
+                SportStatistics = await Query<SportStatistic, SportCriteria>(request),
+                BetTypeStatistics = await Query<BetTypeStatistic, BetTypeCriteria>(request),
+                EventStatistics = await Query<EventStatistic, EventCriteria>(request)
+            };
 
-            viewModel.MonthStatistics = await Query<MonthStatistic, MonthCriteria>(request);
-            viewModel.ProductTurnoverStatistics = await Query<ProductTurnoverStatistic, ProductTurnoverCriteria>(request);
-            viewModel.SportStatistics = await Query<SportStatistic, SportCriteria>(request);
-            viewModel.BetTypeStatistics = await Query<BetTypeStatistic, BetTypeCriteria>(request);
-            viewModel.EventStatistics = await Query<EventStatistic, EventCriteria>(request);
             viewModel.SummaryStatistic = QuerySummaryStatistic(viewModel.MonthStatistics);
 
             return viewModel;
@@ -38,7 +31,7 @@ namespace PunterAnalysis.Performance.Summary
             {
                 BetCount = monthStatistics.Sum(m => m.BetCount),
                 Turnover = monthStatistics.Sum(m => m.Turnover),
-                WinLoss = monthStatistics.Sum(m => m.WinLoss),
+                WinLoss = monthStatistics.Sum(m => m.WinLoss)
             };
         }
 

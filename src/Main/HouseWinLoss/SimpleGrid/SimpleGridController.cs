@@ -8,28 +8,13 @@ namespace HouseWinLoss.SimpleGrid
 {
     [Route("api/house-win-loss-by-products/simple-grid")]
     [ApiController]
-    public class SimpleGridController : ControllerBase
+    public class SimpleGridController(
+        SimpleCriteriaFactory modelFactory,
+        BasicWinLossService basicWinLossService,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecorator decorator)
+        : ControllerBase
     {
-        private readonly SimpleCriteriaFactory modelFactory;
-
-        private readonly BasicWinLossService basicWinLossService;
-
-        private readonly BasicGridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecorator decorator;
-
-        public SimpleGridController(
-            SimpleCriteriaFactory modelFactory,
-            BasicWinLossService basicWinLossService,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecorator decorator)
-        {
-            this.modelFactory = modelFactory;
-            this.basicWinLossService = basicWinLossService;
-            this.builder = builder;
-            this.decorator = decorator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(Dictionary<string, object> queryModel)
         {

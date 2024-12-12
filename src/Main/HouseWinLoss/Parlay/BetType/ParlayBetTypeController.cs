@@ -7,16 +7,13 @@ namespace HouseWinLoss.Parlay.BetType
 {
     [Route("api/house-win-loss-by-products/parlay/bet-type")]
     [ApiController]
-    public class ParlayBetTypeController : BasicWinLossController
+    public class ParlayBetTypeController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : BasicWinLossController(service, builder, decorator)
     {
-        private readonly IMapper mapper;
-
-        public ParlayBetTypeController(BasicWinLossService service, BasicGridOptionsBuilder builder, GridOptionColumnDecoratorFull decorator, IMapper mapper)
-         : base(service, builder, decorator)
-        {
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

@@ -8,15 +8,8 @@ namespace CashOutPerformance.Controllers
 {
     [Route("api/cash-out-performance")]
     [ApiController]
-    public class CashOutPerformanceApiController : ControllerBase
+    public class CashOutPerformanceApiController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public CashOutPerformanceApiController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("sports")]
         public async Task<IActionResult> Sports()
         {

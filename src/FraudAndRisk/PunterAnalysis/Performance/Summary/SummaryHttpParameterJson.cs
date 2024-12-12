@@ -3,7 +3,5 @@ using PunterAnalysis.Performance.Summary.Model;
 
 namespace PunterAnalysis.Performance.Summary
 {
-    public class SummaryHttpParameterJson : HttpParameterJson, IRequest<ViewModelJson>
-    {
-    }
+    public class SummaryHttpParameterJson : HttpParameterJson, IRequest<ViewModelJson>;
 }

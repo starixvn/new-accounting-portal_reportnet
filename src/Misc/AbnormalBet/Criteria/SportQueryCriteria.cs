@@ -6,6 +6,6 @@ namespace AbnormalBet.Criteria
     {
         public override bool IsValid() => true;
 
-        public override string GetSettingKey() => $"Acc_Rpt_AbnormalBet_SportSel";
+        public override string GetSettingKey() => "Acc_Rpt_AbnormalBet_SportSel";
     }
 }

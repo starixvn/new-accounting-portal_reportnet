@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.Soccer.SumBetType
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

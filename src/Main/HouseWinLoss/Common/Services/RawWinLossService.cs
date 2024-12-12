@@ -9,16 +9,8 @@ namespace HouseWinLoss.Common.Services
         Task<List<WinLossRaw>> Query(WinLossCriteria criteria);
     }
 
-    public class RawWinLossServiceImp : RawWinLossService
+    public class RawWinLossServiceImp(IDynamicRepository repository) : RawWinLossService
     {
-        private readonly IDynamicRepository repository;
-
-
-        public RawWinLossServiceImp(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public virtual async Task<List<WinLossRaw>> Query(WinLossCriteria criteria)
         {
             return (await repository.FetchAsync<WinLossRaw>(criteria)).ToList();

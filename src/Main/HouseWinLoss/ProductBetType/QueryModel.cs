@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.ProductBetType
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

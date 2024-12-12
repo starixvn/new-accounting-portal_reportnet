@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.MatchDetail
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

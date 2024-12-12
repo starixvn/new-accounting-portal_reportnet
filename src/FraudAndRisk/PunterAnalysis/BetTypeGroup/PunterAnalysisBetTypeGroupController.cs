@@ -7,15 +7,8 @@ namespace PunterAnalysis.BetTypeGroup
 {
     [Route("api/punter-analysis/bet-type-group")]
     [ApiController]
-    public class PunterAnalysisBetTypeGroupController : ControllerBase
+    public class PunterAnalysisBetTypeGroupController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public PunterAnalysisBetTypeGroupController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Index(HttpParameterJson parameter)
         {

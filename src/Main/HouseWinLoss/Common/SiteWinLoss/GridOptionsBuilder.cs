@@ -10,15 +10,8 @@ namespace HouseWinLoss.Common.SiteWinLoss
         GridOptions Build(SiteWinLossModel winLoss, string title);
     }
 
-    public class GridOptionsBuilderImp : GridOptionsBuilder
+    public class GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : GridOptionsBuilder
     {
-        private readonly BasicGridDataRowBuilder gridDataRowBuilder;
-
-        public GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder)
-        {
-            this.gridDataRowBuilder = gridDataRowBuilder;
-        }
-
         public GridOptions Build(SiteWinLossModel winLoss, string title)
         {
             return new GridOptions
@@ -42,7 +35,7 @@ namespace HouseWinLoss.Common.SiteWinLoss
         private List<GridDataRow> BuildFooter(WinLoss item)
         {
             var row = gridDataRowBuilder.BuildDataRow(item, HAlignment.Center);
-            return new List<GridDataRow> { row };
+            return [row];
         }
     }
 }

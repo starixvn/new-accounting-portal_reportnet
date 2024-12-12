@@ -30,7 +30,7 @@ namespace Margin.Services
                 var bettypeId = item.BettypeId;
                 var bettypeName = remotingRefService.GetBetTypeName(bettypeId);
 
-                var winLossItem = new MarginWinLossModel()
+                var winLossItem = new MarginWinLossModel
                 {
                     UserName = item.UserName,
                     BettypeId = bettypeId,

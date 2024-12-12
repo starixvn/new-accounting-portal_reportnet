@@ -47,7 +47,7 @@ namespace TreeWinLoss.Criteria
         {
             var settingKey = string.Empty;
 
-            switch (this.RoleId)
+            switch (RoleId)
             {
                 case 2:
                     settingKey = "WinLoss_TreeWinLoss_GetDataByAgent";

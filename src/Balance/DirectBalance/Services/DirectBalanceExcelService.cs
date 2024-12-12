@@ -69,7 +69,7 @@ public class DirectBalanceExcelServiceImp(ConfigurationService configurationServ
 
     private void BuildTotalRow(DirectBalanceItemModel baseBalanceTotal, int startIndex)
     {
-        var item = new DirectBalanceTotalItemExcelModel()
+        var item = new DirectBalanceTotalItemExcelModel
         {
             Text = "Total",
             Total = baseBalanceTotal.BaseBalance

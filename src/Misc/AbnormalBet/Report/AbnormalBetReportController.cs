@@ -7,15 +7,8 @@ namespace AbnormalBet.Report
 {
     [Route("api/ab-normal-bet/report")]
     [ApiController]
-    public class AbnormalBetReportController : ControllerBase
+    public class AbnormalBetReportController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public AbnormalBetReportController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("member")]
         public async Task<IActionResult> Member(MemberHttpParameter httpParameters)
         {

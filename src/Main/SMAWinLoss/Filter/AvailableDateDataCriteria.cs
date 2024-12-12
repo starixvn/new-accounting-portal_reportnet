@@ -5,12 +5,7 @@ namespace SMAWinLoss.Filter
 {
     public class AvailableDateDataCriteria : CriteriaBase
     {
-        public AvailableDateDataCriteria()
-        {
-            TaskId = TaskIdConstant.DailyTask;
-        }
-
-        public int TaskId { get; }
+        public int TaskId { get; } = TaskIdConstant.DailyTask;
 
         public override string GetSettingKey() => "SMAWinLoss-ReportLatestDate";
 

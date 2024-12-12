@@ -9,15 +9,8 @@ namespace HouseWinLoss.Common.MatchDetail
         GridOptions Build(WinLossModel winLoss, string title);
     }
 
-    public class GridOptionsBuilderImp : GridOptionsBuilder
+    public class GridOptionsBuilderImp(GetTeamNameAndSuffixService teamNameService) : GridOptionsBuilder
     {
-        private readonly GetTeamNameAndSuffixService teamNameService;
-
-        public GridOptionsBuilderImp(GetTeamNameAndSuffixService teamNameService)
-        {
-            this.teamNameService = teamNameService;
-        }
-
         public GridOptions Build(WinLossModel winLoss, string title)
         {
             var gridOptions = new GridOptions
@@ -64,8 +57,8 @@ namespace HouseWinLoss.Common.MatchDetail
             var columnIndex = 0;
             var columns = new List<Columns>
             {
-                new Columns(columnIndex++, "MatchCode", string.Empty),
-                new Columns
+                new(columnIndex++, "MatchCode", string.Empty),
+                new()
                 {
                     ColumnIndex = columnIndex,
                     Name = "Home",
@@ -86,23 +79,23 @@ namespace HouseWinLoss.Common.MatchDetail
 
         private GridDataRow BuildMatchRow(WinLoss item, string leagueName)
         {
-            string homeName = teamNameService.GetTeamNameWithSuffixByMatchCode(item.HomeName, item.MatchCode);
-            string awayName = teamNameService.GetTeamNameWithSuffixByMatchCode(item.AwayName, item.MatchCode);
+            var homeName = teamNameService.GetTeamNameWithSuffixByMatchCode(item.HomeName, item.MatchCode);
+            var awayName = teamNameService.GetTeamNameWithSuffixByMatchCode(item.AwayName, item.MatchCode);
 
             var columnIndex = 0;
             var customAttributes = $"{item.SportType},{item.MatchId},'{item.EventDate:MMM dd, yyyy}','{leagueName}','{item.MatchCode}'";
             var columns = new List<Columns>
             {
-                new Columns(0, "MatchCode", item.MatchCode)
+                new(0, "MatchCode", item.MatchCode)
                 {
                     CustomAttributes = customAttributes,
                     Bold = true,
                     CssClass = "league-match-code",
                     CellAlignment = HAlignment.Center
                 },
-                new Columns(columnIndex++, "Home", homeName),
-                new Columns(columnIndex++, "VS", "-vs-") { CellAlignment = HAlignment.Center },
-                new Columns(columnIndex++, "Away", awayName) { CellAlignment = HAlignment.Left },
+                new(columnIndex++, "Home", homeName),
+                new(columnIndex++, "VS", "-vs-") { CellAlignment = HAlignment.Center },
+                new(columnIndex++, "Away", awayName) { CellAlignment = HAlignment.Left }
             };
 
             var baseColumns = CreateBaseColumns(columnIndex, item);
@@ -130,7 +123,7 @@ namespace HouseWinLoss.Common.MatchDetail
             const int BaseColumnIndex = 4;
             var columns = new List<Columns>
             {
-                new Columns
+                new()
                 {
                     ColumnIndex = 0,
                     Name = "MatchCode",
@@ -148,8 +141,8 @@ namespace HouseWinLoss.Common.MatchDetail
 
         private static List<Columns> CreateBaseColumns(int columnIndex, WinLoss item)
         {
-            return new List<Columns>
-            {
+            return
+            [
                 new Columns(columnIndex++, "MemberWinLoss", item.MemberWinLoss),
                 new Columns(columnIndex++, "SMAWinLoss", item.SMAWinLoss),
                 new Columns(columnIndex++, "SMAWinLoss", item.ExtraPT),
@@ -161,7 +154,7 @@ namespace HouseWinLoss.Common.MatchDetail
                 new Columns(columnIndex++, "RealTurnover", item.RealTurnover),
                 new Columns(columnIndex++, "VirtualMargin", item.ExcelVirtualMargin()),
                 new Columns(columnIndex, "RealMargin", item.ExcelRealMargin())
-            };
+            ];
         }
     }
 }

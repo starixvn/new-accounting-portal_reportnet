@@ -8,15 +8,8 @@ namespace ActualMemberBet.Common
         Task<SummaryEntity<T>> Query<T>(ICriteria criteria) where T : class, new();
     }
 
-    public class ActualMemberBetServiceImp : ActualMemberBetService
+    public class ActualMemberBetServiceImp(IDynamicRepository repository) : ActualMemberBetService
     {
-        private readonly IDynamicRepository repository;
-
-        public ActualMemberBetServiceImp(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public async Task<SummaryEntity<T>> Query<T>(ICriteria criteria) where T : class, new()
         {
             return (await repository.FetchAsync<T>(criteria))

@@ -15,8 +15,8 @@ namespace PunterAnalysis.GameBetType.Model
 
         [Cell("D12")]
         public object NonLiveMargin => NonLiveTurnover == 0
-            ? (object)"N/A" :
-            (object)(NonLiveWinLoss / NonLiveTurnover);
+            ? "N/A" :
+            NonLiveWinLoss / NonLiveTurnover;
 
         [Cell("E12")]
         public int NonLiveBetCount { get; set; }
@@ -29,8 +29,8 @@ namespace PunterAnalysis.GameBetType.Model
 
         [Cell("H12")]
         public object LiveMargin => LiveTurnover == 0
-            ? (object)"N/A" :
-            (object)(LiveWinLoss / LiveTurnover);
+            ? "N/A" :
+            LiveWinLoss / LiveTurnover;
 
         [Cell("I12")]
         public int LiveBetCount { get; set; }
@@ -43,8 +43,8 @@ namespace PunterAnalysis.GameBetType.Model
 
         [Cell("L12")]
         public object Margin => Turnover == 0
-            ? (object)"N/A" :
-            (object)(WinLoss / Turnover);
+            ? "N/A" :
+            WinLoss / Turnover;
 
         [Cell("M12")]
         public int BetCount { get; set; }

@@ -12,15 +12,8 @@ namespace PunterAnalysis.Filter
 {
     [Route("api/punter-analysis/filter")]
     [ApiController]
-    public class PunterAnalysisFilterController : ControllerBase
+    public class PunterAnalysisFilterController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public PunterAnalysisFilterController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("available-database")]
         public async Task<IActionResult> AvailableDatabase(HttpParameterAvailableDatabase parameter)
         {

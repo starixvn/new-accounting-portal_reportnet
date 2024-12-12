@@ -8,18 +8,9 @@ namespace PunterAnalysis.League
         LeagueService CreateLeagueService(int periodType);
     }
 
-    public class LeagueServiceFactoryImp : LeagueServiceFactory
+    public class LeagueServiceFactoryImp(IDynamicRepository repository, DateTimeService dateTimeService)
+        : LeagueServiceFactory
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly DateTimeService dateTimeService;
-
-        public LeagueServiceFactoryImp(IDynamicRepository repository, DateTimeService dateTimeService)
-        {
-            this.repository = repository;
-            this.dateTimeService = dateTimeService;
-        }
-
         public LeagueService CreateLeagueService(int periodType)
         {
             var periodTypeEnum = (PeriodType)periodType;

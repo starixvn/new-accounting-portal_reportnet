@@ -15,7 +15,7 @@ namespace DailyCreatedCustomers.Criteria
 
         public override bool IsValid()
         {
-            return this.Fromdate <= this.Todate;
+            return Fromdate <= Todate;
         }
     }
 }

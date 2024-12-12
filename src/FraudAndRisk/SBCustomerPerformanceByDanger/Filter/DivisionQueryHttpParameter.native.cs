@@ -2,7 +2,5 @@
 
 namespace SBCustomerPerformanceByDanger.Filter
 {
-    public class DivisionQueryHttpParameter : IRequest<IEnumerable<DivisionModel>>
-    {
-    }
+    public class DivisionQueryHttpParameter : IRequest<IEnumerable<DivisionModel>>;
 }

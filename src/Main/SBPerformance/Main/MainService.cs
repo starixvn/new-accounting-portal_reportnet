@@ -9,17 +9,8 @@ namespace SBPerformance.Main
         Task<SummaryEntity<ItemModel>> Query(HttpParameter parameter);
     }
 
-    public class MainServiceImp : MainService
+    public class MainServiceImp(IDynamicRepository repository, IMapper mapper) : MainService
     {
-        private readonly IDynamicRepository repository;
-        private readonly IMapper mapper;
-
-        public MainServiceImp(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<SummaryEntity<ItemModel>> Query(HttpParameter parameter)
         {
             var criteria = mapper.Map<Criteria>(parameter);

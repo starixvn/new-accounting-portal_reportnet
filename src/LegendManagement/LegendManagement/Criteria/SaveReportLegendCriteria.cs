@@ -6,18 +6,13 @@ namespace LegendManagement.Criteria;
 
 public class SaveReportLegendCriteria : CriteriaBase, INonQueryCommand
 {
-    public SaveReportLegendCriteria()
-    {
-        this.System = WebSettings.System;
-    }
-
     public int MenuId { get; set; }
 
     public string Legend { get; set; }
 
     public int LegendId { get; set; }
 
-    public string System { get; set; }
+    public string System { get; set; } = WebSettings.System;
 
     [SpParam(Ignored = true)]
     public bool IsNote { get; set; }

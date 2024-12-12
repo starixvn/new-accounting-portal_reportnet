@@ -12,7 +12,7 @@
 
         public int SportType { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_LvlN_3rd_Bettype";
+        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_3rd_Bettype";
 
         public UniversalThirdPartyBetTypeCriteria Clone()
         {

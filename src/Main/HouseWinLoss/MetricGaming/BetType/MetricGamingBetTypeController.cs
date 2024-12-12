@@ -8,20 +8,13 @@ namespace HouseWinLoss.MetricGaming.BetType
 {
     [Route("api/house-win-loss-by-products/metric-gaming-superlive/bet-type")]
     [ApiController]
-    public class MetricGamingBetTypeController : BasicWinLossController
+    public class MetricGamingBetTypeController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : BasicWinLossController(service, builder, decorator)
     {
-        private readonly IMapper mapper;
-
-        public MetricGamingBetTypeController(
-            BasicWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecoratorFull decorator,
-            IMapper mapper)
-         : base(service, builder, decorator)
-        {
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

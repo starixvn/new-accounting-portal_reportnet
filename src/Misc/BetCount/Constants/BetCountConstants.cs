@@ -22,8 +22,8 @@
         public static readonly string BetCountSessionKey = "Fanex.AccountingReports.Misc.BetCount.BetCountReport";
         public static readonly string BetCountHistoryReportSessionKey = "Fanex.AccountingReports.Misc.BetCount.HistoryBetCountReport";
 
-        public static List<string> ProductsHaveSports => new List<string>
-        {
+        public static List<string> ProductsHaveSports =>
+        [
             "sportsbook",
             "virtual sports",
             "ng2",
@@ -32,7 +32,7 @@
             "bet builder",
             "saba.games",
             "vgaming",
-             "virtual sports 3"
-        };
+            "virtual sports 3"
+        ];
     }
 }

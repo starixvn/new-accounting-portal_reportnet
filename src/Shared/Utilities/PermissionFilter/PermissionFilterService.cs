@@ -7,15 +7,8 @@ namespace Utilities.PermissionFilter
         Task<int> GetPermissionProfileId(string functionKeyValue);
     }
 
-    public class PermissionFilterServiceImp : PermissionFilterService
+    public class PermissionFilterServiceImp(IDynamicRepository repository) : PermissionFilterService
     {
-        private readonly IDynamicRepository repository;
-
-        public PermissionFilterServiceImp(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public async Task<int> GetPermissionProfileId(string functionKeyValue)
         {
             var criteria = new PermissionCriteria

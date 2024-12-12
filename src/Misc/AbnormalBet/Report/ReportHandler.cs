@@ -6,19 +6,10 @@ using MediatR;
 
 namespace AbnormalBet.Report
 {
-    public class ReportHandler : IRequestHandler<LicenseeHttpParameter, LicenseeModel>,
-         IRequestHandler<MemberHttpParameter, MemberModel>
+    public class ReportHandler(ReportService service, IMapper mapper)
+        : IRequestHandler<LicenseeHttpParameter, LicenseeModel>,
+            IRequestHandler<MemberHttpParameter, MemberModel>
     {
-        private readonly ReportService service;
-
-        private readonly IMapper mapper;
-
-        public ReportHandler(ReportService service, IMapper mapper)
-        {
-            this.service = service;
-            this.mapper = mapper;
-        }
-
         public async Task<MemberModel> Handle(MemberHttpParameter request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<MemberQueryCriteria>(request);

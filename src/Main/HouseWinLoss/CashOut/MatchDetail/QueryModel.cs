@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.CashOut.MatchDetail
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

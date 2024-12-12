@@ -30,7 +30,7 @@ namespace SBPerformance.MarginBySport
 
         public int? MatchID { get; set; }
 
-        public override string GetSettingKey() => $"SBPerformanceMonitor-Sport";
+        public override string GetSettingKey() => "SBPerformanceMonitor-Sport";
 
         public override bool IsValid() => true;
     }

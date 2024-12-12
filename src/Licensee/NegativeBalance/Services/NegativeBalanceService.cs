@@ -29,12 +29,12 @@ namespace NegativeBalance.Services
             var model = new NegativeBalanceModel();
             var rawData =  (await repository.FetchAsync<NegativeBalanceUser>(criteria)).ToList();
             
-            List<NegativeBalanceUser> tempUsers = new List<NegativeBalanceUser>();
+            List<NegativeBalanceUser> tempUsers = [];
             
             if (rawData != null && rawData.Any())
             {
-                int from = criteria.PageSize * (criteria.PageIndex - 1);
-                int to = criteria.PageSize * criteria.PageIndex;
+                var from = criteria.PageSize * (criteria.PageIndex - 1);
+                var to = criteria.PageSize * criteria.PageIndex;
                 
                 for (var i = from; i < rawData.Count && i < to; i++)
                 {
@@ -53,7 +53,7 @@ namespace NegativeBalance.Services
                             currentNegative = new SiteNegativeBalanceModel
                             {
                                 LicenseeSite = data.Site,
-                                NegativeBalanceUsers = new List<NegativeBalanceUser>()
+                                NegativeBalanceUsers = []
                             };
 
                             model.NegativeBalanceUsers.Add(currentNegative);
@@ -81,7 +81,7 @@ namespace NegativeBalance.Services
                     currentNegative = new SiteNegativeBalanceModel
                     {
                         LicenseeSite = data.Site,
-                        NegativeBalanceUsers = new List<NegativeBalanceUser>()
+                        NegativeBalanceUsers = []
                     };
 
                     model.NegativeBalanceUsers.Add(currentNegative);

@@ -2,7 +2,5 @@
 
 namespace ActualMemberBet.Filter
 {
-    public class CurrencyHttpParameter : IRequest<IEnumerable<Currency>>
-    {
-    }
+    public class CurrencyHttpParameter : IRequest<IEnumerable<Currency>>;
 }

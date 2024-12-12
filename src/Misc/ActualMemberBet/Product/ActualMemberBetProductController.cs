@@ -6,15 +6,8 @@ namespace ActualMemberBet.Product
 {
     [Route("api/actual-member-bet/product")]
     [ApiController]
-    public class ActualMemberBetProductController : ControllerBase
+    public class ActualMemberBetProductController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ActualMemberBetProductController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Index(HttpParameter parameter)
         {

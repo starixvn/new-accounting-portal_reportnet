@@ -50,7 +50,7 @@ namespace TraderPerformance.Repositories
                     continue;
                 }
 
-                TraderPerformanceSoccerModel traderInfo = new TraderPerformanceSoccerModel
+                var traderInfo = new TraderPerformanceSoccerModel
                 {
                     Id = Convert.ToInt32(dataRow["custid"]),
                     Name = Convert.ToString(dataRow["username"]),
@@ -139,7 +139,7 @@ namespace TraderPerformance.Repositories
             foreach (DataRow dataRow in dataTable.Rows)
             {
                 var eventDate = Convert.ToDateTime(dataRow["eventdate"]);
-                TraderPerformanceSoccerDetailModel traderInfo = new TraderPerformanceSoccerDetailModel
+                var traderInfo = new TraderPerformanceSoccerDetailModel
                 {
                     Id = Convert.ToInt32(dataRow["custid"]),
                     Name = Convert.ToString(dataRow["username"]),
@@ -230,7 +230,7 @@ namespace TraderPerformance.Repositories
                 FifteenMinNoOfCorners = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minCorners"]),
                 SingleTeamOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_SingleTeamOU"]),
                 TenMinOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10min1x2"]),
-                TenMinHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10minHdp"]),
+                TenMinHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10minHdp"])
             };
 
             return traderGroupInfo;

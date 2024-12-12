@@ -36,15 +36,15 @@ namespace TreeWinLoss.Model
         public decimal BaseRMWinLossVarianceTotal { get; set; }
 
         public string BaseRMVarianceMargin => BaseRMTurnoverVarianceAbsoluteTotal != 0 ?
-                    Math.Round((this.BaseRMWinLossVarianceTotal / BaseRMTurnoverVarianceAbsoluteTotal) * 100, 2).ToString() :
+                    Math.Round(BaseRMWinLossVarianceTotal / BaseRMTurnoverVarianceAbsoluteTotal * 100, 2).ToString() :
                     "N/A";
 
         public string VirtualBaseRMMargin => BaseRMVirtualTurnover != 0 ?
-             Math.Round((this.BaseRMVirtualTotal / this.BaseRMVirtualTurnover) * 100, 2).ToString() :
+             Math.Round(BaseRMVirtualTotal / BaseRMVirtualTurnover * 100, 2).ToString() :
              "N/A";
 
         public string BaseRMMargin => BaseRMTurnover != 0 ?
-            Math.Round((BaseRMTotal / BaseRMTurnover) * 100, 2).ToString() :
+            Math.Round(BaseRMTotal / BaseRMTurnover * 100, 2).ToString() :
               "N/A";
 
         public string VirtualRate { get; set; }
@@ -66,7 +66,7 @@ namespace TreeWinLoss.Model
                 BaseRMWinLossVarianceTotal = a.BaseRMWinLossVarianceTotal + b.BaseRMWinLossVarianceTotal,
                 BaseRMTurnoverVarianceAbsoluteTotal = a.BaseRMTurnoverVarianceAbsoluteTotal + b.BaseRMTurnoverVarianceAbsoluteTotal,
                 BaseRMWinLossVariancePlus = a.BaseRMWinLossVariancePlus + b.BaseRMWinLossVariancePlus,
-                BaseRMWinLossVarianceMinus = a.BaseRMWinLossVarianceMinus + b.BaseRMWinLossVarianceMinus,
+                BaseRMWinLossVarianceMinus = a.BaseRMWinLossVarianceMinus + b.BaseRMWinLossVarianceMinus
             };
         }
     }

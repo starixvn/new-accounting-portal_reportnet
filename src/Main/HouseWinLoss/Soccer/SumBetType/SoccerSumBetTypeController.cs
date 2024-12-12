@@ -1,30 +1,21 @@
 ﻿namespace HouseWinLoss.Soccer.SumBetType
 {
     using AutoMapper;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Configuration;
+    using Common.ColumnDecorators;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer/sum-bettype")]
     [ApiController]
-    public class SoccerSumBetTypeController : ControllerBase
+    public class SoccerSumBetTypeController(
+        SumBetTypeWinLossService service,
+        SumBetTypeGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly SumBetTypeWinLossService service;
-
-        private readonly SumBetTypeGridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecorator decorator;
-
-        private readonly IMapper mapper;
-
-        public SoccerSumBetTypeController(SumBetTypeWinLossService service, SumBetTypeGridOptionsBuilder builder, GridOptionColumnDecoratorFull decorator, IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
+        private readonly GridOptionColumnDecorator decorator = decorator;
 
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)

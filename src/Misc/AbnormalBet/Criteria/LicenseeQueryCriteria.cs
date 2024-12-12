@@ -28,6 +28,6 @@ namespace AbnormalBet.Criteria
 
         public override bool IsValid() => true;
 
-        public override string GetSettingKey() => $"Acc_Rpt_AbnormalBet_Licensee";
+        public override string GetSettingKey() => "Acc_Rpt_AbnormalBet_Licensee";
     }
 }

@@ -8,18 +8,8 @@ namespace UniversalReports.SMAWinLoss.VirtualRate
         Task<IEnumerable<VirtualRateModel>> GetVirtualRate(VirtualRateHttpParameter parameter);
     }
 
-    public class VirtualRateServiceImp : VirtualRateService
+    public class VirtualRateServiceImp(IDynamicRepository repository, IMapper mapper) : VirtualRateService
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly IMapper mapper;
-
-        public VirtualRateServiceImp(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<IEnumerable<VirtualRateModel>> GetVirtualRate(VirtualRateHttpParameter parameter)
         {
             var criteria = mapper.Map<VirtualRateCriteria>(parameter);

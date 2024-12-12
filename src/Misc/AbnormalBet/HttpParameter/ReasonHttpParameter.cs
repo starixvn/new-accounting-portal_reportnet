@@ -3,7 +3,5 @@ using MediatR;
 
 namespace AbnormalBet.HttpParameter
 {
-    public class ReasonHttpParameter : IRequest<IEnumerable<FilterItemModel>>
-    {
-    }
+    public class ReasonHttpParameter : IRequest<IEnumerable<FilterItemModel>>;
 }

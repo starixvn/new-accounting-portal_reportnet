@@ -2,7 +2,5 @@
 
 namespace SBCustomerPerformanceByDanger.Filter
 {
-    public class BalanceUpDateQueryHttpParameter : IRequest<DateTime>
-    {
-    }
+    public class BalanceUpDateQueryHttpParameter : IRequest<DateTime>;
 }

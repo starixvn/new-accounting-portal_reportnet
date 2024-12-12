@@ -50,7 +50,7 @@ namespace CompanyWinLoss.Services
         public async Task<GridOptions> GetCompanyWinLoss(CompanyWinLossCriteria criteria)
         {
             GridOptions gridOptions = null;
-            GridOptions pagingGridOptions = InitGridOptions(criteria);
+            var pagingGridOptions = InitGridOptions(criteria);
 
             if (criteria.IsPagingCallBack)
             {
@@ -79,8 +79,8 @@ namespace CompanyWinLoss.Services
 
         private void GetPagingReport(GridOptions gridOptions, ref GridOptions pagingGridOptions, CompanyWinLossCriteria criteria)
         {
-            int pageSize = criteria.PageSize;
-            int pageIndex = criteria.PageIndex;
+            var pageSize = criteria.PageSize;
+            var pageIndex = criteria.PageIndex;
             pagingGridOptions.BodyRows = gridOptions.BodyRows.Skip(pageIndex * pageSize).Take(pageSize).ToList();
         }
 
@@ -89,13 +89,13 @@ namespace CompanyWinLoss.Services
             var balanceUp = balanceUpService.Query();
 
             criteria.MoveBetsDay = balanceUp.MoveBetsDate;
-            GridOptions gridOptions = InitGridOptions(criteria);
+            var gridOptions = InitGridOptions(criteria);
 
             var rawData = await repository.FetchAsync<CompanyWinLossItem>(criteria);
 
             gridOptions.BodyRows = MapReportDataRows(rawData);
 
-            cacheService.Set(dataCachedKey, gridOptions);
+            await cacheService.SetAsync(dataCachedKey, gridOptions);
 
             return gridOptions;
         }
@@ -103,7 +103,7 @@ namespace CompanyWinLoss.Services
         public async Task<GridOptions> GetFullReportFromCache(CompanyWinLossCriteria criteria)
         {
             GridOptions gridOptions = null;
-            gridOptions = cacheService.Get<GridOptions>(dataCachedKey);
+            gridOptions = await cacheService.GetAsync<GridOptions>(dataCachedKey);
 
             if (gridOptions == null)
             {
@@ -133,11 +133,11 @@ namespace CompanyWinLoss.Services
         {
             var groupHeader = new List<GroupHeaderRows>();
             var groupHeaderRow = new GroupHeaderRows();
-            groupHeaderRow.Columns.AddRange(new List<HeaderColumns>()
+            groupHeaderRow.Columns.AddRange(new List<HeaderColumns>
             {
-                new HeaderColumns() { HeaderText = "#", Name = "RowId", Width = 50 },
-                new HeaderColumns() { HeaderText = "Super", Name = "Username", Width = 250 },
-                new HeaderColumns() { HeaderText = "Company Win Loss", Name = "CompanyWL", Width = 250 },
+                new() { HeaderText = "#", Name = "RowId", Width = 50 },
+                new() { HeaderText = "Super", Name = "Username", Width = 250 },
+                new() { HeaderText = "Company Win Loss", Name = "CompanyWL", Width = 250 }
             });
             groupHeader.Add(groupHeaderRow);
 
@@ -148,11 +148,11 @@ namespace CompanyWinLoss.Services
         private List<HeaderColumns> CreateHeaderColumns()
         {
             var header = new List<HeaderColumns>();
-            header.AddRange(new List<HeaderColumns>()
+            header.AddRange(new List<HeaderColumns>
             {
-                new HeaderColumns() { HeaderText = "#", Name = "RowId", Width = 50, CustomCellType = ExcelCellType.Integer, CellAlignment = HAlignment.Center },
-                new HeaderColumns() { HeaderText = "Super", Name = "Username", Width = 250, CellAlignment = HAlignment.Left },
-                new HeaderColumns() { HeaderText = "Company Win Loss", Name = "CompanyWL", Width = 250, CustomCellType = ExcelCellType.DoubleRedNegative, CellAlignment = HAlignment.Right },
+                new() { HeaderText = "#", Name = "RowId", Width = 50, CustomCellType = ExcelCellType.Integer, CellAlignment = HAlignment.Center },
+                new() { HeaderText = "Super", Name = "Username", Width = 250, CellAlignment = HAlignment.Left },
+                new() { HeaderText = "Company Win Loss", Name = "CompanyWL", Width = 250, CustomCellType = ExcelCellType.DoubleRedNegative, CellAlignment = HAlignment.Right }
             });
 
             return header;
@@ -160,16 +160,16 @@ namespace CompanyWinLoss.Services
 
         private List<GridDataRow> MapReportDataRows(IEnumerable<CompanyWinLossItem> rawData)
         {
-            int dataColIndex = 0;
-            List<GridDataRow> dataRows = new List<GridDataRow>();
+            var dataColIndex = 0;
+            List<GridDataRow> dataRows = [];
             foreach (var item in rawData)
             {
-                GridDataRow dataRow = new GridDataRow();
-                dataRow.Columns.AddRange(new List<Columns>()
+                var dataRow = new GridDataRow();
+                dataRow.Columns.AddRange(new List<Columns>
                 {
-                    new Columns(dataColIndex++) { Name = "RowId", Value = item.RowId },
-                    new Columns(dataColIndex++) { Name = "Username", Value = item.UserName },
-                    new Columns(dataColIndex++) { Name = "CompanyWL", Value = item.CompanyWinLoss },
+                    new(dataColIndex++) { Name = "RowId", Value = item.RowId },
+                    new(dataColIndex++) { Name = "Username", Value = item.UserName },
+                    new(dataColIndex++) { Name = "CompanyWL", Value = item.CompanyWinLoss }
                 });
 
                 dataRows.Add(dataRow);
@@ -180,7 +180,7 @@ namespace CompanyWinLoss.Services
 
         public string GetReportName(CompanyWinLossCriteria criteria)
         {
-            string reportName = $"CompanyWinLoss_From_{criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "_")}_To_{criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "_")}";
+            var reportName = $"CompanyWinLoss_From_{criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "_")}_To_{criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "_")}";
 
             return reportName;
         }

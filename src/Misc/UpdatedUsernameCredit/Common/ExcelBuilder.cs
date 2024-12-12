@@ -29,13 +29,11 @@ namespace UpdatedUsernameCredit.Common
 
         private ExcelPackage LoadTemplate(ExcelSetting settings)
         {
-            using (var stream = new FileStream(settings.TemplatePath, FileMode.Open, FileAccess.Read))
-            {
-                var excelPackage = new ExcelPackage(stream);
-                statisticSheet = excelPackage.Workbook.Worksheets.Copy("Template", settings.SheetName);
+            using var stream = new FileStream(settings.TemplatePath, FileMode.Open, FileAccess.Read);
+            var excelPackage = new ExcelPackage(stream);
+            statisticSheet = excelPackage.Workbook.Worksheets.Copy("Template", settings.SheetName);
 
-                return excelPackage;
-            }
+            return excelPackage;
         }
 
         private void ApplySetting()
@@ -58,7 +56,7 @@ namespace UpdatedUsernameCredit.Common
 
         private void SetStartRowIndex(int rowIndex)
         {
-            this.startRowIndex = rowIndex;
+            startRowIndex = rowIndex;
         }
 
         private void SetSheetName(string sheetName)

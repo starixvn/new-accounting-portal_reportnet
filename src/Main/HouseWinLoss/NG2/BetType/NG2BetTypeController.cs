@@ -2,36 +2,21 @@
 {
     using AutoMapper;
     using Fanex.Excel.Models;
-    using HouseWinLoss.Common.BasicWinLoss;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Common.BasicWinLoss;
+    using Common.ColumnDecorators;
+    using Common.Criteria;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [ApiController]
-    public class NG2BetTypeController : ControllerBase
+    public class NG2BetTypeController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecorator decorator,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly BasicWinLossService service;
-
-        private readonly BasicGridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecorator decorator;
-
-        private readonly IMapper mapper;
-
-        public NG2BetTypeController(
-           BasicWinLossService service,
-           BasicGridOptionsBuilder builder,
-           GridOptionColumnDecorator decorator,
-           IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
-
         [Route("api/house-win-loss-by-products/ng2-live-non-live/excel")]
         public async Task<IActionResult> ExcelLiveNonLive(ExcelLiveNonLiveQueryModel queryModel)
         {
@@ -44,7 +29,7 @@
             var liveGridOptions = builder.Build(winlosses[1], queryModel.LiveTitle);
             liveGridOptions = decorator.Build(liveGridOptions, "Bet Type");
 
-            return new FanexExcelResult(new List<GridOptions> { nonLiveGridOptions, liveGridOptions }, Constants.SheetName);
+            return new FanexExcelResult([nonLiveGridOptions, liveGridOptions], Constants.SheetName);
         }
 
         private async Task<BasicWinLossModel[]> QueryLiveNonLiveBetType(UniversalThirdPartyBetTypeCriteria criteria)

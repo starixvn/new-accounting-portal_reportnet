@@ -5,21 +5,12 @@ using Utilities.ExcelResult;
 
 namespace HouseWinLoss.Common.SiteWinLoss
 {
-    public class SiteWinLossController : ControllerBase
+    public class SiteWinLossController(
+        WinLossService service,
+        GridOptionsBuilder builder,
+        GridOptionColumnDecorator decorator)
+        : ControllerBase
     {
-        private readonly WinLossService service;
-
-        private readonly GridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecorator decorator;
-
-        public SiteWinLossController(WinLossService service, GridOptionsBuilder builder, GridOptionColumnDecorator decorator)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-        }
-
         protected async Task<IActionResult> Json(WinLossCriteria criteria, string site)
         {
             var winlosses = await service.Query(criteria);

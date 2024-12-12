@@ -6,7 +6,7 @@ namespace HouseWinLoss.Products
     {
         public ProductGroupWinLoss Sportsbook { get; set; }
 
-        public List<WinLoss> RM { get; set; } = new List<WinLoss>();
+        public List<WinLoss> RM { get; set; } = [];
 
         public ProductGroupWinLoss NonSportsbook { get; set; }
 

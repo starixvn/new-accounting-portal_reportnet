@@ -8,16 +8,9 @@ namespace UpdatedUsernameCredit.UpdatedUsername
         ExcelSetting CreateSetting(BaseMessage message);
     }
 
-    public class UpdatedUsernameExcelSettingImp : UpdatedUsernameExcelSetting
+    public class UpdatedUsernameExcelSettingImp(ConfigurationService configurationService) : UpdatedUsernameExcelSetting
     {
         private const string TemplatePath = @"ExcelTemplate/UpdatedUsernameAndCredit/UpdatedUsername.xlsx";
-
-        private readonly ConfigurationService configurationService;
-
-        public UpdatedUsernameExcelSettingImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelSetting CreateSetting(BaseMessage message)
         {

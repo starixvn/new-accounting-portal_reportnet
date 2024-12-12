@@ -9,17 +9,8 @@ namespace SBPerformance.TopWinningMember
         Task<SummaryEntity<TopWinningMemberItemModel>> Query(TopWinningMemberHttpParameter parameter);
     }
 
-    public class TopWinningMemberServiceImp : TopWinningMemberService
+    public class TopWinningMemberServiceImp(IDynamicRepository repository, IMapper mapper) : TopWinningMemberService
     {
-        private readonly IDynamicRepository repository;
-        private readonly IMapper mapper;
-
-        public TopWinningMemberServiceImp(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<SummaryEntity<TopWinningMemberItemModel>> Query(TopWinningMemberHttpParameter parameter)
         {
             var criteria = mapper.Map<TopWinningMemberCriteria>(parameter);

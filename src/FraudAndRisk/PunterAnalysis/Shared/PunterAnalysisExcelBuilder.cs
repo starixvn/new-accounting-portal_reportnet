@@ -31,14 +31,12 @@ namespace PunterAnalysis.Shared
 
         private ExcelPackage LoadTemplate(string templatePath)
         {
-            using (var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read))
-            {
-                var excelPackage = new ExcelPackage(stream);
-                statisticSheet = excelPackage.Workbook.Worksheets.Copy("Template", "Statistic");
-                totalTemplateSheet = excelPackage.Workbook.Worksheets["TotalTemplate"];
+            using var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read);
+            var excelPackage = new ExcelPackage(stream);
+            statisticSheet = excelPackage.Workbook.Worksheets.Copy("Template", "Statistic");
+            totalTemplateSheet = excelPackage.Workbook.Worksheets["TotalTemplate"];
 
-                return excelPackage;
-            }
+            return excelPackage;
         }
 
         private void ApplySetting()
@@ -65,7 +63,7 @@ namespace PunterAnalysis.Shared
 
         private void SetStartRowIndex(int rowIndex)
         {
-            this.startRowIndex = rowIndex;
+            startRowIndex = rowIndex;
         }
 
         private void SetEndRowIndex(int rowIndex, int numberBodyItems)

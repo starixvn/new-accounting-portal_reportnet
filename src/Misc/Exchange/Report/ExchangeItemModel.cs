@@ -50,7 +50,7 @@
                 CompanyWinLoss = a.CompanyWinLoss + b.CompanyWinLoss,
                 CompanyCommission = a.CompanyCommission + b.CompanyCommission,
                 PayToSupplier = a.PayToSupplier + b.PayToSupplier,
-                CompanyNetIncome = a.CompanyNetIncome + b.CompanyNetIncome,
+                CompanyNetIncome = a.CompanyNetIncome + b.CompanyNetIncome
             };
         }
     }

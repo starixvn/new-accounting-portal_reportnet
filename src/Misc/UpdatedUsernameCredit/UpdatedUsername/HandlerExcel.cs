@@ -5,21 +5,13 @@ using UpdatedUsernameCredit.Common;
 
 namespace UpdatedUsernameCredit.UpdatedUsername
 {
-    public class HandlerExcel : IRequestHandler<ExcelMessage, ExcelPackage>
+    public class HandlerExcel(
+        UpdatedUsernameService service,
+        UpdatedUsernameExcelSetting excelSetting,
+        ExcelBuilder excelBuilder,
+        IMapper mapper)
+        : IRequestHandler<ExcelMessage, ExcelPackage>
     {
-        private readonly UpdatedUsernameService service;
-        private readonly UpdatedUsernameExcelSetting excelSetting;
-        private readonly ExcelBuilder excelBuilder;
-        private readonly IMapper mapper;
-
-        public HandlerExcel(UpdatedUsernameService service, UpdatedUsernameExcelSetting excelSetting, ExcelBuilder excelBuilder, IMapper mapper)
-        {
-            this.service = service;
-            this.excelSetting = excelSetting;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(ExcelMessage request, CancellationToken cancellationToken)
         {
             var model = await service.GetUpdatedUsername(request);
@@ -30,7 +22,7 @@ namespace UpdatedUsernameCredit.UpdatedUsername
                 {
                     option.AfterMap((source, destination) =>
                     {
-                        int index = 0;
+                        var index = 0;
                         foreach (var item in destination)
                         {
                             item.Index = index + 1;

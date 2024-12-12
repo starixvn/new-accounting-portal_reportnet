@@ -3,15 +3,9 @@ using Utilities.LinqDynamicSum;
 
 namespace Exchange.Report
 {
-    public class Handler : IRequestHandler<LicenseeHttpParameterJson, ExchangeModel>, IRequestHandler<HttpParameterJson, SummaryEntity<ExchangeItemModel>>
+    public class Handler(Service service) : IRequestHandler<LicenseeHttpParameterJson, ExchangeModel>,
+        IRequestHandler<HttpParameterJson, SummaryEntity<ExchangeItemModel>>
     {
-        private readonly Service service;
-
-        public Handler(Service service)
-        {
-            this.service = service;
-        }
-
         public async Task<ExchangeModel> Handle(LicenseeHttpParameterJson request, CancellationToken cancellationToken)
         {
 

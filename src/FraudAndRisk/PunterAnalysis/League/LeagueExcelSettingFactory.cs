@@ -8,16 +8,9 @@ namespace PunterAnalysis.League
         ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
     }
 
-    public class LeagueExcelSettingFactory : LeagueExcelSetting
+    public class LeagueExcelSettingFactory(ConfigurationService configurationService) : LeagueExcelSetting
     {
         private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/League.xlsx";
-
-        private readonly ConfigurationService configurationService;
-
-        public LeagueExcelSettingFactory(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
         {

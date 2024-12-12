@@ -7,15 +7,8 @@ namespace PunterAnalysis.Performance
 {
     [Route("api/punter-analysis/performance")]
     [ApiController]
-    public class PunterAnalysisPerformanceController : ControllerBase
+    public class PunterAnalysisPerformanceController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public PunterAnalysisPerformanceController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("summary")]
         public async Task<IActionResult> Summary(SummaryHttpParameterJson parameter)
         {

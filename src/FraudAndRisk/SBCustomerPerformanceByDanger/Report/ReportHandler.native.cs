@@ -4,18 +4,10 @@ using Utilities.LinqDynamicSum;
 
 namespace SBCustomerPerformanceByDanger.Report
 {
-    public class ReportHandler : IRequestHandler<CustomerPerformanceByDangerQueryHttpParameter, SummaryEntity<CustomerPerformanceByDangerModel>>
+    public class ReportHandler(ReportService service, IMapper mapper)
+        : IRequestHandler<CustomerPerformanceByDangerQueryHttpParameter,
+            SummaryEntity<CustomerPerformanceByDangerModel>>
     {
-        private readonly ReportService service;
-
-        private readonly IMapper mapper;
-
-        public ReportHandler(ReportService service, IMapper mapper)
-        {
-            this.service = service;
-            this.mapper = mapper;
-        }
-
         public async Task<SummaryEntity<CustomerPerformanceByDangerModel>> Handle(
             CustomerPerformanceByDangerQueryHttpParameter request,
             CancellationToken cancellationToken)

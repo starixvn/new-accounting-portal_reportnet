@@ -2,7 +2,5 @@
 
 namespace SMAWinLoss.Filter
 {
-    public class AvailableDatabaseHttpParameter : IRequest<bool>
-    {
-    }
+    public class AvailableDatabaseHttpParameter : IRequest<bool>;
 }

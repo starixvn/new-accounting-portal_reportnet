@@ -9,20 +9,11 @@ public interface BetBuilderSportTypeWinLossService
     Task<IEnumerable<BasicWinLossModel>> Query(WinLossCriteria criteria);
 }
 
-public class BetBuilderSportTypeWinLossServiceImp : BetBuilderSportTypeWinLossService
+public class BetBuilderSportTypeWinLossServiceImp(
+    RawWinLossService rawWinLossService,
+    CalculationService calculationService)
+    : BetBuilderSportTypeWinLossService
 {
-    private readonly RawWinLossService rawWinLossService;
-
-    private readonly CalculationService calculationService;
-
-    public BetBuilderSportTypeWinLossServiceImp(
-        RawWinLossService rawWinLossService,
-        CalculationService calculationService)
-    {
-        this.rawWinLossService = rawWinLossService;
-        this.calculationService = calculationService;
-    }
-
     public async Task<IEnumerable<BasicWinLossModel>> Query(WinLossCriteria criteria)
     {
         var rawWinLosses = await rawWinLossService.Query(criteria);
@@ -48,6 +39,6 @@ public class BetBuilderSportTypeWinLossServiceImp : BetBuilderSportTypeWinLossSe
             SiteWinLossSummaries = liveNonLiveSiteWinLossSummaries.ToList(),
             GrandTotal = liveNonLiveGrandTotal
         };
-        return new BasicWinLossModel[] { sportTypeSummaries, liveNonLiveSummaries };
+        return [sportTypeSummaries, liveNonLiveSummaries];
     }
 }

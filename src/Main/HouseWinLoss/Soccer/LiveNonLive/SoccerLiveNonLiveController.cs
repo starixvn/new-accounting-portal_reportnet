@@ -2,35 +2,22 @@
 {
     using AutoMapper;
     using Fanex.Excel.Models;
-    using HouseWinLoss.Common.BasicWinLoss;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Configuration;
+    using Common.BasicWinLoss;
+    using Common.ColumnDecorators;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer/live-nonlive")]
     [ApiController]
-    public class SoccerLiveNonLiveController : ControllerBase
+    public class SoccerLiveNonLiveController(
+        SoccerLiveNonLiveWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly SoccerLiveNonLiveWinLossService service;
-
-        private readonly BasicGridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecorator decorator;
-
-        private readonly IMapper mapper;
-
-        public SoccerLiveNonLiveController(
-            SoccerLiveNonLiveWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecoratorFull decorator,
-            IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
+        private readonly GridOptionColumnDecorator decorator = decorator;
 
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
@@ -50,7 +37,7 @@
             var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
             var liveNonLiveGridOptionsDecoration = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
 
-            return new GridOptions[] { majorMinorGridOptionsDecoration, liveNonLiveGridOptionsDecoration };
+            return [majorMinorGridOptionsDecoration, liveNonLiveGridOptionsDecoration];
         }
 
         [Route("excel")]
@@ -66,7 +53,7 @@
             liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
 
             return new FanexExcelResult(
-                new List<GridOptions> { majorMinorGridOptions, liveNonLiveGridOptions },
+                [majorMinorGridOptions, liveNonLiveGridOptions],
                 Constants.SheetName);
         }
     }

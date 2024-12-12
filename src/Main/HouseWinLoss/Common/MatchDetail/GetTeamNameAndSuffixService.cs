@@ -7,7 +7,7 @@
 
     public class GetTeamNameAndSuffixServiceImp : GetTeamNameAndSuffixService
     {
-        private static Dictionary<string, string> PlayOffBettype => new Dictionary<string, string>
+        private static Dictionary<string, string> PlayOffBettype => new()
         {
             { "(O)", "(O/U)" },
             { "(o)", "(O/U)" },
@@ -16,12 +16,12 @@
             { "(h)", "(HDP)" },
             { "(H)", "(HDP)" },
             { "( h)", "(HDP)" },
-            { "( H)", "(HDP)" },
+            { "( H)", "(HDP)" }
         };
 
         public string GetTeamNameWithSuffixByMatchCode(string teamName, string matchCode)
         {
-            string matchCodeValue = matchCode.Replace(" ", string.Empty).ToLowerInvariant();
+            var matchCodeValue = matchCode.Replace(" ", string.Empty).ToLowerInvariant();
             var bettype = PlayOffBettype.FirstOrDefault(s => matchCodeValue.Contains(s.Key)).Value ?? string.Empty;
             return string.IsNullOrEmpty(bettype) ? teamName : $"{teamName} {bettype}";
         }

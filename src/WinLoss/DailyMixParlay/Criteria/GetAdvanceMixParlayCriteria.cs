@@ -12,13 +12,7 @@ namespace DailyMixParlay.Criteria
         public int Site { get; set; }
 
         [SpParam(Ignored = true)]
-        public int Bettype
-        {
-            get
-            {
-                return 9;
-            }
-        }
+        public int Bettype => 9;
 
         [SpParam(Ignored = true)]
         public string BetName { get; set; }

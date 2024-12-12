@@ -7,15 +7,8 @@ namespace PunterAnalysis.BetCount
 {
     [Route("api/punter-analysis/bet-count")]
     [ApiController]
-    public class PunterAnalysisBetCountController : ControllerBase
+    public class PunterAnalysisBetCountController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public PunterAnalysisBetCountController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Index(HttpParameterJson parameter)
         {

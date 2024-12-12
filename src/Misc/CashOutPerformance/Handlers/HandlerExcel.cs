@@ -11,33 +11,18 @@ using System.Globalization;
 
 namespace CashOutPerformance.Handlers
 {
-    public class HandlerExcel : IRequestHandler<SportLevelExcelRequest, ExcelPackage>,
-        IRequestHandler<TicketExcelRequest<EventStatusLevelModel>, ExcelPackage>,
-        IRequestHandler<TicketExcelRequest<BetTypeLevelModel>, ExcelPackage>,
-        IRequestHandler<TicketExcelRequest<MatchDetailLevelModel>, ExcelPackage>
+    public class HandlerExcel(
+        TicketsExcelBuilder<SportLevelExcelModel> ticketsSportExcelBuilder,
+        TicketsExcelBuilder<EventStatusLevelExcelModel> ticketsEventExcelBuilder,
+        TicketsExcelBuilder<BetTypeLevelExcelModel> ticketsBetTypeExcelBuilder,
+        TicketsExcelBuilder<MatchDetailLevelExcelModel> ticketsMatchExcelBuilder,
+        CashOutPerformanceService service,
+        IMapper mapper)
+        : IRequestHandler<SportLevelExcelRequest, ExcelPackage>,
+            IRequestHandler<TicketExcelRequest<EventStatusLevelModel>, ExcelPackage>,
+            IRequestHandler<TicketExcelRequest<BetTypeLevelModel>, ExcelPackage>,
+            IRequestHandler<TicketExcelRequest<MatchDetailLevelModel>, ExcelPackage>
     {
-        private readonly TicketsExcelBuilder<SportLevelExcelModel> ticketsSportExcelBuilder;
-        private readonly TicketsExcelBuilder<EventStatusLevelExcelModel> ticketsEventExcelBuilder;
-        private readonly TicketsExcelBuilder<BetTypeLevelExcelModel> ticketsBetTypeExcelBuilder;
-        private readonly TicketsExcelBuilder<MatchDetailLevelExcelModel> ticketsMatchExcelBuilder;
-        private readonly CashOutPerformanceService service;
-        private readonly IMapper mapper;
-
-        public HandlerExcel(TicketsExcelBuilder<SportLevelExcelModel> ticketsSportExcelBuilder,
-            TicketsExcelBuilder<EventStatusLevelExcelModel> ticketsEventExcelBuilder,
-            TicketsExcelBuilder<BetTypeLevelExcelModel> ticketsBetTypeExcelBuilder,
-            TicketsExcelBuilder<MatchDetailLevelExcelModel> ticketsMatchExcelBuilder,
-            CashOutPerformanceService service,
-            IMapper mapper)
-        {
-            this.ticketsSportExcelBuilder = ticketsSportExcelBuilder;
-            this.ticketsEventExcelBuilder = ticketsEventExcelBuilder;
-            this.ticketsBetTypeExcelBuilder = ticketsBetTypeExcelBuilder;
-            this.ticketsMatchExcelBuilder = ticketsMatchExcelBuilder;
-            this.service = service;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(SportLevelExcelRequest request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<SportLevelCriteria>(request);

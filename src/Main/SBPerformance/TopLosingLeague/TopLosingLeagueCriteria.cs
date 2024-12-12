@@ -30,7 +30,7 @@ namespace SBPerformance.TopLosingLeague
 
         public int? BetType { get; set; }
 
-        public override string GetSettingKey() => $"SBPerformanceMonitor-League";
+        public override string GetSettingKey() => "SBPerformanceMonitor-League";
 
         public override bool IsValid() => true;
     }

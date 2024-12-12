@@ -4,15 +4,9 @@ using PunterAnalysis.Shared;
 
 namespace PunterAnalysis.League
 {
-    public class LeagueServiceByWeek : LeagueServiceBase
+    public class LeagueServiceByWeek(IDynamicRepository repository, DateTimeService dateTimeService)
+        : LeagueServiceBase(repository)
     {
-        private readonly DateTimeService dateTimeService;
-
-        public LeagueServiceByWeek(IDynamicRepository repository, DateTimeService dateTimeService) : base(repository)
-        {
-            this.dateTimeService = dateTimeService;
-        }
-
         protected override LeagueMappingModel Transform(LeagueRawModel rawModel)
         {
             return new LeagueMappingModel

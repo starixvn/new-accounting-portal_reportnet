@@ -44,7 +44,7 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
                 IsDefault = false
             };
         }
-        criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria());
+        criteria.LegendId = MappingLegendId(new GetReportLegendCriteria());
         rawData = dynamicRepository.Fetch<RawLegendResultModel>(criteria).FirstOrDefault();
 
         return new LegendResultModel
@@ -108,7 +108,7 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
 
     public string SaveReportLegendMapping(SaveReportLegendMappingCriteria criteria)
     {
-        criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria
+        criteria.LegendId = MappingLegendId(new GetReportLegendCriteria
         {
             MenuId = criteria.AccMenuId,
             System = WebSettings.System
@@ -124,21 +124,21 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
     {
         var result = new List<InputedLegend>
         {
-            new InputedLegend
+            new()
             {
                 System = "Accounting",
                 ReportId = 101,
                 ReportName = "Daily Win Loss 2h",
                 Content = "abc"
             },
-            new InputedLegend
+            new()
             {
                 System = "NAP",
                 ReportId = 101,
                 ReportName = "Daily Win Loss 2h",
                 Content = "abc"
             },
-            new InputedLegend
+            new()
             {
                 System = "NAP",
                 ReportId = 103,
@@ -200,7 +200,7 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
 
             if (rows != null && rows.Any())
             {
-                menuList = new List<MenuItem>();
+                menuList = [];
                 foreach (var row in rows)
                 {
                     var menuItem = new MenuItem
@@ -213,10 +213,10 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
                         FunctionName = Converter.ToString2(row.FunctionName),
                         IsHide = !Converter.ToBool(row.IsActive),
                         Order = Converter.ToInt(row.DisplayOrder),
-                        SubMenu = this.MappingNapMenuToAccountingMenu(rawData, row.Id)
+                        SubMenu = MappingNapMenuToAccountingMenu(rawData, row.Id)
                     };
 
-                    menuItem.SubMenu = this.MappingNapMenuToAccountingMenu(rawData, menuItem.Id);
+                    menuItem.SubMenu = MappingNapMenuToAccountingMenu(rawData, menuItem.Id);
                     menuList.Add(menuItem);
                 }
             }

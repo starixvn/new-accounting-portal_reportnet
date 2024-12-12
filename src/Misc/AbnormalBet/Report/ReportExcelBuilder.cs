@@ -12,21 +12,14 @@ namespace AbnormalBet.Report
 
         ExcelPackage Build(string title, IEnumerable<MemberExcelModel> memberModel);
     }
-    public class ReportExcelBuilderImp : ReportExcelBuilder
+    public class ReportExcelBuilderImp(ConfigurationService configurationService) : ReportExcelBuilder
     {
-        private readonly ConfigurationService configurationService;
-
         private ExcelWorksheet sheet;
 
 
         private const int StartRowIndex = 5;
 
         private ExcelPackage ExcelPackage { get; set; }
-
-        public ReportExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelPackage Build(string title, IEnumerable<MemberExcelModel> memberModel)
         {
@@ -49,21 +42,17 @@ namespace AbnormalBet.Report
         private void LoadMemberTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/AbNormalBet/Member.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                sheet = ExcelPackage.Workbook.Worksheets.Copy("AbnormalBetTemplate", "Abnormal Bet Void");
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            sheet = ExcelPackage.Workbook.Worksheets.Copy("AbnormalBetTemplate", "Abnormal Bet Void");
         }
 
         private void LoadLicenseeTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/AbNormalBet/Licensee.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                sheet = ExcelPackage.Workbook.Worksheets.Copy("AbnormalBetTemplate", "Abnormal Bet Void");
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            sheet = ExcelPackage.Workbook.Worksheets.Copy("AbnormalBetTemplate", "Abnormal Bet Void");
         }
 
         private void BuildTitle(string title, string cellRange)

@@ -7,19 +7,11 @@ using ResultAnalysis.Services;
 
 namespace ResultAnalysis.Handlers
 {
-    public class ResultAnalysisHandler: IRequestHandler<LeagueRequest, IEnumerable<LeagueModel>>,
-		IRequestHandler<ResultAnalysisRequest, ResultAnalysisModel>
-	{
-		private readonly ResultAnalysisService service;
-		private readonly IMapper mapper;
-
-		public ResultAnalysisHandler(ResultAnalysisService service, IMapper mapper)
-		{
-			this.service = service;
-			this.mapper = mapper;
-		}
-
-		public async Task<IEnumerable<LeagueModel>> Handle(LeagueRequest request, CancellationToken cancellationToken)
+    public class ResultAnalysisHandler(ResultAnalysisService service, IMapper mapper)
+        : IRequestHandler<LeagueRequest, IEnumerable<LeagueModel>>,
+            IRequestHandler<ResultAnalysisRequest, ResultAnalysisModel>
+    {
+        public async Task<IEnumerable<LeagueModel>> Handle(LeagueRequest request, CancellationToken cancellationToken)
 		{
 			var criteria = mapper.Map<LeagueCriteria>(request);
 			return await service.GetLeagues(criteria);

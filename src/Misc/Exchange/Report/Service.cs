@@ -11,18 +11,8 @@ namespace Exchange.Report
         Task<ExchangeModel> QueryLicensee(LicenseeHttpParameterJson message);
     }
 
-    public class ServiceImp : Service
+    public class ServiceImp(IDynamicRepository repository, IMapper mapper) : Service
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly IMapper mapper;
-
-        public ServiceImp(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<SummaryEntity<ExchangeItemModel>> Query(HttpParameterJson message)
         {
             var criteria = mapper.Map<Criteria>(message);

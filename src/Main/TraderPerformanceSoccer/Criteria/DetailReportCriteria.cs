@@ -24,22 +24,10 @@ namespace TraderPerformance.Criteria
         public int PageIndex { get; set; }
 
         [SpParam(Ignored = true)]
-        public int StartIndex
-        {
-            get
-            {
-                return (PageIndex - 1) * PageSize;
-            }
-        }
+        public int StartIndex => (PageIndex - 1) * PageSize;
 
         [SpParam(Ignored = true)]
-        public int EndIndex
-        {
-            get
-            {
-                return (PageIndex * PageSize) - 1;
-            }
-        }
+        public int EndIndex => PageIndex * PageSize - 1;
 
         [SpParam(Ignored = true)]
         public bool IsPagingCallBack { get; set; }

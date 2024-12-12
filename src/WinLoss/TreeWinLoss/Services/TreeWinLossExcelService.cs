@@ -93,13 +93,12 @@ public class TreeWinLossExcelServiceImp(TreeWinLossService service,
 
     private void ExportExcelVirtualRateInfo(TreeWinLossVirtualRateModel data, string title)
     {
-        var maxUserPerSheet = MaxUserPerSheet;
-        var redundancyUsers = data.NumberUserEnabledVirtualRate % maxUserPerSheet;
-        var numberSheetBeforeRounding = data.NumberUserEnabledVirtualRate / maxUserPerSheet;
+        var redundancyUsers = data.NumberUserEnabledVirtualRate % MaxUserPerSheet;
+        var numberSheetBeforeRounding = data.NumberUserEnabledVirtualRate / MaxUserPerSheet;
         var numberSheet = redundancyUsers == 0 ? numberSheetBeforeRounding : numberSheetBeforeRounding + 1;
         for (var sheetIndex = 0; sheetIndex < numberSheet; sheetIndex++)
         {
-            var virtualRateByUserInSheet = data.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
+            var virtualRateByUserInSheet = data.SMAVirtualRate.ReportRows.Skip(sheetIndex * MaxUserPerSheet).Take(MaxUserPerSheet).ToList();
             var sheetName = $"VirtualRate {sheetIndex + 1}";
             var workSheet = ExcelPackage.Workbook.Worksheets.Copy("VirtualRateTemplate", sheetName);
             BuildTitle(workSheet, title, "A1:L1");

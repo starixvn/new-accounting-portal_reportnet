@@ -6,7 +6,7 @@
 
         public WinLoss Total { get; set; }
 
-        public List<WinLoss> RM { get; set; } = new List<WinLoss>();
+        public List<WinLoss> RM { get; set; } = [];
 
         public int TotalRows { get; set; }
     }

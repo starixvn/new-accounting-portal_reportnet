@@ -3,7 +3,5 @@ using MediatR;
 
 namespace AbnormalBet.HttpParameter
 {
-    public class SiteHttpParameter : IRequest<IEnumerable<SiteModel>>
-    {
-    }
+    public class SiteHttpParameter : IRequest<IEnumerable<SiteModel>>;
 }

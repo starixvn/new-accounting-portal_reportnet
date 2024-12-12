@@ -5,15 +5,8 @@ namespace SBPerformance.TopWinningMember
 {
     [Route("api/sb-performance/main")]
     [ApiController]
-    public class SBPerformanceTopWinningMemberController : ControllerBase
+    public class SBPerformanceTopWinningMemberController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public SBPerformanceTopWinningMemberController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("top-winning-member")]
         public async Task<IActionResult> Member(TopWinningMemberHttpParameter httpParameters)
         {

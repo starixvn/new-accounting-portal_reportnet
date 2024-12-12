@@ -4,21 +4,9 @@ using OfficeOpenXml;
 
 namespace Exchange.Report
 {
-    public class LicenseeHandlerExcel : IRequestHandler<LicenseeHttpParameterExcel, ExcelPackage>
+    public class LicenseeHandlerExcel(Service service, LicenseeExcelBuilder excelBuilder, IMapper mapper)
+        : IRequestHandler<LicenseeHttpParameterExcel, ExcelPackage>
     {
-        private readonly Service service;
-
-        private readonly LicenseeExcelBuilder excelBuilder;
-
-        private readonly IMapper mapper;
-
-        public LicenseeHandlerExcel(Service service, LicenseeExcelBuilder excelBuilder, IMapper mapper)
-        {
-            this.service = service;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(LicenseeHttpParameterExcel request, CancellationToken cancellationToken)
         {
             var jsonMessage = mapper.Map<LicenseeHttpParameterJson>(request);

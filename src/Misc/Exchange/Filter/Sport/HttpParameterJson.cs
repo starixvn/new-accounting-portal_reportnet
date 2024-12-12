@@ -2,7 +2,5 @@
 
 namespace Exchange.Filter.Sport
 {
-    public class HttpParameterJson : IRequest<IEnumerable<SportModel>>
-    {
-    }
+    public class HttpParameterJson : IRequest<IEnumerable<SportModel>>;
 }

@@ -22,18 +22,18 @@ namespace HouseWinLoss.Common.BasicWinLoss
             var sportTypeAttribute = $"{item.SportType}";
             var columns = new List<Columns>
             {
-                new Columns { ColumnIndex = columnIndex++, Name = "Main", Value = name, DisplayValue = item.Name, CustomAttributes = customAttributes, CellAlignment = mainTextAlignment },
-                new Columns { ColumnIndex= columnIndex++, Name = "MemberWinLoss", Value = item.MemberWinLoss, CustomAttributes = sabaSportCustomAttributes },
-                new Columns { ColumnIndex = columnIndex++, Name = "SMAWinLoss", Value =  item.SMAWinLoss, CustomAttributes = sportTypeAttribute },
-                 new Columns(columnIndex++, "ExtraPT", item.ExtraPT),
-                new Columns(columnIndex++, "Commission", item.Commission),
-                new Columns(columnIndex++, "VarianceIncome", item.Variance),
-                new Columns(columnIndex++, "VirtualIncome", item.VirtualIncome),
-                new Columns(columnIndex++, "RealIncome", item.RealIncome),
-                new Columns(columnIndex++, "VirtualTurnover", item.VirtualTurnover),
-                new Columns(columnIndex++, "RealTurnover", item.RealTurnover),
-                new Columns(columnIndex++, "VirtualMargin", item.ExcelVirtualMargin()),
-                new Columns(columnIndex, "RealMargin", item.ExcelRealMargin())
+                new() { ColumnIndex = columnIndex++, Name = "Main", Value = name, DisplayValue = item.Name, CustomAttributes = customAttributes, CellAlignment = mainTextAlignment },
+                new() { ColumnIndex= columnIndex++, Name = "MemberWinLoss", Value = item.MemberWinLoss, CustomAttributes = sabaSportCustomAttributes },
+                new() { ColumnIndex = columnIndex++, Name = "SMAWinLoss", Value =  item.SMAWinLoss, CustomAttributes = sportTypeAttribute },
+                 new(columnIndex++, "ExtraPT", item.ExtraPT),
+                new(columnIndex++, "Commission", item.Commission),
+                new(columnIndex++, "VarianceIncome", item.Variance),
+                new(columnIndex++, "VirtualIncome", item.VirtualIncome),
+                new(columnIndex++, "RealIncome", item.RealIncome),
+                new(columnIndex++, "VirtualTurnover", item.VirtualTurnover),
+                new(columnIndex++, "RealTurnover", item.RealTurnover),
+                new(columnIndex++, "VirtualMargin", item.ExcelVirtualMargin()),
+                new(columnIndex, "RealMargin", item.ExcelRealMargin())
             };
 
             return new GridDataRow { Columns = columns };

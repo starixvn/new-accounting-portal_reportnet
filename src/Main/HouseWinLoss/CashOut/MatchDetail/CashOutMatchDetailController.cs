@@ -1,23 +1,21 @@
 ﻿namespace HouseWinLoss.CashOut.MatchDetail
 {
     using AutoMapper;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Common.Criteria;
+    using Common.ColumnDecorators;
+    using Common.Criteria;
     using HouseWinLoss.Common.MatchDetail;
-    using HouseWinLoss.Configuration;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/house-win-loss-by-products/cash-out/match-detail")]
     [ApiController]
-    public class CashOutMatchDetailController : MatchDetailController
+    public class CashOutMatchDetailController(
+        WinLossService service,
+        GridOptionsBuilder builder,
+        MatchGridOptionColumnDecoratorBasic decorator,
+        IMapper mapper)
+        : MatchDetailController(service, builder, decorator)
     {
-        private readonly IMapper mapper;
-        public CashOutMatchDetailController(WinLossService service, GridOptionsBuilder builder, MatchGridOptionColumnDecoratorBasic decorator, IMapper mapper)
-            : base(service, builder, decorator)
-        {
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

@@ -21,27 +21,15 @@ namespace PunterAnalysis.AssociatedAccount.Model
         [Cell("C8")]
         public object WinLoss
         {
-            get
-            {
-                return IsMember() ? (object)winLoss : string.Empty;
-            }
-            set
-            {
-                winLoss = (decimal)value;
-            }
+            get => IsMember() ? winLoss : string.Empty;
+            set => winLoss = (decimal)value;
         }
 
         [Cell("D8")]
         public object Turnover
         {
-            get
-            {
-                return IsMember() ? (object)turnover : string.Empty;
-            }
-            set
-            {
-                turnover = (decimal)value;
-            }
+            get => IsMember() ? turnover : string.Empty;
+            set => turnover = (decimal)value;
         }
 
         [Cell("E8")]
@@ -53,7 +41,7 @@ namespace PunterAnalysis.AssociatedAccount.Model
                 {
                     return turnover == 0
                    ? "N/A" :
-                   (object)(winLoss / turnover);
+                   winLoss / turnover;
                 }
 
                 return string.Empty;
@@ -63,14 +51,8 @@ namespace PunterAnalysis.AssociatedAccount.Model
         [Cell("F8")]
         public object BetCount
         {
-            get
-            {
-                return IsMember() ? (object)betCount : string.Empty;
-            }
-            set
-            {
-                betCount = (int)value;
-            }
+            get => IsMember() ? betCount : string.Empty;
+            set => betCount = (int)value;
         }
 
         [Cell("G8")]

@@ -3,25 +3,16 @@ using Utilities.PermissionFilter;
 
 namespace SMAWinLoss.Filter
 {
-    public class Handler : IRequestHandler<CurrencyHttpParameter, IEnumerable<Currency>>,
-        IRequestHandler<SiteHttpParameter, IEnumerable<Site>>,
-        IRequestHandler<SportHttpParameter, IEnumerable<Sport>>,
-        IRequestHandler<LeagueGroupHttpParameter, LeagueGroupModel>,
-        IRequestHandler<AvailableDatabaseHttpParameter, bool>,
-        IRequestHandler<AvailableDateDataHttpParameter, DateTime>,
-        IRequestHandler<BetFromHttpParameter, IEnumerable<BetFrom>>,
-        IRequestHandler<PermissionHttpParameter, int>
+    public class Handler(FilterService service, PermissionFilterService permissionService)
+        : IRequestHandler<CurrencyHttpParameter, IEnumerable<Currency>>,
+            IRequestHandler<SiteHttpParameter, IEnumerable<Site>>,
+            IRequestHandler<SportHttpParameter, IEnumerable<Sport>>,
+            IRequestHandler<LeagueGroupHttpParameter, LeagueGroupModel>,
+            IRequestHandler<AvailableDatabaseHttpParameter, bool>,
+            IRequestHandler<AvailableDateDataHttpParameter, DateTime>,
+            IRequestHandler<BetFromHttpParameter, IEnumerable<BetFrom>>,
+            IRequestHandler<PermissionHttpParameter, int>
     {
-        private readonly FilterService service;
-
-        private readonly PermissionFilterService permissionService;
-
-        public Handler(FilterService service, PermissionFilterService permissionService)
-        {
-            this.service = service;
-            this.permissionService = permissionService;
-        }
-
         public async Task<LeagueGroupModel> Handle(LeagueGroupHttpParameter request, CancellationToken cancellationToken)
         {
             return await service.GetLeagueGroup();

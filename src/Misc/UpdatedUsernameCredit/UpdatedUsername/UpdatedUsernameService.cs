@@ -9,21 +9,12 @@ namespace UpdatedUsernameCredit.UpdatedUsername
         Task<List<UpdatedUsernameModel>> GetUpdatedUsername(BaseMessage message);
     }
 
-    public class UpdatedUsernameServiceImp : UpdatedUsernameService
+    public class UpdatedUsernameServiceImp(
+        IDynamicRepository repository,
+        LogParseService logParseService,
+        IMapper mapper)
+        : UpdatedUsernameService
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly LogParseService logParseService;
-
-        private readonly IMapper mapper;
-
-        public UpdatedUsernameServiceImp(IDynamicRepository repository, LogParseService logParseService,  IMapper mapper)
-        {
-            this.repository = repository;
-            this.logParseService = logParseService;
-            this.mapper = mapper;
-        }
-
         public async Task<List<UpdatedUsernameModel>> GetUpdatedUsername(BaseMessage message)
         {
             var criteria = mapper.Map<Criteria>(message);

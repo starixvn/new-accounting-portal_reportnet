@@ -22,7 +22,7 @@ namespace SBCustomerPerformanceByDanger.Report
 
         public int TopUsers { get; set; }
 
-        public override string GetSettingKey() => $"Acc_Rpt_SBCustPerfByDangerLevel_WareHouse";
+        public override string GetSettingKey() => "Acc_Rpt_SBCustPerfByDangerLevel_WareHouse";
 
         public override bool IsValid() => true;
     }

@@ -8,19 +8,9 @@ namespace Utilities.BalanceUpServices
         BalanceUpRange Query();
     }
 
-    public class BalanceUpServiceImp : BalanceUpService
+    public class BalanceUpServiceImp(IDynamicRepository repository, ICacheService cacheService) : BalanceUpService
     {
         private const string BalanceUpRangeCacheKey = "CommonBalanceUpRangeCacheKey";
-
-        private readonly IDynamicRepository repository;
-
-        private readonly ICacheService cacheService;
-
-        public BalanceUpServiceImp(IDynamicRepository repository, ICacheService cacheService)
-        {
-            this.repository = repository;
-            this.cacheService = cacheService;
-        }
 
         public BalanceUpRange Query()
         {

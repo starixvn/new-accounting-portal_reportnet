@@ -21,10 +21,7 @@ namespace CashOutPerformance.Models
 
                 return dateTime;
             }
-            set
-            {
-                dateTime = value;
-            }
+            set => dateTime = value;
         }
 
         [Cell("B6")]
@@ -67,10 +64,7 @@ namespace CashOutPerformance.Models
 
                 return betTime;
             }
-            set
-            {
-                betTime = value;
-            }
+            set => betTime = value;
         }
 
         [Cell("L6")]
@@ -86,10 +80,7 @@ namespace CashOutPerformance.Models
 
                 return cashOutTime;
             }
-            set
-            {
-                cashOutTime = value;
-            }
+            set => cashOutTime = value;
         }
 
         [Cell("M6")]

@@ -12,18 +12,9 @@ namespace AbnormalBet.Report
         Task<LicenseeModel> QueryLicensee(LicenseeQueryCriteria criteria);
     }
 
-    public class ReportServiceImp : ReportService
+    public class ReportServiceImp(IDynamicRepository repository, LocationService locationService)
+        : ReportService
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly LocationService locationService;
-
-        public ReportServiceImp(IDynamicRepository repository, LocationService locationService)
-        {
-            this.repository = repository;
-            this.locationService = locationService;
-        }
-
         public async Task<LocationModel> QueryIP(string ip)
         {
             ip = string.IsNullOrEmpty(ip) ? string.Empty : ip.Trim();

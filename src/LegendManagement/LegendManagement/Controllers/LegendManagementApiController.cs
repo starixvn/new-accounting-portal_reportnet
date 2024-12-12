@@ -8,7 +8,7 @@ namespace LegendManagement.Controllers;
 
 [Route("LegendManagement")]
 [ApiController]
-public class LegendManagementApiController(LegendManagementService legendManagementService, IHostingEnvironment env) : ControllerBase
+public class LegendManagementApiController(LegendManagementService legendManagementService, IWebHostEnvironment env) : ControllerBase
 {
     [Route("GetReportLegend")]
     public IActionResult GetReportLegend(GetReportLegendCriteria criteria)

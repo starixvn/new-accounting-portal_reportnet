@@ -37,7 +37,7 @@ namespace TreeWinLoss.Services
 
         private readonly RemotingRefService remotingRefService;
 
-        private readonly Dictionary<int, int> bettypes = new Dictionary<int, int>();
+        private readonly Dictionary<int, int> bettypes = new();
 
         private const int MaxCustIds = 5000;
 
@@ -76,8 +76,8 @@ namespace TreeWinLoss.Services
 
             var treeWinLoss = new TreeWinLossModel
             {
-                WinLosses = new List<TreeWinLossItemModel>(),
-                Total = new List<TreeWinLossItemModel>(),
+                WinLosses = [],
+                Total = [],
                 IsShowNotAvailableTurnover = false
             };
 
@@ -110,16 +110,16 @@ namespace TreeWinLoss.Services
 
         public async Task<VirtualRateModel> GetVirtualRate(int custId)
         {
-            VirtualRateModel virtualRateInfo = new VirtualRateModel();
-            VirtualRateModel virtualRateItem = new VirtualRateModel
+            var virtualRateInfo = new VirtualRateModel();
+            var virtualRateItem = new VirtualRateModel
             {
                 Date = "Current"
             };
-            VirtualRateCriteria getVirtualRateCriteria = new VirtualRateCriteria
+            var getVirtualRateCriteria = new VirtualRateCriteria
             {
                 CustId = custId
             };
-            VirtualRateHistoryCriteria criteria = new VirtualRateHistoryCriteria
+            var criteria = new VirtualRateHistoryCriteria
             {
                 CustId = custId
             };
@@ -149,10 +149,12 @@ namespace TreeWinLoss.Services
 
             var allVirtualRate = await GetAllVirtualRate(getAllVirtualRateCriteria);
 
-            var treeWinLossVirtualRate = new TreeWinLossVirtualRateModel();
-            treeWinLossVirtualRate.SMAVirtualRate = allVirtualRate;
-            treeWinLossVirtualRate.NumberUserEnabledVirtualRate = allVirtualRate.ReportRows.Count;
-            treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.WinLosses.Where(x => x.VirtualRate != "N/A" || x.VirtualRate != "Disabled").ToList());
+            var treeWinLossVirtualRate = new TreeWinLossVirtualRateModel
+            {
+                SMAVirtualRate = allVirtualRate,
+                NumberUserEnabledVirtualRate = allVirtualRate.ReportRows.Count,
+                EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.WinLosses.Where(x => x.VirtualRate != "N/A" || x.VirtualRate != "Disabled").ToList())
+            };
 
             return treeWinLossVirtualRate;
         }
@@ -204,8 +206,8 @@ namespace TreeWinLoss.Services
         {
             var treeWinLoss = new TreeWinLossModel
             {
-                WinLosses = new List<TreeWinLossItemModel>(),
-                Total = new List<TreeWinLossItemModel>()
+                WinLosses = [],
+                Total = []
             };
 
             var rawData = await repository.FetchAsync<WinLossRawItem>(criteria);
@@ -226,8 +228,8 @@ namespace TreeWinLoss.Services
 
         private async Task<VirtualRateModel> GetVirtualRateBySportAndLiveStatus(VirtualRateCriteria criteria)
         {
-            VirtualRateModel virtualRateBySportAndLiveStatus = new VirtualRateModel();
-            bool enableVirtualRate = false;
+            var virtualRateBySportAndLiveStatus = new VirtualRateModel();
+            var enableVirtualRate = false;
 
             var rawData = await repository.FetchMultipleAsync<SummaryVirtualRate, DetailVirtualRate>(criteria);
 
@@ -244,15 +246,15 @@ namespace TreeWinLoss.Services
                 if (detailVirtualRate.Any())
                 {
                     VirtualRateModel virtualRateItem = null;
-                    string preLiveAndSportType = string.Empty;
+                    var preLiveAndSportType = string.Empty;
                     virtualRateBySportAndLiveStatus.EnableVirtualRate = true;
                     foreach (var detailItem in detailVirtualRate)
                     {
-                        int sportId = detailItem.SportType;
-                        bool isLive = detailItem.IsLive;
-                        int bettypeId = detailItem.BetType;
-                        decimal virtualRate = detailItem.VirtualMultiplier;
-                        string liveAndSportType = string.Join(string.Empty, detailItem.SportType, detailItem.IsLive);
+                        var sportId = detailItem.SportType;
+                        var isLive = detailItem.IsLive;
+                        var bettypeId = detailItem.BetType;
+                        var virtualRate = detailItem.VirtualMultiplier;
+                        var liveAndSportType = string.Join(string.Empty, detailItem.SportType, detailItem.IsLive);
 
                         if (liveAndSportType != preLiveAndSportType)
                         {
@@ -261,7 +263,7 @@ namespace TreeWinLoss.Services
                                 virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
                             }
 
-                            string liveStatusTitle = isLive ? "Live" : "Non-Live";
+                            var liveStatusTitle = isLive ? "Live" : "Non-Live";
                             virtualRateItem = new VirtualRateModel
                             {
                                 Sport = GetSportName(sportId),
@@ -298,15 +300,15 @@ namespace TreeWinLoss.Services
 
         private async Task<VirtualRateModel> GetVirtualRateHistory(VirtualRateHistoryCriteria criteria)
         {
-            VirtualRateModel virtualRateInfo = new VirtualRateModel();
+            var virtualRateInfo = new VirtualRateModel();
 
             var rawData = await repository.FetchAsync<HistoryVirtualRate>(criteria);
 
             foreach (var historyVirtualRateItem in rawData)
             {
-                int actionId = historyVirtualRateItem.ActionId;
-                string trackingValue = historyVirtualRateItem.TrackingValue;
-                XElement xmlTrackingValue = XElement.Parse(trackingValue);
+                var actionId = historyVirtualRateItem.ActionId;
+                var trackingValue = historyVirtualRateItem.TrackingValue;
+                var xmlTrackingValue = XElement.Parse(trackingValue);
                 var virtualRateHistoryItem = GetVirtualRateLogHistory(actionId, xmlTrackingValue);
                 if (virtualRateHistoryItem.ReportRows.Count != 0)
                 {
@@ -322,27 +324,27 @@ namespace TreeWinLoss.Services
 
         private void InitBettype()
         {
-            this.bettypes.Add(0, BetTypeConstants.Handicap);
-            this.bettypes.Add(1, BetTypeConstants.OverUnder2);
-            this.bettypes.Add(2, BetTypeConstants.OddEvenBetType);
-            this.bettypes.Add(3, BetTypeConstants.FirstHalfHandicap);
-            this.bettypes.Add(4, BetTypeConstants.FirstHalfOverUnder);
-            this.bettypes.Add(5, BetTypeConstants.FirstHalfOddEvenBetType);
-            this.bettypes.Add(6, BetTypeConstants.MoneyLineBettype);
-            this.bettypes.Add(7, BetTypeConstants.FirstHalfMoneyLineBettype);
-            this.bettypes.Add(8, BetTypeConstants.SetXGameYWinner);
+            bettypes.Add(0, BetTypeConstants.Handicap);
+            bettypes.Add(1, BetTypeConstants.OverUnder2);
+            bettypes.Add(2, BetTypeConstants.OddEvenBetType);
+            bettypes.Add(3, BetTypeConstants.FirstHalfHandicap);
+            bettypes.Add(4, BetTypeConstants.FirstHalfOverUnder);
+            bettypes.Add(5, BetTypeConstants.FirstHalfOddEvenBetType);
+            bettypes.Add(6, BetTypeConstants.MoneyLineBettype);
+            bettypes.Add(7, BetTypeConstants.FirstHalfMoneyLineBettype);
+            bettypes.Add(8, BetTypeConstants.SetXGameYWinner);
         }
 
         private string GetSportName(int sportId)
         {
-            string sportName = sportId == 99 ? "Other Sports" : remotingRefService.GetSportName(sportId);
+            var sportName = sportId == 99 ? "Other Sports" : remotingRefService.GetSportName(sportId);
             return sportName;
         }
 
         private List<VirtualRateByBettypeModel> InitVirtualRateByBettypeInfo()
         {
-            var virtualRateByBettype = new List<VirtualRateByBettypeModel>(this.bettypes.Count);
-            for (int i = 0; i < bettypes.Count; i++)
+            var virtualRateByBettype = new List<VirtualRateByBettypeModel>(bettypes.Count);
+            for (var i = 0; i < bettypes.Count; i++)
             {
                 var virtualRateByBettypeItem = new VirtualRateByBettypeModel
                 {
@@ -357,26 +359,26 @@ namespace TreeWinLoss.Services
 
         private VirtualRateModel GetVirtualRateLogHistory(int actionId, XElement xmlTrackingValue)
         {
-            string preLiveAndSportType = string.Empty;
-            VirtualRateModel virtualRateHistory = new VirtualRateModel();
+            var preLiveAndSportType = string.Empty;
+            var virtualRateHistory = new VirtualRateModel();
             VirtualRateModel virtualRateUpdatedItem = null;
             if (actionId == 806 || actionId == 2802)
             {
-                bool enabledVirtualRate = Convert.ToInt32(xmlTrackingValue.Attribute("EnableVirtualrate").Value) == 1;
+                var enabledVirtualRate = Convert.ToInt32(xmlTrackingValue.Attribute("EnableVirtualrate").Value) == 1;
                 virtualRateUpdatedItem = new VirtualRateModel
                 {
-                    Sport = string.Format("Virtual Rate: {0}", enabledVirtualRate ? "Enabled" : "Disabled")
+                    Sport = $"Virtual Rate: {(enabledVirtualRate ? "Enabled" : "Disabled")}"
                 };
             }
             else
             {
                 foreach (XElement element in xmlTrackingValue.Nodes())
                 {
-                    int sportId = Convert.ToInt32(element.Attribute("SportType").Value);
-                    int bettypeId = Convert.ToInt32(element.Attribute("BetType").Value);
-                    bool isLive = Convert.ToInt32(element.Attribute("IsLive").Value) == 1;
-                    decimal virtualRate = Convert.ToDecimal(element.Attribute("VirtualMultiplier").Value);
-                    string liveAndSportType = string.Join(string.Empty, sportId, isLive);
+                    var sportId = Convert.ToInt32(element.Attribute("SportType").Value);
+                    var bettypeId = Convert.ToInt32(element.Attribute("BetType").Value);
+                    var isLive = Convert.ToInt32(element.Attribute("IsLive").Value) == 1;
+                    var virtualRate = Convert.ToDecimal(element.Attribute("VirtualMultiplier").Value);
+                    var liveAndSportType = string.Join(string.Empty, sportId, isLive);
 
                     if (liveAndSportType != preLiveAndSportType)
                     {
@@ -385,7 +387,7 @@ namespace TreeWinLoss.Services
                             virtualRateHistory.ReportRows.Add(virtualRateUpdatedItem);
                         }
 
-                        string liveStatusTitle = isLive ? "Live" : "Non-Live";
+                        var liveStatusTitle = isLive ? "Live" : "Non-Live";
                         virtualRateUpdatedItem = new VirtualRateModel
                         {
                             Sport = GetSportName(sportId),
@@ -412,21 +414,21 @@ namespace TreeWinLoss.Services
 
         private SMAVirtualRateModel MapSMAVirtualRateData(IEnumerable<DetailVirtualRate> rawData)
         {
-            SMAVirtualRateModel report = new SMAVirtualRateModel();
-            string preUserName = string.Empty;
-            string preSportAndLiveStatus = string.Empty;
+            var report = new SMAVirtualRateModel();
+            var preUserName = string.Empty;
+            var preSportAndLiveStatus = string.Empty;
             SMAVirtualRateModel virtualRateByUser = null;
             SMAVirtualRateModel virtualRateBySportAndLiveStatus = null;
             foreach (var detailItem in rawData)
             {
-                string userName = detailItem.UserName;
-                int sportId = detailItem.SportType;
-                int bettypeId = detailItem.BetType;
-                bool isLive = detailItem.IsLive;
-                decimal virtualRate = detailItem.VirtualMultiplier;
-                string sportAndLiveStatus = string.Join(string.Empty, sportId, isLive);
-                string liveStatusTitle = isLive ? "Live" : "None-Live";
-                int bettypeIndex = bettypes.FirstOrDefault(x => x.Value == bettypeId).Key;
+                var userName = detailItem.UserName;
+                var sportId = detailItem.SportType;
+                var bettypeId = detailItem.BetType;
+                var isLive = detailItem.IsLive;
+                var virtualRate = detailItem.VirtualMultiplier;
+                var sportAndLiveStatus = string.Join(string.Empty, sportId, isLive);
+                var liveStatusTitle = isLive ? "Live" : "None-Live";
+                var bettypeIndex = bettypes.FirstOrDefault(x => x.Value == bettypeId).Key;
 
                 if (userName != preUserName)
                 {
@@ -458,7 +460,7 @@ namespace TreeWinLoss.Services
 
                     virtualRateBySportAndLiveStatus = new SMAVirtualRateModel
                     {
-                        Sport = string.Format("{0} ({1})", GetSportName(sportId), liveStatusTitle),
+                        Sport = $"{GetSportName(sportId)} ({liveStatusTitle})",
                         VirtualRateByBettypeInfo = InitVirtualRateByBettypeInfo()
                     };
                     preSportAndLiveStatus = sportAndLiveStatus;
@@ -482,8 +484,8 @@ namespace TreeWinLoss.Services
 
         private Dictionary<string, int> MapEnabledVirtualRateUserData(List<TreeWinLossItemModel> enabledVirtualRateUser)
         {
-            int index = 0;
-            Dictionary<string, int> enabledVirtualRateUserDictionary = new Dictionary<string, int>();
+            var index = 0;
+            var enabledVirtualRateUserDictionary = new Dictionary<string, int>();
             foreach (var user in enabledVirtualRateUser)
             {
                 enabledVirtualRateUserDictionary.Add(user.Name, index);
@@ -495,7 +497,7 @@ namespace TreeWinLoss.Services
 
         private async Task<SMAVirtualRateModel> GetAllVirtualRate(AllVirtualRateCriteria criteria)
         {
-            SMAVirtualRateModel virtualRate = new SMAVirtualRateModel();
+            var virtualRate = new SMAVirtualRateModel();
             var custIds = criteria.CustIDs.Split(",");
             var detailVirtualRate = new List<DetailVirtualRate>();
             while (custIds.Length > 0)

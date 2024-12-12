@@ -13,7 +13,7 @@ namespace HouseWinLoss.SimpleGrid
 
     public class SimpleCriteriaFactoryImp : SimpleCriteriaFactory
     {
-        private static readonly Dictionary<string, Type> CriteriaTypes = new Dictionary<string, Type>
+        private static readonly Dictionary<string, Type> CriteriaTypes = new()
         {
             { "universal-second-level", typeof(UniversalSecondLevelCriteria)},
             { "number-game-drill-down", typeof(NumberGameDrilldownCriteria)},

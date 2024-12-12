@@ -9,20 +9,11 @@ namespace HouseWinLoss.MetricGaming.LiveNonLive
         Task<IEnumerable<BasicWinLossModel>> Query(WinLossCriteria criteria);
     }
 
-    public class MetricGamingLiveNonLiveWinLossServiceImp : MetricGamingLiveNonLiveWinLossService
+    public class MetricGamingLiveNonLiveWinLossServiceImp(
+        RawWinLossService rawWinLossService,
+        CalculationService calculationService)
+        : MetricGamingLiveNonLiveWinLossService
     {
-        private readonly RawWinLossService rawWinLossService;
-
-        private readonly CalculationService calculationService;
-
-        public MetricGamingLiveNonLiveWinLossServiceImp(
-            RawWinLossService rawWinLossService,
-            CalculationService calculationService)
-        {
-            this.rawWinLossService = rawWinLossService;
-            this.calculationService = calculationService;
-        }
-
         public async Task<IEnumerable<BasicWinLossModel>> Query(WinLossCriteria criteria)
         {
             var rawWinLosses = await rawWinLossService.Query(criteria);
@@ -49,7 +40,7 @@ namespace HouseWinLoss.MetricGaming.LiveNonLive
                 GrandTotal = liveNonLiveGrandTotal
             };
 
-            return new BasicWinLossModel[] { betTypeSummaries, liveNonLiveSummaries };
+            return [betTypeSummaries, liveNonLiveSummaries];
         }
     }
 }

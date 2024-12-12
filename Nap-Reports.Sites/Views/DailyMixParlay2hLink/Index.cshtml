@@ -143,10 +143,10 @@
     </div>
 </div>
 @{
-    string startDate = DateTime.Today.ToShortFormatedDate();
-    string endDate = DateTime.Today.ToShortFormatedDate();
-    string betType = string.Empty;
-    bool isRedirect = false;
+    var startDate = DateTime.Today.ToShortFormatedDate();
+    var endDate = DateTime.Today.ToShortFormatedDate();
+    var betType = string.Empty;
+    var isRedirect = false;
     if (@Context.Request.Query["IsRedirect"].ToString() != null)
     {
         isRedirect = bool.Parse(Context.Request.Query["IsRedirect"]);

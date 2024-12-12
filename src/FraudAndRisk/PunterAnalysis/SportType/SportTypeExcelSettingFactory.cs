@@ -8,16 +8,9 @@ namespace PunterAnalysis.SportType
         ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
     }
 
-    public class SportTypeExcelSettingFactory : SportTypeExcelSetting
+    public class SportTypeExcelSettingFactory(ConfigurationService configurationService) : SportTypeExcelSetting
     {
         private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/Sporttype.xlsx";
-
-        private readonly ConfigurationService configurationService;
-
-        public SportTypeExcelSettingFactory(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
         {

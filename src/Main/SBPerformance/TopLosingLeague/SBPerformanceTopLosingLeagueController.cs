@@ -5,15 +5,8 @@ namespace SBPerformance.TopLosingLeague
 {
     [Route("api/sb-performance/main")]
     [ApiController]
-    public class SBPerformanceTopLosingLeagueController : ControllerBase
+    public class SBPerformanceTopLosingLeagueController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public SBPerformanceTopLosingLeagueController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("top-losing-league")]
         public async Task<IActionResult> League(TopLosingLeagueHttpParameter httpParameters)
         {

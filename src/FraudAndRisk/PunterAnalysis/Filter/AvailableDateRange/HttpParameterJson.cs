@@ -2,7 +2,5 @@
 
 namespace PunterAnalysis.Filter.AvailableDateRange
 {
-    public class HttpParameterJson : IRequest<DateRange>
-    {
-    }
+    public class HttpParameterJson : IRequest<DateRange>;
 }

@@ -16,18 +16,9 @@ namespace SBCustomerPerformanceByDanger.Filter
         DateTime GetBalanceUpDate();
     }
 
-    public class FilterServiceImp : FilterService
+    public class FilterServiceImp(IDynamicRepository repository, BalanceUpService balanceUpService)
+        : FilterService
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly BalanceUpService balanceUpService;
-
-        public FilterServiceImp(IDynamicRepository repository, BalanceUpService balanceUpService)
-        {
-            this.repository = repository;
-            this.balanceUpService = balanceUpService;
-        }
-
         public async Task<IEnumerable<DivisionModel>> GetDivision(DivisionQueryCriteria criteria)
         {
             return await repository.FetchAsync<DivisionModel>(criteria);
@@ -60,7 +51,7 @@ namespace SBCustomerPerformanceByDanger.Filter
                 {
                     SportName = sportGroup.Key.SportGroupName,
                     SportType = sportGroup.Key.SportGroupType,
-                    BettypeGroups = new List<BettypeGroupModel>()
+                    BettypeGroups = []
                 };
 
                 var sports = rawSports.Where(x => x.SportGroupType == sportGroup.Key.SportGroupType);
@@ -72,7 +63,7 @@ namespace SBCustomerPerformanceByDanger.Filter
                     var betTypeGroupItem = new BettypeGroupModel
                     {
                         BettypeGroupName = betTypeGroup.Key,
-                        Bettypes = new List<BettypeModel>()
+                        Bettypes = []
                     };
 
                     foreach(var betType in betTypes)

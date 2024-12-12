@@ -8,16 +8,9 @@ namespace PunterAnalysis.Game
         ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
     }
 
-    public class GameExcelSettingFactory : GameExcelSetting
+    public class GameExcelSettingFactory(ConfigurationService configurationService) : GameExcelSetting
     {
         private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/Game.xlsx";
-
-        private readonly ConfigurationService configurationService;
-
-        public GameExcelSettingFactory(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
         {

@@ -147,7 +147,7 @@ public class TraderPerformanceOtherSportsExcelServiceImp(ConfigurationService co
             Match = $"{model.HomeName}-{model.AwayName}",
             Maxbet = model.Maxbet,
             HaftTime = $"{model.HTHomeScore}-{model.HTAwayScore}",
-            FullTime = $"{model.FTHomeScore}-{model.FTAwayScore}",
+            FullTime = $"{model.FTHomeScore}-{model.FTAwayScore}"
         };
         UpdateChildInfoExcelModel(excelModel, model.ChildInfo[0], "WinLoss");
         UpdateChildInfoExcelModel(excelModel, model.ChildInfo[1], "TurnOver");

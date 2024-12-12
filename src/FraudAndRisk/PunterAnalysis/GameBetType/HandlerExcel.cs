@@ -6,18 +6,15 @@ using PunterAnalysis.Shared;
 
 namespace PunterAnalysis.GameBetType
 {
-    public class HandlerExcel : HandlerExcelBase, IRequestHandler<HttpParameterExcel, ExcelPackage>
+    public class HandlerExcel(
+        PunterAnalysisService punterAnalysisService,
+        GameBetTypeExcelSetting excelSettingFactory,
+        PunterAnalysisExcelBuilder excelBuilder,
+        IMapper mapper)
+        : HandlerExcelBase(punterAnalysisService, excelBuilder, mapper),
+            IRequestHandler<HttpParameterExcel, ExcelPackage>
     {
-        private readonly GameBetTypeExcelSetting excelSettingFactory;
-
-        private readonly IMapper mapper;
-
-        public HandlerExcel(PunterAnalysisService punterAnalysisService, GameBetTypeExcelSetting excelSettingFactory, PunterAnalysisExcelBuilder excelBuilder, IMapper mapper)
-            : base(punterAnalysisService, excelBuilder, mapper)
-        {
-            this.excelSettingFactory = excelSettingFactory;
-            this.mapper = mapper;
-        }
+        private readonly IMapper mapper = mapper;
 
         public async Task<ExcelPackage> Handle(HttpParameterExcel request, CancellationToken cancellationToken)
         {

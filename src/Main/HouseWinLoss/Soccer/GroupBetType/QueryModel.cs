@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.Soccer.GroupBetType
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

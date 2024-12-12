@@ -5,15 +5,8 @@ namespace UniversalReports.SMAWinLoss.VirtualRate
 {
     [Route("api/sma-win-loss/virtual-rate")]
     [ApiController]
-    public class SMAWinLossVirtualRateController : ControllerBase
+    public class SMAWinLossVirtualRateController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public SMAWinLossVirtualRateController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("")]
         public async Task<IActionResult> VirtualRate(VirtualRateHttpParameter httpParameters)
         {

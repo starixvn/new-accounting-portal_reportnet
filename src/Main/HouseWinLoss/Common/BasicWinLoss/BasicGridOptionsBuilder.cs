@@ -9,16 +9,9 @@ namespace HouseWinLoss.Common.BasicWinLoss
         GridOptions Build(BasicWinLossModel winLoss, string title);
     }
 
-    public class BasicGridOptionsBuilderImp : BasicGridOptionsBuilder
+    public class BasicGridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : BasicGridOptionsBuilder
     {
         const string grandTotalClass = "grand-total";
-
-        private readonly BasicGridDataRowBuilder gridDataRowBuilder;
-
-        public BasicGridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder)
-        {
-            this.gridDataRowBuilder = gridDataRowBuilder;
-        }
 
         public GridOptions Build(BasicWinLossModel winLoss, string title)
         {

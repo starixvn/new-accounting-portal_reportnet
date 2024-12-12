@@ -2,7 +2,5 @@
 
 namespace SMAWinLoss.Filter
 {
-    public class LeagueGroupHttpParameter : IRequest<LeagueGroupModel>
-    {
-    }
+    public class LeagueGroupHttpParameter : IRequest<LeagueGroupModel>;
 }

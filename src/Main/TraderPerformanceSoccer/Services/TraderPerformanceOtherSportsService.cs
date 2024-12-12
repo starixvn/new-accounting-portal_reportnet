@@ -158,7 +158,7 @@ namespace TraderPerformance.Services
         
         private TraderPerformanceOtherSportsModel SortReportData(TraderPerformanceOtherSportsModel report, ReportCriteria criteria)
         {
-            bool isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
+            var isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
 
             switch (criteria.SortColumnName)
             {
@@ -242,7 +242,7 @@ namespace TraderPerformance.Services
             TraderPerformanceOtherSportsDetailModel report,
             DetailReportCriteria criteria)
         {
-            bool isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
+            var isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
 
             foreach (var traderInfo in report.ReportRows)
             {

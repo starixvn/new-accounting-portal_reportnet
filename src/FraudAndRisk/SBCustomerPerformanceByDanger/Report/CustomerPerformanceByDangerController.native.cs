@@ -7,15 +7,8 @@ namespace SBCustomerPerformanceByDanger.Report
 
     [Route("api/sb-customer-performance-by-danger/report")]
     [ApiController]
-    public class CustomerPerformanceByDangerController : ControllerBase
+    public class CustomerPerformanceByDangerController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public CustomerPerformanceByDangerController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("data")]
         [HttpPost]
         public async Task<IActionResult> GetCustomerPerformanceByDanger(CustomerPerformanceByDangerQueryHttpParameter parameter)

@@ -15,15 +15,8 @@ namespace Utilities.RemotingRef
         string GetBetTypeName(int betTypeId);
     }
 
-    public class RemotingRefServiceImp : RemotingRefService
+    public class RemotingRefServiceImp(IRemotingRefService remotingRefService) : RemotingRefService
     {
-        private readonly IRemotingRefService remotingRefService;
-
-        public RemotingRefServiceImp(IRemotingRefService remotingRefService)
-        {
-            this.remotingRefService = remotingRefService;
-        }
-
         public string GetTeamName(int teamId)
         {
             var teamIdString = teamId.ToString();
@@ -59,15 +52,8 @@ namespace Utilities.RemotingRef
         }
     }
 
-    public class RemotingRef3rdServiceImp : RemotingRefService
+    public class RemotingRef3rdServiceImp(IRemotingRefService remotingRefService) : RemotingRefService
     {
-        private readonly IRemotingRefService remotingRefService;
-
-        public RemotingRef3rdServiceImp(IRemotingRefService remotingRefService)
-        {
-            this.remotingRefService = remotingRefService;
-        }
-
         public virtual string GetLeagueName(int leagueId)
         {
             var leagueIdString = leagueId.ToString();

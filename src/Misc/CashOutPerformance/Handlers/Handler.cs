@@ -8,25 +8,16 @@ using MediatR;
 
 namespace CashOutPerformance.Handlers
 {
-    public class Handler : IRequestHandler<SportRequest, IEnumerable<FilterGroupItemModel>>,
-        IRequestHandler<LicenseeRequest, IEnumerable<SiteModel>>,
-        IRequestHandler<SportLevelRequest, SportLevelModel>,
-        IRequestHandler<TicketRequest<EventStatusLevelModel>, TicketViewModel<EventStatusLevelModel>>,
-        IRequestHandler<TicketRequest<BetTypeLevelModel>, TicketViewModel<BetTypeLevelModel>>,
-        IRequestHandler<TicketRequest<MatchDetailLevelModel>, TicketViewModel<MatchDetailLevelModel>>,
-        IRequestHandler<LeagueRequest, IEnumerable<LeagueModel>>,
-        IRequestHandler<LeagueGroupRequest, IEnumerable<FilterItemModel>>
+    public class Handler(CashOutPerformanceService service, IMapper mapper)
+        : IRequestHandler<SportRequest, IEnumerable<FilterGroupItemModel>>,
+            IRequestHandler<LicenseeRequest, IEnumerable<SiteModel>>,
+            IRequestHandler<SportLevelRequest, SportLevelModel>,
+            IRequestHandler<TicketRequest<EventStatusLevelModel>, TicketViewModel<EventStatusLevelModel>>,
+            IRequestHandler<TicketRequest<BetTypeLevelModel>, TicketViewModel<BetTypeLevelModel>>,
+            IRequestHandler<TicketRequest<MatchDetailLevelModel>, TicketViewModel<MatchDetailLevelModel>>,
+            IRequestHandler<LeagueRequest, IEnumerable<LeagueModel>>,
+            IRequestHandler<LeagueGroupRequest, IEnumerable<FilterItemModel>>
     {
-        private readonly CashOutPerformanceService service;
-
-        private readonly IMapper mapper;
-
-        public Handler(CashOutPerformanceService service, IMapper mapper)
-        {
-            this.service = service;
-            this.mapper = mapper;
-        }
-
         public async Task<IEnumerable<FilterGroupItemModel>> Handle(SportRequest request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<SportCriteria>(request);

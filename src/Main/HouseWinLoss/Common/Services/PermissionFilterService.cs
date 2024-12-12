@@ -8,15 +8,8 @@ namespace HouseWinLoss.Common.Services
         Task<int> GetPermissionProfileId(string functionKeyValue);
     }
 
-    public class PermissionFilterServiceImp1 : PermissionFilterService1
+    public class PermissionFilterServiceImp1(IDynamicRepository repository) : PermissionFilterService1
     {
-        private readonly IDynamicRepository repository;
-
-        public PermissionFilterServiceImp1(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-     
         public async Task<int> GetPermissionProfileId(string functionKeyValue)
         {
             var criteria = new PermissionCriteria

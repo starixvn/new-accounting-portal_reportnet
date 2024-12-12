@@ -23,7 +23,7 @@ namespace Utilities.CustomerTrackingSystem
     {
         private const int AssociatedByIP = 3;
 
-        private static HttpClient jsonClient = new HttpClient();
+        private static HttpClient jsonClient = new();
 
         public async Task<List<CustomerDevice>> GetAssociatedCustomers(string host, int custId)
         {
@@ -34,7 +34,7 @@ namespace Utilities.CustomerTrackingSystem
             var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
             return response.IsSuccessStatusCode
                 ? await response.Content.ReadFromJsonAsync<List<CustomerDevice>>().ConfigureAwait(false)
-                : new List<CustomerDevice>();
+                : [];
         }
 
         public async Task<string> GetLatestIP(string host, int custId)

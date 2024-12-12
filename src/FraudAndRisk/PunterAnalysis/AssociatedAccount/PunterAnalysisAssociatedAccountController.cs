@@ -8,15 +8,8 @@ namespace PunterAnalysis.AssociatedAccount
 {
     [Route("api/punter-analysis/associated-account")]
     [ApiController]
-    public class PunterAnalysisAssociatedAccountController : ControllerBase
+    public class PunterAnalysisAssociatedAccountController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public PunterAnalysisAssociatedAccountController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Index(HttpParameterJson parameter)
         {

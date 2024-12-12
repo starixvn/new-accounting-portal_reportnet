@@ -1,27 +1,21 @@
 ﻿namespace HouseWinLoss.Soccer.GroupBetType
 {
     using AutoMapper;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Configuration;
+    using Common.ColumnDecorators;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer/group-bettype")]
     [ApiController]
-    public class SoccerGroupBetTypeController : ControllerBase
+    public class SoccerGroupBetTypeController(
+        GroupBetTypeWinLossService service,
+        GroupBetTypeGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly GroupBetTypeWinLossService service;
-        private readonly GroupBetTypeGridOptionsBuilder builder;
-        private readonly GridOptionColumnDecorator decorator;
-        private readonly IMapper mapper;
-
-        public SoccerGroupBetTypeController(GroupBetTypeWinLossService service, GroupBetTypeGridOptionsBuilder builder, GridOptionColumnDecoratorFull decorator, IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
+        private readonly GridOptionColumnDecorator decorator = decorator;
 
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)

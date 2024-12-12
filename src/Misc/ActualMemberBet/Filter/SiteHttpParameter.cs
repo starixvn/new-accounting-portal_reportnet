@@ -2,7 +2,5 @@
 
 namespace ActualMemberBet.Filter
 {
-    public class SiteHttpParameter : IRequest<IEnumerable<Site>>
-    {
-    }
+    public class SiteHttpParameter : IRequest<IEnumerable<Site>>;
 }

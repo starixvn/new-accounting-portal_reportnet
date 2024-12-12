@@ -42,7 +42,7 @@ namespace BetCount.Services
 
             var report = new TransactionModel
             {
-                Items = new List<TransactionModel>(),
+                Items = [],
                 Total = new TransactionModel
                 {
                     SiteName = "Total"
@@ -55,11 +55,10 @@ namespace BetCount.Services
                    {
                        var transByIsDepositionGroup = new TransactionModel
                        {
-                           Items = new List<TransactionModel>(),
-                           Total = new TransactionModel()
+                           Items = [],
+                           Total = new TransactionModel(),
+                           SiteName = group.Key ? "Deposite" : "Credit"
                        };
-
-                       transByIsDepositionGroup.SiteName = group.Key ? "Deposite" : "Credit";
 
                        transByIsDepositionGroup.Total.SiteName = transByIsDepositionGroup.SiteName;
 
@@ -94,10 +93,10 @@ namespace BetCount.Services
                 report.Items.Count > 0)
             {
                 var siteGroupLength = report.Items.Count;
-                for (int i = 0; i < siteGroupLength; i++)
+                for (var i = 0; i < siteGroupLength; i++)
                 {
-                    var propertyName = this.GetSortedColumnName(criteria.SortBy);
-                    report.Items[i].Items.SortByProperty<TransactionModel>(
+                    var propertyName = GetSortedColumnName(criteria.SortBy);
+                    report.Items[i].Items.SortByProperty(
                         criteria.SortDirection,
                         propertyName);
                 }
@@ -112,7 +111,7 @@ namespace BetCount.Services
 
             var rawData = await repository.FetchAsync<ProductEntity>(criteria);
 
-            List<ProductModel> products = new List<ProductModel>();
+            List<ProductModel> products = [];
 
             var productGroups = rawData.GroupBy(rawInfo => rawInfo.ProductName);
 
@@ -121,7 +120,7 @@ namespace BetCount.Services
                 var product = new ProductModel
                 {
                     Name = productGroup.Key,
-                    Items = new List<ProductModel>()
+                    Items = []
                 };
 
                 if (BetCountConstants.ProductsHaveSports.Contains(product.Name.ToLower()))
@@ -221,17 +220,17 @@ namespace BetCount.Services
                 return new ProductModel
                 {
                     Id = 0,
-                    Items = new List<ProductModel>()
+                    Items = []
                 };
             }
 
             var indGroup = new ProductModel
             {
                 Id = rawData.FirstOrDefault().SportId,
-                Items = new List<ProductModel>()
+                Items = []
             };
 
-            indGroup.Name = this.GetSportName(indGroup.Id);
+            indGroup.Name = GetSportName(indGroup.Id);
             indGroup.Id = GetGroupId(indGroup.Id);
 
             foreach (var data in rawData)
@@ -284,7 +283,7 @@ namespace BetCount.Services
             {
                 Id = sportGroup.SportId,
                 Name = sportGroup.SportName,
-                Items = new List<ProductModel>()
+                Items = []
             };
         }
 
@@ -302,7 +301,7 @@ namespace BetCount.Services
             return new ProductModel
             {
                 Id = key,
-                Items = new List<ProductModel>()
+                Items = []
             };
         }
 

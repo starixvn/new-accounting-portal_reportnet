@@ -229,7 +229,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
 
             if (columnName.Contains("Margin %_"))
             {
-                decimal margin = CalculateMargin(dataTable.AsEnumerable(), columnName);
+                var margin = CalculateMargin(dataTable.AsEnumerable(), columnName);
                 sheetTrader.Cells[currentContentRowIndex, columnIndex].Value = margin;
             }
             else
@@ -270,7 +270,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
 
             if (columnName.Contains("Margin %_"))
             {
-                decimal margin = CalculateMargin(rowsByUser, columnName);
+                var margin = CalculateMargin(rowsByUser, columnName);
                 sheetTrader.Cells[currentContentRowIndex, columnIndex].Value = margin;
             }
             else
@@ -390,7 +390,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
             };
 
         var totalRowIndex = BeginContentRowIndex + dataTable.Rows.Count;
-        templateSheet.Cells[$"A7:B7"].Copy(sheetTrader.Cells[$"A{totalRowIndex}:B{totalRowIndex}"]);
+        templateSheet.Cells["A7:B7"].Copy(sheetTrader.Cells[$"A{totalRowIndex}:B{totalRowIndex}"]);
         sheetTrader.Cells[$"A{totalRowIndex}:B{totalRowIndex}"].Merge = true;
 
         for (var columnIndex = 3; columnIndex <= lastColumnIndex; columnIndex++)
@@ -398,7 +398,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
             var columnName = dataTable.Columns[columnIndex - 1].ColumnName;
             if (columnName.Contains("Margin %_"))
             {
-                decimal margin = CalculateMargin(dataTable.AsEnumerable(), columnName);
+                var margin = CalculateMargin(dataTable.AsEnumerable(), columnName);
                 sheetTrader.Cells[totalRowIndex, columnIndex].Value = margin;
             }
             else

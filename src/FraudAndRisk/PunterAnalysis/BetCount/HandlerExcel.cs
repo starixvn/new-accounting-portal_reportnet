@@ -7,28 +7,13 @@ using Utilities.LinqDynamicSum;
 
 namespace PunterAnalysis.BetCount
 {
-    public class HandlerExcel : IRequestHandler<HttpParameterExcel, ExcelPackage>
+    public class HandlerExcel(
+        BetCountService betCountService,
+        BetCountExcelSetting excelSettingFactory,
+        PunterAnalysisExcelBuilder excelBuilder,
+        IMapper mapper)
+        : IRequestHandler<HttpParameterExcel, ExcelPackage>
     {
-        private readonly BetCountService betCountService;
-
-        private readonly BetCountExcelSetting excelSettingFactory;
-
-        private readonly PunterAnalysisExcelBuilder excelBuilder;
-
-        private readonly IMapper mapper;
-
-        public HandlerExcel(
-            BetCountService betCountService,
-            BetCountExcelSetting excelSettingFactory, 
-            PunterAnalysisExcelBuilder excelBuilder,
-            IMapper mapper)
-        {
-            this.betCountService = betCountService;
-            this.excelSettingFactory = excelSettingFactory;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(HttpParameterExcel request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<Criteria>(request);

@@ -10,15 +10,8 @@ namespace HouseWinLoss.Products
         GridOptions Build(ProductWinLoss winLoss, string title);
     }
 
-    public class GridOptionsBuilderImp : GridOptionsBuilder
+    public class GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : GridOptionsBuilder
     {
-        private readonly BasicGridDataRowBuilder gridDataRowBuilder;
-
-        public GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder)
-        {
-            this.gridDataRowBuilder = gridDataRowBuilder;
-        }
-
         public GridOptions Build(ProductWinLoss winLoss, string title)
         {
             return new GridOptions
@@ -27,7 +20,7 @@ namespace HouseWinLoss.Products
                 ShowTitle = true,
                 TitleType = TitleType.TwoLineBlue,
                 TitleInfoText = title.ToUpperInvariant(),
-                BodyRows = winLoss.IsEmpty ? new List<GridDataRow>() : BuildBodyRows(winLoss),
+                BodyRows = winLoss.IsEmpty ? [] : BuildBodyRows(winLoss),
                 FooterRows = BuildFooter(winLoss.GrandTotal, winLoss.GrandTotalWithoutCN88),
                 ShowHighlightRow = false,
                 ShowDistinctRow = false,
@@ -81,7 +74,7 @@ namespace HouseWinLoss.Products
         {
             var columns = new List<Columns>
             {
-                new Columns { ColumnIndex = 1, Name = "Main", Value = string.Empty, MergeColNumber = 13 }
+                new() { ColumnIndex = 1, Name = "Main", Value = string.Empty, MergeColNumber = 13 }
             };
 
             return new GridDataRow { Columns = columns, RowType = RowType.Normal, CssClass = string.Empty };
@@ -167,7 +160,7 @@ namespace HouseWinLoss.Products
             var cn88TotalRow = gridDataRowBuilder.BuildDataRow(cn88Total, HAlignment.Right);
             FormatTotalRow(cn88TotalRow);
 
-            return new List<GridDataRow> { row, cn88TotalRow };
+            return [row, cn88TotalRow];
         }
 
         private static void FormatTotalRow(GridDataRow row)

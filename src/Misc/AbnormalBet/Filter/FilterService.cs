@@ -19,15 +19,8 @@ namespace AbnormalBet.Filter
         Task<IEnumerable<LeagueModel>> QueryLeague(string sportId, string searchText, bool searchExactly);
     }
 
-    public class FilterServiceImp : FilterService
+    public class FilterServiceImp(IDynamicRepository repository) : FilterService
     {
-        private readonly IDynamicRepository repository;
-
-        public FilterServiceImp(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public async Task<IEnumerable<FilterItemModel>> QueryBetType(string sportId)
         {
             return await repository.FetchAsync<FilterItemModel>(new BetTypeQueryCriteria

@@ -2,7 +2,5 @@
 
 namespace SMAWinLoss.Filter
 {
-    public class BetFromHttpParameter : IRequest<IEnumerable<BetFrom>>
-    {
-    }
+    public class BetFromHttpParameter : IRequest<IEnumerable<BetFrom>>;
 }

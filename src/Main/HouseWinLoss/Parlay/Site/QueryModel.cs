@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.Parlay.Site
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

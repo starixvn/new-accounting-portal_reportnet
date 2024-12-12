@@ -2,10 +2,10 @@
 {
     using AutoMapper;
     using Fanex.Excel.Models;
-    using HouseWinLoss.Common.BasicWinLoss;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Common.BasicWinLoss;
+    using Common.ColumnDecorators;
+    using Common.Criteria;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
@@ -54,7 +54,7 @@
             var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
             var liveNonLiveDecorateGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
-            return new GridOptions[] { majorMinorDecorationGridOptions, liveNonLiveDecorateGridOptions };
+            return [majorMinorDecorationGridOptions, liveNonLiveDecorateGridOptions];
         }
     }
 }

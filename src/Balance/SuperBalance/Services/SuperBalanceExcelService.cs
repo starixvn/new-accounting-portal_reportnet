@@ -75,7 +75,7 @@ public class SuperBalanceExcelServiceImp(ConfigurationService configurationServi
 
     private void BuildTotalRow(BalanceItemModel baseBalanceTotal, int startIndex)
     {
-        var item = new BalanceTotalItemExcelModel()
+        var item = new BalanceTotalItemExcelModel
         {
             Text = "Total",
             Total = baseBalanceTotal.BaseBalance

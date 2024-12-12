@@ -2,15 +2,9 @@ namespace DuplicateTickets.Model
 {
     public class DuplicateTicketsExcelModel
     {
-        public DuplicateTicketsExcelModel()
-        {
-            Rows = new List<DuplicateTicketsByUserNameExcelModel>();
-            MD5Hash = string.Empty;
-        }
+        public List<DuplicateTicketsByUserNameExcelModel> Rows { get; set; } = [];
 
-        public List<DuplicateTicketsByUserNameExcelModel> Rows { get; set; }
-
-        public string MD5Hash { get; set; }
+        public string MD5Hash { get; set; } = string.Empty;
 
         public bool HaveDuplicateTickets { get; set; }
     }

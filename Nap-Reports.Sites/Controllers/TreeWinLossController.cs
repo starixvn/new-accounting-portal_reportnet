@@ -6,15 +6,8 @@ using Utilities.BalanceUpServices;
 
 namespace Nap_Reports.Sites.Controllers
 {
-    public class TreeWinLossController : Controller
+    public class TreeWinLossController(BalanceUpService balanceUpService) : Controller
     {
-        private readonly BalanceUpService balanceUpService;
-
-        public TreeWinLossController(BalanceUpService balanceUpService)
-        {
-            this.balanceUpService = balanceUpService;
-        }
-
         [NapAuth(FunctionKey = AccReportFunctionKeys.TreeWinLoss, Policy = Constant.Policy.Read)]
         public IActionResult Index()
         {

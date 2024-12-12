@@ -16,9 +16,9 @@ namespace CompanyWinLoss.Criteria
             get
             {
                 var endOfMonth = new DateTime(
-                    this.FromDate.Year,
-                    this.FromDate.Month,
-                    DateTime.DaysInMonth(this.FromDate.Year, this.FromDate.Month));
+                    FromDate.Year,
+                    FromDate.Month,
+                    DateTime.DaysInMonth(FromDate.Year, FromDate.Month));
                 if (endOfMonth > DateTime.Now)
                 {
                     endOfMonth = DateTime.Now;

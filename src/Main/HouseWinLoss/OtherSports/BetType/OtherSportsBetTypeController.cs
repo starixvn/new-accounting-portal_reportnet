@@ -7,19 +7,13 @@ namespace HouseWinLoss.OtherSports.BetType
 {
     [Route("api/house-win-loss-by-products/other-sports/bet-type")]
     [ApiController]
-    public class OtherSportsBetTypeController : BasicWinLossController
+    public class OtherSportsBetTypeController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : BasicWinLossController(service, builder, decorator)
     {
-        private readonly IMapper mapper;    
-        public OtherSportsBetTypeController(
-            BasicWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecoratorFull decorator,
-            IMapper mapper)
-         : base(service, builder, decorator)
-        {
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

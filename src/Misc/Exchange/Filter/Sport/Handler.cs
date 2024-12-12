@@ -3,15 +3,8 @@ using MediatR;
 
 namespace Exchange.Filter.Sport
 {
-    public class Handler : IRequestHandler<HttpParameterJson, IEnumerable<SportModel>>
+    public class Handler(IDynamicRepository repository) : IRequestHandler<HttpParameterJson, IEnumerable<SportModel>>
     {
-        private readonly IDynamicRepository repository;
-
-        public Handler(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public async Task<IEnumerable<SportModel>> Handle(HttpParameterJson request, CancellationToken cancellationToken)
         {
             var criteria = new Criteria();

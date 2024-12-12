@@ -16,7 +16,7 @@ namespace PunterAnalysis.Summary.Model
         [Cell("D8")]
         public object Margin => Turnover == 0
             ? "N/A" :
-            (object)(WinLoss / Turnover);
+            WinLoss / Turnover;
 
         [Cell("E8")]
         public int BetCount { get; set; }

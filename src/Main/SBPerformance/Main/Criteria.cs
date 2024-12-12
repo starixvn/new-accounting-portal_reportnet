@@ -28,7 +28,7 @@ namespace SBPerformance.Main
 
         public bool ExcludeParlay { get; set; }
 
-        public override string GetSettingKey() => $"SBPerformanceMonitor-Dashboard";
+        public override string GetSettingKey() => "SBPerformanceMonitor-Dashboard";
 
         public override bool IsValid() => true;
     }

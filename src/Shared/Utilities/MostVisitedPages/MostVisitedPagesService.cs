@@ -29,7 +29,7 @@ namespace Utilities.MostVisitedPages
 
         public const char UrlSeparator = '/';
 
-        public static readonly object MostVisitedPageLockObject = new object();
+        public static readonly object MostVisitedPageLockObject = new();
 
         public async Task<IEnumerable<MostVisitedPageModel>> GetMostVisitedPages()
         {
@@ -67,7 +67,7 @@ namespace Utilities.MostVisitedPages
                 }
             }
 
-            this.SortMostVisitedPages(ref mostvisitedPages);
+            SortMostVisitedPages(ref mostvisitedPages);
             return mostvisitedPages;
         }
 
@@ -80,15 +80,15 @@ namespace Utilities.MostVisitedPages
 
             lock (MostVisitedPageLockObject)
             {
-                List<MostVisitedPageModel> mostVisitedPages = cacheService.Get<List<MostVisitedPageModel>>(MistVisitedPageCacheKey);
+                var mostVisitedPages = cacheService.Get<List<MostVisitedPageModel>>(MistVisitedPageCacheKey);
                 if (mostVisitedPages == null)
                 {
-                    mostVisitedPages = new List<MostVisitedPageModel>();
+                    mostVisitedPages = [];
                 }
 
                 var mostVisitedPagesCount = mostVisitedPages.Count;
                 var isExist = false;
-                for (int i = 0; i < mostVisitedPagesCount; i++)
+                for (var i = 0; i < mostVisitedPagesCount; i++)
                 {
                     if (mostVisitedPages[i] != null &&
                         mostVisitedPages[i].MenuId == mostVisitedPage.MenuId)
@@ -149,12 +149,12 @@ namespace Utilities.MostVisitedPages
                                                .ToList();
 
             var pinSite = mostVisitedPages.Where(mvp =>
-                this.IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
+                IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
             var unpinSite = mostVisitedPages.Where(mvp =>
-                !this.IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
+                !IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
             mostVisitedPages = unpinSite;
 
-            for (int i = 0; i < pinSite.Count; i++)
+            for (var i = 0; i < pinSite.Count; i++)
             {
                 var mostVisitedPage = pinSite[i];
                 if (mostVisitedPage.Position <= mostVisitedPages.Count)

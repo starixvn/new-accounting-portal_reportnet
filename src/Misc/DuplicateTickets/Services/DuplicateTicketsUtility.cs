@@ -21,19 +21,19 @@ namespace DuplicateTickets.Services
 
         public List<TicketModel> AssignSubTicketInfo(IGrouping<dynamic, DuplicateTicketEntity> duplicateTicketByUserName)
         {
-            List<TicketModel> groups = new List<TicketModel>();
-            DateTime prevBetTimeGroup = new DateTime(2014, 7, 11);
-            DateTime prevBetTimeTicket = new DateTime(2014, 7, 11);
-            int ticketIndex = 0;
+            List<TicketModel> groups = [];
+            var prevBetTimeGroup = new DateTime(2014, 7, 11);
+            var prevBetTimeTicket = new DateTime(2014, 7, 11);
+            var ticketIndex = 0;
             double timeDifferenceGroup = 0;
             double timeDifferenceTicket = 0;
-            int groupNo = 0;
+            var groupNo = 0;
 
             foreach (var duplicateTicket in duplicateTicketByUserName)
             {
                 var betTime = duplicateTicket.BetTime;
-                TimeSpan timeSpanGroup = betTime.Subtract(prevBetTimeGroup);
-                TimeSpan timeSpanTicket = betTime.Subtract(prevBetTimeTicket);
+                var timeSpanGroup = betTime.Subtract(prevBetTimeGroup);
+                var timeSpanTicket = betTime.Subtract(prevBetTimeTicket);
                 timeDifferenceGroup = timeSpanGroup.TotalMilliseconds;
                 timeDifferenceTicket = timeSpanTicket.TotalMilliseconds;
 
@@ -55,7 +55,7 @@ namespace DuplicateTickets.Services
                     timeDifferenceTicket = 0;
                 }
 
-                var ticketInfo = new TicketModel()
+                var ticketInfo = new TicketModel
                 {
                     Status = duplicateTicket.Status,
                     ReferenceNumber = duplicateTicket.RefNo,
@@ -104,15 +104,15 @@ namespace DuplicateTickets.Services
             var md5Hash = MD5.Create();
 
             // Convert the input string to a byte array and compute the hash. 
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            var data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
             // Create a new String builder to collect the bytes 
             // and create a string.
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
             // Loop through each byte of the hashed data  
             // and format each one as a hexadecimal string. 
-            for (int i = 0; i < data.Length; i++)
+            for (var i = 0; i < data.Length; i++)
             {
                 builder.Append(data[i].ToString("x2"));
             }

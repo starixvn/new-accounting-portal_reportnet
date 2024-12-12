@@ -2,7 +2,5 @@
 
 namespace SBCustomerPerformanceByDanger.Filter
 {
-    public class SportQueryHttpParameter : IRequest<List<SportModel>>
-    {
-    }
+    public class SportQueryHttpParameter : IRequest<List<SportModel>>;
 }

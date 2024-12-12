@@ -20,7 +20,7 @@ namespace DailyCreatedCustomers.Services
         {
             var report = new SummaryModel
             {
-                Summaries = new List<SummaryItemModel>()
+                Summaries = []
             };
 
             var rawData = await repository.FetchAsync<SummaryEntity>(criteria);

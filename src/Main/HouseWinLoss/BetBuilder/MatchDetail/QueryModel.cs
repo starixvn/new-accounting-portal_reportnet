@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.BetBuilder.MatchDetail
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

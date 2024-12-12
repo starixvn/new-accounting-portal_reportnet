@@ -1,7 +1,5 @@
 ﻿namespace SBPerformance
 {
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class SBPerformanceAttribute : Attribute
-    {
-    }
+    public sealed class SBPerformanceAttribute : Attribute;
 }

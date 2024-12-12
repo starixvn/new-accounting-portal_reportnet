@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.Common.Criteria
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class UniversalSportbookMatchDetailCriteria : WinLossCriteria
     {
@@ -20,6 +20,6 @@
 
         public int PermissionProfileID { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_LvlN_Sportsbook_MatchDetail";
+        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_MatchDetail";
     }
 }

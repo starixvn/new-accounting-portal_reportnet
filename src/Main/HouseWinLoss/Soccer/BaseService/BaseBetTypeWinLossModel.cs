@@ -16,6 +16,6 @@ namespace HouseWinLoss.Soccer.BaseService
 
         public WinLoss HedgeTotal { get; set; }
 
-        public List<WinLoss> RM { get; set; } = new List<WinLoss>();
+        public List<WinLoss> RM { get; set; } = [];
     }
 }

@@ -19,12 +19,12 @@ namespace HouseWinLoss.Soccer.BaseService
             var row = GridDataRowBuilder.BuildDataRow(item.Total, alignment);
             row.RowType = RowType.ParentLevelOne;
 
-            row.SubRows = new List<GridDataRow>
-            {
+            row.SubRows =
+            [
                 GridDataRowBuilder.BuildDataRow(item.Credit, HAlignment.Right),
                 GridDataRowBuilder.BuildDataRow(item.Deposit, HAlignment.Right),
                 GridDataRowBuilder.BuildDataRow(item.CN88, HAlignment.Right)
-            };
+            ];
 
             return row;
         }

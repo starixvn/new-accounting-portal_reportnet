@@ -6,7 +6,7 @@ namespace SBCustomerPerformanceByDanger.Filter
     {
         public string SportBettype { get; set; }
 
-        public override string GetSettingKey() => $"Acc_Rpt_SBCustPerfByDangerLevel_LeagueGroupBySportSel";
+        public override string GetSettingKey() => "Acc_Rpt_SBCustPerfByDangerLevel_LeagueGroupBySportSel";
 
         public override bool IsValid() => true;
     }

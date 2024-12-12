@@ -10,15 +10,8 @@ namespace HouseWinLoss.Parlay.Site
         GridOptions Build(SiteParlayModel winLoss, string title);
     }
 
-    public class GridOptionsBuilderImp : GridOptionsBuilder
+    public class GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : GridOptionsBuilder
     {
-        private readonly BasicGridDataRowBuilder gridDataRowBuilder;
-
-        public GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder)
-        {
-            this.gridDataRowBuilder = gridDataRowBuilder;
-        }
-
         public GridOptions Build(SiteParlayModel winLoss, string title)
         {
             return new GridOptions
@@ -53,7 +46,7 @@ namespace HouseWinLoss.Parlay.Site
         {
             var columns = new List<Columns>
             {
-                new Columns { ColumnIndex = 1, Name = "Main", Value = string.Empty, MergeColNumber = 13 }
+                new() { ColumnIndex = 1, Name = "Main", Value = string.Empty, MergeColNumber = 13 }
             };
 
             return new GridDataRow { Columns = columns, RowType = RowType.Normal, CssClass = string.Empty };
@@ -66,7 +59,7 @@ namespace HouseWinLoss.Parlay.Site
 
         private List<GridDataRow> BuildFooter(WinLoss item)
         {
-            return new List<GridDataRow> { gridDataRowBuilder.BuildDataRow(item, HAlignment.Right) };
+            return [gridDataRowBuilder.BuildDataRow(item, HAlignment.Right)];
         }
     }
 }

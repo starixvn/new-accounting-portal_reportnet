@@ -50,7 +50,7 @@ namespace TraderPerformance.Repositories
                         continue;
                     }
 
-                    TraderPerformanceOtherSportsModel traderInfo = new TraderPerformanceOtherSportsModel
+                    var traderInfo = new TraderPerformanceOtherSportsModel
                     {
                         Id = Convert.ToInt32(dataRow["custid"]),
                         Name = Convert.ToString(dataRow["username"]),
@@ -139,7 +139,7 @@ namespace TraderPerformance.Repositories
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
                     var eventDate = Convert.ToDateTime(dataRow["eventdate"]);
-                    TraderPerformanceOtherSportsDetailModel traderInfo = new TraderPerformanceOtherSportsDetailModel
+                    var traderInfo = new TraderPerformanceOtherSportsDetailModel
                     {
                         Id = Convert.ToInt32(dataRow["custid"]),
                         Name = Convert.ToString(dataRow["username"]),

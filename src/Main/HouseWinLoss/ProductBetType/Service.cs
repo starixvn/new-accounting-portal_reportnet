@@ -8,21 +8,9 @@ namespace HouseWinLoss.ProductBetType
         Task<ProductBetTypeWinLoss> Query(QueryModel queryModel);
     }
 
-    public class ServiceImp : Service
+    public class ServiceImp(RawWinLossService rawWinLossService, CalculationService calculationService, IMapper mapper)
+        : Service
     {
-        private readonly RawWinLossService rawWinLossService;
-
-        private readonly CalculationService calculationService;
-
-        private readonly IMapper mapper;
-
-        public ServiceImp(RawWinLossService rawWinLossService, CalculationService calculationService, IMapper mapper)
-        {
-            this.rawWinLossService = rawWinLossService;
-            this.calculationService = calculationService;
-            this.mapper = mapper;
-        }
-
         public async Task<ProductBetTypeWinLoss> Query(QueryModel queryModel)
         {
             var criteria = mapper.Map<Criteria>(queryModel);

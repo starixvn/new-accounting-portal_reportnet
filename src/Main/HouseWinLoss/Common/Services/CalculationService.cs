@@ -21,23 +21,13 @@ namespace HouseWinLoss.Common.Services
         IEnumerable<WinLoss> CalculateBetTypes(IEnumerable<WinLossRaw> rawWinLosses);
     }
 
-    public class CalculationServiceImp : CalculationService
+    public class CalculationServiceImp(RemotingRefService refService, IMapper mapper) : CalculationService
     {
         private const string CreditName = @"Credit";
 
         private const string DepositName = @"Deposit";
 
         private const string CN88Name = @"CN88";
-
-        private readonly RemotingRefService refService;
-
-        private readonly IMapper mapper;
-
-        public CalculationServiceImp(RemotingRefService refService, IMapper mapper)
-        {
-            this.refService = refService;
-            this.mapper = mapper;
-        }
 
         public WinLoss FromRawWinLossByRowName(WinLossRaw rawWinLoss)
         {

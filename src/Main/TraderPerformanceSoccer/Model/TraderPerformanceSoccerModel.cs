@@ -2,12 +2,6 @@ namespace TraderPerformance.Model
 {
     public class TraderPerformanceSoccerModel
     {
-        public TraderPerformanceSoccerModel()
-        {
-            ReportRows = new List<TraderPerformanceSoccerModel>();
-            ChildInfo = new List<TraderPerformanceSoccerModel>();
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -70,9 +64,9 @@ namespace TraderPerformance.Model
 
         public decimal TenMinOneXTwo { get; set; }
 
-        public List<TraderPerformanceSoccerModel> ChildInfo { get; set; }
+        public List<TraderPerformanceSoccerModel> ChildInfo { get; set; } = [];
 
-        public List<TraderPerformanceSoccerModel> ReportRows { get; set; }
+        public List<TraderPerformanceSoccerModel> ReportRows { get; set; } = [];
 
         public TraderPerformanceSoccerModel GrandTotal { get; set; }
 
@@ -108,73 +102,73 @@ namespace TraderPerformance.Model
         {
             FirstHalfHdp = turnOverInfo.FirstHalfHdp == 0 ?
                 0 :
-                (winLossInfo.FirstHalfHdp / turnOverInfo.FirstHalfHdp) * 100;
+                winLossInfo.FirstHalfHdp / turnOverInfo.FirstHalfHdp * 100;
             Hdp = turnOverInfo.Hdp == 0 ?
                 0 :
-                (winLossInfo.Hdp / turnOverInfo.Hdp) * 100;
+                winLossInfo.Hdp / turnOverInfo.Hdp * 100;
             FifteenMinHdp = turnOverInfo.FifteenMinHdp == 0 ?
                 0 :
-                (winLossInfo.FifteenMinHdp / turnOverInfo.FifteenMinHdp) * 100;
+                winLossInfo.FifteenMinHdp / turnOverInfo.FifteenMinHdp * 100;
             FirstHalfOU = turnOverInfo.FirstHalfOU == 0 ?
                 0 :
-                (winLossInfo.FirstHalfOU / turnOverInfo.FirstHalfOU) * 100;
+                winLossInfo.FirstHalfOU / turnOverInfo.FirstHalfOU * 100;
             OU = turnOverInfo.OU == 0 ?
                 0 :
-                (winLossInfo.OU / turnOverInfo.OU) * 100;
+                winLossInfo.OU / turnOverInfo.OU * 100;
             FirstHalfOneXTwo = turnOverInfo.FirstHalfOneXTwo == 0 ?
                 0 :
-                (winLossInfo.FirstHalfOneXTwo / turnOverInfo.FirstHalfOneXTwo) * 100;
+                winLossInfo.FirstHalfOneXTwo / turnOverInfo.FirstHalfOneXTwo * 100;
             OneXTwo = turnOverInfo.OneXTwo == 0 ?
                 0 :
-                (winLossInfo.OneXTwo / turnOverInfo.OneXTwo) * 100;
+                winLossInfo.OneXTwo / turnOverInfo.OneXTwo * 100;
             FifteenMinOneXTwo = turnOverInfo.FifteenMinOneXTwo == 0 ?
                 0 :
-                (winLossInfo.FifteenMinOneXTwo / turnOverInfo.FifteenMinOneXTwo) * 100;
+                winLossInfo.FifteenMinOneXTwo / turnOverInfo.FifteenMinOneXTwo * 100;
             FirstHalfNoOfCorners = turnOverInfo.FirstHalfNoOfCorners == 0 ?
                 0 :
-                (winLossInfo.FirstHalfNoOfCorners / turnOverInfo.FirstHalfNoOfCorners) * 100;
+                winLossInfo.FirstHalfNoOfCorners / turnOverInfo.FirstHalfNoOfCorners * 100;
             FifteenMinNoOfCorners = turnOverInfo.FifteenMinNoOfCorners == 0 ?
                 0 :
-                (winLossInfo.FifteenMinNoOfCorners / turnOverInfo.FifteenMinNoOfCorners) * 100;
+                winLossInfo.FifteenMinNoOfCorners / turnOverInfo.FifteenMinNoOfCorners * 100;
             NoOfCorners = turnOverInfo.NoOfCorners == 0 ?
                 0 :
-                (winLossInfo.NoOfCorners / turnOverInfo.NoOfCorners) * 100;
+                winLossInfo.NoOfCorners / turnOverInfo.NoOfCorners * 100;
             FifteenMinOU = turnOverInfo.FifteenMinOU == 0 ?
                 0 :
-                (winLossInfo.FifteenMinOU / turnOverInfo.FifteenMinOU) * 100;
+                winLossInfo.FifteenMinOU / turnOverInfo.FifteenMinOU * 100;
             TenMinOU = turnOverInfo.TenMinOU == 0 ?
                 0 :
-                (winLossInfo.TenMinOU / turnOverInfo.TenMinOU) * 100;
+                winLossInfo.TenMinOU / turnOverInfo.TenMinOU * 100;
             SingleTeamOU = turnOverInfo.SingleTeamOU == 0 ?
                 0 :
-                (winLossInfo.SingleTeamOU / turnOverInfo.SingleTeamOU) * 100;
+                winLossInfo.SingleTeamOU / turnOverInfo.SingleTeamOU * 100;
             FirstHalfTotalBookings = turnOverInfo.FirstHalfTotalBookings == 0 ?
                 0 :
-                (winLossInfo.FirstHalfTotalBookings / turnOverInfo.FirstHalfTotalBookings) * 100;
+                winLossInfo.FirstHalfTotalBookings / turnOverInfo.FirstHalfTotalBookings * 100;
             TotalBookings = turnOverInfo.TotalBookings == 0 ?
                 0 :
-                (winLossInfo.TotalBookings / turnOverInfo.TotalBookings) * 100;
+                winLossInfo.TotalBookings / turnOverInfo.TotalBookings * 100;
             TotalBookingsFifteenMinOU = turnOverInfo.TotalBookingsFifteenMinOU == 0 ?
                 0 :
-                (winLossInfo.TotalBookingsFifteenMinOU / turnOverInfo.TotalBookingsFifteenMinOU) * 100;
+                winLossInfo.TotalBookingsFifteenMinOU / turnOverInfo.TotalBookingsFifteenMinOU * 100;
             TotalBookingsFifteenMinHDP = turnOverInfo.TotalBookingsFifteenMinHDP == 0 ?
                 0 :
-                (winLossInfo.TotalBookingsFifteenMinHDP / turnOverInfo.TotalBookingsFifteenMinHDP) * 100;
+                winLossInfo.TotalBookingsFifteenMinHDP / turnOverInfo.TotalBookingsFifteenMinHDP * 100;
             NextBookings = turnOverInfo.NextBookings == 0 ?
                 0 :
-                (winLossInfo.NextBookings / turnOverInfo.NextBookings) * 100;            
+                winLossInfo.NextBookings / turnOverInfo.NextBookings * 100;            
             NextCorner = turnOverInfo.NextCorner == 0 ?
                 0 :
-                (winLossInfo.NextCorner / turnOverInfo.NextCorner) * 100;
+                winLossInfo.NextCorner / turnOverInfo.NextCorner * 100;
             Overall = turnOverInfo.Overall == 0 ?
                 0 :
-                (winLossInfo.Overall / turnOverInfo.Overall) * 100;
+                winLossInfo.Overall / turnOverInfo.Overall * 100;
             TenMinOneXTwo = turnOverInfo.TenMinOneXTwo == 0 ?
                 0 :
-                (winLossInfo.TenMinOneXTwo / turnOverInfo.TenMinOneXTwo) * 100;
+                winLossInfo.TenMinOneXTwo / turnOverInfo.TenMinOneXTwo * 100;
             TenMinHdp = turnOverInfo.TenMinHdp == 0 ?
                 0 :
-                (winLossInfo.TenMinHdp / turnOverInfo.TenMinHdp) * 100; 
+                winLossInfo.TenMinHdp / turnOverInfo.TenMinHdp * 100; 
         }
 
         public void CalculateTotalMatchAndLeague(

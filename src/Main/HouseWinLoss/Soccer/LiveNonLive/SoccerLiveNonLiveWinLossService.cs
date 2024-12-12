@@ -9,20 +9,11 @@ namespace HouseWinLoss.Soccer.LiveNonLive
         Task<IEnumerable<BasicWinLossModel>> Query(WinLossCriteria criteria);
     }
 
-    public class SoccerLiveNonLiveWinLossServiceImp : SoccerLiveNonLiveWinLossService
+    public class SoccerLiveNonLiveWinLossServiceImp(
+        RawWinLossService rawWinLossService,
+        CalculationService calculationService)
+        : SoccerLiveNonLiveWinLossService
     {
-        private readonly RawWinLossService rawWinLossService;
-
-        private readonly CalculationService calculationService;
-
-        public SoccerLiveNonLiveWinLossServiceImp(
-            RawWinLossService rawWinLossService,
-            CalculationService calculationService)
-        {
-            this.rawWinLossService = rawWinLossService;
-            this.calculationService = calculationService;
-        }
-
         public async Task<IEnumerable<BasicWinLossModel>> Query(WinLossCriteria criteria)
         {
             var rawWinLosses = await rawWinLossService.Query(criteria);
@@ -59,7 +50,7 @@ namespace HouseWinLoss.Soccer.LiveNonLive
                 GrandTotal = liveNonLiveGrandTotal
             };
 
-            return new BasicWinLossModel[] { majorMinorSummaries,  liveNonLiveSummaries};
+            return [majorMinorSummaries,  liveNonLiveSummaries];
         }
     }
 }

@@ -7,20 +7,13 @@ namespace HouseWinLoss.Soccer.MajorMinor
 {
     [Route("api/house-win-loss-by-products/soccer/major-minor")]
     [ApiController]
-    public class SoccerMajorMinorController : BasicWinLossController
+    public class SoccerMajorMinorController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : BasicWinLossController(service, builder, decorator)
     {
-        private readonly IMapper mapper;
-
-        public SoccerMajorMinorController(
-            BasicWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecoratorFull decorator,
-            IMapper mapper)
-        : base(service, builder, decorator)
-        {
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

@@ -21,15 +21,8 @@ namespace CashOutPerformance.Services
         Task<SportLevelModel> GetSportLevel(SportLevelCriteria criteria);
     }
 
-    public class CashOutPerformanceServiceImp : CashOutPerformanceService
+    public class CashOutPerformanceServiceImp(IDynamicRepository repository) : CashOutPerformanceService
     {
-        private readonly IDynamicRepository repository;
-
-        public CashOutPerformanceServiceImp(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public async Task<IEnumerable<SiteModel>> GetLicensees(LicenseeCriteria criteria)
         {
             return await repository.FetchAsync<SiteModel>(criteria);
@@ -78,7 +71,7 @@ namespace CashOutPerformance.Services
         {
             var (firstResultSet, secondResultSet, thirdResultSet) = await repository.FetchMultipleAsync<SportItemModel, SportItemModel, int>(criteria);
 
-            var groups = firstResultSet.Select(r => new { SportName = r.SportName, SportType = r.SportType })
+            var groups = firstResultSet.Select(r => new { r.SportName, r.SportType })
                             .Distinct();
             var sports = from @group in groups
                       let rawSports = firstResultSet.Where(r => r.SportType == @group.SportType && r.SportName == @group.SportName).ToArray()

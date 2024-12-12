@@ -11,25 +11,12 @@ namespace PunterAnalysis.Summary
         Task<SummaryEntity<SummaryModel>> GetSummaries(Criteria criteria);
     }
 
-    public class SummaryServiceImp : SummaryService
+    public class SummaryServiceImp(
+        PunterAnalysisService punterAnalysisService,
+        CustomerTrackingService customerTrackingService,
+        ConfigurationService configurationService)
+        : SummaryService
     {
-        private readonly PunterAnalysisService punterAnalysisService;
-
-        private readonly CustomerTrackingService customerTrackingService;
-
-        private readonly ConfigurationService configurationService;
-
-
-        public SummaryServiceImp(
-           PunterAnalysisService punterAnalysisService,
-           CustomerTrackingService customerTrackingService,
-           ConfigurationService configurationService)
-        {
-            this.punterAnalysisService = punterAnalysisService;
-            this.customerTrackingService = customerTrackingService;
-            this.configurationService = configurationService;
-        }
-
         public async Task<SummaryEntity<SummaryModel>> GetSummaries(Criteria criteria)
         {
             var summaries = await punterAnalysisService.Query<SummaryModel>(criteria);

@@ -12,6 +12,6 @@
 
         public int BetType { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_LvlN_3rd_MatchDetail";
+        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_3rd_MatchDetail";
     }
 }

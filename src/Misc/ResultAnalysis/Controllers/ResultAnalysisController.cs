@@ -7,16 +7,9 @@ namespace ResultAnalysis.Controllers
 {
     [Route("api/result-analysis")]
 	[ApiController]
-	public class ResultAnalysisController: ControllerBase
-	{
-		private readonly IMediator mediator;
-
-		public ResultAnalysisController(IMediator mediator)
-		{
-			this.mediator = mediator;
-		}
-
-		[Route("leagues")]
+	public class ResultAnalysisController(IMediator mediator) : ControllerBase
+    {
+        [Route("leagues")]
 		public async Task<IActionResult> Leagues(LeagueRequest request)
 		{
 			var viewModel = await mediator.Send(request);

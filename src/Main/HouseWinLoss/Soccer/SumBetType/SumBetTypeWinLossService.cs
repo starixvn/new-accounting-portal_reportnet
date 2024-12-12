@@ -8,20 +8,11 @@ namespace HouseWinLoss.Soccer.SumBetType
         Task<SumBetTypeWinLossModel> Query(WinLossCriteria criteria);
     }
 
-    public class SumBetTypeWinLossServiceImp : SumBetTypeWinLossService
+    public class SumBetTypeWinLossServiceImp(
+        RawWinLossService rawWinLossService,
+        BaseService.BaseCalculationService calculationService)
+        : SumBetTypeWinLossService
     {
-        private readonly RawWinLossService rawWinLossService;
-
-        private readonly BaseService.BaseCalculationService calculationService;
-
-        public SumBetTypeWinLossServiceImp(
-            RawWinLossService rawWinLossService,
-            BaseService.BaseCalculationService calculationService)
-        {
-            this.rawWinLossService = rawWinLossService;
-            this.calculationService = calculationService;
-        }
-
         public async Task<SumBetTypeWinLossModel> Query(WinLossCriteria criteria)
         {
             var rawWinLosses = await rawWinLossService.Query(criteria);

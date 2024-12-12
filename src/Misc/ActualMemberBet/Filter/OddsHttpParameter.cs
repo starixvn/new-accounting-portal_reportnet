@@ -2,7 +2,5 @@
 
 namespace ActualMemberBet.Filter
 {
-    public class OddsHttpParameter : IRequest<IEnumerable<Odds>>
-    {
-    }
+    public class OddsHttpParameter : IRequest<IEnumerable<Odds>>;
 }

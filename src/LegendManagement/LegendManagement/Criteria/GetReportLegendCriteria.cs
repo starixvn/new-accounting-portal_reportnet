@@ -6,23 +6,15 @@ namespace LegendManagement.Criteria;
 
 public class GetReportLegendCriteria : CriteriaBase
 {
-    public GetReportLegendCriteria()
-    {
-        this.MenuId = WebSettings.DefaultReportLegendTemplate;
-        this.LegendId = WebSettings.DefaultReportLegendTemplate;
-        this.System = WebSettings.System;
-        this.IsNote = false;
-    }
+    public int MenuId { get; set; } = WebSettings.DefaultReportLegendTemplate;
 
-    public int MenuId { get; set; }
-
-    public string System { get; set; }
+    public string System { get; set; } = WebSettings.System;
 
     [SpParam(Ignored = true)]
-    public bool IsNote { get; set; }
+    public bool IsNote { get; set; } = false;
 
     [SpParam(Ignored = true)]
-    public int LegendId { get; set; }
+    public int LegendId { get; set; } = WebSettings.DefaultReportLegendTemplate;
 
     [SpParam(Ignored = true)]
     public string ConfigPath { get; set; }

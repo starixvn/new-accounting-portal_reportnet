@@ -2,7 +2,5 @@
 
 namespace Exchange.Filter.Licensee
 {
-    public class HttpParameterJson : IRequest<IEnumerable<LicenseeModel>>
-    {
-    }
+    public class HttpParameterJson : IRequest<IEnumerable<LicenseeModel>>;
 }

@@ -6,15 +6,8 @@ namespace Exchange.Report
 {
     [Route("api/exchange")]
     [ApiController]
-    public class ExchangeController : ControllerBase
+    public class ExchangeController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ExchangeController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("main-report")]
         public async Task<IActionResult> ExchangeLincensee(LicenseeHttpParameterJson httpParameter)
         {

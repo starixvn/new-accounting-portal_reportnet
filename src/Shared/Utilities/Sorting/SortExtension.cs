@@ -6,13 +6,13 @@ namespace Utilities.Sorting
     {
         public static void SortByProperty<T>(this List<T> dataSource, string sortType, string sortCol)
         {
-            PropertyInfo propInfo = typeof(T).GetProperty(sortCol);
+            var propInfo = typeof(T).GetProperty(sortCol);
             if (propInfo == null || dataSource == null || dataSource.Count == 0)
             {
                 return;
             }
 
-            bool isAsc = string.Equals(sortType, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
+            var isAsc = string.Equals(sortType, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
             Comparison<T> compare = delegate (T a, T b)
             {
                 object valueA = isAsc
@@ -31,11 +31,11 @@ namespace Utilities.Sorting
 
         public static void SortDataByProperty<T>(List<T> dataSource, string sortDirection, string sortColumnName, string sortDataType)
         {
-            PropertyInfo propInfo = typeof(T).GetProperty(sortColumnName);
+            var propInfo = typeof(T).GetProperty(sortColumnName);
 
             Comparison<T> compare = delegate (T a, T b)
             {
-                bool isAsc = string.Equals(sortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
+                var isAsc = string.Equals(sortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
                 object valueA;
                 object valueB;
 

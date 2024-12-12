@@ -3,12 +3,9 @@ using Fanex.Excel.Models;
 
 namespace HouseWinLoss.Common.ColumnDecorators
 {
-    public class MatchGridOptionColumnDecoratorOutright : GridOptionColumnDecoratorBase, MatchGridOptionColumnDecorator
+    public class MatchGridOptionColumnDecoratorOutright(GridOptionColumnRemoval columnRemoval)
+        : GridOptionColumnDecoratorBase(columnRemoval), MatchGridOptionColumnDecorator
     {
-        public MatchGridOptionColumnDecoratorOutright(GridOptionColumnRemoval columnRemoval) : base(columnRemoval)
-        {
-        }
-
         public GridOptions Build(GridOptions gridOptions)
         {
             DecorateMatchRow(gridOptions);
@@ -27,8 +24,8 @@ namespace HouseWinLoss.Common.ColumnDecorators
         {
             var headerColumns = new List<HeaderColumns>
             {
-                new HeaderColumns { HeaderText = "Code", Width = 130, Name = "MatchCode", CellAlignment = HAlignment.Center, Bold = true },
-                new HeaderColumns { HeaderText = "Home", Width = 150, Name = "Home", CellAlignment = HAlignment.Right }
+                new() { HeaderText = "Code", Width = 130, Name = "MatchCode", CellAlignment = HAlignment.Center, Bold = true },
+                new() { HeaderText = "Home", Width = 150, Name = "Home", CellAlignment = HAlignment.Right }
             };
             var baseHeaderColumns = CreateCoreHeaderColumns();
             headerColumns.AddRange(baseHeaderColumns);
@@ -40,19 +37,19 @@ namespace HouseWinLoss.Common.ColumnDecorators
         {
             var columns = new List<HeaderColumns>
             {
-                new HeaderColumns { HeaderText = "Code", Name = "MatchCode", Width = 130, MergeRowNumber = 2 },
-                new HeaderColumns { HeaderText = "Event", Name = "Home", Width = 150, MergeRowNumber = 2 },
-                new HeaderColumns { HeaderText = "Member Win Loss", Name = "MemberWinLoss", Width = 100, MergeRowNumber = 2 },
-                new HeaderColumns { HeaderText = "SMA Win Loss", Name = "SMAWinLoss",  Width = 100, MergeRowNumber = 2 },
-                new HeaderColumns { HeaderText = "Extra PT", Name = "ExtraPT",  Width = 100, MergeRowNumber = 2 },
-                new HeaderColumns { HeaderText = "Commission", Name = "Commission",  Width = 100, MergeRowNumber = 2 },
-                new HeaderColumns { HeaderText = "House Real Income", Name = "RealIncome", Width = 300, MergeColNumber = 3 },
-                new HeaderColumns { HeaderText = "House Real Turnover", Name = "RealTurnover",  Width = 200, MergeColNumber = 2 },
-                new HeaderColumns { HeaderText = "Margin", Name = "VirtualMargin",  Width = 100, MergeColNumber = 2 }
+                new() { HeaderText = "Code", Name = "MatchCode", Width = 130, MergeRowNumber = 2 },
+                new() { HeaderText = "Event", Name = "Home", Width = 150, MergeRowNumber = 2 },
+                new() { HeaderText = "Member Win Loss", Name = "MemberWinLoss", Width = 100, MergeRowNumber = 2 },
+                new() { HeaderText = "SMA Win Loss", Name = "SMAWinLoss",  Width = 100, MergeRowNumber = 2 },
+                new() { HeaderText = "Extra PT", Name = "ExtraPT",  Width = 100, MergeRowNumber = 2 },
+                new() { HeaderText = "Commission", Name = "Commission",  Width = 100, MergeRowNumber = 2 },
+                new() { HeaderText = "House Real Income", Name = "RealIncome", Width = 300, MergeColNumber = 3 },
+                new() { HeaderText = "House Real Turnover", Name = "RealTurnover",  Width = 200, MergeColNumber = 2 },
+                new() { HeaderText = "Margin", Name = "VirtualMargin",  Width = 100, MergeColNumber = 2 }
             };
 
             var groupHeader = new GroupHeaderRows { Columns = columns };
-            return new List<GroupHeaderRows> { groupHeader };
+            return [groupHeader];
         }
 
         private static void DecorateMatchRow(GridOptions gridOptions)

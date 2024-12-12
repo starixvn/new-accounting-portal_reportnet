@@ -4,15 +4,8 @@ using Utilities.LinqDynamicSum;
 
 namespace PunterAnalysis.League
 {
-    public abstract class LeagueServiceBase : LeagueService
+    public abstract class LeagueServiceBase(IDynamicRepository repository) : LeagueService
     {
-        private readonly IDynamicRepository repository;
-
-        protected LeagueServiceBase(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public async Task<ReportModel> Query(ICriteria criteria)
         {
             var entities = await QueryFromRepository(criteria);

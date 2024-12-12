@@ -35,10 +35,7 @@ namespace AbnormalBet.Model
                     return Odds;
                 }
             }
-            set
-            {
-                OddsData = value;
-            }
+            set => OddsData = value;
         }
 
         [Cell("G5")]
@@ -63,10 +60,7 @@ namespace AbnormalBet.Model
                     return HDP;
                 }
             }
-            set
-            {
-                HDPData = value;
-            }
+            set => HDPData = value;
         }
 
         [Cell("J5")]

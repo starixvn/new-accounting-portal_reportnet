@@ -1,7 +1,7 @@
 namespace HouseWinLoss.Soccer.GroupBetType
 {
-    using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Common.Criteria;
+    using Configuration;
 
     public class GroupBetTypeCriteria : WinLossCriteria
     {
@@ -9,7 +9,7 @@ namespace HouseWinLoss.Soccer.GroupBetType
 
         public int IsLive { get; set; } = Constants.LiveDefault;
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_LvlN_Sportsbook_Bettype";
+        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Bettype";
 
         public bool IsNoDraw { get; set; }
 

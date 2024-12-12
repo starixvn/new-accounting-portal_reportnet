@@ -6,21 +6,9 @@ using OfficeOpenXml;
 
 namespace ActualMemberBet.Bettype
 {
-    public class HandlerExcel : IRequestHandler<HttpParameterExcel, ExcelPackage>
+    public class HandlerExcel(ActualMemberBetService service, BettypeExcelBuilder excelBuilder, IMapper mapper)
+        : IRequestHandler<HttpParameterExcel, ExcelPackage>
     {
-        private readonly ActualMemberBetService service;
-
-        private readonly BettypeExcelBuilder excelBuilder;
-
-        private readonly IMapper mapper;    
-
-        public HandlerExcel(ActualMemberBetService service, BettypeExcelBuilder excelBuilder, IMapper mapper)
-        {
-            this.service = service;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(HttpParameterExcel request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<Criteria>(request);

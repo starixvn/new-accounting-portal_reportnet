@@ -15,21 +15,12 @@ namespace DailyMixParlayWinLoss.Services
         Task<WinLoss> GetAdvanceMixParlayReport(GetAdvanceMixParlayCriteria criteria);
     }
 
-    public class DailyMixParlayWinLossServiceImp : DailyMixParlayWinLossService
+    public class DailyMixParlayWinLossServiceImp(
+        IDynamicRepository repository,
+        RemotingRefService remotingRefService,
+        IMapper mapper)
+        : DailyMixParlayWinLossService
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly RemotingRefService remotingRefService;
-
-        private readonly IMapper mapper;
-
-        public DailyMixParlayWinLossServiceImp(IDynamicRepository repository, RemotingRefService remotingRefService, IMapper mapper)
-        {
-            this.repository = repository;
-            this.remotingRefService = remotingRefService;
-            this.mapper = mapper;
-        }
-
         public async Task<WinLoss> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria)
         {
             var report = new WinLoss();
@@ -57,7 +48,7 @@ namespace DailyMixParlayWinLoss.Services
 
         private ParentGroupItem CalculateCombinationGroup(string combination, IEnumerable<WinLossItem> rawData)
         {
-            var combinationName = this.ConvertCombinationType(combination);
+            var combinationName = ConvertCombinationType(combination);
 
             var result = CalculateCombinationByLiveType(rawData);
             result.Name = combinationName;
@@ -235,7 +226,7 @@ namespace DailyMixParlayWinLoss.Services
 
         private string ConvertLiveTypeName(int liveType)
         {
-            string name = "Live";
+            var name = "Live";
             switch (liveType)
             {
                 case DailyMixParlayConstant.NonLive:

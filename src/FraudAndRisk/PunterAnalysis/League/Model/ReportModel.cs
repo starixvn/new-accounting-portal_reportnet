@@ -2,10 +2,10 @@
 {
     public class ReportModel
     {
-        public List<LeagueModel> Entities { get; set; } = new List<LeagueModel>();
+        public List<LeagueModel> Entities { get; set; } = [];
 
-        public LeagueModel Total { get; set; } = new LeagueModel();
+        public LeagueModel Total { get; set; } = new();
 
-        public List<string> GroupNames { get; set; } = new List<string>();
+        public List<string> GroupNames { get; set; } = [];
     }
 }

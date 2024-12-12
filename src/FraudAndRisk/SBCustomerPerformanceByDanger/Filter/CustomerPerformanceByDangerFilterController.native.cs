@@ -5,15 +5,8 @@ namespace SBCustomerPerformanceByDanger.Filter
 {
     [Route("api/sb-customer-performance-by-danger/filter")]
     [ApiController]
-    public class CustomerPerformanceByDangerFilterController : ControllerBase
+    public class CustomerPerformanceByDangerFilterController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public CustomerPerformanceByDangerFilterController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("balance-up-date")]
         public async Task<IActionResult> BalanceUpDate()
         {

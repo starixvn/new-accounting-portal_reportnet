@@ -6,15 +6,8 @@ namespace AbnormalBet.Filter
 {
     [Route("api/ab-normal-bet/filter")]
     [ApiController]
-    public class AbnormalBetFilterController : ControllerBase
+    public class AbnormalBetFilterController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public AbnormalBetFilterController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("sport")]
         public async Task<IActionResult> Sport()
         {

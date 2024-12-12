@@ -7,15 +7,8 @@ namespace SMAWinLoss.Summary
 
     [Route("api/sma-win-loss/summary")]
     [ApiController]
-    public class SMAWinLossController : ControllerBase
+    public class SMAWinLossController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public SMAWinLossController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Summary(WinLossHttpParameter httpParameters)
         {

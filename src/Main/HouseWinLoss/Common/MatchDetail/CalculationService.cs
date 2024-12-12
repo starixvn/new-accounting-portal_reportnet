@@ -13,18 +13,8 @@ namespace HouseWinLoss.Common.MatchDetail
         IEnumerable<WinLoss> CalculateRM(IEnumerable<RawWinLoss> rawWinLosses);
     }
 
-    public class CalculationServiceImp : CalculationService
+    public class CalculationServiceImp(RemotingRefService refService, IMapper mapper) : CalculationService
     {
-        private readonly RemotingRefService refService;
-
-        private readonly IMapper mapper;
-
-        public CalculationServiceImp(RemotingRefService refService, IMapper mapper)
-        {
-            this.refService = refService;
-            this.mapper = mapper;
-        }
-
         public WinLoss FromRawWinLoss(RawWinLoss rawWinLoss)
         {
             var winLoss = mapper.Map<WinLoss>(rawWinLoss);
@@ -43,7 +33,7 @@ namespace HouseWinLoss.Common.MatchDetail
 
         private string GetLeague(int leagueId, string leagueCode)
         {
-            string leagueName = refService.GetLeagueName(leagueId);
+            var leagueName = refService.GetLeagueName(leagueId);
 
             return string.IsNullOrEmpty(leagueCode) ? leagueName : $"{leagueCode} - {leagueName}";
         }
@@ -88,12 +78,6 @@ namespace HouseWinLoss.Common.MatchDetail
         }
     }
 
-    public class Calculation3rdServiceImp : CalculationServiceImp
-    {
-        private readonly IMapper mapper;
-
-        public Calculation3rdServiceImp(RemotingRef3rdServiceImp refService, IMapper mapper) : base(refService, mapper)
-        {
-        }
-    }
+    public class Calculation3rdServiceImp(RemotingRef3rdServiceImp refService, IMapper mapper)
+        : CalculationServiceImp(refService, mapper);
 }

@@ -45,7 +45,7 @@ namespace LeagueWinLoss.Services
             var rawData = (await repository.FetchAsync<LeagueWinLossEntity>(criteria)).ToList();
             var leagueWinLoss = new LeagueWinLossModel
             {
-                SportWinLoss = new List<SportWinLoss>(),
+                SportWinLoss = [],
                 SoccerBARM = new LeagueWinLossItem(),
                 OtherSportBARM = new LeagueWinLossItem(),
                 SoccerRM = new LeagueWinLossItem(),
@@ -142,7 +142,7 @@ namespace LeagueWinLoss.Services
                 {
                     GroupId = group.Key.SportGroupType,
                     GroupName = group.Key.SportGroupName,
-                    ChildItems = new List<Sport>()
+                    ChildItems = []
                 };
 
                 var sports = group.ToList().GroupBy(x => new { x.SportType, x.SportName });
@@ -153,7 +153,7 @@ namespace LeagueWinLoss.Services
                     {
                         SportType = sport.Key.SportType,
                         SportName = sport.Key.SportName,
-                        BettypeGroups = new List<BetTypeGroup>()
+                        BettypeGroups = []
                     };
 
                     var sportBettypes = rawData.Where(x => x.SportType == sport.Key.SportType
@@ -166,7 +166,7 @@ namespace LeagueWinLoss.Services
                         var bettypeGroup = new BetTypeGroup
                         {
                             BetTypeGroupName = groupBettype.Key,
-                            BetTypes = new List<BetType>()
+                            BetTypes = []
                         };
 
                         var bettypes = sportBettypes.Where(x => x.BetTypeGroupName == groupBettype.Key);
@@ -205,7 +205,7 @@ namespace LeagueWinLoss.Services
                 var siteGroup = new SiteGroup
                 {
                     GroupName = group.Key,
-                    Sites = new List<Site>()
+                    Sites = []
                 };
                 var sites = rawData.Where(x => x.SiteGroup == group.Key);
 
@@ -229,7 +229,7 @@ namespace LeagueWinLoss.Services
         {
             var result = new BettypeWinLossModel
             {
-                BettypeWinLoss = new List<BetTypeWinLossItem>(),
+                BettypeWinLoss = [],
                 RM = new BettypeWinLossBySite(),
                 BARM = new BettypeWinLossBySite(),
                 Total = new BettypeWinLossBySite(),
@@ -300,31 +300,31 @@ namespace LeagueWinLoss.Services
         {
             var result = new List<GlobalShowTime>
             {
-                new GlobalShowTime { Value = 0, Time = "00:00 - 23:59"},
-                new GlobalShowTime { Value = 1, Time = "12:00 - 12:59"},
-                new GlobalShowTime { Value = 2, Time = "13:00 - 13:59"},
-                new GlobalShowTime { Value = 3, Time = "14:00 - 15:59"},
-                new GlobalShowTime { Value = 4, Time = "15:00 - 15:59"},
-                new GlobalShowTime { Value = 5, Time = "16:00 - 16:59"},
-                new GlobalShowTime { Value = 6, Time = "17:00 - 17:59"},
-                new GlobalShowTime { Value = 7, Time = "18:00 - 18:59"},
-                new GlobalShowTime { Value = 8, Time = "19:00 - 19:59"},
-                new GlobalShowTime { Value = 9, Time = "20:00 - 20:59"},
-                new GlobalShowTime { Value = 10, Time = "21:00 - 21:59"},
-                new GlobalShowTime { Value = 11, Time = "22:00 - 22:59"},
-                new GlobalShowTime { Value = 12, Time = "23:00 - 23:59"},
-                new GlobalShowTime { Value = 13, Time = "00:00 - 00:59"},
-                new GlobalShowTime { Value = 14, Time = "01:00 - 01:59"},
-                new GlobalShowTime { Value = 15, Time = "02:00 - 02:59"},
-                new GlobalShowTime { Value = 16, Time = "03:00 - 03:59"},
-                new GlobalShowTime { Value = 17, Time = "04:00 - 04:59"},
-                new GlobalShowTime { Value = 18, Time = "05:00 - 05:59"},
-                new GlobalShowTime { Value = 19, Time = "06:00 - 06:59"},
-                new GlobalShowTime { Value = 20, Time = "07:00 - 07:59"},
-                new GlobalShowTime { Value = 21, Time = "08:00 - 08:59"},
-                new GlobalShowTime { Value = 22, Time = "09:00 - 09:59"},
-                new GlobalShowTime { Value = 23, Time = "10:00 - 10:59"},
-                new GlobalShowTime { Value = 24, Time = "11:00 - 11:59"}
+                new() { Value = 0, Time = "00:00 - 23:59"},
+                new() { Value = 1, Time = "12:00 - 12:59"},
+                new() { Value = 2, Time = "13:00 - 13:59"},
+                new() { Value = 3, Time = "14:00 - 15:59"},
+                new() { Value = 4, Time = "15:00 - 15:59"},
+                new() { Value = 5, Time = "16:00 - 16:59"},
+                new() { Value = 6, Time = "17:00 - 17:59"},
+                new() { Value = 7, Time = "18:00 - 18:59"},
+                new() { Value = 8, Time = "19:00 - 19:59"},
+                new() { Value = 9, Time = "20:00 - 20:59"},
+                new() { Value = 10, Time = "21:00 - 21:59"},
+                new() { Value = 11, Time = "22:00 - 22:59"},
+                new() { Value = 12, Time = "23:00 - 23:59"},
+                new() { Value = 13, Time = "00:00 - 00:59"},
+                new() { Value = 14, Time = "01:00 - 01:59"},
+                new() { Value = 15, Time = "02:00 - 02:59"},
+                new() { Value = 16, Time = "03:00 - 03:59"},
+                new() { Value = 17, Time = "04:00 - 04:59"},
+                new() { Value = 18, Time = "05:00 - 05:59"},
+                new() { Value = 19, Time = "06:00 - 06:59"},
+                new() { Value = 20, Time = "07:00 - 07:59"},
+                new() { Value = 21, Time = "08:00 - 08:59"},
+                new() { Value = 22, Time = "09:00 - 09:59"},
+                new() { Value = 23, Time = "10:00 - 10:59"},
+                new() { Value = 24, Time = "11:00 - 11:59"}
             };
 
             return result;
@@ -332,12 +332,12 @@ namespace LeagueWinLoss.Services
 
         public List<Status> GetStatus()
         {
-            return new List<Status>
-                {
-                    new Status { Name = "All", Value = 2 },
-                    new Status { Name = "Live", Value = 1 },
-                    new Status { Name = "Non-Live", Value = 0 }
-                };
+            return
+            [
+                new Status { Name = "All", Value = 2 },
+                new Status { Name = "Live", Value = 1 },
+                new Status { Name = "Non-Live", Value = 0 }
+            ];
         }
 
         public int GetPermissionProfileId(string functionKeyValue)
@@ -365,7 +365,7 @@ namespace LeagueWinLoss.Services
             var maxValueOfPenaltyBettype = -1000;
             var result = new BetTypeWinLossLiveModel
             {
-                BetTypeWinLossLiveGroups = new List<BetTypeWinLossLiveGroupModel>(),
+                BetTypeWinLossLiveGroups = [],
                 Total = new BettypeWinLossBySite(),
                 RM = new BettypeWinLossBySite(),
                 BARM = new BettypeWinLossBySite(),
@@ -388,7 +388,7 @@ namespace LeagueWinLoss.Services
 
             var betTypesWithOutPenalty = new BetTypeWinLossLiveGroupModel
             {
-                BettypeWinLoss = new List<BettypeWinLossBySite>(),
+                BettypeWinLoss = [],
                 Total = new BettypeWinLossBySite()
             };
 
@@ -399,7 +399,7 @@ namespace LeagueWinLoss.Services
             var rawPenaltyBetTypes = rawBettypes.Where(x => x.Bettype <= maxValueOfPenaltyBettype);
             var penaltyBetTypes = new BetTypeWinLossLiveGroupModel
             {
-                BettypeWinLoss = new List<BettypeWinLossBySite>(),
+                BettypeWinLoss = [],
                 Total = new BettypeWinLossBySite()
             };
 
@@ -426,7 +426,7 @@ namespace LeagueWinLoss.Services
         {
             var result = new BetTypeWinLossNonLiveModel
             {
-                BettypeWinLoss = new List<BettypeWinLossBySite>(),
+                BettypeWinLoss = [],
                 RM = new BettypeWinLossBySite(),
                 BARM = new BettypeWinLossBySite(),
                 Total = new BettypeWinLossBySite(),
@@ -466,7 +466,7 @@ namespace LeagueWinLoss.Services
 
             var leagueWinLoss = new MatchWinLossModel
             {
-                Match = new List<MatchWinLossItem>(),
+                Match = [],
                 RM = new MatchWinLossByLiveStatus(),
                 BARM = new MatchWinLossByLiveStatus(),
                 Total = new MatchWinLossByLiveStatus(),
@@ -511,7 +511,7 @@ namespace LeagueWinLoss.Services
             var rawData = (await repository.FetchAsync<MatchEntity>(criteria)).ToList();
             var leagueWinLoss = new MatchWinLossFromBetTypeStatusModel
             {
-                Match = new List<MatchWinLossByLiveStatus>(),
+                Match = [],
                 RM = new MatchWinLossByLiveStatus(),
                 BARM = new MatchWinLossByLiveStatus(),
                 Total = new MatchWinLossByLiveStatus(),
@@ -542,7 +542,7 @@ namespace LeagueWinLoss.Services
             var rawData = (await repository.FetchAsync<SiteEntity>(criteria)).ToList();
             var leagueWinLoss = new SiteWinLossModel
             {
-                Sites = new List<SiteWinLossItem>(),
+                Sites = [],
                 RM = new SiteWinLossItem(),
                 BARM = new SiteWinLossItem(),
                 Total = new SiteWinLossItem(),
@@ -581,7 +581,7 @@ namespace LeagueWinLoss.Services
             var rawData = (await repository.FetchAsync<SuperEntity>(criteria)).ToList();
             var leagueWinLoss = new SuperWinLossModel
             {
-                Supers = new List<SuperWinLossItem>(),
+                Supers = [],
                 RM = new SuperWinLossItem(),
                 BARM = new SuperWinLossItem(),
                 Total = new SuperWinLossItem(),

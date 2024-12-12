@@ -8,16 +8,9 @@ namespace PunterAnalysis.Summary
         ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
     }
 
-    public class SummaryExcelSettingFactory : SummaryExcelSetting
+    public class SummaryExcelSettingFactory(ConfigurationService configurationService) : SummaryExcelSetting
     {
         private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/Summary.xlsx";
-
-        private readonly ConfigurationService configurationService;
-
-        public SummaryExcelSettingFactory(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
         {

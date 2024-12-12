@@ -1,29 +1,23 @@
 ﻿namespace HouseWinLoss.Common.BasicWinLoss
 {
     using Fanex.Excel.Models;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using ColumnDecorators;
+    using Criteria;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
-    public class BasicWinLossController : ControllerBase
+    public class BasicWinLossController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecorator decorator)
+        : ControllerBase
     {
-        public BasicWinLossController(
-            BasicWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecorator decorator)
-        {
-            Service = service;
-            Builder = builder;
-            Decorator = decorator;
-        }
+        protected BasicWinLossService Service { get; } = service;
 
-        protected BasicWinLossService Service { get; }
+        protected BasicGridOptionsBuilder Builder { get; } = builder;
 
-        protected BasicGridOptionsBuilder Builder { get; }
-
-        protected GridOptionColumnDecorator Decorator { get; }
+        protected GridOptionColumnDecorator Decorator { get; } = decorator;
 
         protected async Task<IActionResult> Json(WinLossCriteria criteria, string mainColumnText, int mainColumnWidth = 180)
         {

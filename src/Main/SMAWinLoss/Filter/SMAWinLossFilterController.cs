@@ -9,28 +9,13 @@ namespace SMAWinLoss.Filter
 {
     [Route("api/sma-win-loss/filter")]
     [ApiController]
-    public class SMAWinLossFilterController : ControllerBase
+    public class SMAWinLossFilterController(
+        IMediator mediator,
+        INapSession napSession,
+        INapSettings napSettings,
+        IUserService userService)
+        : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        private readonly INapSettings napSettings;
-
-        private readonly INapSession napSession;
-
-        private readonly IUserService userService;
-
-        public SMAWinLossFilterController(
-            IMediator mediator,
-            INapSession napSession,
-            INapSettings napSettings,
-            IUserService userService)
-        {
-            this.mediator = mediator;
-            this.napSession = napSession;
-            this.napSettings = napSettings;
-            this.userService = userService;
-        }
-
         [Route("currency")]
         public async Task<IActionResult> Currency()
         {
@@ -83,10 +68,10 @@ namespace SMAWinLoss.Filter
         [Route("permission")]
         public async Task<IActionResult> Permission()
         {
-            var permissions = this.userService.GetPermissions(
+            var permissions = (await userService.GetPermissionsAsync(
                 napSession.UserId,
                 napSettings.SiteId,
-                "SMAWinLossSummary")
+                "SMAWinLossSummary"))
                 .Where(p => p.Policy >= (int)Constant.Policy.Read)
                 .OrderBy(x => x.Name)
                 .Select(p => p.Key);

@@ -4,7 +4,7 @@ namespace HouseWinLoss.OtherSports.LiveNonLive
 {
     public class Criteria : WinLossCriteria
     {
-        public override string GetSettingKey() => $"HouseWinlossByProducts_Lvl2";
+        public override string GetSettingKey() => "HouseWinlossByProducts_Lvl2";
 
         public bool IsNoDraw { get; set; }
 

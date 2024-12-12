@@ -1,30 +1,21 @@
 ﻿namespace HouseWinLoss.Parlay.Site
 {
     using AutoMapper;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Configuration;
+    using Common.ColumnDecorators;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/parlay/site")]
     [ApiController]
-    public class ParlaySiteController : ControllerBase
+    public class ParlaySiteController(
+        WinLossService service,
+        GridOptionsBuilder builder,
+        GridOptionColumnDecoratorBasic decorator,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly WinLossService service;
-
-        private readonly GridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecorator decorator;
-
-        private readonly IMapper mapper;
-
-        public ParlaySiteController(WinLossService service, GridOptionsBuilder builder, GridOptionColumnDecoratorBasic decorator, IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
+        private readonly GridOptionColumnDecorator decorator = decorator;
 
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)

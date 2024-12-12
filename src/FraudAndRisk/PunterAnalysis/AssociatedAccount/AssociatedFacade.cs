@@ -11,24 +11,12 @@ namespace PunterAnalysis.AssociatedAccount
         Task<SummaryEntity<AssociatedSummaryModel>> Query(HttpParameterJson request);
     }
 
-    public class AssociatedFacadeImp : AssociatedFacade
+    public class AssociatedFacadeImp(
+        IDynamicRepository repository,
+        CustomerTrackingService customerTrackingService,
+        ConfigurationService configurationService)
+        : AssociatedFacade
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly CustomerTrackingService customerTrackingService;
-
-        private readonly ConfigurationService configurationService;
-
-        public AssociatedFacadeImp(
-            IDynamicRepository repository,
-            CustomerTrackingService customerTrackingService,
-            ConfigurationService configurationService)
-        {
-            this.repository = repository;
-            this.customerTrackingService = customerTrackingService;
-            this.configurationService = configurationService;
-        }
-
         public async Task<SummaryEntity<AssociatedSummaryModel>> Query(HttpParameterJson request)
         {
             var summaries = await GetMemberSummaries(request);

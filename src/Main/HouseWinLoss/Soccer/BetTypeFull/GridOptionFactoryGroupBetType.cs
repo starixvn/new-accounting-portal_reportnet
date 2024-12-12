@@ -5,28 +5,13 @@ using HouseWinLoss.Soccer.GroupBetType;
 
 namespace HouseWinLoss.Soccer.BetTypeFull
 {
-    public class GridOptionFactoryGroupBetType : GridOptionFactory
+    public class GridOptionFactoryGroupBetType(
+        GroupBetTypeWinLossService groupBetTypeWinLossService,
+        GroupBetTypeGridOptionsBuilder groupBetTypeGridOptionsBuilder,
+        GridOptionColumnDecorator decorator,
+        IMapper mapper)
+        : GridOptionFactory
     {
-        private readonly GroupBetTypeWinLossService groupBetTypeWinLossService;
-
-        private readonly GroupBetTypeGridOptionsBuilder groupBetTypeGridOptionsBuilder;
-
-        private readonly GridOptionColumnDecorator decorator;
-
-        private readonly IMapper mapper;
-
-        public GridOptionFactoryGroupBetType(
-            GroupBetTypeWinLossService groupBetTypeWinLossService,
-            GroupBetTypeGridOptionsBuilder groupBetTypeGridOptionsBuilder,
-            GridOptionColumnDecorator decorator,
-            IMapper mapper)
-        {
-            this.groupBetTypeWinLossService = groupBetTypeWinLossService;
-            this.groupBetTypeGridOptionsBuilder = groupBetTypeGridOptionsBuilder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
-
         public async Task<GridOptions> CreateGridOption(ExcelQueryModel queryModel, string title, int isLive)
         {
             var criteria = mapper.Map<GroupBetTypeCriteria>(queryModel);

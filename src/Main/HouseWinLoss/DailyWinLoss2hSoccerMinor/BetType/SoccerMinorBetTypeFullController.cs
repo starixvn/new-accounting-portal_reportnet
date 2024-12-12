@@ -2,37 +2,22 @@
 {
     using AutoMapper;
     using Fanex.Excel.Models;
-    using HouseWinLoss.Common.BasicWinLoss;
-    using HouseWinLoss.Common.ColumnDecorators;
+    using Common.BasicWinLoss;
+    using Common.ColumnDecorators;
     using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer-minor/bet-type-full")]
     [ApiController]
-    public class SoccerMinorBetTypeFullController : ControllerBase
+    public class SoccerMinorBetTypeFullController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly BasicWinLossService service;
-
-        private readonly BasicGridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecoratorFull decorator;
-
-        private readonly IMapper mapper;
-
-        public SoccerMinorBetTypeFullController(
-            BasicWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecoratorFull decorator,
-            IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
-
         [Route("excel")]
         public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
         {
@@ -48,7 +33,7 @@
             var noneLiveGridOption = await GetGridOptions(criteria, queryModel.BetTypeLiveTitle);
 
             return new FanexExcelResult(
-                new List<GridOptions> { sumGridOption, liveGridOption, noneLiveGridOption },
+                [sumGridOption, liveGridOption, noneLiveGridOption],
                 Constants.SoccerMinorBetTypesSheetName);
         }
 

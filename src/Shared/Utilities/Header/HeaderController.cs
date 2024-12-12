@@ -5,15 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Utilities.Header
 {
     [ApiController]
-    public class HeaderController : ControllerBase
+    public class HeaderController(INapSession napSession) : ControllerBase
     {
-        private readonly INapSession napSession;
-
-        public HeaderController(INapSession napSession)
-        {
-            this.napSession = napSession;
-        }
-
         [Route("api/application/header")]
         public Header Index()
         {

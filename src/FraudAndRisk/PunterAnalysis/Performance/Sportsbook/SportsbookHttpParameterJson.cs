@@ -3,7 +3,5 @@ using PunterAnalysis.Performance.Sportsbook.Model;
 
 namespace PunterAnalysis.Performance.Sportsbook
 {
-    public class SportsbookHttpParameterJson : HttpParameterJson, IRequest<ViewModelJson>
-    {
-    }
+    public class SportsbookHttpParameterJson : HttpParameterJson, IRequest<ViewModelJson>;
 }

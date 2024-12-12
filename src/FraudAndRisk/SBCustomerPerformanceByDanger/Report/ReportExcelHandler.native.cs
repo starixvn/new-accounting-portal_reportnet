@@ -5,21 +5,9 @@ using Utilities.LinqDynamicSum;
 
 namespace SBCustomerPerformanceByDanger.Report
 {
-    public class ReportExcelHandler : IRequestHandler<CustomerPerformanceByDangerQueryExcelHttpParameter, ExcelPackage>
+    public class ReportExcelHandler(ReportService service, ReportExcelBuilder builder, IMapper mapper)
+        : IRequestHandler<CustomerPerformanceByDangerQueryExcelHttpParameter, ExcelPackage>
     {
-        private readonly ReportService service;
-
-        private readonly ReportExcelBuilder builder;
-
-        private readonly IMapper mapper;
-
-        public ReportExcelHandler(ReportService service, ReportExcelBuilder builder, IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(
             CustomerPerformanceByDangerQueryExcelHttpParameter request,
             CancellationToken cancellationToken)

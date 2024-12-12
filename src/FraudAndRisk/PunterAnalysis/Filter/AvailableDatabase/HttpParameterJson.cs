@@ -2,7 +2,5 @@
 
 namespace PunterAnalysis.Filter.AvailableDatabase
 {
-    public class HttpParameterJson : IRequest<bool>
-    {
-    }
+    public class HttpParameterJson : IRequest<bool>;
 }

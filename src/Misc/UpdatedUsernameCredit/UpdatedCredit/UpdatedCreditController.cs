@@ -6,15 +6,8 @@ namespace UpdatedUsernameCredit.UpdatedCredit
 {
     [Route("api/updated-credit")]
     [ApiController]
-    public class UpdatedCreditController : ControllerBase
+    public class UpdatedCreditController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator mediator;
-
-        public UpdatedCreditController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
-
         [Route("query")]
         public async Task<IActionResult> Query(Message message)
         {

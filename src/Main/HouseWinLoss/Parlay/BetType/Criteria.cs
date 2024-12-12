@@ -10,6 +10,6 @@ namespace HouseWinLoss.Parlay.BetType
 
         public bool IsNoDraw { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_Lvl2";
+        public override string GetSettingKey() => "HouseWinlossByProducts_Lvl2";
     }
 }

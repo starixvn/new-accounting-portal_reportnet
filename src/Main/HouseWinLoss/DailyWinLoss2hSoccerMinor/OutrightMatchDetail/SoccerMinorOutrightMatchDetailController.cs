@@ -2,40 +2,22 @@
 {
     using AutoMapper;
     using Fanex.Excel.Models;
-    using HouseWinLoss.Common.Criteria;
+    using Common.Criteria;
     using HouseWinLoss.Common.MatchDetail;
-    using HouseWinLoss.Configuration;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer-minor/outright-match-detail")]
     [ApiController]
-    public class SoccerMinorOutrightMatchDetailController : ControllerBase
+    public class SoccerMinorOutrightMatchDetailController(
+        WinLossService service,
+        GridOptionsBuilder builder,
+        SoccerMinorMatchGridOptionColumnDecoratorOutright decorator,
+        MatchSortingService sortingService,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly WinLossService service;
-
-        private readonly GridOptionsBuilder builder;
-
-        private readonly SoccerMinorMatchGridOptionColumnDecoratorOutright decorator;
-
-        private readonly MatchSortingService sortingService;
-
-        private readonly IMapper mapper;
-
-        public SoccerMinorOutrightMatchDetailController(
-            WinLossService service,
-            GridOptionsBuilder builder,
-            SoccerMinorMatchGridOptionColumnDecoratorOutright decorator,
-            MatchSortingService sortingService,
-            IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.sortingService = sortingService;
-            this.mapper = mapper;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

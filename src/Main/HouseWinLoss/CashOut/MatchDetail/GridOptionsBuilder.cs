@@ -52,14 +52,14 @@ namespace HouseWinLoss.CashOut.MatchDetail
             var columnIndex = 0;
             var columns = new List<Columns>
             {
-                new Columns(columnIndex++, "MatchCode", item.MatchCode, alignment),
-                new Columns(columnIndex++, "MemberWinLoss", item.MemberWinLoss),
-                new Columns(columnIndex++, "SMAWinLoss", item.SMAWinLoss),
-                new Columns(columnIndex++, "ExtraPT", item.ExtraPT),
-                new Columns(columnIndex++, "Commission", item.Commission),
-                new Columns(columnIndex++, "RealIncome", item.RealIncome),
-                new Columns(columnIndex++, "RealTurnover", item.RealTurnover),
-                new Columns(columnIndex, "RealMargin", item.RealTurnover == 0 ? "N/A" : (object)item.RealMargin)
+                new(columnIndex++, "MatchCode", item.MatchCode, alignment),
+                new(columnIndex++, "MemberWinLoss", item.MemberWinLoss),
+                new(columnIndex++, "SMAWinLoss", item.SMAWinLoss),
+                new(columnIndex++, "ExtraPT", item.ExtraPT),
+                new(columnIndex++, "Commission", item.Commission),
+                new(columnIndex++, "RealIncome", item.RealIncome),
+                new(columnIndex++, "RealTurnover", item.RealTurnover),
+                new(columnIndex, "RealMargin", item.RealTurnover == 0 ? "N/A" : item.RealMargin)
             };
 
             return new GridDataRow { Columns = columns };
@@ -70,8 +70,8 @@ namespace HouseWinLoss.CashOut.MatchDetail
             var columnIndex = 0;
             var columns = new List<Columns>
                {
-                    new Columns(columnIndex++, "MatchCode", string.Empty),
-                    new Columns { ColumnIndex = columnIndex, Name = "MemberWinLoss", Value = leagueName, MergeColNumber = 7, Bold = true, CellAlignment = HAlignment.Left }
+                    new(columnIndex++, "MatchCode", string.Empty),
+                    new() { ColumnIndex = columnIndex, Name = "MemberWinLoss", Value = leagueName, MergeColNumber = 7, Bold = true, CellAlignment = HAlignment.Left }
                };
 
             return new GridDataRow { Columns = columns, RowType = RowType.ParentLevelOne, CssClass = "league-match-header" };
@@ -79,7 +79,7 @@ namespace HouseWinLoss.CashOut.MatchDetail
 
         private List<GridDataRow> BuildFooter(WinLoss item)
         {
-            return new List<GridDataRow> { BuildDataRow(item, HAlignment.Right) };
+            return [BuildDataRow(item, HAlignment.Right)];
         }
     }
 }

@@ -10,18 +10,9 @@ namespace PunterAnalysis.BetCount
         Task<SummaryEntity<BetCountModel>> Query(Criteria criteria);
     }
 
-    public class BetCountServiceImp : BetCountService
+    public class BetCountServiceImp(IDynamicRepository repository, DateTimeService dateTimeService)
+        : BetCountService
     {
-        private readonly IDynamicRepository repository;
-
-        private readonly DateTimeService dateTimeService;
-
-        public BetCountServiceImp(IDynamicRepository repository, DateTimeService dateTimeService)
-        {
-            this.repository = repository;
-            this.dateTimeService = dateTimeService;
-        }
-
         public async Task<SummaryEntity<BetCountModel>> Query(Criteria criteria)
         {
             return (await repository.FetchAsync<BetCountRawModel>(criteria))

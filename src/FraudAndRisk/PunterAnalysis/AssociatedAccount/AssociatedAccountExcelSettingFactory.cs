@@ -8,16 +8,10 @@ namespace PunterAnalysis.AssociatedAccount
         ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
     }
 
-    public class AssociatedAccountExcelSettingFactory : AssociatedAccountExcelSetting
+    public class AssociatedAccountExcelSettingFactory(ConfigurationService configurationService)
+        : AssociatedAccountExcelSetting
     {
         private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/AssociatedAccount.xlsx";
-
-        private readonly ConfigurationService configurationService;
-
-        public AssociatedAccountExcelSettingFactory(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
         {

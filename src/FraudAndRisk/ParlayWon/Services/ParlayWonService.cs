@@ -47,9 +47,9 @@ namespace ParlayWon.Services
 
             if (report != null && report.Items.Any())
             {
-                var propertyName = this.GetSortedColumnName(criteria.SortBy);
+                var propertyName = GetSortedColumnName(criteria.SortBy);
                 var startIndex = criteria.StartIndex;
-                report.Items.SortByProperty<ParlayWonTransaction>(
+                report.Items.SortByProperty(
                     criteria.SortDirection,
                     propertyName);
 
@@ -76,14 +76,14 @@ namespace ParlayWon.Services
 
             var fullReport = new ParlayWonTransaction
             {
-                Items = new List<ParlayWonTransaction>(),
+                Items = [],
                 NumberItems = numberItems,
                 Total = new ParlayWonTransaction()
             };
 
             foreach (var row in rawData)
             {
-                ParlayWonTransaction transaction = new ParlayWonTransaction
+                var transaction = new ParlayWonTransaction
                 {
                     RefNo = row.TransId,
                     UserName = row.Username,

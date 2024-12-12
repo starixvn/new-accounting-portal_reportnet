@@ -3,7 +3,5 @@ using MediatR;
 
 namespace CashOutPerformance.Requests
 {
-    public class SportRequest : IRequest<IEnumerable<FilterGroupItemModel>>
-    {
-    }
+    public class SportRequest : IRequest<IEnumerable<FilterGroupItemModel>>;
 }

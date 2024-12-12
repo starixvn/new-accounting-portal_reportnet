@@ -8,7 +8,7 @@ namespace SBCustomerPerformanceByDanger.Filter
 
         public string SearchText { get; set; }
 
-        public override string GetSettingKey() => $"Acc_Rpt_SBCustPerfByDangerLevel_LeagueBySportSel";
+        public override string GetSettingKey() => "Acc_Rpt_SBCustPerfByDangerLevel_LeagueBySportSel";
 
         public override bool IsValid() => true;
     }

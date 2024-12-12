@@ -30,7 +30,7 @@ namespace SBPerformance.MarginBySite
 
         public int? MatchID { get; set; }
 
-        public override string GetSettingKey() => $"SBPerformanceMonitor-Site";
+        public override string GetSettingKey() => "SBPerformanceMonitor-Site";
 
         public override bool IsValid() => true;
     }

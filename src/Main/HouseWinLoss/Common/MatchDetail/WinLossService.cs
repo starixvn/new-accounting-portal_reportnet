@@ -7,18 +7,9 @@ namespace HouseWinLoss.Common.MatchDetail
         Task<WinLossModel> Query(WinLossCriteria criteria);
     }
 
-    public class WinLossServiceImp : WinLossService
+    public class WinLossServiceImp(RawWinLossService rawWinLossService, CalculationService calculationService)
+        : WinLossService
     {
-        private readonly RawWinLossService rawWinLossService;
-
-        private readonly CalculationService calculationService;
-
-        public WinLossServiceImp(RawWinLossService rawWinLossService, CalculationService calculationService)
-        {
-            this.rawWinLossService = rawWinLossService;
-            this.calculationService = calculationService;
-        }
-
         public async Task<WinLossModel> Query(WinLossCriteria criteria)
         {
             var rawWinLoss = await rawWinLossService.Query(criteria);
@@ -37,10 +28,6 @@ namespace HouseWinLoss.Common.MatchDetail
         }
     }
 
-    public class WinLossService3rdImp : WinLossServiceImp
-    {
-        public WinLossService3rdImp(RawWinLossService rawWinLossService, Calculation3rdServiceImp calculationService) : base(rawWinLossService, calculationService)
-        {
-        }
-    }
+    public class WinLossService3rdImp(RawWinLossService rawWinLossService, Calculation3rdServiceImp calculationService)
+        : WinLossServiceImp(rawWinLossService, calculationService);
 }

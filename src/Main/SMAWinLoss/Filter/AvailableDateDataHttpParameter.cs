@@ -2,7 +2,5 @@
 
 namespace SMAWinLoss.Filter
 {
-    public class AvailableDateDataHttpParameter : IRequest<DateTime>
-    {
-    }
+    public class AvailableDateDataHttpParameter : IRequest<DateTime>;
 }

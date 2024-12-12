@@ -4,11 +4,6 @@ namespace DuplicateTickets.Model
 {
     public class DuplicateTicketsByUserNameExcelModel
     {
-        public DuplicateTicketsByUserNameExcelModel()
-        {
-            TicketInfo = new List<TicketExcelModel>();
-        }
-
         [Cell("A4")]
         public int No { get; set; }
 
@@ -34,6 +29,6 @@ namespace DuplicateTickets.Model
         [Cell("H4")]
         public decimal Odds { get; set; }
 
-        public List<TicketExcelModel> TicketInfo { get; set; }
+        public List<TicketExcelModel> TicketInfo { get; set; } = [];
     }
 }

@@ -1,13 +1,13 @@
 namespace HouseWinLoss.Soccer.MajorMinor
 {
     using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class Criteria : WinLossCriteria
     {
         public int IsLive { get; set; } = Constants.LiveDefault;
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_LvlN_Sportsbook_MajorMinor";
+        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_MajorMinor";
 
         public bool IsNoDraw { get; set; }
 

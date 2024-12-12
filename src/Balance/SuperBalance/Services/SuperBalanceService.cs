@@ -46,8 +46,8 @@ namespace SuperBalance.Service
         {
             var result = new SuperBalanceModel
             {
-                SuperBalanceItems = new List<BalanceItemModel>(),
-                BaseBalanceTotal = new BalanceItemModel(),
+                SuperBalanceItems = [],
+                BaseBalanceTotal = new BalanceItemModel()
             };
 
             if (criteria.Currency == 0)
@@ -76,7 +76,7 @@ namespace SuperBalance.Service
             {
                 var total = criteria.Total;
                
-                var balanceTotal = new BalanceItemModel()
+                var balanceTotal = new BalanceItemModel
                 {
                     CustId = null,
                     Username = null,
@@ -138,7 +138,7 @@ namespace SuperBalance.Service
             arrLetter.Add("0-9");
             for (var i = 'A'; i <= 'Z'; i++)
             {
-                arrLetter.Add(((char)i).ToString());
+                arrLetter.Add(i.ToString());
             }
 
             return arrLetter;
@@ -164,8 +164,8 @@ namespace SuperBalance.Service
         {
             var result = new SuperBalanceModel
             {
-                SuperBalanceItems = new List<BalanceItemModel>(),
-                BaseBalanceTotal = new BalanceItemModel(),
+                SuperBalanceItems = [],
+                BaseBalanceTotal = new BalanceItemModel()
             };
 
 

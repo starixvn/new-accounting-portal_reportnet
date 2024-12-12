@@ -15,10 +15,8 @@ namespace CashOutPerformance.Services
         ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool IsShowFullColumn);
     }
 
-    public class TicketsExcelBuilderImp<T> : TicketsExcelBuilder<T>
+    public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService) : TicketsExcelBuilder<T>
     {
-        private readonly ConfigurationService configurationService;
-
         private ExcelWorksheet sheet;
 
         private ExcelWorksheet totalSheet;
@@ -31,16 +29,11 @@ namespace CashOutPerformance.Services
 
         private ExcelWorksheet templateSheet;
 
-        public TicketsExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
-
         public ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool IsShowFullColumn)
         {
-            string fileExcel = "CashOutPerformance.xlsx";
-            string cellAddressOfTitle = "A1:AH1";
-            string cellAddressOfBreadCrumb = "A3:AH3";
+            var fileExcel = "CashOutPerformance.xlsx";
+            var cellAddressOfTitle = "A1:AH1";
+            var cellAddressOfBreadCrumb = "A3:AH3";
             byte totalLength = 23;
             if (excelType != ExcelType.Match)
             {
@@ -63,14 +56,12 @@ namespace CashOutPerformance.Services
         private void LoadTemplate(string fileExcel)
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/CashOutPerformance/{fileExcel}";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                sheet = ExcelPackage.Workbook.Worksheets.Copy("BodyTemplate", "Cash Out");
-                templateSheet = ExcelPackage.Workbook.Worksheets["BodyTemplate"];
-                totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-                headerSheet = ExcelPackage.Workbook.Worksheets["HeaderTemplate"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            sheet = ExcelPackage.Workbook.Worksheets.Copy("BodyTemplate", "Cash Out");
+            templateSheet = ExcelPackage.Workbook.Worksheets["BodyTemplate"];
+            totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
+            headerSheet = ExcelPackage.Workbook.Worksheets["HeaderTemplate"];
         }
 
         private void BuildTotalRow(TicketViewExcelModel<T> model, byte totalLength)
@@ -142,7 +133,7 @@ namespace CashOutPerformance.Services
 
             sheet.ApplyModel(totalSheet,model.GrandTotal, startRowIndex);
             sheet.Cells[$"A{startRowIndex}"].Value = "Grand Total";
-            sheet.Cells[$"A5"].Value = "Sport";
+            sheet.Cells["A5"].Value = "Sport";
             UpdateValueColumnSport(updateRowIndex);
             ClearTemplate();
             RemoveUsernameColumn(IsShowFullColumn);

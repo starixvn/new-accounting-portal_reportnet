@@ -36,7 +36,7 @@ namespace SMAWinLoss.Summary
 
         public int PermissionProfileId { get; set; }
 
-        public override string GetSettingKey() => $"SMAWinLoss-Summary";
+        public override string GetSettingKey() => "SMAWinLoss-Summary";
 
         public override bool IsValid() => true;
     }

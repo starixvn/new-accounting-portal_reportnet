@@ -8,6 +8,6 @@
 
         public int PermissionProfileID { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_Lvl2";
+        public override string GetSettingKey() => "HouseWinlossByProducts_Lvl2";
     }
 }

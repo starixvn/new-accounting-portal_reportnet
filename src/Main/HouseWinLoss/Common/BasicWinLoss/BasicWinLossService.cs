@@ -8,20 +8,11 @@ namespace HouseWinLoss.Common.BasicWinLoss
         Task<BasicWinLossModel> Query(WinLossCriteria criteria);
     }
 
-    public class BasicWinLossServiceImp : BasicWinLossService
+    public class BasicWinLossServiceImp(
+        RawWinLossService rawWinLossService,
+        CalculationService calculationService)
+        : BasicWinLossService
     {
-        private readonly RawWinLossService rawWinLossService;
-
-        private readonly CalculationService calculationService;
-
-        public BasicWinLossServiceImp(
-            RawWinLossService rawWinLossService,
-            CalculationService calculationService)
-        {
-            this.rawWinLossService = rawWinLossService;
-            this.calculationService = calculationService;
-        }
-
         public async Task<BasicWinLossModel> Query(WinLossCriteria criteria)
         {
             var rawWinLosses = await rawWinLossService.Query(criteria);

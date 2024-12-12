@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.OutrightMatchDetail
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class ExcelQueryModel : QueryModel
     {

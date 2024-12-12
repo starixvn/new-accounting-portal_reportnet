@@ -1,10 +1,11 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.Models;
+﻿using HouseWinLoss.Common.Models;
 using HouseWinLoss.Common.Services;
 using Utilities.RemotingRef;
 
 namespace HouseWinLoss.Soccer.BaseService
 {
+    using AutoMapper;
+
     public interface BaseCalculationService : CalculationService
     {
         List<WinLossSummaryByBetTypeGroup> CalculateSiteWinLossSummaryGroups(IEnumerable<WinLossRaw> rawWinLosses);
@@ -16,14 +17,9 @@ namespace HouseWinLoss.Soccer.BaseService
         WinLoss CalculateHedgeSumWinLossSummary(string sumTitle, IEnumerable<WinLossRaw> rawWinLosses);
     }
 
-    public class BaseCalculationServiceImp : CalculationServiceImp, BaseCalculationService
+    public class BaseCalculationServiceImp(RemotingRefService refService, IMapper mapper)
+        : CalculationServiceImp(refService, mapper), BaseCalculationService
     {
-        private readonly IMapper mapper;
-
-        public BaseCalculationServiceImp(RemotingRefService refService, IMapper mapper) : base(refService, mapper)
-        {
-        }
-
         public List<WinLossSummaryByBetTypeGroup> CalculateSiteWinLossSummaryGroups(IEnumerable<WinLossRaw> rawWinLosses)
         {
             var groups = rawWinLosses.Select(r => new { Name = r.GroupName, Id = r.GroupId }).Distinct();

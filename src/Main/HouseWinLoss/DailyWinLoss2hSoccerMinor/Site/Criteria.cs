@@ -1,7 +1,7 @@
 namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.Site
 {
     using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class Criteria : WinLossCriteria
     {
@@ -23,6 +23,6 @@ namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.Site
 
         public bool IsNoDraw { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinLoss-Sportsbook-Site";
+        public override string GetSettingKey() => "HouseWinLoss-Sportsbook-Site";
     }
 }

@@ -42,14 +42,12 @@ namespace PunterAnalysis.League
 
         private void LoadTemplate(string templatePath)
         {
-            using (var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                statisticSheet = ExcelPackage.Workbook.Worksheets.Add("Punter Analysis");
-                templateSheet = ExcelPackage.Workbook.Worksheets["Template"];
-                headerTemplateSheet = ExcelPackage.Workbook.Worksheets["HeaderTemplate"];
-                totalTemplateSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-            }
+            using var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            statisticSheet = ExcelPackage.Workbook.Worksheets.Add("Punter Analysis");
+            templateSheet = ExcelPackage.Workbook.Worksheets["Template"];
+            headerTemplateSheet = ExcelPackage.Workbook.Worksheets["HeaderTemplate"];
+            totalTemplateSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
         }
 
         private void ApplySetting()
@@ -71,7 +69,7 @@ namespace PunterAnalysis.League
 
         private void SetColumnWidth(int numberGroup)
         {
-            var numberColumns = (numberGroup * 4) + 1;
+            var numberColumns = numberGroup * 4 + 1;
             for (var i = 0; i < numberColumns; i++)
             {
                 statisticSheet.Column(i + 1).Width = 18;
@@ -152,7 +150,7 @@ namespace PunterAnalysis.League
         {
             statisticSheet.Cells[RowIndex, columnIndex].Value = group.WinLoss;
             statisticSheet.Cells[RowIndex, columnIndex + 1].Value = group.Turnover;
-            statisticSheet.Cells[RowIndex, columnIndex + 2].Value = group.Turnover == 0 ? "N/A" : (object)group.Margin;
+            statisticSheet.Cells[RowIndex, columnIndex + 2].Value = group.Turnover == 0 ? "N/A" : group.Margin;
             statisticSheet.Cells[RowIndex, columnIndex + 3].Value = group.BetCount;
         }
     }

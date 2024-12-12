@@ -8,16 +8,9 @@ namespace PunterAnalysis.BetCount
         ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
     }
 
-    public class BetCountExcelSettingFactory : BetCountExcelSetting
+    public class BetCountExcelSettingFactory(ConfigurationService configurationService) : BetCountExcelSetting
     {
         private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/BetCount.xlsx";
-
-        private readonly ConfigurationService configurationService;
-
-        public BetCountExcelSettingFactory(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
         {

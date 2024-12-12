@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.Soccer.MajorMinor
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

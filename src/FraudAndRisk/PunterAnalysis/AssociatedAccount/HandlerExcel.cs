@@ -7,28 +7,13 @@ using Utilities.LinqDynamicSum;
 
 namespace PunterAnalysis.AssociatedAccount
 {
-    public class HandlerExcel : IRequestHandler<HttpParameterExcel, ExcelPackage>
+    public class HandlerExcel(
+        AssociatedFacade associatedFacade,
+        AssociatedAccountExcelSetting excelSettingFactory,
+        PunterAnalysisExcelBuilder excelBuilder,
+        IMapper mapper)
+        : IRequestHandler<HttpParameterExcel, ExcelPackage>
     {
-        private readonly AssociatedFacade associatedFacade;
-
-        private readonly AssociatedAccountExcelSetting excelSettingFactory;
-
-        private readonly PunterAnalysisExcelBuilder excelBuilder;
-
-        private readonly IMapper mapper;
-
-        public HandlerExcel(
-            AssociatedFacade associatedFacade,
-            AssociatedAccountExcelSetting excelSettingFactory,
-            PunterAnalysisExcelBuilder excelBuilder,
-            IMapper mapper)
-        {
-            this.associatedFacade = associatedFacade;
-            this.excelSettingFactory = excelSettingFactory;
-            this.excelBuilder = excelBuilder;
-            this.mapper = mapper;
-        }
-
         public async Task<ExcelPackage> Handle(HttpParameterExcel request, CancellationToken cancellationToken)
         {
             var associatedSummaries = await associatedFacade.Query(request);

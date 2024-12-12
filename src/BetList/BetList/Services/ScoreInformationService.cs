@@ -11,15 +11,8 @@ namespace BetList.Services
     {
         Task<ScoreInformation> GetScoreInfo(GetScoreInformationCriteria criteria);
     }
-    public class ScoreInformationServiceImp : ScoreInformationService
+    public class ScoreInformationServiceImp(IDynamicRepository repository) : ScoreInformationService
     {
-        private readonly IDynamicRepository repository;
-
-        public ScoreInformationServiceImp(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public async Task<ScoreInformation> GetScoreInfo(GetScoreInformationCriteria criteria)
         {
             var scoreInformation = new ScoreInformation();

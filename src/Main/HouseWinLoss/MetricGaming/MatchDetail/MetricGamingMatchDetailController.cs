@@ -1,23 +1,21 @@
 ﻿namespace HouseWinLoss.MetricGaming.MatchDetail
 {
     using AutoMapper;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Common.Criteria;
+    using Common.ColumnDecorators;
+    using Common.Criteria;
     using HouseWinLoss.Common.MatchDetail;
-    using HouseWinLoss.Configuration;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/house-win-loss-by-products/metric-gaming-superlive/match-detail")]
     [ApiController]
-    public class MetricGamingMatchDetailController : MatchDetailController
+    public class MetricGamingMatchDetailController(
+        WinLossService service,
+        GridOptionsBuilder builder,
+        MatchGridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+        : MatchDetailController(service, builder, decorator)
     {
-        private readonly IMapper mapper;    
-        public MetricGamingMatchDetailController(WinLossService service, GridOptionsBuilder builder, MatchGridOptionColumnDecoratorFull decorator, IMapper mapper)
-            : base(service, builder, decorator)
-        {
-            this.mapper = mapper;   
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

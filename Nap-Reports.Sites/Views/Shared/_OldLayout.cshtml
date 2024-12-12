@@ -6,7 +6,7 @@
         Today = Convert.ToInt64(DateTime.Now
            .Subtract(new DateTime(1970, 1, 1, 0, 0, 0))
            .TotalMilliseconds),
-        RootUrl = Url.Content("~").TrimEnd(new[] { '/' })
+        RootUrl = Url.Content("~").TrimEnd(['/'])
     };
 }
 <!DOCTYPE html>

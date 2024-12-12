@@ -21,10 +21,7 @@ namespace TotalSMAAndActiveMember.Criteria
 
         public bool ShowDetailNew
         {
-            get
-            {
-                return this.Status == (int)StatusConstant.NewCreated;
-            }
+            get => Status == (int)StatusConstant.NewCreated;
 
             set
             {
@@ -33,10 +30,7 @@ namespace TotalSMAAndActiveMember.Criteria
 
         public bool ShowDetailReject
         {
-            get
-            {
-                return this.Status == (int)StatusConstant.Suspended;
-            }
+            get => Status == (int)StatusConstant.Suspended;
 
             set
             {
@@ -45,10 +39,7 @@ namespace TotalSMAAndActiveMember.Criteria
 
         public bool ShowDetailClosed
         {
-            get
-            {
-                return this.Status == (int)StatusConstant.Closed;
-            }
+            get => Status == (int)StatusConstant.Closed;
 
             set
             {

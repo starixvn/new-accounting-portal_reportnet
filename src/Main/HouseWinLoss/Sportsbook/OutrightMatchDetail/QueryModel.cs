@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.Sportsbook.OutrightMatchDetail
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

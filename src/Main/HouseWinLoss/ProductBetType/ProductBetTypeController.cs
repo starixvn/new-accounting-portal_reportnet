@@ -1,27 +1,18 @@
 ﻿namespace HouseWinLoss.ProductBetType
 {
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Configuration;
+    using Common.ColumnDecorators;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/product-bettype")]
     [ApiController]
-    public class ProductBetTypeController : ControllerBase
+    public class ProductBetTypeController(
+        Service service,
+        GridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator)
+        : ControllerBase
     {
-        private readonly Service service;
-
-        private readonly GridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecoratorFull decorator;
-
-        public ProductBetTypeController(Service service, GridOptionsBuilder builder, GridOptionColumnDecoratorFull decorator)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-        }
-
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
         {

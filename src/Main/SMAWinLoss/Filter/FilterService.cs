@@ -19,15 +19,8 @@ namespace SMAWinLoss.Filter
         Task<IEnumerable<BetFrom>> GetBetFroms();
     }
 
-    public class FilterServiceImp : FilterService
+    public class FilterServiceImp(IDynamicRepository repository) : FilterService
     {
-        private readonly IDynamicRepository repository;
-
-        public FilterServiceImp(IDynamicRepository repository)
-        {
-            this.repository = repository;
-        }
-
         public async Task<bool> GetAvailableDatabase()
         {
             var criteria = new AvailableDatabaseCriteria();
@@ -51,7 +44,7 @@ namespace SMAWinLoss.Filter
             var result = new LeagueGroupModel
             {
                 NumberItems = 0,
-                LeagueGroups = new List<LeagueGroup>()
+                LeagueGroups = []
             };
 
           //  var result = new List<LeagueGroup>();

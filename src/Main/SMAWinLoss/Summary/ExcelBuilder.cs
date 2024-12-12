@@ -9,10 +9,8 @@ namespace SMAWinLoss.Summary
         ExcelPackage Build(int year, string title, WinLossModel winlosses);
     }
 
-    public class ExcelBuilderImp : ExcelBuilder
+    public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelBuilder
     {
-        private readonly ConfigurationService configurationService;
-
         private ExcelWorksheet summarySheet;
 
         private ExcelWorksheet summaryEvenSheet;
@@ -33,11 +31,6 @@ namespace SMAWinLoss.Summary
 
         private ExcelPackage ExcelPackage { get; set; }
 
-        public ExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
-
         public ExcelPackage Build(int year, string title, WinLossModel winlosses)
         {
             LoadTemplate();
@@ -53,14 +46,12 @@ namespace SMAWinLoss.Summary
         private void LoadTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/SMAWinLoss/Summary.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                summarySheet = ExcelPackage.Workbook.Worksheets.Copy("SummaryOdd", "SMA Win Loss Summary");
-                summaryEvenSheet = ExcelPackage.Workbook.Worksheets["SummaryEven"];
-                summaryOddSheet = ExcelPackage.Workbook.Worksheets["SummaryOdd"];
-                totalSheet = ExcelPackage.Workbook.Worksheets["Total"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            summarySheet = ExcelPackage.Workbook.Worksheets.Copy("SummaryOdd", "SMA Win Loss Summary");
+            summaryEvenSheet = ExcelPackage.Workbook.Worksheets["SummaryEven"];
+            summaryOddSheet = ExcelPackage.Workbook.Worksheets["SummaryOdd"];
+            totalSheet = ExcelPackage.Workbook.Worksheets["Total"];
         }
 
         private void BuildTitle(string title)
@@ -96,7 +87,7 @@ namespace SMAWinLoss.Summary
 
         private void BuildTotal(WinLossModel winlosses)
         {
-            int numberRowOfTotal = 0;
+            var numberRowOfTotal = 0;
             var rowIndex = StartRowIndex + winlosses.UsernameWinLosses.Count;
             foreach (var item in winlosses.Total)
             {

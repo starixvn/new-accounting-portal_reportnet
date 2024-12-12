@@ -11,11 +11,11 @@ namespace UpdatedUsernameCredit.UpdatedUsername
     {
         public UsernameLogModel GetUsernameLog(string tracking)
         {
-            Regex fromNameRegex = new Regex(@"(?<=\bFromName="")[^""]*");
-            Match fromNameMatch = fromNameRegex.Match(tracking);
+            var fromNameRegex = new Regex("""(?<=\bFromName=")[^"]*""");
+            var fromNameMatch = fromNameRegex.Match(tracking);
 
-            Regex toNameRegex = new Regex(@"(?<=\bToName="")[^""]*");
-            Match toNameMatch = toNameRegex.Match(tracking);
+            var toNameRegex = new Regex("""(?<=\bToName=")[^"]*""");
+            var toNameMatch = toNameRegex.Match(tracking);
 
             return new UsernameLogModel
             {

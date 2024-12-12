@@ -10,10 +10,8 @@ namespace SBCustomerPerformanceByDanger.Report
         ExcelPackage Build(string title, SummaryEntity<CustomerPerformanceByDangerExcelModel> model);
     }
 
-    public class ReportExcelBuilderImp : ReportExcelBuilder
+    public class ReportExcelBuilderImp(ConfigurationService configurationService) : ReportExcelBuilder
     {
-        private readonly ConfigurationService configurationService;
-
         private ExcelWorksheet sheet;
 
         private ExcelWorksheet totalSheet;
@@ -21,11 +19,6 @@ namespace SBCustomerPerformanceByDanger.Report
         private const int StartRowIndex = 4;
 
         private ExcelPackage ExcelPackage { get; set; }
-
-        public ReportExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelPackage Build(string title, SummaryEntity<CustomerPerformanceByDangerExcelModel> model)
         {
@@ -40,12 +33,10 @@ namespace SBCustomerPerformanceByDanger.Report
         private void LoadTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/SBCustomerPerformanceByDangers/SBCustomerPerformanceByDangers.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                sheet = ExcelPackage.Workbook.Worksheets.Copy("BodyTemplate", "Customer Performance");
-                totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            sheet = ExcelPackage.Workbook.Worksheets.Copy("BodyTemplate", "Customer Performance");
+            totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
         }
 
         private void BuildTotalRow(SummaryEntity<CustomerPerformanceByDangerExcelModel> model)

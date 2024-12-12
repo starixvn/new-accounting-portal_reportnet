@@ -10,11 +10,8 @@ namespace ActualMemberBet.Bettype
         ExcelPackage Build(HttpParameterExcel excelParams, SummaryEntity<BetTypeActualMemberBetExcel> bettypeActualMemberBetExcel);
     }
 
-    public class BettypeExcelBuilderImp : BettypeExcelBuilder
+    public class BettypeExcelBuilderImp(ConfigurationService configurationService) : BettypeExcelBuilder
     {
-
-        private readonly ConfigurationService configurationService;
-
         private ExcelWorksheet bettypeActualMemberBetSheet;
 
         private ExcelWorksheet totalSheet;
@@ -22,11 +19,6 @@ namespace ActualMemberBet.Bettype
         private const int StartRowIndex = 5;
 
         private ExcelPackage ExcelPackage { get; set; }
-
-        public BettypeExcelBuilderImp(ConfigurationService configurationService)
-        {
-            this.configurationService = configurationService;
-        }
 
         public ExcelPackage Build(HttpParameterExcel excelParams, SummaryEntity<BetTypeActualMemberBetExcel> bettypeActualMemberBetExcel)
         {
@@ -41,12 +33,10 @@ namespace ActualMemberBet.Bettype
         private void LoadTemplate()
         {
             var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/ActualMemberBet/BettypeActualMemberBet.xlsx";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                bettypeActualMemberBetSheet = ExcelPackage.Workbook.Worksheets.Copy("ActualMemberBetDetailTemplate", "ActualMemberBet");
-                totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            bettypeActualMemberBetSheet = ExcelPackage.Workbook.Worksheets.Copy("ActualMemberBetDetailTemplate", "ActualMemberBet");
+            totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
         }
 
         private void BuildTitle(HttpParameterExcel excelParams)

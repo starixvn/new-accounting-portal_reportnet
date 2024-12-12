@@ -1,21 +1,14 @@
 ﻿namespace HouseWinLoss.Soccer.BetTypeFull
 {
     using Fanex.Excel.Models;
-    using HouseWinLoss.Configuration;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/soccer/bettype-full")]
     [ApiController]
-    public class SoccerBetTypeFullController : ControllerBase
+    public class SoccerBetTypeFullController(AbstractFactory factory) : ControllerBase
     {
-        private readonly AbstractFactory factory;
-
-        public SoccerBetTypeFullController(AbstractFactory factory)
-        {
-            this.factory = factory;
-        }
-
         [Route("excel")]
         public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
         {
@@ -30,7 +23,7 @@
             var betTypeNonLiveGridOptions = await betTypeNonLiveGridOptionFactory.CreateGridOption(queryModel, queryModel.BetTypeNonLiveTitle, 0);
 
             return new FanexExcelResult(
-                new List<GridOptions> { betTypeFullGridOptions, betTypeLiveGridOptions, betTypeNonLiveGridOptions },
+                [betTypeFullGridOptions, betTypeLiveGridOptions, betTypeNonLiveGridOptions],
                 Constants.SheetName);
         }
     }

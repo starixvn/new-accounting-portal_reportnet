@@ -2,36 +2,23 @@
 {
     using AutoMapper;
     using Fanex.Excel.Models;
-    using HouseWinLoss.Common.BasicWinLoss;
-    using HouseWinLoss.Common.ColumnDecorators;
-    using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Common.BasicWinLoss;
+    using Common.ColumnDecorators;
+    using Common.Criteria;
+    using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;
 
     [Route("api/house-win-loss-by-products/cash-out/live-non-live")]
     [ApiController]
-    public class CashOutLiveNonLiveController : ControllerBase
+    public class CashOutLiveNonLiveController(
+        CashOutLiveNonLiveWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorBasic decorator,
+        IMapper mapper)
+        : ControllerBase
     {
-        private readonly CashOutLiveNonLiveWinLossService service;
-
-        private readonly BasicGridOptionsBuilder builder;
-
-        private readonly GridOptionColumnDecorator decorator;
-
-        private readonly IMapper mapper;
-
-        public CashOutLiveNonLiveController(
-            CashOutLiveNonLiveWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecoratorBasic decorator, 
-            IMapper mapper)
-        {
-            this.service = service;
-            this.builder = builder;
-            this.decorator = decorator;
-            this.mapper = mapper;
-        }
+        private readonly GridOptionColumnDecorator decorator = decorator;
 
         [Route("")]
         public async Task<IActionResult> Json(QueryModel queryModel)
@@ -54,7 +41,7 @@
             var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
             var liveNonLiveDecorateGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
-            return new GridOptions[] { majorMinorDecorationGridOptions , liveNonLiveDecorateGridOptions };
+            return [majorMinorDecorationGridOptions , liveNonLiveDecorateGridOptions];
         }
 
         [Route("excel")]
@@ -71,7 +58,7 @@
             liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
             return new FanexExcelResult(
-                new List<GridOptions> { majorMinorGridOptions, liveNonLiveGridOptions },
+                [majorMinorGridOptions, liveNonLiveGridOptions],
                 Constants.SheetName);
         }
     }

@@ -9,17 +9,8 @@ namespace SBPerformance.TopLosingLeague
         Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parameter);
     }
 
-    public class TopLosingLeagueServiceImp : TopLosingLeagueService
+    public class TopLosingLeagueServiceImp(IDynamicRepository repository, IMapper mapper) : TopLosingLeagueService
     {
-        private readonly IDynamicRepository repository;
-        private readonly IMapper mapper;
-
-        public TopLosingLeagueServiceImp(IDynamicRepository repository, IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-
         public async Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parameter)
         {
             var criteria = mapper.Map<TopLosingLeagueCriteria>(parameter);

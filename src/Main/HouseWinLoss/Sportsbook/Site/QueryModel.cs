@@ -1,6 +1,6 @@
 ﻿namespace HouseWinLoss.Sportsbook.Site
 {
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class QueryModel
     {

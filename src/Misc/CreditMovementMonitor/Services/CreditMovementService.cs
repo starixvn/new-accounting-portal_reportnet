@@ -32,7 +32,7 @@ namespace CreditMovementMonitor.Services
         public async Task<GridOptions> GetReport(CreditMovementCriteria criteria)
         {
             GridOptions gridOptions = null;
-            GridOptions pagingGridOptions = InitCreditMovementGridOptions(criteria);
+            var pagingGridOptions = InitCreditMovementGridOptions(criteria);
 
             if (criteria.IsPagingCallBack)
             {
@@ -90,7 +90,7 @@ namespace CreditMovementMonitor.Services
                 var siteGroup = new SiteGroup
                 {
                     GroupName = group,
-                    Sites = new List<Site>()
+                    Sites = []
                 };
 
                 var sites = list.Where(x => x.SiteGroup == group).ToList();
@@ -104,13 +104,13 @@ namespace CreditMovementMonitor.Services
 
         private async Task<GridOptions> GetReportData(CreditMovementCriteria criteria)
         {
-            GridOptions gridOptions = InitCreditMovementGridOptions(criteria);
+            var gridOptions = InitCreditMovementGridOptions(criteria);
 
             var rawData = await repository.FetchAsync<CreditMovementEntity>(criteria);
 
             gridOptions.BodyRows = MapReportDataRows(rawData);
 
-            cacheService.Set(creditMovementDataCachedKey, gridOptions);
+            await cacheService.SetAsync(creditMovementDataCachedKey, gridOptions);
 
             return gridOptions;
         }
@@ -135,14 +135,14 @@ namespace CreditMovementMonitor.Services
         {
             var groupHeader = new List<GroupHeaderRows>();
             var groupHeaderRow = new GroupHeaderRows();
-            groupHeaderRow.Columns.AddRange(new List<HeaderColumns>()
+            groupHeaderRow.Columns.AddRange(new List<HeaderColumns>
             {
-                new HeaderColumns() { HeaderText = "#", Name = "No", MergeRowNumber = 2, Width = 50 },
-                new HeaderColumns() { HeaderText = "Date", Name = "Date", MergeRowNumber = 2, Width = 100 },
-                new HeaderColumns() { HeaderText = "Currency", Name = "Currency", MergeRowNumber = 2, Width = 100 },
-                new HeaderColumns() { HeaderText = "Site", Name = "Site", MergeRowNumber = 2, Width = 100 },
-                new HeaderColumns() { HeaderText = "Super/Master/Agent/Member", Name = "Super/Master/Agent/Member", MergeRowNumber = 2, Width = 300 },
-                new HeaderColumns() { HeaderText = "Credit Movement", Name = "Original Currency", MergeColNumber = 2 }
+                new() { HeaderText = "#", Name = "No", MergeRowNumber = 2, Width = 50 },
+                new() { HeaderText = "Date", Name = "Date", MergeRowNumber = 2, Width = 100 },
+                new() { HeaderText = "Currency", Name = "Currency", MergeRowNumber = 2, Width = 100 },
+                new() { HeaderText = "Site", Name = "Site", MergeRowNumber = 2, Width = 100 },
+                new() { HeaderText = "Super/Master/Agent/Member", Name = "Super/Master/Agent/Member", MergeRowNumber = 2, Width = 300 },
+                new() { HeaderText = "Credit Movement", Name = "Original Currency", MergeColNumber = 2 }
             });
             groupHeader.Add(groupHeaderRow);
             return groupHeader;
@@ -151,45 +151,45 @@ namespace CreditMovementMonitor.Services
         private List<HeaderColumns> HeaderColumns()
         {
             var header = new List<HeaderColumns>();
-            header.AddRange(new List<HeaderColumns>()
+            header.AddRange(new List<HeaderColumns>
             {
-                new HeaderColumns() { HeaderText = "#", Name = "No", Width = 50, CustomCellType = ExcelCellType.Integer, CellAlignment = HAlignment.Center },
-                new HeaderColumns() { HeaderText = "Date", Name = "Date", Width = 100, CellAlignment = HAlignment.Center },
-                new HeaderColumns() { HeaderText = "Currency", Name = "Currency", Width = 100, CellAlignment = HAlignment.Center },
-                new HeaderColumns() { HeaderText = "Site", Name = "Site", Width = 100, CellAlignment = HAlignment.Center },
-                new HeaderColumns() { HeaderText = "Super/Master/Agent/Member", Name = "Super/Master/Agent/Member", Width = 300, CellAlignment = HAlignment.Center },
-                new HeaderColumns() { HeaderText = "Original Currency", Name = "Original Currency", Width = 150, CustomCellType = ExcelCellType.Double, CellAlignment = HAlignment.Right },
-                new HeaderColumns() { HeaderText = "Base Currency", Name = "Base Currency", Width = 150, CustomCellType = ExcelCellType.Double, CellAlignment = HAlignment.Right },
+                new() { HeaderText = "#", Name = "No", Width = 50, CustomCellType = ExcelCellType.Integer, CellAlignment = HAlignment.Center },
+                new() { HeaderText = "Date", Name = "Date", Width = 100, CellAlignment = HAlignment.Center },
+                new() { HeaderText = "Currency", Name = "Currency", Width = 100, CellAlignment = HAlignment.Center },
+                new() { HeaderText = "Site", Name = "Site", Width = 100, CellAlignment = HAlignment.Center },
+                new() { HeaderText = "Super/Master/Agent/Member", Name = "Super/Master/Agent/Member", Width = 300, CellAlignment = HAlignment.Center },
+                new() { HeaderText = "Original Currency", Name = "Original Currency", Width = 150, CustomCellType = ExcelCellType.Double, CellAlignment = HAlignment.Right },
+                new() { HeaderText = "Base Currency", Name = "Base Currency", Width = 150, CustomCellType = ExcelCellType.Double, CellAlignment = HAlignment.Right }
             });
             return header;
         }
 
         private List<GridDataRow> MapReportDataRows(IEnumerable<CreditMovementEntity> rawData)
         {
-            int dataRowIndex = 0;
-            int dataColIndex = 0;
-            List<GridDataRow> dataRows = new List<GridDataRow>();
+            var dataRowIndex = 0;
+            var dataColIndex = 0;
+            List<GridDataRow> dataRows = [];
             foreach (var item in rawData)
             {
-                string downLineDetail = string.Empty;
-                string superName = item.SuperName;
+                var downLineDetail = string.Empty;
+                var superName = item.SuperName;
                 downLineDetail = string.IsNullOrEmpty(superName) ? downLineDetail : superName;
-                string masterName = item.MasterName;
-                downLineDetail = string.IsNullOrEmpty(masterName) ? downLineDetail : string.Format("{0} / {1}", downLineDetail, masterName);
-                string agentName = item.AgentName;
-                downLineDetail = string.IsNullOrEmpty(agentName) ? downLineDetail : string.Format("{0} / {1}", downLineDetail, agentName);
-                string memberName = item.CustomerName;
-                downLineDetail = string.IsNullOrEmpty(memberName) ? downLineDetail : string.Format("{0} / {1}", downLineDetail, memberName);
-                GridDataRow dataRow = new GridDataRow();
-                dataRow.Columns.AddRange(new List<Columns>()
+                var masterName = item.MasterName;
+                downLineDetail = string.IsNullOrEmpty(masterName) ? downLineDetail : $"{downLineDetail} / {masterName}";
+                var agentName = item.AgentName;
+                downLineDetail = string.IsNullOrEmpty(agentName) ? downLineDetail : $"{downLineDetail} / {agentName}";
+                var memberName = item.CustomerName;
+                downLineDetail = string.IsNullOrEmpty(memberName) ? downLineDetail : $"{downLineDetail} / {memberName}";
+                var dataRow = new GridDataRow();
+                dataRow.Columns.AddRange(new List<Columns>
                 {
-                    new Columns(dataColIndex++) { Name = "No", Value = dataRowIndex + 1 },
-                    new Columns(dataColIndex++) { Name = "Date", Value = item.TransDate.ToShortFormatedDate() },
-                    new Columns(dataColIndex++) { Name = "Currency", Value = item.Currency },
-                    new Columns(dataColIndex++) { Name = "Site", Value = item.Site },
-                    new Columns(dataColIndex++) { Name = "Super/Master/Agent/Member", Value = downLineDetail },
-                    new Columns(dataColIndex++) { Name = "Original Currency", Value = item.Amount },
-                    new Columns(dataColIndex++) { Name = "Base Currency", Value = item.BaseAmount }
+                    new(dataColIndex++) { Name = "No", Value = dataRowIndex + 1 },
+                    new(dataColIndex++) { Name = "Date", Value = item.TransDate.ToShortFormatedDate() },
+                    new(dataColIndex++) { Name = "Currency", Value = item.Currency },
+                    new(dataColIndex++) { Name = "Site", Value = item.Site },
+                    new(dataColIndex++) { Name = "Super/Master/Agent/Member", Value = downLineDetail },
+                    new(dataColIndex++) { Name = "Original Currency", Value = item.Amount },
+                    new(dataColIndex++) { Name = "Base Currency", Value = item.BaseAmount }
                 });
 
                 dataRows.Add(dataRow);
@@ -201,8 +201,8 @@ namespace CreditMovementMonitor.Services
 
         private void GetPagingReport(GridOptions gridOptions, ref GridOptions pagingGridOptions, CreditMovementCriteria criteria)
         {
-            int pageSize = criteria.PageSize;
-            int pageIndex = criteria.PageIndex;
+            var pageSize = criteria.PageSize;
+            var pageIndex = criteria.PageIndex;
             pagingGridOptions.BodyRows = gridOptions.BodyRows.Skip(pageIndex * pageSize).Take(pageSize).ToList();
         }
     }

@@ -4,7 +4,7 @@ namespace HouseWinLoss.Products
 {
     public class Criteria : WinLossCriteria
     {
-        public override string GetSettingKey() => $"HouseWinlossByProducts_Lvl1";
+        public override string GetSettingKey() => "HouseWinlossByProducts_Lvl1";
 
         public bool IsNoDraw { get; set; }
 

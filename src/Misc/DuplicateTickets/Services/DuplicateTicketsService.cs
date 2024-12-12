@@ -76,7 +76,7 @@ namespace DuplicateTickets.Services
             if (result.Count > 0)
             {
                 var json = JsonConvert.SerializeObject(result, Formatting.Indented);
-                LogService.Info($"Misc / Duplicate Tickets by Username: {napSession.UserName}" + Environment.NewLine + json);
+                await LogService.InfoAsync($"Misc / Duplicate Tickets by Username: {napSession.UserName}" + Environment.NewLine + json);
             }
 
             return duplicateTicketsInfo;

@@ -11,15 +11,9 @@ namespace ResultAnalysis.Services
 		Task<ResultAnalysisModel> GetResultAnalysis(ResultAnalysisCriteria criteria);
 	}
 
-	public class ResultAnalysisServiceImp : ResultAnalysisService
-	{
-		private readonly IDynamicRepository repository;
-
-		public ResultAnalysisServiceImp(IDynamicRepository repository)
-		{
-			this.repository = repository;
-		}
-		public async Task<IEnumerable<LeagueModel>> GetLeagues(LeagueCriteria criteria)
+	public class ResultAnalysisServiceImp(IDynamicRepository repository) : ResultAnalysisService
+    {
+        public async Task<IEnumerable<LeagueModel>> GetLeagues(LeagueCriteria criteria)
 		{
 			return await repository.FetchAsync<LeagueModel>(criteria);
 		}
@@ -53,8 +47,8 @@ namespace ResultAnalysis.Services
 				TgResult01 = data.Count(item => CheckResultTg(item.ResultTG, 0, 1)),
 				TgResult23 = data.Count(item => CheckResultTg(item.ResultTG, 2, 3)),
 				TgResult46 = data.Count(item => CheckResultTg(item.ResultTG, 4, 6)),
-				TgResult7 = data.Count(item => CheckResultTg(item.ResultTG, 7, -1)),
-			};
+				TgResult7 = data.Count(item => CheckResultTg(item.ResultTG, 7, -1))
+            };
 			return result;
 		}
 

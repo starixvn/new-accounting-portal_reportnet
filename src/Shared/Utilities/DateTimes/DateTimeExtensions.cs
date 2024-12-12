@@ -66,18 +66,18 @@
 
         public static DateTime FirstDateOfWeek(int year, int week)
         {
-            DateTime firstDateOfYear = new DateTime(year, 1, 1);
-            int daysOffset = DayOfWeek.Monday - firstDateOfYear.DayOfWeek;
-            DateTime firstMonday = firstDateOfYear.AddDays(daysOffset);
+            var firstDateOfYear = new DateTime(year, 1, 1);
+            var daysOffset = DayOfWeek.Monday - firstDateOfYear.DayOfWeek;
+            var firstMonday = firstDateOfYear.AddDays(daysOffset);
             return firstMonday.AddDays((week - 1) * 7);
         }
 
         public static DateTime LastDateOfWeek(int year, int week)
         {
-            DateTime firstDateOfYear = new DateTime(year, 1, 1);
-            int daysOffset = DayOfWeek.Monday - firstDateOfYear.DayOfWeek;
-            DateTime firstMonday = firstDateOfYear.AddDays(daysOffset);
-            return firstMonday.AddDays((week * 7) - 1);
+            var firstDateOfYear = new DateTime(year, 1, 1);
+            var daysOffset = DayOfWeek.Monday - firstDateOfYear.DayOfWeek;
+            var firstMonday = firstDateOfYear.AddDays(daysOffset);
+            return firstMonday.AddDays(week * 7 - 1);
         }
 
         public static DateTime GetEndOfDate(this DateTime date)

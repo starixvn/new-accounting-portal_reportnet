@@ -1,7 +1,7 @@
 namespace HouseWinLoss.OtherSports.SportType
 {
     using HouseWinLoss.Common.Criteria;
-    using HouseWinLoss.Configuration;
+    using Configuration;
 
     public class Criteria : WinLossCriteria
     {
@@ -11,6 +11,6 @@ namespace HouseWinLoss.OtherSports.SportType
 
         public int PermissionProfileID { get; set; }
 
-        public override string GetSettingKey() => $"HouseWinlossByProducts_LvlN_Sportsbook_Sporttype";
+        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Sporttype";
     }
 }

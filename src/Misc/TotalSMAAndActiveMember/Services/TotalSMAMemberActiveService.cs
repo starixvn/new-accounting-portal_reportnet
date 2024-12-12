@@ -28,44 +28,46 @@ namespace TotalSMAAndActiveMember.Services
 
             if (totalSMA != null && activeDetails != null && activeDetails.Any())
             {
-                report = new List<SMASummaryModel>();
+                report =
+                [
+                    new SMASummaryModel
+                    {
+                        Name = "New Created",
+                        Super = totalSMA.NewCreatedSuper,
+                        Master = totalSMA.NewCreatedMaster,
+                        Agent = totalSMA.NewCreatedAgent
+                    },
 
-                report.Add(new SMASummaryModel
-                {
-                    Name = "New Created",
-                    Super = totalSMA.NewCreatedSuper,
-                    Master = totalSMA.NewCreatedMaster,
-                    Agent = totalSMA.NewCreatedAgent
-                });
+                    new SMASummaryModel
+                    {
+                        Name = "Active",
+                        Super = totalSMA.ActiveSuper,
+                        Master = totalSMA.ActiveMaster,
+                        Agent = totalSMA.ActiveAgent
+                    },
 
-                report.Add(new SMASummaryModel
-                {
-                    Name = "Active",
-                    Super = totalSMA.ActiveSuper,
-                    Master = totalSMA.ActiveMaster,
-                    Agent = totalSMA.ActiveAgent
-                });
+                    new SMASummaryModel
+                    {
 
-                report.Add(new SMASummaryModel
-                {
+                        Name = "Suspended",
+                        Super = totalSMA.SuspendedSuper,
+                        Master = totalSMA.SuspendedMaster,
+                        Agent = totalSMA.SuspendedAgent
+                    },
 
-                    Name = "Suspended",
-                    Super = totalSMA.SuspendedSuper,
-                    Master = totalSMA.SuspendedMaster,
-                    Agent = totalSMA.SuspendedAgent
-                });
+                    new SMASummaryModel
+                    {
+                        Name = "Closed",
+                        Super = totalSMA.ClosedSuper,
+                        Master = totalSMA.ClosedMaster,
+                        Agent = totalSMA.ClosedAgent
+                    }
 
-                report.Add(new SMASummaryModel
-                {
-                    Name = "Closed",
-                    Super = totalSMA.ClosedSuper,
-                    Master = totalSMA.ClosedMaster,
-                    Agent = totalSMA.ClosedAgent
-                });
+                ];
 
                 foreach (var item in activeDetails)
                 {
-                    var smaSummary = this.BuildSMASummary(item);
+                    var smaSummary = BuildSMASummary(item);
                     report.Add(smaSummary);
                 }
             }
@@ -116,7 +118,7 @@ namespace TotalSMAAndActiveMember.Services
 
                 foreach (var item in groupHeadline)
                 {
-                    var statusDetail = this.BuildStatusDetail(item, status);
+                    var statusDetail = BuildStatusDetail(item, status);
                     groupStatusDetail.ChildItems.Add(statusDetail);
                 }
 
@@ -128,7 +130,7 @@ namespace TotalSMAAndActiveMember.Services
 
         private SMASummaryModel BuildSMASummary(ActiveDetailItem rawData)
         {
-            string[] smaArray = rawData.SMA.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            var smaArray = rawData.SMA.Split(['/'], StringSplitOptions.RemoveEmptyEntries);
 
             return new SMASummaryModel
             {

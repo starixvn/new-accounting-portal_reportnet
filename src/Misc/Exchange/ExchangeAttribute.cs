@@ -1,7 +1,5 @@
 ﻿namespace Exchange
 {
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class ExchangeAttribute : Attribute
-    {
-    }
+    public sealed class ExchangeAttribute : Attribute;
 }

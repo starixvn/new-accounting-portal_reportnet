@@ -41,7 +41,7 @@ namespace DirectBalance.Controller
             var data = await service.GetDirectBalanceMasterDownLine(criteria);
             var excelPackage = await excelService.ExportExcelDirectBalance(data, "Agent");
             var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
-            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"DirectBalance_Agent.xlsx");
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DirectBalance_Agent.xlsx");
         }
 
         [Route("agent-downline")]
@@ -58,7 +58,7 @@ namespace DirectBalance.Controller
             var data = await service.GetDirectBalanceAgentDownLine(criteria);
             var excelPackage = await excelService.ExportExcelDirectBalance(data, "Member");
             var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
-            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"DirectBalance_Member.xlsx");
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DirectBalance_Member.xlsx");
         }
 
         [Route("currencies")]

@@ -5,18 +5,9 @@ using Utilities.LinqDynamicSum;
 
 namespace PunterAnalysis.Summary
 {
-    public class Handler : IRequestHandler<HttpParameterJson, SummaryEntity<SummaryModel>>
+    public class Handler(SummaryService summaryService, IMapper mapper)
+        : IRequestHandler<HttpParameterJson, SummaryEntity<SummaryModel>>
     {
-        private readonly SummaryService summaryService;
-
-        private readonly IMapper mapper;
-
-        public Handler(SummaryService summaryService, IMapper mapper)
-        {
-            this.summaryService = summaryService;
-            this.mapper = mapper;
-        }
-
         public async Task<SummaryEntity<SummaryModel>> Handle(HttpParameterJson request, CancellationToken cancellationToken)
         {
             var criteria = mapper.Map<Criteria>(request);

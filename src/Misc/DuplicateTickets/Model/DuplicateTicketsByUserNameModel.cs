@@ -2,11 +2,6 @@ namespace DuplicateTickets.Model
 {
     public class DuplicateTicketsByUserNameModel
     {
-        public DuplicateTicketsByUserNameModel()
-        {
-            TicketInfo = new List<TicketModel>();
-        }
-
         public string UserName { get; set; }
 
         public int CustId { get; set; }
@@ -23,6 +18,6 @@ namespace DuplicateTickets.Model
 
         public decimal Odds { get; set; }
 
-        public List<TicketModel> TicketInfo { get; set; }
+        public List<TicketModel> TicketInfo { get; set; } = [];
     }
 }

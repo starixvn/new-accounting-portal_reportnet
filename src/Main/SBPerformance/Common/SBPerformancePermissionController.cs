@@ -7,21 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace SBPerformance.Common
 {
     [Route("api/sb-performance/check-full-view")]
-    public class SBPerformancePermissionController : ControllerBase
+    public class SBPerformancePermissionController(
+        IUserService userService,
+        INapSession napSession,
+        INapSettings napSettings)
+        : ControllerBase
     {
-        private readonly IUserService userService;
-
-        private readonly INapSession napSession;
-
-        private readonly INapSettings napSettings;
-
-        public SBPerformancePermissionController(IUserService userService, INapSession napSession, INapSettings napSettings)
-        {
-            this.userService = userService;
-            this.napSession = napSession;
-            this.napSettings = napSettings;
-        }
-
         [Route("")]
         public IActionResult FullView()
         {

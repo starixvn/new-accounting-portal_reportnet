@@ -2,12 +2,6 @@ namespace TraderPerformance.Model
 {
     public class TraderPerformanceOtherSportsDetailModel
     {
-        public TraderPerformanceOtherSportsDetailModel()
-        {
-            ReportRows = new List<TraderPerformanceOtherSportsDetailModel>();
-            ChildInfo = new List<TraderPerformanceOtherSportsDetailModel>();
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -56,9 +50,9 @@ namespace TraderPerformance.Model
 
         public decimal Maxbet { get; set; }
 
-        public List<TraderPerformanceOtherSportsDetailModel> ChildInfo { get; set; }
+        public List<TraderPerformanceOtherSportsDetailModel> ChildInfo { get; set; } = [];
 
-        public List<TraderPerformanceOtherSportsDetailModel> ReportRows { get; set; }
+        public List<TraderPerformanceOtherSportsDetailModel> ReportRows { get; set; } = [];
 
         public TraderPerformanceOtherSportsDetailModel GrandTotal { get; set; }
 
@@ -82,31 +76,31 @@ namespace TraderPerformance.Model
         {
             FirstHalfHdp = turnOverInfo.FirstHalfHdp == 0 ?
                 0 :
-                (winLossInfo.FirstHalfHdp / turnOverInfo.FirstHalfHdp) * 100;
+                winLossInfo.FirstHalfHdp / turnOverInfo.FirstHalfHdp * 100;
             Hdp = turnOverInfo.Hdp == 0 ?
                 0 :
-                (winLossInfo.Hdp / turnOverInfo.Hdp) * 100;
+                winLossInfo.Hdp / turnOverInfo.Hdp * 100;
             FirstHalfOU = turnOverInfo.FirstHalfOU == 0 ?
                 0 :
-                (winLossInfo.FirstHalfOU / turnOverInfo.FirstHalfOU) * 100;
+                winLossInfo.FirstHalfOU / turnOverInfo.FirstHalfOU * 100;
             OU = turnOverInfo.OU == 0 ?
                 0 :
-                (winLossInfo.OU / turnOverInfo.OU) * 100;
+                winLossInfo.OU / turnOverInfo.OU * 100;
             FirstHalfOneXTwo = turnOverInfo.FirstHalfOneXTwo == 0 ?
                 0 :
-                (winLossInfo.FirstHalfOneXTwo / turnOverInfo.FirstHalfOneXTwo) * 100;
+                winLossInfo.FirstHalfOneXTwo / turnOverInfo.FirstHalfOneXTwo * 100;
             OneXTwo = turnOverInfo.OneXTwo == 0 ?
                 0 :
-                (winLossInfo.OneXTwo / turnOverInfo.OneXTwo) * 100;
+                winLossInfo.OneXTwo / turnOverInfo.OneXTwo * 100;
             FirstHalfOE = turnOverInfo.FirstHalfOE == 0 ?
                 0 :
-                (winLossInfo.FirstHalfOE / turnOverInfo.FirstHalfOE) * 100;
+                winLossInfo.FirstHalfOE / turnOverInfo.FirstHalfOE * 100;
             OE = turnOverInfo.OE == 0 ?
                 0 :
-                (winLossInfo.OE / turnOverInfo.OE) * 100;
+                winLossInfo.OE / turnOverInfo.OE * 100;
             Overall = turnOverInfo.Overall == 0 ?
                 0 :
-                (winLossInfo.Overall / turnOverInfo.Overall) * 100;
+                winLossInfo.Overall / turnOverInfo.Overall * 100;
         }
 
         public void FormatTwoDecimalNumberData(TraderPerformanceOtherSportsDetailModel traderInfo)
