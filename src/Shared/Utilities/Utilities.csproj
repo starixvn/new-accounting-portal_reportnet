@@ -5,6 +5,7 @@
     <RootNamespace>Utilities</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    <SonarQubeExclude>true</SonarQubeExclude>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,7 @@
     <None Remove="Controllers\**" />
   </ItemGroup>
   <ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="7.5.0" />
