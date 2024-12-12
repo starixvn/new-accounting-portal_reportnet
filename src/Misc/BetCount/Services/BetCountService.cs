@@ -26,16 +26,6 @@ namespace BetCount.Services
         RemotingRefService remotingRefService,
         IMapper mapper) : BetCountService
     {
-        private enum ReportRowType
-        {
-            NormalRow = 1,
-
-            Total = 2,
-
-            GrandTotal = 3
-        }
-
-
         public async Task<TransactionModel> GetReport(BetCountCriteria criteria)
         {
             var rawData = await repository.FetchAsync<BetCountEntity>(criteria);
@@ -152,11 +142,9 @@ namespace BetCount.Services
         {
             criteria ??= new ProductCriteria();
 
-            var rawData = await repository.FetchAsync<ProductEntity>(criteria);
+            var rawData = (await repository.FetchAsync<ProductEntity>(criteria)).ToList();
 
             var sports = new List<ProductModel>();
-
-            var sportIds = rawData.Select(info => info.SportId).Distinct().ToList();
 
             CalculateSportData(rawData, sports);
 
@@ -317,62 +305,60 @@ namespace BetCount.Services
             return indGroup;
         }
 
-        private List<ProductModel> CalculateSportData(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        private void CalculateSportData(IList<ProductEntity> rawData, List<ProductModel> sports)
         {
-            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscSportbookId).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.MiscSportbookId))
             {
                 CreateSportBookGroups(rawData, sports);
             }
 
-            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscVirtualSportsId).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.MiscVirtualSportsId))
             {
                 CreateVirtualSportGroup(rawData, sports);
             }
 
-            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscNG2ProductID).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.MiscNG2ProductID))
             {
                 CreateNG2SportGroup(rawData, sports);
             }
 
-            if (rawData.Where(x => x.ProductId == 3).Any())
+            if (rawData.Any(x => x.ProductId == 3))
             {
                 CreateNGSportGroup(rawData, sports);
             }
 
-            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscBetradarVirtualSportsId).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.MiscBetradarVirtualSportsId))
             {
                 CreateBetradarVirtualSportGroup(rawData, sports);
             }
 
-            if (rawData.Where(x => x.ProductId == BetCountConstants.BetBuilderProductID).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.BetBuilderProductID))
             {
                 CreateBetBuilderSportGroup(rawData, sports);
             }
 
-            if (rawData.Where(x => x.ProductId == BetCountConstants.SabaClubProductId).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.SabaClubProductId))
             {
                 CreateSportGroup(rawData, sports, BetCountConstants.SabaClubProductId);
             }
 
-            if (rawData.Where(x => x.ProductId == BetCountConstants.VGaming).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.VGaming))
             {
                 CreateSportGroup(rawData, sports, BetCountConstants.VGaming);
             }
 
-            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscVirtualSportsThirdId).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.MiscVirtualSportsThirdId))
             {
                 CreateVirtualSportThirdGroup(rawData, sports);
             }
 
-            if (rawData.Where(x => x.ProductId == BetCountConstants.MiscVirtualSportsThirdIdOld).Any())
+            if (rawData.Any(x => x.ProductId == BetCountConstants.MiscVirtualSportsThirdIdOld))
             {
                 CreateVirtualSportThirdOldGroup(rawData, sports);
             }
-
-            return sports;
         }
 
-        private List<ProductModel> CreateSportBookGroups(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        private void CreateSportBookGroups(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
         {
             var sportbookRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscSportbookId);
             var soccerGroupData = sportbookRaw.Where(r => r.SportId == BetCountConstants.MiscSoccerGroupId);
@@ -394,11 +380,9 @@ namespace BetCount.Services
             sports.Add(GenerateOtherSports(otherSportGroupData));
             sports.Add(GenerateSports(parlayGroupData));
             sports.Add(GenerateSports(sbAdjustmentGroupData));
-
-            return sports;
         }
 
-        private List<ProductModel> CreateVirtualSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        private void CreateVirtualSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
         {
             var virtualSportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscVirtualSportsId);
             var virtualSportGroups = virtualSportRaw.GroupBy(x => new { x.SportId, x.SportName });
@@ -406,11 +390,9 @@ namespace BetCount.Services
             {
                 sports.Add(AddSportGroup(virtualSportGroup));
             }
-
-            return sports;
         }
 
-        private List<ProductModel> CreateBetradarVirtualSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        private void CreateBetradarVirtualSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
         {
             var virtualSportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscBetradarVirtualSportsId);
             var virtualSportGroups = virtualSportRaw.GroupBy(rawInfo => new { rawInfo.SportId, rawInfo.SportName });
@@ -418,11 +400,9 @@ namespace BetCount.Services
             {
                 sports.Add(AddSportGroup(virtualSportGroup));
             }
-
-            return sports;
         }
 
-        private List<ProductModel> CreateNG2SportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        private void CreateNG2SportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
         {
             var numberGame2sportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscNG2ProductID);
             var numberGame2sportGroups = numberGame2sportRaw.GroupBy(rawInfo => new { rawInfo.SportId, rawInfo.SportName });
@@ -430,11 +410,9 @@ namespace BetCount.Services
             {
                 sports.Add(AddSportGroup(numberGame2sportGroup));
             }
-
-            return sports;
         }
 
-        private List<ProductModel> CreateNGSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        private void CreateNGSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
         {
             var numberGameSportRaw = rawData.Where(r => r.ProductId == 3);
             var numberGameSportGroups = numberGameSportRaw.GroupBy(rawInfo => new { rawInfo.SportId, rawInfo.SportName });
@@ -442,11 +420,9 @@ namespace BetCount.Services
             {
                 sports.Add(AddSportGroup(numberGameSportGroup));
             }
-
-            return sports;
         }
 
-        private List<ProductModel> CreateBetBuilderSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+        private void CreateBetBuilderSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
         {
             var betBuilderRaw = rawData.Where(r => r.ProductId == BetCountConstants.BetBuilderProductID);
             var betBuilderSportGroups = betBuilderRaw.GroupBy(entity => new { entity.SportId, entity.SportName });
@@ -468,11 +444,9 @@ namespace BetCount.Services
                     sports.Add(AddSportGroup(group));
                 }
             }
-
-            return sports;
         }
 
-        private List<ProductModel> CreateSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports, int productId)
+        private void CreateSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports, int productId)
         {
             var sportRaw = rawData.Where(r => r.ProductId == productId);
             var sportGroups = sportRaw.GroupBy(entity => new { entity.SportId, entity.SportName });
@@ -480,8 +454,6 @@ namespace BetCount.Services
             {
                 sports.Add(AddSportGroup(sportGroup));
             }
-
-            return sports;
         }
 
         private string GetSportName(int sportId)

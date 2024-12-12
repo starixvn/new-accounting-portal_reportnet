@@ -23,25 +23,6 @@ namespace SuperBalance.Service
 
     public class SuperBalanceServiceImp(IDynamicRepository repository, CurrenciesService currenciesService) : SuperBalanceService
     {
-        private enum ReportRowType
-        {
-            Total = 1,
-
-            GrandTotal = 2,
-
-            NormalEvenRow = 3,
-
-            NormalOddRow = 4
-        }
-
-        private enum BalanceType
-        {
-            Today = 1,
-
-            Yesterday = 2
-        }
-
-        
         public async Task<SuperBalanceModel> GetSuperBalance(SuperBalanceCriteria criteria)
         {
             var result = new SuperBalanceModel
@@ -133,31 +114,17 @@ namespace SuperBalance.Service
 
         public List<string> GetListAlphabet()
         {
-            var arrLetter = new List<string>();
-            arrLetter.Add("All");
-            arrLetter.Add("0-9");
+            var arrLetter = new List<string>
+            {
+                "All",
+                "0-9"
+            };
             for (var i = 'A'; i <= 'Z'; i++)
             {
                 arrLetter.Add(i.ToString());
             }
 
             return arrLetter;
-        }
-
-        private string GetBalanceType(int balanceTypeVal)
-        {
-            var balanceType = string.Empty;
-
-            if (balanceTypeVal == (int)BalanceType.Today)
-            {
-                balanceType = "Today";
-            }
-            else
-            {
-                balanceType = "Yesterday";
-            }
-
-            return balanceType;
         }
 
         private async Task<SuperBalanceModel> GetBalanceDownline(CriteriaBase criteria)

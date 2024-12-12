@@ -20,7 +20,7 @@ namespace UpdatedUsernameCredit.UpdatedUsername
                 model,
                 option =>
                 {
-                    option.AfterMap((source, destination) =>
+                    option.AfterMap((_, destination) =>
                     {
                         var index = 0;
                         foreach (var item in destination)

@@ -62,7 +62,7 @@ namespace NegativeBalance.Services
                         currentNegative.NegativeBalanceUsers.Add(data);
                     });
 
-                model.TotalNegativeBalanceUser = rawData.Count();
+                model.TotalNegativeBalanceUser = rawData.Count;
             }
 
             return model;
@@ -90,7 +90,7 @@ namespace NegativeBalance.Services
                 currentNegative.NegativeBalanceUsers.Add(data);
             });
 
-            model.TotalNegativeBalanceUser = rawData.Count();
+            model.TotalNegativeBalanceUser = rawData.Count;
             return model;
         }
     }

@@ -38,7 +38,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
         MergeHeader(columnHeaders);
         SetHeaderStyle(lastColumnIndex);
         RenderContent(dataTable);
-        SetContenStyle(dataTable, lastColumnIndex);
+        SetContentStyle(dataTable, lastColumnIndex);
         RenderTotal(dataTable, lastColumnIndex);
         ClearSheet();
         return Task.FromResult(excelPackage);
@@ -192,7 +192,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
                     currentContentRowIndex++;
                 }
 
-                MergeAndSetSyleContentByUser(lastColumnIndex, trader, dataTable);
+                MergeAndSetStyleContentByUser(lastColumnIndex, trader, dataTable);
                 CalculateSubTotalByUser(lastColumnIndex, rowsByUser, dataTable);
                 currentContentRowIndex++;
                 userIndex++;
@@ -280,7 +280,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
         }
     }
 
-    private void MergeAndSetSyleContentByUser(int lastColumnIndex, string trader, DataTable dataTable)
+    private void MergeAndSetStyleContentByUser(int lastColumnIndex, string trader, DataTable dataTable)
     {
         var rowsByUser = dataTable.AsEnumerable().Where(s => s["Trader"].ToString() == trader).ToList();
         var beginContentRowIndex = currentContentRowIndex - rowsByUser.Count;
@@ -348,7 +348,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
         }
     }
 
-    private void SetContenStyle(DataTable dataTable, int lastColumnIndex)
+    private void SetContentStyle(DataTable dataTable, int lastColumnIndex)
     {
         var styles = new Dictionary<string, int>
             {
@@ -427,9 +427,9 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
     {
         var bettype = columnName.Split('_')[1];
         var suffixWinLoss = columnName.Contains("Overall") ? "_Win Loss" : string.Empty;
-        var suffixTurover = columnName.Contains("Overall") ? "_Turnover" : string.Empty;
+        var suffixTurnover = columnName.Contains("Overall") ? "_Turnover" : string.Empty;
         var sumWL = rows.Sum(s => Converter.To<decimal>(s[$"Win Loss_{bettype}{suffixWinLoss}"]));
-        var sumTO = rows.Sum(s => Converter.To<decimal>(s[$"Turnover_{bettype}{suffixTurover}"]));
+        var sumTO = rows.Sum(s => Converter.To<decimal>(s[$"Turnover_{bettype}{suffixTurnover}"]));
         var margin = sumTO == 0 ? 0.0m : sumWL / sumTO;
         return margin;
     }

@@ -31,7 +31,7 @@ namespace Utilities.MostVisitedPages
         [Route("delete")]
         public async Task<IActionResult> DeleteMostVisitedPage(DeleteMostVisitedPagesCriteria mostVisitedPage)
         {
-            var result = await service.Delete(mostVisitedPage);
+            await service.Delete(mostVisitedPage);
 
             var mostVisitedPages = await service.GetMostVisitedPages();
 

@@ -16,7 +16,7 @@ namespace TraderPerformance.Services
         Task<TraderPerformanceOtherSportsDetailModel> SortDetailReportData(DetailReportCriteria criteria);
     }
 
-    public partial class TraderPerformanceOtherSportsServiceImp(
+    public class TraderPerformanceOtherSportsServiceImp(
         TraderPerformanceOtherSportsRepository repository) : 
         TraderPerformanceOtherSportsService
     {
@@ -221,25 +221,19 @@ namespace TraderPerformance.Services
                                         .OrderByDescending(traderInfo => traderInfo.ChildInfo[4].Overall)
                                         .ToList();
                     break;
-
-                default:
-                    break;
             }
 
             return report;
         }
 
-        private TraderPerformanceOtherSportsDetailModel SortDetailReportData(
-            TraderPerformanceOtherSportsDetailModel report,
+        private void SortDetailReportData(TraderPerformanceOtherSportsDetailModel report,
             DetailReportCriteria criteria)
         {
             SortSecondSubLevelReport(report, criteria);
-            return report;
         }
 
         
-        private TraderPerformanceOtherSportsDetailModel SortSecondSubLevelReport(
-            TraderPerformanceOtherSportsDetailModel report,
+        private void SortSecondSubLevelReport(TraderPerformanceOtherSportsDetailModel report,
             DetailReportCriteria criteria)
         {
             var isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
@@ -297,13 +291,8 @@ namespace TraderPerformance.Services
                                             .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[4].Overall)
                                             .ToList();
                         break;
-
-                    default:
-                        break;
                 }
             }
-
-            return report;
         }
     }
 }

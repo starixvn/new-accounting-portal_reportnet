@@ -29,8 +29,6 @@ namespace CompanyWinLoss.Services
         INapSession napSession,
         BalanceUpService balanceUpService) : CompanyWinLossService
     {
-        private const int ExtendCachedTimeOut = 2;
-
         private readonly string dataCachedKey = $"Fanex.AccountingReports.Licensee.CompanyWinLoss.{napSession.UserName}";
 
         public async Task<List<Currency>> GetCurrenciesByLicensee(CurrenciesByLicenseeCriteria criteria)
@@ -128,22 +126,6 @@ namespace CompanyWinLoss.Services
                 TitleInfoText = $"Company Win Loss from {criteria.FromDate.ToShortFormatedDate()} to {criteria.ToDate.ToShortFormatedDate()}"
             };
         }
-
-        private List<GroupHeaderRows> CreateGroupHeaderRows()
-        {
-            var groupHeader = new List<GroupHeaderRows>();
-            var groupHeaderRow = new GroupHeaderRows();
-            groupHeaderRow.Columns.AddRange(new List<HeaderColumns>
-            {
-                new() { HeaderText = "#", Name = "RowId", Width = 50 },
-                new() { HeaderText = "Super", Name = "Username", Width = 250 },
-                new() { HeaderText = "Company Win Loss", Name = "CompanyWL", Width = 250 }
-            });
-            groupHeader.Add(groupHeaderRow);
-
-            return groupHeader;
-        }
-
 
         private List<HeaderColumns> CreateHeaderColumns()
         {

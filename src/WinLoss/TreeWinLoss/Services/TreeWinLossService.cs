@@ -231,10 +231,7 @@ namespace TreeWinLoss.Services
             var virtualRateBySportAndLiveStatus = new VirtualRateModel();
             var enableVirtualRate = false;
 
-            var rawData = await repository.FetchMultipleAsync<SummaryVirtualRate, DetailVirtualRate>(criteria);
-
-            var summaryVirtualRate = rawData.Item1;
-            var detailVirtualRate = rawData.Item2;
+            var (summaryVirtualRate, detailVirtualRate) = await repository.FetchMultipleAsync<SummaryVirtualRate, DetailVirtualRate>(criteria);
 
             if (summaryVirtualRate.Any())
             {

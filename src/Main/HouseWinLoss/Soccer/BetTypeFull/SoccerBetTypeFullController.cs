@@ -1,6 +1,5 @@
 ﻿namespace HouseWinLoss.Soccer.BetTypeFull
 {
-    using Fanex.Excel.Models;
     using Configuration;
     using Microsoft.AspNetCore.Mvc;
     using Utilities.ExcelResult;

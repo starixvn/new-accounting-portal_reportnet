@@ -51,8 +51,7 @@ namespace TotalSMAAndActiveMember.Controller
         {
             criteria.PageSize = 0;
             var result = await service.GetStatusDetails(criteria);
-            var title =
-                $"Total SMA and Member Active Report from {criteria.FromDate.ToShortFormatedDate()} to {criteria.ToDate.ToShortFormatedDate()}";
+            _ = $"Total SMA and Member Active Report from {criteria.FromDate.ToShortFormatedDate()} to {criteria.ToDate.ToShortFormatedDate()}";
             var excelPackage = await excelService.ExportExcelForDetail(result, criteria.Status);
             var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
             var fileDownloadName = $"Total_SMA_and_Member_Active_Report_From_{criteria.FromDate: MM_dd_yyyy}_To_{criteria.ToDate: MM_dd_yyyy}.xlsx";

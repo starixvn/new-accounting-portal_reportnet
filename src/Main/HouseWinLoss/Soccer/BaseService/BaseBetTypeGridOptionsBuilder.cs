@@ -7,7 +7,7 @@ namespace HouseWinLoss.Soccer.BaseService
 {
     public class BaseBetTypeGridOptionsBuilder : BaseGridOptionsBuilder
     {
-        const string grandTotalClass = "grand-total";
+        private const string grandTotalClass = "grand-total";
 
         protected BaseBetTypeGridOptionsBuilder(BasicGridDataRowBuilder gridDataRowBuilder) : base(gridDataRowBuilder)
         {

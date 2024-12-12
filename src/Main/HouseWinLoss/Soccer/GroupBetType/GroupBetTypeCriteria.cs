@@ -15,7 +15,7 @@ namespace HouseWinLoss.Soccer.GroupBetType
 
         public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
 
-        public int Sporttype { get; } = Constants.SportTypeSoccer;
+        public int Sporttype => Constants.SportTypeSoccer;
 
         public int PermissionProfileID { get; set; }
     }

@@ -1,7 +1,6 @@
 ﻿namespace HouseWinLoss.NG2.BetType
 {
     using AutoMapper;
-    using Fanex.Excel.Models;
     using Common.BasicWinLoss;
     using Common.ColumnDecorators;
     using Common.Criteria;

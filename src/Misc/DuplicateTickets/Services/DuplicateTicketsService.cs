@@ -19,10 +19,6 @@ namespace DuplicateTickets.Services
         DuplicateTicketsCashOutService cashOutService,
         DuplicateTicketsUtility utility) : DuplicateTicketsService
     {
-    
-        private readonly string duplicateTicketsSessionKey = $"Fanex.AccountingReports.Misc.DuplicateTickets.{napSession.UserName}"; 
-
-        
         public async Task<DuplicateTicketsModel> GetDuplicateTicketByUserName(DuplicateTicketsCriteria criteria)
         {
             var duplicateTicketsInfo = new DuplicateTicketsModel();

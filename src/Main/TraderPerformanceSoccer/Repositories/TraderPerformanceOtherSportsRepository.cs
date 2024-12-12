@@ -32,7 +32,6 @@ namespace TraderPerformance.Repositories
                 var liveBetCountGrandTotal = new TraderPerformanceOtherSportsModel();
                 var marginGrandTotal = new TraderPerformanceOtherSportsModel();
                 var commissionGrandTotal = new TraderPerformanceOtherSportsModel();
-                var param = criteria;
 
                 var dataSet = await repository.FetchDataSetAsync(criteria);
                 var dataTable = dataSet.Tables[0];
@@ -125,7 +124,7 @@ namespace TraderPerformance.Repositories
             var liveBetCountTotal = new TraderPerformanceOtherSportsDetailModel();
             var marginTotal = new TraderPerformanceOtherSportsDetailModel();
             var commissionTotal = new TraderPerformanceOtherSportsDetailModel();
-            var settingKey = criteria.GetSettingKey();
+            criteria.GetSettingKey();
 
 
                 var dataSet = await repository.FetchDataSetAsync(criteria);

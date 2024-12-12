@@ -11,7 +11,7 @@ public interface TraderSumPivotService
 public class TraderSumPivotServiceImp : TraderSumPivotService
 {
     private const string BettypeColumnName = "BettypeName";
-    private const string TraderColmunName = "Trader";
+    private const string TraderColumnName = "Trader";
 
     public DataTable Execute(DataTable rawData)
     {
@@ -29,13 +29,13 @@ public class TraderSumPivotServiceImp : TraderSumPivotService
     {
         rawData
             .AsEnumerable()
-            .Select(s => Converter.To<string>(s[TraderColmunName]))
+            .Select(s => Converter.To<string>(s[TraderColumnName]))
             .Distinct()
             .ToList()
             .ForEach(trader =>
             {
                 var newDataRow = dataTable.NewRow();
-                var dataByUser = rawData.AsEnumerable().Where(s => Converter.To<string>(s[TraderColmunName]) == trader).ToList();
+                var dataByUser = rawData.AsEnumerable().Where(s => Converter.To<string>(s[TraderColumnName]) == trader).ToList();
                 for (var columnIndex = 0; columnIndex < rawData.Columns.Count; columnIndex++)
                 {
                     var rawColumnName = rawData.Columns[columnIndex].ColumnName;
@@ -97,14 +97,14 @@ public class TraderSumPivotServiceImp : TraderSumPivotService
     private static List<string> GetBettypes(DataTable rawData)
     {
         var userNameWithMaxNumberOfBettypes = rawData.AsEnumerable()
-            .GroupBy(g => Converter.To<string>(g[TraderColmunName]))
+            .GroupBy(g => Converter.To<string>(g[TraderColumnName]))
             .Select(s => new { trader = s.Key, count = s.Count() })
             .OrderByDescending(o => o.count)
             .FirstOrDefault();
 
         var trader = userNameWithMaxNumberOfBettypes.trader;
         return rawData.AsEnumerable()
-            .Where(s => Converter.To<string>(s[TraderColmunName]) == trader)
+            .Where(s => Converter.To<string>(s[TraderColumnName]) == trader)
             .Select(s => Converter.To<string>(s[BettypeColumnName]))
             .Distinct()
             .ToList();

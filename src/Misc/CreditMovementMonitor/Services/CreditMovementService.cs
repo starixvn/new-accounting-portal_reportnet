@@ -25,8 +25,6 @@ namespace CreditMovementMonitor.Services
         INapSession napSession,
         ICacheService cacheService) : CreditMovementService
     {
-        private const int ExtendCachedTimeOut = 2;
-
         private readonly string creditMovementDataCachedKey = $"Fanex.AccountingReports.Misc.CreditMovement{napSession.UserName}"; 
 
         public async Task<GridOptions> GetReport(CreditMovementCriteria criteria)
@@ -127,7 +125,7 @@ namespace CreditMovementMonitor.Services
                 ShowHighlightRow = false,
                 ShowTitle = true,
                 TitleType = TitleType.TwoLineBlue,
-                TitleInfoText = $"Accounts which have been allocated with more than {criteria.Amount.ToString("0,0")} RM credit for SMA + Member Line"
+                TitleInfoText = $"Accounts which have been allocated with more than {criteria.Amount:0,0} RM credit for SMA + Member Line"
             };
         }
         

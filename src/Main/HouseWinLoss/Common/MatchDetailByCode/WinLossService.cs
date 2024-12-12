@@ -22,7 +22,7 @@ namespace HouseWinLoss.Common.MatchDetailByCode
             var leagueWinLosses = leagues.Select(l => CalculateLeagueWinLoss(l, rawWinLosses))
                                          .OrderBy(l => l.Name);
             var grandTotal = calculationService.CalculateSumWinLoss("Grand Total", rawWinLosses);
-            var totalRows = rawWinLosses.Count();
+            var totalRows = rawWinLosses.Count;
 
             return new WinLossModel
             {

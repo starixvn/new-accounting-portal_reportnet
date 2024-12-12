@@ -128,7 +128,7 @@ namespace TraderPerformance.Repositories
             var dataSet = await repository.FetchDataSetAsync(criteria);
             var dataTable = dataSet.Tables[0];
 
-            var settingKey = criteria.GetSettingKey();
+            criteria.GetSettingKey();
 
 
             if (dataTable == null)

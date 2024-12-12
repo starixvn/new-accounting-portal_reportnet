@@ -227,9 +227,6 @@ namespace TraderPerformance.Services
                                         .OrderByDescending(traderInfo => traderInfo.ChildInfo[4].Overall)
                                         .ToList();
                     break;
-
-                default:
-                    break;
             }
 
             return report;
@@ -298,9 +295,6 @@ namespace TraderPerformance.Services
                                             traderInfo.ReportRows
                                             .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[4].Overall)
                                             .ToList();
-                        break;
-
-                    default:
                         break;
                 }
             }

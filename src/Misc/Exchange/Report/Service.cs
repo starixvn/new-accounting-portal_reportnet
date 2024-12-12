@@ -32,7 +32,6 @@ namespace Exchange.Report
             var licenseeExchange = CalculateExchangeByLicensee(rawData);
             var grandTotal = CalculateGrandTotal(rawData);
             var marketTotal = CalculateTotal(rawData);
-            var totalItems = rawData.Count();
 
             var result = new ExchangeModel
             {

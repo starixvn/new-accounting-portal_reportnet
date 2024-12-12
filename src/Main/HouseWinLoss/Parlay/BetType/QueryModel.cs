@@ -10,7 +10,7 @@
 
         public int AliasProductID { get; set; }
 
-        public int PermissionProfileID { get; } = 1;
+        public int PermissionProfileID => 1;
 
         public bool IsNoDraw { get; set; }
     }

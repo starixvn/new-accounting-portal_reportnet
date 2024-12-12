@@ -21,10 +21,9 @@ namespace TotalSMAAndActiveMember.Services
         {
             var report = new List<SMASummaryModel>();
 
-            var rawData = await repository.FetchMultipleAsync<AccountStatusItem, ActiveDetailItem>(criteria);
+            var (accountStatusItems, activeDetails) = await repository.FetchMultipleAsync<AccountStatusItem, ActiveDetailItem>(criteria);
 
-            var totalSMA = rawData.Item1.FirstOrDefault();
-            var activeDetails = rawData.Item2;
+            var totalSMA = accountStatusItems.FirstOrDefault();
 
             if (totalSMA != null && activeDetails != null && activeDetails.Any())
             {

@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Utilities.Sorting
+﻿namespace Utilities.Sorting
 {
     public static class SortExtension
     {
@@ -67,7 +65,7 @@ namespace Utilities.Sorting
                         break;
                 }
 
-                return valueA is IComparable ? ((IComparable)valueA).CompareTo(valueB) : 0;
+                return valueA is IComparable comparable ? comparable.CompareTo(valueB) : 0;
             };
             dataSource.Sort(compare);
         }

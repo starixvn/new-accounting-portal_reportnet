@@ -5,7 +5,7 @@ namespace SMAWinLoss.Filter
 {
     public class AvailableDatabaseCriteria : CriteriaBase
     {
-        public int TaskId { get; } = TaskIdConstant.DailyTask;
+        public int TaskId => TaskIdConstant.DailyTask;
 
         public override string GetSettingKey() => "SMAWinLoss-AvailabeDatabaseQuery";
 

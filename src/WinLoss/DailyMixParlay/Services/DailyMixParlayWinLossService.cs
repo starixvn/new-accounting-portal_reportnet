@@ -204,7 +204,7 @@ namespace DailyMixParlayWinLoss.Services
             if (!string.IsNullOrEmpty(combination) &&
                 combination.Contains(DailyMixParlayConstant.DailyMixParlayReportCombinationPrefix))
             {
-                var combinationSubString = combination.Substring(DailyMixParlayConstant.DailyMixParlayReportCombinationPrefix.Length);
+                var combinationSubString = combination[DailyMixParlayConstant.DailyMixParlayReportCombinationPrefix.Length..];
 
                 name = $"{combinationSubString}XCombinations{string.Empty}";
 
