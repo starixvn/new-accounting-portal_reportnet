@@ -1,0 +1,100 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 250px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 250px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+      <tr>
+        <th scope="col">Sport</th>
+        <th scope="col">Match Count</th>
+        <th scope="col">Bet Count</th>
+        <th scope="col">Member WL</th>
+        <th scope="col">Member Turnover</th>
+        <th scope="col">House Income</th>
+        <th scope="col">House Turnover</th>
+        <th scope="col">Margin</th>
+        <th scope="col">Amount due to BetConstruct</th>
+      </tr>
+    </thead>
+  </ng-template>
+  <ng-template #rowItem let-item="item">
+    <tr>
+        <td>
+          <a href="javascript:;" (click)="showSportDetail(item.SportId, item.Sport)">{{item.Sport}}</a>
+        </td>
+        <td class="text-right">{{item.MatchCount | number: '1.0-0'}}</td>
+        <td class="text-right">{{item.BetCount | number: '1.0-0'}}</td>
+        <td class="text-right" [appDecimalFormat]="item.MemberWinLoss"></td>
+        <td class="text-right">{{item.MemberTurnover | number: '1.2-2'}}</td>
+        <td class="text-right" [appDecimalFormat]="item.HouseIncome"></td>
+        <td class="text-right">{{item.HouseTurnover | number: '1.2-2'}}</td>
+        <td class="text-right" [ngClass]="item.Margin < 0 ? 'red-negative' : ''">{{ item.Margin * 100 | number: '1.2-2' }}%</td>
+        <td class="text-right" [appDecimalFormat]="item.AmountDueToBC"></td>
+    </tr>
+  </ng-template>
+  <ng-template #rowTotalItem let-item="item">
+    <tr>
+        <td class="text-center font-weight-bold">Grand Total</td>
+        <td class="text-right font-weight-bold">{{item.MatchCount | number: '1.0-0'}}</td>
+        <td class="text-right font-weight-bold">{{item.BetCount | number: '1.0-0'}}</td>
+        <td class="text-right font-weight-bold" [appDecimalFormat]="item.MemberWinLoss"></td>
+        <td class="text-right font-weight-bold">{{item.MemberTurnover | number: '1.2-2'}}</td>
+        <td class="text-right font-weight-bold" [appDecimalFormat]="item.HouseIncome"></td>
+        <td class="text-right font-weight-bold">{{item.HouseTurnover | number: '1.2-2'}}</td>
+        <td class="text-right font-weight-bold" [ngClass]="item.Margin < 0 ? 'red-negative' : ''">{{ item.Margin * 100 | number: '1.2-2' }}%</td>
+        <td class="text-right font-weight-bold" [appDecimalFormat]="item.AmountDueToBC"></td>
+    </tr>
+  </ng-template>
+  <div *ngIf="dataViewModel" [ngSwitch]="dataViewModel.Items.length > 0">
+    <div class="nap-grid">
+      <div style="width: 1567px">
+        <div class="header">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <ng-template [ngTemplateOutlet]="thead"></ng-template>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+          <table class="table table-striped">
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tbody>
+              <ng-container *ngFor="let item of dataViewModel.Items">
+                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+                </ng-template>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col" class="no-data" colspan="9">
+                  There is no data
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="footer">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tfoot>
+                <ng-template [ngTemplateOutlet]="rowTotalItem" [ngTemplateOutletContext]="{ item: dataViewModel.Total }">
+                </ng-template>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

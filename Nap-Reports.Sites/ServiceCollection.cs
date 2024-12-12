@@ -54,6 +54,7 @@ namespace Nap_Reports.Sites
             services.RegisterLeagueWinLossServices();
             services.RegisterDuplicateTicketsServices();
             services.RegisterMostVisitedPageServices();
+            services.RegisterBetConstructPerformanceServices();
         }
 
         public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)

@@ -21,6 +21,7 @@ using SuperBalance;
 using TotalSMAAndActiveMember;
 using TreeWinLoss;
 using UpdatedUsernameCredit;
+using BetConstructPerformance;
 
 namespace Nap_Reports.Sites.App_Start
 {
@@ -51,6 +52,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeMarginReport();
                 cfg.InitializeTotalSmaAndMemberActive();
                 cfg.InitializeDuplicateTickets();
+                cfg.InitializeBetConstructPerformance();
             });
 
             var mapper = config.CreateMapper();

@@ -1,0 +1,79 @@
+@import '~nap-theme/scss/_mixins';
+.nap-filter {
+    padding: .3rem;
+    margin-bottom: .5rem;
+    border: solid 1px #cecccd;
+    border-radius: .3rem;
+    background-color: #eceeef;
+    @include box-shadow(0 0 4px 1px rgba(0, 0, 0, .1));
+    .row {
+        margin-top: 3px;
+    }
+    .nap-col {
+        padding-left: $grid-gutter-width / 4;
+        padding-right: $grid-gutter-width / 4;
+    }
+    .nap-group {
+        label {
+            margin-right: .5em;
+            text-align: right;
+        }
+        .nap-control {
+            display: inline-block;
+        }
+    }
+    .nap-form-checkbox {
+        display: inline-block;
+        margin-top: .3rem;
+    }
+}
+
+:host /deep/ .show {
+    .dropdown-menu {
+        display: block;
+        .form-check-input {
+            margin-left: 0;
+        }
+    }
+}
+
+.nap-col {
+  .nap-group {
+    &>label {
+      float: left;
+      width: 100px;
+      line-height: 25px;
+      font-weight: bold;
+    }
+    &>.nap-control {
+      float: left;
+      width: 150px;
+      &>p {
+        color: red;
+        &>span {
+          width: 35px;
+          display: inline-block;
+        }
+      }
+    }
+    &>.turnover {
+      width: 180px !important;
+      &>.form-check {
+        &>.form-check-label {
+          margin-top: 5px !important;
+        }
+      }
+    }
+    &>.width-180 {
+      width: 180px !important;
+    }
+  }
+}
+
+.width-420 {
+  width: 420px !important;
+}
+
+.width-190 {
+  width: 190px !important;
+}
