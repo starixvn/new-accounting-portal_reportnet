@@ -129,7 +129,7 @@ namespace TotalSMAAndActiveMember.Services
 
         private SMASummaryModel BuildSMASummary(ActiveDetailItem rawData)
         {
-            var smaArray = rawData.SMA.Split(['/'], StringSplitOptions.RemoveEmptyEntries);
+            var smaArray = rawData.SMA.Split('/', StringSplitOptions.RemoveEmptyEntries);
 
             return new SMASummaryModel
             {
