@@ -9,6 +9,7 @@ using DirectBalance;
 using DuplicateTickets;
 using Exchange;
 using HouseWinLoss;
+using LeagueWinLoss;
 using Margin;
 using NegativeBalance;
 using ParlayWon;
@@ -53,6 +54,7 @@ namespace Nap_Reports.Sites.App_Start
                 cfg.InitializeTotalSmaAndMemberActive();
                 cfg.InitializeDuplicateTickets();
                 cfg.InitializeBetConstructPerformance();
+                cfg.InitializeLeagueWinLoss();
             });
 
             var mapper = config.CreateMapper();

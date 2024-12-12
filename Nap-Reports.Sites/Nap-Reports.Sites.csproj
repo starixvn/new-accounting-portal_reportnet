@@ -1280,6 +1280,7 @@
   <ItemGroup>
     <Folder Include="ExcelTemplate\NegativeBalance\" />
     <Folder Include="ExcelTemplate\DailyCreatedCustomer\" />
+    <Folder Include="ExcelTemplate\LeagueWinLoss\" />
     <Folder Include="ExcelTemplate\TraderPerformanceOtherSports\" />
     <Folder Include="ExcelTemplate\SuperBalance\" />
     <Folder Include="ExcelTemplate\PeakConcurrentUser\" />
@@ -1336,6 +1337,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\Exchange\LicenseeExchange.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\LeagueWinLoss\LeagueWinLoss.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\LeagueWinLoss\LeagueWinLoss_Level.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\Margin\MarginReport.xlsx">

@@ -750,7 +750,22 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.reportContainer.removeClass("display-none");
     };
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLoss", self.Params.reportParams);
+        AccReport.utility.CallAjaxForDownload(this,
+            window.rootUrl + "/api/league-win-loss/export-league-win-loss",
+            self.Params.reportParams,
+            self.downloadFile,
+            null,
+            null);
+    };
+
+    self.downloadFile = function (rs, fileName) {
+        element = document.createElement('a');
+        element.href = window.URL.createObjectURL(rs);
+        element.download = fileName;
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        element.remove();
     };
 
     self.RenderSport = function (rs) {

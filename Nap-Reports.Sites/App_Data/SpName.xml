@@ -392,6 +392,7 @@
 		</Setting>
 		<Setting Key="WinLoss_LeagueWinLoss_GetBetTypes" SpName="Acc_Rpt_LeagueWL_Bettype_Old" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="2400">
 			<Mapping DataField="VirtualIncome" ObjectProperty="VirtualWinLoss" />
+			<Mapping DataField="BetTypeID" ObjectProperty="Bettype" />
 		</Setting>
 		<Setting Key="WinLoss_LeagueWinLoss_GetMatches" SpName="Acc_Rpt_LeagueWL_Match_Old" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="2400">
 			<Mapping DataField="VirtualIncome" ObjectProperty="VirtualWinLoss" />

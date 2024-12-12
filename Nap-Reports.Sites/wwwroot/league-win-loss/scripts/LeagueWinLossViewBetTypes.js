@@ -19,7 +19,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             IsNormalMode: true,
             IsNoDraw: false,
             SiteName: '',
-            IsHedge: 0,
+            IsHedge: false,
             IsIncludeSiteType: true,
             IsIncludeHedge: false,
             GlobalShowTime: '',
@@ -70,6 +70,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
     };
     var getParams = function (params) {
         self.Params.reportParams = params;
+
+        if (params.LiveIndicator){
+            self.Params.reportParams.LiveIndicator = 1;
+        } else if (!params.LiveIndicator){
+            self.Params.reportParams.LiveIndicator = 0;
+        } else {
+            self.Params.reportParams.LiveIndicator = 2
+        }
     };
 
     var showBetType = function (info, bodyData) {
@@ -264,8 +272,24 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
 
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
     }
+
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewBetTypes", self.Params.reportParams);
+        AccReport.utility.CallAjaxForDownload(this,
+            window.rootUrl + "/api/league-win-loss/export-bettypes",
+            self.Params.reportParams,
+            self.downloadFile,
+            null,
+            null);
+    };
+
+    self.downloadFile = function (rs, fileName) {
+        element = document.createElement('a');
+        element.href = window.URL.createObjectURL(rs);
+        element.download = fileName;
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        element.remove();
     };
 
     self.isShowTotalRow = function (total) {
