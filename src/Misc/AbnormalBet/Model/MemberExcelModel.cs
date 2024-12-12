@@ -22,11 +22,7 @@ namespace AbnormalBet.Model
         public decimal Odds { get; set; }
 
         [Cell("F5")]
-        public dynamic OddsData
-        {
-            get => Sport == "-" ? "-" : Odds;
-            set => Odds = value;
-        }
+        public dynamic OddsData => Sport == "-" ? "-" : Odds;
 
         [Cell("G5")]
         public string Currency { get; set; }
@@ -37,11 +33,7 @@ namespace AbnormalBet.Model
         public decimal HDP { get; set; }
 
         [Cell("I5")]
-        public dynamic HDPData
-        {
-            get => Sport == "-" ? "-" : HDP;
-            set => HDP = value;
-        }
+        public dynamic HDPData => Sport == "-" ? "-" : HDP;
 
         [Cell("J5")]
         public string Score { get; set; }

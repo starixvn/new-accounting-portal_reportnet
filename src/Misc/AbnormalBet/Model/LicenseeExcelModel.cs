@@ -43,21 +43,7 @@ namespace AbnormalBet.Model
         public decimal HDPOU { get; set; }
 
         [Cell("M5")]
-        public dynamic HDPOUData
-        {
-            get
-            {
-                if (Sport == "-")
-                {
-                    return "-";
-                }
-                else
-                {
-                    return HDPOU;
-                }    
-            }
-            set => HDPOU = value;
-        }
+        public dynamic HDPOUData => Sport == "-" ? "-" : HDPOU;
 
         [Cell("N5")]
         public string HTScore { get; set; }
