@@ -109,9 +109,9 @@ namespace CashOutPerformance.Services
 
         public ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool IsShowFullColumn)
         {
-            var fileExcel = "SimpleCashOutPerformance.xlsx";
-            var cellAddressOfTitle = "A1:L1";
-            var cellAddressOfBreadCrumb = "A3:L3";
+            const string fileExcel = "SimpleCashOutPerformance.xlsx";
+            const string cellAddressOfTitle = "A1:L1";
+            const string cellAddressOfBreadCrumb = "A3:L3";
             var startRowIndex = 6;
             var updateRowIndex = new List<int>();
     
@@ -151,7 +151,7 @@ namespace CashOutPerformance.Services
 
         private void RemoveSportColumn()
         {
-            var sportColumnIndex = 13;
+            const int sportColumnIndex = 13;
             sheet.DeleteColumn(sportColumnIndex);
         }
     }

@@ -123,7 +123,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
     private void MergeHeader(IEnumerable<string> columnHeaders)
     {
         var startColumn = 1;
-        var startRow = 4;
+        const int startRow = 4;
         columnHeaders
             .Distinct()
             .ToList()
@@ -218,14 +218,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
         {
             var columnName = dataTable.Columns[columnIndex - 1].ColumnName;
             var result = styles.FirstOrDefault(s => columnName.Contains(s.Key));
-            if (string.IsNullOrEmpty(result.Key))
-            {
-                sheetTrader.Cells[currentContentRowIndex, columnIndex].StyleID = styles["others"];
-            }
-            else
-            {
-                sheetTrader.Cells[currentContentRowIndex, columnIndex].StyleID = result.Value;
-            }
+            sheetTrader.Cells[currentContentRowIndex, columnIndex].StyleID = string.IsNullOrEmpty(result.Key) ? styles["others"] : result.Value;
 
             if (columnName.Contains("Margin %_"))
             {
@@ -259,14 +252,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
         {
             var columnName = dataTable.Columns[columnIndex - 1].ColumnName;
             var result = styles.FirstOrDefault(s => columnName.Contains(s.Key));
-            if (string.IsNullOrEmpty(result.Key))
-            {
-                sheetTrader.Cells[currentContentRowIndex, columnIndex].StyleID = styles["others"];
-            }
-            else
-            {
-                sheetTrader.Cells[currentContentRowIndex, columnIndex].StyleID = result.Value;
-            }
+            sheetTrader.Cells[currentContentRowIndex, columnIndex].StyleID = string.IsNullOrEmpty(result.Key) ? styles["others"] : result.Value;
 
             if (columnName.Contains("Margin %_"))
             {
@@ -314,14 +300,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
         {
             var columnName = dataTable.Columns[columnIndex - 1].ColumnName;
             var result = styles.FirstOrDefault(s => columnName.Contains(s.Key));
-            if (string.IsNullOrEmpty(result.Key))
-            {
-                sheetTrader.Cells[beginContentRowIndex, columnIndex, endContentRowIndex, columnIndex].StyleID = styles["others"];
-            }
-            else
-            {
-                sheetTrader.Cells[beginContentRowIndex, columnIndex, endContentRowIndex, columnIndex].StyleID = result.Value;
-            }
+            sheetTrader.Cells[beginContentRowIndex, columnIndex, endContentRowIndex, columnIndex].StyleID = string.IsNullOrEmpty(result.Key) ? styles["others"] : result.Value;
         }
     }
 
@@ -366,14 +345,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
         {
             var columnName = dataTable.Columns[columnIndex - 1].ColumnName;
             var result = styles.FirstOrDefault(s => columnName.Contains(s.Key));
-            if (string.IsNullOrEmpty(result.Key))
-            {
-                sheetTrader.Cells[BeginContentRowIndex, columnIndex, lastContentRowIndex, columnIndex].StyleID = styles["others"];
-            }
-            else
-            {
-                sheetTrader.Cells[BeginContentRowIndex, columnIndex, lastContentRowIndex, columnIndex].StyleID = result.Value;
-            }
+            sheetTrader.Cells[BeginContentRowIndex, columnIndex, lastContentRowIndex, columnIndex].StyleID = string.IsNullOrEmpty(result.Key) ? styles["others"] : result.Value;
         }
     }
 
@@ -409,14 +381,7 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
             if (columnIndex >= 9)
             {
                 var result = styles.FirstOrDefault(s => columnName.Contains(s.Key));
-                if (string.IsNullOrEmpty(result.Key))
-                {
-                    sheetTrader.Cells[totalRowIndex, columnIndex, totalRowIndex, lastColumnIndex].StyleID = styles["others"];
-                }
-                else
-                {
-                    sheetTrader.Cells[totalRowIndex, columnIndex, totalRowIndex, lastColumnIndex].StyleID = result.Value;
-                }
+                sheetTrader.Cells[totalRowIndex, columnIndex, totalRowIndex, lastColumnIndex].StyleID = string.IsNullOrEmpty(result.Key) ? styles["others"] : result.Value;
             }
         }
 

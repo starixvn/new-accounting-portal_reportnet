@@ -45,30 +45,14 @@ namespace TreeWinLoss.Criteria
         
         public override string GetSettingKey()
         {
-            var settingKey = string.Empty;
-
-            switch (RoleId)
+            var settingKey = RoleId switch
             {
-                case 2:
-                    settingKey = "WinLoss_TreeWinLoss_GetDataByAgent";
-                    break;
-
-                case 3:
-                    settingKey = "WinLoss_TreeWinLoss_GetDataByMaster";
-                    break;
-
-                case 4:
-                    settingKey = "WinLoss_TreeWinLoss_GetDataBySuper";
-                    break;
-
-                case 5:
-                    settingKey = "WinLoss_TreeWinLoss_GetDataByCom";
-                    break;
-
-                default:
-                    settingKey = "WinLoss_TreeWinLoss_GetDataByAgent";
-                    break;
-            }
+                2 => "WinLoss_TreeWinLoss_GetDataByAgent",
+                3 => "WinLoss_TreeWinLoss_GetDataByMaster",
+                4 => "WinLoss_TreeWinLoss_GetDataBySuper",
+                5 => "WinLoss_TreeWinLoss_GetDataByCom",
+                _ => "WinLoss_TreeWinLoss_GetDataByAgent"
+            };
 
             return settingKey;
         }

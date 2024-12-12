@@ -166,68 +166,28 @@ namespace TraderPerformance.Services
         {
             var isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
 
-            switch (criteria.SortColumnName)
+            report.ReportRows = criteria.SortColumnName switch
             {
-                case "Trader":
-                    report.ReportRows = isAsc ?
-                                        report.ReportRows
-                                        .OrderBy(traderInfo => traderInfo.Name)
-                                        .ToList() :
-                                        report.ReportRows
-                                        .OrderByDescending(traderInfo => traderInfo.Name)
-                                        .ToList();
-                    break;
-
-                case "WinLossOverall":
-                    report.ReportRows = isAsc ?
-                                        report.ReportRows
-                                        .OrderBy(traderInfo => traderInfo.ChildInfo[0].Overall)
-                                        .ToList() :
-                                        report.ReportRows
-                                        .OrderByDescending(traderInfo => traderInfo.ChildInfo[0].Overall)
-                                        .ToList();
-                    break;
-
-                case "TurnOverOverall":
-                    report.ReportRows = isAsc ?
-                                        report.ReportRows
-                                        .OrderBy(traderInfo => traderInfo.ChildInfo[1].Overall)
-                                        .ToList() :
-                                        report.ReportRows
-                                        .OrderByDescending(traderInfo => traderInfo.ChildInfo[1].Overall)
-                                        .ToList();
-                    break;
-
-                case "LiveBetCountOverall":
-                    report.ReportRows = isAsc ?
-                                        report.ReportRows
-                                        .OrderBy(traderInfo => traderInfo.ChildInfo[2].Overall)
-                                        .ToList() :
-                                        report.ReportRows
-                                        .OrderByDescending(traderInfo => traderInfo.ChildInfo[2].Overall)
-                                        .ToList();
-                    break;
-
-                case "MarginOverall":
-                    report.ReportRows = isAsc ?
-                                        report.ReportRows
-                                        .OrderBy(traderInfo => traderInfo.ChildInfo[3].Overall)
-                                        .ToList() :
-                                        report.ReportRows
-                                        .OrderByDescending(traderInfo => traderInfo.ChildInfo[3].Overall)
-                                        .ToList();
-                    break;
-
-                case "CommOverall":
-                    report.ReportRows = isAsc ?
-                                        report.ReportRows
-                                        .OrderBy(traderInfo => traderInfo.ChildInfo[4].Overall)
-                                        .ToList() :
-                                        report.ReportRows
-                                        .OrderByDescending(traderInfo => traderInfo.ChildInfo[4].Overall)
-                                        .ToList();
-                    break;
-            }
+                "Trader" => isAsc
+                    ? report.ReportRows.OrderBy(traderInfo => traderInfo.Name).ToList()
+                    : report.ReportRows.OrderByDescending(traderInfo => traderInfo.Name).ToList(),
+                "WinLossOverall" => isAsc
+                    ? report.ReportRows.OrderBy(traderInfo => traderInfo.ChildInfo[0].Overall).ToList()
+                    : report.ReportRows.OrderByDescending(traderInfo => traderInfo.ChildInfo[0].Overall).ToList(),
+                "TurnOverOverall" => isAsc
+                    ? report.ReportRows.OrderBy(traderInfo => traderInfo.ChildInfo[1].Overall).ToList()
+                    : report.ReportRows.OrderByDescending(traderInfo => traderInfo.ChildInfo[1].Overall).ToList(),
+                "LiveBetCountOverall" => isAsc
+                    ? report.ReportRows.OrderBy(traderInfo => traderInfo.ChildInfo[2].Overall).ToList()
+                    : report.ReportRows.OrderByDescending(traderInfo => traderInfo.ChildInfo[2].Overall).ToList(),
+                "MarginOverall" => isAsc
+                    ? report.ReportRows.OrderBy(traderInfo => traderInfo.ChildInfo[3].Overall).ToList()
+                    : report.ReportRows.OrderByDescending(traderInfo => traderInfo.ChildInfo[3].Overall).ToList(),
+                "CommOverall" => isAsc
+                    ? report.ReportRows.OrderBy(traderInfo => traderInfo.ChildInfo[4].Overall).ToList()
+                    : report.ReportRows.OrderByDescending(traderInfo => traderInfo.ChildInfo[4].Overall).ToList(),
+                _ => report.ReportRows
+            };
 
             return report;
         }
@@ -245,58 +205,45 @@ namespace TraderPerformance.Services
 
             foreach (var traderInfo in report.ReportRows)
             {
-                switch (criteria.SortColumnName)
+                traderInfo.ReportRows = criteria.SortColumnName switch
                 {
-                    case "WinLossOverall":
-                        traderInfo.ReportRows = isAsc ?
-                                            traderInfo.ReportRows
-                                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[0].Overall)
-                                            .ToList() :
-                                            traderInfo.ReportRows
-                                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[0].Overall)
-                                            .ToList();
-                        break;
-
-                    case "TurnOverOverall":
-                        traderInfo.ReportRows = isAsc ?
-                                            traderInfo.ReportRows
-                                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[1].Overall)
-                                            .ToList() :
-                                            traderInfo.ReportRows
-                                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[1].Overall)
-                                            .ToList();
-                        break;
-
-                    case "LiveBetCountOverall":
-                        traderInfo.ReportRows = isAsc ?
-                                            traderInfo.ReportRows
-                                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[2].Overall)
-                                            .ToList() :
-                                            traderInfo.ReportRows
-                                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[2].Overall)
-                                            .ToList();
-                        break;
-
-                    case "MarginOverall":
-                        traderInfo.ReportRows = isAsc ?
-                                            traderInfo.ReportRows
-                                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[3].Overall)
-                                            .ToList() :
-                                            traderInfo.ReportRows
-                                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[3].Overall)
-                                            .ToList();
-                        break;
-
-                    case "CommOverall":
-                        traderInfo.ReportRows = isAsc ?
-                                            traderInfo.ReportRows
-                                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[4].Overall)
-                                            .ToList() :
-                                            traderInfo.ReportRows
-                                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[4].Overall)
-                                            .ToList();
-                        break;
-                }
+                    "WinLossOverall" => isAsc
+                        ? traderInfo.ReportRows
+                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[0].Overall)
+                            .ToList()
+                        : traderInfo.ReportRows
+                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[0].Overall)
+                            .ToList(),
+                    "TurnOverOverall" => isAsc
+                        ? traderInfo.ReportRows
+                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[1].Overall)
+                            .ToList()
+                        : traderInfo.ReportRows
+                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[1].Overall)
+                            .ToList(),
+                    "LiveBetCountOverall" => isAsc
+                        ? traderInfo.ReportRows
+                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[2].Overall)
+                            .ToList()
+                        : traderInfo.ReportRows
+                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[2].Overall)
+                            .ToList(),
+                    "MarginOverall" => isAsc
+                        ? traderInfo.ReportRows
+                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[3].Overall)
+                            .ToList()
+                        : traderInfo.ReportRows
+                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[3].Overall)
+                            .ToList(),
+                    "CommOverall" => isAsc
+                        ? traderInfo.ReportRows
+                            .OrderBy(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[4].Overall)
+                            .ToList()
+                        : traderInfo.ReportRows
+                            .OrderByDescending(traderChildGroupInfo => traderChildGroupInfo.ChildInfo[4].Overall)
+                            .ToList(),
+                    _ => traderInfo.ReportRows
+                };
             }
 
             return report;

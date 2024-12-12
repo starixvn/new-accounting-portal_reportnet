@@ -31,7 +31,7 @@ namespace NegativeBalance.Services
             
             List<NegativeBalanceUser> tempUsers = [];
             
-            if (rawData != null && rawData.Any())
+            if (rawData.Any())
             {
                 var from = criteria.PageSize * (criteria.PageIndex - 1);
                 var to = criteria.PageSize * criteria.PageIndex;

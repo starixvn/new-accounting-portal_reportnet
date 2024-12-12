@@ -80,11 +80,7 @@ namespace Utilities.MostVisitedPages
 
             lock (MostVisitedPageLockObject)
             {
-                var mostVisitedPages = cacheService.Get<List<MostVisitedPageModel>>(MistVisitedPageCacheKey);
-                if (mostVisitedPages == null)
-                {
-                    mostVisitedPages = [];
-                }
+                var mostVisitedPages = cacheService.Get<List<MostVisitedPageModel>>(MistVisitedPageCacheKey) ?? [];
 
                 var mostVisitedPagesCount = mostVisitedPages.Count;
                 var isExist = false;

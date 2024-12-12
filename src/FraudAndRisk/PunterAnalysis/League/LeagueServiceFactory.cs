@@ -15,20 +15,13 @@ namespace PunterAnalysis.League
         {
             var periodTypeEnum = (PeriodType)periodType;
 
-            switch (periodTypeEnum)
+            return periodTypeEnum switch
             {
-                case PeriodType.Weekly:
-                    return new LeagueServiceByWeek(repository, dateTimeService);
-
-                case PeriodType.Annually:
-                case PeriodType.Daily:
-                case PeriodType.Monthly:
-                case PeriodType.MonthRange:
-                    return new LeagueServiceByMonth(repository);
-
-                default:
-                    throw new NotImplementedException();
-            }
+                PeriodType.Weekly => new LeagueServiceByWeek(repository, dateTimeService),
+                PeriodType.Annually or PeriodType.Daily or PeriodType.Monthly or PeriodType.MonthRange =>
+                    new LeagueServiceByMonth(repository),
+                _ => throw new NotImplementedException()
+            };
         }
     }
 }

@@ -153,50 +153,20 @@ namespace BetCount.Services
 
         private string GetSortedColumnName(string sortBy)
         {
-            var columnName = string.Empty;
-
-            switch (sortBy)
+            var columnName = sortBy switch
             {
-                case "TotalTurnover":
-                    columnName = "Turnover";
-                    break;
-
-                case "MemberWinLoss":
-                    columnName = "MemberWinLoss";
-                    break;
-
-                case "MarginPercent":
-                    columnName = "MarginPercent";
-                    break;
-
-                case "AgentWinLoss":
-                    columnName = "AgentWinLoss";
-                    break;
-
-                case "MasterWinLoss":
-                    columnName = "MasterWinLoss";
-                    break;
-
-                case "SuperWinLoss":
-                    columnName = "SuperWinLoss";
-                    break;
-
-                case "TotalWinLoss":
-                    columnName = "TotalWinLoss";
-                    break;
-
-                case "CompanyWinLoss":
-                    columnName = "CompanyWinLoss";
-                    break;
-
-                case "Commission":
-                    columnName = "Commission";
-                    break;
-
-                case "ExtraPT":
-                    columnName = "ExtraPT";
-                    break;
-            }
+                "TotalTurnover" => "Turnover",
+                "MemberWinLoss" => "MemberWinLoss",
+                "MarginPercent" => "MarginPercent",
+                "AgentWinLoss" => "AgentWinLoss",
+                "MasterWinLoss" => "MasterWinLoss",
+                "SuperWinLoss" => "SuperWinLoss",
+                "TotalWinLoss" => "TotalWinLoss",
+                "CompanyWinLoss" => "CompanyWinLoss",
+                "Commission" => "Commission",
+                "ExtraPT" => "ExtraPT",
+                _ => string.Empty
+            };
 
             return columnName;
         }
@@ -458,23 +428,15 @@ namespace BetCount.Services
 
         private string GetSportName(int sportId)
         {
-            switch (sportId)
+            return sportId switch
             {
-                case BetCountConstants.MiscSoccerGroupId:
-                case BetCountConstants.MiscBasketballGroupId:
-                    return remotingRefService.GetSportName(sportId);
-
-                case BetCountConstants.MiscParLayGroupId:
-                    return "Parlay";
-
-                case BetCountConstants.MiscEsportsGroupId:
-                    return "E-Sports";
-
-                case BetCountConstants.SBAdjustmentId:
-                    return "SB Adjustment";
-            }
-
-            return string.Empty;
+                BetCountConstants.MiscSoccerGroupId or BetCountConstants.MiscBasketballGroupId => remotingRefService
+                    .GetSportName(sportId),
+                BetCountConstants.MiscParLayGroupId => "Parlay",
+                BetCountConstants.MiscEsportsGroupId => "E-Sports",
+                BetCountConstants.SBAdjustmentId => "SB Adjustment",
+                _ => string.Empty
+            };
         }
 
         private List<ProductModel> CreateVirtualSportThirdGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)

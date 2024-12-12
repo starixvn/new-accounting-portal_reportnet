@@ -23,7 +23,7 @@ namespace Utilities.CustomerTrackingSystem
     {
         private const int AssociatedByIP = 3;
 
-        private static HttpClient jsonClient = new();
+        private static readonly HttpClient jsonClient = new();
 
         public async Task<List<CustomerDevice>> GetAssociatedCustomers(string host, int custId)
         {

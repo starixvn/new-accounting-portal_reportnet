@@ -36,15 +36,9 @@ namespace SuperBalance.Service
                 criteria.Currency = null;
             }
 
-            if (criteria.Username == null)
-            {
-                criteria.Username = string.Empty;
-            }
+            criteria.Username ??= string.Empty;
 
-            if (criteria.FirstLetter == null)
-            {
-                criteria.FirstLetter = string.Empty;
-            }
+            criteria.FirstLetter ??= string.Empty;
 
             var rawData = await repository.FetchAsync<BalanceItemModel>(criteria);
 

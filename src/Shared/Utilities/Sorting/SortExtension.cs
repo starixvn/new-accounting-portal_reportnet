@@ -21,7 +21,7 @@
                     ? Convert.ToDecimal(propInfo.GetValue(b, null))
                     : Convert.ToDecimal(propInfo.GetValue(a, null));
 
-                return valueA is IComparable ? ((IComparable)valueA).CompareTo(valueB) : 0;
+                return ((IComparable)valueA).CompareTo(valueB);
             };
 
             dataSource.Sort(compare);

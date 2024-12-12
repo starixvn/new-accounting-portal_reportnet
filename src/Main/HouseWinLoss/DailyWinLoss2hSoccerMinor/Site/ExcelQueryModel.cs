@@ -6,6 +6,6 @@
     {
         public string Title { get; set; }
 
-        public int IsSabaSport { get; set; } = Constants.IsAllSportDefault;
+        public new int IsSabaSport { get; set; } = Constants.IsAllSportDefault;
     }
 }

@@ -49,19 +49,12 @@ namespace Exchange.Report
 
         private void SetNameForFirstHeaderColumn(byte drillDownLevel)
         {
-            string name;
-            switch (drillDownLevel)
+            var name = drillDownLevel switch
             {
-                case 0:
-                    name = "Licensee";
-                    break;
-                case 1:
-                    name = "Sport";
-                    break;
-                default:
-                    name = "Event";
-                    break;
-            }
+                0 => "Licensee",
+                1 => "Sport",
+                _ => "Event"
+            };
             exchangeSheet.Cells["A3:A4"].Value = name;
         }
 

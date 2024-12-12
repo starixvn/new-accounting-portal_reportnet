@@ -198,7 +198,7 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
                 (parentId == null && menuItem.ParentId == 0) ||
                 (menuItem.ParentId != 0 && menuItem.ParentId == parentId));
 
-            if (rows != null && rows.Any())
+            if (rows.Any())
             {
                 menuList = [];
                 foreach (var row in rows)

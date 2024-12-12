@@ -40,17 +40,12 @@ namespace PunterAnalysis.Shared
 
         public string FormatDateTimeByPeriodType(int periodType, DateTime date)
         {
-            switch ((PeriodType)periodType)
+            return (PeriodType)periodType switch
             {
-                case PeriodType.Daily:
-                    return $"{date:yyyy-MM-dd}";
-
-                case PeriodType.Weekly:
-                    return $"{date:MM/yyyy} - Week {GetWeekOfYearIso8601(date)}";
-
-                default:
-                    return $"{date:MM/yyyy}";
-            }
+                PeriodType.Daily => $"{date:yyyy-MM-dd}",
+                PeriodType.Weekly => $"{date:MM/yyyy} - Week {GetWeekOfYearIso8601(date)}",
+                _ => $"{date:MM/yyyy}"
+            };
         }
     }
 }

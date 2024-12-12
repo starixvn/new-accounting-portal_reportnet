@@ -362,7 +362,7 @@ namespace LeagueWinLoss.Services
 
         private async Task<BetTypeWinLossLiveModel> GetBetTypesLive(BetTypesCriteria criteria)
         {
-            var maxValueOfPenaltyBettype = -1000;
+            const int maxValueOfPenaltyBettype = -1000;
             var result = new BetTypeWinLossLiveModel
             {
                 BetTypeWinLossLiveGroups = [],

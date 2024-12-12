@@ -122,17 +122,12 @@ namespace ParlayWon.Services
 
         private string GetSortedColumnName(string sortBy)
         {
-            var columnName = string.Empty;
-            switch (sortBy)
+            var columnName = sortBy switch
             {
-                case "BaseWinLoss":
-                    columnName = "BaseWinLoss";
-                    break;
-
-                case "BaseCompanyWinLoss":
-                    columnName = "CompanyWinLoss";
-                    break;
-            }
+                "BaseWinLoss" => "BaseWinLoss",
+                "BaseCompanyWinLoss" => "CompanyWinLoss",
+                _ => string.Empty
+            };
 
             return columnName;
         }

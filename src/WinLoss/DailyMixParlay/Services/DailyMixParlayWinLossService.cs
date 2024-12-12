@@ -226,38 +226,24 @@ namespace DailyMixParlayWinLoss.Services
 
         private string ConvertLiveTypeName(int liveType)
         {
-            var name = "Live";
-            switch (liveType)
+            var name = liveType switch
             {
-                case DailyMixParlayConstant.NonLive:
-                    name = "Non-Live";
-                    break;
-                case DailyMixParlayConstant.MixLiveTypes:
-                    name = "Mix Live and Non-Live";
-                    break;
-                default:
-                    name = "Live";
-                    break;
-            }
+                DailyMixParlayConstant.NonLive => "Non-Live",
+                DailyMixParlayConstant.MixLiveTypes => "Mix Live and Non-Live",
+                _ => "Live"
+            };
 
             return name;
         }
 
         private string ConvertSportTypeName(int sportType)
         {
-            var name = string.Empty;
-            switch (sportType)
+            var name = sportType switch
             {
-                case DailyMixParlayConstant.MixedSports:
-                    name = "Mixed Sports";
-                    break;
-                case DailyMixParlayConstant.MixedOtherSports:
-                    name = "Mixed Other Sports";
-                    break;
-                default:
-                    name = remotingRefService.GetSportName(sportType);
-                    break;
-            }
+                DailyMixParlayConstant.MixedSports => "Mixed Sports",
+                DailyMixParlayConstant.MixedOtherSports => "Mixed Other Sports",
+                _ => remotingRefService.GetSportName(sportType)
+            };
 
             return name;
         }

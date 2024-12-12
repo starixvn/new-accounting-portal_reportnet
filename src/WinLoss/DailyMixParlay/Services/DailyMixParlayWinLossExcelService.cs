@@ -363,19 +363,12 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
 
     public static string GetSiteTypeName(int siteType)
     {
-        switch (siteType)
+        return siteType switch
         {
-            case DailyMixParlayConstant.AllSites:
-                return "All Sites";
-
-            case DailyMixParlayConstant.Credit:
-                return "Credit";
-
-            case DailyMixParlayConstant.Deposit:
-                return "Deposit";
-
-            default:
-                return string.Empty;
-        }
+            DailyMixParlayConstant.AllSites => "All Sites",
+            DailyMixParlayConstant.Credit => "Credit",
+            DailyMixParlayConstant.Deposit => "Deposit",
+            _ => string.Empty
+        };
     }
 }

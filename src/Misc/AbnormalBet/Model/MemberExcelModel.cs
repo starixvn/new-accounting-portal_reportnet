@@ -24,18 +24,8 @@ namespace AbnormalBet.Model
         [Cell("F5")]
         public dynamic OddsData
         {
-            get
-            {
-                if (Sport == "-")
-                {
-                    return "-";
-                }
-                else
-                {
-                    return Odds;
-                }
-            }
-            set => OddsData = value;
+            get => Sport == "-" ? "-" : Odds;
+            set => Odds = value;
         }
 
         [Cell("G5")]
@@ -49,18 +39,8 @@ namespace AbnormalBet.Model
         [Cell("I5")]
         public dynamic HDPData
         {
-            get
-            {
-                if (Sport == "-")
-                {
-                    return "-";
-                }
-                else
-                {
-                    return HDP;
-                }
-            }
-            set => HDPData = value;
+            get => Sport == "-" ? "-" : HDP;
+            set => HDP = value;
         }
 
         [Cell("J5")]

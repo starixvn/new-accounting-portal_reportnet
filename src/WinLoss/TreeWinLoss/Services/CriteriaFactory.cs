@@ -12,56 +12,49 @@ namespace TreeWinLoss.Services
     {
         public CriteriaBase CreateCriteria(TreeWinLossByLevelCriteria criteria)
         {
-            switch (criteria.RoleId)
+            return criteria.RoleId switch
             {
-                case 5:
-                    return new TreeWinLossByComCriteria
-                    {
-                        Currency = criteria.Currency,
-                        FromDate = criteria.FromDate,
-                        ToDate = criteria.ToDate,
-                        ProductSelection = criteria.ProductSelection,
-                        Products = criteria.Products,
-                        IsNormalMode = criteria.IsNormalMode,
-                        SportType = criteria.SportType
-                    };
-
-                case 4:
-                    return new TreeWinLossBySuperCriteria
-                    {
-                        SRecommend = criteria.SRecommend,
-                        FromDate = criteria.FromDate,
-                        ToDate = criteria.ToDate,
-                        ProductSelection = criteria.ProductSelection,
-                        Products = criteria.Products,
-                        IsNormalMode = criteria.IsNormalMode,
-                        SportType = criteria.SportType
-                    };
-
-                case 3:
-                    return new TreeWinLossByMasterCriteria
-                        {
-                            MRecommend = criteria.MRecommend,
-                            FromDate = criteria.FromDate,
-                            ToDate = criteria.ToDate,
-                            ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products,
-                            IsNormalMode = criteria.IsNormalMode,
-                            SportType = criteria.SportType
-                        };
-
-                default:
-                    return new TreeWinLossByAgentCriteria
-                    {
-                        Recommend = criteria.Recommend,
-                        FromDate = criteria.FromDate,
-                        ToDate = criteria.ToDate,
-                        ProductSelection = criteria.ProductSelection,
-                        Products = criteria.Products,
-                        IsNormalMode = criteria.IsNormalMode,
-                        SportType = criteria.SportType
-                    };
-            }
+                5 => new TreeWinLossByComCriteria
+                {
+                    Currency = criteria.Currency,
+                    FromDate = criteria.FromDate,
+                    ToDate = criteria.ToDate,
+                    ProductSelection = criteria.ProductSelection,
+                    Products = criteria.Products,
+                    IsNormalMode = criteria.IsNormalMode,
+                    SportType = criteria.SportType
+                },
+                4 => new TreeWinLossBySuperCriteria
+                {
+                    SRecommend = criteria.SRecommend,
+                    FromDate = criteria.FromDate,
+                    ToDate = criteria.ToDate,
+                    ProductSelection = criteria.ProductSelection,
+                    Products = criteria.Products,
+                    IsNormalMode = criteria.IsNormalMode,
+                    SportType = criteria.SportType
+                },
+                3 => new TreeWinLossByMasterCriteria
+                {
+                    MRecommend = criteria.MRecommend,
+                    FromDate = criteria.FromDate,
+                    ToDate = criteria.ToDate,
+                    ProductSelection = criteria.ProductSelection,
+                    Products = criteria.Products,
+                    IsNormalMode = criteria.IsNormalMode,
+                    SportType = criteria.SportType
+                },
+                _ => new TreeWinLossByAgentCriteria
+                {
+                    Recommend = criteria.Recommend,
+                    FromDate = criteria.FromDate,
+                    ToDate = criteria.ToDate,
+                    ProductSelection = criteria.ProductSelection,
+                    Products = criteria.Products,
+                    IsNormalMode = criteria.IsNormalMode,
+                    SportType = criteria.SportType
+                }
+            };
         }
     }
 }

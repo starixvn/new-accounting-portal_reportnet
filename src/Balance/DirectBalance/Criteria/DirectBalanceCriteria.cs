@@ -22,21 +22,13 @@ namespace DirectBalance.Criteria
 
         public override string GetSettingKey()
         {
-            var storeProcedureName = string.Empty;
-            switch (RoleID)
+            var storeProcedureName = RoleID switch
             {
-                case RoleConstant.Master:
-                    storeProcedureName = "Balance_DirectBalance_DirectMaster";
-                    break;
-
-                case RoleConstant.Agent:
-                    storeProcedureName = "Balance_DirectBalance_DirectAgent";
-                    break;
-
-                case RoleConstant.Member:
-                    storeProcedureName = "Balance_DirectBalance_DirectMember";
-                    break;
-            }
+                RoleConstant.Master => "Balance_DirectBalance_DirectMaster",
+                RoleConstant.Agent => "Balance_DirectBalance_DirectAgent",
+                RoleConstant.Member => "Balance_DirectBalance_DirectMember",
+                _ => string.Empty
+            };
 
             if (!string.IsNullOrEmpty(storeProcedureName) && BalanceType == 2)
             {

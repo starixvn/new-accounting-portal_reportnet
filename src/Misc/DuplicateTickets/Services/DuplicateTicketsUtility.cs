@@ -25,8 +25,6 @@ namespace DuplicateTickets.Services
             var prevBetTimeGroup = new DateTime(2014, 7, 11);
             var prevBetTimeTicket = new DateTime(2014, 7, 11);
             var ticketIndex = 0;
-            double timeDifferenceGroup = 0;
-            double timeDifferenceTicket = 0;
             var groupNo = 0;
 
             foreach (var duplicateTicket in duplicateTicketByUserName)
@@ -34,8 +32,8 @@ namespace DuplicateTickets.Services
                 var betTime = duplicateTicket.BetTime;
                 var timeSpanGroup = betTime.Subtract(prevBetTimeGroup);
                 var timeSpanTicket = betTime.Subtract(prevBetTimeTicket);
-                timeDifferenceGroup = timeSpanGroup.TotalMilliseconds;
-                timeDifferenceTicket = timeSpanTicket.TotalMilliseconds;
+                var timeDifferenceGroup = timeSpanGroup.TotalMilliseconds;
+                var timeDifferenceTicket = timeSpanTicket.TotalMilliseconds;
 
                 if (ticketIndex == 0)
                 {

@@ -143,7 +143,7 @@ namespace TraderPerformance.Repositories
                 {
                     Id = Convert.ToInt32(dataRow["custid"]),
                     Name = Convert.ToString(dataRow["username"]),
-                    EventDate = DateTimeExtensions.ToMonthAndDayWithNoHyphen(eventDate),
+                    EventDate = eventDate.ToMonthAndDayWithNoHyphen(),
                     LeagueId = Convert.ToInt32(dataRow["leagueid"]),
                     HomeId = Convert.ToInt32(dataRow["homeid"]),
                     AwayId = Convert.ToInt32(dataRow["awayid"]),

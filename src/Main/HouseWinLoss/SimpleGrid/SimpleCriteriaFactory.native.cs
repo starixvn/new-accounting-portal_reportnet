@@ -26,12 +26,11 @@ namespace HouseWinLoss.SimpleGrid
         {
             var criteriaType = queryModel["type"].ToString();
 
-            if (!CriteriaTypes.ContainsKey(criteriaType))
+            if (!CriteriaTypes.TryGetValue(criteriaType, out var targetType))
             {
                 throw new ArgumentException("queryModel[\"type\"]");
             }
 
-            var targetType = CriteriaTypes[criteriaType];
             var criteria = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(queryModel), targetType);
 
             return (WinLossCriteria)criteria;

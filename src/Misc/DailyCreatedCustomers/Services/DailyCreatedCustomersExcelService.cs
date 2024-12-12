@@ -22,7 +22,7 @@ public class DailyCreatedCustomersExcelServiceImp(ConfigurationService configura
 
     private ExcelWorksheet evenSheet;
 
-    private ExcelWorksheet? totalSheet;
+    private ExcelWorksheet totalSheet;
 
     private const int StartRowIndex = 5;
 

@@ -56,7 +56,7 @@ namespace AbnormalBet.Model
                     return HDPOU;
                 }    
             }
-            set => HDPOUData = value;
+            set => HDPOU = value;
         }
 
         [Cell("N5")]
