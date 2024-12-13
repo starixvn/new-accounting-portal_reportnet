@@ -1,7 +1,6 @@
 ﻿using LeagueWinLoss.Criteria;
 using LeagueWinLoss.Services;
 using Microsoft.AspNetCore.Mvc;
-using static NPOI.HSSF.Util.HSSFColor;
 
 namespace LeagueWinLoss.Controller
 {

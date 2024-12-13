@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using OfficeOpenXml;
-using System;
 
 namespace BetConstructPerformance.Requests
 {

@@ -45,28 +45,29 @@ namespace ParlayWon.Services
         {
             var report = await GetReport(criteria);
 
-            if (report != null && report.Items.Any())
+            if (report == null || !report.Items.Any())
             {
-                var propertyName = GetSortedColumnName(criteria.SortBy);
-                var startIndex = criteria.StartIndex;
-                report.Items.SortByProperty(
-                    criteria.SortDirection,
-                    propertyName);
-
-
-                var pagingReport = new ParlayWonTransaction
-                {
-                    Items = report.Items.Skip(startIndex)
-                                                .Take(criteria.ItemsPerPage)
-                                                .ToList(),
-                    NumberItems = report.NumberItems,
-                    Total = report.Total
-                };
-
-                return pagingReport;
+                return new ParlayWonTransaction();
             }
 
-            return new ParlayWonTransaction();
+            var propertyName = GetSortedColumnName(criteria.SortBy);
+            var startIndex = criteria.StartIndex;
+            report.Items.SortByProperty(
+                criteria.SortDirection,
+                propertyName);
+
+
+            var pagingReport = new ParlayWonTransaction
+            {
+                Items = report.Items.Skip(startIndex)
+                    .Take(criteria.ItemsPerPage)
+                    .ToList(),
+                NumberItems = report.NumberItems,
+                Total = report.Total
+            };
+
+            return pagingReport;
+
         }
 
         private async Task<ParlayWonTransaction> GetFullReportFromDatabase(ParlayWonReportCriteria criteria)

@@ -201,27 +201,29 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
             (parentId == null && menuItem.ParentId == 0) ||
             (menuItem.ParentId != 0 && menuItem.ParentId == parentId));
 
-        if (rows.Any())
+        if (!rows.Any())
         {
-            menuList = [];
-            foreach (var row in rows)
-            {
-                var menuItem = new MenuItem
-                {
-                    Id = Converter.ToInt(row.Id),
-                    Name = Converter.ToString2(row.Name),
-                    Href = Converter.ToString2(row.Url),
-                    System = WebSettings.System,
-                    ParentId = Converter.ToInt(parentId),
-                    FunctionName = Converter.ToString2(row.FunctionName),
-                    IsHide = !Converter.ToBool(row.IsActive),
-                    Order = Converter.ToInt(row.DisplayOrder),
-                    SubMenu = MappingNapMenuToAccountingMenu(rawData, row.Id)
-                };
+            return menuList;
+        }
 
-                menuItem.SubMenu = MappingNapMenuToAccountingMenu(rawData, menuItem.Id);
-                menuList.Add(menuItem);
-            }
+        menuList = [];
+        foreach (var row in rows)
+        {
+            var menuItem = new MenuItem
+            {
+                Id = Converter.ToInt(row.Id),
+                Name = Converter.ToString2(row.Name),
+                Href = Converter.ToString2(row.Url),
+                System = WebSettings.System,
+                ParentId = Converter.ToInt(parentId),
+                FunctionName = Converter.ToString2(row.FunctionName),
+                IsHide = !Converter.ToBool(row.IsActive),
+                Order = Converter.ToInt(row.DisplayOrder),
+                SubMenu = MappingNapMenuToAccountingMenu(rawData, row.Id)
+            };
+
+            menuItem.SubMenu = MappingNapMenuToAccountingMenu(rawData, menuItem.Id);
+            menuList.Add(menuItem);
         }
 
         return menuList;

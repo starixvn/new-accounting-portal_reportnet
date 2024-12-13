@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BetConstructPerformance.Models
+﻿namespace BetConstructPerformance.Models
 {
     public class SportDetailExcelModel
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BetConstructPerformance.Models
+﻿namespace BetConstructPerformance.Models
 {
     public class SportItemModel
     {

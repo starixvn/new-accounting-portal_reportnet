@@ -74,13 +74,14 @@ namespace CashOutPerformance.Models
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(cashOutTime))
+                if (string.IsNullOrWhiteSpace(cashOutTime))
                 {
-                    var date = DateTime.Parse(cashOutTime);
-                    return date.ToString("yyyy-MM-dd hh:mm:ss tt");
+                    return cashOutTime;
                 }
 
-                return cashOutTime;
+                var date = DateTime.Parse(cashOutTime);
+                return date.ToString("yyyy-MM-dd hh:mm:ss tt");
+
             }
             set => cashOutTime = value;
         }

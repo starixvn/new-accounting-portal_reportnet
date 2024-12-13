@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System;
 using BetConstructPerformance.Models;
 
 namespace BetConstructPerformance.Requests
