@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using Fanex.Data.Repository;
-
-namespace UniversalReports.SMAWinLoss.VirtualRate
+﻿namespace SMAWinLoss.VirtualRate
 {
+    using AutoMapper;
+    using Fanex.Data.Repository;
+
     public interface VirtualRateService
     {
         Task<IEnumerable<VirtualRateModel>> GetVirtualRate(VirtualRateHttpParameter parameter);

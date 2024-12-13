@@ -1,4 +1,4 @@
-﻿namespace UniversalReports.SMAWinLoss.VirtualRate
+﻿namespace SMAWinLoss.VirtualRate
 {
     public class VirtualRateModel
     {

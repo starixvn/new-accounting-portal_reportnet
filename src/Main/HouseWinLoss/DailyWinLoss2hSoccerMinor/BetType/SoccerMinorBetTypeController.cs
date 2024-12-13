@@ -58,6 +58,11 @@
         private static void SortData(BasicWinLossModel winlosses, string sortDirection, string sortColumnName)
         {
             var propInfo = typeof(WinLoss).GetProperty(sortColumnName);
+            if (propInfo == null)
+            {
+                return;
+            }
+
             var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);
             winlosses.SiteWinLossSummaries = isAsc ?
             winlosses

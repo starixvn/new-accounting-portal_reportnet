@@ -49,24 +49,9 @@ namespace DailyCreatedCustomers.Services
 
         public async Task<List<DetailModel>> GetDetailReport(DailyCreatedCustomersDetailsCriteria criteria)
         {
-            var report = new List<DetailModel>();
-
             var rawData = await repository.FetchAsync<DetailEntity>(criteria);
 
-            foreach (var row in rawData)
-            {
-                var item = new DetailModel
-                {
-                    CreatedDate = row.CreatedDate.ToLongFormatedDate(),
-                    UserId = row.CustId,
-                    UserName = row.UserName,
-                    Creator = row.Creator
-                };
-
-                report.Add(item);
-            }
-
-            return report;
+            return rawData.Select(row => new DetailModel { CreatedDate = row.CreatedDate.ToLongFormatedDate(), UserId = row.CustId, UserName = row.UserName, Creator = row.Creator }).ToList();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using SuperBalance.Service;
-using SuperBalance.Services;
+﻿using SuperBalance.Services;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {

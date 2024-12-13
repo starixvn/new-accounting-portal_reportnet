@@ -154,7 +154,7 @@ namespace TraderPerformance.Services
             return pagingReport;
         }
         
-        private TraderPerformanceOtherSportsModel SortReportData(TraderPerformanceOtherSportsModel report, ReportCriteria criteria)
+        private void SortReportData(TraderPerformanceOtherSportsModel report, ReportCriteria criteria)
         {
             var isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
 
@@ -180,8 +180,6 @@ namespace TraderPerformance.Services
                     : report.ReportRows.OrderByDescending(traderInfo => traderInfo.ChildInfo[4].Overall).ToList(),
                 _ => report.ReportRows
             };
-
-            return report;
         }
 
         private void SortDetailReportData(TraderPerformanceOtherSportsDetailModel report,

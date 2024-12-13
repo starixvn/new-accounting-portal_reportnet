@@ -1,5 +1,7 @@
 namespace TreeWinLoss.Model
 {
+    using System.Globalization;
+
     public class TreeWinLossItemModel
     {
         public string Name { get; set; }
@@ -36,15 +38,15 @@ namespace TreeWinLoss.Model
         public decimal BaseRMWinLossVarianceTotal { get; set; }
 
         public string BaseRMVarianceMargin => BaseRMTurnoverVarianceAbsoluteTotal != 0 ?
-                    Math.Round(BaseRMWinLossVarianceTotal / BaseRMTurnoverVarianceAbsoluteTotal * 100, 2).ToString() :
+                    Math.Round(BaseRMWinLossVarianceTotal / BaseRMTurnoverVarianceAbsoluteTotal * 100, 2).ToString(CultureInfo.CurrentCulture) :
                     "N/A";
 
         public string VirtualBaseRMMargin => BaseRMVirtualTurnover != 0 ?
-             Math.Round(BaseRMVirtualTotal / BaseRMVirtualTurnover * 100, 2).ToString() :
+             Math.Round(BaseRMVirtualTotal / BaseRMVirtualTurnover * 100, 2).ToString(CultureInfo.CurrentCulture) :
              "N/A";
 
         public string BaseRMMargin => BaseRMTurnover != 0 ?
-            Math.Round(BaseRMTotal / BaseRMTurnover * 100, 2).ToString() :
+            Math.Round(BaseRMTotal / BaseRMTurnover * 100, 2).ToString(CultureInfo.CurrentCulture) :
               "N/A";
 
         public string VirtualRate { get; set; }

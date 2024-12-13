@@ -32,18 +32,7 @@ namespace CashOutPerformance.Services
         {
             var sportBettype = await repository.FetchAsync<SportBetTypeModel>(criteria);
             var groups = sportBettype.GroupBy(x => new { x.SportType, x.SportName });
-            var result = new List<FilterGroupItemModel>();
-            foreach (var group in groups)
-            {
-                var model = new FilterGroupItemModel
-                {
-                    GroupId = group.Key.SportType,
-                    GroupName = group.Key.SportName,
-                    ChildItems = group.Select(x => new FilterItemModel { Id = x.Bettype, Name = x.BettypeName }).ToList()
-                };
-                result.Add(model);
-            }
-            return result;
+            return groups.Select(group => new FilterGroupItemModel { GroupId = group.Key.SportType, GroupName = group.Key.SportName, ChildItems = group.Select(x => new FilterItemModel { Id = x.Bettype, Name = x.BettypeName }).ToList() }).ToList();
         }
 
         public async Task<TicketViewModel<T>> GetTickets<T, U>(U criteria)

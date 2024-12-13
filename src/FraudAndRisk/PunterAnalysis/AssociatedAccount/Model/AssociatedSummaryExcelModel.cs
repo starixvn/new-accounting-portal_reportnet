@@ -60,7 +60,7 @@ namespace PunterAnalysis.AssociatedAccount.Model
 
         private bool IsMember()
         {
-            return RoleName == string.Empty || RoleName == MemberRole;
+            return RoleName is "" or MemberRole;
         }
     }
 }

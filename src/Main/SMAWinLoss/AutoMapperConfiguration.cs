@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using SMAWinLoss.Summary;
-using UniversalReports.SMAWinLoss.VirtualRate;
 
 namespace SMAWinLoss
 {
+    using VirtualRate;
+
     public static class AutoMapperConfiguration
     {
         public static void InitializeSMAWinLoss(this IProfileExpression cfg)

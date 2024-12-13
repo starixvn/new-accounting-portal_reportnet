@@ -1,6 +1,5 @@
 ﻿using DailyMixParlay.Criteria;
 using DailyMixParlay.Services;
-using DailyMixParlayWinLoss.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DailyMixParlay.Controller

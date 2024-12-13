@@ -76,10 +76,7 @@ namespace Utilities.CustomerTrackingSystem
                 return string.Join(", ", result);
             }
 
-            foreach (var element in elements)
-            {
-                result.Add(element.Attribute("CategoryName").Value);
-            }
+            result.AddRange(elements.Select(element => element.Attribute("CategoryName")?.Value));
 
             return string.Join(", ", result);
         }

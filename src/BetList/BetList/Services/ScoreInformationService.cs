@@ -55,6 +55,10 @@ namespace BetList.Services
             }
 
             var item = rawData.Item1.FirstOrDefault();
+            if (item == null)
+            {
+                return result;
+            }
 
             if (rawData.Item2 != null && rawData.Item2.Any())
             {

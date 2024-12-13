@@ -1,8 +1,8 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace UniversalReports.SMAWinLoss.VirtualRate
+﻿namespace SMAWinLoss.VirtualRate
 {
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/sma-win-loss/virtual-rate")]
     [ApiController]
     public class SMAWinLossVirtualRateController(IMediator mediator) : ControllerBase

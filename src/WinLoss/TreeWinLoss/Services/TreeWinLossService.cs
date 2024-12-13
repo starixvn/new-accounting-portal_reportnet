@@ -143,7 +143,7 @@ namespace TreeWinLoss.Services
 
         public async Task<TreeWinLossVirtualRateModel> GetAllVirtualRate(TreeWinLossModel report)
         {
-            var custIdEnableVirtualRate = string.Join(",", report.WinLosses.Where(x => x.VirtualRate != "N/A" || x.VirtualRate != "Disabled").Select(x => x.Id));
+            var custIdEnableVirtualRate = string.Join(",", report.WinLosses.Where(x => x.VirtualRate != "N/A" && x.VirtualRate != "Disabled").Select(x => x.Id));
             var getAllVirtualRateCriteria = new AllVirtualRateCriteria
             {
                 CustIDs = custIdEnableVirtualRate
@@ -155,7 +155,7 @@ namespace TreeWinLoss.Services
             {
                 SMAVirtualRate = allVirtualRate,
                 NumberUserEnabledVirtualRate = allVirtualRate.ReportRows.Count,
-                EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.WinLosses.Where(x => x.VirtualRate != "N/A" || x.VirtualRate != "Disabled").ToList())
+                EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.WinLosses.Where(x => x.VirtualRate != "N/A" && x.VirtualRate != "Disabled").ToList())
             };
 
             return treeWinLossVirtualRate;
@@ -239,7 +239,7 @@ namespace TreeWinLoss.Services
 
             if (summaryVirtualRate.Any())
             {
-                enableVirtualRate = summaryVirtualRate.FirstOrDefault().EnableVirtualRate == 1;
+                enableVirtualRate = summaryVirtualRate.FirstOrDefault()?.EnableVirtualRate == 1;
             }
 
             if (enableVirtualRate)
@@ -277,7 +277,7 @@ namespace TreeWinLoss.Services
                         preLiveAndSportType = liveAndSportType;
                     }
 
-                    virtualRateItem.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
+                    virtualRateItem?.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
                     {
                         BettypeName = remotingRefService.GetBetTypeName(bettypeId),
                         VirtualRate = virtualRate - 1
@@ -367,9 +367,9 @@ namespace TreeWinLoss.Services
             var preLiveAndSportType = string.Empty;
             var virtualRateHistory = new VirtualRateModel();
             VirtualRateModel virtualRateUpdatedItem = null;
-            if (actionId == 806 || actionId == 2802)
+            if (actionId is 806 or 2802)
             {
-                var enabledVirtualRate = Convert.ToInt32(xmlTrackingValue.Attribute("EnableVirtualrate").Value) == 1;
+                var enabledVirtualRate = Convert.ToInt32(xmlTrackingValue.Attribute("EnableVirtualrate")?.Value) == 1;
                 virtualRateUpdatedItem = new VirtualRateModel
                 {
                     Sport = $"Virtual Rate: {(enabledVirtualRate ? "Enabled" : "Disabled")}"
@@ -377,12 +377,13 @@ namespace TreeWinLoss.Services
             }
             else
             {
-                foreach (XElement element in xmlTrackingValue.Nodes())
+                foreach (var xNode in xmlTrackingValue.Nodes())
                 {
-                    var sportId = Convert.ToInt32(element.Attribute("SportType").Value);
-                    var bettypeId = Convert.ToInt32(element.Attribute("BetType").Value);
-                    var isLive = Convert.ToInt32(element.Attribute("IsLive").Value) == 1;
-                    var virtualRate = Convert.ToDecimal(element.Attribute("VirtualMultiplier").Value);
+                    var element = (XElement)xNode;
+                    var sportId = Convert.ToInt32(element.Attribute("SportType")?.Value);
+                    var bettypeId = Convert.ToInt32(element.Attribute("BetType")?.Value);
+                    var isLive = Convert.ToInt32(element.Attribute("IsLive")?.Value) == 1;
+                    var virtualRate = Convert.ToDecimal(element.Attribute("VirtualMultiplier")?.Value);
                     var liveAndSportType = string.Join(string.Empty, sportId, isLive);
 
                     if (liveAndSportType != preLiveAndSportType)
@@ -401,7 +402,7 @@ namespace TreeWinLoss.Services
                         preLiveAndSportType = liveAndSportType;
                     }
 
-                    virtualRateUpdatedItem.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
+                    virtualRateUpdatedItem?.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
                     {
                         BettypeName = remotingRefService.GetBetTypeName(bettypeId),
                         VirtualRate = virtualRate - 1
@@ -439,7 +440,7 @@ namespace TreeWinLoss.Services
                 {
                     if (virtualRateBySportAndLiveStatus != null)
                     {
-                        virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
+                        virtualRateByUser?.ReportRows.Add(virtualRateBySportAndLiveStatus);
                         virtualRateBySportAndLiveStatus = null;
                     }
 
@@ -460,7 +461,7 @@ namespace TreeWinLoss.Services
                 {
                     if (virtualRateBySportAndLiveStatus != null)
                     {
-                        virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
+                        virtualRateByUser?.ReportRows.Add(virtualRateBySportAndLiveStatus);
                     }
 
                     virtualRateBySportAndLiveStatus = new SMAVirtualRateModel
@@ -471,12 +472,15 @@ namespace TreeWinLoss.Services
                     preSportAndLiveStatus = sportAndLiveStatus;
                 }
 
-                virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[bettypeIndex].VirtualRate = virtualRate - 1;
+                if (virtualRateBySportAndLiveStatus != null)
+                {
+                    virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[bettypeIndex].VirtualRate = virtualRate - 1;
+                }
             }
 
             if (virtualRateBySportAndLiveStatus != null)
             {
-                virtualRateByUser.ReportRows.Add(virtualRateBySportAndLiveStatus);
+                virtualRateByUser?.ReportRows.Add(virtualRateBySportAndLiveStatus);
             }
 
             if (virtualRateByUser != null)

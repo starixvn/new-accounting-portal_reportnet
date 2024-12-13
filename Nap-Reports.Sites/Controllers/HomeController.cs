@@ -5,7 +5,7 @@ using Utilities.Configurations;
 
 namespace Nap_Reports.Sites.Controllers
 {
-    public class HomeController(ILogger<HomeController> logger, ConfigurationService config) : Controller
+    public class HomeController(ConfigurationService config) : Controller
     {
 
         public IActionResult Index()

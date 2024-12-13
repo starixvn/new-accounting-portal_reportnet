@@ -1,4 +1,4 @@
-﻿namespace Nap_Reports.Utilities;
+﻿namespace Utilities;
 
 public static class AccReportFunctionKeys
 {

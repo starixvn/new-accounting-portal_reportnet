@@ -1,7 +1,7 @@
-﻿using MediatR;
-
-namespace UniversalReports.SMAWinLoss.VirtualRate
+﻿namespace SMAWinLoss.VirtualRate
 {
+    using MediatR;
+
     public class Handler(VirtualRateService service)
         : IRequestHandler<VirtualRateHttpParameter, IEnumerable<VirtualRateModel>>
     {

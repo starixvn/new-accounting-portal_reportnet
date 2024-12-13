@@ -1,11 +1,12 @@
 ﻿using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Utilities;
 using Utilities.BalanceUpServices;
 
 namespace Nap_Reports.Sites.Controllers
 {
+    using Utilities;
+
     public class ParlayWonController(BalanceUpService balanceUpService) : Controller
     {
         [NapAuth(FunctionKey = AccReportFunctionKeys.ParlayWon, Policy = Constant.Policy.Read)]

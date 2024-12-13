@@ -1,13 +1,13 @@
-using AutoMapper;
-using DailyMixParlay.Constant;
-using DailyMixParlay.Criteria;
-using DailyMixParlay.Models;
-using Fanex.Data.Repository;
-using Utilities.LinqDynamicSum;
-using Utilities.RemotingRef;
-
-namespace DailyMixParlayWinLoss.Services
+namespace DailyMixParlay.Services
 {
+    using AutoMapper;
+    using Constant;
+    using Criteria;
+    using Models;
+    using Fanex.Data.Repository;
+    using Utilities.LinqDynamicSum;
+    using Utilities.RemotingRef;
+
     public interface DailyMixParlayWinLossService
     {
         Task<WinLoss> GetCombinationWinLossReport(GetCombinationWinLossCriteria criteria);

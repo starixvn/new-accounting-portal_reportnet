@@ -24,7 +24,7 @@ namespace HouseWinLoss.SimpleGrid
 
         public WinLossCriteria CreateCriteria(Dictionary<string, object> queryModel)
         {
-            var criteriaType = queryModel["type"].ToString();
+            var criteriaType = queryModel["type"].ToString() ?? string.Empty;
 
             if (!CriteriaTypes.TryGetValue(criteriaType, out var targetType))
             {

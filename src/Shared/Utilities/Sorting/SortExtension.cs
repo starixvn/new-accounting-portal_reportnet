@@ -12,6 +12,9 @@
 
             var isAsc = string.Equals(sortType, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
 
+            dataSource.Sort((Comparison<T>)Compare);
+            return;
+
             int Compare(T a, T b)
             {
                 object valueA = isAsc
@@ -24,13 +27,18 @@
 
                 return ((IComparable)valueA).CompareTo(valueB);
             }
-
-            dataSource.Sort((Comparison<T>)Compare);
         }
 
         public static void SortDataByProperty<T>(List<T> dataSource, string sortDirection, string sortColumnName, string sortDataType)
         {
             var propInfo = typeof(T).GetProperty(sortColumnName);
+            if (propInfo == null)
+            {
+                return;
+            }
+
+            dataSource.Sort((Comparison<T>)Compare);
+            return;
 
             int Compare(T a, T b)
             {
@@ -60,8 +68,6 @@
 
                 return valueA is IComparable comparable ? comparable.CompareTo(valueB) : 0;
             }
-
-            dataSource.Sort((Comparison<T>)Compare);
         }
     }
 }

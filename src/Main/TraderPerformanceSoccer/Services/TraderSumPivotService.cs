@@ -60,7 +60,7 @@ public class TraderSumPivotServiceImp : TraderSumPivotService
                     }
                     else
                     {
-                        newDataRow[columnIndex] = dataByUser.FirstOrDefault()[columnIndex];
+                        newDataRow[columnIndex] = dataByUser?.FirstOrDefault()?[columnIndex];
                     }
                 }
 
@@ -106,7 +106,7 @@ public class TraderSumPivotServiceImp : TraderSumPivotService
             .OrderByDescending(o => o.count)
             .FirstOrDefault();
 
-        var trader = userNameWithMaxNumberOfBettypes.trader;
+        var trader = userNameWithMaxNumberOfBettypes?.trader;
         return rawData.AsEnumerable()
             .Where(s => Converter.To<string>(s[TraderColumnName]) == trader)
             .Select(s => Converter.To<string>(s[BettypeColumnName]))

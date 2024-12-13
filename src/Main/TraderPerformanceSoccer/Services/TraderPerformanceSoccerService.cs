@@ -160,7 +160,7 @@ namespace TraderPerformance.Services
             return repository.GetSummaryPH(criteria);
         }
 
-        private TraderPerformanceSoccerModel SortReportData(TraderPerformanceSoccerModel report, ReportCriteria criteria)
+        private void SortReportData(TraderPerformanceSoccerModel report, ReportCriteria criteria)
         {
             var isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
 
@@ -186,18 +186,15 @@ namespace TraderPerformance.Services
                     : report.ReportRows.OrderByDescending(traderInfo => traderInfo.ChildInfo[4].Overall).ToList(),
                 _ => report.ReportRows
             };
-
-            return report;
         }
 
-        private TraderPerformanceSoccerDetailModel SortDetailReportData(TraderPerformanceSoccerDetailModel report, DetailReportCriteria criteria)
+        private void SortDetailReportData(TraderPerformanceSoccerDetailModel report, DetailReportCriteria criteria)
         {
             SortSecondSubLevelReport(report, criteria);
-            return report;
         }
 
         
-        private TraderPerformanceSoccerDetailModel SortSecondSubLevelReport(TraderPerformanceSoccerDetailModel report, DetailReportCriteria criteria)
+        private void SortSecondSubLevelReport(TraderPerformanceSoccerDetailModel report, DetailReportCriteria criteria)
         {
             var isAsc = string.Equals(criteria.SortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
 
@@ -243,8 +240,6 @@ namespace TraderPerformance.Services
                     _ => traderInfo.ReportRows
                 };
             }
-
-            return report;
         }
     }
 }

@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Utilities.Constants;
 using Utilities.Services;
 using SuperBalance.Criteria;
-using SuperBalance.Service;
 using SuperBalance.Services;
 
 namespace SuperBalance.Controller

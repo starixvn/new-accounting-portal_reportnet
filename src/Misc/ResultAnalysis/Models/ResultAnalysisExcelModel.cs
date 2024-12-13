@@ -2,6 +2,8 @@
 
 namespace ResultAnalysis.Models
 {
+    using System.Globalization;
+
     public class ResultAnalysisExcelModel
 	{
 		public IEnumerable<DetailedResultAnalysisExcelModel> Items { get; set; }
@@ -71,12 +73,12 @@ namespace ResultAnalysis.Models
         public string HDP { get; set; }
 
         [Cell("D10")]
-        public string HdpString => HDP == "-" ? "-" : Math.Round(decimal.Parse(HDP), 2).ToString();
+        public string HdpString => HDP == "-" ? "-" : Math.Round(decimal.Parse(HDP), 2).ToString(CultureInfo.CurrentCulture);
 
         public string OU { get; set; }
 
         [Cell("E10")]
-		public string OuString => OU == "-" ? "-" : Math.Round(decimal.Parse(OU), 2).ToString();
+		public string OuString => OU == "-" ? "-" : Math.Round(decimal.Parse(OU), 2).ToString(CultureInfo.CurrentCulture);
 
         [Cell("F10")]
 		public string Fav { get; set; }

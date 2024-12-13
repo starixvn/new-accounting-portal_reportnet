@@ -31,7 +31,7 @@ namespace PunterAnalysis.Shared
         public static int GetWeekOfYearIso8601(DateTime dateTime)
         {
             var day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(dateTime);
-            var realDate = day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday
+            var realDate = day is >= DayOfWeek.Monday and <= DayOfWeek.Wednesday
                 ? dateTime.AddDays(DayOffsetFromStartOfWeek)
                 : dateTime;
 

@@ -1,5 +1,4 @@
 ﻿using DailyMixParlay.Services;
-using DailyMixParlayWinLoss.Services;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {

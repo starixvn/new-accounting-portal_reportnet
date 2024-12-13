@@ -16,23 +16,14 @@ namespace CompanyBalanceDifference.Services
             var criteria = new CompanyBalanceDifferenceCriteria();
             var rawData = await repository.FetchAsync<CompanyBalanceDifferenceItem>(criteria);
 
-            var result  = new List<CompanyBalanceDifferenceModel>();
+            var result = new List<CompanyBalanceDifferenceModel>();
 
             if (!rawData.Any())
             {
                 return result;
             }
 
-            foreach (var row in rawData)
-            {
-                result.Add(new CompanyBalanceDifferenceModel
-                {
-                    BalanceUpDate = $"{row.BalanceUpDay:MMM dd, yyyy}",
-                    BalanceBeforeBalanceUpDate = row.CompanyBalanceBefore,
-                    BalanceAfterBalanceUpDate = row.CompanyBalanceAfter,
-                    Difference = row.Difference
-                });
-            }
+            result.AddRange(rawData.Select(row => new CompanyBalanceDifferenceModel { BalanceUpDate = $"{row.BalanceUpDay:MMM dd, yyyy}", BalanceBeforeBalanceUpDate = row.CompanyBalanceBefore, BalanceAfterBalanceUpDate = row.CompanyBalanceAfter, Difference = row.Difference }));
 
             return result;
         }

@@ -1,11 +1,11 @@
-using Fanex.Data.Repository;
-using Utilities.Currencies;
-using SuperBalance.Criteria;
-using SuperBalance.Model;
-using Utilities.LinqDynamicSum;
-
-namespace SuperBalance.Service
+namespace SuperBalance.Services
 {
+    using Fanex.Data.Repository;
+    using Criteria;
+    using Model;
+    using Utilities.Currencies;
+    using Utilities.LinqDynamicSum;
+
     public interface SuperBalanceService
     {
         Task<SuperBalanceModel> GetSuperBalance(SuperBalanceCriteria criteria);

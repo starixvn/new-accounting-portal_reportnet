@@ -10,7 +10,7 @@ namespace Nap_Reports.Sites
     {
         public static void AddRemotingRef(this IServiceCollection services, IConfiguration configuration)
         {
-            RefDataTypeContainer.ConnectTo(new Uri(configuration["Fanex.RemotingRef.Service.Url"]))
+            RefDataTypeContainer.ConnectTo(new Uri(configuration["Fanex.RemotingRef.Service.Url"] ?? string.Empty))
                 .FromApplication("Nap-Reports");
         }
 
@@ -90,10 +90,10 @@ namespace Nap_Reports.Sites
         {
             services.AddWebOptimizer(pipeline =>
             {
-                pipeline.AddCssBundle("/style/fanex.result.css", 
-                    "/Content/Fanex.Result/fanex.result.css", 
+                pipeline.AddCssBundle("/style/fanex.result.css",
+                    "/Content/Fanex.Result/fanex.result.css",
                     "/Content/Fanex.Result/fanex.result-customized.css");
-                
+
                 pipeline.AddCssBundle("/style/tipsy.css",
                    "/scripts/_lib/Tooltip/tipsy.css");
 
@@ -123,7 +123,7 @@ namespace Nap_Reports.Sites
 
                 pipeline.AddCssBundle("/style/month-picker.css",
                "/scripts/_lib/MonthPicker/monPickr-0.0.3.css");
-                
+
                 pipeline.AddLessBundle("/style/month-picker-custom.css",
                 "/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less");
 
@@ -153,7 +153,7 @@ namespace Nap_Reports.Sites
                 "/scripts/_lib/MonthPicker/monPickr-0.0.3.js");
 
                 pipeline.AddLessBundle(
-                    "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css", 
+                    "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                     "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");
                 pipeline.AddLessBundle(
                     "/daily-mix-parlay-2hlink/styles/DailyMixParlayWinLoss.css",

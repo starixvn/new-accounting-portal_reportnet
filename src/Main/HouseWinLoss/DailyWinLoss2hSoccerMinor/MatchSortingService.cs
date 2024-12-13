@@ -27,6 +27,11 @@ namespace HouseWinLoss.DailyWinLoss2hSoccerMinor
         private static void SortStatisticsForParentGroup(WinLossModel reportModel, string sortDirection, string sortColumnName)
         {
             var propInfo = typeof(WinLoss).GetProperty(sortColumnName);
+            if (propInfo == null)
+            {
+                return;
+            }
+
             var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);
             reportModel.Leagues = isAsc ?
             reportModel

@@ -1,9 +1,10 @@
 ﻿using SMAWinLoss.Filter;
 using SMAWinLoss.Summary;
-using UniversalReports.SMAWinLoss.VirtualRate;
 
 namespace Nap_Reports.Sites.DependencyInjection
 {
+    using SMAWinLoss.VirtualRate;
+
     public static class SMAWinLossInjection
     {
         public static void RegisterSMAWinLossServices(this IServiceCollection service)

@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-
-namespace UniversalReports.SMAWinLoss.VirtualRate
+﻿namespace SMAWinLoss.VirtualRate
 {
+    using Fanex.Data.Repository;
+
     public class VirtualRateCriteria : CriteriaBase
     {
         public int CustId { get; set; }

@@ -66,12 +66,7 @@ namespace TotalSMAAndActiveMember.Services
                 }
 
             ];
-
-            foreach (var item in activeDetails)
-            {
-                var smaSummary = BuildSMASummary(item);
-                report.Add(smaSummary);
-            }
+            report.AddRange(activeDetails.Select(BuildSMASummary));
 
             return report;
         }

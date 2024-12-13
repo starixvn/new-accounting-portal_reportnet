@@ -279,7 +279,7 @@ namespace LeagueWinLoss.Services
         {
             var result = new BetTypeWinLossByStatusModel();
             var liveIndicator = criteria.LiveIndicator;
-            if (liveIndicator == 1 || liveIndicator == 2)
+            if (liveIndicator is 1 or 2)
             {
                 criteria.LiveIndicator = 1;
                 var liveBetTypes = await GetBetTypesLive(criteria);

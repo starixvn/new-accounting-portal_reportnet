@@ -95,7 +95,7 @@ namespace Utilities.MostVisitedPages
                 menu = napSession.MenuItemList.FirstOrDefault(m => m.Url.StartsWith(menuURL));
             }
 
-            return menu.Name;
+            return menu?.Name;
         }
     }
 }

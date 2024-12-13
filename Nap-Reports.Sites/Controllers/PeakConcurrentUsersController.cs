@@ -2,11 +2,12 @@
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Nap_Reports.Utilities;
 using PeakConcurrentUsers.Services;
 
 namespace Nap_Reports.Sites.Controllers
 {
+    using Utilities;
+
     public class PeakConcurrentUsersController(PeakConcurrentUserService service) : Controller
     {
         [NapAuth(FunctionKey = AccReportFunctionKeys.PeakConcurrentUsers, Policy = Constant.Policy.Read)]

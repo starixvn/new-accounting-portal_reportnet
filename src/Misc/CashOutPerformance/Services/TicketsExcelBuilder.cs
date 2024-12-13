@@ -82,7 +82,7 @@ namespace CashOutPerformance.Services
         {
             if (excelType != ExcelType.Match)
             {
-                sheet.Cells["A5"].Value = Enum.GetName(typeof(ExcelType), excelType).Replace("Event", "Live/Non-Live");
+                sheet.Cells["A5"].Value = Enum.GetName(typeof(ExcelType), excelType)?.Replace("Event", "Live/Non-Live");
             }
         }
 

@@ -64,7 +64,7 @@ namespace DuplicateTickets.Services
 
                 if (item.TicketInfo.Any())
                 {
-                    var originalTicketReferenceNumber = item.TicketInfo.FirstOrDefault().ReferenceNumber;
+                    var originalTicketReferenceNumber = item.TicketInfo.FirstOrDefault()?.ReferenceNumber;
 
                     var groupTitle = $"Duplicate Tickets of {originalTicketReferenceNumber}";
                     var ticketCellRange = $"A{rowIndex}:O{rowIndex}";
