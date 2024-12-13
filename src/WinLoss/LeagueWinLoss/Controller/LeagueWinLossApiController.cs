@@ -127,8 +127,8 @@ namespace LeagueWinLoss.Controller
             var data = await service.GetMatchesFromBetTypeStatus(criteria);
             var title =
                 $"League Win Loss Report From {criteria.StartDate: MMM dd, yyyy} To {criteria.EndDate: MMM dd, yyyy}";
-            var liveNonlive = criteria.LiveIndicator == 1 ? "Live" : "Non-Live";
-            var header = $"{criteria.SportName} - {criteria.LeagueName} - {criteria.BetTypeName} - {liveNonlive}";
+            var liveNonLive = criteria.LiveIndicator == 1 ? "Live" : "Non-Live";
+            var header = $"{criteria.SportName} - {criteria.LeagueName} - {criteria.BetTypeName} - {liveNonLive}";
             var excelPackage = await matchExcelService.ExportExcelFromBetTypeStatus(data, title, header);
             var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
             var fileDownloadName = $"League_Win_Loss_Report_From_Date_{criteria.StartDate: MM_dd_yyyy}_To_{criteria.EndDate: MM_dd_yyyy}.xlsx";

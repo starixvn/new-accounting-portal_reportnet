@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Epplus.Mapper.Extensions;
-using Fanex.Excel.Repositories.CustomColors;
 using LeagueWinLoss.Model;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
