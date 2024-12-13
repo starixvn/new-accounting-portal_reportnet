@@ -69,11 +69,13 @@ namespace DuplicateTickets.Services
             duplicateTicketsInfo.MD5Hash = utility.GetMD5Hash(JsonConvert.SerializeObject(result));
 
 
-            if (result.Count > 0)
+            if (result.Count <= 0)
             {
-                var json = JsonConvert.SerializeObject(result, Formatting.Indented);
-                await LogService.InfoAsync($"Misc / Duplicate Tickets by Username: {napSession.UserName}" + Environment.NewLine + json);
+                return duplicateTicketsInfo;
             }
+
+            var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+            await LogService.InfoAsync($"Misc / Duplicate Tickets by Username: {napSession.UserName}" + Environment.NewLine + json);
 
             return duplicateTicketsInfo;
         }

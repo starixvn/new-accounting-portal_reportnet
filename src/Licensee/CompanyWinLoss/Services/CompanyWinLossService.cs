@@ -102,11 +102,13 @@ namespace CompanyWinLoss.Services
         {
             var gridOptions = await cacheService.GetAsync<GridOptions>(dataCachedKey);
 
-            if (gridOptions == null)
+            if (gridOptions != null)
             {
-                criteria.IsPagingCallBack = false;
-                gridOptions =  await GetCompanyWinLoss(criteria);
+                return gridOptions;
             }
+
+            criteria.IsPagingCallBack = false;
+            gridOptions =  await GetCompanyWinLoss(criteria);
 
             return gridOptions;
         }

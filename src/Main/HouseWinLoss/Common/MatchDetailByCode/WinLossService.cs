@@ -36,7 +36,7 @@ namespace HouseWinLoss.Common.MatchDetailByCode
         {
             var rawLeagueWinLosses = rawWinLosses.Where(r => r.GroupName == league);
             var matchWinLosses = rawLeagueWinLosses
-                .Select(m => calculationService.FromRawWinLossByRowName(m))
+                .Select(calculationService.FromRawWinLossByRowName)
                 .OrderBy(m => m.Name);
             var total = calculationService.CalculateSumWinLoss(string.Empty, rawLeagueWinLosses);
             var totalRows = rawWinLosses.Count();

@@ -25,50 +25,52 @@ namespace TotalSMAAndActiveMember.Services
 
             var totalSMA = accountStatusItems.FirstOrDefault();
 
-            if (totalSMA != null && activeDetails != null && activeDetails.Any())
+            if (totalSMA == null || activeDetails == null || !activeDetails.Any())
             {
-                report =
-                [
-                    new SMASummaryModel
-                    {
-                        Name = "New Created",
-                        Super = totalSMA.NewCreatedSuper,
-                        Master = totalSMA.NewCreatedMaster,
-                        Agent = totalSMA.NewCreatedAgent
-                    },
+                return report;
+            }
 
-                    new SMASummaryModel
-                    {
-                        Name = "Active",
-                        Super = totalSMA.ActiveSuper,
-                        Master = totalSMA.ActiveMaster,
-                        Agent = totalSMA.ActiveAgent
-                    },
-
-                    new SMASummaryModel
-                    {
-
-                        Name = "Suspended",
-                        Super = totalSMA.SuspendedSuper,
-                        Master = totalSMA.SuspendedMaster,
-                        Agent = totalSMA.SuspendedAgent
-                    },
-
-                    new SMASummaryModel
-                    {
-                        Name = "Closed",
-                        Super = totalSMA.ClosedSuper,
-                        Master = totalSMA.ClosedMaster,
-                        Agent = totalSMA.ClosedAgent
-                    }
-
-                ];
-
-                foreach (var item in activeDetails)
+            report =
+            [
+                new SMASummaryModel
                 {
-                    var smaSummary = BuildSMASummary(item);
-                    report.Add(smaSummary);
+                    Name = "New Created",
+                    Super = totalSMA.NewCreatedSuper,
+                    Master = totalSMA.NewCreatedMaster,
+                    Agent = totalSMA.NewCreatedAgent
+                },
+
+                new SMASummaryModel
+                {
+                    Name = "Active",
+                    Super = totalSMA.ActiveSuper,
+                    Master = totalSMA.ActiveMaster,
+                    Agent = totalSMA.ActiveAgent
+                },
+
+                new SMASummaryModel
+                {
+
+                    Name = "Suspended",
+                    Super = totalSMA.SuspendedSuper,
+                    Master = totalSMA.SuspendedMaster,
+                    Agent = totalSMA.SuspendedAgent
+                },
+
+                new SMASummaryModel
+                {
+                    Name = "Closed",
+                    Super = totalSMA.ClosedSuper,
+                    Master = totalSMA.ClosedMaster,
+                    Agent = totalSMA.ClosedAgent
                 }
+
+            ];
+
+            foreach (var item in activeDetails)
+            {
+                var smaSummary = BuildSMASummary(item);
+                report.Add(smaSummary);
             }
 
             return report;
@@ -153,11 +155,13 @@ namespace TotalSMAAndActiveMember.Services
                 Position = rawData.Position
             };
 
-            if (status == StatusConstant.NewCreated)
+            if (status != StatusConstant.NewCreated)
             {
-                statusDetail.CreatedTime = rawData.CreatedTime;
-                statusDetail.Creator = rawData.Creator;
+                return statusDetail;
             }
+
+            statusDetail.CreatedTime = rawData.CreatedTime;
+            statusDetail.Creator = rawData.Creator;
 
             return statusDetail;
         }

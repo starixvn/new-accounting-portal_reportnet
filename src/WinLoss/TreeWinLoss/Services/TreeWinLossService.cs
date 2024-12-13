@@ -83,15 +83,17 @@ namespace TreeWinLoss.Services
 
             var rawData = await repository.FetchAsync<WinLossRawItem>(criteria);
 
-            if (rawData.Any())
+            if (!rawData.Any())
             {
-                var winLosses = mapper.Map<List<TreeWinLossItemModel>>(rawData);
-
-                var allTotal = CalculateAllTotal(rawData, criteria);
-
-                treeWinLoss.WinLosses = winLosses;
-                treeWinLoss.Total = allTotal;
+                return treeWinLoss;
             }
+
+            var winLosses = mapper.Map<List<TreeWinLossItemModel>>(rawData);
+
+            var allTotal = CalculateAllTotal(rawData, criteria);
+
+            treeWinLoss.WinLosses = winLosses;
+            treeWinLoss.Total = allTotal;
 
             return treeWinLoss;
         }
@@ -212,15 +214,17 @@ namespace TreeWinLoss.Services
 
             var rawData = await repository.FetchAsync<WinLossRawItem>(criteria);
 
-            if (rawData != null && rawData.Any())
+            if (rawData == null || !rawData.Any())
             {
-                var winlosses = mapper.Map<List<TreeWinLossItemModel>>(rawData);
-
-                var total = winlosses.DynamicSum();
-
-                treeWinLoss.WinLosses = winlosses;
-                treeWinLoss.Total.Add(total);
+                return treeWinLoss;
             }
+
+            var winlosses = mapper.Map<List<TreeWinLossItemModel>>(rawData);
+
+            var total = winlosses.DynamicSum();
+
+            treeWinLoss.WinLosses = winlosses;
+            treeWinLoss.Total.Add(total);
 
             return treeWinLoss;
         }
@@ -240,47 +244,49 @@ namespace TreeWinLoss.Services
 
             if (enableVirtualRate)
             {
-                if (detailVirtualRate.Any())
+                if (!detailVirtualRate.Any())
                 {
-                    VirtualRateModel virtualRateItem = null;
-                    var preLiveAndSportType = string.Empty;
-                    virtualRateBySportAndLiveStatus.EnableVirtualRate = true;
-                    foreach (var detailItem in detailVirtualRate)
+                    return virtualRateBySportAndLiveStatus;
+                }
+
+                VirtualRateModel virtualRateItem = null;
+                var preLiveAndSportType = string.Empty;
+                virtualRateBySportAndLiveStatus.EnableVirtualRate = true;
+                foreach (var detailItem in detailVirtualRate)
+                {
+                    var sportId = detailItem.SportType;
+                    var isLive = detailItem.IsLive;
+                    var bettypeId = detailItem.BetType;
+                    var virtualRate = detailItem.VirtualMultiplier;
+                    var liveAndSportType = string.Join(string.Empty, detailItem.SportType, detailItem.IsLive);
+
+                    if (liveAndSportType != preLiveAndSportType)
                     {
-                        var sportId = detailItem.SportType;
-                        var isLive = detailItem.IsLive;
-                        var bettypeId = detailItem.BetType;
-                        var virtualRate = detailItem.VirtualMultiplier;
-                        var liveAndSportType = string.Join(string.Empty, detailItem.SportType, detailItem.IsLive);
-
-                        if (liveAndSportType != preLiveAndSportType)
+                        if (virtualRateItem != null)
                         {
-                            if (virtualRateItem != null)
-                            {
-                                virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
-                            }
-
-                            var liveStatusTitle = isLive ? "Live" : "Non-Live";
-                            virtualRateItem = new VirtualRateModel
-                            {
-                                Sport = GetSportName(sportId),
-                                LiveStatus = liveStatusTitle
-                            };
-
-                            preLiveAndSportType = liveAndSportType;
+                            virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
                         }
 
-                        virtualRateItem.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
+                        var liveStatusTitle = isLive ? "Live" : "Non-Live";
+                        virtualRateItem = new VirtualRateModel
                         {
-                            BettypeName = remotingRefService.GetBetTypeName(bettypeId),
-                            VirtualRate = virtualRate - 1
-                        });
+                            Sport = GetSportName(sportId),
+                            LiveStatus = liveStatusTitle
+                        };
+
+                        preLiveAndSportType = liveAndSportType;
                     }
 
-                    if (virtualRateItem != null)
+                    virtualRateItem.VirtualRateByBettype.Add(new VirtualRateByBettypeModel
                     {
-                        virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
-                    }
+                        BettypeName = remotingRefService.GetBetTypeName(bettypeId),
+                        VirtualRate = virtualRate - 1
+                    });
+                }
+
+                if (virtualRateItem != null)
+                {
+                    virtualRateBySportAndLiveStatus.ReportRows.Add(virtualRateItem);
                 }
             }
             else
@@ -307,12 +313,14 @@ namespace TreeWinLoss.Services
                 var trackingValue = historyVirtualRateItem.TrackingValue;
                 var xmlTrackingValue = XElement.Parse(trackingValue);
                 var virtualRateHistoryItem = GetVirtualRateLogHistory(actionId, xmlTrackingValue);
-                if (virtualRateHistoryItem.ReportRows.Count != 0)
+                if (virtualRateHistoryItem.ReportRows.Count == 0)
                 {
-                    virtualRateHistoryItem.ChangedBy = historyVirtualRateItem.UserName;
-                    virtualRateHistoryItem.Date = historyVirtualRateItem.LogDate.ToLongFormatedDateWithSlash();
-                    virtualRateInfo.ReportRows.Add(virtualRateHistoryItem);
+                    continue;
                 }
+
+                virtualRateHistoryItem.ChangedBy = historyVirtualRateItem.UserName;
+                virtualRateHistoryItem.Date = historyVirtualRateItem.LogDate.ToLongFormatedDateWithSlash();
+                virtualRateInfo.ReportRows.Add(virtualRateHistoryItem);
             }
 
 

@@ -17,7 +17,7 @@ namespace HouseWinLoss.Common.SiteWinLoss
         {
             var rawWinLosses = await rawWinLossService.Query(criteria);
 
-            var siteWinLosses = rawWinLosses.Select(r => calculationService.FromRawWinLossByRowName(r));
+            var siteWinLosses = rawWinLosses.Select(calculationService.FromRawWinLossByRowName);
             var grandTotal = calculationService.CalculateSumWinLoss("Grand Total", rawWinLosses);
 
             return new SiteWinLossModel

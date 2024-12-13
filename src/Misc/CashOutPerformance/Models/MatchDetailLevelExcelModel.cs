@@ -13,13 +13,14 @@ namespace CashOutPerformance.Models
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(dateTime))
+                if (string.IsNullOrWhiteSpace(dateTime))
                 {
-                    var date = DateTime.Parse(dateTime);
-                    return date.ToString("yyyy-MM-dd");
+                    return dateTime;
                 }
 
-                return dateTime;
+                var date = DateTime.Parse(dateTime);
+                return date.ToString("yyyy-MM-dd");
+
             }
             set => dateTime = value;
         }
@@ -56,13 +57,14 @@ namespace CashOutPerformance.Models
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(betTime))
+                if (string.IsNullOrWhiteSpace(betTime))
                 {
-                    var date = DateTime.Parse(betTime);
-                    return date.ToString("yyyy-MM-dd hh:mm:ss tt");
+                    return betTime;
                 }
 
-                return betTime;
+                var date = DateTime.Parse(betTime);
+                return date.ToString("yyyy-MM-dd hh:mm:ss tt");
+
             }
             set => betTime = value;
         }

@@ -192,33 +192,35 @@ public class LegendManagementServiceImp(IDynamicRepository dynamicRepository,ISi
             return menuList;
         }
 
-        if (rawData.Any())
+        if (!rawData.Any())
         {
-            var rows = rawData.Where(menuItem =>
-                (parentId == null && menuItem.ParentId == 0) ||
-                (menuItem.ParentId != 0 && menuItem.ParentId == parentId));
+            return menuList;
+        }
 
-            if (rows.Any())
+        var rows = rawData.Where(menuItem =>
+            (parentId == null && menuItem.ParentId == 0) ||
+            (menuItem.ParentId != 0 && menuItem.ParentId == parentId));
+
+        if (rows.Any())
+        {
+            menuList = [];
+            foreach (var row in rows)
             {
-                menuList = [];
-                foreach (var row in rows)
+                var menuItem = new MenuItem
                 {
-                    var menuItem = new MenuItem
-                    {
-                        Id = Converter.ToInt(row.Id),
-                        Name = Converter.ToString2(row.Name),
-                        Href = Converter.ToString2(row.Url),
-                        System = WebSettings.System,
-                        ParentId = Converter.ToInt(parentId),
-                        FunctionName = Converter.ToString2(row.FunctionName),
-                        IsHide = !Converter.ToBool(row.IsActive),
-                        Order = Converter.ToInt(row.DisplayOrder),
-                        SubMenu = MappingNapMenuToAccountingMenu(rawData, row.Id)
-                    };
+                    Id = Converter.ToInt(row.Id),
+                    Name = Converter.ToString2(row.Name),
+                    Href = Converter.ToString2(row.Url),
+                    System = WebSettings.System,
+                    ParentId = Converter.ToInt(parentId),
+                    FunctionName = Converter.ToString2(row.FunctionName),
+                    IsHide = !Converter.ToBool(row.IsActive),
+                    Order = Converter.ToInt(row.DisplayOrder),
+                    SubMenu = MappingNapMenuToAccountingMenu(rawData, row.Id)
+                };
 
-                    menuItem.SubMenu = MappingNapMenuToAccountingMenu(rawData, menuItem.Id);
-                    menuList.Add(menuItem);
-                }
+                menuItem.SubMenu = MappingNapMenuToAccountingMenu(rawData, menuItem.Id);
+                menuList.Add(menuItem);
             }
         }
 

@@ -61,11 +61,13 @@ namespace HouseWinLoss.Products
                 .ToList();
 
             var result = new List<GridDataRow>(bodyRows);
-            if (bodyRows.Any())
+            if (!bodyRows.Any())
             {
-                var totalRow = BuildSiteWinLossSummaryForTotalRow(productGroupWinLoss.Total);
-                result.Add(totalRow);
+                return result;
             }
+
+            var totalRow = BuildSiteWinLossSummaryForTotalRow(productGroupWinLoss.Total);
+            result.Add(totalRow);
 
             return result;
         }

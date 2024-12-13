@@ -86,13 +86,15 @@ namespace Utilities.MostVisitedPages
                 var isExist = false;
                 for (var i = 0; i < mostVisitedPagesCount; i++)
                 {
-                    if (mostVisitedPages[i] != null &&
-                        mostVisitedPages[i].MenuId == mostVisitedPage.MenuId)
+                    if (mostVisitedPages[i] == null ||
+                        mostVisitedPages[i].MenuId != mostVisitedPage.MenuId)
                     {
-                        mostVisitedPages[i].Count++;
-                        isExist = true;
-                        break;
+                        continue;
                     }
+
+                    mostVisitedPages[i].Count++;
+                    isExist = true;
+                    break;
                 }
 
                 if (!isExist && napSession.UserId != 0)
@@ -150,9 +152,8 @@ namespace Utilities.MostVisitedPages
                 !IsInRange(mvp.Position, SelectMostVisitedPageCriteria.MaxPages)).ToList();
             mostVisitedPages = unpinSite;
 
-            for (var i = 0; i < pinSite.Count; i++)
+            foreach (var mostVisitedPage in pinSite)
             {
-                var mostVisitedPage = pinSite[i];
                 if (mostVisitedPage.Position <= mostVisitedPages.Count)
                 {
                     mostVisitedPages.Insert(mostVisitedPage.Position - 1, mostVisitedPage);

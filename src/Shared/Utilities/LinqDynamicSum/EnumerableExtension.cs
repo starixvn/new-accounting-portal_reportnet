@@ -6,24 +6,26 @@ namespace Utilities.LinqDynamicSum
     {
         public static TSource DynamicSum<TSource>(this IEnumerable<TSource> source)
         {
-            if (source.Any())
+            if (!source.Any())
             {
-                var addFunc = GenAddFunc<TSource>();
-                return source.Aggregate(addFunc);
+                return Activator.CreateInstance<TSource>();
             }
 
-            return Activator.CreateInstance<TSource>();
+            var addFunc = GenAddFunc<TSource>();
+            return source.Aggregate(addFunc);
+
         }
 
         public static TSource DynamicSum<TSource>(this IEnumerable<TSource> source, TSource @default)
         {
-            if (source.Any())
+            if (!source.Any())
             {
-                var addFunc = GenAddFunc<TSource>();
-                return source.Aggregate(addFunc);
+                return @default;
             }
 
-            return @default;
+            var addFunc = GenAddFunc<TSource>();
+            return source.Aggregate(addFunc);
+
         }
 
         private static Func<T, T, T> GenAddFunc<T>()

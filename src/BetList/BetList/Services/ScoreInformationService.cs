@@ -49,21 +49,23 @@ namespace BetList.Services
         {
             var result = new List<Sportsbook>();
 
-            if(rawData.Item1 != null && rawData.Item1.Any())
+            if (rawData.Item1 == null || !rawData.Item1.Any())
             {
-                var item = rawData.Item1.FirstOrDefault();
-
-                if (rawData.Item2 != null && rawData.Item2.Any())
-                {
-                    item.GameDetails.AddRange(rawData.Item2);
-                }
-                else
-                {
-                    item.GameDetails.Add(new GameDetail());
-                }
-
-                result.Add(item);
+                return result;
             }
+
+            var item = rawData.Item1.FirstOrDefault();
+
+            if (rawData.Item2 != null && rawData.Item2.Any())
+            {
+                item.GameDetails.AddRange(rawData.Item2);
+            }
+            else
+            {
+                item.GameDetails.Add(new GameDetail());
+            }
+
+            result.Add(item);
 
             return result;
         }

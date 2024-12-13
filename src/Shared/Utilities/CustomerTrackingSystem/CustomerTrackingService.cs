@@ -71,12 +71,14 @@ namespace Utilities.CustomerTrackingSystem
             var responseData = await response.Content.ReadFromJsonAsync<string>();
             var xdoc = XDocument.Parse(responseData);
             var elements = xdoc.Descendants("Root").Descendants("CustomerClassification");
-            if (elements.Any())
+            if (!elements.Any())
             {
-                foreach (var element in elements)
-                {
-                    result.Add(element.Attribute("CategoryName").Value);
-                }
+                return string.Join(", ", result);
+            }
+
+            foreach (var element in elements)
+            {
+                result.Add(element.Attribute("CategoryName").Value);
             }
 
             return string.Join(", ", result);

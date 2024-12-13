@@ -34,7 +34,7 @@ namespace HouseWinLoss.Parlay.Site
 
         private SiteModel CalculationSiteTotal(string name, IEnumerable<WinLossRaw> rawWinLosses)
         {
-            var siteWinLosses = rawWinLosses.Select(r => calculationService.FromRawWinLossByRowName(r)).ToList();
+            var siteWinLosses = rawWinLosses.Select(calculationService.FromRawWinLossByRowName).ToList();
             var siteTotal = calculationService.CalculateSumWinLoss(name, rawWinLosses);
             return new SiteModel
             {

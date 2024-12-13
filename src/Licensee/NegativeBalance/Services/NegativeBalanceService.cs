@@ -30,40 +30,42 @@ namespace NegativeBalance.Services
             var rawData =  (await repository.FetchAsync<NegativeBalanceUser>(criteria)).ToList();
             
             List<NegativeBalanceUser> tempUsers = [];
-            
-            if (rawData.Any())
+
+            if (!rawData.Any())
             {
-                var from = criteria.PageSize * (criteria.PageIndex - 1);
-                var to = criteria.PageSize * criteria.PageIndex;
+                return model;
+            }
+
+            var from = criteria.PageSize * (criteria.PageIndex - 1);
+            var to = criteria.PageSize * criteria.PageIndex;
                 
-                for (var i = from; i < rawData.Count && i < to; i++)
+            for (var i = from; i < rawData.Count && i < to; i++)
+            {
+                tempUsers.Add(rawData[i]);
+            }
+
+            SiteNegativeBalanceModel currentNegative = null;
+
+            var tempUsersOderBySite = tempUsers.OrderBy(negativeBalanceUser => negativeBalanceUser.Site).ToList();
+
+
+            tempUsersOderBySite.ForEach(data =>
+            {
+                if (currentNegative == null || currentNegative.LicenseeSite != data.Site)
                 {
-                    tempUsers.Add(rawData[i]);
+                    currentNegative = new SiteNegativeBalanceModel
+                    {
+                        LicenseeSite = data.Site,
+                        NegativeBalanceUsers = []
+                    };
+
+                    model.NegativeBalanceUsers.Add(currentNegative);
                 }
 
-                SiteNegativeBalanceModel currentNegative = null;
+                currentNegative.NegativeBalanceUsers.Add(data);
+            });
 
-                var tempUsersOderBySite = tempUsers.OrderBy(negativeBalanceUser => negativeBalanceUser.Site).ToList();
-
-
-                tempUsersOderBySite.ForEach(data =>
-                    {
-                        if (currentNegative == null || currentNegative.LicenseeSite != data.Site)
-                        {
-                            currentNegative = new SiteNegativeBalanceModel
-                            {
-                                LicenseeSite = data.Site,
-                                NegativeBalanceUsers = []
-                            };
-
-                            model.NegativeBalanceUsers.Add(currentNegative);
-                        }
-
-                        currentNegative.NegativeBalanceUsers.Add(data);
-                    });
-
-                model.TotalNegativeBalanceUser = rawData.Count;
-            }
+            model.TotalNegativeBalanceUser = rawData.Count;
 
             return model;
         }

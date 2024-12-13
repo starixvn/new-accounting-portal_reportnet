@@ -58,12 +58,10 @@ namespace BetConstructPerformance.Services
         private void LoadTemplate(string fileExcel)
         {
             var templateAbsolutelyPath = $@"{configurationService.CurrentDirectory}\ExcelTemplate\BetConstruct\{fileExcel}";
-            using (var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read))
-            {
-                ExcelPackage = new ExcelPackage(stream);
-                sheet = ExcelPackage.Workbook.Worksheets["Data"];
-                totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-            }
+            using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+            ExcelPackage = new ExcelPackage(stream);
+            sheet = ExcelPackage.Workbook.Worksheets["Data"];
+            totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
         }
 
         private void FormatSheet(int totalItems, string grandTotalCellAddress, bool isDetail)

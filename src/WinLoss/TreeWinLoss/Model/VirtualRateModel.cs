@@ -20,11 +20,7 @@ namespace TreeWinLoss.Model
 
         public void CalculateNumberMergeRows()
         {
-            var numberMergeRows = 0;
-            foreach (var row in ReportRows)
-            {
-                numberMergeRows += row.VirtualRateByBettype.Count;
-            }
+            var numberMergeRows = ReportRows.Sum(row => row.VirtualRateByBettype.Count);
 
             NumberMergeRows = numberMergeRows;
         }

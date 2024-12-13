@@ -286,12 +286,14 @@ namespace LeagueWinLoss.Services
                 result.BetTypeWinLossLive = liveBetTypes;
             }
 
-            if (liveIndicator == 0 || liveIndicator == 2)
+            if (liveIndicator != 0 && liveIndicator != 2)
             {
-                criteria.LiveIndicator = 0;
-                var nonLiveBetTypes = await GetBetTypesNonLive(criteria);
-                result.BetTypeWinLossNonLive = nonLiveBetTypes;
+                return result;
             }
+
+            criteria.LiveIndicator = 0;
+            var nonLiveBetTypes = await GetBetTypesNonLive(criteria);
+            result.BetTypeWinLossNonLive = nonLiveBetTypes;
 
             return result;
         }
@@ -349,15 +351,16 @@ namespace LeagueWinLoss.Services
 
             var dataSet = repository.FetchDataSet(criteria);
 
-            if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+            if (dataSet == null || dataSet.Tables.Count <= 0 || dataSet.Tables[0].Rows.Count <= 0)
             {
-                var firstRow = dataSet.Tables[0].Rows[0];
-                var permissionProfileId = Convert.ToInt32(firstRow["PermisionProfileID"]);
-
-                return permissionProfileId;
+                return 0;
             }
 
-            return 0;
+            var firstRow = dataSet.Tables[0].Rows[0];
+            var permissionProfileId = Convert.ToInt32(firstRow["PermisionProfileID"]);
+
+            return permissionProfileId;
+
         }
 
         private async Task<BetTypeWinLossLiveModel> GetBetTypesLive(BetTypesCriteria criteria)
@@ -613,19 +616,8 @@ namespace LeagueWinLoss.Services
         public async Task<List<VirtualRateModel>> GetVirtualRate(VirtualRateCriteria criteria)
         {
             var rawData = (await repository.FetchAsync<VirtualRateEntity>(criteria)).ToList();
-            var leagueWinLoss = new List<VirtualRateModel>();
-            foreach (var item in rawData)
-            {
-                leagueWinLoss.Add(new VirtualRateModel
-                {
-                    Sport = item.Sport,
-                    BetType = item.BetType,
-                    LiveStatus = item.LiveStatus,
-                    VirtualRate = item.VirtualRate
-                });
-            }
 
-            return leagueWinLoss;
+            return rawData.Select(item => new VirtualRateModel { Sport = item.Sport, BetType = item.BetType, LiveStatus = item.LiveStatus, VirtualRate = item.VirtualRate }).ToList();
         }
 
         public async Task<LeagueSuggestionViewModel> GetLeagueSuggestion(LeagueSuggestionCriteria criteria)
@@ -660,7 +652,7 @@ namespace LeagueWinLoss.Services
 
         private IEnumerable<LeagueWinLossItem> BindingLeagues(IEnumerable<LeagueWinLossEntity> sportGroup)
         {
-            return sportGroup.Select(x => BindingLeague(x));
+            return sportGroup.Select(BindingLeague);
         }
 
         private LeagueWinLossItem BindingLeague(LeagueWinLossEntity rawData)
@@ -707,7 +699,7 @@ namespace LeagueWinLoss.Services
 
         private IEnumerable<BettypeWinLossBySite> BindingBettypes(IEnumerable<BettypeWinLossEntity> bettypeGroup)
         {
-            return bettypeGroup.Select(x => BindingBettype(x));
+            return bettypeGroup.Select(BindingBettype);
         }
 
         private BettypeWinLossBySite BindingBettype(BettypeWinLossEntity rawData)
@@ -755,7 +747,7 @@ namespace LeagueWinLoss.Services
 
         private IEnumerable<MatchWinLossByLiveStatus> BindingMatches(IEnumerable<MatchEntity> matches)
         {
-            return matches.Select(x => BindingMatch(x));
+            return matches.Select(BindingMatch);
         }
 
         private MatchWinLossByLiveStatus BindingMatch(MatchEntity rawData)
@@ -801,7 +793,7 @@ namespace LeagueWinLoss.Services
 
         private IEnumerable<SiteWinLossItem> BindingSites(IEnumerable<SiteEntity> sites)
         {
-            return sites.Select(x => BindingSite(x));
+            return sites.Select(BindingSite);
         }
 
         private SiteWinLossItem BindingSite(SiteEntity rawData)
@@ -844,7 +836,7 @@ namespace LeagueWinLoss.Services
 
         private IEnumerable<SuperWinLossItem> BindingSupers(IEnumerable<SuperEntity> sites)
         {
-            return sites.Select(x => BindingSuper(x));
+            return sites.Select(BindingSuper);
         }
 
         private SuperWinLossItem BindingSuper(SuperEntity rawData)

@@ -34,13 +34,15 @@ namespace DirectBalance.Services
 
             var rawData = await repository.FetchAsync<DirectBalanceItemModel>(criteria);
 
-            if (rawData != null)
+            if (rawData == null)
             {
-                result.DirectBalanceItems = rawData;
-                
-                var total = rawData.DynamicSum();
-                result.Total = total;
+                return result;
             }
+
+            result.DirectBalanceItems = rawData;
+                
+            var total = rawData.DynamicSum();
+            result.Total = total;
 
             return result;
         }
@@ -65,13 +67,15 @@ namespace DirectBalance.Services
 
             var rawData = await repository.FetchAsync<DirectBalanceItemModel>(criteria);
 
-            if (rawData != null)
+            if (rawData == null)
             {
-                result.DirectBalanceItems = rawData.Where(item => item.Balance != 0);
-
-                var total = rawData.DynamicSum();
-                result.Total = total;
+                return result;
             }
+
+            result.DirectBalanceItems = rawData.Where(item => item.Balance != 0);
+
+            var total = rawData.DynamicSum();
+            result.Total = total;
 
             return result;
         }

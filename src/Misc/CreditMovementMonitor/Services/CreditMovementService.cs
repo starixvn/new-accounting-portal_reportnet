@@ -50,11 +50,13 @@ namespace CreditMovementMonitor.Services
         {
             var gridOptions = await cacheService.GetAsync<GridOptions>(creditMovementDataCachedKey);
 
-            if (gridOptions == null)
+            if (gridOptions != null)
             {
-                criteria.IsPagingCallBack = false;
-                gridOptions = await GetReportData(criteria);
+                return gridOptions;
             }
+
+            criteria.IsPagingCallBack = false;
+            gridOptions = await GetReportData(criteria);
 
             return gridOptions;
         }

@@ -27,21 +27,22 @@ namespace DailyMixParlayWinLoss.Services
 
             var rawData = await repository.FetchAsync<WinLossItem>(criteria);
 
-            if (rawData != null)
+            if (rawData == null)
             {
-                var combinationGroups = rawData.GroupBy(data => data.Combinations);
-
-                var combinationWinLosses = from combinationGroup in combinationGroups
-                                           let combinationGroupRawData = rawData.Where(x => x.Combinations == combinationGroup.Key)
-                                           select CalculateCombinationGroup(combinationGroup.Key, combinationGroupRawData);
-
-                var total = rawData.DynamicSum();
-                total.Name = "Grand Total";
-
-                report.WinLosses = combinationWinLosses.ToList();
-                report.Total = total;
-
+                return report;
             }
+
+            var combinationGroups = rawData.GroupBy(data => data.Combinations);
+
+            var combinationWinLosses = from combinationGroup in combinationGroups
+                let combinationGroupRawData = rawData.Where(x => x.Combinations == combinationGroup.Key)
+                select CalculateCombinationGroup(combinationGroup.Key, combinationGroupRawData);
+
+            var total = rawData.DynamicSum();
+            total.Name = "Grand Total";
+
+            report.WinLosses = combinationWinLosses.ToList();
+            report.Total = total;
 
             return report;
         }
@@ -122,21 +123,22 @@ namespace DailyMixParlayWinLoss.Services
 
             var rawData = await repository.FetchAsync<WinLossItem>(criteria);
 
-            if (rawData != null)
+            if (rawData == null)
             {
-
-                var liveTypeGroups = rawData.GroupBy(data => data.LiveType);
-
-                var liveTypeWinLosses = from liveTypeGroup in liveTypeGroups
-                                        let liveTypeGroupRawData = rawData.Where(x => x.LiveType == liveTypeGroup.Key)
-                                        select CalculateLiveTypeGroup(liveTypeGroup.Key, liveTypeGroupRawData);
-
-                var total = rawData.DynamicSum();
-                total.Name = "Grand Total";
-
-                report.WinLosses = liveTypeWinLosses.ToList();
-                report.Total = total;
+                return report;
             }
+
+            var liveTypeGroups = rawData.GroupBy(data => data.LiveType);
+
+            var liveTypeWinLosses = from liveTypeGroup in liveTypeGroups
+                let liveTypeGroupRawData = rawData.Where(x => x.LiveType == liveTypeGroup.Key)
+                select CalculateLiveTypeGroup(liveTypeGroup.Key, liveTypeGroupRawData);
+
+            var total = rawData.DynamicSum();
+            total.Name = "Grand Total";
+
+            report.WinLosses = liveTypeWinLosses.ToList();
+            report.Total = total;
 
             return report;
         }

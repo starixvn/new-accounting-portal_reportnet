@@ -78,18 +78,20 @@ namespace BetCount.Services
         {
             var report = await GetReport(criteria);
 
-            if (report != null &&
-                report.Items != null &&
-                report.Items.Count > 0)
+            if (report == null ||
+                report.Items == null ||
+                report.Items.Count <= 0)
             {
-                var siteGroupLength = report.Items.Count;
-                for (var i = 0; i < siteGroupLength; i++)
-                {
-                    var propertyName = GetSortedColumnName(criteria.SortBy);
-                    report.Items[i].Items.SortByProperty(
-                        criteria.SortDirection,
-                        propertyName);
-                }
+                return report;
+            }
+
+            var siteGroupLength = report.Items.Count;
+            for (var i = 0; i < siteGroupLength; i++)
+            {
+                var propertyName = GetSortedColumnName(criteria.SortBy);
+                report.Items[i].Items.SortByProperty(
+                    criteria.SortDirection,
+                    propertyName);
             }
 
             return report;

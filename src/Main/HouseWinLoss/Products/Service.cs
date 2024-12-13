@@ -56,7 +56,7 @@ namespace HouseWinLoss.Products
 
         public List<WinLoss> GetRMWinLoss(IEnumerable<WinLossRaw> rawWinLosses)
         {
-            return rawWinLosses.Select(r => calculationService.FromRawWinLossByRowName(r)).ToList();
+            return rawWinLosses.Select(calculationService.FromRawWinLossByRowName).ToList();
         }
 
         private static SiteWinLossSummary CalculateGrandTotal(SiteWinLossSummary siteWinLoss, List<WinLoss> rawWinLoss)

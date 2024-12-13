@@ -18,18 +18,20 @@ namespace CompanyBalanceDifference.Services
 
             var result  = new List<CompanyBalanceDifferenceModel>();
 
-            if (rawData.Any())
+            if (!rawData.Any())
             {
-                foreach (var row in rawData)
+                return result;
+            }
+
+            foreach (var row in rawData)
+            {
+                result.Add(new CompanyBalanceDifferenceModel
                 {
-                    result.Add(new CompanyBalanceDifferenceModel
-                    {
-                        BalanceUpDate = $"{row.BalanceUpDay:MMM dd, yyyy}",
-                        BalanceBeforeBalanceUpDate = row.CompanyBalanceBefore,
-                        BalanceAfterBalanceUpDate = row.CompanyBalanceAfter,
-                        Difference = row.Difference
-                    });
-                }
+                    BalanceUpDate = $"{row.BalanceUpDay:MMM dd, yyyy}",
+                    BalanceBeforeBalanceUpDate = row.CompanyBalanceBefore,
+                    BalanceAfterBalanceUpDate = row.CompanyBalanceAfter,
+                    Difference = row.Difference
+                });
             }
 
             return result;

@@ -7,15 +7,16 @@
         public static void SortByProperty<T>(List<T> dataSource, string sortDirection, string sortColumnName)
         {
             var propInfo = typeof(T).GetProperty(sortColumnName);
-            Comparison<T> compare = delegate (T a, T b)
+
+            int Compare(T a, T b)
             {
                 var isAsc = string.Equals(sortDirection, Ascending, StringComparison.OrdinalIgnoreCase);
                 var valueA = isAsc ? propInfo.GetValue(a, null) : propInfo.GetValue(b, null);
                 var valueB = isAsc ? propInfo.GetValue(b, null) : propInfo.GetValue(a, null);
                 return (valueA as IComparable)?.CompareTo(valueB) ?? 0;
-            };
+            }
 
-            dataSource.Sort(compare);
+            dataSource.Sort((Comparison<T>)Compare);
         }
     }
 }
