@@ -12,6 +12,7 @@ namespace Nap_Reports.Sites.DependencyInjection
             service.AddTransient<MatchWinLossExcelService, MatchWinLossExcelServiceImp>();
             service.AddTransient<BetTypeWinLossExcelService, BetTypeWinLossExcelServiceImp>();
             service.AddTransient<SiteWinLossExcelService, SiteWinLossExcelServiceImp>();
+            service.AddTransient<SuperWinLossExcelService, SuperWinLossExcelServiceImp>();
         }
     }
 }

@@ -6,7 +6,7 @@
 
         public string BettypeName { get; set; }
 
-        public string SiteType { get; set; }
+        public string SiteType { get; set; } = string.Empty;
 
         public bool IsHedge { get; set; }
 

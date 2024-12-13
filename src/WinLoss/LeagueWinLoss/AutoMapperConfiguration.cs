@@ -11,5 +11,6 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<MatchWinLossByLiveStatus, MatchWinLossItemExcelModel>();
         cfg.CreateMap<BettypeWinLossBySite, BetTypeWinLossItemExcelModel>();
         cfg.CreateMap<SiteWinLossItem, SiteWinLossItemExcelModel>();
+        cfg.CreateMap<SuperWinLossItem, SuperWinLossItemExcelModel>();
     }
 }

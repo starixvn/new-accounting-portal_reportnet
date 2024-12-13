@@ -56,3 +56,9 @@ public class SiteWinLossItemExcelModel : WinLossItemExcelModel
     [Cell("A6")]
     public string SiteName { get; set; }
 }
+
+public class SuperWinLossItemExcelModel : WinLossItemExcelModel
+{
+    [Cell("A6")]
+    public string SuperName { get; set; }
+}
