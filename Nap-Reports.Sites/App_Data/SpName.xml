@@ -434,4 +434,9 @@
 		<Setting Key="Home_MostVisitedPage_DeleteMostvisitedPage" SpName="Acc_FunctionUsageDel" DbName="DBMA.bodb_Maintenance.wsv_nap">
 		</Setting>
 	</Function>
+	<Function Name="BeConstructPerformance">
+		<Setting Key="Acc_Rpt_BetConstructPerformance" SpName="Acc_Rpt_BetConstructPerformance" DbName="DBWH.bodb_dwrs.wsv_nap" >
+			<Mapping DataField="RptDate" ObjectProperty="Date" />
+		</Setting>
+	</Function>
 </Functions>

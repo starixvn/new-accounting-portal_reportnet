@@ -57,7 +57,7 @@ namespace BetConstructPerformance.Services
 
         private void LoadTemplate(string fileExcel)
         {
-            var templateAbsolutelyPath = $@"{configurationService.CurrentDirectory}\ExcelTemplate\BetConstruct\{fileExcel}";
+            var templateAbsolutelyPath = $@"{configurationService.CurrentDirectory}/ExcelTemplate/BetConstruct/{fileExcel}";
             using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
             ExcelPackage = new ExcelPackage(stream);
             sheet = ExcelPackage.Workbook.Worksheets["Data"];

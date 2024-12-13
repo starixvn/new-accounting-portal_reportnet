@@ -21,7 +21,7 @@
     "@angular/router": "~12.2.0",
     "@ng-bootstrap/ng-bootstrap": "^9.1.0",
     "bootstrap": "^4.6.0",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "^1.0.0-rc.12",
     "core-js": "^3.10.0",
     "ejs": "^3.1.9",
     "font-awesome": "^4.7.0",

@@ -6,6 +6,7 @@ using Olympus.WebApi.Epplus;
 namespace BetConstructPerformance.Controllers
 {
     [Route("api/bet-construct")]
+    [ApiController]
     public class BetConstructPerformanceApiController(IMediator mediator) : ControllerBase
     {
         [Route("sports")]

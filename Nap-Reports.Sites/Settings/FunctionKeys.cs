@@ -28,5 +28,6 @@
         public const string SuperBalance = "SuperBalance";
         public const string MarginReport = "MarginReport";
         public const string DailyCreatedCustomers = "DailyCreatedCustomers";
+        public const string BetConstructPerformance = "BetConstructPerformance";
     }
 }

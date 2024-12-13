@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map'
 import { HttpService } from 'nap-components/http';
 import { NavbarService, UserMenu, Menu, Navbar } from 'nap-components/navbar';
 
@@ -40,7 +40,7 @@ export class CustomNavbarService extends NavbarService {
         });
     }
 
-    private bindingMenuData(data: any): Menu[]
+    private bindingMenuData(data: any[]): Menu[]
     {
       let menus: Menu[] = [];
       data.forEach(menu => {
@@ -48,12 +48,14 @@ export class CustomNavbarService extends NavbarService {
         let children: Menu[] = [];
 
         if(hasChildrend) {
-          menu.Children.forEach(childMenu => {
+          let childMenus = menu.Children as any[];
+          childMenus.forEach(childMenu => {
             children.push({
                 id: childMenu.Id,
                 name: childMenu.Name,
                 link:childMenu.Link,
-                children: []
+                children: [],
+                hasChildren: false
             } as Menu);
           });
         }

@@ -10,6 +10,7 @@ namespace BetConstructPerformance
         public static void InitializeBetConstructPerformance(this IProfileExpression cfg)
         {
             cfg.CreateMap<SportRequest, SportCriteria>();
+            cfg.CreateMap<SportItemModel, SportItemExcelModel>();
             cfg.CreateMap<SportModel, SportDetailExcelModel>();
             cfg.CreateMap<SportModel, SportExcelModel>();
             cfg.CreateMap<SportExcelRequest, SportCriteria>();
