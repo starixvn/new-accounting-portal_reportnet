@@ -25,9 +25,8 @@ namespace PunterAnalysis.League
             {
                 yield return $"Year {year}";
                 var months = indexGroups[year];
-                foreach (var month in months)
+                foreach (var beginOfMonth in months.Select(month => new DateTime(year, month, 1)))
                 {
-                    var beginOfMonth = new DateTime(year, month, 1);
                     yield return beginOfMonth.ToString("MMMM");
                 }
             }

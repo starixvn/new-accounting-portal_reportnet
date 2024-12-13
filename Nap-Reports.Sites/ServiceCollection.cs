@@ -62,9 +62,10 @@ namespace Nap_Reports.Sites
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
+                    var timeout = int.Parse(configuration.GetSection("AuthSettings:CookieTimeOut").Value ?? "1440");
                     options.LoginPath = configuration.GetSection("AuthSettings:LoginPath").Value;
                     options.LogoutPath = configuration.GetSection("AuthSettings:LogoutPath").Value;
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:CookieTimeOut").Value));
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(timeout);
                     options.Cookie = new CookieBuilder
                     {
                         Name = "Nap-Reports.Cookie",
@@ -80,8 +81,9 @@ namespace Nap_Reports.Sites
 
             services.AddSession(options =>
             {
+                var timeout = int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value ?? "2880");
                 options.Cookie.IsEssential = true;
-                options.IdleTimeout = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value));
+                options.IdleTimeout = TimeSpan.FromMinutes(timeout);
                 options.Cookie.Name = "Nap-Reports.Session";
             });
         }

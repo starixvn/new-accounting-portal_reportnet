@@ -94,9 +94,8 @@ public class TraderPerformanceSoccerExcelServiceImp(ConfigurationService configu
         foreach (var item in list)
         {
             var template = index % 2 == 0 ? evenSheet : oddSheet;
-            foreach (var subItem in item.ReportRows)
+            foreach (var excelModel in item.ReportRows.Select(CreateDetailExcelModel))
             {
-                var excelModel = CreateDetailExcelModel(subItem);
                 sheet.ApplyModel(template, excelModel, rowIndex++);
             }
             BuildDetailTotalRow(item.GrandTotal, rowIndex++, item.Name, subTotalSheet);

@@ -61,9 +61,8 @@ namespace PunterAnalysis.League
                 var entitiesByYear = entitiesByLeague.Where(e => e.Year == year).ToArray();
                 yield return GetPeriodGroupBySumOf(entitiesByYear);
 
-                foreach (var month in monthGroups[year])
+                foreach (var entitiesByMonth in monthGroups[year].Select(month => entitiesByYear.Where(e => e.MonthOrWeek == month).ToArray()))
                 {
-                    var entitiesByMonth = entitiesByYear.Where(e => e.MonthOrWeek == month).ToArray();
                     yield return GetPeriodGroupBySumOf(entitiesByMonth);
                 }
             }

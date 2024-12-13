@@ -23,9 +23,8 @@ namespace SBPerformance.TopWinningMember
         private SummaryEntity<TopWinningMemberItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<TopWinningMemberEntity> entities)
         {
             var result = new SummaryEntity<TopWinningMemberItemModel>();
-            foreach (var entity in entities.Entities)
+            foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
             {
-                var item = BindingItem(isShowFullColumn, entity);
                 result.Entities.Add(item);
             }
 

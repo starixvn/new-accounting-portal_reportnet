@@ -60,7 +60,7 @@ public class TraderSumPivotServiceImp : TraderSumPivotService
                     }
                     else
                     {
-                        newDataRow[columnIndex] = dataByUser?.FirstOrDefault()?[columnIndex];
+                        newDataRow[columnIndex] = dataByUser.FirstOrDefault()?[columnIndex];
                     }
                 }
 

@@ -23,9 +23,8 @@ namespace SBPerformance.Main
         private SummaryEntity<ItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<Entity> entities)
         {
             var result = new SummaryEntity<ItemModel>();
-            foreach (var entity in entities.Entities)
+            foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
             {
-                var item = BindingItem(isShowFullColumn, entity);
                 result.Entities.Add(item);
             }
 

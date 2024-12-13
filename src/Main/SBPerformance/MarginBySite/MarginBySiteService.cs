@@ -23,9 +23,8 @@ namespace SBPerformance.MarginBySite
         private SummaryEntity<MarginBySiteItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<MarginBySiteEntity> entities)
         {
             var result = new SummaryEntity<MarginBySiteItemModel>();
-            foreach (var entity in entities.Entities)
+            foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
             {
-                var item = BindingItem(isShowFullColumn, entity);
                 result.Entities.Add(item);
             }
 

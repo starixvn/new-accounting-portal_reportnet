@@ -23,9 +23,8 @@ namespace SBPerformance.TopLosingLeague
         private SummaryEntity<TopLosingLeagueItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<TopLosingLeagueEntity> entities)
         {
             var result = new SummaryEntity<TopLosingLeagueItemModel>();
-            foreach (var entity in entities.Entities)
+            foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
             {
-                var item = BindingItem(isShowFullColumn, entity);
                 result.Entities.Add(item);
             }
 

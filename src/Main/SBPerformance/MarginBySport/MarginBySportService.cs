@@ -23,9 +23,8 @@ namespace SBPerformance.MarginBySport
         private SummaryEntity<MarginBySportItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<MarginBySportEntity> entities)
         {
             var result = new SummaryEntity<MarginBySportItemModel>();
-            foreach (var entity in entities.Entities)
+            foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
             {
-                var item = BindingItem(isShowFullColumn, entity);
                 result.Entities.Add(item);
             }
 

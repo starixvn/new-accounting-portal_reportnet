@@ -108,9 +108,8 @@ public class TotalSMAMemberActiveExcelServiceImp(ConfigurationService configurat
         foreach (var item in data)
         {
             var template = index++ % 2 == 0 ? evenSheet : oddSheet;
-            foreach (var subItem in item.ChildItems)
+            foreach (var excelModel in item.ChildItems.Select(mapper.Map<StatusDetailExcelModel>))
             {
-                var excelModel = mapper.Map<StatusDetailExcelModel>(subItem);
                 sheet.ApplyModel(template, excelModel, rowIndex++);
             }
 
