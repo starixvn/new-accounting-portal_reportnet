@@ -308,21 +308,24 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
     {
         for (var columnIndex = 1; columnIndex <= lastColumnIndex; columnIndex++)
         {
-            if (columnIndex == 1)
+            switch (columnIndex)
             {
-                sheetTrader.Cells[currentContentRowIndex, columnIndex].Value = userIndex;
-            }
-            else if (columnIndex == 3)
-            {
-                var value = row[columnIndex - 1].ToString();
-                if (!string.IsNullOrEmpty(value))
+                case 1:
+                    sheetTrader.Cells[currentContentRowIndex, columnIndex].Value = userIndex;
+                    break;
+                case 3:
                 {
-                    sheetTrader.Cells[currentContentRowIndex, columnIndex].Value = Converter.To<DateTime>(row[columnIndex - 1]);
+                    var value = row[columnIndex - 1].ToString();
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        sheetTrader.Cells[currentContentRowIndex, columnIndex].Value = Converter.To<DateTime>(row[columnIndex - 1]);
+                    }
+
+                    break;
                 }
-            }
-            else
-            {
-                sheetTrader.Cells[currentContentRowIndex, columnIndex].Value = row[columnIndex - 1];
+                default:
+                    sheetTrader.Cells[currentContentRowIndex, columnIndex].Value = row[columnIndex - 1];
+                    break;
             }
         }
     }

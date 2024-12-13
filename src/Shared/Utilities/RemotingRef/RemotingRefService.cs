@@ -31,12 +31,7 @@ namespace Utilities.RemotingRef
 
         public string GetMatchCode(string matchCode)
         {
-            if (string.IsNullOrEmpty(matchCode))
-            {
-                return string.Empty;
-            }
-
-            return remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
+            return string.IsNullOrEmpty(matchCode) ? string.Empty : remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
         }
 
         public string GetSportName(int sportId)
@@ -68,12 +63,7 @@ namespace Utilities.RemotingRef
 
         public string GetMatchCode(string matchCode)
         {
-            if (string.IsNullOrEmpty(matchCode))
-            {
-                return string.Empty;
-            }
-
-            return remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
+            return string.IsNullOrEmpty(matchCode) ? string.Empty : remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
         }
 
         public string GetSportName(int sportId)

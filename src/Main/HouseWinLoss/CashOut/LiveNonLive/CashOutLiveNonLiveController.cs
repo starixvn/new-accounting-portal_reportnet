@@ -21,7 +21,7 @@
         private readonly GridOptionColumnDecorator decorator = decorator;
 
         [Route("")]
-        public async Task<IActionResult> Json(QueryModel queryModel)
+        public IActionResult Json(QueryModel queryModel)
         {
             var gridOptions = BuildGridOptions(queryModel);
 

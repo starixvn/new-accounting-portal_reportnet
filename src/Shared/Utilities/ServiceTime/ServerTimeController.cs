@@ -3,16 +3,17 @@
 namespace Utilities.ServiceTime
 {
     [ApiController]
+    [Route("state-api/application")]
     public class ServerTimeController : ControllerBase
     {
-        [Route("state-api/application/today")]
+        [Route("today")]
         [HttpPost]
         public IActionResult Today()
         {
             return Ok(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day));
         }
 
-        [Route("state-api/application/server-time")]
+        [Route("server-time")]
         [HttpPost]
         public IActionResult ServerTime()
         {

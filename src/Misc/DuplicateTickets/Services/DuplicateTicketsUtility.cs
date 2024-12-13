@@ -41,16 +41,15 @@ namespace DuplicateTickets.Services
                     timeDifferenceTicket = 0;
                 }
 
-                if (timeDifferenceGroup < 0)
+                switch (timeDifferenceGroup)
                 {
-                    continue;
-                }
-
-                if (timeDifferenceGroup >= TotalMilliseconds)
-                {
-                    groupNo++;
-                    ticketIndex = 0;
-                    timeDifferenceTicket = 0;
+                    case < 0:
+                        continue;
+                    case >= TotalMilliseconds:
+                        groupNo++;
+                        ticketIndex = 0;
+                        timeDifferenceTicket = 0;
+                        break;
                 }
 
                 var ticketInfo = new TicketModel

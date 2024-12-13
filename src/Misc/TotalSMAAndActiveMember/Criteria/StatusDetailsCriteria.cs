@@ -19,32 +19,11 @@ namespace TotalSMAAndActiveMember.Criteria
 
         public int RoleId { get; set; }
 
-        public bool ShowDetailNew
-        {
-            get => Status == (int)StatusConstant.NewCreated;
+        public bool ShowDetailNew => Status == (int)StatusConstant.NewCreated;
 
-            set
-            {
-            }
-        }
+        public bool ShowDetailReject => Status == (int)StatusConstant.Suspended;
 
-        public bool ShowDetailReject
-        {
-            get => Status == (int)StatusConstant.Suspended;
-
-            set
-            {
-            }
-        }
-
-        public bool ShowDetailClosed
-        {
-            get => Status == (int)StatusConstant.Closed;
-
-            set
-            {
-            }
-        }
+        public bool ShowDetailClosed => Status == (int)StatusConstant.Closed;
 
         #region Paging params
 

@@ -22,9 +22,7 @@ namespace TraderPerformance.Services
     {
         public async Task<TraderPerformanceOtherSportsModel> GetReport(ReportCriteria criteria)
         {
-            var result = new TraderPerformanceOtherSportsModel();
-
-            result = await repository.GetTraderPerformanceOtherSportsReport(criteria);
+            var result = await repository.GetTraderPerformanceOtherSportsReport(criteria);
 
             return result;
         }

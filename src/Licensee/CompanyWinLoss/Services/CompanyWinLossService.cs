@@ -47,7 +47,7 @@ namespace CompanyWinLoss.Services
 
         public async Task<GridOptions> GetCompanyWinLoss(CompanyWinLossCriteria criteria)
         {
-            GridOptions gridOptions = null;
+            GridOptions gridOptions;
             var pagingGridOptions = InitGridOptions(criteria);
 
             if (criteria.IsPagingCallBack)
@@ -100,8 +100,7 @@ namespace CompanyWinLoss.Services
 
         public async Task<GridOptions> GetFullReportFromCache(CompanyWinLossCriteria criteria)
         {
-            GridOptions gridOptions = null;
-            gridOptions = await cacheService.GetAsync<GridOptions>(dataCachedKey);
+            var gridOptions = await cacheService.GetAsync<GridOptions>(dataCachedKey);
 
             if (gridOptions == null)
             {

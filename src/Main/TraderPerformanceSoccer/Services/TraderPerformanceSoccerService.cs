@@ -25,9 +25,7 @@ namespace TraderPerformance.Services
     {
         public async Task<TraderPerformanceSoccerModel> GetReport(ReportCriteria criteria)
         {
-            var result = new TraderPerformanceSoccerModel();
-
-            result =  await repository.GetTraderPerformanceSoccerReport(criteria);
+            var result = await repository.GetTraderPerformanceSoccerReport(criteria);
 
             return result;
         }

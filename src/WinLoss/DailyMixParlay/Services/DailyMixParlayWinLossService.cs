@@ -199,7 +199,7 @@ namespace DailyMixParlayWinLoss.Services
 
         private string ConvertCombinationType(string combination)
         {
-            var name = string.Empty;
+            string name;
 
             if (!string.IsNullOrEmpty(combination) &&
                 combination.Contains(DailyMixParlayConstant.DailyMixParlayReportCombinationPrefix))

@@ -27,19 +27,14 @@
 
         public GridOptionFactory CreateGridOptionFactory(bool isMajor, int isLive)
         {
-            if (isMajor && isLive == Constants.LiveDefault)
+            return isMajor switch
             {
-                return new GridOptionFactorySumBetType(sumBetTypeWinLossService, sumBetTypeGridOptionsBuilder, decorator, mapper);
-            }
-
-            if (isMajor && isLive == 0)
-            {
-                return new GridOptionFactoryGroupBetType(groupBetTypeWinLossService, groupBetTypeGridOptionsBuilder, decorator, mapper);
-            }
-            else
-            {
-                return new GridOptionFactoryBetType(basicWinLossService, basicGridOptionsBuilder, decorator, mapper);
-            }
+                true when isLive == Constants.LiveDefault => new GridOptionFactorySumBetType(sumBetTypeWinLossService,
+                    sumBetTypeGridOptionsBuilder, decorator, mapper),
+                true when isLive == 0 => new GridOptionFactoryGroupBetType(groupBetTypeWinLossService,
+                    groupBetTypeGridOptionsBuilder, decorator, mapper),
+                _ => new GridOptionFactoryBetType(basicWinLossService, basicGridOptionsBuilder, decorator, mapper)
+            };
         }
     }
 }

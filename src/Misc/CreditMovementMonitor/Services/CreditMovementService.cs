@@ -29,7 +29,7 @@ namespace CreditMovementMonitor.Services
 
         public async Task<GridOptions> GetReport(CreditMovementCriteria criteria)
         {
-            GridOptions gridOptions = null;
+            GridOptions gridOptions;
             var pagingGridOptions = InitCreditMovementGridOptions(criteria);
 
             if (criteria.IsPagingCallBack)
@@ -48,8 +48,7 @@ namespace CreditMovementMonitor.Services
 
         public async Task<GridOptions> GetFullReportFromCache(CreditMovementCriteria criteria)
         {
-            GridOptions gridOptions = null;
-            gridOptions = cacheService.Get<GridOptions>(creditMovementDataCachedKey);
+            var gridOptions = await cacheService.GetAsync<GridOptions>(creditMovementDataCachedKey);
 
             if (gridOptions == null)
             {

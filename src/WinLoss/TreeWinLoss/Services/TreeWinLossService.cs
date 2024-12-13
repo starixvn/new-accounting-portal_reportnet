@@ -494,7 +494,6 @@ namespace TreeWinLoss.Services
 
         private async Task<SMAVirtualRateModel> GetAllVirtualRate(AllVirtualRateCriteria criteria)
         {
-            var virtualRate = new SMAVirtualRateModel();
             var custIds = criteria.CustIDs.Split(",");
             var detailVirtualRate = new List<DetailVirtualRate>();
             while (custIds.Length > 0)
@@ -509,7 +508,7 @@ namespace TreeWinLoss.Services
                 custIds = custIds.Length > MaxCustIds ? custIds.Skip(MaxCustIds).Take(custIds.Length - MaxCustIds).ToArray() : [];
             }
 
-            virtualRate = MapSMAVirtualRateData(detailVirtualRate);
+            var virtualRate = MapSMAVirtualRateData(detailVirtualRate);
 
             return virtualRate;
         }
