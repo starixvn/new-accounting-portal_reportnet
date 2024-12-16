@@ -12,13 +12,11 @@ public interface MostVisitedPagesService
 
     void UpdateCount(MostVisitedPageModel mostVisitedPage);
 
-    Task<int> UpdatePosition(INonQueryCommand mostVisitedPage);
-
-    Task<int> Delete(INonQueryCommand mostVisitedPage);
+    Task<int> Update(INonQueryCommand mostVisitedPage);
 }
 
 public class MostVisitedPagesServiceImp(
-    ConfigurationService configurationService, 
+    ConfigurationService configurationService,
     IDynamicRepository repository,
     INapSettings napSettings,
     INapSession napSession,
@@ -45,30 +43,33 @@ public class MostVisitedPagesServiceImp(
             SiteId = napSettings.SiteId
         };
 
-        var rawData =  await repository.FetchAsync<MostVisitedPageModel>(criteria);
+        var rawData = await repository.FetchAsync<MostVisitedPageModel>(criteria);
 
-        var mostvisitedPages = new List<MostVisitedPageModel>();
-
-        foreach (var row in rawData)
-        {
-            var menu = menuService.GetMenuById(row.MenuId);
-
-            if (menu != null)
-            {
-                mostvisitedPages.Add(new MostVisitedPageModel
-                {
-                    MenuName = menu.Name,
-                    MenuURL = menu.Url.Trim(),
-                    MenuId = menu.Id,
-                    Count = row.Count,
-                    Position = row.Position,
-                    Title = menu.ParentName + UrlSeparator + menu.Name
-                });
-            }
-        }
+        var mostvisitedPages = rawData.Select(CreateMostVisitedPageModel)
+            .Where(r => r != null)
+            .ToList();
 
         SortMostVisitedPages(ref mostvisitedPages);
         return mostvisitedPages;
+
+        MostVisitedPageModel CreateMostVisitedPageModel(MostVisitedPageModel row)
+        {
+            var menu = menuService.GetMenuById(row.MenuId);
+            if (menu == null)
+            {
+                return null;
+            }
+
+            return new MostVisitedPageModel
+            {
+                MenuName = menu.Name,
+                MenuURL = menu.Url.Trim(),
+                MenuId = menu.Id,
+                Count = row.Count,
+                Position = row.Position,
+                Title = menu.ParentName + UrlSeparator + menu.Name
+            };
+        }
     }
 
     public void UpdateCount(MostVisitedPageModel mostVisitedPage)
@@ -111,7 +112,7 @@ public class MostVisitedPagesServiceImp(
         }
     }
 
-    public async Task<int> UpdatePosition(INonQueryCommand mostVisitedPage)
+    public async Task<int> Update(INonQueryCommand mostVisitedPage)
     {
         if (configurationService.IsDisableMostvisitedPage)
         {
@@ -121,22 +122,12 @@ public class MostVisitedPagesServiceImp(
         return await repository.ExecuteAsync(mostVisitedPage);
     }
 
-    public async Task<int> Delete(INonQueryCommand mostVisitedPage)
-    {
-        if (configurationService.IsDisableMostvisitedPage)
-        {
-            return -1;
-        }
-
-        return await repository.ExecuteAsync(mostVisitedPage);
-    }
-
-    private bool IsInRange(int position, int maxPages)
+    private static bool IsInRange(int position, int maxPages)
     {
         return position >= 1 && position <= maxPages;
     }
 
-    private void SortMostVisitedPages(ref List<MostVisitedPageModel> mostVisitedPages)
+    private static void SortMostVisitedPages(ref List<MostVisitedPageModel> mostVisitedPages)
     {
         if (mostVisitedPages == null)
         {

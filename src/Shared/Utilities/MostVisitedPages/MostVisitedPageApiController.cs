@@ -24,14 +24,14 @@ public class MostVisitedPageApiController(MostVisitedPagesService service) : Con
     [Route("update-position")]
     public async Task<IActionResult> UpdateMostVisitedPagePosition(UpdateMostVisitedPagePositionCriteria mostVisitedPage)
     {
-        var result = await service.UpdatePosition(mostVisitedPage);
+        var result = await service.Update(mostVisitedPage);
         return Ok(result);
     }
 
     [Route("delete")]
     public async Task<IActionResult> DeleteMostVisitedPage(DeleteMostVisitedPagesCriteria mostVisitedPage)
     {
-        await service.Delete(mostVisitedPage);
+        await service.Update(mostVisitedPage);
 
         var mostVisitedPages = await service.GetMostVisitedPages();
 

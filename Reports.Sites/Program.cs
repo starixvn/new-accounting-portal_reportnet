@@ -1,14 +1,15 @@
 using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client.Attributes;
+using Fanex.NAP.SignIn;
 using Microsoft.AspNetCore.Mvc;
 using Reports.Sites;
-using Reports.Sites.App_Start;
 using Reports.Sites.DependencyInjection;
 using Reports.Sites.Middleware;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ONEbook.UM.AspNetCore.Filters;
+
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
@@ -18,14 +19,14 @@ builder.WebHost.ConfigureKestrel(options =>
     options.Limits.MaxRequestLineSize = 302768;
 });
 
-services.RegisterAuthentication(configuration);
-services.RegisterGlobalServices();
-OnebookUMInjection.RegisterServices(services, configuration);
-services.Initialize();
+services.AddAuthentication(configuration);
+services.AddGlobalServices();
+services.AddOneBookUm(configuration);
+services.AddAllAutoMapper();
 services.RegisterMediatR();
-services.RegisterInternalServices();
+services.AddInternalServices();
 
-services.ProcessWebOptimizer();
+services.AddAllWebOptimizer();
 
 // Add services to the container.
 services.AddControllersWithViews(options =>
@@ -50,12 +51,6 @@ services.AddNapClient(configuration);
 services.AddFanexLogSentry(configuration);
 
 var app = builder.Build();
-
-app.Use((context, next) =>
-{
-    context.Request.PathBase = new PathString(configuration.GetSection("PathBase").Value);
-    return next();
-});
 
 app.UseDeveloperExceptionPage();
 app.UseWebOptimizer();

@@ -1,4 +1,5 @@
-﻿using Fanex.RemotingRef;
+﻿using AutoMapper;
+using Fanex.RemotingRef;
 using Fanex.Result.Core.Base;
 using Fanex.Result.Core.RemotingRef;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -6,7 +7,32 @@ using Reports.Sites.DependencyInjection;
 
 namespace Reports.Sites;
 
-public static class ServiceCollection
+using AbnormalBet;
+using ActualMemberBet;
+using BetConstructPerformance;
+using BetCount;
+using CashOutPerformance;
+using DailyCreatedCustomers;
+using DailyMixParlay;
+using DirectBalance;
+using DuplicateTickets;
+using Exchange;
+using HouseWinLoss;
+using LeagueWinLoss;
+using Margin;
+using NegativeBalance;
+using ParlayWon;
+using PunterAnalysis;
+using ResultAnalysis;
+using SBCustomerPerformanceByDanger;
+using SBPerformance;
+using SMAWinLoss;
+using SuperBalance;
+using TotalSMAAndActiveMember;
+using TreeWinLoss;
+using UpdatedUsernameCredit;
+
+public static class ServiceCollectionExtensions
 {
     public static void AddRemotingRef(this IServiceCollection services, IConfiguration configuration)
     {
@@ -19,7 +45,7 @@ public static class ServiceCollection
         ResultCoreManager.RegisterRefDataHelper(new RefDataHelper());
     }
 
-    public static void RegisterInternalServices(this IServiceCollection services)
+    public static void AddInternalServices(this IServiceCollection services)
     {
         services.RegisterHouseWinLossServices();
         services.RegisterSMAWinLossServices();
@@ -57,7 +83,7 @@ public static class ServiceCollection
         services.RegisterBetConstructPerformanceServices();
     }
 
-    public static void RegisterAuthentication(this IServiceCollection services, IConfiguration configuration)
+    public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
@@ -88,7 +114,7 @@ public static class ServiceCollection
         });
     }
 
-    public static void ProcessWebOptimizer(this IServiceCollection services)
+    public static void AddAllWebOptimizer(this IServiceCollection services)
     {
         services.AddWebOptimizer(pipeline =>
         {
@@ -241,5 +267,39 @@ public static class ServiceCollection
                 "/themes/base/common.css",
                 "/themes/base/common.less");
         });
+    }
+
+    public static void AddAllAutoMapper(this IServiceCollection services)
+    {
+        var config = new MapperConfiguration(cfg => {
+            cfg.InitializeHouseWinLoss();
+            cfg.InitializeSMAWinLoss();
+            cfg.InitializeSBPerformance();
+            cfg.InitializeAbnormalBet();
+            cfg.InitializeActualMemberBet();
+            cfg.InitializeExchange();
+            cfg.InitializeCashOutPerformance();
+            cfg.InitializeUpdatedUsernameCredit();
+            cfg.InitializeSBCustomerPerformanceByDanger();
+            cfg.InitializePunterAnalysis();
+            cfg.InitializeParlay();
+            cfg.InitializeResultAnalysis();
+            cfg.InitializeTreeWinLoss();
+            cfg.InitializeNegativeBalance();
+            cfg.InitializeSuperBalance();
+            cfg.InitializeDirectBalance();
+            cfg.InitializeDailyCreatedCustomers();
+            cfg.InitializeBetCount();
+            cfg.InitializeParlayWon();
+            cfg.InitializeMarginReport();
+            cfg.InitializeTotalSmaAndMemberActive();
+            cfg.InitializeDuplicateTickets();
+            cfg.InitializeBetConstructPerformance();
+            cfg.InitializeLeagueWinLoss();
+        });
+
+        var mapper = config.CreateMapper();
+
+        services.AddSingleton(mapper);
     }
 }

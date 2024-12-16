@@ -16,7 +16,7 @@ using Fanex.NAP.Client;
 
 public static class GlobalInjection
 {
-    public static void RegisterGlobalServices(this IServiceCollection service)
+    public static void AddGlobalServices(this IServiceCollection service)
     {
         service.AddTransient<IRemotingRefService, RemotingRefService>();
         service.AddTransient<IUserService, UserService>();

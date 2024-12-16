@@ -16,16 +16,11 @@ public class MarginWinLossServiceImp(IDynamicRepository repository, RemotingRefS
 {
     public async Task<List<MarginWinLossModel>> GetMarginWinLoss(MarginWinLossCriteria criteria)
     {
-        var result = new List<MarginWinLossModel>();
-
         var rawData = await repository.FetchAsync<MarginWinLossItem>(criteria);
 
-        if (!rawData.Any())
-        {
-            return result;
-        }
+        return !rawData.Any() ? [] : rawData.Select(CreateMarginWinLossModel).ToList();
 
-        foreach (var item in rawData)
+        MarginWinLossModel CreateMarginWinLossModel(MarginWinLossItem item)
         {
             var bettypeId = item.BettypeId;
             var bettypeName = remotingRefService.GetBetTypeName(bettypeId);
@@ -40,10 +35,7 @@ public class MarginWinLossServiceImp(IDynamicRepository repository, RemotingRefS
                 Ratio = item.Ratio,
                 TotalBet = item.TotalBet
             };
-               
-            result.Add(winLossItem);
+            return winLossItem;
         }
-
-        return result;
     }
 }
