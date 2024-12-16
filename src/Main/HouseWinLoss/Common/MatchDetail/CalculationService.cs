@@ -66,7 +66,7 @@ public class CalculationServiceImp(RemotingRefService refService, IMapper mapper
     {
         var matchWinLosses = rawWinLosses.Where(r => r.MatchId > 0 && r.LeagueId > 0);
         var sumWinLoss = matchWinLosses.DynamicSum();
-
+        sumWinLoss.SportType = rawWinLosses.FirstOrDefault()?.SportType ?? 0;
         return FromRawWinLoss(sumWinLoss);
     }
 

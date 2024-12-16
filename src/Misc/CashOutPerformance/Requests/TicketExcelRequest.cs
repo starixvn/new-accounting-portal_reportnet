@@ -38,4 +38,6 @@ public class TicketExcelRequest<T> : IRequest<ExcelPackage>
     public bool ExchangeBy { get; set; }
 
     public int FilterType { get; set; }
+
+    public bool? EvenOddCust { get; set; }
 }

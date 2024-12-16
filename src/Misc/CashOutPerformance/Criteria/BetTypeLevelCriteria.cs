@@ -32,6 +32,8 @@ public class BetTypeLevelCriteria : CriteriaBase
 
     public int FilterType { get; set; }
 
+    public bool? EvenOddCust { get; set; }
+
     public override string GetSettingKey() => $"Acc_Rpt_COPerformance_BetType_{Server}";
 
     public override bool IsValid() => true;

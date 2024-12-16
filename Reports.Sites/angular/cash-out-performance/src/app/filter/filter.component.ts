@@ -73,6 +73,8 @@ export class FilterComponent implements OnInit {
   leagueNamePlaceholder = 'League name';
   exchangeRateSelectItems = this.filterService.getExchangeRateSelectItems();
   exchangeRate: ExchageRateValues = ExchageRateValues.SystemRate;
+  evenOddCustSelectItems = this.filterService.getevenOddCustSelectItems();
+  evenOddCust: boolean = null;
   filterByOptions: SelectItem[] = [];
   FilterType = FilterType;
   filterType = FilterType.SettledDate;
@@ -208,7 +210,8 @@ export class FilterComponent implements OnInit {
       server: dbServer,
       isShowFullColumn: this.isShowFullColumn,
       exchangeBy: this.exchangeRate == ExchageRateValues.OandaRate,
-      filterType: this.filterType
+      filterType: this.filterType,
+      evenOddCust: this.evenOddCust
     };
   }
 

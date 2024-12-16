@@ -30,4 +30,6 @@ public class TicketRequest<T> : IRequest<TicketViewModel<T>>
     public bool ExchangeBy { get; set; }
 
     public int FilterType { get; set; }
+
+    public bool? EvenOddCust { get; set; }
 }

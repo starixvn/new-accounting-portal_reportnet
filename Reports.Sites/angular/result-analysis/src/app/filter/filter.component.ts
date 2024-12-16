@@ -21,7 +21,7 @@ export class FilterComponent implements OnInit {
 
   sport: string = '1';
   sportSelectItems: SelectItem[] = [];
-  minStartDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today).subtract(29, 'day'));;
+  minStartDate: NgbDateStruct = { year: 2024, month: 4, day: 26 };
   maxEndDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));
   startDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));
   endDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));

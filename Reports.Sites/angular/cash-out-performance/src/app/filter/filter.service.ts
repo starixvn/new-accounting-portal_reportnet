@@ -108,4 +108,12 @@ export class FilterService {
         value: FilterType.CashedOutDate
     }];
   }
+
+  getevenOddCustSelectItems(): SelectItem[] {
+    return [
+        { text: 'All customers', value: null },
+        { text: 'Odd Customer ID', value: true },
+        { text: 'Even Customer ID', value: false }
+    ];
+   }
 }
