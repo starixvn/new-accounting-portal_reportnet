@@ -64,7 +64,7 @@
 </div>
 
 @{
-    var lastMonth = DateTime.Now.AddMonths(-1);
+    var lastMonth = DateTime.Today.AddMonths(-1);
     var firtDateOfLastMonth = new DateTime(lastMonth.Year, lastMonth.Month, 1).ToShortFormatedDate();
 }
 @section scripts

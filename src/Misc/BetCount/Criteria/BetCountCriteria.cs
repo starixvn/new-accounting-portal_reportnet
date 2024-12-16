@@ -7,7 +7,7 @@ public class BetCountCriteria : CriteriaBase
 {
     public BetCountCriteria()
     {
-        Datestart = DateTime.Now.AddDays(-1);
+        Datestart = DateTime.Today.AddDays(-1);
         Dateend = Datestart;
     }
 

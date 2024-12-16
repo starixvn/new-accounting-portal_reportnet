@@ -620,7 +620,7 @@
         var labelFrom = 'From';
         var labelTo = 'To';
         var today = '@DateTime.Today.ToShortDateString()';
-        var mindate = new Date('@DateTime.Now.FirstDayOfMonth().AddMonths(-3).ToString()');
+        var mindate = new Date('@DateTime.Today.FirstDayOfMonth().AddMonths(-3).ToString()');
         var minHistoryReportDate = new Date(2009, 1, 1);
     </script>
 }

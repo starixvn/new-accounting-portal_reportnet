@@ -3,7 +3,7 @@
     var showMenus = ViewBag.ShowMenus != null ? (bool)ViewBag.ShowMenus : true;
     var napConfig = new
     {
-        Today = Convert.ToInt64(DateTime.Now
+        Today = Convert.ToInt64(DateTime.Today
            .Subtract(new DateTime(1970, 1, 1, 0, 0, 0))
            .TotalMilliseconds),
         RootUrl = Url.Content("~").TrimEnd(['/'])

@@ -10,13 +10,13 @@ public class ServerTimeController : ControllerBase
     [HttpPost]
     public IActionResult Today()
     {
-        return Ok(new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day));
+        return Ok(DateTime.Today);
     }
 
     [Route("server-time")]
     [HttpPost]
     public IActionResult ServerTime()
     {
-        return Ok(DateTime.Now);
+        return Ok(DateTimeOffset.Now);
     }
 }

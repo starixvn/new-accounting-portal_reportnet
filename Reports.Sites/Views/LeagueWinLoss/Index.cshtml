@@ -178,11 +178,11 @@
         var labelDate = 'Date';
         var minDate = '@ViewBag.MinDate';
         var maxDate = '@(DateTime.Today.ToShortDateString())';
-        var toDay = '@DateTime.Now.ToShortDateString()';
+        var toDay = '@DateTime.Today.ToShortDateString()';
         var is8RMActive = 'true';
         var isBARMActive = 'true';
-        var todayStr = '@DateTime.Now.ToString("MMM dd, yyyy")';
-        var yesterdayStr = '@DateTime.Now.AddDays(-1).ToString("MMM dd, yyyy")';
+        var todayStr = '@DateTime.Today.ToString("MMM dd, yyyy")';
+        var yesterdayStr = '@DateTime.Today.AddDays(-1).ToString("MMM dd, yyyy")';
         var minWareHouseDate = '@(new DateTime(2017, 1, 1))';
         var labelFrom = 'From';
         var labelTo = 'To';

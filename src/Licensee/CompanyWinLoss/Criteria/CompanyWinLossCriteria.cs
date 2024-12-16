@@ -19,9 +19,9 @@ public class CompanyWinLossCriteria : CriteriaBase
                 FromDate.Year,
                 FromDate.Month,
                 DateTime.DaysInMonth(FromDate.Year, FromDate.Month));
-            if (endOfMonth > DateTime.Now)
+            if (endOfMonth > DateTime.Today)
             {
-                endOfMonth = DateTime.Now;
+                endOfMonth = DateTime.Today;
             }
 
             return endOfMonth;
