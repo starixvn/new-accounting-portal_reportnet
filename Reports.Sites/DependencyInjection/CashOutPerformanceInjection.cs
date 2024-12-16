@@ -12,5 +12,7 @@ public static class CashOutPerformanceInjection
         service.AddTransient<TicketsExcelBuilder<EventStatusLevelExcelModel>, TicketsExcelBuilderImp<EventStatusLevelExcelModel>>();
         service.AddTransient<TicketsExcelBuilder<BetTypeLevelExcelModel>, TicketsExcelBuilderImp<BetTypeLevelExcelModel>>();
         service.AddTransient<TicketsExcelBuilder<MatchDetailLevelExcelModel>, TicketsExcelBuilderImp<MatchDetailLevelExcelModel>>();
+        service.AddTransient<ModelsHelperService, ModelsHelperServiceImp>();
+        service.AddTransient<TicketsExcelBuilder<SimpleBetTypeLevelExcelModel>, TicketsExcelBuilderImp<SimpleBetTypeLevelExcelModel>>();
     }
 }

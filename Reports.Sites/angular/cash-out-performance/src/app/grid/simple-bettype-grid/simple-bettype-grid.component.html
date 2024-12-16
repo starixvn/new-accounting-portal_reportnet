@@ -1,0 +1,124 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 100px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 150px" />
+      <col style="width: 130px" />
+      <col style="width: 130px" />
+      <col style="width: 140px" />
+      <col style="width: 120px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+      <tr>
+        <th scope="col" rowspan="2">Bet Type</th>
+        <th scope="col" colspan="11">BaseRM</th>
+      </tr>
+      <tr>
+        <th scope="col">Cash Out Turnover</th>
+        <th scope="col">Actual Turnover</th>
+        <th scope="col">Buy Back Amount</th>
+        <th scope="col">Member WL</th>
+        <th scope="col">Assumed Payout</th>
+        <th scope="col">Hyp.GGR NO CO (Full PT)</th>
+        <th scope="col">Cash Out Profit (Full PT)</th>
+        <th scope="col">Margin</th>
+        <th scope="col">Commission</th>
+        <th scope="col">Cash Out Income</th>
+        <th scope="col">Total Income (House PT)</th>
+      </tr>
+    </thead>
+  </ng-template>
+  <ng-template #rowItem let-item="item">
+    <td><a href="javascript:;" (click)="showMatchDetailLevel(item.BetType, item.BetTypeName)">{{item.BetTypeName}}</a>
+    </td>
+    <td class="text-right" [napDecimalFormat]="item.COTurnover_RM"></td>
+    <td *ngIf="isShowNotAvailable(item.ActualTurnover)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.ActualTurnover)" class="text-right" [napDecimalFormat]="item.ActualTurnover"></td>
+    <td class="text-right" [napDecimalFormat]="item.BBAmount_RM"></td>
+    <td class="text-right red-positive" [napDecimalFormat]="item.MemberWL_RM"></td>
+    <td *ngIf="isShowNotAvailable(item.AssumedPayout)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.AssumedPayout)" class="text-right" [napDecimalFormat]="item.AssumedPayout"></td>
+    <td *ngIf="isShowNotAvailable(item.HypGGR)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.HypGGR)" class="text-right red-positive" [napDecimalFormat]="item.HypGGR"></td>
+    <td *ngIf="isShowNotAvailable(item.COProfit)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.COProfit)" class="text-right red-positive" [napDecimalFormat]="item.COProfit">
+    </td>
+    <td *ngIf="isShowNotAvailable(item.Margin)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.Margin)" class="text-right number red-positive" [napPercentFormat]="item.Margin"></td>
+    <td class="text-right" [napDecimalFormat]="item.Comm_RM"></td>
+    <td class="text-right red-positive" [napDecimalFormat]="item.COIncome_RM"></td>
+    <td class="text-right red-positive" [napDecimalFormat]="item.TotalIncome_RM"></td>
+  </ng-template>
+  <div *ngIf="dataViewModel" [ngSwitch]="dataViewModel.Total > 0">
+    <div class="nap-grid">
+      <div style="width: 1690px">
+        <div class="header">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <ng-template [ngTemplateOutlet]="thead"></ng-template>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+          <table class="table-striped">
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tbody>
+              <tr *ngFor="let item of dataViewModel.TicketList">
+                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+                </ng-template>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col" class="no-data" colspan="12">
+                  There is no data
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="footer">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tfoot>
+              <tr class="font-weight-bold">
+                <td class="text-right">Grand Total</td>
+                <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.COTurnover_RM"></td>
+                <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.ActualTurnover)" class="text-right">&nbsp;</td>
+                <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.ActualTurnover)" class="text-right"
+                  [napDecimalFormat]="dataViewModel.TotalTicket.ActualTurnover"></td>
+                <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.BBAmount_RM"></td>
+                <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.MemberWL_RM"></td>
+                <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.AssumedPayout)" class="text-right">&nbsp;</td>
+                <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.AssumedPayout)" class="text-right"
+                  [napDecimalFormat]="dataViewModel.TotalTicket.AssumedPayout"></td>
+                <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.HypGGR)" class="text-right">&nbsp;</td>
+                <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.HypGGR)" class="text-right red-positive"
+                  [napDecimalFormat]="dataViewModel.TotalTicket.HypGGR"></td>
+                <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.COProfit)" class="text-right">&nbsp;</td>
+                <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.COProfit)" class="text-right red-positive"
+                  [napDecimalFormat]="dataViewModel.TotalTicket.COProfit"></td>
+                <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.Margin)" class="text-right">&nbsp;</td>
+                <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.Margin)" class="text-right number red-positive"
+                  [napPercentFormat]="dataViewModel.TotalTicket.Margin"></td>
+                <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.Comm_RM"></td>
+                <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.COIncome_RM"></td>
+                <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.TotalIncome_RM"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

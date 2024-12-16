@@ -7,6 +7,7 @@ import { PaginationService } from 'nap-components/pagination';
 import { Observable } from 'rxjs';
 import { EventStatusService } from './event-status.service';
 import * as _ from 'lodash';
+import { SportType } from 'src/app/common/constants';
 
 @Component({
   selector: 'app-event-status-grid',
@@ -88,9 +89,15 @@ export class EventStatusGridComponent implements Grid {
     this.gridService.betTypeTitle = this.getliveNonLiveText(liveStatus);
     this.gridService.filterModel.liveIndicator = liveStatus;
     this.gridService.filterModel.sportBettype = this.gridService.cachedSportBettypeForSport;
-    this.gridService.filterModel.pageSize = this.originalPageSize;
-    this.gridService.filterModel.pageIndex = 1;
-    this.gridService.generate(GridType.BetType);
+    this.gridService.filterModel.pageSize = 0;
+    this.gridService.filterModel.pageIndex = 0;
+    var sportType = this.gridService.filterModel.sportBettype.split(',')[0].split('_')[0];
+    if (sportType === SportType.SOCCER) {
+      this.gridService.generate(GridType.BetType);
+    }
+    else {
+      this.gridService.generate(GridType.SimpleBetType);
+    }
   }
 
   getliveNonLiveText(liveStatus: number): string {

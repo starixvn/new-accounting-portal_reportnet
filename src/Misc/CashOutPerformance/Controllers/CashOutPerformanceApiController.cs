@@ -74,7 +74,7 @@ public class CashOutPerformanceApiController(IMediator mediator) : ControllerBas
 
     [Route("excel-sport")]
     [HttpPost]
-    public async Task<IActionResult> TicketsExcel(SportLevelExcelRequest request)
+    public async Task<IActionResult> TicketsExcelForSport(SportLevelExcelRequest request)
     {
         var excelPackage = await mediator.Send(request);
         return new EpplusExcelResult(excelPackage);
@@ -82,7 +82,7 @@ public class CashOutPerformanceApiController(IMediator mediator) : ControllerBas
 
     [Route("excel-event-status")]
     [HttpPost]
-    public async Task<IActionResult> TicketsExcel(TicketExcelRequest<EventStatusLevelModel> request)
+    public async Task<IActionResult> TicketsExcelForEventStatus(TicketExcelRequest<EventStatusLevelModel> request)
     {
         var excelPackage = await mediator.Send(request);
         return new EpplusExcelResult(excelPackage);
@@ -90,7 +90,7 @@ public class CashOutPerformanceApiController(IMediator mediator) : ControllerBas
 
     [Route("excel-bettype")]
     [HttpPost]
-    public async Task<IActionResult> TicketsExcel(TicketExcelRequest<BetTypeLevelModel> request)
+    public async Task<IActionResult> TicketsExcelForBetType(TicketExcelRequest<BetTypeLevelModel> request)
     {
         var excelPackage = await mediator.Send(request);
         return new EpplusExcelResult(excelPackage);
@@ -98,7 +98,39 @@ public class CashOutPerformanceApiController(IMediator mediator) : ControllerBas
 
     [Route("excel-match-detail")]
     [HttpPost]
-    public async Task<IActionResult> TicketsExcel(TicketExcelRequest<MatchDetailLevelModel> request)
+    public async Task<IActionResult> TicketsExcelForMatchDetail(TicketExcelRequest<MatchDetailLevelModel> request)
+    {
+        var excelPackage = await mediator.Send(request);
+        return new EpplusExcelResult(excelPackage);
+    }
+
+    [Route("simple-bettype-level")]
+    [HttpPost]
+    public async Task<IActionResult> SimpleBetTypeLevel(TicketRequest<SimpleBetTypeLevelModel> request)
+    {
+        var viewModel = await mediator.Send(request);
+        return Ok(viewModel);
+    }
+
+    [Route("drill-down-bettype-level")]
+    [HttpPost]
+    public async Task<IActionResult> GameTimeLevel(BetTypeDrillDownRequest request)
+    {
+        var viewModel = await mediator.Send(request);
+        return Ok(viewModel);
+    }
+
+    [Route("excel-simple-bettype")]
+    [HttpPost]
+    public async Task<IActionResult> TicketsExcelForSimpleBetType(TicketExcelRequest<SimpleBetTypeLevelModel> request)
+    {
+        var excelPackage = await mediator.Send(request);
+        return new EpplusExcelResult(excelPackage);
+    }
+
+    [Route("excel-drill-down-bettype")]
+    [HttpPost]
+    public async Task<IActionResult> TicketsExcelForDrillDownBetType(BetTypeDrillDownExcelRequest request)
     {
         var excelPackage = await mediator.Send(request);
         return new EpplusExcelResult(excelPackage);

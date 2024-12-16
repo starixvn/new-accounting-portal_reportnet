@@ -1,6 +1,7 @@
 <ng-template #colgroup>
   <colgroup>
-    <col style="width: 100px" />
+    <col style="width: 130px" />
+    <col style="width: 70px" />
     <col style="width: 150px" />
     <col style="width: 150px" />
     <col style="width: 150px" />
@@ -18,6 +19,7 @@
   <thead>
     <tr>
       <th scope="col" rowspan="2">Bet Type</th>
+      <th scope="col" rowspan="2">Bet Count</th>
       <th scope="col" colspan="11">BaseRM</th>
     </tr>
     <tr>
@@ -36,8 +38,42 @@
   </thead>
 </ng-template>
 <ng-template #rowItem let-item="item">
-  <td><a href="javascript:;" (click)="showMatchDetailLevel(item.BetType, item.BetTypeName)">{{item.BetTypeName}}</a>
+  <tr class="sub-total-row font-weight-bold">
+    <td (click)="item.collapsed=!item.collapsed">
+      <i [ngClass]="{'fa-caret-down': item.collapsed, 'fa-caret-right': !item.collapsed}"
+                                      class="fa"></i>&nbsp;
+      <a href="javascript:;" (click)="showMatchDetailLevel(item.BetType, item.BetTypeName)">{{item.BetTypeName}}</a></td>
+    <td class="text-right">
+      <a href="javascript:;" (click)="showWinningProbabilityLevel(item.BetType, item.BetTypeName)" [napIntegerFormat]="item.BetCount"></a>
+    </td>
+    <td *ngIf="isLive()" class="text-right">
+      <a [napDecimalFormat]="item.COTurnover_RM" href="javascript:;" (click)="showDetailGameTimeLevel(item.BetType, item.BetTypeName)">{{item.COTurnover_RM}}</a>
+    </td>
+    <td *ngIf="!isLive()" class="text-right" [napDecimalFormat]="item.COTurnover_RM"></td>
+    <td *ngIf="isShowNotAvailable(item.ActualTurnover)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.ActualTurnover)" class="text-right" [napDecimalFormat]="item.ActualTurnover"></td>
+    <td class="text-right" [napDecimalFormat]="item.BBAmount_RM"></td>
+    <td class="text-right red-positive" [napDecimalFormat]="item.MemberWL_RM"></td>
+    <td *ngIf="isShowNotAvailable(item.AssumedPayout)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.AssumedPayout)" class="text-right" [napDecimalFormat]="item.AssumedPayout"></td>
+    <td *ngIf="isShowNotAvailable(item.HypGGR)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.HypGGR)" class="text-right red-positive" [napDecimalFormat]="item.HypGGR"></td>
+    <td *ngIf="isShowNotAvailable(item.COProfit)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.COProfit)" class="text-right red-positive" [napDecimalFormat]="item.COProfit">
+    </td>
+    <td *ngIf="isShowNotAvailable(item.Margin)" class="text-right">&nbsp;</td>
+    <td *ngIf="!isShowNotAvailable(item.Margin)" class="text-right number red-positive" [napPercentFormat]="item.Margin"></td>
+    <td class="text-right" [napDecimalFormat]="item.Comm_RM"></td>
+    <td class="text-right red-positive" [napDecimalFormat]="item.COIncome_RM"></td>
+    <td class="text-right red-positive" [napDecimalFormat]="item.TotalIncome_RM"></td>
+  </tr>
+</ng-template>
+<ng-template #rowOutComeItem let-item="item">
+  <td *ngIf="isLive()" class="text-right">
+    <a href="javascript:;" (click)="showGameTimeLevel(item.OutCome, item.BetType, item.BetTypeName)">{{item.OutCome}}</a>
   </td>
+  <td *ngIf="!isLive()" class="text-right">{{item.OutCome}}</td>
+  <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
   <td class="text-right" [napDecimalFormat]="item.COTurnover_RM"></td>
   <td *ngIf="isShowNotAvailable(item.ActualTurnover)" class="text-right">&nbsp;</td>
   <td *ngIf="!isShowNotAvailable(item.ActualTurnover)" class="text-right" [napDecimalFormat]="item.ActualTurnover"></td>
@@ -58,7 +94,7 @@
 </ng-template>
 <div *ngIf="dataViewModel" [ngSwitch]="dataViewModel.Total > 0">
   <div class="nap-grid">
-    <div style="width: 1690px">
+    <div style="width: 1790px">
       <div class="header">
         <table>
           <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
@@ -66,13 +102,19 @@
         </table>
       </div>
       <div *ngSwitchCase="true" class="body">
-        <table class="table-striped">
+        <table class="table">
           <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
           <tbody>
-            <tr *ngFor="let item of dataViewModel.TicketList">
+            <ng-container *ngFor="let item of dataViewModel.TicketList">
               <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
               </ng-template>
-            </tr>
+              <ng-container *ngIf="item.collapsed">
+                <tr *ngFor="let childItem of item.ChildItems">
+                  <ng-template [ngTemplateOutlet]="rowOutComeItem" [ngTemplateOutletContext]="{ item: childItem }">
+                  </ng-template>
+                </tr>
+              </ng-container>
+            </ng-container>
           </tbody>
         </table>
       </div>
@@ -80,7 +122,7 @@
         <table>
           <tbody>
             <tr>
-              <th scope="col" class="no-data" colspan="12">
+              <th scope="col" class="no-data" colspan="13">
                 There is no data
               </th>
             </tr>
@@ -93,6 +135,7 @@
           <tfoot>
             <tr class="font-weight-bold">
               <td class="text-right">Grand Total</td>
+              <td class="text-right" [napIntegerFormat]="dataViewModel.TotalTicket.BetCount"></td>
               <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.COTurnover_RM"></td>
               <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.ActualTurnover)" class="text-right">&nbsp;</td>
               <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.ActualTurnover)" class="text-right"
@@ -114,11 +157,6 @@
               <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.Comm_RM"></td>
               <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.COIncome_RM"></td>
               <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.TotalIncome_RM"></td>
-            </tr>
-            <tr>
-              <td colspan="12">
-                <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
-              </td>
             </tr>
           </tfoot>
         </table>

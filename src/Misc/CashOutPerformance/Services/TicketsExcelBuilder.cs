@@ -1,4 +1,5 @@
-﻿using CashOutPerformance.Constants;
+﻿using AutoMapper;
+using CashOutPerformance.Constants;
 using CashOutPerformance.Models;
 using CashOutPerformance.ViewModels;
 using Epplus.Mapper.Extensions;
@@ -9,12 +10,15 @@ namespace CashOutPerformance.Services;
 
 public interface TicketsExcelBuilder<T>
 {
-    ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool IsShowFullColumn);
+    ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn);
 
-    ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool IsShowFullColumn);
+    ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool isShowFullColumn);
+
+    ExcelPackage BuildBetTypeLevel(string title, string[] breadCrumb,
+        TicketViewModel<BetTypeLevelModel> model, string firstColumnText, bool hasChildLevel);
 }
 
-public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService) : TicketsExcelBuilder<T>
+public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService, IMapper mapper) : TicketsExcelBuilder<T>
 {
     private ExcelWorksheet sheet;
 
@@ -22,13 +26,13 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
 
     private ExcelWorksheet headerSheet;
 
-    private const int StartRowIndex = 6;
+    private const int SportColumnIndex = 13;
 
     private ExcelPackage ExcelPackage { get; set; }
 
     private ExcelWorksheet templateSheet;
 
-    public ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool IsShowFullColumn)
+    public ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn)
     {
         var fileExcel = "CashOutPerformance.xlsx";
         var cellAddressOfTitle = "A1:AH1";
@@ -45,10 +49,10 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         BuildTitle(title, cellAddressOfTitle);
         BuildBreadCrumb(breadCrumb, cellAddressOfBreadCrumb);
         RenameFirstColumn(excelType);
-        sheet.ApplyVertical(model.TicketList, StartRowIndex);
+        sheet.ApplyVertical(model.TicketList, ExcelConstants.StartRowIndex);
         BuildTotalRow(model, totalLength);
         ClearTemplate();
-        RemoveUsernameColumn(IsShowFullColumn);
+        RemoveUsernameColumn(isShowFullColumn);
         return ExcelPackage;
     }
 
@@ -65,8 +69,8 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
 
     private void BuildTotalRow(TicketViewExcelModel<T> model, byte totalLength)
     {
-        var endRowIndex = StartRowIndex + model.Total;
-        sheet.ApplyModel(totalSheet, model.TotalTicket, StartRowIndex + model.Total);
+        var endRowIndex = ExcelConstants.StartRowIndex + model.Total;
+        sheet.ApplyModel(totalSheet, model.TotalTicket, endRowIndex);
         var cellAddressOfTotalText = new ExcelAddressBase(endRowIndex, 1, endRowIndex, totalLength);
         sheet.Cells[cellAddressOfTotalText.Address].Value = "Grand Total";
         sheet.Cells[cellAddressOfTotalText.Address].Merge = true;
@@ -97,16 +101,16 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         ExcelPackage.Workbook.Worksheets.Delete("HeaderTemplate");
     }
 
-    private void RemoveUsernameColumn(bool IsShowFullColumn)
+    private void RemoveUsernameColumn(bool isShowFullColumn)
     {
         const byte usernameColumnIndex = 2;
-        if (!IsShowFullColumn)
+        if (!isShowFullColumn)
         {
             sheet.DeleteColumn(usernameColumnIndex);
         }
     }
 
-    public ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool IsShowFullColumn)
+    public ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool isShowFullColumn)
     {
         const string fileExcel = "SimpleCashOutPerformance.xlsx";
         const string cellAddressOfTitle = "A1:L1";
@@ -135,8 +139,51 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         sheet.Cells["A5"].Value = "Sport";
         UpdateValueColumnSport(updateRowIndex);
         ClearTemplate();
-        RemoveUsernameColumn(IsShowFullColumn);
+        RemoveUsernameColumn(isShowFullColumn);
         RemoveSportColumn();
+        return ExcelPackage;
+    }
+
+    public ExcelPackage BuildBetTypeLevel(string title, string[] breadCrumb, TicketViewModel<BetTypeLevelModel> model, string firstColumnText, bool hasChildLevel)
+    {
+        var startRowIndex = ExcelConstants.StartRowIndex;
+
+        LoadTemplate(ExcelConstants.BetTypeDrillDownExcelFile);
+        BuildTitle(title, ExcelConstants.CellAddressOfBetTypeDrillDownTitle);
+        BuildBreadCrumb(breadCrumb, ExcelConstants.CellAddressOfBetTypeDrillDownBreadCrumb);
+        if (hasChildLevel)
+        {
+            BetTypeLevelExcelModel mapperModel;
+            foreach (var item in model.TicketList)
+            {
+                mapperModel = mapper.Map<BetTypeLevelExcelModel>(item);
+                sheet.ApplyModel(headerSheet, mapperModel, startRowIndex);
+                startRowIndex += 1;
+                foreach (var childItem in item.ChildItems)
+                {
+                    mapperModel = mapper.Map<BetTypeLevelExcelModel>(childItem);
+                    mapperModel.BetTypeName = childItem.OutCome;
+                    sheet.ApplyModel(templateSheet, mapperModel, startRowIndex);
+                    startRowIndex += 1;
+                }
+            }
+            mapperModel = mapper.Map<BetTypeLevelExcelModel>(model.TotalTicket);
+            sheet.ApplyModel(totalSheet, mapperModel, startRowIndex);
+            sheet.Cells[$"A{startRowIndex}"].Value = "Grand Total";
+
+        }
+        else
+        {
+            var excelTicketList = mapper.Map<IEnumerable<BetTypeLevelExcelModel>>(model.TicketList);
+            sheet.ApplyVertical(excelTicketList, startRowIndex);
+            var excelTotalTicket = mapper.Map<BetTypeLevelExcelModel>(model.TotalTicket);
+            var totalRowIndex = startRowIndex + model.Total;
+            sheet.ApplyModel(totalSheet, excelTotalTicket, totalRowIndex);
+            sheet.Cells[$"A{totalRowIndex}"].Value = "Grand Total";
+        }
+
+        sheet.Cells["A5"].Value = firstColumnText;
+        ClearTemplate();
         return ExcelPackage;
     }
 
@@ -150,7 +197,6 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
 
     private void RemoveSportColumn()
     {
-        const int sportColumnIndex = 13;
-        sheet.DeleteColumn(sportColumnIndex);
+        sheet.DeleteColumn(SportColumnIndex);
     }
 }

@@ -8,6 +8,10 @@ import { MatchDetailGridComponent } from './match-detail-grid/match-detail-grid.
 import { SportGridComponent } from './sport-grid/sport-grid.component';
 import { EventStatusGridComponent } from './event-status-grid/event-status-grid.component';
 import { BettypeGridComponent } from './bettype-grid/bettype-grid.component';
+import { DetailGameTimeGridComponent } from './detail-game-time-grid/detail-game-time-grid.component';
+import { WinningProbabilityGridComponent } from './winning-probability-grid/winning-probability-grid.component';
+import { GameTimeGridComponent } from './game-time-grid/game-time-grid.component';
+import { SimpleBettypeGridComponent } from './simple-bettype-grid/simple-bettype-grid.component';
 
 @Component({
   selector: 'app-grid',
@@ -17,7 +21,11 @@ import { BettypeGridComponent } from './bettype-grid/bettype-grid.component';
     MatchDetailGridComponent,
     SportGridComponent,
     EventStatusGridComponent,
-    BettypeGridComponent
+    BettypeGridComponent,
+    GameTimeGridComponent,
+    WinningProbabilityGridComponent,
+    DetailGameTimeGridComponent,
+    SimpleBettypeGridComponent
   ]
 })
 export class GridComponent implements OnInit, OnChanges, OnDestroy {
@@ -67,17 +75,25 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
 
   private getComponentFactory(): ComponentFactory<Grid> {
     switch (this.gridType) {
-        case GridType.Sport:
-            return this.componentFactoryResolver.resolveComponentFactory(SportGridComponent);
-        case GridType.Event:
-            return this.componentFactoryResolver.resolveComponentFactory(EventStatusGridComponent);
-        case GridType.BetType:
-            return this.componentFactoryResolver.resolveComponentFactory(BettypeGridComponent);
-        case GridType.MatchDetail:
-            return this.componentFactoryResolver.resolveComponentFactory(MatchDetailGridComponent);
-        default:
-            throw new Error('Not implemented yet');
-    }
+      case GridType.Sport:
+          return this.componentFactoryResolver.resolveComponentFactory(SportGridComponent);
+      case GridType.Event:
+          return this.componentFactoryResolver.resolveComponentFactory(EventStatusGridComponent);
+      case GridType.SimpleBetType:
+        return this.componentFactoryResolver.resolveComponentFactory(SimpleBettypeGridComponent);
+      case GridType.BetType:
+          return this.componentFactoryResolver.resolveComponentFactory(BettypeGridComponent);
+      case GridType.MatchDetail:
+          return this.componentFactoryResolver.resolveComponentFactory(MatchDetailGridComponent);
+      case GridType.GameTime:
+          return this.componentFactoryResolver.resolveComponentFactory(GameTimeGridComponent);
+      case GridType.WinningProbability:
+          return this.componentFactoryResolver.resolveComponentFactory(WinningProbabilityGridComponent);
+      case GridType.DetailGameTime:
+          return this.componentFactoryResolver.resolveComponentFactory(DetailGameTimeGridComponent);
+      default:
+          throw new Error('Not implemented yet');
+  }
   }
 
   private createGridComponent(): void {

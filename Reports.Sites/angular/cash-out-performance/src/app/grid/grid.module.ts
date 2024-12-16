@@ -10,6 +10,10 @@ import { PaginationModule, PaginationService, PaginationConfig, } from 'nap-comp
 import { CustomPaginationConfig } from '../common/config';
 import { EventStatusGridComponent } from './event-status-grid/event-status-grid.component';
 import { BettypeGridComponent } from './bettype-grid/bettype-grid.component';
+import { DetailGameTimeGridComponent } from './detail-game-time-grid/detail-game-time-grid.component';
+import { WinningProbabilityGridComponent } from './winning-probability-grid/winning-probability-grid.component';
+import { GameTimeGridComponent } from './game-time-grid/game-time-grid.component';
+import { SimpleBettypeGridComponent } from './simple-bettype-grid/simple-bettype-grid.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { BettypeGridComponent } from './bettype-grid/bettype-grid.component';
     MatchDetailGridComponent,
     SportGridComponent,
     EventStatusGridComponent,
-    BettypeGridComponent
+    BettypeGridComponent,
+    DetailGameTimeGridComponent,
+    WinningProbabilityGridComponent,
+    GameTimeGridComponent,
+    SimpleBettypeGridComponent
   ],
   imports: [
     CommonModule,

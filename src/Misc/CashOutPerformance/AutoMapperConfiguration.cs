@@ -35,5 +35,14 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<EventStatusLevelModel, EventStatusLevelExcelModel>();
         cfg.CreateMap<BetTypeLevelModel, BetTypeLevelExcelModel>();
         cfg.CreateMap<MatchDetailLevelModel, MatchDetailLevelExcelModel>();
+        cfg.CreateMap<TicketRequest<SimpleBetTypeLevelModel>, BetTypeLevelCriteria>();
+        cfg.CreateMap<TicketExcelRequest<SimpleBetTypeLevelModel>, BetTypeLevelCriteria>();
+        cfg.CreateMap<TicketViewModel<SimpleBetTypeLevelModel>, TicketViewExcelModel<SimpleBetTypeLevelExcelModel>>();
+        cfg.CreateMap<BetTypeLevelModel, ChildItemBetTypeModel>();
+        cfg.CreateMap<BetTypeLevelModel, BetTypeLevelExcelModel>();
+        cfg.CreateMap<BetTypeDrillDownExcelRequest, GameTimeCriteria>();
+        cfg.CreateMap<BetTypeDrillDownRequest, GameTimeCriteria>();
+        cfg.CreateMap<BetTypeDrillDownExcelRequest, BetTypeLevelCriteria>();
+        cfg.CreateMap<BetTypeDrillDownRequest, BetTypeLevelCriteria>();
     }
 }

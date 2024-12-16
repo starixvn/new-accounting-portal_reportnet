@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { PaginationInstance, PaginatePipe, PaginationService as NgxPaginationService } from 'ngx-pagination';
-import { PaginationService } from 'nap-components/pagination';
 import { Observable } from 'rxjs';
 import { Grid, GridType } from '../grid.model';
 import { BettypeGridService } from './bettype-grid.service';
 import { GridService } from '../grid.service';
 import { BetTypeLevelModel, TicketViewModel } from '../../../app/common/model';
 import * as _ from 'lodash';
+import { BetTypeDrillDownType } from 'src/app/common/constants';
 
 @Component({
   selector: 'app-bettype-grid',
@@ -16,17 +15,10 @@ import * as _ from 'lodash';
 export class BettypeGridComponent implements Grid {
 
   dataViewModel: TicketViewModel<BetTypeLevelModel>;
-  paginationInstance: PaginationInstance;
-  originalPageSize = 100;
-
-  private paginatePipe: PaginatePipe;
 
   constructor(
     private readonly service: BettypeGridService,
-    private readonly gridService: GridService,
-    private readonly paginationService: PaginationService,
-    private readonly ngxPaginationService: NgxPaginationService) {
-    this.paginatePipe = new PaginatePipe(this.ngxPaginationService);
+    private readonly gridService: GridService) {
   }
 
   get title(): string {
@@ -37,8 +29,6 @@ export class BettypeGridComponent implements Grid {
     return new Observable(observer => {
       this.service.getTickets(this.gridService.filterModel).subscribe(data => {
         this.dataViewModel = data;
-        this.paginationInstance = this.paginationService.createPaginationInstance(this.dataViewModel.Total, 'bettype-pagination');
-        this.onPageChange();
       });
       observer.complete();
     });
@@ -49,34 +39,6 @@ export class BettypeGridComponent implements Grid {
     this.service.exportExcel(this.gridService.filterModel);
   }
 
-  onPageChange(): void {
-    this.createPaging();
-  }
-
-  private createPaging(): void {
-    if (this.gridService.filterModel.isPageChanged) {
-      this.paginationInstance.currentPage =
-        this.paginationInstance.itemsPerPage !== this.originalPageSize ? 1 : this.paginationInstance.currentPage;
-      this.gridService.filterModel.pageIndex = this.paginationInstance.currentPage;
-      this.gridService.filterModel.pageSize = this.paginationInstance.itemsPerPage;
-      this.gridService.filterModel.sportBettype = this.gridService.cachedSportBettypeForSport;
-
-      this.service.getTickets(this.gridService.filterModel).subscribe(data => {
-        this.dataViewModel = data;
-        this.createPagingTransform();
-      });
-    }
-
-    this.createPagingTransform();
-  }
-
-  private createPagingTransform(): void {
-    const paginateData = this.paginatePipe.transform(this.dataViewModel.TicketList, this.paginationInstance);
-    this.dataViewModel.TicketList = _.cloneDeep(paginateData);
-    this.gridService.filterModel.isPageChanged = true;
-    this.originalPageSize = this.paginationInstance.itemsPerPage;
-  }
-
   get hasData(): boolean {
     return !_.isNil(this.dataViewModel) && this.dataViewModel.Total > 0;
   }
@@ -85,14 +47,44 @@ export class BettypeGridComponent implements Grid {
     return _.isNil(data);
   }
 
-  showMatchDetailLevel(betType: number, betTypeName: string): void{
+  isLive(): boolean {
+    return this.gridService.filterModel.liveIndicator === 1;
+  }
+
+  showMatchDetailLevel(betType: number, betTypeName: string): void {
     this.gridService.matchDetailTitle = betTypeName;
     const sportBettypeList =
       this.gridService.cachedSportBettypeForSport.split(',').filter(x => x.split('_')[1] === betType.toString()).join(',');
     this.gridService.filterModel.sportBettype = sportBettypeList;
-    this.gridService.filterModel.pageSize = this.originalPageSize;
+    this.gridService.filterModel.pageSize = 100;
     this.gridService.filterModel.pageIndex = 1;
     this.gridService.generate(GridType.MatchDetail);
   }
 
+  showGameTimeLevel(outCome: string, betType: number, bettypeName: string): void {
+    this.gridService.gameTimeTitle = `${bettypeName} | ${outCome}`;
+    this.gridService.betTypeDrillDownQueryModel = _.assignIn(this.gridService.filterModel, { betType : betType, outCome: outCome, type: BetTypeDrillDownType.GAME_TIME });
+    this.gridService.betTypeDrillDownQueryModel.sportBettype = this.gridService.cachedSportBettypeForSport;
+    this.gridService.betTypeDrillDownQueryModel.pageIndex = 0;
+    this.gridService.betTypeDrillDownQueryModel.pageSize = 0;
+    this.gridService.generate(GridType.GameTime);
+  }
+
+  showWinningProbabilityLevel(betType: number, bettypeName: string): void {
+    this.gridService.winningProbabilityTitle = `${bettypeName}`;
+    this.gridService.betTypeDrillDownQueryModel =  _.assignIn(this.gridService.filterModel, { betType : betType, outCome: '', type: BetTypeDrillDownType.WINNING_PROBABILITY });
+    this.gridService.betTypeDrillDownQueryModel.sportBettype = this.gridService.cachedSportBettypeForSport;
+    this.gridService.betTypeDrillDownQueryModel.pageIndex = 0;
+    this.gridService.betTypeDrillDownQueryModel.pageSize = 0;
+    this.gridService.generate(GridType.WinningProbability);
+  }
+
+  showDetailGameTimeLevel(betType: number, bettypeName: string): void {
+    this.gridService.detailGameTimeTitle = `${bettypeName}`;
+    this.gridService.betTypeDrillDownQueryModel =  _.assignIn(this.gridService.filterModel, { betType : betType, outCome: '', type: BetTypeDrillDownType.DETAIL_GAME_TIME });
+    this.gridService.betTypeDrillDownQueryModel.sportBettype = this.gridService.cachedSportBettypeForSport;
+    this.gridService.betTypeDrillDownQueryModel.pageIndex = 0;
+    this.gridService.betTypeDrillDownQueryModel.pageSize = 0;
+    this.gridService.generate(GridType.DetailGameTime);
+  }
 }

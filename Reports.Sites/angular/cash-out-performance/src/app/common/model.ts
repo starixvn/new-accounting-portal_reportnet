@@ -1,3 +1,5 @@
+import { FilterModel } from "../filter/filter.model";
+
 export interface CommonTicketModel {
   COTurnover_RM: number;
   BBAmount_RM: number;
@@ -55,6 +57,9 @@ export interface EventStatusLevelModel extends CommonTicketModel {
 export interface BetTypeLevelModel extends CommonTicketModel {
   BetType: number;
   BetTypeName: string;
+  BetCount: number;
+  OutCome: string;
+  WinningProbabilityQuantile: string;
 }
 
 export interface MatchDetailLevelModel extends CommonTicketModel {
@@ -112,4 +117,11 @@ export interface ExcelQueryModel {
   export enum FilterType {
     SettledDate,
     CashedOutDate
+  }
+
+  export interface BetTypeDrillDownQueryModel extends FilterModel {
+    betType: number;
+    outCome: string;
+    title?: string;
+    type?: string;
   }
