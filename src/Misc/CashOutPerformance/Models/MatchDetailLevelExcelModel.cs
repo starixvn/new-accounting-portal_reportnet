@@ -80,7 +80,7 @@ public class MatchDetailLevelExcelModel
                 return cashOutTime;
             }
 
-            var date = DateTime.Parse(cashOutTime, new CultureInfo("en-US");
+            var date = DateTime.Parse(cashOutTime, new CultureInfo("en-US"));
             return date.ToString("yyyy-MM-dd hh:mm:ss tt");
 
         }
