@@ -34,7 +34,7 @@ public class SoccerLiveNonLiveController(
         var majorMinorGridOptions = builder.Build(winlosses[0], "Major/Minor");
         var majorMinorGridOptionsDecoration = decorator.Build(majorMinorGridOptions, "Major/Minor");
 
-        var liveNonLiveGridOptions = builder.Build(winlosses[-1], "Live/Non-Live");
+        var liveNonLiveGridOptions = builder.Build(winlosses[1], "Live/Non-Live");
         var liveNonLiveGridOptionsDecoration = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
 
         return [majorMinorGridOptionsDecoration, liveNonLiveGridOptionsDecoration];
