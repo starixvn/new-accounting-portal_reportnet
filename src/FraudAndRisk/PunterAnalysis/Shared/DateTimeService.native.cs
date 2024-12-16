@@ -15,17 +15,17 @@ public class DateTimeServiceImp : DateTimeService
 
     public DateTime GetFirstDateOfWeekIso8601(int year, int weekOfYear)
     {
-        var january = new DateTime(year, 1, 1);
+        var january = new DateTimeOffset(year, 1, 1, 0, 0, 0, TimeSpan.Zero);
         var daysOffset = DayOfWeek.Thursday - january.DayOfWeek;
 
         var firstThursday = january.AddDays(daysOffset);
         var calendar = CultureInfo.CurrentCulture.Calendar;
-        var firstWeek = calendar.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        var firstWeek = calendar.GetWeekOfYear(firstThursday.Date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
         var weekNum = firstWeek <= 1 ? weekOfYear - 1 : weekOfYear;
 
         var result = firstThursday.AddDays(weekNum * 7);
-        return result.AddDays(-DayOffsetFromStartOfWeek);
+        return result.AddDays(-DayOffsetFromStartOfWeek).Date;
     }
 
     public static int GetWeekOfYearIso8601(DateTime dateTime)
