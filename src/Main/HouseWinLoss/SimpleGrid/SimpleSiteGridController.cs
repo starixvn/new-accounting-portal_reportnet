@@ -4,40 +4,39 @@ using HouseWinLoss.Common.SiteWinLoss;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
 
-namespace HouseWinLoss.SimpleGrid
+namespace HouseWinLoss.SimpleGrid;
+
+[Route("api/house-win-loss-by-products/simple-site-grid")]
+[ApiController]
+public class SimpleSiteGridController(
+    SimpleCriteriaFactory modelFactory,
+    WinLossService service,
+    GridOptionsBuilder builder,
+    GridOptionColumnDecorator decorator)
+    : ControllerBase
 {
-    [Route("api/house-win-loss-by-products/simple-site-grid")]
-    [ApiController]
-    public class SimpleSiteGridController(
-        SimpleCriteriaFactory modelFactory,
-        WinLossService service,
-        GridOptionsBuilder builder,
-        GridOptionColumnDecorator decorator)
-        : ControllerBase
+    [Route("")]
+    public async Task<IActionResult> Json(Dictionary<string, object> queryModel)
     {
-        [Route("")]
-        public async Task<IActionResult> Json(Dictionary<string, object> queryModel)
-        {
-            var gridOptions = await GetGridOptions(queryModel);
+        var gridOptions = await GetGridOptions(queryModel);
 
-            return Ok(gridOptions);
-        }
+        return Ok(gridOptions);
+    }
 
-        [Route("excel")]
-        public async Task<IActionResult> Excel(Dictionary<string, object> queryModel)
-        {
-            var gridOptions = await GetGridOptions(queryModel);
+    [Route("excel")]
+    public async Task<IActionResult> Excel(Dictionary<string, object> queryModel)
+    {
+        var gridOptions = await GetGridOptions(queryModel);
 
-            return new FanexExcelResult(gridOptions, queryModel["sheetName"].ToString());
-        }
+        return new FanexExcelResult(gridOptions, queryModel["sheetName"].ToString());
+    }
 
-        private async Task<GridOptions> GetGridOptions(Dictionary<string, object> queryModel)
-        {
-            var criteria = modelFactory.CreateCriteria(queryModel);
-            var decorationModel = modelFactory.CreateGridDecorationModel(queryModel);
-            var winlosses = await service.Query(criteria);
-            var gridOptions = builder.Build(winlosses, decorationModel.Title);
-            return decorator.Build(gridOptions, decorationModel.MainColumnText, decorationModel.MainColumnWidth);
-        }
+    private async Task<GridOptions> GetGridOptions(Dictionary<string, object> queryModel)
+    {
+        var criteria = modelFactory.CreateCriteria(queryModel);
+        var decorationModel = modelFactory.CreateGridDecorationModel(queryModel);
+        var winlosses = await service.Query(criteria);
+        var gridOptions = builder.Build(winlosses, decorationModel.Title);
+        return decorator.Build(gridOptions, decorationModel.MainColumnText, decorationModel.MainColumnWidth);
     }
 }

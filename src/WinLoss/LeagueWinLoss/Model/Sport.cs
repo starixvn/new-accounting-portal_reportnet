@@ -1,11 +1,10 @@
-﻿namespace LeagueWinLoss.Model
+﻿namespace LeagueWinLoss.Model;
+
+public class Sport
 {
-    public class Sport
-    {
-        public int SportType { get; set; }
+    public int SportType { get; set; }
 
-        public string SportName { get; set; }
+    public string SportName { get; set; }
 
-        public List<BetTypeGroup> BettypeGroups { get; set; }
-    }
+    public List<BetTypeGroup> BettypeGroups { get; set; }
 }

@@ -1,9 +1,8 @@
-﻿namespace LeagueWinLoss.Model
-{
-    public class BetTypeWinLossItem
-    {
-        public BettypeWinLossBySite Total { get; set; }
+﻿namespace LeagueWinLoss.Model;
 
-        public List<BettypeWinLossBySite> BetTypes { get; set; }
-    }
+public class BetTypeWinLossItem
+{
+    public BettypeWinLossBySite Total { get; set; }
+
+    public List<BettypeWinLossBySite> BetTypes { get; set; }
 }

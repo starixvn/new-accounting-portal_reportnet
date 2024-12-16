@@ -1,11 +1,10 @@
-﻿namespace LeagueWinLoss.Model
+﻿namespace LeagueWinLoss.Model;
+
+public class LiveNonLiveWinLossModel
 {
-    public class LiveNonLiveWinLossModel
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public BettypeWinLossModel BetTypeWinLoss { get; set; }
-    }
+    public BettypeWinLossModel BetTypeWinLoss { get; set; }
 }

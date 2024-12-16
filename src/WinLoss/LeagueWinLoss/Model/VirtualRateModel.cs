@@ -1,13 +1,12 @@
-﻿namespace LeagueWinLoss.Model
+﻿namespace LeagueWinLoss.Model;
+
+public class VirtualRateModel
 {
-    public class VirtualRateModel
-    {
-        public string Sport { get; set; }
+    public string Sport { get; set; }
 
-        public string BetType { get; set; }
+    public string BetType { get; set; }
 
-        public string LiveStatus { get; set; }
+    public string LiveStatus { get; set; }
 
-        public decimal VirtualRate { get; set; }
-    }
+    public decimal VirtualRate { get; set; }
 }

@@ -1,14 +1,13 @@
 ﻿using TreeWinLoss.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class TreeWinLossInjection
 {
-    public static class TreeWinLossInjection
+    public static void RegisterTreeWinLossServices(this IServiceCollection service)
     {
-        public static void RegisterTreeWinLossServices(this IServiceCollection service)
-        {
-            service.AddTransient<CriteriaFactory, CriteriaFactoryImp>();
-            service.AddTransient<TreeWinLossService, TreeWinLossServiceImp>();
-            service.AddTransient<TreeWinLossExcelService, TreeWinLossExcelServiceImp>();
-        }
+        service.AddTransient<CriteriaFactory, CriteriaFactoryImp>();
+        service.AddTransient<TreeWinLossService, TreeWinLossServiceImp>();
+        service.AddTransient<TreeWinLossExcelService, TreeWinLossExcelServiceImp>();
     }
 }

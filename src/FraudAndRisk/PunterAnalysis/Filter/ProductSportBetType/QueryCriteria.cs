@@ -1,11 +1,10 @@
 ﻿using Fanex.Data.Repository;
 
-namespace PunterAnalysis.Filter.ProductSportBetType
-{
-    public class QueryCriteria : CriteriaBase
-    {
-        public override string GetSettingKey() => "Punter-ProductSportBetTypeQuery";
+namespace PunterAnalysis.Filter.ProductSportBetType;
 
-        public override bool IsValid() => true;
-    }
+public class QueryCriteria : CriteriaBase
+{
+    public override string GetSettingKey() => "Punter-ProductSportBetTypeQuery";
+
+    public override bool IsValid() => true;
 }

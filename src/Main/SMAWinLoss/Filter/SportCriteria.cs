@@ -1,11 +1,10 @@
 ﻿using Fanex.Data.Repository;
 
-namespace SMAWinLoss.Filter
-{
-    public class SportCriteria : CriteriaBase
-    {
-        public override string GetSettingKey() => "SMAWinLoss-SportSel";
+namespace SMAWinLoss.Filter;
 
-        public override bool IsValid() => true;
-    }
+public class SportCriteria : CriteriaBase
+{
+    public override string GetSettingKey() => "SMAWinLoss-SportSel";
+
+    public override bool IsValid() => true;
 }

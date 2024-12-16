@@ -1,47 +1,46 @@
 ﻿using HouseWinLoss.Common.MatchDetail;
 
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor
+namespace HouseWinLoss.DailyWinLoss2hSoccerMinor;
+
+public interface MatchSortingService
 {
-    public interface MatchSortingService
+    WinLossModel SortData(WinLossModel reportModel, string sortDirection, string sortColumnName);
+}
+
+public class MatchSortingServiceImp : MatchSortingService
+{
+    public WinLossModel SortData(WinLossModel reportModel, string sortDirection, string sortColumnName)
     {
-        WinLossModel SortData(WinLossModel reportModel, string sortDirection, string sortColumnName);
+        SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
+        SortStatisticsForParentGroup(reportModel, sortDirection, sortColumnName);
+        return reportModel;
     }
 
-    public class MatchSortingServiceImp : MatchSortingService
+    private static void SortStatisticsForPerChildGroup(WinLossModel reportModel, string sortDirection, string sortColumnName)
     {
-        public WinLossModel SortData(WinLossModel reportModel, string sortDirection, string sortColumnName)
+        foreach (var row in reportModel.Leagues)
         {
-            SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
-            SortStatisticsForParentGroup(reportModel, sortDirection, sortColumnName);
-            return reportModel;
+            Sort.SortByProperty(row.Matches, sortDirection, sortColumnName);
+        }
+    }
+
+    private static void SortStatisticsForParentGroup(WinLossModel reportModel, string sortDirection, string sortColumnName)
+    {
+        var propInfo = typeof(WinLoss).GetProperty(sortColumnName);
+        if (propInfo == null)
+        {
+            return;
         }
 
-        private static void SortStatisticsForPerChildGroup(WinLossModel reportModel, string sortDirection, string sortColumnName)
-        {
-            foreach (var row in reportModel.Leagues)
-            {
-                Sort.SortByProperty(row.Matches, sortDirection, sortColumnName);
-            }
-        }
-
-        private static void SortStatisticsForParentGroup(WinLossModel reportModel, string sortDirection, string sortColumnName)
-        {
-            var propInfo = typeof(WinLoss).GetProperty(sortColumnName);
-            if (propInfo == null)
-            {
-                return;
-            }
-
-            var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);
-            reportModel.Leagues = isAsc ?
+        var isAsc = string.Equals(sortDirection, SortingInformation.Ascending, StringComparison.OrdinalIgnoreCase);
+        reportModel.Leagues = isAsc ?
             reportModel
                 .Leagues
                 .OrderBy(s => propInfo.GetValue(s.Total, null))
                 .ToList() :
             reportModel
-                 .Leagues
+                .Leagues
                 .OrderByDescending(s => propInfo.GetValue(s.Total, null))
                 .ToList();
-        }
     }
 }

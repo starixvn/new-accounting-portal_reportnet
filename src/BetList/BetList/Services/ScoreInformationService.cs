@@ -5,73 +5,72 @@ using Fanex.Result.Core;
 using Fanex.Result.Core.Base;
 using Fanex.Result.Core.Sportsbook.DTO;
 
-namespace BetList.Services
+namespace BetList.Services;
+
+public interface ScoreInformationService
 {
-    public interface ScoreInformationService
+    Task<ScoreInformation> GetScoreInfo(GetScoreInformationCriteria criteria);
+}
+public class ScoreInformationServiceImp(IDynamicRepository repository) : ScoreInformationService
+{
+    public async Task<ScoreInformation> GetScoreInfo(GetScoreInformationCriteria criteria)
     {
-        Task<ScoreInformation> GetScoreInfo(GetScoreInformationCriteria criteria);
-    }
-    public class ScoreInformationServiceImp(IDynamicRepository repository) : ScoreInformationService
-    {
-        public async Task<ScoreInformation> GetScoreInfo(GetScoreInformationCriteria criteria)
+        var scoreInformation = new ScoreInformation();
+        var rawData = await repository.FetchMultipleAsync<Sportsbook, GameDetail>(criteria);
+        var sportsBooks = BindingScoreInformation(rawData);
+        scoreInformation.MatchId = criteria.MatchId;
+        scoreInformation.TraderName = criteria.TraderName;
+        var resultSettings = GetFanexResultSetting(criteria);
+
+
+        if (criteria.SportType != (int)SportType.Tennis || sportsBooks[0].GameDetails[0].MatchId == 0)
         {
-            var scoreInformation = new ScoreInformation();
-            var rawData = await repository.FetchMultipleAsync<Sportsbook, GameDetail>(criteria);
-            var sportsBooks = BindingScoreInformation(rawData);
-            scoreInformation.MatchId = criteria.MatchId;
-            scoreInformation.TraderName = criteria.TraderName;
-            var resultSettings = GetFanexResultSetting(criteria);
-
-
-            if (criteria.SportType != (int)SportType.Tennis || sportsBooks[0].GameDetails[0].MatchId == 0)
-            {
-                scoreInformation.MatchInformation = ResultEngine.HtmlParser(sportsBooks, resultSettings).Replace("original-title", " title ");
-                return scoreInformation;
-            }
-
-            scoreInformation.MatchInformation = ResultEngine.HtmlGameDetailParser(sportsBooks[0], resultSettings);
+            scoreInformation.MatchInformation = ResultEngine.HtmlParser(sportsBooks, resultSettings).Replace("original-title", " title ");
             return scoreInformation;
         }
 
-        private ResultSetting GetFanexResultSetting(GetScoreInformationCriteria criteria)
+        scoreInformation.MatchInformation = ResultEngine.HtmlGameDetailParser(sportsBooks[0], resultSettings);
+        return scoreInformation;
+    }
+
+    private ResultSetting GetFanexResultSetting(GetScoreInformationCriteria criteria)
+    {
+        return new ResultSetting
         {
-            return new ResultSetting
-            {
-                SportType = (SportType)criteria.SportType,
-                IsOutright = false,
-                IsParlayPopUp = false,
-                IsPopUp = true,
-                LanguageCode = "en-US"
-            };
-        }
+            SportType = (SportType)criteria.SportType,
+            IsOutright = false,
+            IsParlayPopUp = false,
+            IsPopUp = true,
+            LanguageCode = "en-US"
+        };
+    }
 
-        public List<Sportsbook> BindingScoreInformation((IEnumerable<Sportsbook>, IEnumerable<GameDetail>) rawData)
+    public List<Sportsbook> BindingScoreInformation((IEnumerable<Sportsbook>, IEnumerable<GameDetail>) rawData)
+    {
+        var result = new List<Sportsbook>();
+
+        if (rawData.Item1 == null || !rawData.Item1.Any())
         {
-            var result = new List<Sportsbook>();
-
-            if (rawData.Item1 == null || !rawData.Item1.Any())
-            {
-                return result;
-            }
-
-            var item = rawData.Item1.FirstOrDefault();
-            if (item == null)
-            {
-                return result;
-            }
-
-            if (rawData.Item2 != null && rawData.Item2.Any())
-            {
-                item.GameDetails.AddRange(rawData.Item2);
-            }
-            else
-            {
-                item.GameDetails.Add(new GameDetail());
-            }
-
-            result.Add(item);
-
             return result;
         }
+
+        var item = rawData.Item1.FirstOrDefault();
+        if (item == null)
+        {
+            return result;
+        }
+
+        if (rawData.Item2 != null && rawData.Item2.Any())
+        {
+            item.GameDetails.AddRange(rawData.Item2);
+        }
+        else
+        {
+            item.GameDetails.Add(new GameDetail());
+        }
+
+        result.Add(item);
+
+        return result;
     }
 }

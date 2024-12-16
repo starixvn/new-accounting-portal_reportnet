@@ -1,11 +1,10 @@
-﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string BetTypeFullTitle { get; set; }
+    public string BetTypeFullTitle { get; set; }
 
-        public string BetTypeLiveTitle { get; set; }
+    public string BetTypeLiveTitle { get; set; }
 
-        public string BetTypeNonLiveTitle { get; set; }
-    }
+    public string BetTypeNonLiveTitle { get; set; }
 }

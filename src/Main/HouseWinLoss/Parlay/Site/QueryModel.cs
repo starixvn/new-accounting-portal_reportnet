@@ -1,17 +1,16 @@
-﻿namespace HouseWinLoss.Parlay.Site
+﻿namespace HouseWinLoss.Parlay.Site;
+
+using Configuration;
+
+public class QueryModel
 {
-    using Configuration;
+    public DateTime StartDate { get; set; }
 
-    public class QueryModel
-    {
-        public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+    public bool NormalMode { get; set; } = true;
 
-        public bool NormalMode { get; set; } = true;
+    public string SiteType { get; set; } = Constants.SiteDefault;
 
-        public string SiteType { get; set; } = Constants.SiteDefault;
-
-        public int PermissionProfileID { get; set; } 
-    }
+    public int PermissionProfileID { get; set; } 
 }

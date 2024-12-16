@@ -3,39 +3,38 @@ using Fanex.Excel.Models;
 using HouseWinLoss.Common.BasicWinLoss;
 using HouseWinLoss.Common.Models;
 
-namespace HouseWinLoss.Common.SiteWinLoss
+namespace HouseWinLoss.Common.SiteWinLoss;
+
+public interface GridOptionsBuilder
 {
-    public interface GridOptionsBuilder
+    GridOptions Build(SiteWinLossModel winLoss, string title);
+}
+
+public class GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : GridOptionsBuilder
+{
+    public GridOptions Build(SiteWinLossModel winLoss, string title)
     {
-        GridOptions Build(SiteWinLossModel winLoss, string title);
+        return new GridOptions
+        {
+            ShowTitle = true,
+            TitleInfoText = title.ToUpperInvariant(),
+            TitleType = TitleType.TwoLineBlue,
+            BodyRows = BuildBodyRows(winLoss.Sites),
+            FooterRows = BuildFooter(winLoss.Total),
+            ShowFooter = true
+        };
     }
 
-    public class GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : GridOptionsBuilder
+    private List<GridDataRow> BuildBodyRows(IEnumerable<WinLoss> winLoss)
     {
-        public GridOptions Build(SiteWinLossModel winLoss, string title)
-        {
-            return new GridOptions
-            {
-                ShowTitle = true,
-                TitleInfoText = title.ToUpperInvariant(),
-                TitleType = TitleType.TwoLineBlue,
-                BodyRows = BuildBodyRows(winLoss.Sites),
-                FooterRows = BuildFooter(winLoss.Total),
-                ShowFooter = true
-            };
-        }
+        return winLoss
+            .Select(item => gridDataRowBuilder.BuildDataRow(item, HAlignment.Center))
+            .ToList();
+    }
 
-        private List<GridDataRow> BuildBodyRows(IEnumerable<WinLoss> winLoss)
-        {
-            return winLoss
-                .Select(item => gridDataRowBuilder.BuildDataRow(item, HAlignment.Center))
-                .ToList();
-        }
-
-        private List<GridDataRow> BuildFooter(WinLoss item)
-        {
-            var row = gridDataRowBuilder.BuildDataRow(item, HAlignment.Center);
-            return [row];
-        }
+    private List<GridDataRow> BuildFooter(WinLoss item)
+    {
+        var row = gridDataRowBuilder.BuildDataRow(item, HAlignment.Center);
+        return [row];
     }
 }

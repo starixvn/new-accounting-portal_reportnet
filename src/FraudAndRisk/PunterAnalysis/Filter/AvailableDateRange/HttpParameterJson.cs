@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-namespace PunterAnalysis.Filter.AvailableDateRange
-{
-    public class HttpParameterJson : IRequest<DateRange>;
-}
+namespace PunterAnalysis.Filter.AvailableDateRange;
+
+public class HttpParameterJson : IRequest<DateRange>;

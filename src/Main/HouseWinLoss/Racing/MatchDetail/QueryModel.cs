@@ -1,21 +1,20 @@
-﻿namespace HouseWinLoss.Racing.MatchDetail
+﻿namespace HouseWinLoss.Racing.MatchDetail;
+
+public class QueryModel
 {
-    public class QueryModel
-    {
-        public DateTime StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+    public DateTime EndDate { get; set; }
 
-        public bool NormalMode { get; set; } = true;
+    public bool NormalMode { get; set; } = true;
 
-        public bool IsNoDraw { get; set; }
+    public bool IsNoDraw { get; set; }
 
-        public int PermissionProfileID { get; set; }
+    public int PermissionProfileID { get; set; }
 
-        public int IsLive { get; set; }
+    public int IsLive { get; set; }
 
-        public int SportType { get; set; }
+    public int SportType { get; set; }
 
-        public int BetType { get; set; }
-    }
+    public int BetType { get; set; }
 }

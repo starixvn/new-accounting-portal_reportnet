@@ -24,42 +24,41 @@ using TreeWinLoss;
 using UpdatedUsernameCredit;
 using BetConstructPerformance;
 
-namespace Nap_Reports.Sites.App_Start
+namespace Reports.Sites.App_Start;
+
+public static class AutoMapperConfiguration
 {
-    public static class AutoMapperConfiguration
+    public static void Initialize(this IServiceCollection services)
     {
-        public static void Initialize(this IServiceCollection services)
-        {
-            var config = new MapperConfiguration(cfg => {
-                cfg.InitializeHouseWinLoss();
-                cfg.InitializeSMAWinLoss();
-                cfg.InitializeSBPerformance();
-                cfg.InitializeAbnormalBet();
-                cfg.InitializeActualMemberBet();
-                cfg.InitializeExchange();
-                cfg.InitializeCashOutPerformance();
-                cfg.InitializeUpdatedUsernameCredit();
-                cfg.InitializeSBCustomerPerformanceByDanger();
-                cfg.InitializePunterAnalysis();
-                cfg.InitializeParlay();
-                cfg.InitializeResultAnalysis();
-                cfg.InitializeTreeWinLoss();
-                cfg.InitializeNegativeBalance();
-                cfg.InitializeSuperBalance();
-                cfg.InitializeDirectBalance();
-                cfg.InitializeDailyCreatedCustomers();
-                cfg.InitializeBetCount();
-                cfg.InitializeParlayWon();
-                cfg.InitializeMarginReport();
-                cfg.InitializeTotalSmaAndMemberActive();
-                cfg.InitializeDuplicateTickets();
-                cfg.InitializeBetConstructPerformance();
-                cfg.InitializeLeagueWinLoss();
-            });
+        var config = new MapperConfiguration(cfg => {
+            cfg.InitializeHouseWinLoss();
+            cfg.InitializeSMAWinLoss();
+            cfg.InitializeSBPerformance();
+            cfg.InitializeAbnormalBet();
+            cfg.InitializeActualMemberBet();
+            cfg.InitializeExchange();
+            cfg.InitializeCashOutPerformance();
+            cfg.InitializeUpdatedUsernameCredit();
+            cfg.InitializeSBCustomerPerformanceByDanger();
+            cfg.InitializePunterAnalysis();
+            cfg.InitializeParlay();
+            cfg.InitializeResultAnalysis();
+            cfg.InitializeTreeWinLoss();
+            cfg.InitializeNegativeBalance();
+            cfg.InitializeSuperBalance();
+            cfg.InitializeDirectBalance();
+            cfg.InitializeDailyCreatedCustomers();
+            cfg.InitializeBetCount();
+            cfg.InitializeParlayWon();
+            cfg.InitializeMarginReport();
+            cfg.InitializeTotalSmaAndMemberActive();
+            cfg.InitializeDuplicateTickets();
+            cfg.InitializeBetConstructPerformance();
+            cfg.InitializeLeagueWinLoss();
+        });
 
-            var mapper = config.CreateMapper();
+        var mapper = config.CreateMapper();
 
-            services.AddSingleton(mapper);
-        }
+        services.AddSingleton(mapper);
     }
 }

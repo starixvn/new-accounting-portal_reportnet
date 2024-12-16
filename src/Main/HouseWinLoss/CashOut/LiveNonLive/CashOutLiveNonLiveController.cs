@@ -1,65 +1,64 @@
-﻿namespace HouseWinLoss.CashOut.LiveNonLive
+﻿namespace HouseWinLoss.CashOut.LiveNonLive;
+
+using AutoMapper;
+using Fanex.Excel.Models;
+using Common.BasicWinLoss;
+using Common.ColumnDecorators;
+using Common.Criteria;
+using Configuration;
+using Microsoft.AspNetCore.Mvc;
+using Utilities.ExcelResult;
+
+[Route("api/house-win-loss-by-products/cash-out/live-non-live")]
+[ApiController]
+public class CashOutLiveNonLiveController(
+    CashOutLiveNonLiveWinLossService service,
+    BasicGridOptionsBuilder builder,
+    GridOptionColumnDecoratorBasic decorator,
+    IMapper mapper)
+    : ControllerBase
 {
-    using AutoMapper;
-    using Fanex.Excel.Models;
-    using Common.BasicWinLoss;
-    using Common.ColumnDecorators;
-    using Common.Criteria;
-    using Configuration;
-    using Microsoft.AspNetCore.Mvc;
-    using Utilities.ExcelResult;
+    private readonly GridOptionColumnDecorator decorator = decorator;
 
-    [Route("api/house-win-loss-by-products/cash-out/live-non-live")]
-    [ApiController]
-    public class CashOutLiveNonLiveController(
-        CashOutLiveNonLiveWinLossService service,
-        BasicGridOptionsBuilder builder,
-        GridOptionColumnDecoratorBasic decorator,
-        IMapper mapper)
-        : ControllerBase
+    [Route("")]
+    public IActionResult Json(QueryModel queryModel)
     {
-        private readonly GridOptionColumnDecorator decorator = decorator;
+        var gridOptions = BuildGridOptions(queryModel);
 
-        [Route("")]
-        public IActionResult Json(QueryModel queryModel)
-        {
-            var gridOptions = BuildGridOptions(queryModel);
+        return Ok(gridOptions);
+    }
 
-            return Ok(gridOptions);
-        }
-
-        private async Task<IEnumerable<GridOptions>> BuildGridOptions(QueryModel queryModel)
-        {
+    private async Task<IEnumerable<GridOptions>> BuildGridOptions(QueryModel queryModel)
+    {
             
-            var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
-            var winlosses = (await service.Query(criteria)).ToArray();
+        var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
+        var winlosses = (await service.Query(criteria)).ToArray();
 
-            var majorMinorGridOptions = builder.Build(winlosses.First(), "Sport Type");
-            const int mainColumnWidth = 220;
-            var majorMinorDecorationGridOptions =  decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
+        var majorMinorGridOptions = builder.Build(winlosses.First(), "Sport Type");
+        const int mainColumnWidth = 220;
+        var majorMinorDecorationGridOptions =  decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
 
-            var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
-            var liveNonLiveDecorateGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
+        var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
+        var liveNonLiveDecorateGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
-            return [majorMinorDecorationGridOptions , liveNonLiveDecorateGridOptions];
-        }
+        return [majorMinorDecorationGridOptions , liveNonLiveDecorateGridOptions];
+    }
 
-        [Route("excel")]
-        public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
-        {
-            var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
-            var winlosses = (await service.Query(criteria)).ToArray();
+    [Route("excel")]
+    public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
+    {
+        var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
+        var winlosses = (await service.Query(criteria)).ToArray();
 
-            var majorMinorGridOptions = builder.Build(winlosses.First(), queryModel.BetTypeTitle);
-            const int mainColumnWidth = 220;
-            majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
+        var majorMinorGridOptions = builder.Build(winlosses.First(), queryModel.BetTypeTitle);
+        const int mainColumnWidth = 220;
+        majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
 
-            var liveNonLiveGridOptions = builder.Build(winlosses.Last(), queryModel.LiveNonLiveTitle);
-            liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
+        var liveNonLiveGridOptions = builder.Build(winlosses.Last(), queryModel.LiveNonLiveTitle);
+        liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
-            return new FanexExcelResult(
-                [majorMinorGridOptions, liveNonLiveGridOptions],
-                Constants.SheetName);
-        }
+        return new FanexExcelResult(
+            [majorMinorGridOptions, liveNonLiveGridOptions],
+            Constants.SheetName);
     }
 }

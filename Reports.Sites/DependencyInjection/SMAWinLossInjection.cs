@@ -1,18 +1,17 @@
 ﻿using SMAWinLoss.Filter;
 using SMAWinLoss.Summary;
 
-namespace Nap_Reports.Sites.DependencyInjection
-{
-    using SMAWinLoss.VirtualRate;
+namespace Reports.Sites.DependencyInjection;
 
-    public static class SMAWinLossInjection
+using SMAWinLoss.VirtualRate;
+
+public static class SMAWinLossInjection
+{
+    public static void RegisterSMAWinLossServices(this IServiceCollection service)
     {
-        public static void RegisterSMAWinLossServices(this IServiceCollection service)
-        {
-            service.AddTransient<FilterService, FilterServiceImp>();
-            service.AddTransient<WinLossService, WinLossServiceImp>();
-            service.AddTransient<VirtualRateService, VirtualRateServiceImp>();
-            service.AddTransient<ExcelBuilder, ExcelBuilderImp>();
-        }
+        service.AddTransient<FilterService, FilterServiceImp>();
+        service.AddTransient<WinLossService, WinLossServiceImp>();
+        service.AddTransient<VirtualRateService, VirtualRateServiceImp>();
+        service.AddTransient<ExcelBuilder, ExcelBuilderImp>();
     }
 }

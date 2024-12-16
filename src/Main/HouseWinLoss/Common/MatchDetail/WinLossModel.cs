@@ -1,13 +1,12 @@
-﻿namespace HouseWinLoss.Common.MatchDetail
+﻿namespace HouseWinLoss.Common.MatchDetail;
+
+public class WinLossModel
 {
-    public class WinLossModel
-    {
-        public List<LeagueWinLoss> Leagues { get; set; }
+    public List<LeagueWinLoss> Leagues { get; set; }
 
-        public WinLoss Total { get; set; }
+    public WinLoss Total { get; set; }
 
-        public List<WinLoss> RM { get; set; } = [];
+    public List<WinLoss> RM { get; set; } = [];
 
-        public int TotalRows { get; set; }
-    }
+    public int TotalRows { get; set; }
 }

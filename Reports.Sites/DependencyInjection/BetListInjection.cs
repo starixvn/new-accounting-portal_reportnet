@@ -1,12 +1,11 @@
 ﻿using BetList.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class BetListInjection
 {
-    public static class BetListInjection
+    public static void RegisterBetListServices(this IServiceCollection service)
     {
-        public static void RegisterBetListServices(this IServiceCollection service)
-        {
-            service.AddTransient<ScoreInformationService, ScoreInformationServiceImp>();
-        }
+        service.AddTransient<ScoreInformationService, ScoreInformationServiceImp>();
     }
 }

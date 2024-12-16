@@ -1,15 +1,14 @@
-﻿namespace NegativeBalance.Model
+﻿namespace NegativeBalance.Model;
+
+public class LicenseeModel
 {
-    public class LicenseeModel
-    {
-        public int LicenseeId { get; set; }
+    public int LicenseeId { get; set; }
 
-        public string LicenseeName { get; set; }
+    public string LicenseeName { get; set; }
 
-        public bool EnableBA { get; set; }
+    public bool EnableBA { get; set; }
 
-        public string BrandName { get; set;}
+    public string BrandName { get; set;}
 
-        public bool IsMultiAgent => LicenseeName == "12Bet";
-    }
+    public bool IsMultiAgent => LicenseeName == "12Bet";
 }

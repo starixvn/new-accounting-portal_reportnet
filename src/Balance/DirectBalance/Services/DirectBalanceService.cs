@@ -4,87 +4,86 @@ using Fanex.Data.Repository;
 using Utilities.Currencies;
 using Utilities.LinqDynamicSum;
 
-namespace DirectBalance.Services
+namespace DirectBalance.Services;
+
+public interface DirectBalanceService
 {
-    public interface DirectBalanceService
+    Task<List<CurrenciesModel>> GetCurrencies();
+
+    Task<DirectBalanceModel> GetDirectBalance(DirectBalanceCriteria criteria);
+
+    Task<DirectBalanceModel> GetDirectBalanceMasterDownLine(MasterDownlineCriteria criteria);
+
+    Task<DirectBalanceModel> GetDirectBalanceAgentDownLine(AgentDownlineCriteria criteria);
+}
+public class DirectBalanceServiceImp(IDynamicRepository repository, CurrenciesService currenciesService) : DirectBalanceService
+{
+    public async Task<DirectBalanceModel> GetDirectBalance(DirectBalanceCriteria criteria)
     {
-        Task<List<CurrenciesModel>> GetCurrencies();
-
-        Task<DirectBalanceModel> GetDirectBalance(DirectBalanceCriteria criteria);
-
-        Task<DirectBalanceModel> GetDirectBalanceMasterDownLine(MasterDownlineCriteria criteria);
-
-        Task<DirectBalanceModel> GetDirectBalanceAgentDownLine(AgentDownlineCriteria criteria);
-    }
-    public class DirectBalanceServiceImp(IDynamicRepository repository, CurrenciesService currenciesService) : DirectBalanceService
-    {
-        public async Task<DirectBalanceModel> GetDirectBalance(DirectBalanceCriteria criteria)
-        {
-            var result = new DirectBalanceModel();
+        var result = new DirectBalanceModel();
            
-            if (criteria.Currency == 0)
-            {
-                criteria.Currency = null;
-            }
+        if (criteria.Currency == 0)
+        {
+            criteria.Currency = null;
+        }
 
-            if (string.IsNullOrEmpty(criteria.Username))
-            {
-                criteria.Username = string.Empty;
-            }
+        if (string.IsNullOrEmpty(criteria.Username))
+        {
+            criteria.Username = string.Empty;
+        }
 
-            var rawData = await repository.FetchAsync<DirectBalanceItemModel>(criteria);
+        var rawData = await repository.FetchAsync<DirectBalanceItemModel>(criteria);
 
-            if (rawData == null)
-            {
-                return result;
-            }
+        if (rawData == null)
+        {
+            return result;
+        }
 
-            result.DirectBalanceItems = rawData;
+        result.DirectBalanceItems = rawData;
                 
-            var total = rawData.DynamicSum();
-            result.Total = total;
+        var total = rawData.DynamicSum();
+        result.Total = total;
 
+        return result;
+    }
+
+    public async Task<DirectBalanceModel> GetDirectBalanceMasterDownLine(MasterDownlineCriteria criteria)
+    {
+        var result = await GetBalanceDownline(criteria);
+
+        return result;
+    }
+
+    public async Task<DirectBalanceModel> GetDirectBalanceAgentDownLine(AgentDownlineCriteria criteria)
+    {
+        var result = await GetBalanceDownline(criteria);
+
+        return result;
+    }
+
+    private async Task<DirectBalanceModel> GetBalanceDownline(CriteriaBase criteria)
+    {
+        var result = new DirectBalanceModel();
+
+        var rawData = await repository.FetchAsync<DirectBalanceItemModel>(criteria);
+
+        if (rawData == null)
+        {
             return result;
         }
 
-        public async Task<DirectBalanceModel> GetDirectBalanceMasterDownLine(MasterDownlineCriteria criteria)
-        {
-            var result = await GetBalanceDownline(criteria);
+        result.DirectBalanceItems = rawData.Where(item => item.Balance != 0);
 
-            return result;
-        }
+        var total = rawData.DynamicSum();
+        result.Total = total;
 
-        public async Task<DirectBalanceModel> GetDirectBalanceAgentDownLine(AgentDownlineCriteria criteria)
-        {
-            var result = await GetBalanceDownline(criteria);
+        return result;
+    }
 
-            return result;
-        }
+    public async Task<List<CurrenciesModel>> GetCurrencies()
+    {
+        var result = await currenciesService.GetCurrencies();
 
-        private async Task<DirectBalanceModel> GetBalanceDownline(CriteriaBase criteria)
-        {
-            var result = new DirectBalanceModel();
-
-            var rawData = await repository.FetchAsync<DirectBalanceItemModel>(criteria);
-
-            if (rawData == null)
-            {
-                return result;
-            }
-
-            result.DirectBalanceItems = rawData.Where(item => item.Balance != 0);
-
-            var total = rawData.DynamicSum();
-            result.Total = total;
-
-            return result;
-        }
-
-        public async Task<List<CurrenciesModel>> GetCurrencies()
-        {
-            var result = await currenciesService.GetCurrencies();
-
-            return result.OrderBy(x => x.CurrencyName).ToList();
-        }
+        return result.OrderBy(x => x.CurrencyName).ToList();
     }
 }

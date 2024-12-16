@@ -1,9 +1,8 @@
-﻿namespace HouseWinLoss.OtherSports.LiveNonLive
-{
-    public class ExcelQueryModel : QueryModel
-    {
-        public string SportTypeTitle { get; set; }
+﻿namespace HouseWinLoss.OtherSports.LiveNonLive;
 
-        public string LiveNonLiveTitle { get; set; }
-    }
+public class ExcelQueryModel : QueryModel
+{
+    public string SportTypeTitle { get; set; }
+
+    public string LiveNonLiveTitle { get; set; }
 }

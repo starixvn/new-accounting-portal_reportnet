@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-namespace ActualMemberBet.Filter
-{
-    public class SiteHttpParameter : IRequest<IEnumerable<Site>>;
-}
+namespace ActualMemberBet.Filter;
+
+public class SiteHttpParameter : IRequest<IEnumerable<Site>>;

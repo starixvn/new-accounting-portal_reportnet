@@ -2,94 +2,93 @@
 using OfficeOpenXml;
 using Utilities.LinqDynamicSum;
 
-namespace PunterAnalysis.Shared
+namespace PunterAnalysis.Shared;
+
+public interface PunterAnalysisExcelBuilder
 {
-    public interface PunterAnalysisExcelBuilder
+    ExcelPackage CreateExcelPackage<T>(SummaryEntity<T> model, ExcelSetting settings) where T : class, new();
+}
+
+public class PunterAnalysisExcelBuilderImp : PunterAnalysisExcelBuilder
+{
+    private ExcelWorksheet statisticSheet;
+
+    private ExcelWorksheet totalTemplateSheet;
+
+    private int startRowIndex;
+
+    private int endRowIndex;
+
+    public ExcelPackage CreateExcelPackage<T>(SummaryEntity<T> model, ExcelSetting settings) where T : class, new()
     {
-        ExcelPackage CreateExcelPackage<T>(SummaryEntity<T> model, ExcelSetting settings) where T : class, new();
+        var excelPackage = LoadTemplate(settings.TemplatePath);
+        ApplySetting();
+        Build(model, settings);
+        ClearTemplate(excelPackage);
+
+        return excelPackage;
     }
 
-    public class PunterAnalysisExcelBuilderImp : PunterAnalysisExcelBuilder
+    private ExcelPackage LoadTemplate(string templatePath)
     {
-        private ExcelWorksheet statisticSheet;
+        using var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read);
+        var excelPackage = new ExcelPackage(stream);
+        statisticSheet = excelPackage.Workbook.Worksheets.Copy("Template", "Statistic");
+        totalTemplateSheet = excelPackage.Workbook.Worksheets["TotalTemplate"];
 
-        private ExcelWorksheet totalTemplateSheet;
+        return excelPackage;
+    }
 
-        private int startRowIndex;
+    private void ApplySetting()
+    {
+        statisticSheet.OutLineSummaryBelow = false;
+    }
 
-        private int endRowIndex;
+    private void ClearTemplate(ExcelPackage excelPackage)
+    {
+        excelPackage.Workbook.Worksheets.Delete("Template");
+        excelPackage.Workbook.Worksheets.Delete(totalTemplateSheet);
+    }
 
-        public ExcelPackage CreateExcelPackage<T>(SummaryEntity<T> model, ExcelSetting settings) where T : class, new()
-        {
-            var excelPackage = LoadTemplate(settings.TemplatePath);
-            ApplySetting();
-            Build(model, settings);
-            ClearTemplate(excelPackage);
+    private void Build<T>(SummaryEntity<T> model, ExcelSetting setting) where T : class, new()
+    {
+        SetStartRowIndex(setting.StartRowIndex);
+        SetEndRowIndex(setting.StartRowIndex, model.Entities.Count);
+        SetSheetName(setting.SheetName);
+        ApplyDescription(setting.Title, setting.TitleCellRange);
+        ApplyDescription(setting.Filter, setting.FilterCellRange);
+        ApplyBody(model.Entities);
+        ApplyFooter(model.Total);
+    }
 
-            return excelPackage;
-        }
+    private void SetStartRowIndex(int rowIndex)
+    {
+        startRowIndex = rowIndex;
+    }
 
-        private ExcelPackage LoadTemplate(string templatePath)
-        {
-            using var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read);
-            var excelPackage = new ExcelPackage(stream);
-            statisticSheet = excelPackage.Workbook.Worksheets.Copy("Template", "Statistic");
-            totalTemplateSheet = excelPackage.Workbook.Worksheets["TotalTemplate"];
+    private void SetEndRowIndex(int rowIndex, int numberBodyItems)
+    {
+        endRowIndex = rowIndex + numberBodyItems;
+    }
 
-            return excelPackage;
-        }
+    private void SetSheetName(string sheetName)
+    {
+        statisticSheet.Name = sheetName;
+    }
 
-        private void ApplySetting()
-        {
-            statisticSheet.OutLineSummaryBelow = false;
-        }
+    private void ApplyDescription(string description, string descriptionCellRange)
+    {
+        statisticSheet.Cells[descriptionCellRange].Value = description;
+    }
 
-        private void ClearTemplate(ExcelPackage excelPackage)
-        {
-            excelPackage.Workbook.Worksheets.Delete("Template");
-            excelPackage.Workbook.Worksheets.Delete(totalTemplateSheet);
-        }
+    private void ApplyBody<T>(IEnumerable<T> statistics) where T : class, new()
+    {
+        statisticSheet.ApplyVertical(statistics, startRowIndex);
+    }
 
-        private void Build<T>(SummaryEntity<T> model, ExcelSetting setting) where T : class, new()
-        {
-            SetStartRowIndex(setting.StartRowIndex);
-            SetEndRowIndex(setting.StartRowIndex, model.Entities.Count);
-            SetSheetName(setting.SheetName);
-            ApplyDescription(setting.Title, setting.TitleCellRange);
-            ApplyDescription(setting.Filter, setting.FilterCellRange);
-            ApplyBody(model.Entities);
-            ApplyFooter(model.Total);
-        }
-
-        private void SetStartRowIndex(int rowIndex)
-        {
-            startRowIndex = rowIndex;
-        }
-
-        private void SetEndRowIndex(int rowIndex, int numberBodyItems)
-        {
-            endRowIndex = rowIndex + numberBodyItems;
-        }
-
-        private void SetSheetName(string sheetName)
-        {
-            statisticSheet.Name = sheetName;
-        }
-
-        private void ApplyDescription(string description, string descriptionCellRange)
-        {
-            statisticSheet.Cells[descriptionCellRange].Value = description;
-        }
-
-        private void ApplyBody<T>(IEnumerable<T> statistics) where T : class, new()
-        {
-            statisticSheet.ApplyVertical(statistics, startRowIndex);
-        }
-
-        private void ApplyFooter<T>(T total) where T : class, new()
-        {
-            statisticSheet.ApplyModel(totalTemplateSheet, total, endRowIndex);
-            statisticSheet.Cells[$"A{endRowIndex}"].Value = "Total";
-        }
+    private void ApplyFooter<T>(T total) where T : class, new()
+    {
+        statisticSheet.ApplyModel(totalTemplateSheet, total, endRowIndex);
+        statisticSheet.Cells[$"A{endRowIndex}"].Value = "Total";
     }
 }

@@ -1,40 +1,39 @@
-﻿namespace HouseWinLoss.Soccer.BetTypeFull
+﻿namespace HouseWinLoss.Soccer.BetTypeFull;
+
+using AutoMapper;
+using Common.BasicWinLoss;
+using Common.ColumnDecorators;
+using Configuration;
+using GroupBetType;
+using SumBetType;
+
+public interface AbstractFactory
 {
-    using AutoMapper;
-    using Common.BasicWinLoss;
-    using Common.ColumnDecorators;
-    using Configuration;
-    using GroupBetType;
-    using SumBetType;
+    GridOptionFactory CreateGridOptionFactory(bool isMajor, int isLive);
+}
 
-    public interface AbstractFactory
+public class AbstractFactoryImp(
+    SumBetTypeWinLossService sumBetTypeWinLossService,
+    SumBetTypeGridOptionsBuilder sumBetTypeGridOptionsBuilder,
+    GroupBetTypeWinLossService groupBetTypeWinLossService,
+    GroupBetTypeGridOptionsBuilder groupBetTypeGridOptionsBuilder,
+    BasicWinLossService basicWinLossService,
+    BasicGridOptionsBuilder basicGridOptionsBuilder,
+    GridOptionColumnDecoratorFull decorator,
+    IMapper mapper)
+    : AbstractFactory
+{
+    private readonly GridOptionColumnDecorator decorator = decorator;
+
+    public GridOptionFactory CreateGridOptionFactory(bool isMajor, int isLive)
     {
-        GridOptionFactory CreateGridOptionFactory(bool isMajor, int isLive);
-    }
-
-    public class AbstractFactoryImp(
-        SumBetTypeWinLossService sumBetTypeWinLossService,
-        SumBetTypeGridOptionsBuilder sumBetTypeGridOptionsBuilder,
-        GroupBetTypeWinLossService groupBetTypeWinLossService,
-        GroupBetTypeGridOptionsBuilder groupBetTypeGridOptionsBuilder,
-        BasicWinLossService basicWinLossService,
-        BasicGridOptionsBuilder basicGridOptionsBuilder,
-        GridOptionColumnDecoratorFull decorator,
-        IMapper mapper)
-        : AbstractFactory
-    {
-        private readonly GridOptionColumnDecorator decorator = decorator;
-
-        public GridOptionFactory CreateGridOptionFactory(bool isMajor, int isLive)
+        return isMajor switch
         {
-            return isMajor switch
-            {
-                true when isLive == Constants.LiveDefault => new GridOptionFactorySumBetType(sumBetTypeWinLossService,
-                    sumBetTypeGridOptionsBuilder, decorator, mapper),
-                true when isLive == 0 => new GridOptionFactoryGroupBetType(groupBetTypeWinLossService,
-                    groupBetTypeGridOptionsBuilder, decorator, mapper),
-                _ => new GridOptionFactoryBetType(basicWinLossService, basicGridOptionsBuilder, decorator, mapper)
-            };
-        }
+            true when isLive == Constants.LiveDefault => new GridOptionFactorySumBetType(sumBetTypeWinLossService,
+                sumBetTypeGridOptionsBuilder, decorator, mapper),
+            true when isLive == 0 => new GridOptionFactoryGroupBetType(groupBetTypeWinLossService,
+                groupBetTypeGridOptionsBuilder, decorator, mapper),
+            _ => new GridOptionFactoryBetType(basicWinLossService, basicGridOptionsBuilder, decorator, mapper)
+        };
     }
 }

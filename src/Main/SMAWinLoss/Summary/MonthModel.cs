@@ -1,9 +1,8 @@
-﻿namespace SMAWinLoss.Summary
-{
-    public class MonthModel
-    {
-        public string Month { get; set; }
+﻿namespace SMAWinLoss.Summary;
 
-        public decimal? Value { get; set; }
-    }
+public class MonthModel
+{
+    public string Month { get; set; }
+
+    public decimal? Value { get; set; }
 }

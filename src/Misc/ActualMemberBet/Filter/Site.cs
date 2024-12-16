@@ -1,9 +1,8 @@
-﻿namespace ActualMemberBet.Filter
-{
-    public class Site
-    {
-        public int SiteType { get; set; }
+﻿namespace ActualMemberBet.Filter;
 
-        public string SiteName { get; set; }
-    }
+public class Site
+{
+    public int SiteType { get; set; }
+
+    public string SiteName { get; set; }
 }

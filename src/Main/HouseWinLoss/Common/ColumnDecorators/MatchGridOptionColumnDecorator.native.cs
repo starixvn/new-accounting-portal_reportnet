@@ -1,9 +1,8 @@
 ﻿using Fanex.Excel.Models;
 
-namespace HouseWinLoss.Common.ColumnDecorators
+namespace HouseWinLoss.Common.ColumnDecorators;
+
+public interface MatchGridOptionColumnDecorator
 {
-    public interface MatchGridOptionColumnDecorator
-    {
-        GridOptions Build(GridOptions gridOptions);
-    }
+    GridOptions Build(GridOptions gridOptions);
 }

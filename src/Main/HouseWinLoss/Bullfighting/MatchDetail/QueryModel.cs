@@ -1,21 +1,20 @@
-﻿namespace HouseWinLoss.Bullfighting.MatchDetail
+﻿namespace HouseWinLoss.Bullfighting.MatchDetail;
+
+public class QueryModel
 {
-    public class QueryModel
-    {
-        public DateTime StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+    public DateTime EndDate { get; set; }
 
-        public bool NormalMode { get; set; } = true;
+    public bool NormalMode { get; set; } = true;
 
-        public int SportType { get; set; }
+    public int SportType { get; set; }
 
-        public int BetType { get; set; }
+    public int BetType { get; set; }
 
-        public int PermissionProfileID { get; set; }
+    public int PermissionProfileID { get; set; }
 
-        public bool IsLive { get; set; }
+    public bool IsLive { get; set; }
 
 
-    }
 }

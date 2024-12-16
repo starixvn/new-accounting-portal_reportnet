@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-namespace SMAWinLoss.Filter
-{
-    public class AvailableDatabaseHttpParameter : IRequest<bool>;
-}
+namespace SMAWinLoss.Filter;
+
+public class AvailableDatabaseHttpParameter : IRequest<bool>;

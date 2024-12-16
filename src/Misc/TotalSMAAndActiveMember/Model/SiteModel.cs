@@ -1,9 +1,8 @@
-﻿namespace TotalSMAAndActiveMember.Model
-{
-    public class SiteModel
-    {
-        public int Id { get; set; }
+﻿namespace TotalSMAAndActiveMember.Model;
 
-        public string Name { get; set; }
-    }
+public class SiteModel
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; }
 }

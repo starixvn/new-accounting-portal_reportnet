@@ -1,22 +1,21 @@
 ﻿using Fanex.Data.Repository;
 
-namespace Utilities.PermissionFilter
+namespace Utilities.PermissionFilter;
+
+public interface PermissionFilterService
 {
-    public interface PermissionFilterService
-    {
-        Task<int> GetPermissionProfileId(string functionKeyValue);
-    }
+    Task<int> GetPermissionProfileId(string functionKeyValue);
+}
 
-    public class PermissionFilterServiceImp(IDynamicRepository repository) : PermissionFilterService
+public class PermissionFilterServiceImp(IDynamicRepository repository) : PermissionFilterService
+{
+    public async Task<int> GetPermissionProfileId(string functionKeyValue)
     {
-        public async Task<int> GetPermissionProfileId(string functionKeyValue)
+        var criteria = new PermissionCriteria
         {
-            var criteria = new PermissionCriteria
-            {
-                FunctionKey = functionKeyValue
-            };
+            FunctionKey = functionKeyValue
+        };
 
-            return await repository.GetAsync<int>(criteria);
-        }
+        return await repository.GetAsync<int>(criteria);
     }
 }

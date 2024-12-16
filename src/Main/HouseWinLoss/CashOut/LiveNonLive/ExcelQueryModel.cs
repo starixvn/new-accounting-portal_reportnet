@@ -1,9 +1,8 @@
-﻿namespace HouseWinLoss.CashOut.LiveNonLive
-{
-    public class ExcelQueryModel : QueryModel
-    {
-        public string BetTypeTitle { get; set; }
+﻿namespace HouseWinLoss.CashOut.LiveNonLive;
 
-        public string LiveNonLiveTitle { get; set; }
-    }
+public class ExcelQueryModel : QueryModel
+{
+    public string BetTypeTitle { get; set; }
+
+    public string LiveNonLiveTitle { get; set; }
 }

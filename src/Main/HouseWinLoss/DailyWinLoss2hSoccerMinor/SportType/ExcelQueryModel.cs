@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.SportType
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.SportType;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

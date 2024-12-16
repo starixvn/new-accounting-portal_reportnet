@@ -1,21 +1,20 @@
 using Fanex.Data.Repository;
 
-namespace DailyCreatedCustomers.Criteria
+namespace DailyCreatedCustomers.Criteria;
+
+public class DailyCreatedCustomersCriteria : CriteriaBase
 {
-    public class DailyCreatedCustomersCriteria : CriteriaBase
+    public DateTime Fromdate { get; set; }
+
+    public DateTime Todate { get; set; }
+
+    public override string GetSettingKey()
     {
-        public DateTime Fromdate { get; set; }
+        return "Misc_DailyCreatedCustomers_GetReport";
+    }
 
-        public DateTime Todate { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "Misc_DailyCreatedCustomers_GetReport";
-        }
-
-        public override bool IsValid()
-        {
-            return Fromdate <= Todate;
-        }
+    public override bool IsValid()
+    {
+        return Fromdate <= Todate;
     }
 }

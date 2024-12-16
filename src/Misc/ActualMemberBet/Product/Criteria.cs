@@ -1,21 +1,20 @@
 ﻿using Fanex.Data.Repository;
 
-namespace ActualMemberBet.Product
+namespace ActualMemberBet.Product;
+
+public class Criteria : CriteriaBase
 {
-    public class Criteria : CriteriaBase
-    {
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public int SiteType { get; set; }
+    public int SiteType { get; set; }
 
-        public int CurrencyId { get; set; }
+    public int CurrencyId { get; set; }
 
-        public string OddsType { get; set; }
+    public string OddsType { get; set; }
 
-        public override bool IsValid() => true;
+    public override bool IsValid() => true;
 
-        public override string GetSettingKey() => "Actual-Member-Bet-Product";
-    }
+    public override string GetSettingKey() => "Actual-Member-Bet-Product";
 }

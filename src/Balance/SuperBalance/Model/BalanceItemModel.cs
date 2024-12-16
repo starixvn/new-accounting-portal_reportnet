@@ -1,27 +1,26 @@
-﻿namespace SuperBalance.Model
+﻿namespace SuperBalance.Model;
+
+public class BalanceItemModel
 {
-    public class BalanceItemModel
+    public string CustId { get; set; }
+
+    public string Username { get; set; }
+
+    public string Currency { get; set; }
+
+    public string CurrencyName { get; set; }
+
+    public bool HeadlineEnabled { get; set; }
+
+    public decimal Balance { get; set; }
+
+    public decimal BaseBalance { get; set; }
+
+    public static BalanceItemModel operator +(BalanceItemModel a, BalanceItemModel b)
     {
-        public string CustId { get; set; }
-
-        public string Username { get; set; }
-
-        public string Currency { get; set; }
-
-        public string CurrencyName { get; set; }
-
-        public bool HeadlineEnabled { get; set; }
-
-        public decimal Balance { get; set; }
-
-        public decimal BaseBalance { get; set; }
-
-        public static BalanceItemModel operator +(BalanceItemModel a, BalanceItemModel b)
+        return new BalanceItemModel
         {
-            return new BalanceItemModel
-            {
-                BaseBalance = a.BaseBalance + b.BaseBalance
-            };
-        }
+            BaseBalance = a.BaseBalance + b.BaseBalance
+        };
     }
 }

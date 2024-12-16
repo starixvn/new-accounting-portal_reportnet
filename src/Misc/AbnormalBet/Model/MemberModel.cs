@@ -1,9 +1,8 @@
-﻿namespace AbnormalBet.Model
-{
-    public class MemberModel
-    {
-        public IEnumerable<MemberItemModel> Members { get; set; }
+﻿namespace AbnormalBet.Model;
 
-        public int TotalItems { get; set; }
-    }
+public class MemberModel
+{
+    public IEnumerable<MemberItemModel> Members { get; set; }
+
+    public int TotalItems { get; set; }
 }

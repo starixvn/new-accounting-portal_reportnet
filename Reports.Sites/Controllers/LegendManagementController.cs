@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Nap_Reports.Sites.Controllers;
+namespace Reports.Sites.Controllers;
 
 public class LegendManagementController : Controller
 {

@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.Products
+﻿namespace HouseWinLoss.Products;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

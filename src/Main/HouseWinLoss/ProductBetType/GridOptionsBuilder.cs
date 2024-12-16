@@ -3,46 +3,45 @@ using Fanex.Excel.Models;
 using HouseWinLoss.Common.BasicWinLoss;
 using HouseWinLoss.Common.Models;
 
-namespace HouseWinLoss.ProductBetType
+namespace HouseWinLoss.ProductBetType;
+
+public interface GridOptionsBuilder
 {
-    public interface GridOptionsBuilder
+    GridOptions Build(ProductBetTypeWinLoss winLoss, string title);
+}
+
+public class GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : GridOptionsBuilder
+{
+    public GridOptions Build(ProductBetTypeWinLoss winLoss, string title)
     {
-        GridOptions Build(ProductBetTypeWinLoss winLoss, string title);
+        var bodyRows = BuildBodyRows(winLoss);
+
+        return new GridOptions
+        {
+            CustomizeHeader = true,
+            ShowTitle = true,
+            TitleType = TitleType.TwoLineBlue,
+            TitleInfoText = title.ToUpperInvariant(),
+            BodyRows = bodyRows.ToList(),
+            FooterRows = BuildFooter(winLoss.GrandTotal),
+            ShowHighlightRow = false,
+            ShowDistinctRow = false,
+            ShowFooter = true,
+            ShowTree = true
+        };
     }
 
-    public class GridOptionsBuilderImp(BasicGridDataRowBuilder gridDataRowBuilder) : GridOptionsBuilder
+    private IEnumerable<GridDataRow> BuildBodyRows(ProductBetTypeWinLoss winLosses)
     {
-        public GridOptions Build(ProductBetTypeWinLoss winLoss, string title)
-        {
-            var bodyRows = BuildBodyRows(winLoss);
+        return from betTypeWinLoss in winLosses.BetTypes select gridDataRowBuilder.BuildDataRow(betTypeWinLoss, HAlignment.Left);
+    }
 
-            return new GridOptions
-            {
-                CustomizeHeader = true,
-                ShowTitle = true,
-                TitleType = TitleType.TwoLineBlue,
-                TitleInfoText = title.ToUpperInvariant(),
-                BodyRows = bodyRows.ToList(),
-                FooterRows = BuildFooter(winLoss.GrandTotal),
-                ShowHighlightRow = false,
-                ShowDistinctRow = false,
-                ShowFooter = true,
-                ShowTree = true
-            };
-        }
+    private List<GridDataRow> BuildFooter(WinLoss winLosses)
+    {
+        var result = new List<GridDataRow>();
+        var row = gridDataRowBuilder.BuildDataRow(winLosses, HAlignment.Center);
+        result.Add(row);
 
-        private IEnumerable<GridDataRow> BuildBodyRows(ProductBetTypeWinLoss winLosses)
-        {
-            return from betTypeWinLoss in winLosses.BetTypes select gridDataRowBuilder.BuildDataRow(betTypeWinLoss, HAlignment.Left);
-        }
-
-        private List<GridDataRow> BuildFooter(WinLoss winLosses)
-        {
-            var result = new List<GridDataRow>();
-            var row = gridDataRowBuilder.BuildDataRow(winLosses, HAlignment.Center);
-            result.Add(row);
-
-            return result;
-        }
+        return result;
     }
 }

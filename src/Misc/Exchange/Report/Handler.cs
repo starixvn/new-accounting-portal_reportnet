@@ -1,20 +1,19 @@
 ﻿using MediatR;
 using Utilities.LinqDynamicSum;
 
-namespace Exchange.Report
+namespace Exchange.Report;
+
+public class Handler(Service service) : IRequestHandler<LicenseeHttpParameterJson, ExchangeModel>,
+    IRequestHandler<HttpParameterJson, SummaryEntity<ExchangeItemModel>>
 {
-    public class Handler(Service service) : IRequestHandler<LicenseeHttpParameterJson, ExchangeModel>,
-        IRequestHandler<HttpParameterJson, SummaryEntity<ExchangeItemModel>>
+    public async Task<ExchangeModel> Handle(LicenseeHttpParameterJson request, CancellationToken cancellationToken)
     {
-        public async Task<ExchangeModel> Handle(LicenseeHttpParameterJson request, CancellationToken cancellationToken)
-        {
 
-            return await service.QueryLicensee(request);
-        }
+        return await service.QueryLicensee(request);
+    }
 
-        public async Task<SummaryEntity<ExchangeItemModel>> Handle(HttpParameterJson request, CancellationToken cancellationToken)
-        {
-            return await service.Query(request);
-        }
+    public async Task<SummaryEntity<ExchangeItemModel>> Handle(HttpParameterJson request, CancellationToken cancellationToken)
+    {
+        return await service.Query(request);
     }
 }

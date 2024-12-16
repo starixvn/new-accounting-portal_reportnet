@@ -1,6 +1,6 @@
 ﻿using SaveBetReport.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection;
+namespace Reports.Sites.DependencyInjection;
 
 public static class SaveBetInjection
 {

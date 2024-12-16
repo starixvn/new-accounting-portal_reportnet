@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using Margin.Model;
 
-namespace Margin
+namespace Margin;
+
+public static class AutoMapperConfiguration
 {
-    public static class AutoMapperConfiguration
+    public static void InitializeMarginReport(this IProfileExpression cfg)
     {
-        public static void InitializeMarginReport(this IProfileExpression cfg)
-        {
-            cfg.CreateMap<MarginWinLossModel, MarginWinLossExcelModel>();
-        }
+        cfg.CreateMap<MarginWinLossModel, MarginWinLossExcelModel>();
     }
 }

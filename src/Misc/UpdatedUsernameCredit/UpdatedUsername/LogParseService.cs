@@ -1,27 +1,26 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace UpdatedUsernameCredit.UpdatedUsername
+namespace UpdatedUsernameCredit.UpdatedUsername;
+
+public interface LogParseService
 {
-    public interface LogParseService
-    {
-        UsernameLogModel GetUsernameLog(string tracking);
-    }
+    UsernameLogModel GetUsernameLog(string tracking);
+}
 
-    public class LogParseServiceImp : LogParseService
+public class LogParseServiceImp : LogParseService
+{
+    public UsernameLogModel GetUsernameLog(string tracking)
     {
-        public UsernameLogModel GetUsernameLog(string tracking)
+        var fromNameRegex = new Regex("""(?<=\bFromName=")[^"]*""");
+        var fromNameMatch = fromNameRegex.Match(tracking);
+
+        var toNameRegex = new Regex("""(?<=\bToName=")[^"]*""");
+        var toNameMatch = toNameRegex.Match(tracking);
+
+        return new UsernameLogModel
         {
-            var fromNameRegex = new Regex("""(?<=\bFromName=")[^"]*""");
-            var fromNameMatch = fromNameRegex.Match(tracking);
-
-            var toNameRegex = new Regex("""(?<=\bToName=")[^"]*""");
-            var toNameMatch = toNameRegex.Match(tracking);
-
-            return new UsernameLogModel
-            {
-                FromName = fromNameMatch.Value,
-                ToName = toNameMatch.Value
-            };
-        }
+            FromName = fromNameMatch.Value,
+            ToName = toNameMatch.Value
+        };
     }
 }

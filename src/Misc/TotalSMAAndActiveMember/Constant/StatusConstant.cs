@@ -1,13 +1,12 @@
-﻿namespace TotalSMAAndActiveMember.Constant
+﻿namespace TotalSMAAndActiveMember.Constant;
+
+public enum StatusConstant
 {
-    public enum StatusConstant
-    {
-        Active = 0,
+    Active = 0,
 
-        NewCreated = 1,
+    NewCreated = 1,
 
-        Suspended = 2,
+    Suspended = 2,
 
-        Closed = 3
-    }
+    Closed = 3
 }

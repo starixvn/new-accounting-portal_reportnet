@@ -1,9 +1,8 @@
-﻿namespace Utilities.BalanceUpServices
-{
-    public class BalanceUpRange
-    {
-        public DateTime BalanceUpDate { get; set; }
+﻿namespace Utilities.BalanceUpServices;
 
-        public DateTime MoveBetsDate { get; set; }
-    }
+public class BalanceUpRange
+{
+    public DateTime BalanceUpDate { get; set; }
+
+    public DateTime MoveBetsDate { get; set; }
 }

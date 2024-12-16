@@ -1,9 +1,8 @@
-namespace CompanyWinLoss.Model
-{
-    public class Product
-    {
-        public string ProductPrefix { get; set; }
+namespace CompanyWinLoss.Model;
 
-        public string ProductName { get; set; }
-    }
+public class Product
+{
+    public string ProductPrefix { get; set; }
+
+    public string ProductName { get; set; }
 }

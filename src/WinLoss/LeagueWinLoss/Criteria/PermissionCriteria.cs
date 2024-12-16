@@ -1,13 +1,12 @@
 ﻿using Fanex.Data.Repository;
 
-namespace LeagueWinLoss.Criteria
+namespace LeagueWinLoss.Criteria;
+
+public class PermissionCriteria : CriteriaBase
 {
-    public class PermissionCriteria : CriteriaBase
-    {
-        public string FunctionKey { get; set; }
+    public string FunctionKey { get; set; }
 
-        public override string GetSettingKey() => "WinLoss_LeagueWinLoss_GetPermisionProfileID";
+    public override string GetSettingKey() => "WinLoss_LeagueWinLoss_GetPermisionProfileID";
 
-        public override bool IsValid() => true;
-    }
+    public override bool IsValid() => true;
 }

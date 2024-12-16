@@ -1,17 +1,16 @@
 ﻿using Fanex.Data.Repository;
 
-namespace UpdatedUsernameCredit.UpdatedUsername
+namespace UpdatedUsernameCredit.UpdatedUsername;
+
+public class Criteria : CriteriaBase
 {
-    public class Criteria : CriteriaBase
-    {
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public string Username { get; set; }
+    public string Username { get; set; }
 
-        public override bool IsValid() => FromDate <= ToDate;
+    public override bool IsValid() => FromDate <= ToDate;
 
-        public override string GetSettingKey() => "Acc_Rpt_AdminUpdateUserName";
-    }
+    public override string GetSettingKey() => "Acc_Rpt_AdminUpdateUserName";
 }

@@ -1,19 +1,18 @@
-﻿namespace HouseWinLoss.OtherSports.SportType
+﻿namespace HouseWinLoss.OtherSports.SportType;
+
+using Configuration;
+
+public class QueryModel
 {
-    using Configuration;
+    public int IsLive { get; set; } = Constants.LiveDefault;
 
-    public class QueryModel
-    {
-        public int IsLive { get; set; } = Constants.LiveDefault;
+    public DateTime StartDate { get; set; }
 
-        public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+    public bool NormalMode { get; set; } = true;
 
-        public bool NormalMode { get; set; } = true;
+    public bool IsNoDraw { get; set; }
 
-        public bool IsNoDraw { get; set; }
-
-        public int PermissionProfileID { get; set; }
-    }
+    public int PermissionProfileID { get; set; }
 }

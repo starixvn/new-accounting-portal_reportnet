@@ -1,9 +1,8 @@
-﻿namespace LeagueWinLoss.Model
-{
-    public class BetTypeWinLossByStatusModel
-    {
-        public BetTypeWinLossLiveModel BetTypeWinLossLive { get; set; }
+﻿namespace LeagueWinLoss.Model;
 
-        public BetTypeWinLossNonLiveModel BetTypeWinLossNonLive { get; set; }
-    }
+public class BetTypeWinLossByStatusModel
+{
+    public BetTypeWinLossLiveModel BetTypeWinLossLive { get; set; }
+
+    public BetTypeWinLossNonLiveModel BetTypeWinLossNonLive { get; set; }
 }

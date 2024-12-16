@@ -1,13 +1,12 @@
-﻿namespace Utilities.CustomerTrackingSystem.Model
+﻿namespace Utilities.CustomerTrackingSystem.Model;
+
+using System;
+
+public class CustomerDevice
 {
-    using System;
+    public string Account { get; set; }
 
-    public class CustomerDevice
-    {
-        public string Account { get; set; }
+    public string Device { get; set; }
 
-        public string Device { get; set; }
-
-        public DateTime LastAccessedDate { get; set; }
-    }
+    public DateTime LastAccessedDate { get; set; }
 }

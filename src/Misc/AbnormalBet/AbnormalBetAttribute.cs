@@ -1,5 +1,4 @@
-﻿namespace AbnormalBet
-{
-    [AttributeUsage(AttributeTargets.All)]
-    public sealed class AbnormalBetAttribute : Attribute;
-}
+﻿namespace AbnormalBet;
+
+[AttributeUsage(AttributeTargets.All)]
+public sealed class AbnormalBetAttribute : Attribute;

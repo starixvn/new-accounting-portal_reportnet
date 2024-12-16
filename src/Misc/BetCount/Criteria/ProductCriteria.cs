@@ -1,21 +1,20 @@
 using Fanex.Data.Repository;
 
-namespace BetCount.Criteria
+namespace BetCount.Criteria;
+
+public class ProductCriteria : CriteriaBase
 {
-    public class ProductCriteria : CriteriaBase
+    public int IMode { get; set; } = 3;
+
+    public string ProductID { get; set; }
+
+    public override string GetSettingKey()
     {
-        public int IMode { get; set; } = 3;
+        return "Misc_Bet_Count_GetProducts";
+    }
 
-        public string ProductID { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "Misc_Bet_Count_GetProducts";
-        }
-
-        public override bool IsValid()
-        {
-            return true;
-        }
+    public override bool IsValid()
+    {
+        return true;
     }
 }

@@ -1,12 +1,11 @@
 ﻿using MediatR;
 
-namespace UpdatedUsernameCredit.UpdatedUsername
+namespace UpdatedUsernameCredit.UpdatedUsername;
+
+public class Handler(UpdatedUsernameService service) : IRequestHandler<Message, IEnumerable<UpdatedUsernameModel>>
 {
-    public class Handler(UpdatedUsernameService service) : IRequestHandler<Message, IEnumerable<UpdatedUsernameModel>>
+    public async Task<IEnumerable<UpdatedUsernameModel>> Handle(Message request, CancellationToken cancellationToken)
     {
-        public async Task<IEnumerable<UpdatedUsernameModel>> Handle(Message request, CancellationToken cancellationToken)
-        {
-            return await service.GetUpdatedUsername(request);
-        }
+        return await service.GetUpdatedUsername(request);
     }
 }

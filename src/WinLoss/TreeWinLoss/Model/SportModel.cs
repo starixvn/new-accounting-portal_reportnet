@@ -1,9 +1,8 @@
-﻿namespace TreeWinLoss.Model
-{
-    public class SportModel
-    {
-        public int SportType { get; set; }
+﻿namespace TreeWinLoss.Model;
 
-        public string SportName { get; set; }
-    }
+public class SportModel
+{
+    public int SportType { get; set; }
+
+    public string SportName { get; set; }
 }

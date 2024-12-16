@@ -1,13 +1,12 @@
 ﻿using BetConstructPerformance.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class BetConstructPerformanceInjection
 {
-    public static class BetConstructPerformanceInjection
+    public static void RegisterBetConstructPerformanceServices(this IServiceCollection service)
     {
-        public static void RegisterBetConstructPerformanceServices(this IServiceCollection service)
-        {
-            service.AddTransient<BetConstructPerformanceService, BetConstructPerformanceServiceImp>();
-            service.AddTransient<ExcelBuilderService, ExcelBuilderServiceImp>();
-        }
+        service.AddTransient<BetConstructPerformanceService, BetConstructPerformanceServiceImp>();
+        service.AddTransient<ExcelBuilderService, ExcelBuilderServiceImp>();
     }
 }

@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using DuplicateTickets.Model;
 
-namespace DuplicateTickets
+namespace DuplicateTickets;
+
+public static class AutoMapperConfiguration
 {
-    public static class AutoMapperConfiguration
+    public static void InitializeDuplicateTickets(this IProfileExpression cfg)
     {
-        public static void InitializeDuplicateTickets(this IProfileExpression cfg)
-        {
-            cfg.CreateMap<TicketModel, TicketExcelModel>();
-            cfg.CreateMap<DuplicateTicketsByUserNameModel, DuplicateTicketsByUserNameExcelModel>();
-            cfg.CreateMap<DuplicateTicketsModel, DuplicateTicketsExcelModel>();
-        }
+        cfg.CreateMap<TicketModel, TicketExcelModel>();
+        cfg.CreateMap<DuplicateTicketsByUserNameModel, DuplicateTicketsByUserNameExcelModel>();
+        cfg.CreateMap<DuplicateTicketsModel, DuplicateTicketsExcelModel>();
     }
 }

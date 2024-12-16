@@ -1,14 +1,13 @@
 ﻿using Exchange.Report;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class ExchangeInjection
 {
-    public static class ExchangeInjection
+    public static void RegisterExchangeServices(this IServiceCollection service)
     {
-        public static void RegisterExchangeServices(this IServiceCollection service)
-        {
-            service.AddTransient<Service, ServiceImp>();
-            service.AddTransient<ExcelBuilder, ExcelBuilderImp>();
-            service.AddTransient<LicenseeExcelBuilder, LicenseeExcelBuilderImp>();
-        }
+        service.AddTransient<Service, ServiceImp>();
+        service.AddTransient<ExcelBuilder, ExcelBuilderImp>();
+        service.AddTransient<LicenseeExcelBuilder, LicenseeExcelBuilderImp>();
     }
 }

@@ -1,30 +1,29 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace SuperBalance.Criteria
+namespace SuperBalance.Criteria;
+
+public class MasterDownlineCriteria : CriteriaBase
 {
-    public class MasterDownlineCriteria : CriteriaBase
+    [SpParam(Ignored = true)]
+    public int BalanceType { get; set; }
+
+    [SpParam(Ignored = true)]
+    public string CustomerType { get; set; }
+
+    public int MasterId { get; set; }
+
+    public override bool IsValid() => true;
+
+    public override string GetSettingKey()
     {
-        [SpParam(Ignored = true)]
-        public int BalanceType { get; set; }
+        var storeProcedureName = "Balance_SuperBalance_Agent";
 
-        [SpParam(Ignored = true)]
-        public string CustomerType { get; set; }
-
-        public int MasterId { get; set; }
-
-        public override bool IsValid() => true;
-
-        public override string GetSettingKey()
+        if (!string.IsNullOrEmpty(storeProcedureName) && BalanceType == 2)
         {
-            var storeProcedureName = "Balance_SuperBalance_Agent";
-
-            if (!string.IsNullOrEmpty(storeProcedureName) && BalanceType == 2)
-            {
-                storeProcedureName += "Yesterday";
-            }
-
-            return storeProcedureName;
+            storeProcedureName += "Yesterday";
         }
+
+        return storeProcedureName;
     }
 }

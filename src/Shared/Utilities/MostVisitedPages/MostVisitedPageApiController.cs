@@ -1,41 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Utilities.MostVisitedPages
+namespace Utilities.MostVisitedPages;
+
+[Route("api/most-visited-page")]
+[ApiController]
+public class MostVisitedPageApiController(MostVisitedPagesService service) : ControllerBase
 {
-    [Route("api/most-visited-page")]
-    [ApiController]
-    public class MostVisitedPageApiController(MostVisitedPagesService service) : ControllerBase
+    [Route("main")]
+    public async Task<IActionResult> GetMostvisitedPages()
     {
-        [Route("main")]
-        public async Task<IActionResult> GetMostvisitedPages()
-        {
-            var result = await service.GetMostVisitedPages();
+        var result = await service.GetMostVisitedPages();
 
-            return Ok(result);
-        }
+        return Ok(result);
+    }
 
-        [Route("update-count")]
-        public IActionResult UpdateMostVisitedPageCount(MostVisitedPageModel mostVisitedPage)
-        {
-            service.UpdateCount(mostVisitedPage);
-            return Ok();
-        }
+    [Route("update-count")]
+    public IActionResult UpdateMostVisitedPageCount(MostVisitedPageModel mostVisitedPage)
+    {
+        service.UpdateCount(mostVisitedPage);
+        return Ok();
+    }
 
-        [Route("update-position")]
-        public async Task<IActionResult> UpdateMostVisitedPagePosition(UpdateMostVisitedPagePositionCriteria mostVisitedPage)
-        {
-            var result = await service.UpdatePosition(mostVisitedPage);
-            return Ok(result);
-        }
+    [Route("update-position")]
+    public async Task<IActionResult> UpdateMostVisitedPagePosition(UpdateMostVisitedPagePositionCriteria mostVisitedPage)
+    {
+        var result = await service.UpdatePosition(mostVisitedPage);
+        return Ok(result);
+    }
 
-        [Route("delete")]
-        public async Task<IActionResult> DeleteMostVisitedPage(DeleteMostVisitedPagesCriteria mostVisitedPage)
-        {
-            await service.Delete(mostVisitedPage);
+    [Route("delete")]
+    public async Task<IActionResult> DeleteMostVisitedPage(DeleteMostVisitedPagesCriteria mostVisitedPage)
+    {
+        await service.Delete(mostVisitedPage);
 
-            var mostVisitedPages = await service.GetMostVisitedPages();
+        var mostVisitedPages = await service.GetMostVisitedPages();
 
-            return Ok(mostVisitedPages);
-        }
+        return Ok(mostVisitedPages);
     }
 }

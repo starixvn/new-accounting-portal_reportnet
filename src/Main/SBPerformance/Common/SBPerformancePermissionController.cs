@@ -4,27 +4,25 @@ using Fanex.NAP.Client;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SBPerformance.Common
+namespace SBPerformance.Common;
+
+[Route("api/sb-performance/check-full-view")]
+public class SBPerformancePermissionController(
+    IUserService userService,
+    INapSession napSession,
+    INapSettings napSettings)
+    : ControllerBase
 {
-    [Route("api/sb-performance/check-full-view")]
-    public class SBPerformancePermissionController(
-        IUserService userService,
-        INapSession napSession,
-        INapSettings napSettings)
-        : ControllerBase
+    [Route("")]
+    public IActionResult FullView()
     {
-        [Route("")]
-        public IActionResult FullView()
-        {
-            var permissions = userService.GetPermissions(
+        var permissions = userService.GetPermissions(
                 napSession.UserId,
                 napSettings.SiteId,
                 "SBPerformanceMonitor")
-                 .Where(p => p.Policy >= (int)Constant.Policy.Read)
-                .Select(p => p.Key);
+            .Where(p => p.Policy >= (int)Constant.Policy.Read)
+            .Select(p => p.Key);
 
-            return Ok(permissions.Contains("FullView"));
-        }
+        return Ok(permissions.Contains("FullView"));
     }
 }
-

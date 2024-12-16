@@ -1,13 +1,12 @@
 ﻿using TotalSMAAndActiveMember.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class TotalSMAAndActiveMemberInjection
 {
-    public static class TotalSMAAndActiveMemberInjection
+    public static void RegisterTotalSMAAndActiveMemberServices(this IServiceCollection service)
     {
-        public static void RegisterTotalSMAAndActiveMemberServices(this IServiceCollection service)
-        {
-            service.AddTransient<TotalSMAMemberActiveService, TotalSMAMemberActiveServiceImp>();
-            service.AddTransient<TotalSMAMemberActiveExcelService, TotalSMAMemberActiveExcelServiceImp>();
-        }
+        service.AddTransient<TotalSMAMemberActiveService, TotalSMAMemberActiveServiceImp>();
+        service.AddTransient<TotalSMAMemberActiveExcelService, TotalSMAMemberActiveExcelServiceImp>();
     }
 }

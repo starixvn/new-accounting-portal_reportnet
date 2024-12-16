@@ -1,18 +1,17 @@
 ﻿using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Sites.Settings;
+using Reports.Sites.Settings;
 
-namespace Nap_Reports.Sites.Controllers
+namespace Reports.Sites.Controllers;
+
+public class DailyWinLoss2hSoccerMinorController : Controller
 {
-    public class DailyWinLoss2hSoccerMinorController : Controller
+    [NapAuth(FunctionKey = FunctionKeys.DailyWinLoss2hSoccerMinorBettype, Policy = Constant.Policy.Read)]
+    public IActionResult Index()
     {
-        [NapAuth(FunctionKey = FunctionKeys.DailyWinLoss2hSoccerMinorBettype, Policy = Constant.Policy.Read)]
-        public IActionResult Index()
-        {
-            ViewBag.ProductPermissions = new List<string> { "HouseWinLossByProducts_AllProducts" };
-            ViewBag.ModePermissions = new List<string> { "HouseWinLossByProducts_HistoryMode", "HouseWinLossByProducts_NormalMode" };
-            return View();
-        }
+        ViewBag.ProductPermissions = new List<string> { "HouseWinLossByProducts_AllProducts" };
+        ViewBag.ModePermissions = new List<string> { "HouseWinLossByProducts_HistoryMode", "HouseWinLossByProducts_NormalMode" };
+        return View();
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.OtherSports.BetType
+﻿namespace HouseWinLoss.OtherSports.BetType;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

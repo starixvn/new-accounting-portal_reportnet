@@ -1,9 +1,8 @@
-﻿namespace LeagueWinLoss.Entities
-{
-    public class SiteEntity : BaseEntity
-    {
-        public int SiteID { get; set; }
+﻿namespace LeagueWinLoss.Entities;
 
-        public string SiteName { get; set; }
-    }
+public class SiteEntity : BaseEntity
+{
+    public int SiteID { get; set; }
+
+    public string SiteName { get; set; }
 }

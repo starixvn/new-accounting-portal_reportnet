@@ -1,5 +1,4 @@
-﻿namespace SMAWinLoss
-{
-    [AttributeUsage(AttributeTargets.All)]
-    public sealed class SMAWinLossAttribute : Attribute;
-}
+﻿namespace SMAWinLoss;
+
+[AttributeUsage(AttributeTargets.All)]
+public sealed class SMAWinLossAttribute : Attribute;

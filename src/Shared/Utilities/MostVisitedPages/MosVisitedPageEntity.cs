@@ -1,11 +1,10 @@
-﻿namespace Utilities.MostVisitedPages
+﻿namespace Utilities.MostVisitedPages;
+
+public class MosVisitedPageEntity
 {
-    public class MosVisitedPageEntity
-    {
-        public int MenuId { get; set; } 
+    public int MenuId { get; set; } 
 
-        public ulong VisitedCount { get; set; } 
+    public ulong VisitedCount { get; set; } 
 
-        public int Position { get; set; }
-    }
+    public int Position { get; set; }
 }

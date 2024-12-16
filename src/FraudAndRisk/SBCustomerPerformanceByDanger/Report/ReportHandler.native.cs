@@ -2,18 +2,17 @@
 using MediatR;
 using Utilities.LinqDynamicSum;
 
-namespace SBCustomerPerformanceByDanger.Report
+namespace SBCustomerPerformanceByDanger.Report;
+
+public class ReportHandler(ReportService service, IMapper mapper)
+    : IRequestHandler<CustomerPerformanceByDangerQueryHttpParameter,
+        SummaryEntity<CustomerPerformanceByDangerModel>>
 {
-    public class ReportHandler(ReportService service, IMapper mapper)
-        : IRequestHandler<CustomerPerformanceByDangerQueryHttpParameter,
-            SummaryEntity<CustomerPerformanceByDangerModel>>
+    public async Task<SummaryEntity<CustomerPerformanceByDangerModel>> Handle(
+        CustomerPerformanceByDangerQueryHttpParameter request,
+        CancellationToken cancellationToken)
     {
-        public async Task<SummaryEntity<CustomerPerformanceByDangerModel>> Handle(
-            CustomerPerformanceByDangerQueryHttpParameter request,
-            CancellationToken cancellationToken)
-        {
-            var criteria = mapper.Map<CustomerPerformanceByDangerQueryCriteria>(request);
-            return await service.GetCustomerPerformanceByDanger(criteria);
-        }
+        var criteria = mapper.Map<CustomerPerformanceByDangerQueryCriteria>(request);
+        return await service.GetCustomerPerformanceByDanger(criteria);
     }
 }

@@ -1,27 +1,26 @@
-namespace HouseWinLoss.Common.Criteria
+namespace HouseWinLoss.Common.Criteria;
+
+using Configuration;
+
+public class UniversalSportbookSiteCriteria : WinLossCriteria
 {
-    using Configuration;
+    public int SportType { get; set; }
 
-    public class UniversalSportbookSiteCriteria : WinLossCriteria
-    {
-        public int SportType { get; set; }
+    public int BetType { get; set; }
 
-        public int BetType { get; set; }
+    public string SiteType { get; set; }
 
-        public string SiteType { get; set; }
+    public int IsLive { get; set; } = Constants.LiveDefault;
 
-        public int IsLive { get; set; } = Constants.LiveDefault;
+    public int IsHedge { get; set; } = Constants.HedgeDefault;
 
-        public int IsHedge { get; set; } = Constants.HedgeDefault;
+    public int IsCorners { get; set; } = Constants.CornersDefault;
 
-        public int IsCorners { get; set; } = Constants.CornersDefault;
+    public bool IsNoDraw { get; set; }
 
-        public bool IsNoDraw { get; set; }
+    public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
 
-        public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
+    public int PermissionProfileID { get; set; }
 
-        public int PermissionProfileID { get; set; }
-
-        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Site";
-    }
+    public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Site";
 }

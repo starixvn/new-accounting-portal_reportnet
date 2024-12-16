@@ -1,16 +1,15 @@
 ﻿using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Sites.Settings;
+using Reports.Sites.Settings;
 
-namespace Nap_Reports.Sites.Controllers
+namespace Reports.Sites.Controllers;
+
+public class MarginReportController : Controller
 {
-    public class MarginReportController : Controller
+    [NapAuth(FunctionKey = FunctionKeys.MarginReport, Policy = Constant.Policy.Read)]
+    public IActionResult Index()
     {
-        [NapAuth(FunctionKey = FunctionKeys.MarginReport, Policy = Constant.Policy.Read)]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

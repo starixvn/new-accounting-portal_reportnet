@@ -1,9 +1,8 @@
 ﻿using MediatR;
 
-namespace SMAWinLoss.Filter
+namespace SMAWinLoss.Filter;
+
+public class PermissionHttpParameter : IRequest<int>
 {
-    public class PermissionHttpParameter : IRequest<int>
-    {
-        public string FunctionKey { get; set; }
-    }
+    public string FunctionKey { get; set; }
 }

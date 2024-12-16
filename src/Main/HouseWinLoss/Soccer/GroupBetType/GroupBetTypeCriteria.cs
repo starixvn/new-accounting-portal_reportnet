@@ -1,22 +1,21 @@
-namespace HouseWinLoss.Soccer.GroupBetType
+namespace HouseWinLoss.Soccer.GroupBetType;
+
+using Common.Criteria;
+using Configuration;
+
+public class GroupBetTypeCriteria : WinLossCriteria
 {
-    using Common.Criteria;
-    using Configuration;
+    public bool IsMajor { get; set; }
 
-    public class GroupBetTypeCriteria : WinLossCriteria
-    {
-        public bool IsMajor { get; set; }
+    public int IsLive { get; set; } = Constants.LiveDefault;
 
-        public int IsLive { get; set; } = Constants.LiveDefault;
+    public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Bettype";
 
-        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Bettype";
+    public bool IsNoDraw { get; set; }
 
-        public bool IsNoDraw { get; set; }
+    public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
 
-        public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
+    public int Sporttype => Constants.SportTypeSoccer;
 
-        public int Sporttype => Constants.SportTypeSoccer;
-
-        public int PermissionProfileID { get; set; }
-    }
+    public int PermissionProfileID { get; set; }
 }

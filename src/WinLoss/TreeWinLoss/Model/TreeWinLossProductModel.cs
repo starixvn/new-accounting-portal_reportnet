@@ -1,9 +1,8 @@
-namespace TreeWinLoss.Model
-{
-    public class TreeWinLossProductModel
-    {
-        public int ProductId { get; set; }
+namespace TreeWinLoss.Model;
 
-        public string ProductName { get; set; }
-    }
+public class TreeWinLossProductModel
+{
+    public int ProductId { get; set; }
+
+    public string ProductName { get; set; }
 }

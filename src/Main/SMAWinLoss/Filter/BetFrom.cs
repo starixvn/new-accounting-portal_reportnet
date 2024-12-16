@@ -1,9 +1,8 @@
-﻿namespace SMAWinLoss.Filter
-{
-    public class BetFrom
-    {
-        public string Platform { get; set; }
+﻿namespace SMAWinLoss.Filter;
 
-        public string BetFromId { get; set; }
-    }
+public class BetFrom
+{
+    public string Platform { get; set; }
+
+    public string BetFromId { get; set; }
 }

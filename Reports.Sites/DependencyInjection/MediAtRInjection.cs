@@ -11,23 +11,22 @@ using SMAWinLoss;
 using System.Reflection;
 using UpdatedUsernameCredit;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class MediatRInjection
 {
-    public static class MediatRInjection
+    public static void RegisterMediatR(this IServiceCollection service)
     {
-        public static void RegisterMediatR(this IServiceCollection service)
-        {
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBPerformanceAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AbnormalBetAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ActualMemberBetAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ExchangeAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CashOutPerformanceAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(UpdatedUsernameAndCreditAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBCustomerPerformanceByDangerAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(PunterAnalysisAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ResultAnalysisAttribute).GetTypeInfo().Assembly));
-            service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(BetConstructPerformanceAttribute).GetTypeInfo().Assembly));
-        }
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBPerformanceAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AbnormalBetAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ActualMemberBetAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ExchangeAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CashOutPerformanceAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(UpdatedUsernameAndCreditAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBCustomerPerformanceByDangerAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(PunterAnalysisAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ResultAnalysisAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(BetConstructPerformanceAttribute).GetTypeInfo().Assembly));
     }
 }

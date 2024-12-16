@@ -1,30 +1,29 @@
 ﻿using HouseWinLoss.Common.Criteria;
 using HouseWinLoss.Common.Services;
 
-namespace HouseWinLoss.Common.SiteWinLoss
+namespace HouseWinLoss.Common.SiteWinLoss;
+
+public interface WinLossService
 {
-    public interface WinLossService
-    {
-        Task<SiteWinLossModel> Query(WinLossCriteria criteria);
-    }
+    Task<SiteWinLossModel> Query(WinLossCriteria criteria);
+}
 
-    public class WinLossServiceImp(
-        RawWinLossService rawWinLossService,
-        CalculationService calculationService)
-        : WinLossService
+public class WinLossServiceImp(
+    RawWinLossService rawWinLossService,
+    CalculationService calculationService)
+    : WinLossService
+{
+    public async Task<SiteWinLossModel> Query(WinLossCriteria criteria)
     {
-        public async Task<SiteWinLossModel> Query(WinLossCriteria criteria)
+        var rawWinLosses = await rawWinLossService.Query(criteria);
+
+        var siteWinLosses = rawWinLosses.Select(calculationService.FromRawWinLossByRowName);
+        var grandTotal = calculationService.CalculateSumWinLoss("Grand Total", rawWinLosses);
+
+        return new SiteWinLossModel
         {
-            var rawWinLosses = await rawWinLossService.Query(criteria);
-
-            var siteWinLosses = rawWinLosses.Select(calculationService.FromRawWinLossByRowName);
-            var grandTotal = calculationService.CalculateSumWinLoss("Grand Total", rawWinLosses);
-
-            return new SiteWinLossModel
-            {
-                Sites = siteWinLosses.ToList(),
-                Total = grandTotal
-            };
-        }
+            Sites = siteWinLosses.ToList(),
+            Total = grandTotal
+        };
     }
 }

@@ -2,14 +2,13 @@
 using BetCount.Entities;
 using BetCount.Model;
 
-namespace BetCount
+namespace BetCount;
+
+public static class AutoMapperConfiguration
 {
-    public static class AutoMapperConfiguration
+    public static void InitializeBetCount(this IProfileExpression cfg)
     {
-        public static void InitializeBetCount(this IProfileExpression cfg)
-        {
-            cfg.CreateMap<BetCountEntity, TransactionModel>();
-            cfg.CreateMap<TransactionModel, TransactionExcelModel>();
-        }
+        cfg.CreateMap<BetCountEntity, TransactionModel>();
+        cfg.CreateMap<TransactionModel, TransactionExcelModel>();
     }
 }

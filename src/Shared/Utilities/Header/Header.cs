@@ -1,9 +1,8 @@
-﻿namespace Utilities.Header
-{
-    public class Header
-    {
-        public string Username { get; set; }
+﻿namespace Utilities.Header;
 
-        public IList<Menu> Menus { get; set; }
-    }
+public class Header
+{
+    public string Username { get; set; }
+
+    public IList<Menu> Menus { get; set; }
 }

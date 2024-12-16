@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor;
+
+public static class SortingInformation
 {
-    public static class SortingInformation
-    {
-        public const string Ascending = "Asc";
-    }
+    public const string Ascending = "Asc";
 }

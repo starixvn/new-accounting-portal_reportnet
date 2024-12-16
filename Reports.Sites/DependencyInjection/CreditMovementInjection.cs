@@ -1,12 +1,11 @@
 ﻿using CreditMovementMonitor.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class CreditMovementInjection
 {
-    public static class CreditMovementInjection
+    public static void RegisterCreditMovementServices(this IServiceCollection service)
     {
-        public static void RegisterCreditMovementServices(this IServiceCollection service)
-        {
-            service.AddTransient<CreditMovementService, CreditMovementServiceImp>();
-        }
+        service.AddTransient<CreditMovementService, CreditMovementServiceImp>();
     }
 }

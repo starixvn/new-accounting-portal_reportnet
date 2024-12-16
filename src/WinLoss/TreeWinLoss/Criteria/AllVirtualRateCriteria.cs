@@ -1,19 +1,18 @@
-namespace TreeWinLoss.Criteria
+namespace TreeWinLoss.Criteria;
+
+using Fanex.Data.Repository;
+
+public class AllVirtualRateCriteria : CriteriaBase
 {
-    using Fanex.Data.Repository;
+    public string CustIDs { get; set; }
 
-    public class AllVirtualRateCriteria : CriteriaBase
+    public override bool IsValid()
     {
-        public string CustIDs { get; set; }
+        return true;
+    }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
-
-        public override string GetSettingKey()
-        {
-            return "WinLoss_TreeWinLoss_GetAllVirtualRate";
-        }
+    public override string GetSettingKey()
+    {
+        return "WinLoss_TreeWinLoss_GetAllVirtualRate";
     }
 }

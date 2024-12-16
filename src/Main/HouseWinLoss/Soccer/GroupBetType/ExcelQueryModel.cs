@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.Soccer.GroupBetType
+﻿namespace HouseWinLoss.Soccer.GroupBetType;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

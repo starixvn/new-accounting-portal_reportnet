@@ -1,11 +1,10 @@
 ﻿using PunterAnalysis.Shared;
 
-namespace PunterAnalysis.BetCount.Model
-{
-    public class Criteria : BetCountAndLeagueCriteriaBase
-    {
-        public int BettypeGroupId { get; set; }
+namespace PunterAnalysis.BetCount.Model;
 
-        public override string GetSettingKey() => "Punter-BetCount";
-    }
+public class Criteria : BetCountAndLeagueCriteriaBase
+{
+    public int BettypeGroupId { get; set; }
+
+    public override string GetSettingKey() => "Punter-BetCount";
 }

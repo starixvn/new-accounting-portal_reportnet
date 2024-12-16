@@ -1,23 +1,22 @@
-﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
+
+using Configuration;
+
+public class QueryModel
 {
-    using Configuration;
+    private const int AllLiveAndNonLive = 2;
 
-    public class QueryModel
-    {
-        private const int AllLiveAndNonLive = 2;
+    public DateTime StartDate { get; set; }
 
-        public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+    public bool NormalMode { get; set; } = true;
 
-        public bool NormalMode { get; set; } = true;
+    public int IsLive { get; set; } = AllLiveAndNonLive;
 
-        public int IsLive { get; set; } = AllLiveAndNonLive;
+    public string SortColumnName { get; set; }
 
-        public string SortColumnName { get; set; }
+    public string SortDirection { get; set; }
 
-        public string SortDirection { get; set; }
-
-        public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
-    }
+    public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
 }

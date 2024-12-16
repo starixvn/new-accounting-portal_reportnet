@@ -4,29 +4,28 @@ using PunterAnalysis.Summary.Model;
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;
 
-namespace PunterAnalysis.Summary
+namespace PunterAnalysis.Summary;
+
+public interface SummaryService
 {
-    public interface SummaryService
-    {
-        Task<SummaryEntity<SummaryModel>> GetSummaries(Criteria criteria);
-    }
+    Task<SummaryEntity<SummaryModel>> GetSummaries(Criteria criteria);
+}
 
-    public class SummaryServiceImp(
-        PunterAnalysisService punterAnalysisService,
-        CustomerTrackingService customerTrackingService,
-        ConfigurationService configurationService)
-        : SummaryService
+public class SummaryServiceImp(
+    PunterAnalysisService punterAnalysisService,
+    CustomerTrackingService customerTrackingService,
+    ConfigurationService configurationService)
+    : SummaryService
+{
+    public async Task<SummaryEntity<SummaryModel>> GetSummaries(Criteria criteria)
     {
-        public async Task<SummaryEntity<SummaryModel>> GetSummaries(Criteria criteria)
+        var summaries = await punterAnalysisService.Query<SummaryModel>(criteria);
+
+        foreach (var item in summaries.Entities)
         {
-            var summaries = await punterAnalysisService.Query<SummaryModel>(criteria);
-
-            foreach (var item in summaries.Entities)
-            {
-                item.Category = await customerTrackingService.GetCategory(configurationService.FraudSystemCategoryApi, item.CustId.ToString());
-            }
-
-            return summaries;
+            item.Category = await customerTrackingService.GetCategory(configurationService.FraudSystemCategoryApi, item.CustId.ToString());
         }
+
+        return summaries;
     }
 }

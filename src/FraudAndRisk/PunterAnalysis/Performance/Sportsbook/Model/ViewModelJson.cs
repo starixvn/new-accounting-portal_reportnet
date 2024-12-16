@@ -1,9 +1,8 @@
-﻿namespace PunterAnalysis.Performance.Sportsbook.Model
-{
-    public class ViewModelJson
-    {
-        public SummaryStatistic SummaryStatistic { get; set; }
+﻿namespace PunterAnalysis.Performance.Sportsbook.Model;
 
-        public List<SportStatistic> SportStatistics { get; set; }
-    }
+public class ViewModelJson
+{
+    public SummaryStatistic SummaryStatistic { get; set; }
+
+    public List<SportStatistic> SportStatistics { get; set; }
 }

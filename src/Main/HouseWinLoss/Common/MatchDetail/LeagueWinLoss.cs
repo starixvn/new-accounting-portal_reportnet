@@ -1,11 +1,10 @@
-﻿namespace HouseWinLoss.Common.MatchDetail
+﻿namespace HouseWinLoss.Common.MatchDetail;
+
+public class LeagueWinLoss
 {
-    public class LeagueWinLoss
-    {
-        public string LeagueName { get; set; }
+    public string LeagueName { get; set; }
 
-        public List<WinLoss> Matches { get; set; }
+    public List<WinLoss> Matches { get; set; }
 
-        public WinLoss Total { get; set; }
-    }
+    public WinLoss Total { get; set; }
 }

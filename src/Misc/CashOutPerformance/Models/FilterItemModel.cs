@@ -1,9 +1,8 @@
-﻿namespace CashOutPerformance.Models
-{
-    public class FilterItemModel
-    {
-        public int Id { get; set; }
+﻿namespace CashOutPerformance.Models;
 
-        public string Name { get; set; }
-    }
+public class FilterItemModel
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; }
 }

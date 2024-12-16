@@ -1,9 +1,8 @@
-﻿namespace SMAWinLoss.Filter
-{
-    public class Currency
-    {
-        public int CurrencyId { get; set; }
+﻿namespace SMAWinLoss.Filter;
 
-        public string CurrencyName { get; set; }
-    }
+public class Currency
+{
+    public int CurrencyId { get; set; }
+
+    public string CurrencyName { get; set; }
 }

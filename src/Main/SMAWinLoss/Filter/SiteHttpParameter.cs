@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-namespace SMAWinLoss.Filter
-{
-    public class SiteHttpParameter : IRequest<IEnumerable<Site>>;
-}
+namespace SMAWinLoss.Filter;
+
+public class SiteHttpParameter : IRequest<IEnumerable<Site>>;

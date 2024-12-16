@@ -1,27 +1,26 @@
-﻿namespace LeagueWinLoss.Model
+﻿namespace LeagueWinLoss.Model;
+
+public class BaseWinLoss
 {
-    public class BaseWinLoss
-    {
-        public decimal MemberWinLoss { get; set; }
+    public decimal MemberWinLoss { get; set; }
 
-        public decimal SMAWinLoss { get; set; }
+    public decimal SMAWinLoss { get; set; }
 
-        public decimal ExtraPT { get; set; }
+    public decimal ExtraPT { get; set; }
 
-        public decimal Commission { get; set; }
+    public decimal Commission { get; set; }
 
-        public decimal RealIncome { get; set; }
+    public decimal RealIncome { get; set; }
 
-        public decimal VirtualWinLoss { get; set; }
+    public decimal VirtualWinLoss { get; set; }
 
-        public decimal VarianceIncome => RealIncome - VirtualWinLoss;
+    public decimal VarianceIncome => RealIncome - VirtualWinLoss;
 
-        public decimal RealTurnover { get; set; }
+    public decimal RealTurnover { get; set; }
 
-        public decimal VirtualTurnover { get; set; }
+    public decimal VirtualTurnover { get; set; }
 
-        public decimal VirtualMargin => VirtualTurnover != 0 ? VirtualWinLoss / VirtualTurnover : 0;
+    public decimal VirtualMargin => VirtualTurnover != 0 ? VirtualWinLoss / VirtualTurnover : 0;
 
-        public decimal RealMargin => RealTurnover != 0 ? RealIncome / RealTurnover : 0;
-    }
+    public decimal RealMargin => RealTurnover != 0 ? RealIncome / RealTurnover : 0;
 }

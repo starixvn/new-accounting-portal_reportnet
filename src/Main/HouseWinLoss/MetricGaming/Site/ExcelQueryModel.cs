@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.MetricGaming.Site
+﻿namespace HouseWinLoss.MetricGaming.Site;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

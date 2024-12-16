@@ -1,7 +1,6 @@
-﻿namespace SMAWinLoss.Constants
+﻿namespace SMAWinLoss.Constants;
+
+public static class TaskIdConstant
 {
-    public static class TaskIdConstant
-    {
-        public const byte DailyTask = 58;
-    }
+    public const byte DailyTask = 58;
 }

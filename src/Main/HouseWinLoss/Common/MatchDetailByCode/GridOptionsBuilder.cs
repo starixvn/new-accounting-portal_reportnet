@@ -2,89 +2,88 @@
 using Fanex.Excel.Models;
 using HouseWinLoss.Common.Models;
 
-namespace HouseWinLoss.Common.MatchDetailByCode
+namespace HouseWinLoss.Common.MatchDetailByCode;
+
+public interface GridOptionsBuilder
 {
-    public interface GridOptionsBuilder
+    GridOptions Build(WinLossModel winLoss, string title);
+}
+
+public class GridOptionsBuilderImp : GridOptionsBuilder
+{
+    public GridOptions Build(WinLossModel winLoss, string title)
     {
-        GridOptions Build(WinLossModel winLoss, string title);
+        var gridOptions = new GridOptions
+        {
+            ShowTitle = true,
+            TitleType = TitleType.TwoLineBlue,
+            TitleInfoText = title.ToUpperInvariant(),
+            BodyRows = BuildBodyRows(winLoss.Leagues),
+            FooterRows = BuildFooter(winLoss.Total),
+            ShowFooter = true,
+            ShowDistinctRow = false,
+            TotalItems = winLoss.TotalRows
+        };
+
+        return gridOptions;
     }
 
-    public class GridOptionsBuilderImp : GridOptionsBuilder
+    private List<GridDataRow> BuildBodyRows(IEnumerable<LeagueWinLoss> leagues)
     {
-        public GridOptions Build(WinLossModel winLoss, string title)
+        return leagues
+            .Select(BuildLeagues)
+            .SelectMany(t => t)
+            .ToList();
+    }
+
+    private List<GridDataRow> BuildLeagues(LeagueWinLoss league)
+    {
+        var leagueNameRow = BuildLeagueNameRow(league.Name);
+        var matchRows = league.Matches.Select(m => BuildDataRow(m, HAlignment.Center));
+        league.Total.Name = string.IsNullOrEmpty(league.Total.Name) ? "Total" : league.Total.Name;
+        var totalRows = BuildDataRow(league.Total, HAlignment.Right);
+        totalRows.CssClass = "total-row";
+        totalRows.RowType = RowType.SubTotal;
+
+        var rows = new List<GridDataRow> { leagueNameRow };
+        rows.AddRange(matchRows);
+        rows.Add(totalRows);
+
+        return rows;
+    }
+
+    private GridDataRow BuildDataRow(WinLoss item, HAlignment alignment)
+    {
+        var columnIndex = 0;
+        var columns = new List<Columns>
         {
-            var gridOptions = new GridOptions
-            {
-                ShowTitle = true,
-                TitleType = TitleType.TwoLineBlue,
-                TitleInfoText = title.ToUpperInvariant(),
-                BodyRows = BuildBodyRows(winLoss.Leagues),
-                FooterRows = BuildFooter(winLoss.Total),
-                ShowFooter = true,
-                ShowDistinctRow = false,
-                TotalItems = winLoss.TotalRows
-            };
+            new(columnIndex++, "MatchCode", item.Name, alignment),
+            new(columnIndex++, "MemberWinLoss", item.MemberWinLoss),
+            new(columnIndex++, "SMAWinLoss", item.SMAWinLoss),
+            new(columnIndex++, "ExtraPT", item.ExtraPT),
+            new(columnIndex++, "Commission", item.Commission),
+            new(columnIndex++, "RealIncome", item.RealIncome),
+            new(columnIndex++, "RealTurnover", item.RealTurnover),
+            new(columnIndex, "RealMargin", item.RealTurnover == 0 ? "N/A" : item.RealMargin)
+        };
 
-            return gridOptions;
-        }
+        return new GridDataRow { Columns = columns };
+    }
 
-        private List<GridDataRow> BuildBodyRows(IEnumerable<LeagueWinLoss> leagues)
+    private GridDataRow BuildLeagueNameRow(string leagueName)
+    {
+        var columnIndex = 0;
+        var columns = new List<Columns>
         {
-            return leagues
-                .Select(BuildLeagues)
-                .SelectMany(t => t)
-                .ToList();
-        }
+            new(columnIndex++, "MatchCode", string.Empty),
+            new() { ColumnIndex = columnIndex, Name = "MemberWinLoss", Value = leagueName, MergeColNumber = 7, Bold = true, CellAlignment = HAlignment.Left }
+        };
 
-        private List<GridDataRow> BuildLeagues(LeagueWinLoss league)
-        {
-            var leagueNameRow = BuildLeagueNameRow(league.Name);
-            var matchRows = league.Matches.Select(m => BuildDataRow(m, HAlignment.Center));
-            league.Total.Name = string.IsNullOrEmpty(league.Total.Name) ? "Total" : league.Total.Name;
-            var totalRows = BuildDataRow(league.Total, HAlignment.Right);
-            totalRows.CssClass = "total-row";
-            totalRows.RowType = RowType.SubTotal;
+        return new GridDataRow { Columns = columns, RowType = RowType.ParentLevelOne, CssClass = "league-match-header" };
+    }
 
-            var rows = new List<GridDataRow> { leagueNameRow };
-            rows.AddRange(matchRows);
-            rows.Add(totalRows);
-
-            return rows;
-        }
-
-        private GridDataRow BuildDataRow(WinLoss item, HAlignment alignment)
-        {
-            var columnIndex = 0;
-            var columns = new List<Columns>
-            {
-                new(columnIndex++, "MatchCode", item.Name, alignment),
-                new(columnIndex++, "MemberWinLoss", item.MemberWinLoss),
-                new(columnIndex++, "SMAWinLoss", item.SMAWinLoss),
-                new(columnIndex++, "ExtraPT", item.ExtraPT),
-                new(columnIndex++, "Commission", item.Commission),
-                new(columnIndex++, "RealIncome", item.RealIncome),
-                new(columnIndex++, "RealTurnover", item.RealTurnover),
-                new(columnIndex, "RealMargin", item.RealTurnover == 0 ? "N/A" : item.RealMargin)
-            };
-
-            return new GridDataRow { Columns = columns };
-        }
-
-        private GridDataRow BuildLeagueNameRow(string leagueName)
-        {
-            var columnIndex = 0;
-            var columns = new List<Columns>
-               {
-                    new(columnIndex++, "MatchCode", string.Empty),
-                    new() { ColumnIndex = columnIndex, Name = "MemberWinLoss", Value = leagueName, MergeColNumber = 7, Bold = true, CellAlignment = HAlignment.Left }
-               };
-
-            return new GridDataRow { Columns = columns, RowType = RowType.ParentLevelOne, CssClass = "league-match-header" };
-        }
-
-        private List<GridDataRow> BuildFooter(WinLoss item)
-        {
-            return [BuildDataRow(item, HAlignment.Right)];
-        }
+    private List<GridDataRow> BuildFooter(WinLoss item)
+    {
+        return [BuildDataRow(item, HAlignment.Right)];
     }
 }

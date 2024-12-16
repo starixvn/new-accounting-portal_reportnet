@@ -1,21 +1,20 @@
 ﻿using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace PunterAnalysis.Filter.UsernameSuggestion
+namespace PunterAnalysis.Filter.UsernameSuggestion;
+
+public class QueryCriteria : CriteriaBase
 {
-    public class QueryCriteria : CriteriaBase
-    {
-        public int CustId { get; set; }
+    public int CustId { get; set; }
 
-        public string Username { get; set; }
+    public string Username { get; set; }
 
-        public int RoleId { get; set; }
+    public int RoleId { get; set; }
 
-        [SpParam(SqlParamName = "IsAllowFISearch")]
-        public bool IsAllowFinanceUsersSearch => false;
+    [SpParam(SqlParamName = "IsAllowFISearch")]
+    public bool IsAllowFinanceUsersSearch => false;
 
-        public override string GetSettingKey() => "Punter-UserNameSuggestion";
+    public override string GetSettingKey() => "Punter-UserNameSuggestion";
 
-        public override bool IsValid() => true;
-    }
+    public override bool IsValid() => true;
 }

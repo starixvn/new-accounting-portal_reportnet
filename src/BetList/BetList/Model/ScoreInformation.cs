@@ -1,11 +1,10 @@
-namespace BetList.Model
+namespace BetList.Model;
+
+public class ScoreInformation
 {
-    public class ScoreInformation
-    {
-        public int MatchId { get; set; }
+    public int MatchId { get; set; }
 
-        public string TraderName { get; set; }
+    public string TraderName { get; set; }
 
-        public string MatchInformation { get; set; }
-    }
+    public string MatchInformation { get; set; }
 }

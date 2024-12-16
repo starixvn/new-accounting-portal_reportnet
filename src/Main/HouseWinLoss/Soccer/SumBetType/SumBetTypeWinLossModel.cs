@@ -1,10 +1,9 @@
 ﻿using HouseWinLoss.Common.Models;
 using HouseWinLoss.Soccer.BaseService;
 
-namespace HouseWinLoss.Soccer.SumBetType
+namespace HouseWinLoss.Soccer.SumBetType;
+
+public class SumBetTypeWinLossModel : BaseBetTypeWinLossModel
 {
-    public class SumBetTypeWinLossModel : BaseBetTypeWinLossModel
-    {
-        public List<SiteWinLossSummary> SiteWinLossSummaries { get; set; }
-    }
+    public List<SiteWinLossSummary> SiteWinLossSummaries { get; set; }
 }

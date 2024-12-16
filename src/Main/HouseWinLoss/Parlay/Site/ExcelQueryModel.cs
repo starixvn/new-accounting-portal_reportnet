@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.Parlay.Site
+﻿namespace HouseWinLoss.Parlay.Site;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

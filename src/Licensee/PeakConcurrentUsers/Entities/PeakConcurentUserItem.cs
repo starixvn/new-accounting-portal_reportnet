@@ -1,9 +1,8 @@
-﻿namespace PeakConcurrentUsers.Entities
-{
-    public class PeakConcurentUserItem
-    {
-        public int TotalUser { get;set; }
+﻿namespace PeakConcurrentUsers.Entities;
 
-        public DateTime LogDate { get; set; }   
-    }
+public class PeakConcurentUserItem
+{
+    public int TotalUser { get;set; }
+
+    public DateTime LogDate { get; set; }   
 }

@@ -2,7 +2,7 @@
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Nap_Reports.Sites.Controllers;
+namespace Reports.Sites.Controllers;
 
 using Utilities;
 

@@ -1,5 +1,4 @@
-﻿namespace ActualMemberBet
-{
-    [AttributeUsage(AttributeTargets.All)]
-    public sealed class ActualMemberBetAttribute : Attribute;
-}
+﻿namespace ActualMemberBet;
+
+[AttributeUsage(AttributeTargets.All)]
+public sealed class ActualMemberBetAttribute : Attribute;

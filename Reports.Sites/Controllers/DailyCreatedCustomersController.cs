@@ -1,17 +1,16 @@
 ﻿using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Sites.Settings;
+using Reports.Sites.Settings;
 
-namespace Nap_Reports.Sites.Controllers
+namespace Reports.Sites.Controllers;
+
+public class DailyCreatedCustomersController : Controller
 {
-    public class DailyCreatedCustomersController : Controller
-    {
 
-        [NapAuth(FunctionKey = FunctionKeys.DailyCreatedCustomers, Policy = Constant.Policy.Read)]
-        public IActionResult Index()
-        {
-            return View();
-        }
+    [NapAuth(FunctionKey = FunctionKeys.DailyCreatedCustomers, Policy = Constant.Policy.Read)]
+    public IActionResult Index()
+    {
+        return View();
     }
 }

@@ -1,13 +1,12 @@
 ﻿using Utilities.LinqDynamicSum;
 
-namespace Exchange.Report
+namespace Exchange.Report;
+
+public class ExchangeExcelModel
 {
-    public class ExchangeExcelModel
-    {
-        public List<SummaryEntity<ExchangeExcelEntity>> ExchangeLicensees { get; set; }
+    public List<SummaryEntity<ExchangeExcelEntity>> ExchangeLicensees { get; set; }
 
-        public ExchangeExcelEntity GrandTotal { get; set; }
+    public ExchangeExcelEntity GrandTotal { get; set; }
 
-        public List<ExchangeExcelEntity> MarketTypeTotal { get; set; }
-    }
+    public List<ExchangeExcelEntity> MarketTypeTotal { get; set; }
 }

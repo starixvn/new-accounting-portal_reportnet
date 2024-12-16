@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-namespace SMAWinLoss.Filter
-{
-    public class AvailableDateDataHttpParameter : IRequest<DateTime>;
-}
+namespace SMAWinLoss.Filter;
+
+public class AvailableDateDataHttpParameter : IRequest<DateTime>;

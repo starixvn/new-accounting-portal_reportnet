@@ -1,9 +1,8 @@
-namespace DirectBalance.Model
-{
-    public class DirectBalanceModel
-    {
-        public IEnumerable<DirectBalanceItemModel> DirectBalanceItems{ get; set; }
+namespace DirectBalance.Model;
 
-        public DirectBalanceItemModel Total { get;set; }
-    }
+public class DirectBalanceModel
+{
+    public IEnumerable<DirectBalanceItemModel> DirectBalanceItems{ get; set; }
+
+    public DirectBalanceItemModel Total { get;set; }
 }

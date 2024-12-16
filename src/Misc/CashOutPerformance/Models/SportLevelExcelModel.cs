@@ -1,11 +1,10 @@
-﻿namespace CashOutPerformance.Models
+﻿namespace CashOutPerformance.Models;
+
+public class SportLevelExcelModel
 {
-    public class SportLevelExcelModel
-    {
-        public IEnumerable<SportExcelModel> Sports { get; set; }
+    public IEnumerable<SportExcelModel> Sports { get; set; }
 
-        public SportItemExcelModel GrandTotal { get; set; }
+    public SportItemExcelModel GrandTotal { get; set; }
 
-        public int TotalItems { get; set; }
-    }
+    public int TotalItems { get; set; }
 }

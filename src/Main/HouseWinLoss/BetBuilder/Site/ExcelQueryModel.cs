@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.BetBuilder.Site
+﻿namespace HouseWinLoss.BetBuilder.Site;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

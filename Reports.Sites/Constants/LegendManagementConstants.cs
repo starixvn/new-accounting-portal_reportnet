@@ -1,4 +1,4 @@
-﻿namespace Nap_Reports.Sites.Constants;
+﻿namespace Reports.Sites.Constants;
 
 public static class LegendManagementConstants
 {

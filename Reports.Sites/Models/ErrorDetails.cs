@@ -1,15 +1,14 @@
 ﻿using Newtonsoft.Json;
 
-namespace Nap_Reports.Sites.Models
-{
-    public class ErrorDetails
-    {
-        public int StatusCode { get; set; }
-        public string Message { get; set; }
+namespace Reports.Sites.Models;
 
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this);
-        }
+public class ErrorDetails
+{
+    public int StatusCode { get; set; }
+    public string Message { get; set; }
+
+    public override string ToString()
+    {
+        return JsonConvert.SerializeObject(this);
     }
 }

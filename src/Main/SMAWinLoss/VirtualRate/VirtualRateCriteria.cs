@@ -1,13 +1,12 @@
-﻿namespace SMAWinLoss.VirtualRate
+﻿namespace SMAWinLoss.VirtualRate;
+
+using Fanex.Data.Repository;
+
+public class VirtualRateCriteria : CriteriaBase
 {
-    using Fanex.Data.Repository;
+    public int CustId { get; set; }
 
-    public class VirtualRateCriteria : CriteriaBase
-    {
-        public int CustId { get; set; }
+    public override string GetSettingKey() => "SMAWinLoss-VirtualRate";
 
-        public override string GetSettingKey() => "SMAWinLoss-VirtualRate";
-
-        public override bool IsValid() => true;
-    }
+    public override bool IsValid() => true;
 }

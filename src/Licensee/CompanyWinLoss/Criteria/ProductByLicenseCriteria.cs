@@ -1,13 +1,12 @@
 using Fanex.Data.Repository;
 
-namespace CompanyWinLoss.Criteria
+namespace CompanyWinLoss.Criteria;
+
+public class ProductByLicenseCriteria : CriteriaBase
 {
-    public class ProductByLicenseCriteria : CriteriaBase
-    {
-        public int LicenseeId { get; set; }
+    public int LicenseeId { get; set; }
 
-        public override bool IsValid() => true;
+    public override bool IsValid() => true;
 
-        public override string GetSettingKey() => "Acc_GetProductListByLicenseId";
-    }
+    public override string GetSettingKey() => "Acc_GetProductListByLicenseId";
 }

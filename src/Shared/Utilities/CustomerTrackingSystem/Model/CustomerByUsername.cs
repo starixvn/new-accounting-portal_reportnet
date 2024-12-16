@@ -1,7 +1,6 @@
-﻿namespace Utilities.CustomerTrackingSystem.Model
+﻿namespace Utilities.CustomerTrackingSystem.Model;
+
+public class CustomerByUsername
 {
-    public class CustomerByUsername
-    {
-        public string Username { get; set; }
-    }
+    public string Username { get; set; }
 }

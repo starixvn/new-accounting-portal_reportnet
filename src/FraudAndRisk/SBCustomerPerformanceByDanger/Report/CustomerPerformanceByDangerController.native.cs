@@ -2,27 +2,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Olympus.WebApi.Epplus;
 
-namespace SBCustomerPerformanceByDanger.Report
+namespace SBCustomerPerformanceByDanger.Report;
+
+[Route("api/sb-customer-performance-by-danger/report")]
+[ApiController]
+public class CustomerPerformanceByDangerController(IMediator mediator) : ControllerBase
 {
-
-    [Route("api/sb-customer-performance-by-danger/report")]
-    [ApiController]
-    public class CustomerPerformanceByDangerController(IMediator mediator) : ControllerBase
+    [Route("data")]
+    [HttpPost]
+    public async Task<IActionResult> GetCustomerPerformanceByDanger(CustomerPerformanceByDangerQueryHttpParameter parameter)
     {
-        [Route("data")]
-        [HttpPost]
-        public async Task<IActionResult> GetCustomerPerformanceByDanger(CustomerPerformanceByDangerQueryHttpParameter parameter)
-        {
-            var viewModel = await mediator.Send(parameter);
-            return Ok(viewModel);
-        }
+        var viewModel = await mediator.Send(parameter);
+        return Ok(viewModel);
+    }
 
-        [Route("excel")]
-        [HttpPost]
-        public async Task<IActionResult> LicenseeExcel(CustomerPerformanceByDangerQueryExcelHttpParameter httpParameter)
-        {
-            var excelPackage = await mediator.Send(httpParameter);
-            return new EpplusExcelResult(excelPackage);
-        }
+    [Route("excel")]
+    [HttpPost]
+    public async Task<IActionResult> LicenseeExcel(CustomerPerformanceByDangerQueryExcelHttpParameter httpParameter)
+    {
+        var excelPackage = await mediator.Send(httpParameter);
+        return new EpplusExcelResult(excelPackage);
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace ActualMemberBet.Filter
-{
-    public class Odds
-    {
-        public string OddsType { get; set; }
+﻿namespace ActualMemberBet.Filter;
 
-        public string OddsTypeName { get; set; }
-    }
+public class Odds
+{
+    public string OddsType { get; set; }
+
+    public string OddsTypeName { get; set; }
 }

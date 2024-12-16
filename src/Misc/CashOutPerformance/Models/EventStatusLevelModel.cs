@@ -1,7 +1,6 @@
-﻿namespace CashOutPerformance.Models
+﻿namespace CashOutPerformance.Models;
+
+public class EventStatusLevelModel : CommonTicketModel
 {
-    public class EventStatusLevelModel : CommonTicketModel
-    {
-        public byte LiveStatus { get; set; }
-    }
+    public byte LiveStatus { get; set; }
 }

@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.VirtualSportsBetradar.MatchDetail
+﻿namespace HouseWinLoss.VirtualSportsBetradar.MatchDetail;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

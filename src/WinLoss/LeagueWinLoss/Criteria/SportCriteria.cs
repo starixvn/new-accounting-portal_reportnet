@@ -1,17 +1,16 @@
 ﻿using Fanex.Data.Repository;
 
-namespace LeagueWinLoss.Criteria
-{
-    public class SportCriteria : CriteriaBase
-    {
-        public override string GetSettingKey()
-        {
-            return "WinLoss_LeagueWinLoss_GetSports";
-        }
+namespace LeagueWinLoss.Criteria;
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+public class SportCriteria : CriteriaBase
+{
+    public override string GetSettingKey()
+    {
+        return "WinLoss_LeagueWinLoss_GetSports";
+    }
+
+    public override bool IsValid()
+    {
+        return true;
     }
 }

@@ -1,13 +1,12 @@
-﻿namespace DailyCreatedCustomers.Entities
+﻿namespace DailyCreatedCustomers.Entities;
+
+public class DetailEntity
 {
-    public class DetailEntity
-    {
-        public int CustId { get; set; }
+    public int CustId { get; set; }
 
-        public string UserName { get; set; }    
+    public string UserName { get; set; }    
 
-        public DateTime CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
-        public string Creator { get; set; }
-    }
+    public string Creator { get; set; }
 }

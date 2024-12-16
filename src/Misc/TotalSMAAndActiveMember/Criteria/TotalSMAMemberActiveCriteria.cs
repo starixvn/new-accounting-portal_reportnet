@@ -1,23 +1,22 @@
 using Fanex.Data.Repository;
 
-namespace TotalSMAAndActiveMember.Criteria
+namespace TotalSMAAndActiveMember.Criteria;
+
+public class TotalSMAMemberActiveCriteria : CriteriaBase
 {
-    public class TotalSMAMemberActiveCriteria : CriteriaBase
+    public DateTime FromDate { get; set; }
+
+    public DateTime ToDate { get; set; }
+
+    public string SiteList { get; set; }
+
+    public override string GetSettingKey()
     {
-        public DateTime FromDate { get; set; }
+        return "Misc_TotalSMAMemberActive_GetReport";
+    }
 
-        public DateTime ToDate { get; set; }
-
-        public string SiteList { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "Misc_TotalSMAMemberActive_GetReport";
-        }
-
-        public override bool IsValid()
-        {
-            return true;
-        }
+    public override bool IsValid()
+    {
+        return true;
     }
 }

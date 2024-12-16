@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Nap_Reports.Sites.Controllers
+namespace Reports.Sites.Controllers;
+
+public class TotalSMAMemberActiveController : Controller
 {
-    public class TotalSMAMemberActiveController : Controller
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

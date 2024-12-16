@@ -3,25 +3,24 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Olympus.WebApi.Epplus;
 
-namespace BetConstructPerformance.Controllers
-{
-    [Route("api/bet-construct")]
-    [ApiController]
-    public class BetConstructPerformanceApiController(IMediator mediator) : ControllerBase
-    {
-        [Route("sports")]
-        public async Task<IActionResult> Sports(SportRequest request)
-        {
-            var viewModel = await mediator.Send(request);
-            return Ok(viewModel);
-        }
+namespace BetConstructPerformance.Controllers;
 
-        [Route("excel-sports")]
-        [HttpPost]
-        public async Task<IActionResult> Excel(SportExcelRequest request)
-        {
-            var excelPackage = await mediator.Send(request);
-            return new EpplusExcelResult(excelPackage);
-        }
+[Route("api/bet-construct")]
+[ApiController]
+public class BetConstructPerformanceApiController(IMediator mediator) : ControllerBase
+{
+    [Route("sports")]
+    public async Task<IActionResult> Sports(SportRequest request)
+    {
+        var viewModel = await mediator.Send(request);
+        return Ok(viewModel);
+    }
+
+    [Route("excel-sports")]
+    [HttpPost]
+    public async Task<IActionResult> Excel(SportExcelRequest request)
+    {
+        var excelPackage = await mediator.Send(request);
+        return new EpplusExcelResult(excelPackage);
     }
 }

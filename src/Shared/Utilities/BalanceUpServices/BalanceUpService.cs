@@ -1,28 +1,27 @@
 ﻿using Fanex.Caching;
 using Fanex.Data.Repository;
 
-namespace Utilities.BalanceUpServices
+namespace Utilities.BalanceUpServices;
+
+public interface BalanceUpService
 {
-    public interface BalanceUpService
+    BalanceUpRange Query();
+}
+
+public class BalanceUpServiceImp(IDynamicRepository repository, ICacheService cacheService) : BalanceUpService
+{
+    private const string BalanceUpRangeCacheKey = "CommonBalanceUpRangeCacheKey";
+
+    public BalanceUpRange Query()
     {
-        BalanceUpRange Query();
+        return cacheService.GetOrSet(
+            BalanceUpRangeCacheKey,
+            QueryFromSource);
     }
 
-    public class BalanceUpServiceImp(IDynamicRepository repository, ICacheService cacheService) : BalanceUpService
+    public BalanceUpRange QueryFromSource()
     {
-        private const string BalanceUpRangeCacheKey = "CommonBalanceUpRangeCacheKey";
-
-        public BalanceUpRange Query()
-        {
-            return cacheService.GetOrSet(
-                BalanceUpRangeCacheKey,
-                QueryFromSource);
-        }
-
-        public BalanceUpRange QueryFromSource()
-        {
-            var criteria = new BalanceUpCriteria();
-            return repository.Get<BalanceUpRange>(criteria);
-        }
+        var criteria = new BalanceUpCriteria();
+        return repository.Get<BalanceUpRange>(criteria);
     }
 }

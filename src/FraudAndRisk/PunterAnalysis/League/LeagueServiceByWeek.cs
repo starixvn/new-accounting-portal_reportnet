@@ -2,42 +2,41 @@
 using PunterAnalysis.League.Model;
 using PunterAnalysis.Shared;
 
-namespace PunterAnalysis.League
+namespace PunterAnalysis.League;
+
+public class LeagueServiceByWeek(IDynamicRepository repository, DateTimeService dateTimeService)
+    : LeagueServiceBase(repository)
 {
-    public class LeagueServiceByWeek(IDynamicRepository repository, DateTimeService dateTimeService)
-        : LeagueServiceBase(repository)
+    protected override LeagueMappingModel Transform(LeagueRawModel rawModel)
     {
-        protected override LeagueMappingModel Transform(LeagueRawModel rawModel)
+        return new LeagueMappingModel
         {
-            return new LeagueMappingModel
+            LeagueId = rawModel.LeagueId,
+            LeagueName = rawModel.LeagueName,
+            Year = rawModel.Year,
+            MonthOrWeek = rawModel.Week,
+            WinLoss = rawModel.WinLoss,
+            Turnover = rawModel.Turnover,
+            BetCount = rawModel.BetCount
+        };
+    }
+
+    public override IEnumerable<string> GetGroupNames(IDictionary<int, List<int>> indexGroups)
+    {
+        foreach (var year in indexGroups.Keys)
+        {
+            yield return $"Year {year}";
+            var weeks = indexGroups[year];
+            foreach (var week in weeks)
             {
-                LeagueId = rawModel.LeagueId,
-                LeagueName = rawModel.LeagueName,
-                Year = rawModel.Year,
-                MonthOrWeek = rawModel.Week,
-                WinLoss = rawModel.WinLoss,
-                Turnover = rawModel.Turnover,
-                BetCount = rawModel.BetCount
-            };
+                var beginOfWeek = dateTimeService.GetFirstDateOfWeekIso8601(year, week);
+                yield return $"Week {week} ({beginOfWeek:MMM dd, yyyy})";
+            }
         }
 
-        public override IEnumerable<string> GetGroupNames(IDictionary<int, List<int>> indexGroups)
+        if (indexGroups.Any())
         {
-            foreach (var year in indexGroups.Keys)
-            {
-                yield return $"Year {year}";
-                var weeks = indexGroups[year];
-                foreach (var week in weeks)
-                {
-                    var beginOfWeek = dateTimeService.GetFirstDateOfWeekIso8601(year, week);
-                    yield return $"Week {week} ({beginOfWeek:MMM dd, yyyy})";
-                }
-            }
-
-            if (indexGroups.Any())
-            {
-                yield return "Grand Total";
-            }
+            yield return "Grand Total";
         }
     }
 }

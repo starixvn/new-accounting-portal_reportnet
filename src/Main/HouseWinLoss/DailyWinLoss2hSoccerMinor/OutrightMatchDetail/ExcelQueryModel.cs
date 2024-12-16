@@ -1,11 +1,10 @@
-﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.OutrightMatchDetail
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.OutrightMatchDetail;
+
+using Configuration;
+
+public class ExcelQueryModel : QueryModel
 {
-    using Configuration;
+    public string Title { get; set; }
 
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-
-        public new int IsSabaSport { get; set; } = Constants.IsAllSportDefault;
-    }
+    public new int IsSabaSport { get; set; } = Constants.IsAllSportDefault;
 }

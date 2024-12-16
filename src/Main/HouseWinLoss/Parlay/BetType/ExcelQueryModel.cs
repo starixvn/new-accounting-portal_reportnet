@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.Parlay.BetType
+﻿namespace HouseWinLoss.Parlay.BetType;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

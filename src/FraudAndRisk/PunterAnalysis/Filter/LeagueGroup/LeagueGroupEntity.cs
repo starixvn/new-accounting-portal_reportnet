@@ -1,13 +1,12 @@
-﻿namespace PunterAnalysis.Filter.LeagueGroup
+﻿namespace PunterAnalysis.Filter.LeagueGroup;
+
+public class LeagueGroupEntity
 {
-    public class LeagueGroupEntity
-    {
-        public int SportType { get; set; }
+    public int SportType { get; set; }
 
-        public string Sport { get; set; }
+    public string Sport { get; set; }
 
-        public int LeagueGroupId { get; set; }
+    public int LeagueGroupId { get; set; }
 
-        public string LeagueGroupName { get; set; }
-    }
+    public string LeagueGroupName { get; set; }
 }

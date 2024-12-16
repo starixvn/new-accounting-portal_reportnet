@@ -1,9 +1,8 @@
-﻿namespace BetConstructPerformance.Models
-{
-    public class SportModel
-    {
-        public IEnumerable<SportItemModel> Items { get; set; }
+﻿namespace BetConstructPerformance.Models;
 
-        public SportItemModel Total { get; set; }
-    }
+public class SportModel
+{
+    public IEnumerable<SportItemModel> Items { get; set; }
+
+    public SportItemModel Total { get; set; }
 }

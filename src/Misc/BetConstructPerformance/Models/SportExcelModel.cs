@@ -1,9 +1,8 @@
-﻿namespace BetConstructPerformance.Models
-{
-    public class SportExcelModel
-    {
-        public IEnumerable<SportItemExcelModel> Items { get; set; }
+﻿namespace BetConstructPerformance.Models;
 
-        public SportItemExcelModel Total { get; set; }
-    }
+public class SportExcelModel
+{
+    public IEnumerable<SportItemExcelModel> Items { get; set; }
+
+    public SportItemExcelModel Total { get; set; }
 }

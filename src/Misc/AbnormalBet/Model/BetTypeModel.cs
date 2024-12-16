@@ -1,9 +1,8 @@
-﻿namespace AbnormalBet.Model
-{
-    public class BetTypeModel
-    {
-        public int BetTypeId { get; set; }
+﻿namespace AbnormalBet.Model;
 
-        public string BetTypeName { get; set; }
-    }
+public class BetTypeModel
+{
+    public int BetTypeId { get; set; }
+
+    public string BetTypeName { get; set; }
 }

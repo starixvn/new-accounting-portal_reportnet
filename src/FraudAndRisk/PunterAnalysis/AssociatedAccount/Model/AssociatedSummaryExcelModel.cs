@@ -1,66 +1,65 @@
 ﻿using Epplus.Mapper.Annotations;
 
-namespace PunterAnalysis.AssociatedAccount.Model
+namespace PunterAnalysis.AssociatedAccount.Model;
+
+public class AssociatedSummaryExcelModel
 {
-    public class AssociatedSummaryExcelModel
+    private const string MemberRole = "Member";
+
+    private decimal winLoss;
+
+    private decimal turnover;
+
+    private decimal betCount;
+
+    [Cell("A8")]
+    public string Username { get; set; }
+
+    [Cell("B8")]
+    public string RoleName { get; set; }
+
+    [Cell("C8")]
+    public object WinLoss
     {
-        private const string MemberRole = "Member";
+        get => IsMember() ? winLoss : string.Empty;
+        set => winLoss = (decimal)value;
+    }
 
-        private decimal winLoss;
+    [Cell("D8")]
+    public object Turnover
+    {
+        get => IsMember() ? turnover : string.Empty;
+        set => turnover = (decimal)value;
+    }
 
-        private decimal turnover;
-
-        private decimal betCount;
-
-        [Cell("A8")]
-        public string Username { get; set; }
-
-        [Cell("B8")]
-        public string RoleName { get; set; }
-
-        [Cell("C8")]
-        public object WinLoss
+    [Cell("E8")]
+    public object Margin
+    {
+        get
         {
-            get => IsMember() ? winLoss : string.Empty;
-            set => winLoss = (decimal)value;
-        }
-
-        [Cell("D8")]
-        public object Turnover
-        {
-            get => IsMember() ? turnover : string.Empty;
-            set => turnover = (decimal)value;
-        }
-
-        [Cell("E8")]
-        public object Margin
-        {
-            get
+            if (IsMember())
             {
-                if (IsMember())
-                {
-                    return turnover == 0
-                   ? "N/A" :
-                   winLoss / turnover;
-                }
-
-                return string.Empty;
+                return turnover == 0
+                    ? "N/A" :
+                    winLoss / turnover;
             }
-        }
 
-        [Cell("F8")]
-        public object BetCount
-        {
-            get => IsMember() ? betCount : string.Empty;
-            set => betCount = (int)value;
+            return string.Empty;
         }
+    }
 
-        [Cell("G8")]
-        public string Category { get; set; }
+    [Cell("F8")]
+    public object BetCount
+    {
+        get => IsMember() ? betCount : string.Empty;
+        set => betCount = (int)value;
+    }
 
-        private bool IsMember()
-        {
-            return RoleName is "" or MemberRole;
-        }
+    [Cell("G8")]
+    public string Category { get; set; }
+
+    private bool IsMember()
+    {
+        return RoleName is "" or MemberRole;
     }
 }

@@ -1,13 +1,12 @@
 ﻿
 using CompanyBalanceDifference.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class CompanyBalanceDifferenceInjection
 {
-    public static class CompanyBalanceDifferenceInjection
+    public static void RegisterCompanyBalanceDifferenceServices(this IServiceCollection service)
     {
-        public static void RegisterCompanyBalanceDifferenceServices(this IServiceCollection service)
-        {
-            service.AddTransient<CompanyBalanceDifferenceService, CompanyBalanceDifferenceServiceImp>();
-        }
+        service.AddTransient<CompanyBalanceDifferenceService, CompanyBalanceDifferenceServiceImp>();
     }
 }

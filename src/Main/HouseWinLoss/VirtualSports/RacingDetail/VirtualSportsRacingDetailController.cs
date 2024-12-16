@@ -4,29 +4,28 @@ using HouseWinLoss.Common.Criteria;
 using HouseWinLoss.Common.MatchDetailByCode;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HouseWinLoss.VirtualSports.RacingDetail
-{
-    [Route("api/house-win-loss-by-products/virtual-sports/racing-match-detail")]
-    [ApiController]
-    public class VirtualSportsRacingDetailController(
-        WinLossService service,
-        GridOptionsBuilder builder,
-        MatchGridOptionColumnDecoratorByCode decorator,
-        IMapper mapper)
-        : MatchDetailByCodeController(service, builder, decorator)
-    {
-        [Route("")]
-        public async Task<IActionResult> Json(QueryModel queryModel)
-        {
-            var criteria = mapper.Map<UniversalThirdPartyMatchDetailCriteria>(queryModel);
-            return await Json(criteria);
-        }
+namespace HouseWinLoss.VirtualSports.RacingDetail;
 
-        [Route("excel")]
-        public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
-        {
-            var criteria = mapper.Map<UniversalThirdPartyMatchDetailCriteria>(queryModel);
-            return await Excel(criteria, queryModel.Title);
-        }
+[Route("api/house-win-loss-by-products/virtual-sports/racing-match-detail")]
+[ApiController]
+public class VirtualSportsRacingDetailController(
+    WinLossService service,
+    GridOptionsBuilder builder,
+    MatchGridOptionColumnDecoratorByCode decorator,
+    IMapper mapper)
+    : MatchDetailByCodeController(service, builder, decorator)
+{
+    [Route("")]
+    public async Task<IActionResult> Json(QueryModel queryModel)
+    {
+        var criteria = mapper.Map<UniversalThirdPartyMatchDetailCriteria>(queryModel);
+        return await Json(criteria);
+    }
+
+    [Route("excel")]
+    public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
+    {
+        var criteria = mapper.Map<UniversalThirdPartyMatchDetailCriteria>(queryModel);
+        return await Excel(criteria, queryModel.Title);
     }
 }

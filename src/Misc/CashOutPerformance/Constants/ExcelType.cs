@@ -1,10 +1,9 @@
-﻿namespace CashOutPerformance.Constants
+﻿namespace CashOutPerformance.Constants;
+
+public enum ExcelType
 {
-    public enum ExcelType
-    {
-        Sport,
-        Event,
-        BetType,
-        Match
-    }
+    Sport,
+    Event,
+    BetType,
+    Match
 }

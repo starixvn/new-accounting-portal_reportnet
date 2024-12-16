@@ -1,9 +1,8 @@
-﻿namespace LeagueWinLoss.Model
-{
-    public class Status
-    {
-        public string Name { get; set; }
+﻿namespace LeagueWinLoss.Model;
 
-        public int Value { get; set; }
-    }
+public class Status
+{
+    public string Name { get; set; }
+
+    public int Value { get; set; }
 }

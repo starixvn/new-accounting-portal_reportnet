@@ -1,27 +1,26 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace DailyCreatedCustomers.Criteria
+namespace DailyCreatedCustomers.Criteria;
+
+public class DailyCreatedCustomersDetailsCriteria : CriteriaBase
 {
-    public class DailyCreatedCustomersDetailsCriteria : CriteriaBase
+    public DateTime Date { get; set; }
+
+    public int RoleID { get; set; }
+
+    public bool IsDirect { get; set; }
+
+    [SpParam(Ignored = true)]
+    public string RoleName { get; set; }
+
+    public override string GetSettingKey()
     {
-        public DateTime Date { get; set; }
+        return "Misc_DailyCreatedCustomers_GetDetailReport";
+    }
 
-        public int RoleID { get; set; }
-
-        public bool IsDirect { get; set; }
-
-        [SpParam(Ignored = true)]
-        public string RoleName { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "Misc_DailyCreatedCustomers_GetDetailReport";
-        }
-
-        public override bool IsValid()
-        {
-            return true;
-        }
+    public override bool IsValid()
+    {
+        return true;
     }
 }

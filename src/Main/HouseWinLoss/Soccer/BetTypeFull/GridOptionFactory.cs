@@ -1,9 +1,8 @@
 ﻿using Fanex.Excel.Models;
 
-namespace HouseWinLoss.Soccer.BetTypeFull
+namespace HouseWinLoss.Soccer.BetTypeFull;
+
+public interface GridOptionFactory
 {
-    public interface GridOptionFactory
-    {
-        Task<GridOptions> CreateGridOption(ExcelQueryModel queryModel, string title, int isLive);
-    }
+    Task<GridOptions> CreateGridOption(ExcelQueryModel queryModel, string title, int isLive);
 }

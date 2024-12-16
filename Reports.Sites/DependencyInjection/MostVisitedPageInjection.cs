@@ -1,13 +1,12 @@
 ﻿using Utilities.MostVisitedPages;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class MostVisitedPageInjection
 {
-    public static class MostVisitedPageInjection
+    public static void RegisterMostVisitedPageServices(this IServiceCollection service)
     {
-        public static void RegisterMostVisitedPageServices(this IServiceCollection service)
-        {
-            service.AddTransient<MostVisitedPagesService, MostVisitedPagesServiceImp>();
-            service.AddTransient<MenuService, MenuServiceImp>();
-        }
+        service.AddTransient<MostVisitedPagesService, MostVisitedPagesServiceImp>();
+        service.AddTransient<MenuService, MenuServiceImp>();
     }
 }

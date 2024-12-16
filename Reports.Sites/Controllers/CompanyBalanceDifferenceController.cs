@@ -2,16 +2,15 @@
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Nap_Reports.Sites.Controllers
-{
-    using Utilities;
+namespace Reports.Sites.Controllers;
 
-    public class CompanyBalanceDifferenceController : Controller
+using Utilities;
+
+public class CompanyBalanceDifferenceController : Controller
+{
+    [NapAuth(FunctionKey = AccReportFunctionKeys.CompanyBalanceDifference, Policy = Constant.Policy.Read)]
+    public IActionResult Index()
     {
-        [NapAuth(FunctionKey = AccReportFunctionKeys.CompanyBalanceDifference, Policy = Constant.Policy.Read)]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

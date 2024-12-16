@@ -1,35 +1,34 @@
 ﻿using LeagueWinLoss.Model;
 using Utilities.Sorting;
 
-namespace LeagueWinLoss.Services
-{
-    public interface SortingService
-    {
-        LeagueWinLossModel SortData(LeagueWinLossModel reportModel, string sortDirection, string sortColumnName);
+namespace LeagueWinLoss.Services;
 
-        SiteWinLossModel SortSiteData(SiteWinLossModel reportModel, string sortDirection, string sortColumnName);
+public interface SortingService
+{
+    LeagueWinLossModel SortData(LeagueWinLossModel reportModel, string sortDirection, string sortColumnName);
+
+    SiteWinLossModel SortSiteData(SiteWinLossModel reportModel, string sortDirection, string sortColumnName);
+}
+
+public class SortingServiceImp : SortingService
+{
+    public LeagueWinLossModel SortData(LeagueWinLossModel reportModel, string sortDirection, string sortColumnName)
+    {
+        SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
+        return reportModel;
     }
 
-    public class SortingServiceImp : SortingService
+    private static void SortStatisticsForPerChildGroup(LeagueWinLossModel reportModel, string sortDirection, string sortColumnName)
     {
-        public LeagueWinLossModel SortData(LeagueWinLossModel reportModel, string sortDirection, string sortColumnName)
+        foreach (var row in reportModel.SportWinLoss)
         {
-            SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
-            return reportModel;
+            SortExtension.SortDataByProperty(row.Leagues, sortDirection, sortColumnName, "number");
         }
+    }
 
-        private static void SortStatisticsForPerChildGroup(LeagueWinLossModel reportModel, string sortDirection, string sortColumnName)
-        {
-            foreach (var row in reportModel.SportWinLoss)
-            {
-                SortExtension.SortDataByProperty(row.Leagues, sortDirection, sortColumnName, "number");
-            }
-        }
-
-        public SiteWinLossModel SortSiteData(SiteWinLossModel reportModel, string sortDirection, string sortColumnName)
-        {
-            SortExtension.SortDataByProperty(reportModel.Sites, sortDirection, sortColumnName, "number");
-            return reportModel;
-        }
+    public SiteWinLossModel SortSiteData(SiteWinLossModel reportModel, string sortDirection, string sortColumnName)
+    {
+        SortExtension.SortDataByProperty(reportModel.Sites, sortDirection, sortColumnName, "number");
+        return reportModel;
     }
 }

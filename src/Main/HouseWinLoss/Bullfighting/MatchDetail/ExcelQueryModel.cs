@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.Bullfighting.MatchDetail
+﻿namespace HouseWinLoss.Bullfighting.MatchDetail;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

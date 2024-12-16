@@ -3,32 +3,31 @@ using Microsoft.AspNetCore.Mvc;
 using Olympus.WebApi.Epplus;
 using ResultAnalysis.Requests;
 
-namespace ResultAnalysis.Controllers
+namespace ResultAnalysis.Controllers;
+
+[Route("api/result-analysis")]
+[ApiController]
+public class ResultAnalysisController(IMediator mediator) : ControllerBase
 {
-    [Route("api/result-analysis")]
-	[ApiController]
-	public class ResultAnalysisController(IMediator mediator) : ControllerBase
+    [Route("leagues")]
+    public async Task<IActionResult> Leagues(LeagueRequest request)
     {
-        [Route("leagues")]
-		public async Task<IActionResult> Leagues(LeagueRequest request)
-		{
-			var viewModel = await mediator.Send(request);
-			return Ok(viewModel);
-		}
+        var viewModel = await mediator.Send(request);
+        return Ok(viewModel);
+    }
 
-		[Route("result-analysis")]
-		public async Task<IActionResult> ResultAnalysis(ResultAnalysisRequest request)
-		{
-			var viewModel = await mediator.Send(request);
-			return Ok(viewModel);
-		}
+    [Route("result-analysis")]
+    public async Task<IActionResult> ResultAnalysis(ResultAnalysisRequest request)
+    {
+        var viewModel = await mediator.Send(request);
+        return Ok(viewModel);
+    }
 
-		[Route("export-excel")]
-		[HttpPost]
-		public async Task<IActionResult> Excel(ResultAnalysisExcelRequest request)
-		{
-			var excelPackage = await mediator.Send(request);
-			return new EpplusExcelResult(excelPackage);
-		}
-	}
+    [Route("export-excel")]
+    [HttpPost]
+    public async Task<IActionResult> Excel(ResultAnalysisExcelRequest request)
+    {
+        var excelPackage = await mediator.Send(request);
+        return new EpplusExcelResult(excelPackage);
+    }
 }

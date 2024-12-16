@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using DailyMixParlay.Models;
 
-namespace DailyMixParlay
+namespace DailyMixParlay;
+
+public static class AutoMapperConfiguration
 {
-    public static class AutoMapperConfiguration
+    public static void InitializeParlay(this IProfileExpression cfg)
     {
-        public static void InitializeParlay(this IProfileExpression cfg)
-        {
-            cfg.CreateMap<WinLossItem, WinLossItem>();
-        }
+        cfg.CreateMap<WinLossItem, WinLossItem>();
     }
 }

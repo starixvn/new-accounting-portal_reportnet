@@ -1,9 +1,8 @@
-﻿namespace UpdatedUsernameCredit.UpdatedUsername
-{
-    public class UsernameLogModel
-    {
-        public string FromName { get; set; }
+﻿namespace UpdatedUsernameCredit.UpdatedUsername;
 
-        public string ToName { get; set; }
-    }
+public class UsernameLogModel
+{
+    public string FromName { get; set; }
+
+    public string ToName { get; set; }
 }

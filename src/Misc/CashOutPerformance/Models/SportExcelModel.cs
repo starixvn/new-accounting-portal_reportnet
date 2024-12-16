@@ -1,9 +1,8 @@
-﻿namespace CashOutPerformance.Models
-{
-    public class SportExcelModel
-    {
-        public SportItemExcelModel SportTotal { get; set; }
+﻿namespace CashOutPerformance.Models;
 
-        public IEnumerable<SportItemExcelModel> ChildItems { get; set; }
-    }
+public class SportExcelModel
+{
+    public SportItemExcelModel SportTotal { get; set; }
+
+    public IEnumerable<SportItemExcelModel> ChildItems { get; set; }
 }

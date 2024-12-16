@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <SonarQubeExclude>true</SonarQubeExclude>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Nap_Reports.Sites</RootNamespace>
+    <RootNamespace>Reports.Sites</RootNamespace>
     <UserSecretsId>f8486ce7-66af-4ef6-951b-f4a54515339e</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>

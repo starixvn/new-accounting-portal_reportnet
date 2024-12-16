@@ -1,15 +1,14 @@
 ﻿using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace Margin.Criteria
+namespace Margin.Criteria;
+
+public class MarginWinLossCriteria : CriteriaBase
 {
-    public class MarginWinLossCriteria : CriteriaBase
-    {
-        [SpParam(SqlParamName = "actual_stake")]
-        public decimal ActualStake { get; set; }
+    [SpParam(SqlParamName = "actual_stake")]
+    public decimal ActualStake { get; set; }
 
-        public override string GetSettingKey() => "Special_MarginReport_BetRatioByUser";
+    public override string GetSettingKey() => "Special_MarginReport_BetRatioByUser";
 
-        public override bool IsValid() => true;
-    }
+    public override bool IsValid() => true;
 }

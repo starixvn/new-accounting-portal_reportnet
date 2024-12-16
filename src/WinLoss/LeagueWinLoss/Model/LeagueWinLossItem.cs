@@ -1,16 +1,15 @@
-﻿namespace LeagueWinLoss.Model
+﻿namespace LeagueWinLoss.Model;
+
+[Serializable]
+public class LeagueWinLossItem : BaseWinLoss
 {
-    [Serializable]
-    public class LeagueWinLossItem : BaseWinLoss
-    {
-        public int SportType { get; set; }
+    public int SportType { get; set; }
 
-        public string Sport { get; set; }
+    public string Sport { get; set; }
 
-        public string LeagueId { get; set; }
+    public string LeagueId { get; set; }
 
-        public string LeagueName { get; set; }
+    public string LeagueName { get; set; }
 
-        public int? MatchCount { get; set; }
-    }
+    public int? MatchCount { get; set; }
 }

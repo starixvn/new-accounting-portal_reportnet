@@ -1,9 +1,8 @@
-namespace TreeWinLoss.Model
-{
-    public class VirtualRateByBettypeModel
-    {
-        public string BettypeName { get; set; }
+namespace TreeWinLoss.Model;
 
-        public decimal? VirtualRate { get; set; }
-    }
+public class VirtualRateByBettypeModel
+{
+    public string BettypeName { get; set; }
+
+    public decimal? VirtualRate { get; set; }
 }

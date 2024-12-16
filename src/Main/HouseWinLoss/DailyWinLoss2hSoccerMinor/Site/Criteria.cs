@@ -1,28 +1,27 @@
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.Site
+namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.Site;
+
+using HouseWinLoss.Common.Criteria;
+using Configuration;
+
+public class Criteria : WinLossCriteria
 {
-    using HouseWinLoss.Common.Criteria;
-    using Configuration;
+    public int SportType { get; set; }
 
-    public class Criteria : WinLossCriteria
-    {
-        public int SportType { get; set; }
+    public int BetType { get; set; }
 
-        public int BetType { get; set; }
+    public string SiteType { get; set; }
 
-        public string SiteType { get; set; }
+    public int IsLive { get; set; } = Constants.LiveDefault;
 
-        public int IsLive { get; set; } = Constants.LiveDefault;
+    public int IsHedge { get; set; } = Constants.HedgeDefault;
 
-        public int IsHedge { get; set; } = Constants.HedgeDefault;
+    public int IsCorners { get; set; } = Constants.CornersDefault;
 
-        public int IsCorners { get; set; } = Constants.CornersDefault;
+    public int IsSabaSport { get; set; } = Constants.IsAllSportDefault;
 
-        public int IsSabaSport { get; set; } = Constants.IsAllSportDefault;
+    public int PermissionProfileID { get; set; }
 
-        public int PermissionProfileID { get; set; }
+    public bool IsNoDraw { get; set; }
 
-        public bool IsNoDraw { get; set; }
-
-        public override string GetSettingKey() => "HouseWinLoss-Sportsbook-Site";
-    }
+    public override string GetSettingKey() => "HouseWinLoss-Sportsbook-Site";
 }

@@ -1,9 +1,8 @@
-﻿namespace CompanyWinLoss.Model
-{
-    public class Currency
-    {
-        public int CurrencyId { get; set; }
+﻿namespace CompanyWinLoss.Model;
 
-        public string CurrencyName { get; set; }
-    }
+public class Currency
+{
+    public int CurrencyId { get; set; }
+
+    public string CurrencyName { get; set; }
 }

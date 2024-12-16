@@ -1,13 +1,12 @@
 ﻿using DailyMixParlay.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class DailyMixParlayInjection
 {
-    public static class DailyMixParlayInjection
+    public static void RegisterDailyMixParlayServices(this IServiceCollection service)
     {
-        public static void RegisterDailyMixParlayServices(this IServiceCollection service)
-        {
-            service.AddTransient<DailyMixParlayWinLossService, DailyMixParlayWinLossServiceImp>();
-            service.AddTransient<DailyMixParlayWinLossExcelService, DailyMixParlayWinLossExcelServiceImp>();
-        }
+        service.AddTransient<DailyMixParlayWinLossService, DailyMixParlayWinLossServiceImp>();
+        service.AddTransient<DailyMixParlayWinLossExcelService, DailyMixParlayWinLossExcelServiceImp>();
     }
 }

@@ -1,11 +1,10 @@
-﻿namespace CompanyWinLoss.Model
+﻿namespace CompanyWinLoss.Model;
+
+public class CompanyWinLossItem
 {
-    public class CompanyWinLossItem
-    {
-        public int RowId { get; set; }
+    public int RowId { get; set; }
 
-        public string UserName { get; set; }
+    public string UserName { get; set; }
 
-        public decimal CompanyWinLoss { get; set; } 
-    }
+    public decimal CompanyWinLoss { get; set; } 
 }

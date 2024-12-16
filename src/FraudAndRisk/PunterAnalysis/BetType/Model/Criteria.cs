@@ -1,33 +1,32 @@
 ﻿using Fanex.Data.Repository;
 
-namespace PunterAnalysis.BetType.Model
+namespace PunterAnalysis.BetType.Model;
+
+public class Criteria : CriteriaBase
 {
-    public class Criteria : CriteriaBase
-    {
-        public int PeriodType { get; set; } = 1;
+    public int PeriodType { get; set; } = 1;
 
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public int CustId { get; set; }
+    public int CustId { get; set; }
 
-        public string ListCombinationId { get; set; }
+    public string ListCombinationId { get; set; }
 
-        public string LeagueId { get; set; }
+    public string LeagueId { get; set; }
 
-        public int SportId { get; set; }
+    public int SportId { get; set; }
 
-        public int OrderBy { get; set; } = 1;
+    public int OrderBy { get; set; } = 1;
 
-        public int SortBy { get; set; } = 1;
+    public int SortBy { get; set; } = 1;
 
-        public string ListLeagueGroupId { get; set; }
+    public string ListLeagueGroupId { get; set; }
 
-        public int LeagueGroupId { get; set; }
+    public int LeagueGroupId { get; set; }
 
-        public override string GetSettingKey() => "Punter-BetType";
+    public override string GetSettingKey() => "Punter-BetType";
 
-        public override bool IsValid() => true;
-    }
+    public override bool IsValid() => true;
 }

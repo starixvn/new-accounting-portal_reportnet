@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Nap_Reports.Sites.ViewComponents;
+namespace Reports.Sites.ViewComponents;
 
 public class ScoreInformationViewComponent : ViewComponent
 {

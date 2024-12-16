@@ -2,14 +2,13 @@
 
 using BetCount.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class BetCountInjection
 {
-    public static class BetCountInjection
+    public static void RegisterBetCountServices(this IServiceCollection service)
     {
-        public static void RegisterBetCountServices(this IServiceCollection service)
-        {
-            service.AddTransient<BetCountService, BetCountServiceImp>();
-            service.AddTransient<BetCountExportExcelService, BetCountExportExcelServiceImp>();
-        }
+        service.AddTransient<BetCountService, BetCountServiceImp>();
+        service.AddTransient<BetCountExportExcelService, BetCountExportExcelServiceImp>();
     }
 }

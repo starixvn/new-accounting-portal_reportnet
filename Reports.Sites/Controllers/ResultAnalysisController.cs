@@ -1,16 +1,15 @@
 ﻿using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Sites.Settings;
+using Reports.Sites.Settings;
 
-namespace Nap_Reports.Sites.Controllers
+namespace Reports.Sites.Controllers;
+
+public class ResultAnalysisController : Controller
 {
-    public class ResultAnalysisController : Controller
+    [NapAuth(FunctionKey = FunctionKeys.ResultAnalysis, Policy = Constant.Policy.Read)]
+    public IActionResult Index()
     {
-        [NapAuth(FunctionKey = FunctionKeys.ResultAnalysis, Policy = Constant.Policy.Read)]
-        public IActionResult Index()
-        {
-            return View("~/wwwroot/result-analysis/index.cshtml");
-        }
+        return View("~/wwwroot/result-analysis/index.cshtml");
     }
 }

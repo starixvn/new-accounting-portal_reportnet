@@ -1,9 +1,8 @@
-﻿namespace SMAWinLoss.Filter
-{
-    public class Sport
-    {
-        public string SportGroup { get; set; }
+﻿namespace SMAWinLoss.Filter;
 
-        public string SportIds { get; set; }
-    }
+public class Sport
+{
+    public string SportGroup { get; set; }
+
+    public string SportIds { get; set; }
 }

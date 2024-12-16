@@ -1,9 +1,8 @@
-namespace NegativeBalance.Model
-{ 
-    public class NegativeBalanceModel
-    {
-        public List<SiteNegativeBalanceModel> NegativeBalanceUsers { get; set; } = [];
+namespace NegativeBalance.Model;
 
-        public int TotalNegativeBalanceUser { get; set; }
-    }
+public class NegativeBalanceModel
+{
+    public List<SiteNegativeBalanceModel> NegativeBalanceUsers { get; set; } = [];
+
+    public int TotalNegativeBalanceUser { get; set; }
 }

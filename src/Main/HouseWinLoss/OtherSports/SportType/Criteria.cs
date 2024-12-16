@@ -1,16 +1,15 @@
-namespace HouseWinLoss.OtherSports.SportType
+namespace HouseWinLoss.OtherSports.SportType;
+
+using HouseWinLoss.Common.Criteria;
+using Configuration;
+
+public class Criteria : WinLossCriteria
 {
-    using HouseWinLoss.Common.Criteria;
-    using Configuration;
+    public int IsLive { get; set; } = Constants.LiveDefault;
 
-    public class Criteria : WinLossCriteria
-    {
-        public int IsLive { get; set; } = Constants.LiveDefault;
+    public bool IsNoDraw { get; set; }
 
-        public bool IsNoDraw { get; set; }
+    public int PermissionProfileID { get; set; }
 
-        public int PermissionProfileID { get; set; }
-
-        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Sporttype";
-    }
+    public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Sporttype";
 }

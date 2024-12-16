@@ -1,28 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Sites.Models;
+using Reports.Sites.Models;
 using System.Diagnostics;
 using Utilities.Configurations;
 
-namespace Nap_Reports.Sites.Controllers
+namespace Reports.Sites.Controllers;
+
+public class HomeController(ConfigurationService config) : Controller
 {
-    public class HomeController(ConfigurationService config) : Controller
+
+    public IActionResult Index()
     {
+        ViewBag.IsDisableMostvisitedPage = config.IsDisableMostvisitedPage;
+        return View();
+    }
 
-        public IActionResult Index()
-        {
-            ViewBag.IsDisableMostvisitedPage = config.IsDisableMostvisitedPage;
-            return View();
-        }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

@@ -1,37 +1,36 @@
 ﻿using Fanex.Logging;
 using Fanex.Logging.Extensions;
 using Microsoft.AspNetCore.Diagnostics;
-using Nap_Reports.Sites.Models;
+using Reports.Sites.Models;
 using System.Net;
 
-namespace Nap_Reports.Sites.Middleware
+namespace Reports.Sites.Middleware;
+
+public static class ExceptionMiddleware
 {
-    public static class ExceptionMiddleware
+    public static void ConfigureExceptionHandler(this IApplicationBuilder app)
     {
-        public static void ConfigureExceptionHandler(this IApplicationBuilder app)
+        app.UseExceptionHandler(appError =>
         {
-            app.UseExceptionHandler(appError =>
+            appError.Run(async context =>
             {
-                appError.Run(async context =>
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                context.Response.ContentType = "application/json";
+                var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                if (contextFeature != null)
                 {
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    context.Response.ContentType = "application/json";
-                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                    if (contextFeature != null)
+                    var logMessage = new LogMessage(contextFeature.Error.Message)
+                        .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
+                        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(contextFeature.Error.InnerException))
+                        .ToString();
+                    await LogService.ErrorAsync(logMessage);
+                    await context.Response.WriteAsync(new ErrorDetails
                     {
-                        var logMessage = new LogMessage(contextFeature.Error.Message)
-                            .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
-                            .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(contextFeature.Error.InnerException))
-                            .ToString();
-                        await LogService.ErrorAsync(logMessage);
-                        await context.Response.WriteAsync(new ErrorDetails
-                        {
-                            StatusCode = context.Response.StatusCode,
-                            Message = contextFeature.Error.Message
-                        }.ToString());
-                    }
-                });
+                        StatusCode = context.Response.StatusCode,
+                        Message = contextFeature.Error.Message
+                    }.ToString());
+                }
             });
-        }
+        });
     }
 }

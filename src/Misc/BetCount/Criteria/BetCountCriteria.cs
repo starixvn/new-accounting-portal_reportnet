@@ -1,39 +1,38 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace BetCount.Criteria
+namespace BetCount.Criteria;
+
+public class BetCountCriteria : CriteriaBase
 {
-    public class BetCountCriteria : CriteriaBase
+    public BetCountCriteria()
     {
-        public BetCountCriteria()
-        {
-            Datestart = DateTime.Now.AddDays(-1);
-            Dateend = Datestart;
-        }
+        Datestart = DateTime.Now.AddDays(-1);
+        Dateend = Datestart;
+    }
 
-        public DateTime Datestart { get; set; }
+    public DateTime Datestart { get; set; }
 
-        public DateTime Dateend { get; set; }
+    public DateTime Dateend { get; set; }
 
-        public string SportBettype { get; set; }
+    public string SportBettype { get; set; }
 
-        [SpParam(Ignored = true)]
-        public string SortBy { get; set; }
+    [SpParam(Ignored = true)]
+    public string SortBy { get; set; }
 
-        [SpParam(Ignored = true)]
-        public string SortDirection { get; set; }
+    [SpParam(Ignored = true)]
+    public string SortDirection { get; set; }
 
-        [SpParam(Ignored = true)]
-        public bool IsHistoryReport { get; set; }
+    [SpParam(Ignored = true)]
+    public bool IsHistoryReport { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "Misc_BetCount_GetBetCountReport";
-        }
+    public override string GetSettingKey()
+    {
+        return "Misc_BetCount_GetBetCountReport";
+    }
 
-        public override bool IsValid()
-        {
-            return Datestart <= Dateend;
-        }
+    public override bool IsValid()
+    {
+        return Datestart <= Dateend;
     }
 }

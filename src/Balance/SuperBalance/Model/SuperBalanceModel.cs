@@ -1,11 +1,10 @@
-namespace SuperBalance.Model
+namespace SuperBalance.Model;
+
+public class SuperBalanceModel
 {
-    public class SuperBalanceModel
-    {
-        public bool HasData { get; set; }
+    public bool HasData { get; set; }
 
-        public List<BalanceItemModel> SuperBalanceItems { get; set; }
+    public List<BalanceItemModel> SuperBalanceItems { get; set; }
 
-        public BalanceItemModel BaseBalanceTotal { get; set; }
-    }
+    public BalanceItemModel BaseBalanceTotal { get; set; }
 }

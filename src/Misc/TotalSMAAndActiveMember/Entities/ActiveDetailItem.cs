@@ -1,11 +1,10 @@
-﻿namespace TotalSMAAndActiveMember.Entities
+﻿namespace TotalSMAAndActiveMember.Entities;
+
+public class ActiveDetailItem
 {
-    public class ActiveDetailItem
-    {
-        public int Id { get; set; } 
+    public int Id { get; set; } 
 
-        public string SiteName { get; set; }
+    public string SiteName { get; set; }
 
-        public string SMA { get; set; }
-    }
+    public string SMA { get; set; }
 }

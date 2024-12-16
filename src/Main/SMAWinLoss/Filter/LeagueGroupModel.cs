@@ -1,9 +1,8 @@
-﻿namespace SMAWinLoss.Filter
-{
-    public class LeagueGroupModel
-    {
-        public int NumberItems { get; set; }
+﻿namespace SMAWinLoss.Filter;
 
-        public List<LeagueGroup> LeagueGroups { get; set; }
-    }
+public class LeagueGroupModel
+{
+    public int NumberItems { get; set; }
+
+    public List<LeagueGroup> LeagueGroups { get; set; }
 }

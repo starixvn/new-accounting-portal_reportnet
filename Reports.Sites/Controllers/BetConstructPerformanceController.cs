@@ -1,9 +1,9 @@
 ﻿using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using Nap_Reports.Sites.Settings;
+using Reports.Sites.Settings;
 
-namespace Nap_Reports.Sites.Controllers;
+namespace Reports.Sites.Controllers;
 
 public class BetConstructPerformanceController : Controller
 {

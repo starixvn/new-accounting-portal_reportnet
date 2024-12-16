@@ -1,17 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SBPerformance.MarginBySite
+namespace SBPerformance.MarginBySite;
+
+[Route("api/sb-performance/main")]
+[ApiController]
+public class SBPerformanceMarginBySiteController(IMediator mediator) : ControllerBase
 {
-    [Route("api/sb-performance/main")]
-    [ApiController]
-    public class SBPerformanceMarginBySiteController(IMediator mediator) : ControllerBase
+    [Route("margin-by-site")]
+    public async Task<IActionResult> Site(MarginBySiteHttpParameter httpParameters)
     {
-        [Route("margin-by-site")]
-        public async Task<IActionResult> Site(MarginBySiteHttpParameter httpParameters)
-        {
-            var viewModel = await mediator.Send(httpParameters);
-            return Ok(viewModel);
-        }
+        var viewModel = await mediator.Send(httpParameters);
+        return Ok(viewModel);
     }
 }

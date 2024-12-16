@@ -1,13 +1,12 @@
 ﻿using DirectBalance.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class DirectBalanceInjection
 {
-    public static class DirectBalanceInjection
+    public static void RegisterDirectBalanceServices(this IServiceCollection service)
     {
-        public static void RegisterDirectBalanceServices(this IServiceCollection service)
-        {
-            service.AddTransient<DirectBalanceService, DirectBalanceServiceImp>();
-            service.AddTransient<DirectBalanceExcelService, DirectBalanceExcelServiceImp>();
-        }
+        service.AddTransient<DirectBalanceService, DirectBalanceServiceImp>();
+        service.AddTransient<DirectBalanceExcelService, DirectBalanceExcelServiceImp>();
     }
 }

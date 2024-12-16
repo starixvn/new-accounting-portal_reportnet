@@ -1,9 +1,8 @@
-﻿namespace AbnormalBet.Model
-{
-    public class LicenseeModel
-    {
-        public IEnumerable<LicenseeItemModel> Licensees { get; set; }
+﻿namespace AbnormalBet.Model;
 
-        public int TotalItems { get; set; }
-    }
+public class LicenseeModel
+{
+    public IEnumerable<LicenseeItemModel> Licensees { get; set; }
+
+    public int TotalItems { get; set; }
 }

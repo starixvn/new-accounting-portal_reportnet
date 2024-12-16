@@ -1,13 +1,12 @@
 ﻿using Margin.Services;
 
-namespace Nap_Reports.Sites.DependencyInjection
+namespace Reports.Sites.DependencyInjection;
+
+public static class MarginReportInjection
 {
-    public static class MarginReportInjection
+    public static void RegisterMarginReportServices(this IServiceCollection service)
     {
-        public static void RegisterMarginReportServices(this IServiceCollection service)
-        {
-            service.AddTransient<MarginWinLossService, MarginWinLossServiceImp>();
-            service.AddTransient<MarginWinLossExcelService, MarginWinLossExcelServiceImp>();
-        }
+        service.AddTransient<MarginWinLossService, MarginWinLossServiceImp>();
+        service.AddTransient<MarginWinLossExcelService, MarginWinLossExcelServiceImp>();
     }
 }

@@ -1,13 +1,12 @@
 using HouseWinLoss.Common.Criteria;
 
-namespace HouseWinLoss.Parlay.Site
+namespace HouseWinLoss.Parlay.Site;
+
+public class Criteria : WinLossCriteria
 {
-    public class Criteria : WinLossCriteria
-    {
-        public string SiteType { get; set; }
+    public string SiteType { get; set; }
 
-        public int PermissionProfileID { get; set; }
+    public int PermissionProfileID { get; set; }
 
-        public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Parlay";
-    }
+    public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Parlay";
 }

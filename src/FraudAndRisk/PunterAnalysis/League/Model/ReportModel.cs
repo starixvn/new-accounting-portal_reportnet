@@ -1,11 +1,10 @@
-﻿namespace PunterAnalysis.League.Model
+﻿namespace PunterAnalysis.League.Model;
+
+public class ReportModel
 {
-    public class ReportModel
-    {
-        public List<LeagueModel> Entities { get; set; } = [];
+    public List<LeagueModel> Entities { get; set; } = [];
 
-        public LeagueModel Total { get; set; } = new();
+    public LeagueModel Total { get; set; } = new();
 
-        public List<string> GroupNames { get; set; } = [];
-    }
+    public List<string> GroupNames { get; set; } = [];
 }

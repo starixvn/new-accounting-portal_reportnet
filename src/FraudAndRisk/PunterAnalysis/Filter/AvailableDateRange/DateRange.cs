@@ -1,9 +1,8 @@
-﻿namespace PunterAnalysis.Filter.AvailableDateRange
-{
-    public class DateRange
-    {
-        public DateTime MinDate { get; set; }
+﻿namespace PunterAnalysis.Filter.AvailableDateRange;
 
-        public DateTime MaxDate { get; set; }
-    }
+public class DateRange
+{
+    public DateTime MinDate { get; set; }
+
+    public DateTime MaxDate { get; set; }
 }

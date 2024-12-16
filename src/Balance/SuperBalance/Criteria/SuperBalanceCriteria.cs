@@ -1,39 +1,38 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-namespace SuperBalance.Criteria
+namespace SuperBalance.Criteria;
+
+public class SuperBalanceCriteria : CriteriaBase
 {
-    public class SuperBalanceCriteria : CriteriaBase
+    [SpParam(Ignored = true)]
+    public int BalanceType { get; set; }
+
+    [SpParam(SqlParamName = "Keyword")]
+    public string Username { get; set; }
+
+    [SpParam(SqlParamName = "FirstChar")]
+    public string FirstLetter { get; set; }
+
+    [SpParam(SqlParamName = "Currency")]
+    public int? Currency { get; set; }
+
+    [SpParam(SqlParamName = "IsViewTotalOnly")]
+    public bool IsViewTotalOnly { get; set; }
+
+    public decimal Total { get; set; }
+
+    public override bool IsValid() => true;
+
+    public override string GetSettingKey()
     {
-        [SpParam(Ignored = true)]
-        public int BalanceType { get; set; }
+        var storeProcedureName = "Balance_SuperBalance_Super";
 
-        [SpParam(SqlParamName = "Keyword")]
-        public string Username { get; set; }
-
-        [SpParam(SqlParamName = "FirstChar")]
-        public string FirstLetter { get; set; }
-
-        [SpParam(SqlParamName = "Currency")]
-        public int? Currency { get; set; }
-
-        [SpParam(SqlParamName = "IsViewTotalOnly")]
-        public bool IsViewTotalOnly { get; set; }
-
-        public decimal Total { get; set; }
-
-        public override bool IsValid() => true;
-
-        public override string GetSettingKey()
+        if (!string.IsNullOrEmpty(storeProcedureName) && BalanceType == 2)
         {
-            var storeProcedureName = "Balance_SuperBalance_Super";
-
-            if (!string.IsNullOrEmpty(storeProcedureName) && BalanceType == 2)
-            {
-                storeProcedureName += "Yesterday";
-            }
-
-            return storeProcedureName;
+            storeProcedureName += "Yesterday";
         }
+
+        return storeProcedureName;
     }
 }

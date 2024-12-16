@@ -1,14 +1,13 @@
 ﻿using Fanex.Data.Repository;
 using SMAWinLoss.Constants;
 
-namespace SMAWinLoss.Filter
+namespace SMAWinLoss.Filter;
+
+public class AvailableDateDataCriteria : CriteriaBase
 {
-    public class AvailableDateDataCriteria : CriteriaBase
-    {
-        public int TaskId => TaskIdConstant.DailyTask;
+    public int TaskId => TaskIdConstant.DailyTask;
 
-        public override string GetSettingKey() => "SMAWinLoss-ReportLatestDate";
+    public override string GetSettingKey() => "SMAWinLoss-ReportLatestDate";
 
-        public override bool IsValid() => true;
-    }
+    public override bool IsValid() => true;
 }

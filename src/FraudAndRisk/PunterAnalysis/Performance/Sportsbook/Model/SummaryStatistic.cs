@@ -1,11 +1,10 @@
-﻿namespace PunterAnalysis.Performance.Sportsbook.Model
+﻿namespace PunterAnalysis.Performance.Sportsbook.Model;
+
+public class SummaryStatistic
 {
-    public class SummaryStatistic
-    {
-        public decimal WinLoss { get; set; }
+    public decimal WinLoss { get; set; }
 
-        public decimal Turnover { get; set; }
+    public decimal Turnover { get; set; }
 
-        public int BetCount { get; set; }
-    }
+    public int BetCount { get; set; }
 }

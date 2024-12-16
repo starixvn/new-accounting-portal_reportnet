@@ -1,9 +1,8 @@
-﻿namespace LeagueWinLoss.Model
-{
-    public class MatchWinLossItem
-    {
-        public MatchWinLossByLiveStatus Total { get; set; }
+﻿namespace LeagueWinLoss.Model;
 
-        public List<MatchWinLossByLiveStatus> Matches { get; set; }
-    }
+public class MatchWinLossItem
+{
+    public MatchWinLossByLiveStatus Total { get; set; }
+
+    public List<MatchWinLossByLiveStatus> Matches { get; set; }
 }

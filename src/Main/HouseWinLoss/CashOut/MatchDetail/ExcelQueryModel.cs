@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.CashOut.MatchDetail
+﻿namespace HouseWinLoss.CashOut.MatchDetail;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

@@ -1,11 +1,10 @@
-﻿namespace LeagueWinLoss.Model
+﻿namespace LeagueWinLoss.Model;
+
+public class Site
 {
-    public class Site
-    {
-        public string SiteGroup { get; set; }
+    public string SiteGroup { get; set; }
 
-        public string SiteName { get; set; }
+    public string SiteName { get; set; }
 
-        public string SiteLabel { get; set; }
-    }
+    public string SiteLabel { get; set; }
 }

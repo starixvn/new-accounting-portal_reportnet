@@ -1,9 +1,8 @@
-﻿namespace HouseWinLoss.BetBuilder.SportType
-{
-    public class ExcelQueryModel : QueryModel
-    {
-        public string BetTypeTitle { get; set; }
+﻿namespace HouseWinLoss.BetBuilder.SportType;
 
-        public string LiveNonLiveTitle { get; set; }
-    }
+public class ExcelQueryModel : QueryModel
+{
+    public string BetTypeTitle { get; set; }
+
+    public string LiveNonLiveTitle { get; set; }
 }

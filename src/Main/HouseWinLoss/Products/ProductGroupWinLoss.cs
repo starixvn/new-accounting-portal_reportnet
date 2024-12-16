@@ -1,13 +1,12 @@
 ﻿using HouseWinLoss.Common.Models;
 
-namespace HouseWinLoss.Products
+namespace HouseWinLoss.Products;
+
+public class ProductGroupWinLoss
 {
-    public class ProductGroupWinLoss
-    {
-        public List<SiteWinLossSummary> Products { get; set; }
+    public List<SiteWinLossSummary> Products { get; set; }
 
-        public SiteWinLossSummary Total { get; set; }
+    public SiteWinLossSummary Total { get; set; }
 
-        public bool IsEmpty => Total.IsEmpty;
-    }
+    public bool IsEmpty => Total.IsEmpty;
 }

@@ -1,9 +1,8 @@
 ﻿using MediatR;
 
-namespace SBCustomerPerformanceByDanger.Filter
+namespace SBCustomerPerformanceByDanger.Filter;
+
+public class LeagueGroupQueryHttpParameter : IRequest<IEnumerable<LeagueGroupModel>>
 {
-    public class LeagueGroupQueryHttpParameter : IRequest<IEnumerable<LeagueGroupModel>>
-    {
-        public string SportBettype { get; set; }
-    }
+    public string SportBettype { get; set; }
 }

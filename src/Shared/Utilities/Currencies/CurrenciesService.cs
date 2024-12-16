@@ -1,31 +1,30 @@
 ﻿using Fanex.Caching;
 using Fanex.Data.Repository;
 
-namespace Utilities.Currencies
+namespace Utilities.Currencies;
+
+public interface CurrenciesService
 {
-    public interface CurrenciesService
+    Task<IEnumerable<CurrenciesModel>> GetCurrencies();
+}
+
+public class CurrenciesServiceImp(IDynamicRepository repository, ICacheService cacheService) : CurrenciesService
+{
+    private const string CurrenciesCacheKey = "CurrenciesCacheKey";
+
+    public async Task<IEnumerable<CurrenciesModel>> GetCurrencies()
     {
-        Task<IEnumerable<CurrenciesModel>> GetCurrencies();
+        return await cacheService.GetOrSetAsync(
+            CurrenciesCacheKey,
+            QueryCurrenciesFromSource);
     }
 
-    public class CurrenciesServiceImp(IDynamicRepository repository, ICacheService cacheService) : CurrenciesService
+    private async Task<IEnumerable<CurrenciesModel>> QueryCurrenciesFromSource()
     {
-        private const string CurrenciesCacheKey = "CurrenciesCacheKey";
+        var criteria = new CurrenciesCriteria();
 
-        public async Task<IEnumerable<CurrenciesModel>> GetCurrencies()
-        {
-            return await cacheService.GetOrSetAsync(
-               CurrenciesCacheKey,
-               QueryCurrenciesFromSource);
-        }
+        var result = await repository.FetchAsync<CurrenciesModel>(criteria);
 
-        private async Task<IEnumerable<CurrenciesModel>> QueryCurrenciesFromSource()
-        {
-            var criteria = new CurrenciesCriteria();
-
-            var result = await repository.FetchAsync<CurrenciesModel>(criteria);
-
-            return result;
-        }
+        return result;
     }
 }

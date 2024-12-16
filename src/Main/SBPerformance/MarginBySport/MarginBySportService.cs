@@ -2,59 +2,58 @@
 using Fanex.Data.Repository;
 using Utilities.LinqDynamicSum;
 
-namespace SBPerformance.MarginBySport
+namespace SBPerformance.MarginBySport;
+
+public interface MarginBySportService
 {
-    public interface MarginBySportService
+    Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parameter);
+}
+
+public class MarginBySportServiceImp(IDynamicRepository repository, IMapper mapper) : MarginBySportService
+{
+    public async Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parameter)
     {
-        Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parameter);
+        var criteria = mapper.Map<MarginBySportCriteria>(parameter);
+        var summaryEntities = (await repository.FetchAsync<MarginBySportEntity>(criteria)).CalculateSummaryEntity();
+
+        var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
+        return result;
     }
 
-    public class MarginBySportServiceImp(IDynamicRepository repository, IMapper mapper) : MarginBySportService
+    private SummaryEntity<MarginBySportItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<MarginBySportEntity> entities)
     {
-        public async Task<SummaryEntity<MarginBySportItemModel>> Query(MarginBySportHttpParameter parameter)
+        var result = new SummaryEntity<MarginBySportItemModel>();
+        foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
         {
-            var criteria = mapper.Map<MarginBySportCriteria>(parameter);
-            var summaryEntities = (await repository.FetchAsync<MarginBySportEntity>(criteria)).CalculateSummaryEntity();
-
-            var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
-            return result;
+            result.Entities.Add(item);
         }
 
-        private SummaryEntity<MarginBySportItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<MarginBySportEntity> entities)
+        var totalItem = BindingItem(isShowFullColumn, entities.Total);
+        result.Total = totalItem;
+
+        return result;
+    }
+
+    private MarginBySportItemModel BindingItem(bool isShowFullColumn, MarginBySportEntity entity)
+    {
+        var income = isShowFullColumn ? entity.RealIncome : 0;
+        var turnover = isShowFullColumn ? entity.RealTurnover : 0;
+
+        return new MarginBySportItemModel
         {
-            var result = new SummaryEntity<MarginBySportItemModel>();
-            foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
-            {
-                result.Entities.Add(item);
-            }
-
-            var totalItem = BindingItem(isShowFullColumn, entities.Total);
-            result.Total = totalItem;
-
-            return result;
-        }
-
-        private MarginBySportItemModel BindingItem(bool isShowFullColumn, MarginBySportEntity entity)
-        {
-            var income = isShowFullColumn ? entity.RealIncome : 0;
-            var turnover = isShowFullColumn ? entity.RealTurnover : 0;
-
-            return new MarginBySportItemModel
-            {
-                Id = entity.Id,
-                Site = entity.Site,
-                League = entity.League,
-                Event = entity.Event,
-                Match = entity.Match,
-                BetType = entity.BetType,
-                NoBetTypes = entity.NoBetTypes,
-                NoMatches = entity.NoMatches,
-                ActiveMembers = entity.ActiveMembers,
-                BetCount = entity.BetCount,
-                RealIncome = income,
-                RealTurnover = turnover,
-                RealMargin = entity.RealMargin
-            };
-        }
+            Id = entity.Id,
+            Site = entity.Site,
+            League = entity.League,
+            Event = entity.Event,
+            Match = entity.Match,
+            BetType = entity.BetType,
+            NoBetTypes = entity.NoBetTypes,
+            NoMatches = entity.NoMatches,
+            ActiveMembers = entity.ActiveMembers,
+            BetCount = entity.BetCount,
+            RealIncome = income,
+            RealTurnover = turnover,
+            RealMargin = entity.RealMargin
+        };
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace SBPerformance.Constants
+﻿namespace SBPerformance.Constants;
+
+public static class TextConstant
 {
-    public static class TextConstant
-    {
-        public const string Total = "Total";
-    }
+    public const string Total = "Total";
 }

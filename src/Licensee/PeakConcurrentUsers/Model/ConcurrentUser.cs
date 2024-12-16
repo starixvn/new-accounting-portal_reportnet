@@ -1,9 +1,8 @@
-namespace PeakConcurrentUsers.Model
-{
-    public class ConcurrentUser
-    {
-        public string Date { get; set; }
+namespace PeakConcurrentUsers.Model;
 
-        public string TotalUser { get; set; }
-    }
+public class ConcurrentUser
+{
+    public string Date { get; set; }
+
+    public string TotalUser { get; set; }
 }

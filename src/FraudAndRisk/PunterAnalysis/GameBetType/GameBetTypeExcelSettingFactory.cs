@@ -1,29 +1,28 @@
 ﻿using PunterAnalysis.Shared;
 using Utilities.Configurations;
 
-namespace PunterAnalysis.GameBetType
+namespace PunterAnalysis.GameBetType;
+
+public interface GameBetTypeExcelSetting
 {
-    public interface GameBetTypeExcelSetting
-    {
-        ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
-    }
+    ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams);
+}
 
-    public class GameBetTypeExcelSettingFactory(ConfigurationService configurationService) : GameBetTypeExcelSetting
-    {
-        private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/GameBettype.xlsx";
+public class GameBetTypeExcelSettingFactory(ConfigurationService configurationService) : GameBetTypeExcelSetting
+{
+    private const string TemplatePath = @"ExcelTemplate/PunterAnalysis/GameBettype.xlsx";
 
-        public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
+    public ExcelSetting CreateSetting(ExcelSettingParams excelSettingParams)
+    {
+        return new ExcelSetting
         {
-            return new ExcelSetting
-            {
-                SheetName = "Punter Analysis",
-                StartRowIndex = 12,
-                TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
-                Title = excelSettingParams.Title,
-                TitleCellRange = "A1:M2",
-                Filter = excelSettingParams.Filter,
-                FilterCellRange = "A3:M8"
-            };
-        }
+            SheetName = "Punter Analysis",
+            StartRowIndex = 12,
+            TemplatePath = $"{configurationService.CurrentDirectory}/{TemplatePath}",
+            Title = excelSettingParams.Title,
+            TitleCellRange = "A1:M2",
+            Filter = excelSettingParams.Filter,
+            FilterCellRange = "A3:M8"
+        };
     }
 }

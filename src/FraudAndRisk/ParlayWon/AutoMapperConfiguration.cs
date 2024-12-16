@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using ParlayWon.Model;
 
-namespace ParlayWon
+namespace ParlayWon;
+
+public static class AutoMapperConfiguration
 {
-    public static class AutoMapperConfiguration
+    public static void InitializeParlayWon(this IProfileExpression cfg)
     {
-        public static void InitializeParlayWon(this IProfileExpression cfg)
-        {
-            cfg.CreateMap<ParlayWonTransaction, ParlayWonTransactionExcelModel>();
-        }
+        cfg.CreateMap<ParlayWonTransaction, ParlayWonTransactionExcelModel>();
     }
 }

@@ -1,11 +1,10 @@
-﻿namespace SMAWinLoss.Filter
+﻿namespace SMAWinLoss.Filter;
+
+public class LeagueGroup
 {
-    public class LeagueGroup
-    {
-        public string GroupName { get; set; }
+    public string GroupName { get; set; }
 
-        public string LeagueIds { get; set; }
+    public string LeagueIds { get; set; }
 
-        public IEnumerable<LeagueGroupChildItem> ChildItems { get; set; }
-    }
+    public IEnumerable<LeagueGroupChildItem> ChildItems { get; set; }
 }

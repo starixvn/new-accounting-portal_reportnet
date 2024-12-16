@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-namespace SMAWinLoss.Filter
-{
-    public class LeagueGroupHttpParameter : IRequest<LeagueGroupModel>;
-}
+namespace SMAWinLoss.Filter;
+
+public class LeagueGroupHttpParameter : IRequest<LeagueGroupModel>;

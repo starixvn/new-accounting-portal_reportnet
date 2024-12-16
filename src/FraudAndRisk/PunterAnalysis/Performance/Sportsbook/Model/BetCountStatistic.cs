@@ -1,9 +1,8 @@
-﻿namespace PunterAnalysis.Performance.Sportsbook.Model
-{
-    public class BetCountStatistic
-    {
-        public string EventType { get; set; }
+﻿namespace PunterAnalysis.Performance.Sportsbook.Model;
 
-        public decimal Turnover { get; set; }
-    }
+public class BetCountStatistic
+{
+    public string EventType { get; set; }
+
+    public decimal Turnover { get; set; }
 }

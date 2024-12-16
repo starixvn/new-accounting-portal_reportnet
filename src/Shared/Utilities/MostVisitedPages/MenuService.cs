@@ -1,101 +1,100 @@
 ﻿using Fanex.NAP.Client.Models;
 
-namespace Utilities.MostVisitedPages
+namespace Utilities.MostVisitedPages;
+
+using Fanex.NAP.Client;
+
+public interface MenuService
 {
-    using Fanex.NAP.Client;
+    string GetMenuPathFromRequestFilePath(string filePath, string applicationPath);
 
-    public interface MenuService
+    MenuItem GetMenuById(int menuId);
+
+    MenuItem GetMenuByURL(string menuURL);
+
+    MenuItem GetMenuByURL(string menuURL, IList<MenuItem> menuList);
+
+    string GetMenuNameByURL(string menuURL);
+}
+
+public class MenuServiceImp(INapSession napSession) : MenuService
+{
+    public const char UrlSeparator = '/';
+
+    public string GetMenuPathFromRequestFilePath(
+        string filePath,
+        string applicationPath)
     {
-        string GetMenuPathFromRequestFilePath(string filePath, string applicationPath);
+        filePath = filePath.Trim();
+        applicationPath = applicationPath.Trim();
+        var menuPath = filePath;
+        if (!string.IsNullOrEmpty(applicationPath) &&
+            menuPath.StartsWith(applicationPath, StringComparison.CurrentCultureIgnoreCase) &&
+            napSession.MenuItemList != null)
+        {
+            menuPath = menuPath.Remove(0, applicationPath.Length);
+        }
 
-        MenuItem GetMenuById(int menuId);
+        if (!menuPath.StartsWith(UrlSeparator.ToString()))
+        {
+            menuPath = UrlSeparator + menuPath;
+        }
 
-        MenuItem GetMenuByURL(string menuURL);
-
-        MenuItem GetMenuByURL(string menuURL, IList<MenuItem> menuList);
-
-        string GetMenuNameByURL(string menuURL);
+        return menuPath;
     }
 
-    public class MenuServiceImp(INapSession napSession) : MenuService
+    public MenuItem GetMenuById(int menuId)
     {
-        public const char UrlSeparator = '/';
+        var menu = new MenuItem();
 
-        public string GetMenuPathFromRequestFilePath(
-            string filePath,
-            string applicationPath)
+        if (napSession.MenuItemList != null)
         {
-            filePath = filePath.Trim();
-            applicationPath = applicationPath.Trim();
-            var menuPath = filePath;
-            if (!string.IsNullOrEmpty(applicationPath) &&
-                menuPath.StartsWith(applicationPath, StringComparison.CurrentCultureIgnoreCase) &&
-                napSession.MenuItemList != null)
-            {
-                menuPath = menuPath.Remove(0, applicationPath.Length);
-            }
+            menu = napSession.MenuItemList.FirstOrDefault(m => m.Id == menuId);
 
-            if (!menuPath.StartsWith(UrlSeparator.ToString()))
-            {
-                menuPath = UrlSeparator + menuPath;
-            }
-
-            return menuPath;
         }
 
-        public MenuItem GetMenuById(int menuId)
+        return menu;
+    }
+
+    public MenuItem GetMenuByURL(string menuURL)
+    {
+        var menu = new MenuItem();
+
+        if (!string.IsNullOrEmpty(menuURL) &&
+            !string.Equals(menuURL, UrlSeparator.ToString()) &&
+            napSession.MenuItemList != null)
         {
-            var menu = new MenuItem();
-
-            if (napSession.MenuItemList != null)
-            {
-                menu = napSession.MenuItemList.FirstOrDefault(m => m.Id == menuId);
-
-            }
-
-            return menu;
+            menu = napSession.MenuItemList.FirstOrDefault(m => m.Url.ToLower().StartsWith(menuURL.ToLower()));
         }
 
-        public MenuItem GetMenuByURL(string menuURL)
+        return menu;
+    }
+
+    public MenuItem GetMenuByURL(string menuURL, IList<MenuItem> menuList)
+    {
+        var menu = new MenuItem();
+
+        if (!string.IsNullOrEmpty(menuURL) &&
+            !string.Equals(menuURL, UrlSeparator.ToString()) &&
+            napSession.MenuItemList != null)
         {
-            var menu = new MenuItem();
-
-            if (!string.IsNullOrEmpty(menuURL) &&
-                !string.Equals(menuURL, UrlSeparator.ToString()) &&
-                napSession.MenuItemList != null)
-            {
-                menu = napSession.MenuItemList.FirstOrDefault(m => m.Url.ToLower().StartsWith(menuURL.ToLower()));
-            }
-
-            return menu;
+            menu = menuList.FirstOrDefault(m => m.Url.StartsWith(menuURL));
         }
-
-        public MenuItem GetMenuByURL(string menuURL, IList<MenuItem> menuList)
-        {
-            var menu = new MenuItem();
-
-            if (!string.IsNullOrEmpty(menuURL) &&
-                !string.Equals(menuURL, UrlSeparator.ToString()) &&
-                napSession.MenuItemList != null)
-            {
-                menu = menuList.FirstOrDefault(m => m.Url.StartsWith(menuURL));
-            }
            
-            return menu;
-        }
+        return menu;
+    }
 
-        public string GetMenuNameByURL(string menuURL)
+    public string GetMenuNameByURL(string menuURL)
+    {
+        var menu = new MenuItem();
+
+        if (!string.IsNullOrEmpty(menuURL) &&
+            !string.Equals(menuURL, UrlSeparator.ToString()) &&
+            napSession.MenuItemList != null)
         {
-            var menu = new MenuItem();
-
-            if (!string.IsNullOrEmpty(menuURL) &&
-                !string.Equals(menuURL, UrlSeparator.ToString()) &&
-                napSession.MenuItemList != null)
-            {
-                menu = napSession.MenuItemList.FirstOrDefault(m => m.Url.StartsWith(menuURL));
-            }
-
-            return menu?.Name;
+            menu = napSession.MenuItemList.FirstOrDefault(m => m.Url.StartsWith(menuURL));
         }
+
+        return menu?.Name;
     }
 }

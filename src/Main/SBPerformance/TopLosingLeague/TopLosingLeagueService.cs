@@ -2,60 +2,59 @@
 using Fanex.Data.Repository;
 using Utilities.LinqDynamicSum;
 
-namespace SBPerformance.TopLosingLeague
+namespace SBPerformance.TopLosingLeague;
+
+public interface TopLosingLeagueService
 {
-    public interface TopLosingLeagueService
+    Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parameter);
+}
+
+public class TopLosingLeagueServiceImp(IDynamicRepository repository, IMapper mapper) : TopLosingLeagueService
+{
+    public async Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parameter)
     {
-        Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parameter);
+        var criteria = mapper.Map<TopLosingLeagueCriteria>(parameter);
+        var summaryEntities = (await repository.FetchAsync<TopLosingLeagueEntity>(criteria)).CalculateSummaryEntity();
+
+        var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
+        return result;
     }
 
-    public class TopLosingLeagueServiceImp(IDynamicRepository repository, IMapper mapper) : TopLosingLeagueService
+    private SummaryEntity<TopLosingLeagueItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<TopLosingLeagueEntity> entities)
     {
-        public async Task<SummaryEntity<TopLosingLeagueItemModel>> Query(TopLosingLeagueHttpParameter parameter)
+        var result = new SummaryEntity<TopLosingLeagueItemModel>();
+        foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
         {
-            var criteria = mapper.Map<TopLosingLeagueCriteria>(parameter);
-            var summaryEntities = (await repository.FetchAsync<TopLosingLeagueEntity>(criteria)).CalculateSummaryEntity();
-
-            var result = BindingItems(parameter.IsShowFullColumn, summaryEntities);
-            return result;
+            result.Entities.Add(item);
         }
 
-        private SummaryEntity<TopLosingLeagueItemModel> BindingItems(bool isShowFullColumn, SummaryEntity<TopLosingLeagueEntity> entities)
+        var totalItem = BindingItem(isShowFullColumn, entities.Total);
+        result.Total = totalItem;
+
+        return result;
+    }
+
+    private TopLosingLeagueItemModel BindingItem(bool isShowFullColumn, TopLosingLeagueEntity entity)
+    {
+        var income = isShowFullColumn ? entity.RealIncome : 0;
+        var turnover = isShowFullColumn ? entity.RealTurnover : 0;
+
+        return new TopLosingLeagueItemModel
         {
-            var result = new SummaryEntity<TopLosingLeagueItemModel>();
-            foreach (var item in entities.Entities.Select(entity => BindingItem(isShowFullColumn, entity)))
-            {
-                result.Entities.Add(item);
-            }
-
-            var totalItem = BindingItem(isShowFullColumn, entities.Total);
-            result.Total = totalItem;
-
-            return result;
-        }
-
-        private TopLosingLeagueItemModel BindingItem(bool isShowFullColumn, TopLosingLeagueEntity entity)
-        {
-            var income = isShowFullColumn ? entity.RealIncome : 0;
-            var turnover = isShowFullColumn ? entity.RealTurnover : 0;
-
-            return new TopLosingLeagueItemModel
-            {
-                Id = entity.Id,
-                Site = entity.Site,
-                League = entity.League,
-                Event = entity.Event,
-                Match = entity.Match,
-                BetType = entity.BetType,
-                Username = entity.Username,
-                NoBetTypes = entity.NoBetTypes,
-                NoMatches = entity.NoMatches,
-                ActiveMembers = entity.ActiveMembers,
-                BetCount = entity.BetCount,
-                RealIncome = income,
-                RealTurnover = turnover,
-                RealMargin = entity.RealMargin
-            };
-        }
+            Id = entity.Id,
+            Site = entity.Site,
+            League = entity.League,
+            Event = entity.Event,
+            Match = entity.Match,
+            BetType = entity.BetType,
+            Username = entity.Username,
+            NoBetTypes = entity.NoBetTypes,
+            NoMatches = entity.NoMatches,
+            ActiveMembers = entity.ActiveMembers,
+            BetCount = entity.BetCount,
+            RealIncome = income,
+            RealTurnover = turnover,
+            RealMargin = entity.RealMargin
+        };
     }
 }

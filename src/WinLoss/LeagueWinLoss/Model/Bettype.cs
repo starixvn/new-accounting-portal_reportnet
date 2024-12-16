@@ -1,9 +1,8 @@
-﻿namespace LeagueWinLoss.Model
-{
-    public class BetType
-    {
-        public int Bettype { get; set; }
+﻿namespace LeagueWinLoss.Model;
 
-        public string BettypeName { get; set; }
-    }
+public class BetType
+{
+    public int Bettype { get; set; }
+
+    public string BettypeName { get; set; }
 }

@@ -1,7 +1,6 @@
-﻿namespace HouseWinLoss.Soccer.MajorMinor
+﻿namespace HouseWinLoss.Soccer.MajorMinor;
+
+public class ExcelQueryModel : QueryModel
 {
-    public class ExcelQueryModel : QueryModel
-    {
-        public string Title { get; set; }
-    }
+    public string Title { get; set; }
 }

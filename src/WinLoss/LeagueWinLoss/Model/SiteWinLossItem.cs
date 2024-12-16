@@ -1,9 +1,8 @@
-﻿namespace LeagueWinLoss.Model
-{
-    public class SiteWinLossItem : BaseWinLoss
-    {
-        public int SiteId { get; set; }
+﻿namespace LeagueWinLoss.Model;
 
-        public string SiteName { get; set; }
-    }
+public class SiteWinLossItem : BaseWinLoss
+{
+    public int SiteId { get; set; }
+
+    public string SiteName { get; set; }
 }

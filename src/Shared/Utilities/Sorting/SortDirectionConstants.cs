@@ -1,7 +1,6 @@
-﻿namespace Utilities.Sorting
+﻿namespace Utilities.Sorting;
+
+public class SortDirectionConstants
 {
-    public class SortDirectionConstants
-    {
-        public static readonly string Asc = "asc";
-    }
+    public static readonly string Asc = "asc";
 }

@@ -1,13 +1,12 @@
-﻿namespace CompanyBalanceDifference.Entities
+﻿namespace CompanyBalanceDifference.Entities;
+
+public class CompanyBalanceDifferenceItem
 {
-    public class CompanyBalanceDifferenceItem
-    {
-        public DateTime BalanceUpDay { get; set; }
+    public DateTime BalanceUpDay { get; set; }
 
-        public decimal CompanyBalanceBefore { get; set; }
+    public decimal CompanyBalanceBefore { get; set; }
 
-        public decimal CompanyBalanceAfter { get; set; }
+    public decimal CompanyBalanceAfter { get; set; }
 
-        public decimal Difference { get; set; }
-    }
+    public decimal Difference { get; set; }
 }

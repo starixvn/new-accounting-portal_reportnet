@@ -2,16 +2,15 @@
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Nap_Reports.Sites.Controllers
-{
-    using Utilities;
+namespace Reports.Sites.Controllers;
 
-    public class BetCountController : Controller
+using Utilities;
+
+public class BetCountController : Controller
+{
+    [NapAuth(FunctionKey = AccReportFunctionKeys.BetCount, Policy = Constant.Policy.Read)]
+    public IActionResult Index()
     {
-        [NapAuth(FunctionKey = AccReportFunctionKeys.BetCount, Policy = Constant.Policy.Read)]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace SMAWinLoss.VirtualRate
-{
-    using MediatR;
+﻿namespace SMAWinLoss.VirtualRate;
 
-    public class VirtualRateHttpParameter : IRequest<IEnumerable<VirtualRateModel>>
-    {
-        public int CustId { get; set; }
-    }
+using MediatR;
+
+public class VirtualRateHttpParameter : IRequest<IEnumerable<VirtualRateModel>>
+{
+    public int CustId { get; set; }
 }
