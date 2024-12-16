@@ -25,7 +25,7 @@ public class LeagueServiceByMonth(IDynamicRepository repository) : LeagueService
         {
             yield return $"Year {year}";
             var months = indexGroups[year];
-            foreach (var beginOfMonth in months.Select(month => new DateTime(year, month, 1)))
+            foreach (var beginOfMonth in months.Select(month => new DateTimeOffset(year, month, 1, 0, 0, 0, TimeSpan.Zero)))
             {
                 yield return beginOfMonth.ToString("MMMM");
             }

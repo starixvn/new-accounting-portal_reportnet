@@ -34,11 +34,11 @@ public class CashOutLiveNonLiveController(
         var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
         var winlosses = (await service.Query(criteria)).ToArray();
 
-        var majorMinorGridOptions = builder.Build(winlosses.First(), "Sport Type");
+        var majorMinorGridOptions = builder.Build(winlosses[0], "Sport Type");
         const int mainColumnWidth = 220;
         var majorMinorDecorationGridOptions =  decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
 
-        var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
+        var liveNonLiveGridOptions = builder.Build(winlosses[-1], "Live/Non-Live");
         var liveNonLiveDecorateGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
         return [majorMinorDecorationGridOptions , liveNonLiveDecorateGridOptions];
@@ -50,11 +50,11 @@ public class CashOutLiveNonLiveController(
         var criteria = mapper.Map<UniversalSecondLevelCriteria>(queryModel);
         var winlosses = (await service.Query(criteria)).ToArray();
 
-        var majorMinorGridOptions = builder.Build(winlosses.First(), queryModel.BetTypeTitle);
+        var majorMinorGridOptions = builder.Build(winlosses[0], queryModel.BetTypeTitle);
         const int mainColumnWidth = 220;
         majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
 
-        var liveNonLiveGridOptions = builder.Build(winlosses.Last(), queryModel.LiveNonLiveTitle);
+        var liveNonLiveGridOptions = builder.Build(winlosses[-1], queryModel.LiveNonLiveTitle);
         liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
         return new FanexExcelResult(

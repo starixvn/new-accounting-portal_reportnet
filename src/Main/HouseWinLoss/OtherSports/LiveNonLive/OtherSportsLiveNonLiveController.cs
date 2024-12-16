@@ -32,10 +32,10 @@ public class OtherSportsLiveNonLiveController(
         var criteria = mapper.Map<Criteria>(queryModel);
         var winlosses = (await service.Query(criteria)).ToArray();
 
-        var majorMinorGridOptions = builder.Build(winlosses.First(), "Sport Type");
+        var majorMinorGridOptions = builder.Build(winlosses[0], "Sport Type");
         var majorMinorGridOptionsDecoration = decorator.Build(majorMinorGridOptions, "Sport Type");
 
-        var liveNonLiveGridOptions = builder.Build(winlosses.Last(), "Live/Non-Live");
+        var liveNonLiveGridOptions = builder.Build(winlosses[-1], "Live/Non-Live");
         var liveNonLiveGridOptionsDecoration = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
 
         return [majorMinorGridOptionsDecoration, liveNonLiveGridOptionsDecoration];
@@ -47,10 +47,10 @@ public class OtherSportsLiveNonLiveController(
         var criteria = mapper.Map<Criteria>(queryModel);
         var winlosses = (await service.Query(criteria)).ToArray();
 
-        var majorMinorGridOptions = builder.Build(winlosses.First(), queryModel.SportTypeTitle);
+        var majorMinorGridOptions = builder.Build(winlosses[0], queryModel.SportTypeTitle);
         majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Sport Type");
 
-        var liveNonLiveGridOptions = builder.Build(winlosses.Last(), queryModel.LiveNonLiveTitle);
+        var liveNonLiveGridOptions = builder.Build(winlosses[-1], queryModel.LiveNonLiveTitle);
         liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
 
         return new FanexExcelResult(
