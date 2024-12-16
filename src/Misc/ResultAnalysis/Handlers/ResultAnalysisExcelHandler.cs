@@ -14,12 +14,22 @@ public class ResultAnalysisExcelHandler(
     IMapper mapper)
     : IRequestHandler<ResultAnalysisExcelRequest, ExcelPackage>
 {
+    private const int Soccer = 1;
+
     public async Task<ExcelPackage> Handle(ResultAnalysisExcelRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<ResultAnalysisCriteria>(request);
-        var data = await service.GetResultAnalysis(criteria);
-        var excelModel = mapper.Map<ResultAnalysisExcelModel>(data);
         var title = $"Result Analysis Report From {criteria.FromDate:MMM dd, yyyy} To {criteria.ToDate:MMM dd, yyyy}";
-        return excelService.Build(title, excelModel, request.SportId);
+        if (request.SportId == Soccer)
+        {
+            var data = await service.GetResultAnalysis(criteria);
+            var excelModel = mapper.Map<ResultAnalysisExcelModel>(data);
+            return excelService.Build(title, excelModel);
+        }
+        else
+        {
+            var data = await service.GetResultAnalysisOfQuarter(criteria);
+            return excelService.BuildForQuarter(title, data);
+        }
     }
 }

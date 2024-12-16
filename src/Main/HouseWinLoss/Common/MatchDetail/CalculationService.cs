@@ -20,7 +20,7 @@ public class CalculationServiceImp(RemotingRefService refService, IMapper mapper
         var winLoss = mapper.Map<WinLoss>(rawWinLoss);
         winLoss.HomeName = GetHomeName(rawWinLoss.HomeId, rawWinLoss.IsNeutral);
         winLoss.AwayName = refService.GetTeamName(rawWinLoss.AwayId);
-        winLoss.LeagueName = refService.GetLeagueName(rawWinLoss.LeagueId);
+        winLoss.LeagueName = rawWinLoss.LeagueName;
         winLoss.MatchCode = refService.GetMatchCode(winLoss.MatchCode);
         return winLoss;
     }
@@ -31,10 +31,8 @@ public class CalculationServiceImp(RemotingRefService refService, IMapper mapper
                + (isNeutral ? " (N)" : string.Empty);
     }
 
-    private string GetLeague(int leagueId, string leagueCode)
+    private string GetLeague(string leagueCode, string leagueName)
     {
-        var leagueName = refService.GetLeagueName(leagueId);
-
         return string.IsNullOrEmpty(leagueCode) ? leagueName : $"{leagueCode} - {leagueName}";
     }
 
@@ -50,7 +48,8 @@ public class CalculationServiceImp(RemotingRefService refService, IMapper mapper
     {
         var leagueTotal = CalculateSumWinLoss(rawWinLoss);
         leagueTotal.LeagueId = leagueId;
-        leagueTotal.LeagueName = GetLeague(leagueId, leagueCode);
+        leagueTotal.LeagueName = GetLeague(leagueCode, rawWinLoss.FirstOrDefault()?.LeagueName);
+        leagueTotal.SportType = rawWinLoss.FirstOrDefault()?.SportType ?? 0;
         var matches = rawWinLoss.Select(FromRawWinLoss)
             .OrderBy(m => m.MatchCode)
             .ThenBy(m => m.HomeName);

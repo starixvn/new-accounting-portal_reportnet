@@ -9,17 +9,24 @@ namespace ResultAnalysis.Handlers;
 
 public class ResultAnalysisHandler(ResultAnalysisService service, IMapper mapper)
     : IRequestHandler<LeagueRequest, IEnumerable<LeagueModel>>,
-        IRequestHandler<ResultAnalysisRequest, ResultAnalysisModel>
+        IRequestHandler<ResultAnalysisRequest, ResultAnalysisModel>,
+        IRequestHandler<ResultAnalysisOfQuarterRequest, ResultAnalysisOfQuarterModel>
 {
-    public async Task<IEnumerable<LeagueModel>> Handle(LeagueRequest request, CancellationToken cancellationToken)
+    public Task<IEnumerable<LeagueModel>> Handle(LeagueRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<LeagueCriteria>(request);
-        return await service.GetLeagues(criteria);
+        return service.GetLeagues(criteria);
     }
 
-    public async Task<ResultAnalysisModel> Handle(ResultAnalysisRequest request, CancellationToken cancellationToken)
+    public Task<ResultAnalysisModel> Handle(ResultAnalysisRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<ResultAnalysisCriteria>(request);
-        return await service.GetResultAnalysis(criteria);
+        return service.GetResultAnalysis(criteria);
+    }
+
+    public Task<ResultAnalysisOfQuarterModel> Handle(ResultAnalysisOfQuarterRequest request, CancellationToken cancellationToken)
+    {
+        var criteria = mapper.Map<ResultAnalysisCriteria>(request);
+        return service.GetResultAnalysisOfQuarter(criteria);
     }
 }

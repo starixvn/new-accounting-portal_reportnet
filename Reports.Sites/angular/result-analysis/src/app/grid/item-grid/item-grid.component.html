@@ -13,7 +13,7 @@
       <col style="width: 80px" />
       <col style="width: 80px" />
       <col style="width: 80px" />
-      <col *ngIf="isShowTGResult" style="width: 80px" />
+      <col style="width: 80px" />
     </colgroup>
   </ng-template>
   <ng-template #thead>
@@ -30,7 +30,7 @@
             <th scope="col" rowspan="2">HDP RESULT</th>
             <th scope="col" rowspan="2">OU RESULT</th>
             <th scope="col" rowspan="2">1x2 RESULT</th>
-            <th *ngIf="isShowTGResult" scope="col" rowspan="2">TG RESULT</th>
+            <th scope="col" rowspan="2">TG RESULT</th>
         </tr>
         <tr>
             <th scope="col">Home</th>
@@ -56,9 +56,9 @@
     <td class="text-center">{{item.ResultHDP}}</td>
     <td class="text-center">{{item.ResultOU}}</td>
     <td class="text-center">{{item.Result1x2}}</td>
-    <td *ngIf="isShowTGResult" class="text-center">{{item.ResultTG}}</td>
+    <td class="text-center">{{item.ResultTG}}</td>
   </ng-template>
-  <div [ngStyle]="{'width': isShowTGResult ? '1427px' : '1347px'}">
+  <div style="width: 1427px">
     <div [ngSwitch]="displayedData.length > 0">
         <div class="nap-grid">
             <div class="header">

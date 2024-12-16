@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PunterAnalysis.Constants;
 
 namespace PunterAnalysis.League.Model;
 
@@ -20,7 +21,7 @@ public class HttpParameterJson : IRequest<ReportModel>
 
     public int BetTypeId { get; set; }
 
-    public int LiveStatusId { get; set; }
+    public int LiveStatusId { get; set; } = CommonConstant.LiveAndNonLive;
 
     public string ListLeagueGroupId { get; set; }
 

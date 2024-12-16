@@ -32,6 +32,14 @@ namespace HouseWinLoss.Common.ColumnDecorators
 
         protected const int MatchDetailVirtualMarginIndex = 13;
 
+        protected const int VirtualSport2VirtualMarginIndex = 11;
+
+        protected const int VirtualSport2VirtualTurnoverIndex = 9;
+
+        protected const int VirtualSport2VirtualIncomeIndex = 7;
+
+        protected const int VirtualSport2VarianceIndex = 6;
+
         private readonly GridOptionColumnRemoval columnRemoval;
 
         protected GridOptionColumnDecoratorBase(GridOptionColumnRemoval columnRemoval)

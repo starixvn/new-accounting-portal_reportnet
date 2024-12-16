@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using OfficeOpenXml;
+using PunterAnalysis.Constants;
 
 namespace PunterAnalysis.League.Model;
 
@@ -21,7 +22,7 @@ public class HttpParameterExcel : IRequest<ExcelPackage>
 
     public int BetTypeId { get; set; }
 
-    public int LiveStatusId { get; set; }
+    public int LiveStatusId { get; set; } = CommonConstant.LiveAndNonLive;
 
     public string Title { get; set; }
 

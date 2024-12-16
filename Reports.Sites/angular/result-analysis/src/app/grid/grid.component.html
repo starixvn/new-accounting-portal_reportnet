@@ -10,5 +10,6 @@
     <nap-breadcrumb [ngStyle]="{'width': isShowTGResult() ? '1458px' : '1138px'}" class="excel-title" [items]="[title]" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
     <app-summary-grid [data]="data.Summary" [isShowTGResult]="isShowTGResult()"></app-summary-grid>
     <br/>
-    <app-item-grid [data]="data.Items" [isShowTGResult]="isShowTGResult()"></app-item-grid>
+    <app-item-grid *ngIf="isShowTGResult()" [data]="data.Items"></app-item-grid>
+    <app-item-quarter-grid *ngIf="!isShowTGResult()" [data]="data.Items"></app-item-quarter-grid>
 </div>

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PunterAnalysis.Constants;
 using Utilities.LinqDynamicSum;
 
 namespace PunterAnalysis.BetCount.Model;
@@ -21,7 +22,7 @@ public class HttpParameterJson : IRequest<SummaryEntity<BetCountModel>>
 
     public int BetTypeId { get; set; }
 
-    public int LiveStatusId { get; set; }
+    public int LiveStatusId { get; set; } = CommonConstant.LiveAndNonLive;
 
     public string ListLeagueGroupId { get; set; }
 

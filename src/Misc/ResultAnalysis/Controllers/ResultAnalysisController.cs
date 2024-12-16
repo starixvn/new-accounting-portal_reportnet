@@ -25,6 +25,13 @@ public class ResultAnalysisController(IMediator mediator) : ControllerBase
         return Ok(viewModel);
     }
 
+    [Route("result-analysis-of-quarter")]
+    public async Task<IActionResult> ResultAnalysisOfQuarter(ResultAnalysisOfQuarterRequest request)
+    {
+        var viewModel = await mediator.Send(request);
+        return Ok(viewModel);
+    }
+
     [Route("export-excel")]
     [HttpPost]
     public async Task<IActionResult> Excel(ResultAnalysisExcelRequest request)

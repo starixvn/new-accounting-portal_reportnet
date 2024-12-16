@@ -49,12 +49,12 @@ export class GameBetTypeGridComponent implements Grid {
         return this.service.model.betTypeGroupName;
     }
 
-    showBetCount(betTypeId: number, betTypeName: string, liveStatusId: LiveStatus) {
+    showBetCount(betTypeId: number, betTypeName: string, liveStatusId = LiveStatus.Both) {
         this.betCountGridService.model = this.service.createBetCountGridService(betTypeId, betTypeName, liveStatusId);
         this.gridService.generate(GridType.BetCount);
     }
 
-    showLeague(betTypeId: number, betTypeName: string, liveStatusId: LiveStatus) {
+    showLeague(betTypeId: number, betTypeName: string, liveStatusId = LiveStatus.Both) {
         this.leagueGridService.model = this.service.createLeagueGridService(betTypeId, betTypeName, liveStatusId);
         this.gridService.generate(GridType.League);
     }

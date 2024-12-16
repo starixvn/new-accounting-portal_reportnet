@@ -770,7 +770,11 @@ import moment from "moment";
                 templateUrl: "app/house-win-loss/shared/fanex-grid-with-title.html",
                 controller: "MatchDetailController",
                 service: "remoteDataService",
-                serviceBaseUrl: "api/house-win-loss-by-products/virtual-sports-betradar/match-detail",
+                serviceBaseUrl: function (data) {
+                    return data.sportType == 177 || data.sportType == 198
+                           ? "api/house-win-loss-by-products/virtual-sports-betradar/special-match-detail"
+                           : "api/house-win-loss-by-products/virtual-sports-betradar/match-detail";
+                },
                 mainParameters: { sheetName: "House Win Loss by Products" },
                 getTitleFunction: "getMatchDetailTitle"
             },

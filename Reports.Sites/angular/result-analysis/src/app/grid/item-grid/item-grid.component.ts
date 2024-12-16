@@ -12,7 +12,6 @@ import * as _ from 'lodash';
 })
 export class ItemGridComponent implements OnChanges {
   @Input() data: DetailedResultAnalysisModel[] = [];
-  @Input() isShowTGResult: boolean = true;
   displayedData: DetailedResultAnalysisModel[] = [];
   paginationInstance!: PaginationInstance;
   paginatePipe!: PaginatePipe;

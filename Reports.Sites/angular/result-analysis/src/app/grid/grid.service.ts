@@ -15,7 +15,8 @@ export class GridService {
   constructor(private readonly httpService: HttpService) { }
 
   getData(filter: FilterModel): Observable<ResultAnalysisModel> {
-    return this.httpService.post<ResultAnalysisModel>(`${CommonConstants.API}/result-analysis`, filter);
+    const route = filter.sportId === CommonConstants.SOCCER ? 'result-analysis' : 'result-analysis-of-quarter';
+    return this.httpService.post<ResultAnalysisModel>(`${CommonConstants.API}/${route}`, filter);
   }
 
   exportExcel(filterModel: FilterModel): void {

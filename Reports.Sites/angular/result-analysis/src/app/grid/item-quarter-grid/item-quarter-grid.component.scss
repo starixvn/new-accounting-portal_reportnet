@@ -1,0 +1,12 @@
+@import '~nap-theme/scss/grid';
+@import '~nap-theme/scss/breadcrumb';
+
+.nap-grid {
+    .body {
+      overflow-x: hidden;
+    }
+
+    .odd-row {
+      background-color: #e4f2fd;
+    }
+}

@@ -1,0 +1,130 @@
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 80px" />
+      <col style="width: 200px" />
+      <col style="width: 250px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">League</th>
+            <th scope="col">Match</th>
+            <th scope="col">HDP</th>
+            <th scope="col">OU</th>
+            <th scope="col">FAV</th>
+            <th scope="col">1Q</th>
+            <th scope="col">2Q</th>
+            <th scope="col">3Q</th>
+            <th scope="col">4Q</th>
+            <th scope="col">OT</th>
+            <th scope="col">HT Score</th>
+            <th scope="col">2H Score</th>
+            <th scope="col">FT Score</th>
+            <th scope="col">HDP RESULT</th>
+            <th scope="col">OU RESULT</th>
+            <th scope="col">ML RESULT</th>
+            <th scope="col">1H WM</th>
+            <th scope="col">FT WM</th>
+        </tr>
+    </thead>
+  </ng-template>
+  <ng-template #detailedData let-item="item" let-index="index">
+    <tr [ngClass]="{'odd-row': index % 2 > 0}">
+      <td rowspan="2" class="text-center">{{item.Date | date: 'dd-MMM-yy'}}</td>
+      <td rowspan="2">{{item.League}}</td>
+      <td [innerHtml]="getMatch(item.Match, item.Fav, true)"></td>
+      <td rowspan="2" *ngIf="item.HDP === '-'" class="text-center">-</td>
+      <td rowspan="2" *ngIf="item.HDP !== '-'" class="text-center" [napDecimalFormat]="item.HDP"></td>
+      <td rowspan="2" *ngIf="item.OU === '-'" class="text-center">-</td>
+      <td rowspan="2" *ngIf="item.OU !== '-'" class="text-center" [napDecimalFormat]="item.OU"></td>
+      <td rowspan="2" class="text-center">{{item.Fav}}</td>
+      <td class="text-center">{{item.Q1Home}}</td>
+      <td class="text-center">{{item.Q2Home}}</td>
+      <td class="text-center">{{item.Q3Home}}</td>
+      <td class="text-center">{{item.Q4Home}}</td>
+      <td class="text-center">{{item.OtHome}}</td>
+      <td class="text-center">{{item.HtScoreHome}}</td>
+      <td class="text-center">{{item.ShtScoreHome}}</td>
+      <td class="text-center">{{item.FtScoreHome}}</td>
+      <td rowspan="2" class="text-center">{{item.ResultHDP}}</td>
+      <td rowspan="2" class="text-center">{{item.ResultOU}}</td>
+      <td rowspan="2" class="text-center">{{item.Result1x2}}</td>
+      <td rowspan="2" class="text-center">{{item.HtWM}}</td>
+      <td rowspan="2" class="text-center">{{item.FtWM}}</td>
+    </tr>
+    <tr [ngClass]="{'odd-row': index % 2 > 0}">
+      <td [innerHtml]="getMatch(item.Match, item.Fav, false)"></td>
+      <td class="text-center">{{item.Q1Away}}</td>
+      <td class="text-center">{{item.Q2Away}}</td>
+      <td class="text-center">{{item.Q3Away}}</td>
+      <td class="text-center">{{item.Q4Away}}</td>
+      <td class="text-center">{{item.OtAway}}</td>
+      <td class="text-center">{{item.HtScoreAway}}</td>
+      <td class="text-center">{{item.ShtScoreAway}}</td>
+      <td class="text-center">{{item.FtScoreAway}}</td>
+    </tr>
+  </ng-template>
+  <div [ngSwitch]="displayedData.length > 0">
+      <div class="nap-grid">
+        <div style="width: 1827px">
+          <div class="header">
+            <table>
+                <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                <ng-template [ngTemplateOutlet]="thead"></ng-template>
+            </table>
+          </div>
+          <div *ngSwitchCase="true" class="body">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tbody>
+                      <ng-container *ngFor="let item of displayedData; index as index">
+                          <ng-template [ngTemplateOutlet]="detailedData" [ngTemplateOutletContext]="{ item: item, index: index }">
+                          </ng-template>
+                      </ng-container>
+                    </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="false" class="body stretch">
+            <table>
+              <tbody>
+                <tr>
+                  <th scope="col" class="no-data" colspan="19">
+                    There is no data
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="footer" *ngIf="displayedData.length > 0">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tfoot>
+                      <tr>
+                          <td colspan="19">
+                              <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange()"></nap-pagination>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+        </div>
+      </div>
+  </div>

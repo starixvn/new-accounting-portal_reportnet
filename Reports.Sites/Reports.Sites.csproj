@@ -1396,6 +1396,9 @@
     <None Update="ExcelTemplate\ResultAnalysis\ResultAnalysis.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelTemplate\ResultAnalysis\ResultAnalysisOfQuarter.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelTemplate\ResultAnalysis\SimpleResultAnalysis.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

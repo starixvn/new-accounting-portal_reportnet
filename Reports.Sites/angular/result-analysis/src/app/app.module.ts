@@ -26,6 +26,7 @@ import { ItemGridComponent } from './grid/item-grid/item-grid.component';
 import { BreadcrumbModule } from 'nap-components/breadcrumb';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationModule, PaginationConfig } from 'nap-components/pagination';
+import { ItemQuarterGridComponent } from './grid/item-quarter-grid/item-quarter-grid.component';
 
 declare module "@angular/core" {
   interface ModuleWithProviders<T = any> {
@@ -47,7 +48,8 @@ export class CustomPaginationConfig extends PaginationConfig {
     FilterItemTreeviewPipe,
     GridComponent,
     SummaryGridComponent,
-    ItemGridComponent
+    ItemGridComponent,
+    ItemQuarterGridComponent
   ],
   imports: [
     BrowserModule,

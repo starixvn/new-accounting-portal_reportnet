@@ -65,6 +65,7 @@ public static class HouseWinLossInjection
         service.AddTransient<Decorator.MatchGridOptionColumnDecoratorFull, Decorator.MatchGridOptionColumnDecoratorFull>();
         service.AddTransient<Decorator.MatchGridOptionColumnDecoratorBasic, Decorator.MatchGridOptionColumnDecoratorBasic>();
         service.AddTransient<Decorator.MatchGridOptionColumnDecoratorOutright, Decorator.MatchGridOptionColumnDecoratorOutright>();
+        service.AddTransient<Decorator.MatchGridOptionColumnDecoratorVirtualSport, Decorator.MatchGridOptionColumnDecoratorVirtualSport>();
 
         service.AddTransient<CashOut.LiveNonLive.CashOutLiveNonLiveWinLossService, CashOut.LiveNonLive.CashOutLiveNonLiveWinLossServiceImp>();
         service.AddTransient<Daily2hSoccerBettype.BettypeGridOptionColumnDecorator, Daily2hSoccerBettype.BettypeGridOptionColumnDecoratorFull>();
