@@ -55,7 +55,7 @@ public class RawWinLoss
             LeagueCode = string.Empty,
             MatchCode = string.Empty,
             MatchId = 0,
-            EventDate = DateTime.MinValue,
+            EventDate = DateTimeOffset.MinValue.Date,
             SportType = 0,
             SMAWinLoss = a.SMAWinLoss + b.SMAWinLoss,
             ExtraPT = a.ExtraPT + b.ExtraPT,

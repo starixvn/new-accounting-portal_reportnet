@@ -1,4 +1,5 @@
-﻿using Epplus.Mapper.Annotations;
+﻿using System.Globalization;
+using Epplus.Mapper.Annotations;
 
 namespace CashOutPerformance.Models;
 
@@ -18,7 +19,7 @@ public class MatchDetailLevelExcelModel
                 return dateTime;
             }
 
-            var date = DateTime.Parse(dateTime);
+            var date = DateTime.Parse(dateTime, new CultureInfo("en-US"));
             return date.ToString("yyyy-MM-dd");
 
         }
@@ -62,7 +63,7 @@ public class MatchDetailLevelExcelModel
                 return betTime;
             }
 
-            var date = DateTime.Parse(betTime);
+            var date = DateTime.Parse(betTime, new CultureInfo("en-US"));
             return date.ToString("yyyy-MM-dd hh:mm:ss tt");
 
         }
@@ -79,7 +80,7 @@ public class MatchDetailLevelExcelModel
                 return cashOutTime;
             }
 
-            var date = DateTime.Parse(cashOutTime);
+            var date = DateTime.Parse(cashOutTime, new CultureInfo("en-US");
             return date.ToString("yyyy-MM-dd hh:mm:ss tt");
 
         }
