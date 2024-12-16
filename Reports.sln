@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5FE921E3-BA82-458A-9983-BEA80F74C49D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nap-Reports.Sites", "Nap-Reports.Sites\Nap-Reports.Sites.csproj", "{C9C9727F-6806-4C67-B987-83FC16D8CC0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reports.Sites", "Reports.Sites\Reports.Sites.csproj", "{C9C9727F-6806-4C67-B987-83FC16D8CC0E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{A9904CC1-6040-4CA6-84CF-568401D7F360}"
 EndProject
