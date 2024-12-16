@@ -32,7 +32,16 @@ public class CashOutPerformanceServiceImp(IDynamicRepository repository) : CashO
     {
         var sportBettype = await repository.FetchAsync<SportBetTypeModel>(criteria);
         var groups = sportBettype.GroupBy(x => new { x.SportType, x.SportName });
-        return groups.Select(group => new FilterGroupItemModel { GroupId = group.Key.SportType, GroupName = group.Key.SportName, ChildItems = group.Select(x => new FilterItemModel { Id = x.Bettype, Name = x.BettypeName }).ToList() }).ToList();
+        return groups.Select(group => new FilterGroupItemModel
+        {
+            GroupId = group.Key.SportType,
+            GroupName = group.Key.SportName,
+            ChildItems = group.Select(x => new FilterItemModel
+            {
+                Id = x.Bettype,
+                Name = x.BettypeName
+            }).ToList()
+        }).ToList();
     }
 
     public async Task<TicketViewModel<T>> GetTickets<T, U>(U criteria)
@@ -63,8 +72,8 @@ public class CashOutPerformanceServiceImp(IDynamicRepository repository) : CashO
         var groups = firstResultSet.Select(r => new { r.SportName, r.SportType })
             .Distinct();
         var sports = from @group in groups
-            let rawSports = firstResultSet.Where(r => r.SportType == @group.SportType && r.SportName == @group.SportName).ToArray()
-            select CalculateSport(rawSports);
+                     let rawSports = firstResultSet.Where(r => r.SportType == @group.SportType && r.SportName == @group.SportName).ToArray()
+                     select CalculateSport(rawSports);
 
         return new SportLevelModel
         {

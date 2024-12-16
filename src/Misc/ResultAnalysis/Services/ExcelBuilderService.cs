@@ -7,6 +7,8 @@ using Utilities.Configurations;
 
 namespace ResultAnalysis.Services;
 
+using System.Globalization;
+
 public interface ExcelBuilderService
 {
     ExcelPackage Build(string title, ResultAnalysisExcelModel model, int sportId);
@@ -88,9 +90,13 @@ public class ExcelBuilderServiceImp(ConfigurationService configurationService) :
 
     private void HighlightFavoriteTeam(DetailedResultAnalysisExcelModel model, int index, string[] separatingString)
     {
-        if (string.IsNullOrEmpty(model.Match) || string.IsNullOrEmpty(model.Fav)) return;
+        if (string.IsNullOrEmpty(model.Match) || string.IsNullOrEmpty(model.Fav))
+        {
+            return;
+        }
+
         var match = model.Match.Split(separatingString, StringSplitOptions.None);
-        var isFavHome = model.Fav.ToLower() == "home";
+        var isFavHome = model.Fav.ToLower(CultureInfo.CurrentCulture) == "home";
         var rowIndex = StartDetailedRowIndex + index;
         var cellAddress = $"C{rowIndex}";
         sheet.Cells[cellAddress].Value = string.Empty;

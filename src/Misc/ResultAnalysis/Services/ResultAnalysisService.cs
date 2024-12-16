@@ -54,9 +54,17 @@ public class ResultAnalysisServiceImp(IDynamicRepository repository) : ResultAna
 
     private static bool CheckResultTg(string data, int first, int second)
     {
-        if (data == "-") return false;
+        if (data == "-")
+        {
+            return false;
+        }
+
         var number = int.Parse(data);
-        if (second > 0) return number >= first && number <= second;
+        if (second > 0)
+        {
+            return number >= first && number <= second;
+        }
+
         return number >= first;
     }
 }

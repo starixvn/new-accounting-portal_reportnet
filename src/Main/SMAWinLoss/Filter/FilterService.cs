@@ -47,22 +47,20 @@ public class FilterServiceImp(IDynamicRepository repository) : FilterService
             LeagueGroups = []
         };
 
-        //  var result = new List<LeagueGroup>();
-
         var criteria = new LeagueGroupCriteria();
 
         var leagueGroupChildItems = await repository.FetchAsync<LeagueGroupChildItem>(criteria);
         result.NumberItems = leagueGroupChildItems.Count();
 
-        var leagueGroups = leagueGroupChildItems.GroupBy(x => x.Label);
+        var leagueGroups = leagueGroupChildItems.GroupBy(x => x.Label).Select(g => g.Key);
 
-        foreach (var group in leagueGroups)
+        foreach (var key in leagueGroups)
         {
-            var childItems = leagueGroupChildItems.Where(x => x.Label == group.Key);
+            var childItems = leagueGroupChildItems.Where(x => x.Label == key);
 
             var leagueGroupItem = new LeagueGroup
             {
-                GroupName = group.Key,
+                GroupName = key,
                 LeagueIds = childItems.Select(x => x.LeagueIds).FirstOrDefault(),
                 ChildItems = childItems
             };
