@@ -14,7 +14,7 @@
     <PackageReference Include="EPPlus" Version="7.5.0" />
     <PackageReference Include="Epplus.Mapper" Version="7.5.0" />
     <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.2" />
-    <PackageReference Include="Olympus.WebApi.Epplus" Version="1.0.0.4" />
+    
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@
 namespace SMAWinLoss.Summary;
 
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Epplus;
+using Utilities.ExcelResult;
 
 [Route("api/sma-win-loss/summary")]
 [ApiController]

@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
-using Olympus.WebApi.Epplus;
+
 using PunterAnalysis.AssociatedAccount.Model;
 
 namespace PunterAnalysis.AssociatedAccount;
+
+using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/associated-account")]
 [ApiController]

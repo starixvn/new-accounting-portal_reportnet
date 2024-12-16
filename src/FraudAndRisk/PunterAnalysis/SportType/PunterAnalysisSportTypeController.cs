@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Epplus;
+
 using PunterAnalysis.SportType.Model;
 
 namespace PunterAnalysis.SportType;
+
+using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/sport-type")]
 [ApiController]

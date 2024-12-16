@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Epplus;
+
 
 namespace ActualMemberBet.Bettype;
+
+using Utilities.ExcelResult;
 
 [Route("api/actual-member-bet/bettype")]
 [ApiController]

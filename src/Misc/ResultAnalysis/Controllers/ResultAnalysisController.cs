@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Epplus;
+
 using ResultAnalysis.Requests;
 
 namespace ResultAnalysis.Controllers;
+
+using Utilities.ExcelResult;
 
 [Route("api/result-analysis")]
 [ApiController]

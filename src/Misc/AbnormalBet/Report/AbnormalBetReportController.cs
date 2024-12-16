@@ -1,9 +1,11 @@
 ﻿using AbnormalBet.HttpParameter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Epplus;
+
 
 namespace AbnormalBet.Report;
+
+using Utilities.ExcelResult;
 
 [Route("api/ab-normal-bet/report")]
 [ApiController]

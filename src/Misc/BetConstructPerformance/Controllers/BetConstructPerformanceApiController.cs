@@ -1,9 +1,11 @@
 ﻿using BetConstructPerformance.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Epplus;
+
 
 namespace BetConstructPerformance.Controllers;
+
+using Utilities.ExcelResult;
 
 [Route("api/bet-construct")]
 [ApiController]

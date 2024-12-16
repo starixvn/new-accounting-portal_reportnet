@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Epplus;
+
 
 namespace SBCustomerPerformanceByDanger.Report;
+
+using Utilities.ExcelResult;
 
 [Route("api/sb-customer-performance-by-danger/report")]
 [ApiController]

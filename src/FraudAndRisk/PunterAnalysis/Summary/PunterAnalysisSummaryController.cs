@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Olympus.WebApi.Epplus;
+
 using PunterAnalysis.Summary.Model;
 
 namespace PunterAnalysis.Summary;
+
+using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/summary")]
 [ApiController]
