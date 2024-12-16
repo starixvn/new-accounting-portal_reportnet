@@ -35,7 +35,7 @@ public class OtherSportsLiveNonLiveController(
         var majorMinorGridOptions = builder.Build(winlosses[0], "Sport Type");
         var majorMinorGridOptionsDecoration = decorator.Build(majorMinorGridOptions, "Sport Type");
 
-        var liveNonLiveGridOptions = builder.Build(winlosses[-1], "Live/Non-Live");
+        var liveNonLiveGridOptions = builder.Build(winlosses[1], "Live/Non-Live");
         var liveNonLiveGridOptionsDecoration = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
 
         return [majorMinorGridOptionsDecoration, liveNonLiveGridOptionsDecoration];
@@ -50,7 +50,7 @@ public class OtherSportsLiveNonLiveController(
         var majorMinorGridOptions = builder.Build(winlosses[0], queryModel.SportTypeTitle);
         majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Sport Type");
 
-        var liveNonLiveGridOptions = builder.Build(winlosses[-1], queryModel.LiveNonLiveTitle);
+        var liveNonLiveGridOptions = builder.Build(winlosses[1], queryModel.LiveNonLiveTitle);
         liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
 
         return new FanexExcelResult(

@@ -38,7 +38,7 @@ public class CashOutLiveNonLiveController(
         const int mainColumnWidth = 220;
         var majorMinorDecorationGridOptions =  decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
 
-        var liveNonLiveGridOptions = builder.Build(winlosses[-1], "Live/Non-Live");
+        var liveNonLiveGridOptions = builder.Build(winlosses[1], "Live/Non-Live");
         var liveNonLiveDecorateGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
         return [majorMinorDecorationGridOptions , liveNonLiveDecorateGridOptions];
@@ -54,7 +54,7 @@ public class CashOutLiveNonLiveController(
         const int mainColumnWidth = 220;
         majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Sport Type", mainColumnWidth);
 
-        var liveNonLiveGridOptions = builder.Build(winlosses[-1], queryModel.LiveNonLiveTitle);
+        var liveNonLiveGridOptions = builder.Build(winlosses[1], queryModel.LiveNonLiveTitle);
         liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live", mainColumnWidth);
 
         return new FanexExcelResult(

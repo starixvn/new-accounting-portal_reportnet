@@ -49,7 +49,7 @@ public class SoccerLiveNonLiveController(
         var majorMinorGridOptions = builder.Build(winlosses[0], queryModel.MajorMinorTitle);
         majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Major/Minor");
 
-        var liveNonLiveGridOptions = builder.Build(winlosses[-1], queryModel.LiveNonLiveTitle);
+        var liveNonLiveGridOptions = builder.Build(winlosses[1], queryModel.LiveNonLiveTitle);
         liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
 
         return new FanexExcelResult(
