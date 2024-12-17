@@ -160,34 +160,40 @@ public class TraderPerformanceSoccerExcelServiceImp(ConfigurationService configu
     {
         var type = model.GetType();
         var dataType = data.GetType();
-        type.GetProperty($"{category}FirstHalfOneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOneXTwo")?.GetValue(data))));
-        type.GetProperty($"{category}OneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OneXTwo")?.GetValue(data))));
-        type.GetProperty($"{category}FifteenMinOneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FifteenMinOneXTwo")?.GetValue(data))));
-        type.GetProperty($"{category}TenMinOneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TenMinOneXTwo")?.GetValue(data))));
-        type.GetProperty($"{category}FirstHalfHdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfHdp")?.GetValue(data))));
-        type.GetProperty($"{category}Hdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("Hdp")?.GetValue(data))));
-        type.GetProperty($"{category}FifteenMinHdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FifteenMinHdp")?.GetValue(data))));
-        type.GetProperty($"{category}TenMinHdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TenMinHdp")?.GetValue(data))));
-        type.GetProperty($"{category}FirstHalfOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOU")?.GetValue(data))));
-        type.GetProperty($"{category}OU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OU")?.GetValue(data))));
-        type.GetProperty($"{category}FifteenMinOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FifteenMinOU")?.GetValue(data))));
-        type.GetProperty($"{category}TenMinOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TenMinOU")?.GetValue(data))));
-        type.GetProperty($"{category}SingleTeamOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("SingleTeamOU")?.GetValue(data))));
-        type.GetProperty($"{category}FirstHalfNoOfCorners")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfNoOfCorners")?.GetValue(data))));
-        type.GetProperty($"{category}NoOfCorners")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("NoOfCorners")?.GetValue(data))));
-        type.GetProperty($"{category}FifteenMinNoOfCorners")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FifteenMinNoOfCorners")?.GetValue(data))));
-        type.GetProperty($"{category}NextCorner")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("NextCorner")?.GetValue(data))));
-        type.GetProperty($"{category}FirstHalfTotalBookings")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfTotalBookings")?.GetValue(data))));
-        type.GetProperty($"{category}TotalBookings")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TotalBookings")?.GetValue(data))));
-        type.GetProperty($"{category}TotalBookingsFifteenMinOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TotalBookingsFifteenMinOU")?.GetValue(data))));
-        type.GetProperty($"{category}TotalBookingsFifteenMinHDP")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TotalBookingsFifteenMinHDP")?.GetValue(data))));
-        type.GetProperty($"{category}NextBookings")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("NextBookings")?.GetValue(data))));
-        type.GetProperty($"{category}Overall")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("Overall")?.GetValue(data))));
+        var isPercent = category == "Margin";
+        type.GetProperty($"{category}FirstHalfOneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOneXTwo")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}OneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OneXTwo")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FifteenMinOneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FifteenMinOneXTwo")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}TenMinOneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TenMinOneXTwo")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FirstHalfHdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfHdp")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}Hdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("Hdp")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FifteenMinHdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FifteenMinHdp")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}TenMinHdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TenMinHdp")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FirstHalfOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOU")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}OU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OU")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FifteenMinOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FifteenMinOU")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}TenMinOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TenMinOU")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}SingleTeamOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("SingleTeamOU")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FirstHalfNoOfCorners")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfNoOfCorners")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}NoOfCorners")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("NoOfCorners")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FifteenMinNoOfCorners")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FifteenMinNoOfCorners")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}NextCorner")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("NextCorner")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FirstHalfTotalBookings")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfTotalBookings")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}TotalBookings")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TotalBookings")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}TotalBookingsFifteenMinOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TotalBookingsFifteenMinOU")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}TotalBookingsFifteenMinHDP")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("TotalBookingsFifteenMinHDP")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}NextBookings")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("NextBookings")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}Overall")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("Overall")?.GetValue(data)), isPercent));
        
     }
 
-    private static decimal? FormatDecimalData(decimal data)
+    private static decimal? FormatDecimalData(decimal data, bool isPercent)
     {
+        if (isPercent)
+        {
+            return data == 0 ? null : data / 100;
+        }
+
         return data == 0 ? null : data;
     }
 

@@ -160,19 +160,25 @@ public class TraderPerformanceOtherSportsExcelServiceImp(ConfigurationService co
     {
         var type = model.GetType();
         var dataType = data.GetType();
-        type.GetProperty($"{category}FirstHalfOneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOneXTwo")?.GetValue(data))));
-        type.GetProperty($"{category}OneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OneXTwo")?.GetValue(data))));
-        type.GetProperty($"{category}FirstHalfHdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfHdp")?.GetValue(data))));
-        type.GetProperty($"{category}Hdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("Hdp")?.GetValue(data))));
-        type.GetProperty($"{category}FirstHalfOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOU")?.GetValue(data))));
-        type.GetProperty($"{category}OU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OU")?.GetValue(data))));
-        type.GetProperty($"{category}FirstHalfOE")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOE")?.GetValue(data))));
-        type.GetProperty($"{category}OE")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OE")?.GetValue(data))));
-        type.GetProperty($"{category}Overall")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("Overall")?.GetValue(data))));
+        var isPercent = category == "Margin";
+        type.GetProperty($"{category}FirstHalfOneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOneXTwo")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}OneXTwo")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OneXTwo")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FirstHalfHdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfHdp")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}Hdp")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("Hdp")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FirstHalfOU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOU")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}OU")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OU")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}FirstHalfOE")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("FirstHalfOE")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}OE")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("OE")?.GetValue(data)), isPercent));
+        type.GetProperty($"{category}Overall")?.SetValue(model, FormatDecimalData(Convert.ToDecimal(dataType.GetProperty("Overall")?.GetValue(data)), isPercent));
     }
 
-    private static decimal? FormatDecimalData(decimal data)
+    private static decimal? FormatDecimalData(decimal data, bool isPercent)
     {
+        if (isPercent)
+        {
+            return data == 0 ? null : data / 100;
+        }
+
         return data == 0 ? null : data;
     }
 
