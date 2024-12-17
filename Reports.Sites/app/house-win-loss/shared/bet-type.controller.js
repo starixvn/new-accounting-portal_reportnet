@@ -12,7 +12,7 @@ import angular from "angular";
         var showHideColumnBuilder = new showHideColumnService(pane);
         var tab = $scope.tab;
         var gridElement = $element.find('.freegrid');
-        const betradarVirtualSportsMixParlayBettype = [2799, 10449];
+        const betradarVirtualSportsMixParlayBettype = [2799, 10449, 11099];
         $scope.show = showHideColumnBuilder.toggle;
         $scope.generate = generate;
         $scope.generateSite = generateSite;

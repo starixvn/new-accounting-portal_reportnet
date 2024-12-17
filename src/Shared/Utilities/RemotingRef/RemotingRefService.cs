@@ -15,6 +15,8 @@ namespace Utilities.RemotingRef
         string GetBetTypeName(int betTypeId);
 
         string GetLeagueName3rd(int leagueId);
+
+        string GetTeamName3rd(int teamId);
     }
 
     public class RemotingRefServiceImp(IRemotingRefService remotingRefService) : RemotingRefService
@@ -53,6 +55,12 @@ namespace Utilities.RemotingRef
             var betTypeIdString = betTypeId.ToString();
             return remotingRefService.GetBetTypeName(betTypeIdString, "en");
         }
+
+        public string GetTeamName3rd(int teamId)
+        {
+            var teamIdString = teamId.ToString();
+            return remotingRefService.GetTeamName3rd(teamIdString, "en", string.Empty);
+        }
     }
 
     public class RemotingRef3rdServiceImp(IRemotingRefService remotingRefService) : RemotingRefService
@@ -90,6 +98,12 @@ namespace Utilities.RemotingRef
         {
             var leagueIdString = leagueId.ToString();
             return remotingRefService.GetLeagueName3rd(leagueIdString, "en", string.Empty);
+        }
+
+        public string GetTeamName3rd(int teamId)
+        {
+            var teamIdString = teamId.ToString();
+            return remotingRefService.GetTeamName3rd(teamIdString, "en", string.Empty);
         }
     }
 }

@@ -18,11 +18,25 @@ public class CalculationServiceImp(RemotingRefService refService, IMapper mapper
     public WinLoss FromRawWinLoss(RawWinLoss rawWinLoss)
     {
         var winLoss = mapper.Map<WinLoss>(rawWinLoss);
-        winLoss.HomeName = GetHomeName(rawWinLoss.HomeId, rawWinLoss.IsNeutral);
-        winLoss.AwayName = refService.GetTeamName(rawWinLoss.AwayId);
+        if (winLoss.SportType == SportTypeConstants.VirtualSoccer)
+        {
+            winLoss.AwayName = refService.GetTeamName3rd(rawWinLoss.AwayId);
+            winLoss.HomeName = GetHomeName3rd(rawWinLoss.HomeId, rawWinLoss.IsNeutral);
+        }
+        else
+        {
+            winLoss.AwayName = refService.GetTeamName(rawWinLoss.AwayId);
+            winLoss.HomeName = GetHomeName(rawWinLoss.HomeId, rawWinLoss.IsNeutral);
+        }
         winLoss.LeagueName = rawWinLoss.LeagueName;
         winLoss.MatchCode = refService.GetMatchCode(winLoss.MatchCode);
         return winLoss;
+    }
+
+    private string GetHomeName3rd(int teamId, bool isNeutral)
+    {
+        return refService.GetTeamName3rd(teamId)
+               + (isNeutral ? " (N)" : string.Empty);
     }
 
     private string GetHomeName(int teamId, bool isNeutral)
