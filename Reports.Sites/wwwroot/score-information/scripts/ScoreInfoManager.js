@@ -165,7 +165,7 @@ ScoreInfoManager.prototype.GetReport = function (reportDate,
 
     $.ajax({
         type: "POST",
-        url: window.rootUrl + "ScoreInformation/GetScoreInformation",
+        url: window.rootUrl + "/api/bet-list/score",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(self.Params.reportParams),

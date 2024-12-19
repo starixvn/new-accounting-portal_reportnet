@@ -155,6 +155,9 @@ public static class ServiceCollectionExtensions
             pipeline.AddLessBundle("/style/month-picker-custom.css",
                 "/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less");
 
+            pipeline.AddLessBundle("/style/fanex-legend.css",
+                "/scripts/FanexLegend.less");
+
             pipeline.AddJavaScriptBundle("/scripts/nap-report-common.js",
                 "/scripts/_lib/jquery-1.8.2.js",
                 "/scripts/_lib/jquery-ui-1.9.1.js",
@@ -179,6 +182,9 @@ public static class ServiceCollectionExtensions
 
             pipeline.AddJavaScriptBundle("/scripts/month-picker.js",
                 "/scripts/_lib/MonthPicker/monPickr-0.0.3.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/fanex-legend.js",
+                "/scripts/FanexLegend.js");
 
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",

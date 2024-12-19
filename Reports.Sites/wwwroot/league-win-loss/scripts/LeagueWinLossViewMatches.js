@@ -90,19 +90,19 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                         CustomCellRender: function (currentCell) {
                             var openScoreInfoEvent = "scoreInfoManager.GetReport('" + currentCell.Value.startDate + "'," + //*
                                 currentCell.Value.sportType + ",'" +
-                                currentCell.Value.sportName + "','" + //*
-                                0 + "','" + //*
-                                null + "'," + //*
-                                null + ",'" + //*
-                                currentCell.Value.isHedge + "','" +
-                                currentCell.Value.leagueId + "','" +
+                                currentCell.Value.sportName + "'," + //*
+                                0 + "," + //*
+                                null + "," + //*
+                                2 + ",'" + //*
+                                currentCell.Value.isHedge + "'," +
+                                currentCell.Value.leagueId + ",'" +
                                 currentCell.Value.leagueName + "'," + //*
                                 currentCell.Value.matchId + ",'" + //*
-                                currentCell.Value.matchCode + "','" +
-                                null + "','" +
-                                null + "','" + //*
-                                null + "','" +
-                                null + "');"
+                                currentCell.Value.matchCode + "'," +
+                                null + "," +
+                                null + "," + //*
+                                null + "," +
+                                null + ");"
 
                             if (currentCell.Value.isOutright) {
                                 return '<span>' + currentCell.Value.event + '<span>';

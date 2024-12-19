@@ -20,8 +20,7 @@ public class GetScoreInformationCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public string SportTypeName { get; set; }
 
-    [SpParam(Ignored = true)]
-    public string BetTypeName { get; set; }
+    [SpParam(Ignored = true)] public string BetTypeName { get; set; } = string.Empty;
 
     public int LiveIndicator { get; set; }
 
@@ -38,16 +37,14 @@ public class GetScoreInformationCriteria : CriteriaBase
     public string MatchCode { get; set; }
 
     [SpParam(Ignored = true)]
-    public int HomeTeam { get; set; }
+    public int? HomeTeam { get; set; }
+
+    [SpParam(Ignored = true)] public string HomeTeamName { get; set; } = string.Empty;
 
     [SpParam(Ignored = true)]
-    public string HomeTeamName { get; set; }
+    public int? AwayTeam { get; set; }
 
-    [SpParam(Ignored = true)]
-    public int AwayTeam { get; set; }
-
-    [SpParam(Ignored = true)]
-    public string AwayTeamName { get; set; }
+    [SpParam(Ignored = true)] public string AwayTeamName { get; set; } = string.Empty;
 
     [SpParam(Ignored = true)]
     public string BetId { get; set; }

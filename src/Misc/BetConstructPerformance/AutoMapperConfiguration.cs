@@ -11,6 +11,7 @@ public static class AutoMapperConfiguration
     {
         cfg.CreateMap<SportRequest, SportCriteria>();
         cfg.CreateMap<SportItemModel, SportItemExcelModel>();
+        cfg.CreateMap<SportItemModel, SportDetailItemExcelModel>();
         cfg.CreateMap<SportModel, SportDetailExcelModel>();
         cfg.CreateMap<SportModel, SportExcelModel>();
         cfg.CreateMap<SportExcelRequest, SportCriteria>();
