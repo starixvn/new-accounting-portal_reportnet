@@ -19,7 +19,7 @@ public class DuplicateTicketsApiController(DuplicateTicketsService service, Dupl
     public async Task<IActionResult> ExportExcel([FromQuery]DuplicateTicketsCriteria criteria)
     {
         var data = await service.GetDuplicateTicketByUserName(criteria);
-        var title = $"Duplicate Tickets On {criteria.Date: MM dd, yyyy}";
+        var title = $"Duplicate Tickets On {criteria.Date: MMM dd, yyyy}";
         var excelPackage = await excelService.ExportExcel(data, title);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileDownloadName = $"Duplicate_Tickets_On_{criteria.Date: MM_dd_yyyy}.xlsx";

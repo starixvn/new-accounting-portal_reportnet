@@ -1,5 +1,6 @@
 using Fanex.Data.Repository;
 using System.Data;
+using Fanex.Common;
 using TraderPerformance.Criteria;
 using TraderPerformance.Model;
 using Utilities.DateTimes;
@@ -44,22 +45,22 @@ public class TraderPerformanceSoccerRepositoryImp(
 
         foreach (DataRow dataRow in dataTable.Rows)
         {
-            if (Convert.ToInt32(dataRow["custid"]) == 0 &&
-                Convert.ToDecimal(dataRow["overall_st"]) == 0)
+            if (Converter.ToInt(dataRow["custid"]) == 0 &&
+                Converter.ToDecimal(dataRow["overall_st"]) == 0)
             {
                 continue;
             }
 
             var traderInfo = new TraderPerformanceSoccerModel
             {
-                Id = Convert.ToInt32(dataRow["custid"]),
-                Name = Convert.ToString(dataRow["username"]),
-                MatchNumber = Convert.ToInt32(dataRow["matchno"]),
-                Major = Convert.ToInt32(dataRow["Major"]),
-                Minor1 = Convert.ToInt32(dataRow["Minor1"]),
-                Minor2 = Convert.ToInt32(dataRow["Minor2"]),
-                Minor3 = Convert.ToInt32(dataRow["Minor3"]),
-                Others = Convert.ToInt32(dataRow["Others"])
+                Id = Converter.ToInt(dataRow["custid"]),
+                Name = Converter.ToString2(dataRow["username"]),
+                MatchNumber = Converter.ToInt(dataRow["matchno"]),
+                Major = Converter.ToInt(dataRow["Major"]),
+                Minor1 = Converter.ToInt(dataRow["Minor1"]),
+                Minor2 = Converter.ToInt(dataRow["Minor2"]),
+                Minor3 = Converter.ToInt(dataRow["Minor3"]),
+                Others = Converter.ToInt(dataRow["Others"])
             };
 
             var winLossInfo = GetTraderGroupInfo(dataRow, "winlost", "wl");
@@ -138,21 +139,21 @@ public class TraderPerformanceSoccerRepositoryImp(
 
         foreach (DataRow dataRow in dataTable.Rows)
         {
-            var eventDate = Convert.ToDateTime(dataRow["eventdate"]);
+            var eventDate = Converter.ToDateTime(dataRow["eventdate"]);
             var traderInfo = new TraderPerformanceSoccerDetailModel
             {
-                Id = Convert.ToInt32(dataRow["custid"]),
-                Name = Convert.ToString(dataRow["username"]),
+                Id = Converter.ToInt(dataRow["custid"]),
+                Name = Converter.ToString2(dataRow["username"]),
                 EventDate = eventDate.ToMonthAndDayWithNoHyphen(),
-                LeagueId = Convert.ToInt32(dataRow["leagueid"]),
-                HomeId = Convert.ToInt32(dataRow["homeid"]),
-                AwayId = Convert.ToInt32(dataRow["awayid"]),
-                IsNeutral = Convert.ToBoolean(dataRow["IsNeutral"]),
-                HTHomeScore = Convert.ToString(dataRow["hthomescore"]),
-                HTAwayScore = Convert.ToString(dataRow["htawayscore"]),
-                FTHomeScore = Convert.ToString(dataRow["fthomescore"]),
-                FTAwayScore = Convert.ToString(dataRow["ftawayscore"]),
-                Maxbet = Convert.ToDecimal(dataRow["maxbet"])
+                LeagueId = Converter.ToInt(dataRow["leagueid"]),
+                HomeId = Converter.ToInt(dataRow["homeid"]),
+                AwayId = Converter.ToInt(dataRow["awayid"]),
+                IsNeutral = Converter.ToBool(dataRow["IsNeutral"]),
+                HTHomeScore = Converter.ToString2(dataRow["hthomescore"]),
+                HTAwayScore = Converter.ToString2(dataRow["htawayscore"]),
+                FTHomeScore = Converter.ToString2(dataRow["fthomescore"]),
+                FTAwayScore = Converter.ToString2(dataRow["ftawayscore"]),
+                Maxbet = Converter.ToDecimal(dataRow["maxbet"])
             };
 
             var winLossInfo = GetTraderGroupDetailInfo(dataRow, "winlost", "wl");
@@ -208,29 +209,29 @@ public class TraderPerformanceSoccerRepositoryImp(
     {
         var traderGroupInfo = new TraderPerformanceSoccerModel
         {
-            Hdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
-            FirstHalfHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
-            FifteenMinHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minhdp"]),
-            FirstHalfOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
-            OU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
-            FirstHalfOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
-            OneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
-            FifteenMinOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15min1x2"]),
-            FirstHalfNoOfCorners = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stNoOfCorners"]),
-            NoOfCorners = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_NoOfCorners"]),
-            FifteenMinOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minOU"]),
-            FirstHalfTotalBookings = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stTotalBookings"]),
-            TotalBookings = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_TotalBookings"]),
-            NextCorner = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_NextCorner"]),
-            Overall = Convert.ToDecimal(dataRow[$"overall_{overallSuffix}"]),
-            NextBookings = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_NextBooking"]),
-            TotalBookingsFifteenMinOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minTotalBookings"]),
-            TotalBookingsFifteenMinHDP = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minTotalBookingsHdp"]),
-            TenMinOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10minOU"]),
-            FifteenMinNoOfCorners = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minCorners"]),
-            SingleTeamOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_SingleTeamOU"]),
-            TenMinOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10min1x2"]),
-            TenMinHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10minHdp"])
+            Hdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
+            FirstHalfHdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
+            FifteenMinHdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minhdp"]),
+            FirstHalfOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
+            OU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
+            FirstHalfOneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
+            OneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
+            FifteenMinOneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15min1x2"]),
+            FirstHalfNoOfCorners = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stNoOfCorners"]),
+            NoOfCorners = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_NoOfCorners"]),
+            FifteenMinOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minOU"]),
+            FirstHalfTotalBookings = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stTotalBookings"]),
+            TotalBookings = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_TotalBookings"]),
+            NextCorner = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_NextCorner"]),
+            Overall = Converter.ToDecimal(dataRow[$"overall_{overallSuffix}"]),
+            NextBookings = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_NextBooking"]),
+            TotalBookingsFifteenMinOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minTotalBookings"]),
+            TotalBookingsFifteenMinHDP = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minTotalBookingsHdp"]),
+            TenMinOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_10minOU"]),
+            FifteenMinNoOfCorners = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minCorners"]),
+            SingleTeamOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_SingleTeamOU"]),
+            TenMinOneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_10min1x2"]),
+            TenMinHdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_10minHdp"])
         };
 
         return traderGroupInfo;
@@ -243,29 +244,29 @@ public class TraderPerformanceSoccerRepositoryImp(
     {
         var traderGroupInfo = new TraderPerformanceSoccerDetailModel
         {
-            Hdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
-            FirstHalfHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
-            FifteenMinHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minhdp"]),
-            FirstHalfOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
-            OU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
-            FirstHalfOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
-            OneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
-            FifteenMinOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15min1x2"]),
-            FirstHalfNoOfCorners = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stNoOfCorners"]),
-            NoOfCorners = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_NoOfCorners"]),
-            FifteenMinOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minOU"]),
-            FirstHalfTotalBookings = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stTotalBookings"]),
-            TotalBookings = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_TotalBookings"]),
-            NextCorner = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_NextCorner"]),
-            Overall = Convert.ToDecimal(dataRow[$"overall_{overallSuffix}"]),
-            NextBookings = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_NextBooking"]),
-            TotalBookingsFifteenMinOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minTotalBookings"]),
-            TotalBookingsFifteenMinHDP = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minTotalBookingsHdp"]),
-            TenMinOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10minOU"]),
-            FifteenMinNoOfCorners = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_15minCorners"]),
-            SingleTeamOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_SingleTeamOU"]),
-            TenMinHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10minHdp"]),
-            TenMinOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_10min1x2"])
+            Hdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
+            FirstHalfHdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
+            FifteenMinHdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minhdp"]),
+            FirstHalfOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
+            OU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
+            FirstHalfOneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
+            OneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
+            FifteenMinOneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15min1x2"]),
+            FirstHalfNoOfCorners = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stNoOfCorners"]),
+            NoOfCorners = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_NoOfCorners"]),
+            FifteenMinOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minOU"]),
+            FirstHalfTotalBookings = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stTotalBookings"]),
+            TotalBookings = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_TotalBookings"]),
+            NextCorner = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_NextCorner"]),
+            Overall = Converter.ToDecimal(dataRow[$"overall_{overallSuffix}"]),
+            NextBookings = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_NextBooking"]),
+            TotalBookingsFifteenMinOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minTotalBookings"]),
+            TotalBookingsFifteenMinHDP = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minTotalBookingsHdp"]),
+            TenMinOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_10minOU"]),
+            FifteenMinNoOfCorners = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_15minCorners"]),
+            SingleTeamOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_SingleTeamOU"]),
+            TenMinHdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_10minHdp"]),
+            TenMinOneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_10min1x2"])
         };
 
         return traderGroupInfo;

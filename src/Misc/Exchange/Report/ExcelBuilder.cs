@@ -25,7 +25,9 @@ public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelB
         LoadTemplate();
         BuildTitle(excelParams);
         exchangeSheet.ApplyVertical(model.Entities, StartRowIndex);
-        exchangeSheet.ApplyModel(totalSheet, model.Total, StartRowIndex + model.Entities.Count);
+        var totalRowIndex = StartRowIndex + model.Entities.Count;
+        exchangeSheet.ApplyModel(totalSheet, model.Total, totalRowIndex);
+        exchangeSheet.Cells[$"A{totalRowIndex}"].Value = "Grand Total";
         SetNameForFirstHeaderColumn(excelParams.DrillLevel);
         ClearTemplate();
         return ExcelPackage;

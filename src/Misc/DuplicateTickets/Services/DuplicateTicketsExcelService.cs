@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Drawing;
+using AutoMapper;
 using DuplicateTickets.Model;
 using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
@@ -81,6 +82,9 @@ public class DuplicateTicketsExcelServiceImp(ConfigurationService configurationS
                     item.No = ++ticketIndex;
                     sheet.ApplyModel(template, item, rowIndex);
                     sheet.ApplyModel(template, ticketItem, rowIndex++);
+                    if (item.No != 1 || ticketItem.TimeDifference != 0) continue;
+                    sheet.Cells[$"L{rowIndex - 1}"].Value = "-";
+                    sheet.Cells[$"J{rowIndex - 1}"].Style.Font.Color.SetColor(Color.Black);
                 }
                     
                 sheet.AutoMergeRowsHaveSameValue($"B{firstRowOfGroupIndex}:B{rowIndex - 1}");
