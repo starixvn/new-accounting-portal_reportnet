@@ -12,4 +12,6 @@ public class LeagueWinLossItem : BaseWinLoss
     public string LeagueName { get; set; }
 
     public int? MatchCount { get; set; }
+
+    public int Match { get; set; }
 }

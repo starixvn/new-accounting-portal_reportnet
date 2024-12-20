@@ -12,6 +12,8 @@ public interface BetTypeWinLossExcelService
     Task<ExcelPackage> ExportExcel(BettypeWinLossModel data, string title, string header);
 
     Task<ExcelPackage> ExportExcelBetTypeByStatus(BetTypeWinLossByStatusModel data, string title, string header);
+
+    Task<ExcelPackage> ExportExcelBetTypeWithChoices(BettypeWinLossWithChoiceModel data, string title, string header);
 }
 
 public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationService, IMapper mapper) : BetTypeWinLossExcelService
@@ -55,6 +57,17 @@ public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationSer
         sheet.Cells[$"A{rowIndex + 1}:L{rowIndex + 1}"].Value = $"{header} Non-Live";
         sheet.Cells[$"A{rowIndex + 2}:L{rowIndex + 3}"].Value = "Bet Type";
         ExportForBetTypeNonLive(data.BetTypeWinLossNonLive, rowIndex + 4);
+        ClearTemplate();
+        return Task.FromResult(ExcelPackage);
+    }
+
+    public Task<ExcelPackage> ExportExcelBetTypeWithChoices(BettypeWinLossWithChoiceModel data, string title, string header)
+    {
+        LoadTemplate("LeagueWinLoss_Level.xlsx");
+        BuildTitle(title, "A1:L2");
+        BuildBodyRowsWithChoices(data, StartRowIndex);
+        sheet.Cells["A4:L4"].Value = header;
+        sheet.Cells["A5:A6"].Value = "Bet Type";
         ClearTemplate();
         return Task.FromResult(ExcelPackage);
     }
@@ -159,6 +172,43 @@ public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationSer
             }
         }
         BuildTotalRows(data, rowIndex);
+    }
+
+    private void BuildBodyRowsWithChoices(BettypeWinLossWithChoiceModel data, int startRowIndex)
+    {
+        var rowIndex = startRowIndex;
+        foreach (var betType in data.BettypeWinLoss)
+        {
+            var betTypeExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(betType.Total);
+            var hedgeText = betType.Total.IsHedge ? " (hedge) " : "";
+            betTypeExcelModel.BettypeName += $"{hedgeText} (Trader: {betType.Total.TraderName})";
+            sheet.ApplyModel(subItemSheet, betTypeExcelModel, rowIndex++);
+            foreach (var site in betType.SiteTypes)
+            {
+                var siteTypeExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(site.Total);
+                sheet.ApplyModel(subItemSheet, siteTypeExcelModel, rowIndex++);
+                foreach (var choice in site.Choices)
+                {
+                    var choiceExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(choice);
+                    choiceExcelModel.BettypeName = choice.Choice;
+                    sheet.ApplyModel(evenSheet, choiceExcelModel, rowIndex++);
+                }
+            }
+        }
+        var totalExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(data.Total);
+        sheet.ApplyModel(totalSheet, totalExcelModel, rowIndex++);
+        if (IsShowTotal(data.RM))
+        {
+            RenderTotalRow(data.RM, ref rowIndex);
+        }
+        if (IsShowTotal(data.BARM))
+        {
+            RenderTotalRow(data.BARM, ref rowIndex);
+        }
+
+        if (!IsShowTotal(data.RM)
+            && !IsShowTotal(data.BARM)) return;
+        RenderTotalRow(data.GrandTotal, ref rowIndex);
     }
 
     private void BuildTotalRows(BettypeWinLossModel data, int startRowIndex)

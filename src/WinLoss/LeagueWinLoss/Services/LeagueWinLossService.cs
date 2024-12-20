@@ -15,6 +15,8 @@ public interface LeagueWinLossService
 
     Task<BettypeWinLossModel> GetBetTypes(BetTypesCriteria criteria);
 
+    Task<BettypeWinLossWithChoiceModel> GetBetTypesWithChoices(BetTypesWithChoiceCriteria criteria);
+
     Task<BetTypeWinLossByStatusModel> GetBetTypesByLiveNonLiveStatus(BetTypesCriteria criteria);
 
     List<GlobalShowTime> GetGlobalShowTime();
@@ -24,6 +26,8 @@ public interface LeagueWinLossService
     int GetPermissionProfileId(string functionKeyValue);
 
     Task<MatchWinLossModel> GetMatches(MatchesCriteria criteria);
+
+    Task<MatchWinLossWithChoiceModel> GetMatchesWithChoice(MatchesWithChoiceCriteria criteria);
 
     Task<MatchWinLossFromBetTypeStatusModel> GetMatchesFromBetTypeStatus(MatchesCriteria criteria);
 
@@ -275,6 +279,67 @@ public class LeagueWinLossServiceImp(
         return result;
     }
 
+    public async Task<BettypeWinLossWithChoiceModel> GetBetTypesWithChoices(BetTypesWithChoiceCriteria criteria)
+    {
+        var result = new BettypeWinLossWithChoiceModel
+        {
+            BettypeWinLoss = [],
+            RM = new BettypeWinLossBySite(),
+            BARM = new BettypeWinLossBySite(),
+            Total = new BettypeWinLossBySite(),
+            GrandTotal = new BettypeWinLossBySite()
+        };
+
+        var rawData = (await repository.FetchAsync<BettypeWinLossEntity>(criteria)).ToList();
+
+        if (!rawData.Any())
+        {
+            return result;
+        }
+
+        var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
+                                             && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
+                                             && !x.SiteType.Contains("Other Sports 8RM")
+                                             && !x.SiteType.Contains("Other Sports BARM"));
+
+        var betTypeGroups = rawBettypes.GroupBy(x => new { x.Bettype, x.BettypeName });
+        foreach (var group in betTypeGroups)
+        {
+            var bettypes = rawBettypes.Where(x => x.Bettype == group.Key.Bettype && x.BettypeName == group.Key.BettypeName);
+
+            var betTypeItem = new BetTypeWinLossItemByChoice
+            {
+                Total = CalculateBettypeTotal(group.Key.BettypeName, bettypes),
+                SiteTypes = []
+            };
+            var betTypeGroupBySiteType = group.GroupBy(x => new { x.SiteType });
+            foreach (var siteTypeGroup in betTypeGroupBySiteType)
+            {
+                var siteTypes = bettypes.Where(x => x.SiteType == siteTypeGroup.Key.SiteType);
+                var siteTypeItem = new BetTypeWinLossSiteTypeItem
+                {
+                    Total = CalculateBettypeTotal(siteTypeGroup.Key.SiteType, siteTypes),
+                    Choices = BindingBettypes(siteTypes.Where(x => !string.IsNullOrEmpty(x.Choice))).ToList()
+                };
+                betTypeItem.SiteTypes.Add(siteTypeItem);
+            }
+
+            result.BettypeWinLoss.Add(betTypeItem);
+        }
+
+        result.Total = CalculateBettypeTotal("Total", rawBettypes);
+
+        var eightRM = rawData.FirstOrDefault(x => x.SiteType.Contains("8RM"));
+        result.RM = BindingBettype(eightRM);
+
+        var barRM = rawData.FirstOrDefault(x => x.SiteType.Contains("BARM"));
+        result.BARM = BindingBettype(barRM);
+
+        result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
+
+        return result;
+    }
+
     public async Task<BetTypeWinLossByStatusModel> GetBetTypesByLiveNonLiveStatus(BetTypesCriteria criteria)
     {
         var result = new BetTypeWinLossByStatusModel();
@@ -509,6 +574,72 @@ public class LeagueWinLossServiceImp(
         return leagueWinLoss;
     }
 
+    public async Task<MatchWinLossWithChoiceModel> GetMatchesWithChoice(MatchesWithChoiceCriteria criteria)
+    {
+        var rawData = (await repository.FetchAsync<MatchEntity>(criteria)).ToList();
+
+        var leagueWinLoss = new MatchWinLossWithChoiceModel
+        {
+            Match = [],
+            RM = new MatchWinLossByLiveStatus(),
+            BARM = new MatchWinLossByLiveStatus(),
+            Total = new MatchWinLossByLiveStatus(),
+            GrandTotal = new MatchWinLossByLiveStatus()
+        };
+
+        var rawMatches = rawData.Where(x =>
+            !x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
+            && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM")
+            && !x.MatchEvent.Contains("Other Sports 8RM")
+            && !x.MatchEvent.Contains("Other Sports BARM"));
+
+        var matchGroups = rawMatches.GroupBy(x => new { x.MatchID, x.MatchEvent });
+        foreach (var group in matchGroups)
+        {
+            var matches = rawMatches.Where(x => x.MatchID == group.Key.MatchID && x.MatchEvent == group.Key.MatchEvent);
+            var matchWinLossItem = new MatchWinLossItemByChoice
+            {
+                Total = CalculateMatchTotal(group.Key.MatchEvent, matches),
+                LiveIndicators = []
+            };
+            var matchGroupByLiveIndicator = group.GroupBy(x => new { x.LiveIndicator });
+            foreach (var liveIndicatorGroup in matchGroupByLiveIndicator)
+            {
+                var liveIndicators = matches.Where(x => x.LiveIndicator == liveIndicatorGroup.Key.LiveIndicator);
+                var liveIndicatorItem = new MatchWinLossLiveIndicatorItem
+                {
+                    Total = CalculateMatchTotal(liveIndicatorGroup.Key.LiveIndicator ? "Live" : "Non-Live", liveIndicators),
+                    BetTypes = []
+                };
+                var matchGroupByBetType = liveIndicatorGroup.Where(x => x.BetType != 0).GroupBy(x => new { x.BetTypeName });
+                foreach (var betTypeGroup in matchGroupByBetType)
+                {
+                    var betTypes = betTypeGroup.Where(x => x.BetTypeName == betTypeGroup.Key.BetTypeName);
+                    var betTypeItem = new MatchWinLossLiveBetTypeItem
+                    {
+                        Total = CalculateMatchTotal(betTypeGroup.Key.BetTypeName, betTypes),
+                        Choices = BindingMatches(betTypes.Where(x => !string.IsNullOrEmpty(x.Choice))).ToList()
+                    };
+                    liveIndicatorItem.BetTypes.Add(betTypeItem);
+                }
+                matchWinLossItem.LiveIndicators.Add(liveIndicatorItem);
+            }
+
+            leagueWinLoss.Match.Add(matchWinLossItem);
+        }
+
+        leagueWinLoss.Total = CalculateMatchTotal("Total", rawMatches);
+
+        var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("8RM"));
+        leagueWinLoss.RM = BindingMatch(eightRM);
+
+        var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("BARM"));
+        leagueWinLoss.BARM = BindingMatch(barRM);
+
+        leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
+        return leagueWinLoss;
+    }
+
     public async Task<MatchWinLossFromBetTypeStatusModel> GetMatchesFromBetTypeStatus(MatchesCriteria criteria)
     {
         var rawData = (await repository.FetchAsync<MatchEntity>(criteria)).ToList();
@@ -693,7 +824,8 @@ public class LeagueWinLossServiceImp(
             RealIncome = bettypes.Sum(x => x.RealIncome),
             VirtualTurnover = bettypes.Sum(x => x.VirtualTurnover),
             RealTurnover = bettypes.Sum(x => x.RealTurnover),
-            TraderName = bettypes.FirstOrDefault()?.TraderName
+            TraderName = bettypes.FirstOrDefault()?.TraderName,
+            Bettype = (bettypes.FirstOrDefault() ?? new BettypeWinLossEntity()).Bettype
         };
     }
 
@@ -722,7 +854,8 @@ public class LeagueWinLossServiceImp(
             RealIncome = rawData.RealIncome,
             VirtualTurnover = rawData.VirtualTurnover,
             RealTurnover = rawData.RealTurnover,
-            IsHedge = rawData.IsHedge
+            IsHedge = rawData.IsHedge,
+            Choice = rawData.Choice
         };
     }
 
@@ -741,7 +874,8 @@ public class LeagueWinLossServiceImp(
             RealIncome = matches.Sum(x => x.RealIncome),
             VirtualTurnover = matches.Sum(x => x.VirtualTurnover),
             RealTurnover = matches.Sum(x => x.RealTurnover),
-            IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault()
+            IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault(),
+            LiveIndicator = (matches.FirstOrDefault() ?? new MatchEntity()).LiveIndicator
         };
     }
 
@@ -771,7 +905,9 @@ public class LeagueWinLossServiceImp(
             VirtualTurnover = rawData.VirtualTurnover,
             RealTurnover = rawData.RealTurnover,
             IsHedge = rawData.IsHedge,
-            IsOutright = rawData.IsOutright
+            IsOutright = rawData.IsOutright,
+            BetTypeName = rawData.BetTypeName,
+            Choice = rawData.Choice
         };
     }
 

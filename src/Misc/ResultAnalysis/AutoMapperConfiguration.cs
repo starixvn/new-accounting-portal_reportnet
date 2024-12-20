@@ -18,8 +18,8 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<ResultAnalysisModel, ResultAnalysisExcelModel>();
 
         cfg.CreateMap<ResultAnalysisOfQuarterRequest, ResultAnalysisCriteria>();
-        cfg.CreateMap<ResultAnalysisSummaryOfQuarterExcelModel, BaseResultAnalysisSummaryModel>();
-        cfg.CreateMap<DetailedResultAnalysisOfHomeQuarterExcelModel, DetailedResultAnalysisOfQuarterModel>();
-        cfg.CreateMap<DetailedResultAnalysisOfAwayQuarterExcelModel, DetailedResultAnalysisOfQuarterModel>();
+        cfg.CreateMap<BaseResultAnalysisSummaryModel, ResultAnalysisSummaryOfQuarterExcelModel>();
+        cfg.CreateMap<DetailedResultAnalysisOfQuarterModel, DetailedResultAnalysisOfHomeQuarterExcelModel>();
+        cfg.CreateMap<DetailedResultAnalysisOfQuarterModel, DetailedResultAnalysisOfAwayQuarterExcelModel>();
     }
 }

@@ -61,6 +61,13 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
         return Ok(result);
     }
 
+    [Route("bettypes-with-choices")]
+    public async Task<IActionResult> GetBetTypesWithChoice(BetTypesWithChoiceCriteria criteria)
+    {
+        var result = await service.GetBetTypesWithChoices(criteria);
+        return Ok(result);
+    }
+
     [Route("export-bettypes")]
     public async Task<IActionResult> ExportExcelBetTypes(BetTypesCriteria criteria)
     {
@@ -71,6 +78,19 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
         var excelPackage = await betTypeExcelService.ExportExcel(data, title, header);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileDownloadName = $"League_Win_Loss_Report_From_Date_{criteria.StartDate: MM_dd_yyyy}_To_{criteria.EndDate: MM_dd_yyyy}.xlsx";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileDownloadName);
+    }
+
+    [Route("export-bettypes-with-choices")]
+    public async Task<IActionResult> ExportExcelBetTypesWithChoices(BetTypesWithChoiceCriteria criteria)
+    {
+        var data = await service.GetBetTypesWithChoices(criteria);
+        var title =
+            $"League Win Loss Report On {criteria.StartDate: MMM dd, yyyy}";
+        var header = $"{criteria.SportName} - {criteria.LeagueName} - {criteria.MatchEvent}";
+        var excelPackage = await betTypeExcelService.ExportExcelBetTypeWithChoices(data, title, header);
+        var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+        var fileDownloadName = $"League_Win_Loss_Report_On_{criteria.StartDate: MM_dd_yyyy}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileDownloadName);
     }
 
@@ -101,6 +121,13 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
         return Ok(result);
     }
 
+    [Route("matches-with-choices")]
+    public async Task<IActionResult> GetMatchesWithChoices(MatchesWithChoiceCriteria criteria)
+    {
+        var result = await service.GetMatchesWithChoice(criteria);
+        return Ok(result);
+    }
+
     [Route("export-matches")]
     public async Task<IActionResult> ExportExcelMatches(MatchesCriteria criteria)
     {
@@ -111,6 +138,19 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
         var excelPackage = await matchExcelService.ExportExcel(data, title, header);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileDownloadName = $"League_Win_Loss_Report_From_Date_{criteria.StartDate: MM_dd_yyyy}_To_{criteria.EndDate: MM_dd_yyyy}.xlsx";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileDownloadName);
+    }
+
+    [Route("export-matches-with-choices")]
+    public async Task<IActionResult> ExportExcelMatchesWithChoices(MatchesWithChoiceCriteria criteria)
+    {
+        var data = await service.GetMatchesWithChoice(criteria);
+        var title =
+            $"League Win Loss Report On {criteria.StartDate: MMM dd, yyyy}";
+        var header = $"{criteria.SportName} - {criteria.LeagueName}";
+        var excelPackage = await matchExcelService.ExportExcelWithChoices(data, title, header);
+        var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+        var fileDownloadName = $"League_Win_Loss_Report_On_{criteria.StartDate: MM_dd_yyyy}.xlsx";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileDownloadName);
     }
 

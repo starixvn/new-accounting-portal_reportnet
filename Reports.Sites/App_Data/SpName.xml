@@ -407,6 +407,7 @@
 		<Setting Key="WinLoss_LeagueWinLoss_GetPermisionProfileID" SpName="Acc_Rpt_GetPermisionProfileID" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Acc_Rpt_LeagueWL_BetType" SpName="Acc_Rpt_LeagueWL_BetType" DbName="DBWH.bodb_dwrs.wsv_nap">
 			<Mapping DataField="VirtualIncome" ObjectProperty="VirtualWinLoss" />
+			<Mapping DataField="BetTypeID" ObjectProperty="Bettype" />
 		</Setting>
 		<Setting Key="Acc_Rpt_LeagueWL_Match" SpName="Acc_Rpt_LeagueWL_Match" DbName="DBWH.bodb_dwrs.wsv_nap">
 			<Mapping DataField="VirtualIncome" ObjectProperty="VirtualWinLoss" />

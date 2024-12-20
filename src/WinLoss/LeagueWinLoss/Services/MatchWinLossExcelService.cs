@@ -11,6 +11,7 @@ public interface MatchWinLossExcelService
     Task<ExcelPackage> ExportExcel(MatchWinLossModel data, string title, string header);
 
     Task<ExcelPackage> ExportExcelFromBetTypeStatus(MatchWinLossFromBetTypeStatusModel data, string title, string header);
+    Task<ExcelPackage> ExportExcelWithChoices(MatchWinLossWithChoiceModel data, string title, string header);
 }
 
 public class MatchWinLossExcelServiceImp(ConfigurationService configurationService, IMapper mapper) : MatchWinLossExcelService
@@ -47,6 +48,17 @@ public class MatchWinLossExcelServiceImp(ConfigurationService configurationServi
         LoadTemplate("LeagueWinLoss_Level.xlsx");
         BuildTitle(title, "A1:L2");
         BuildBodyRowsForBetTypeFromStatus(data, StartRowIndex);
+        sheet.Cells["A4:L4"].Value = header;
+        sheet.Cells["A5:A6"].Value = "Event";
+        ClearTemplate();
+        return Task.FromResult(ExcelPackage);
+    }
+
+    public Task<ExcelPackage> ExportExcelWithChoices(MatchWinLossWithChoiceModel data, string title, string header)
+    {
+        LoadTemplate("LeagueWinLoss_Level.xlsx");
+        BuildTitle(title, "A1:L2");
+        BuildBodyRowsWithChoices(data, StartRowIndex);
         sheet.Cells["A4:L4"].Value = header;
         sheet.Cells["A5:A6"].Value = "Event";
         ClearTemplate();
@@ -98,6 +110,45 @@ public class MatchWinLossExcelServiceImp(ConfigurationService configurationServi
             var template = startRowIndex % 2 == 0 ? evenSheet : oddSheet;
             var itemExcelModel = mapper.Map<MatchWinLossItemExcelModel>(match);
             sheet.ApplyModel(template, itemExcelModel, startRowIndex++);
+        }
+        var totalExcelModel = mapper.Map<MatchWinLossItemExcelModel>(data.Total);
+        sheet.ApplyModel(totalSheet, totalExcelModel, startRowIndex++);
+        if (IsShowTotal(data.RM))
+        {
+            RenderTotalRow(data.RM, ref startRowIndex);
+        }
+        if (IsShowTotal(data.BARM))
+        {
+            RenderTotalRow(data.BARM, ref startRowIndex);
+        }
+
+        if (!IsShowTotal(data.RM)
+            && !IsShowTotal(data.BARM)) return;
+        RenderTotalRow(data.GrandTotal, ref startRowIndex);
+    }
+
+    private void BuildBodyRowsWithChoices(MatchWinLossWithChoiceModel data, int startRowIndex)
+    {
+        foreach (var match in data.Match)
+        {
+            var matchExcelModel = mapper.Map<MatchWinLossItemExcelModel>(match.Total);
+            sheet.ApplyModel(subItemSheet, matchExcelModel, startRowIndex++);
+            foreach (var liveIndicator in match.LiveIndicators)
+            {
+                var liveIndicatorExcelModel = mapper.Map<MatchWinLossItemExcelModel>(liveIndicator.Total);
+                sheet.ApplyModel(subItemSheet, liveIndicatorExcelModel, startRowIndex++);
+                foreach (var betType in liveIndicator.BetTypes)
+                {
+                    var betTypeExcelModel = mapper.Map<MatchWinLossItemExcelModel>(betType.Total);
+                    sheet.ApplyModel(subItemSheet, betTypeExcelModel, startRowIndex++);
+                    foreach (var choice in betType.Choices)
+                    {
+                        var choiceExcelModel = mapper.Map<MatchWinLossItemExcelModel>(choice);
+                        choiceExcelModel.MatchEvent = choice.Choice;
+                        sheet.ApplyModel(evenSheet, choiceExcelModel, startRowIndex++);
+                    }
+                }
+            }
         }
         var totalExcelModel = mapper.Map<MatchWinLossItemExcelModel>(data.Total);
         sheet.ApplyModel(totalSheet, totalExcelModel, startRowIndex++);

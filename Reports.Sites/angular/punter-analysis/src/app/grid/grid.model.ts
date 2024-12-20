@@ -21,6 +21,6 @@ export interface Grid {
 
 export enum LiveStatus {
     Live = 1,
-    NonLive = 2,
+    NonLive = 0,
     Both = -1
 }
