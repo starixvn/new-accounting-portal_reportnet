@@ -239,7 +239,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                 "<a class='link' onclick='BackToTreeWinLossBySuper();'>Master</a> > " +
                 "<a class='link' onclick='BackToTreeWinLossByMaster();'>Agent</a> > " +
                 " Member Win Loss (Agent " + self.Params.reportParams.Name + ")",
-                showExcelButton: true,
+                showExcelButton: false,
                 exportExcelFunction: function () {
                     self.exportExcel();
                 }

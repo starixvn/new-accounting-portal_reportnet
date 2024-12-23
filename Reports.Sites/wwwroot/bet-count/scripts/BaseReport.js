@@ -36,10 +36,11 @@ Fanex.AccountingReports.Misc.BetCount.BaseReport = function () {
 
         return cssClass;
     };
-    self.renderReportRow = function (row, isSubTotal) {
+    self.renderReportRow = function (row, isSubTotal, siteName) {
         var frozenHtml = '';
         var cssClass = isSubTotal ? 'totalRow' : '';
-        frozenHtml = '<td><div class="col80' + (isSubTotal ? '' : ' align-right') + '">' + row.SiteName + '</div></td>';
+        var siteNameText = isSubTotal ? siteName : row.SiteName;
+        frozenHtml = '<td><div class="col80' + (isSubTotal ? '' : ' align-right') + '">' + siteNameText + '</div></td>';
         self.TempHtml.frozenHtml += '<tr class="' + cssClass + '">' + frozenHtml + ' </tr>';
         self.TempHtml.contentHtml += '<tr class="' + cssClass + '">' +
                                                 frozenHtml +
@@ -60,7 +61,7 @@ Fanex.AccountingReports.Misc.BetCount.BaseReport = function () {
     };
     self.renderReportTotalRow = function (row) {
         var frozenHtml = '';
-        frozenHtml = '<th><div class="col80 align-center">' + row.SiteName + '</div></th>';
+        frozenHtml = '<th><div class="col80 align-center">Total</div></th>';
         self.TempHtml.footerFrozenHtml += '<tr>' + frozenHtml + ' </tr>';
         self.TempHtml.footerContentHtml += '<tr>' +
                                             frozenHtml +

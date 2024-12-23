@@ -60,6 +60,7 @@ public class BetCountExportExcelServiceImp(ConfigurationService configurationSer
         foreach (var item in data)
         {
             sheet.ApplyModel(subTotalSheet, item.Total, rowIndex++);
+            sheet.Cells[$"A{rowIndex - 1}"].Value = item.SiteName;
             sheet.ApplyVertical(bodySheet, item.Items, rowIndex);
             rowIndex += item.Items.Count;
         }
@@ -70,6 +71,7 @@ public class BetCountExportExcelServiceImp(ConfigurationService configurationSer
     private void BuildTotalRow(TransactionExcelModel total, int rowIndex)
     {
         sheet.ApplyModel(totalSheet, total, rowIndex);
+        sheet.Cells[$"A{rowIndex}"].Value = "Total";
     }
 
     private void ClearTemplate()

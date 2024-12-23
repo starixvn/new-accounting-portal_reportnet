@@ -695,7 +695,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 var siteGroup = report.Items[i];
                 var transactionLength = siteGroup.Items.length;
                 var siteGroupTotal = siteGroup.Total;
-                self.renderReportRow(siteGroupTotal, true);
+                self.renderReportRow(siteGroupTotal, true, siteGroup.SiteName);
 
                 for (var j = 0; j < transactionLength; j++) {
                     var reportItem = siteGroup.Items[j];

@@ -41,7 +41,7 @@ public class HandlerExcel(
         var criteria = mapper.Map<EventStatusLevelCriteria>(request);
         var reportData = await service.GetTickets<EventStatusLevelModel, EventStatusLevelCriteria>(criteria);
         var excelModel = mapper.Map<TicketViewExcelModel<EventStatusLevelExcelModel>>(reportData);
-        var sportName = new CultureInfo("en-US").TextInfo.ToTitleCase(request.BreadCrumb[-1].ToLowerInvariant());
+        var sportName = new CultureInfo("en-US").TextInfo.ToTitleCase(request.BreadCrumb[1].ToLowerInvariant());
         foreach (var item in excelModel.TicketList)
         {
             var status = item.LiveStatus == "0" ? "Non-Live" : "Live";
