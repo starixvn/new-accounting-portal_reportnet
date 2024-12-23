@@ -93,10 +93,9 @@ public class TraderPerformanceSoccerExcelServiceImp(ConfigurationService configu
         var rowIndex = startRowIndex;
         foreach (var item in list)
         {
-            var template = index % 2 == 0 ? evenSheet : oddSheet;
             foreach (var excelModel in item.ReportRows.Select(CreateDetailExcelModel))
             {
-                sheet.ApplyModel(template, excelModel, rowIndex++);
+                sheet.ApplyModel(oddSheet, excelModel, rowIndex++);
             }
             BuildDetailTotalRow(item.GrandTotal, rowIndex++, item.Name, subTotalSheet);
             var firstRangeOfCell = $"A{rowIndex - item.ReportRows.Count - 1}:A{rowIndex - 2}";

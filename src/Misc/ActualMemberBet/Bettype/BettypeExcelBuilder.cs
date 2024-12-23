@@ -25,6 +25,7 @@ public class BettypeExcelBuilderImp(ConfigurationService configurationService) :
         LoadTemplate();
         BuildTitle(excelParams);
         bettypeActualMemberBetSheet.ApplyVertical(bettypeActualMemberBetExcel.Entities, StartRowIndex);
+        bettypeActualMemberBetExcel.Total.BettypeName = "Grand Total";
         bettypeActualMemberBetSheet.ApplyModel(totalSheet, bettypeActualMemberBetExcel.Total, StartRowIndex + bettypeActualMemberBetExcel.Entities.Count);
         ClearTemplate();
         return ExcelPackage;

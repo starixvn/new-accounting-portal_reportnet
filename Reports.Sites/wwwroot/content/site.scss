@@ -291,9 +291,11 @@ h1, h2, h3, h4, h5, h6 {
 .grid-boundary {
     .freegrid {
         font-size: 0.85em;
+
         .grid-fixed-table {
             width: 100% !important;
         }
+
         .parent-row {
             td {
                 color: black;
@@ -317,19 +319,21 @@ h1, h2, h3, h4, h5, h6 {
                 background-color: #f4f4be;
             }
         }
+
         .total-row-main {
             & > td {
                 font-weight: bold !important;
                 background-color: #f4f4be !important;
                 color: black !important;
             }
-            .grid-collapse, .grid-expand{
+
+            .grid-collapse, .grid-expand {
                 display: inline-block;
                 float: left;
             }
         }
 
-        .cricket-charged-commission,.grand-total {
+        .cricket-charged-commission, .grand-total {
             & > td {
                 border-top: 1px solid #ff6600;
                 background: none repeat scroll 0 0 #dce2bc;
@@ -337,24 +341,28 @@ h1, h2, h3, h4, h5, h6 {
                 font-weight: bold !important;
                 color: black !important;
             }
-            .grid-collapse,.grid-expand{
+
+            .grid-collapse, .grid-expand {
                 float: left;
             }
+
             .free-grid-td-0 {
-                .table-cell{
+                .table-cell {
                     float: right !important;
                 }
-            }            
+            }
         }
-        .grand-total{
-            .tr-grid-collapse-expand{
+
+        .grand-total {
+            .tr-grid-collapse-expand {
                 color: black !important;
             }
         }
+
         .col_footer table thead th {
             color: black !important;
         }
-                
+
         .league-header {
             text-align: left;
             font-weight: bold;
@@ -364,20 +372,25 @@ h1, h2, h3, h4, h5, h6 {
             .table-cell {
                 text-align: left;
             }
+
             font-weight: bold;
-            align-content:
-            td {
+
+            align-content: td {
                 background-color: #E2FFFF;
             }
         }
-        .out-right-match-detail{
-            .table-cell{
+
+        .out-right-match-detail {
+            .table-cell {
                 float: right;
             }
         }
+
         .league-match-code {
             text-align: center;
             font-weight: bold;
+            display: block;
+            word-wrap: break-word;
         }
 
         .grand-total-note {
@@ -389,6 +402,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .grid-title-label {
         font-size: 0.85em;
+
         ol {
             margin-left: 0px;
         }

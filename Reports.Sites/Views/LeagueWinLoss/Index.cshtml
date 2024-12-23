@@ -176,8 +176,7 @@
 {
     <script type="text/javascript">
         var labelDate = 'Date';
-        // var minDate = '@ViewBag.MinDate';
-        var minDate = '@DateTime.Today.AddDays(-30).ToShortDateString()';
+        var minDate = '@ViewBag.MinDate';
         var maxDate = '@(DateTime.Today.ToShortDateString())';
         var toDay = '@DateTime.Today.ToShortDateString()';
         var is8RMActive = 'true';

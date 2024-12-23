@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Drawing;
+using AutoMapper;
 using Epplus.Mapper.Extensions;
 using LeagueWinLoss.Model;
 using OfficeOpenXml;
@@ -137,10 +138,12 @@ public class MatchWinLossExcelServiceImp(ConfigurationService configurationServi
             {
                 var liveIndicatorExcelModel = mapper.Map<MatchWinLossItemExcelModel>(liveIndicator.Total);
                 sheet.ApplyModel(subItemSheet, liveIndicatorExcelModel, startRowIndex++);
+                sheet.Cells[$"A{startRowIndex - 1}:L{startRowIndex - 1}"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(212, 237, 251));
                 foreach (var betType in liveIndicator.BetTypes)
                 {
                     var betTypeExcelModel = mapper.Map<MatchWinLossItemExcelModel>(betType.Total);
                     sheet.ApplyModel(subItemSheet, betTypeExcelModel, startRowIndex++);
+                    sheet.Cells[$"A{startRowIndex - 1}:L{startRowIndex - 1}"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(235, 253, 253));
                     foreach (var choice in betType.Choices)
                     {
                         var choiceExcelModel = mapper.Map<MatchWinLossItemExcelModel>(choice);

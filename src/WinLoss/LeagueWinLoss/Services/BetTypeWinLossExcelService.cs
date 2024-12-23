@@ -83,10 +83,16 @@ public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationSer
                 {
                     var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
                     var itemExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(betType);
+                    itemExcelModel.BettypeName = betType.IsHedge
+                        ? $"{itemExcelModel.BettypeName} (hedge)"
+                        : itemExcelModel.BettypeName;
                     sheet.ApplyModel(template, itemExcelModel, rowIndex++);
                 }
+
+                if (!IsShowTotal(group.Total)) continue;
                 totalExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(group.Total);
                 sheet.ApplyModel(totalSheet, totalExcelModel, rowIndex++);
+
             }
             totalExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(data.Total);
             sheet.ApplyModel(totalSheet, totalExcelModel, rowIndex++);
@@ -118,6 +124,9 @@ public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationSer
         {
             var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
             var itemExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(betType);
+            itemExcelModel.BettypeName = betType.IsHedge
+                ? $"{itemExcelModel.BettypeName} (hedge)"
+                : itemExcelModel.BettypeName;
             sheet.ApplyModel(template, itemExcelModel, rowIndex++);
         }
         var totalExcelModel = mapper.Map<BetTypeWinLossItemExcelModel>(data.Total);

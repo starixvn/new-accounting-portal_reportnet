@@ -24,7 +24,7 @@
 <div data-nap-loading></div>
 @section Styles {
     <link href="~/bundle/app-style.css?v=1" rel="stylesheet" />
-    <link href="~/bundle/house-win-loss-style.css?v=1" rel="stylesheet" />
+    <link href="~/bundle/house-win-loss-style.css?v=2" rel="stylesheet" />
 }
 <script type="text/javascript">
     var napConfig = @Html.Raw(Json.Serialize(napConfig));
@@ -35,9 +35,9 @@
 
 </script>
 @section Scripts {
-    <script src="~/bundle/lib.chunk.js?v=20241219"></script>
-    <script src="~/bundle/app.chunk.js?v=20241219"></script>
-    <script src="~/bundle/house-win-loss.chunk.js?v=20241219"></script>
+    <script src="~/bundle/lib.chunk.js?v=20241223"></script>
+    <script src="~/bundle/app.chunk.js?v=20241223"></script>
+    <script src="~/bundle/house-win-loss.chunk.js?v=20241223"></script>
 }
 <script type="text/javascript">
     var modePermissions = @Html.Raw(Json.Serialize(ViewBag.ModePermissions));
