@@ -22,18 +22,18 @@ public class DirectBalanceExcelServiceImp(ConfigurationService configurationServ
 
     private ExcelWorksheet totalSheet;
 
-    private const int StartRowIndex = 3;
+    private const int StartRowIndex = 4;
 
     private ExcelPackage ExcelPackage { get; set; }
 
     public Task<ExcelPackage> ExportExcelDirectBalance(DirectBalanceModel data, string level)
     {
         LoadTemplate("DirectBalance.xlsx");
-        BuildTitle($"{level} Balance", "A1:E1");
+        BuildTitle($"{level} Balance", "A1:G1");
         var startIndexOfTotal = data.DirectBalanceItems.Count() + StartRowIndex;
         BuildBodyRows(data.DirectBalanceItems, StartRowIndex);
         BuildTotalRow(data.Total, startIndexOfTotal);
-        sheet.Cells["B2"].Value = $"{level} Balance";
+        sheet.Cells["B2:B3"].Value = $"{level} Balance";
         ClearTemplate();
         return Task.FromResult(ExcelPackage);
     }
@@ -72,7 +72,8 @@ public class DirectBalanceExcelServiceImp(ConfigurationService configurationServ
         var item = new DirectBalanceTotalItemExcelModel
         {
             Text = "Total",
-            Total = baseBalanceTotal.BaseBalance
+            Total = baseBalanceTotal.BaseBalance,
+            RewardTotal = baseBalanceTotal.RewardRM
         };
         sheet.ApplyModel(totalSheet, item, startIndex);
     }

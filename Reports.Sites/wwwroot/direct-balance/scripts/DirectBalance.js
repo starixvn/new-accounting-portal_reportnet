@@ -85,8 +85,10 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 					    }
 					},
 					{ HeaderText: "Currency", Width: 80, Name: "Currency", CellAlign: "center" },
-					{ HeaderText: "Balance", Width: 150, Name: "Balance", CellAlign: "right", HeaderAlign: "center" , FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER},
-					{ HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }
+					{ HeaderText: "Balance", Width: 150, Name: "Balance", CellAlign: "right", HeaderAlign: "center" , FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                    { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                    { HeaderText: "Reward Receivable", Width: 150, Name: "Reward", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                    { HeaderText: "Reward Receivable (RM)", Width: 150, Name: "RewardRM", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }
             ];
         }
         else {
@@ -95,11 +97,21 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 					{ HeaderText: customerType, Width: 150, Name: "CustomerType" },
 					{ HeaderText: "Currency", Width: 80, Name: "Currency", CellAlign: "center" },
 					{ HeaderText: "Balance", Width: 150, Name: "Balance", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-					{ HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }
+                    { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                    { HeaderText: "Reward Receivable", Width: 150, Name: "Reward", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                    { HeaderText: "Reward Receivable (RM)", Width: 150, Name: "RewardRM", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }
             ];
         }
 
         var gridOption = {
+            customizeHeader: true,
+            groupHeaderRows: [{
+                Columns: [{ HeaderText: "No", Name: "Number", MergeRowNumber: 2 },
+                { HeaderText: customerType, Name: "CustomerType", MergeRowNumber: 2 },
+                { HeaderText: "Currency", Name: "Currency", MergeRowNumber: 2 },
+                { HeaderText: "Main Wallet", Name: "Balance", MergeColNumber: 2 },
+                { HeaderText: "Reward Wallet", Name: "Reward", MergeColNumber: 2 }]
+            }],
             columns: columns,
             showFooter: true,
             showTitle: true,
@@ -189,7 +201,9 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 										{ Name: "CustomerType", Value: currentCustomer },
 										{ Name: "Currency", Value: currentCustomer.CurrencyName },
 										{ Name: "Balance", Value: currentCustomer.Balance },
-										{ Name: "BaseRM", Value: currentCustomer.BaseBalance }
+                                        { Name: "BaseRM", Value: currentCustomer.BaseBalance },
+                                        { Name: "Reward", Value: currentCustomer.Reward },
+                                        { Name: "RewardRM", Value: currentCustomer.RewardRM }
 							    ]
 							});
                         }
@@ -201,7 +215,9 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 										{ Name: "CustomerType", Value: currentCustomer.Username },
 										{ Name: "Currency", Value: currentCustomer.CurrencyName },
 										{ Name: "Balance", Value: currentCustomer.Balance },
-										{ Name: "BaseRM", Value: currentCustomer.BaseBalance }
+                                        { Name: "BaseRM", Value: currentCustomer.BaseBalance },
+                                        { Name: "Reward", Value: currentCustomer.Reward },
+                                        { Name: "RewardRM", Value: currentCustomer.RewardRM }
 							    ]
 							});
                         }
@@ -211,7 +227,9 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 						{
 						    Columns: [
 										{ Name: "Number", Value: "Total", MergeColNumber: 4 },
-										{ Name: "BaseRM", Value: rs.Total.BaseBalance }
+                                    { Name: "BaseRM", Value: rs.Total.BaseBalance },
+                                    { Name: "Reward", Value: "" },
+                                { Name: "RewardRM", Value: rs.Total.RewardRM }
 						    ]
 						}]
                     }

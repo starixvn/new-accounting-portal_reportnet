@@ -22,14 +22,14 @@ public class SuperBalanceExcelServiceImp(ConfigurationService configurationServi
 
     private ExcelWorksheet totalSheet;
 
-    private const int StartRowIndex = 3;
+    private const int StartRowIndex = 4;
 
     private ExcelPackage ExcelPackage { get; set; }
 
     public Task<ExcelPackage> ExportExcelSuperBalance(SuperBalanceModel data, string title)
     {
         LoadTemplate("SuperBalance.xlsx");
-        BuildTitle(title, "A1:E1");
+        BuildTitle(title, "A1:G1");
         var startIndexOfTotal = data.SuperBalanceItems.Count + StartRowIndex;
         if (data.SuperBalanceItems.Count > 0)
         {
@@ -78,7 +78,8 @@ public class SuperBalanceExcelServiceImp(ConfigurationService configurationServi
         var item = new BalanceTotalItemExcelModel
         {
             Text = "Total",
-            Total = baseBalanceTotal.BaseBalance
+            Total = baseBalanceTotal.BaseBalance,
+            RewardTotal = baseBalanceTotal.RewardRM
         };
         sheet.ApplyModel(totalSheet, item, startIndex);
     }

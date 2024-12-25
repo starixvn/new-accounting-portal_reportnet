@@ -14,6 +14,10 @@ public class DirectBalanceItemModel
 
     public decimal BaseBalance { get; set; }
 
+    public decimal Reward { get; set; }
+
+    public decimal RewardRM { get; set; }
+
     public static DirectBalanceItemModel operator +(DirectBalanceItemModel a, DirectBalanceItemModel b)
     {
         return new DirectBalanceItemModel
@@ -22,7 +26,9 @@ public class DirectBalanceItemModel
             Username = string.Empty,
             Currency = string.Empty,
             Balance = a.Balance + b.Balance,
-            BaseBalance = a.BaseBalance + b.BaseBalance 
+            BaseBalance = a.BaseBalance + b.BaseBalance,
+            Reward = a.Reward + b.Reward,
+            RewardRM = a.RewardRM + b.RewardRM
         };
     }
 }

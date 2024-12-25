@@ -4,18 +4,24 @@ namespace SuperBalance.Model;
 
 public class BalanceItemExcelModel
 {
-    [Cell("A3")]
+    [Cell("A4")]
     public int No { get; set; }
 
-    [Cell("B3")]
+    [Cell("B4")]
     public string Username { get; set; }
 
-    [Cell("C3")]
+    [Cell("C4")]
     public string CurrencyName { get; set; }
 
-    [Cell("D3")]
+    [Cell("D4")]
     public decimal Balance { get; set; }
 
-    [Cell("E3")]
+    [Cell("E4")]
     public decimal BaseBalance { get; set; }
+
+    [Cell("F4")]
+    public decimal Reward { get; set; }
+
+    [Cell("G4")]
+    public decimal RewardRM { get; set; }
 }

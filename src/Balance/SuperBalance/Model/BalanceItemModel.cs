@@ -16,11 +16,16 @@ public class BalanceItemModel
 
     public decimal BaseBalance { get; set; }
 
+    public decimal Reward { get; set; }
+
+    public decimal RewardRM { get; set; }
+
     public static BalanceItemModel operator +(BalanceItemModel a, BalanceItemModel b)
     {
         return new BalanceItemModel
         {
-            BaseBalance = a.BaseBalance + b.BaseBalance
+            BaseBalance = a.BaseBalance + b.BaseBalance,
+            RewardRM = a.RewardRM + b.RewardRM
         };
     }
 }
