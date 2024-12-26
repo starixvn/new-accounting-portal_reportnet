@@ -37,7 +37,9 @@ public class SuperBalanceExcelServiceImp(ConfigurationService configurationServi
         }
         else
         {
-            startIndexOfTotal--;
+            sheet.DeleteRow(3);
+            sheet.DeleteRow(2);
+            startIndexOfTotal = StartRowIndex - 2;
         }
         BuildTotalRow(data.BaseBalanceTotal, startIndexOfTotal);
         ClearTemplate();

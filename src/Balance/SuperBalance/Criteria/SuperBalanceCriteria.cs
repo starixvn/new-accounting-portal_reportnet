@@ -22,6 +22,8 @@ public class SuperBalanceCriteria : CriteriaBase
 
     public decimal Total { get; set; }
 
+    public decimal TotalReward { get; set; }
+
     public override bool IsValid() => true;
 
     public override string GetSettingKey()

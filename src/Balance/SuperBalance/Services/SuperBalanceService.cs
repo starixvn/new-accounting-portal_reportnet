@@ -50,6 +50,7 @@ public class SuperBalanceServiceImp(IDynamicRepository repository, CurrenciesSer
         if (criteria.IsViewTotalOnly)
         {
             var total = criteria.Total;
+            var totalReward = criteria.TotalReward;
                
             var balanceTotal = new BalanceItemModel
             {
@@ -58,7 +59,8 @@ public class SuperBalanceServiceImp(IDynamicRepository repository, CurrenciesSer
                 Currency = null,
                 CurrencyName = null,
                 Balance = 0,
-                BaseBalance = total
+                BaseBalance = total,
+                RewardRM = totalReward
             };
 
             result.BaseBalanceTotal = balanceTotal;
