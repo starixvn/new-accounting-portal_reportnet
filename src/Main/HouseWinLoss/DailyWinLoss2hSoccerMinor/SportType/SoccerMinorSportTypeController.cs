@@ -1,6 +1,4 @@
-﻿
-
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.SportType;
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.SportType;
 
 using AutoMapper;
 using Common.BasicWinLoss;

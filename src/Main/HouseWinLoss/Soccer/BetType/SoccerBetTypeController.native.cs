@@ -6,36 +6,35 @@ using HouseWinLoss.Common.ColumnDecorators;
 using HouseWinLoss.Common.Criteria;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HouseWinLoss.Soccer.BetType
+namespace HouseWinLoss.Soccer.BetType;
+
+[Route("api/house-win-loss-by-products/soccer/bettype")]
+[ApiController]
+public class SoccerBetTypeController : BasicWinLossController
 {
-    [Route("api/house-win-loss-by-products/soccer/bettype")]
-    [ApiController]
-    public class SoccerBetTypeController : BasicWinLossController
+    private readonly IMapper mapper;
+
+    public SoccerBetTypeController(
+        BasicWinLossService service,
+        BasicGridOptionsBuilder builder,
+        GridOptionColumnDecoratorFull decorator,
+        IMapper mapper)
+     : base(service, builder, decorator)
     {
-        private readonly IMapper mapper;
+        this.mapper = mapper;
+    }
 
-        public SoccerBetTypeController(
-            BasicWinLossService service,
-            BasicGridOptionsBuilder builder,
-            GridOptionColumnDecoratorFull decorator,
-            IMapper mapper)
-         : base(service, builder, decorator)
-        {
-            this.mapper = mapper;
-        }
+    [Route("")]
+    public async Task<IActionResult> Json(QueryModel queryModel)
+    {
+        var criteria = (WinLossCriteria)mapper.Map<BetTypeCriteria>(queryModel);
+        return await Json(criteria, "Bet Type", 210);
+    }
 
-        [Route("")]
-        public async Task<IActionResult> Json(QueryModel queryModel)
-        {
-            var criteria = (WinLossCriteria)mapper.Map<BetTypeCriteria>(queryModel);
-            return await Json(criteria, "Bet Type", 210);
-        }
-
-        [Route("excel")]
-        public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
-        {
-            var criteria = (WinLossCriteria)mapper.Map<BetTypeCriteria>(queryModel);
-            return await Excel(criteria, "Bet Type", queryModel.Title);
-        }
+    [Route("excel")]
+    public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
+    {
+        var criteria = (WinLossCriteria)mapper.Map<BetTypeCriteria>(queryModel);
+        return await Excel(criteria, "Bet Type", queryModel.Title);
     }
 }

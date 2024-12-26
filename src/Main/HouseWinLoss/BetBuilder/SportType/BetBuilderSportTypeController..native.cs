@@ -11,7 +11,8 @@ using Utilities.ExcelResult;
 
 [Route("api/house-win-loss-by-products/bet-builder/sport-type")]
 [ApiController]
-public class BetBuilderSportTypeController(BetBuilderSportTypeWinLossService service,
+public class BetBuilderSportTypeController(
+    BetBuilderSportTypeWinLossService service,
     BasicGridOptionsBuilder builder,
     GridOptionColumnDecoratorFull decorator,
     IMapper mapper) : ControllerBase
