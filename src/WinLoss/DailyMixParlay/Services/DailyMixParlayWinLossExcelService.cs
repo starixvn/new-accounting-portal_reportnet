@@ -32,6 +32,7 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
     private ExcelWorksheet productTotalSheet;
     private ExcelWorksheet productGrandTotalSheet;
     private ExcelWorksheet productSheet;
+    private ExcelWorksheet mixLiveNonLiveSheet;
 
     private int rowIndex = 6;
     private int productRowIndex = 5;
@@ -228,6 +229,7 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
         productSheet = ExcelPackage.Workbook.Worksheets.Copy("DailyMixParlayWinLossTemplate", "Daily Mix Parlay Win Loss");
         nonLiveSheet = ExcelPackage.Workbook.Worksheets["NonLiveTemplate"];
         liveSheet = ExcelPackage.Workbook.Worksheets["LiveTemplate"];
+        mixLiveNonLiveSheet = ExcelPackage.Workbook.Worksheets["MixLiveNonLiveTemplate"];
         productSubTotalSheet = ExcelPackage.Workbook.Worksheets["SubTotalTemplate"];
         productGrandTotalSheet = ExcelPackage.Workbook.Worksheets["GrandTotalTemplate"];
         productTotalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
@@ -278,15 +280,20 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
     private void BindProductFirstMergeValue(string name, int numberMergeRow)
     {
         var index = productRowIndex + numberMergeRow - 1;
-        if (name == "Non-Live")
+        switch (name)
         {
-            nonLiveSheet.Cells["A5:A5"]
-                .Copy(productSheet.Cells[$"A{productRowIndex}:A{index}"]);
-        }
-        else
-        {
-            liveSheet.Cells["A5:A5"]
-                .Copy(productSheet.Cells[$"A{productRowIndex}:A{index}"]);
+            case "Non-Live":
+                nonLiveSheet.Cells["A5:A5"]
+                    .Copy(productSheet.Cells[$"A{productRowIndex}:A{index}"]);
+                break;
+            case "Live":
+                liveSheet.Cells["A5:A5"]
+                    .Copy(productSheet.Cells[$"A{productRowIndex}:A{index}"]);
+                break;
+            default:
+                mixLiveNonLiveSheet.Cells["A5:A5"]
+                    .Copy(productSheet.Cells[$"A{productRowIndex}:A{index}"]);
+                break;
         }
 
         productSheet.Cells[$"A{productRowIndex}:A{index}"].Merge = true;
@@ -356,6 +363,7 @@ public class DailyMixParlayWinLossExcelServiceImp(ConfigurationService configura
         ExcelPackage.Workbook.Worksheets.Delete("DailyMixParlayWinLossTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("NonLiveTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("LiveTemplate");
+        ExcelPackage.Workbook.Worksheets.Delete("MixLiveNonLiveTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("SubTotalTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("GrandTotalTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("TotalTemplate");

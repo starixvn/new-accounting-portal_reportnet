@@ -51,6 +51,7 @@ var negativeBalance = {
                 negativeBalance.cache = result;
                 var tilte = negativeBalance.selNegativeBalanceCriteria.Site == "All" ? "All Licensees" : negativeBalance.selNegativeBalanceCriteria.Site;
                 $('#reporttile').html('Negative Balance Report for ' + tilte);
+                negativeBalance.selNegativeBalanceCriteria.Site == "All" ? $("#btnExport").hide() : $("#btnExport").show();
                 negativeBalance.renderGrid(result);
                 negativeBalance.selNegativeBalanceCriteria.IsGetCache = true;
             },
