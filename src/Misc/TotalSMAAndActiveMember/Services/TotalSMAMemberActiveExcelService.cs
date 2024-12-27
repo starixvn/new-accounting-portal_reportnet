@@ -36,7 +36,7 @@ public class TotalSMAMemberActiveExcelServiceImp(ConfigurationService configurat
 
     public Task<ExcelPackage> ExportExcel(IList<SMASummaryModel> data, string title)
     {
-        LoadTemplate("TotalSMAAndMemberActiveReport.xlsx", false);
+        LoadTemplate("Main.xlsx", false);
         BuildTitle(title, "A1:D2");
         BuildBodyRows(data, "A1:D2");
         return Task.FromResult(ExcelPackage);
@@ -44,7 +44,7 @@ public class TotalSMAMemberActiveExcelServiceImp(ConfigurationService configurat
 
     public Task<ExcelPackage> ExportExcelForDetail(List<GroupStatusDetailModel> data, int status)
     {
-        LoadTemplate("TotalSMAAndMemberActiveReport_Detail.xlsx", true);
+        LoadTemplate("Detail.xlsx", true);
         var title = status switch
         {
             (int)StatusConstant.NewCreated => "New Created Details",
