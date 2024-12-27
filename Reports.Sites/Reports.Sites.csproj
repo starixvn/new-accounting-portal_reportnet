@@ -1411,7 +1411,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\TotalSMAAndMemberActiveReport\TotalSMAandMemberActiveReport_Detail.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\TraderPerformanceOtherSports\TraderPerformance_OtherSports.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

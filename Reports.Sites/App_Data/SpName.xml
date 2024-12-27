@@ -332,7 +332,7 @@
 			<Mapping DataField="AmountMember" ObjectProperty="MemberAmount" />
 		</Setting>
 		<Setting Key="Misc_DailyCreatedCustomers_GetDetailReport" SpName="Acc_DailyCreatedCustomer_Details" DbName="DBACC.bodb02.wsv_nap" TimeOut="600">
-			<Mapping DataField="CreatDate" ObjectProperty="CreatedTime" />
+			<Mapping DataField="creatdate" ObjectProperty="CreatedDate" />
 		</Setting>
 	</Function>
 	<Function Name="Misc - Total SMA Member Active">
