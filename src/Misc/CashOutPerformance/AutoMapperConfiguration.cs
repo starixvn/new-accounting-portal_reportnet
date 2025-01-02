@@ -45,5 +45,6 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<BetTypeDrillDownExcelRequest, BetTypeLevelCriteria>();
         cfg.CreateMap<BetTypeDrillDownRequest, BetTypeLevelCriteria>();
         cfg.CreateMap<ChildItemBetTypeModel, BetTypeLevelExcelModel>();
+        cfg.CreateMap<SimpleBetTypeLevelModel, SimpleBetTypeLevelExcelModel>();
     }
 }
