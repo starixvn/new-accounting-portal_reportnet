@@ -34,37 +34,44 @@ public class TraderSumPivotServiceImp : TraderSumPivotService
             .ToList()
             .ForEach(trader =>
             {
-                var newDataRow = dataTable.NewRow();
                 var dataByUser = rawData.AsEnumerable().Where(s => Converter.To<string>(s[TraderColumnName]) == trader).ToList();
-                for (var columnIndex = 0; columnIndex < rawData.Columns.Count; columnIndex++)
-                {
-                    var rawColumnName = rawData.Columns[columnIndex].ColumnName;
-                    if (pivotColumns.Contains(rawColumnName))
+                dataByUser
+                    .AsEnumerable()
+                    .Select(s => Converter.To<string>(s["Match"]))
+                    .Distinct()
+                    .ToList()
+                    .ForEach(match =>
                     {
-                        if (rawColumnName == BettypeColumnName)
+                        var dataByMatch = dataByUser.AsEnumerable().Where(s => Converter.To<string>(s["Match"]) == match).ToList();
+                        var newDataRow = dataTable.NewRow();
+                        for (var columnIndex = 0; columnIndex < rawData.Columns.Count; columnIndex++)
                         {
-                            continue;
-                        }
-
-                        foreach (var bettype in bettypes)
-                        {
-                            var columnName = $"{rawColumnName}_{bettype}";
-                            if (columnName.Contains("Overall") && !bettype.Contains(rawColumnName))
+                            var rawColumnName = rawData.Columns[columnIndex].ColumnName;
+                            if (pivotColumns.Contains(rawColumnName))
                             {
-                                continue;
+                                if (rawColumnName != BettypeColumnName)
+                                {
+                                    foreach (var bettype in bettypes)
+                                    {
+                                        var columnName = $"{rawColumnName}_{bettype}";
+                                        if (columnName.Contains("Overall") && !bettype.Contains(rawColumnName))
+                                        {
+                                            continue;
+                                        }
+
+                                        var row = dataByMatch.FirstOrDefault(s => Converter.To<string>(s[BettypeColumnName]) == bettype);
+                                        newDataRow[columnName] = row == null ? 0 : row[columnIndex];
+                                    }
+                                }
                             }
-
-                            var row = dataByUser.FirstOrDefault(s => Converter.To<string>(s[BettypeColumnName]) == bettype);
-                            newDataRow[columnName] = row == null ? 0 : row[columnIndex];
+                            else
+                            {
+                                newDataRow[columnIndex] = dataByMatch.FirstOrDefault()[columnIndex];
+                            }
                         }
-                    }
-                    else
-                    {
-                        newDataRow[columnIndex] = dataByUser.FirstOrDefault()?[columnIndex];
-                    }
-                }
 
-                dataTable.Rows.Add(newDataRow);
+                        dataTable.Rows.Add(newDataRow);
+                    });
             });
     }
 

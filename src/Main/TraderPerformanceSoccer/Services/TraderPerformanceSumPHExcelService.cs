@@ -185,9 +185,8 @@ public class TraderPerformanceSumPHExcelServiceImp(TraderSumPivotService pivotSe
             .ForEach(trader =>
             {
                 var rowsByUser = dataTable.AsEnumerable().Where(s => Converter.To<string>(s["Trader"]) == trader).ToList();
-                for (var rowIndex = 0; rowIndex < rowsByUser.Count; rowIndex++)
+                foreach (var row in rowsByUser)
                 {
-                    var row = rowsByUser[rowIndex];
                     RenderContentByUser(lastColumnIndex, userIndex, row);
                     currentContentRowIndex++;
                 }

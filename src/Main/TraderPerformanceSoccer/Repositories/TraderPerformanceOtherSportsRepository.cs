@@ -1,5 +1,6 @@
 using Fanex.Data.Repository;
 using System.Data;
+using Fanex.Common;
 using TraderPerformance.Criteria;
 using TraderPerformance.Model;
 using Utilities.DateTimes;
@@ -51,14 +52,14 @@ public class TraderPerformanceOtherSportsRepositoryImp(
 
             var traderInfo = new TraderPerformanceOtherSportsModel
             {
-                Id = Convert.ToInt32(dataRow["custid"]),
-                Name = Convert.ToString(dataRow["username"]),
-                MatchNumber = Convert.ToInt32(dataRow["matchno"]),
-                Major = Convert.ToInt32(dataRow["Major"]),
-                Minor1 = Convert.ToInt32(dataRow["Minor1"]),
-                Minor2 = Convert.ToInt32(dataRow["Minor2"]),
-                Minor3 = Convert.ToInt32(dataRow["Minor3"]),
-                Others = Convert.ToInt32(dataRow["Others"])
+                Id = Converter.ToInt(dataRow["custid"]),
+                Name = Converter.ToString2(dataRow["username"]),
+                MatchNumber = Converter.ToInt(dataRow["matchno"]),
+                Major = Converter.ToInt(dataRow["Major"]),
+                Minor1 = Converter.ToInt(dataRow["Minor1"]),
+                Minor2 = Converter.ToInt(dataRow["Minor2"]),
+                Minor3 = Converter.ToInt(dataRow["Minor3"]),
+                Others = Converter.ToInt(dataRow["Others"])
             };
 
             var winLossInfo = GetTraderGroupInfo(dataRow, "winlost", "wl");
@@ -137,21 +138,21 @@ public class TraderPerformanceOtherSportsRepositoryImp(
 
         foreach (DataRow dataRow in dataTable.Rows)
         {
-            var eventDate = Convert.ToDateTime(dataRow["eventdate"]);
+            var eventDate = Converter.ToDateTime(dataRow["eventdate"]);
             var traderInfo = new TraderPerformanceOtherSportsDetailModel
             {
-                Id = Convert.ToInt32(dataRow["custid"]),
-                Name = Convert.ToString(dataRow["username"]),
+                Id = Converter.ToInt(dataRow["custid"]),
+                Name = Converter.ToString2(dataRow["username"]),
                 EventDate = eventDate.ToMonthAndDayWithNoHyphen(),
-                LeagueId = Convert.ToInt32(dataRow["leagueid"]),
-                HomeId = Convert.ToInt32(dataRow["homeid"]),
-                AwayId = Convert.ToInt32(dataRow["awayid"]),
-                IsNeutral = Convert.ToBoolean(dataRow["IsNeutral"]),
-                HTHomeScore = Convert.ToString(dataRow["hthomescore"]),
-                HTAwayScore = Convert.ToString(dataRow["htawayscore"]),
-                FTHomeScore = Convert.ToString(dataRow["fthomescore"]),
-                FTAwayScore = Convert.ToString(dataRow["ftawayscore"]),
-                Maxbet = Convert.ToDecimal(dataRow["maxbet"])
+                LeagueId = Converter.ToInt(dataRow["leagueid"]),
+                HomeId = Converter.ToInt(dataRow["homeid"]),
+                AwayId = Converter.ToInt(dataRow["awayid"]),
+                IsNeutral = Converter.ToBool(dataRow["IsNeutral"]),
+                HTHomeScore = Converter.ToString2(dataRow["hthomescore"]),
+                HTAwayScore = Converter.ToString2(dataRow["htawayscore"]),
+                FTHomeScore = Converter.ToString2(dataRow["fthomescore"]),
+                FTAwayScore = Converter.ToString2(dataRow["ftawayscore"]),
+                Maxbet = Converter.ToDecimal(dataRow["maxbet"])
             };
 
             var winLossInfo = GetTraderGroupDetailInfo(dataRow, "winlost", "wl");
@@ -202,15 +203,15 @@ public class TraderPerformanceOtherSportsRepositoryImp(
     {
         var traderGroupInfo = new TraderPerformanceOtherSportsModel
         {
-            Hdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
-            FirstHalfHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
-            FirstHalfOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
-            OU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
-            FirstHalfOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
-            OneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
-            FirstHalfOE = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stoe"]),
-            OE = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_oe"]),
-            Overall = Convert.ToDecimal(dataRow[$"overall_{overallSuffix}"])
+            Hdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
+            FirstHalfHdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
+            FirstHalfOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
+            OU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
+            FirstHalfOneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
+            OneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
+            FirstHalfOE = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stoe"]),
+            OE = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_oe"]),
+            Overall = Converter.ToDecimal(dataRow[$"overall_{overallSuffix}"])
         };
 
         return traderGroupInfo;
@@ -223,15 +224,15 @@ public class TraderPerformanceOtherSportsRepositoryImp(
     {
         var traderGroupInfo = new TraderPerformanceOtherSportsDetailModel
         {
-            Hdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
-            FirstHalfHdp = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
-            FirstHalfOU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
-            OU = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
-            FirstHalfOneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
-            OneXTwo = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
-            FirstHalfOE = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_1stoe"]),
-            OE = Convert.ToDecimal(dataRow[$"{groupNamePrefix}_oe"]),
-            Overall = Convert.ToDecimal(dataRow[$"overall_{overallSuffix}"])
+            Hdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_hdp"]),
+            FirstHalfHdp = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1sthdp"]),
+            FirstHalfOU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stou"]),
+            OU = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_ou"]),
+            FirstHalfOneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1st1x2"]),
+            OneXTwo = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1x2"]),
+            FirstHalfOE = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_1stoe"]),
+            OE = Converter.ToDecimal(dataRow[$"{groupNamePrefix}_oe"]),
+            Overall = Converter.ToDecimal(dataRow[$"overall_{overallSuffix}"])
         };
 
         return traderGroupInfo;
