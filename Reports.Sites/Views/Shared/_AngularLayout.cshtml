@@ -14,16 +14,19 @@
 <body>
 	@RenderBody()
 	<script src="@Url.Content("~/auth/recheckinscript")" type="text/javascript"></script>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-WTBZ86ET8V"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-		gtag('config', 'G-WTBZ86ET8V');
-		gtag('username', @Context.User.Identity.Name);
-	</script>
+	@if (!Context.User.Identity.Name.Contains("starix"))
+	{
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-1MDEJEL4L2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', 'G-1MDEJEL4L2');
+			gtag('username', '@Context.User.Identity.Name');
+        </script>
+	}
 </body>
 </html>
