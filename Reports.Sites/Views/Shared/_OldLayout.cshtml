@@ -66,5 +66,16 @@
     <script type="text/javascript" src="/scripts/nap-report-common.js?v=2"></script>
     @RenderSection("Scripts", false)
     @RenderSection("Foot", false)
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTBZ86ET8V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-WTBZ86ET8V');
+        gtag('username', @Context.User.Identity.Name);
+    </script>
 </body>
 </html>
