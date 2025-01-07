@@ -1,0 +1,18 @@
+<div *ngIf="items && items.length > 0" class="header">
+    <ol class="breadcrumb">
+        <li *ngFor="let item of items; let index = index; let isLast = last" class="breadcrumb-item" [class.active]="isLast" [ngSwitch]="isLast">
+            <a *ngSwitchCase="false" href="javascript:;" (click)="goBack(index)">{{item}}</a>
+            <span *ngSwitchCase="true">{{item}}</span>
+        </li>
+    </ol>
+    <div *ngIf="hasFilter || hasExcel" class="toolbox">
+        <div *ngIf="hasFilter" class="filter">
+            <i class="icon-filter" title="Show/Hide columns" (click)="toggleFilter()"></i>
+            <ngx-dropdown-treeview *ngIf="isShowFilter" class="d-inline-block" [items]="filterItems" (selectedChange)="onFilterSelectedChange($event)">
+            </ngx-dropdown-treeview>
+        </div>
+        <div *ngIf="hasExcel" class="excel">
+            <i class="icon-excel" title="Export excel" (click)="exportExcel()"></i>
+        </div>
+    </div>
+</div>

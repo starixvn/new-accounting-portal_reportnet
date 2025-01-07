@@ -1,0 +1,39 @@
+<div class="nap-filter">
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>From</label>
+          <div class="nap-control">
+            <nap-date-picker [(date)]="startDate" [maxDate]="endDate"></nap-date-picker>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>To</label>
+          <div class="nap-control">
+            <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate"></nap-date-picker>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Turnover</label>
+          <div class="nap-control turnover">
+            <div class="form-check form-check-inline" *ngFor="let option of turnoverOptions">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="searchBy" [(ngModel)]="turnover" [value]="option.value"/> {{option.text}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <label>&nbsp;</label>
+        <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
+          GENERATE
+        </button>
+      </div>
+    </div>
+  </div>
+  

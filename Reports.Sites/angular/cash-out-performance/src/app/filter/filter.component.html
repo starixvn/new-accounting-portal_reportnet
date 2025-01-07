@@ -1,0 +1,159 @@
+<div class="nap-filter">
+  <nap-legend [legendId]="753" [legendTitle]="'Cash Out Performance Legend'"></nap-legend>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Period Type</label>
+        <div class="nap-control">
+          <nap-dropdown-select [items]="timePeriodSelectItems" [(value)]="timePeriod"
+            (valueChange)="onTimePeriodChange()">
+          </nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="width-190">From Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="endDate"
+            (dateChange)="onDateChange()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>To Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate"
+            (dateChange)="onDateChange()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Division</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #siteDropdownTreeview [items]="licensees | siteTreeview:licensees"
+            [config]="licenseeTreeviewConfig" (selectedChange)="selectedLicensees = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Sport</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #sportDropdownTreeview [items]="sports | filterGroupItemTreeview:sports"
+            [config]="sportTreeviewConfig" (selectedChange)="selectedSports = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="width-190">League Group</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #leagueGroupDropdownTreeview [items]="leagueGroups | filterItemTreeview:leagueGroups"
+            [config]="leagueGroupTreeviewConfig" (selectedChange)="selectedLeagueGroups = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>League</label>
+        <div class="nap-control width-307">
+          <nap-dropdown-typeahead [(text)]="leagueName" [query]="leagueNameTypeaheadQuery"
+            [placeholder]="leagueNamePlaceholder">
+          </nap-dropdown-typeahead>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Exchange by</label>
+        <div class="nap-control">
+          <nap-dropdown-select [items]="exchangeRateSelectItems" [(value)]="exchangeRate">
+          </nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Status</label>
+        <div class="nap-control">
+          <nap-dropdown-select [items]="ticketStatusSelectItems" [(value)]="ticketStatus">
+          </nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="width-190">Global Show Time (GMT+8)</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #globalShowTimeDropdownTreeview
+            [items]="globalShowTimes | filterItemTreeview:globalShowTimes" [config]="globalShowTimeTreeviewConfig"
+            (selectedChange)="selectedGlobalShowTime = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Filter by</label>
+        <div class="nap-control filter-by">
+          <div class="form-check form-check-inline" *ngFor="let option of filterByOptions">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="searchBy" [(ngModel)]="filterType" [value]="option.value"/> {{option.text}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>A/B Testing</label>
+        <div class="nap-control">
+          <nap-dropdown-select [items]="evenOddCustSelectItems" [(value)]="evenOddCust">
+          </nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col col-buttons">
+      <label>&nbsp;</label>
+      <button type="button" class="btn btn-primary" (click)="onGenerateClick('Warehouse', null)">
+        GENERATE
+      </button>
+    </div>
+    <div class="nap-col">
+      <label>&nbsp;</label>
+      <button type="button" class="btn btn-primary" (click)="onGenerateClick('Bettrans', todayDate)">
+        {{ todayDate | date : 'MMM dd, YYYY' | uppercase}}
+      </button>
+    </div>
+    <div class="nap-col">
+      <label>&nbsp;</label>
+      <button type="button" class="btn btn-primary" (click)="onGenerateClick('Bettrans', yesterdayDate)">
+        {{ yesterdayDate | date : 'MMM dd, YYYY' | uppercase }}
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>&nbsp;</label>
+        <div class="nap-control width-545">
+          <p class="mb-0"><span>Note:</span>* Daily Oanda and Winning Probability are supported from Jan 21, 2022.</p>
+          <p class="mb-0"><span></span>* Game Time is supported from Nov 27, 2024.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

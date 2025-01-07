@@ -1,0 +1,120 @@
+﻿@using Utilities.DateTimes;
+@{
+    ViewBag.Title = "Tree Win Loss";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/style/jquery-multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/month-picker.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/nex-date-picker.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid-paging.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/scrollbars.css" />
+    <link rel="stylesheet" type="text/css" href="~/tree-win-loss/styles/TreeWinLoss.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>Win Loss / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="normalMode" class="col_9">
+                    <div id="normalModeDatepickerPlugin" class="lbl-field align-right">
+                    </div>
+                </div>
+                <div id="historyMode" class="display-none col_25">
+                    <div id="historyModeDatepickerPlugin" class="lbl-field align-right">
+                    </div>
+                </div>
+                <div class="lbl-field col_3 align-right width-auto">
+                    Product
+                </div>
+                <div class="edit-field col_7 ddlProductContainer">
+                    <select id="ddlProduct"></select>
+                </div>
+                <div class="lbl-field col_3 align-right width-auto">
+                    Sport
+                </div>
+                <div class="edit-field col_7 ddlProductContainer">
+                    <select id="ddlSport"></select>
+                </div>
+                <div class="submit width-auto col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+                <div class="submit width-auto col_4">
+                    <input id="btnMode" name="btnMode" type="submit" value="HISTORY REPORT" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="ErrMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="treeWinLossByProductContainer">
+        <div id="treeWinLossByProduct" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="treeWinLossByCommContainer" class="display-none full-width">
+        <div id="treeWinLossByComm" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="treeWinLossBySuperContainer" class="display-none full-width">
+        <div id="treeWinLossBySuper" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="treeWinLossByMasterContainer" class="display-none full-width">
+        <div id="treeWinLossByMaster" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="treeWinLossByAgentContainer" class="display-none full-width">
+        <div id="treeWinLossByAgent" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="virtualRateHistoryContainer" class="display-none virtualRateInfo">
+        <div id="virtualRateHistory" class="freegrid display-none">
+        </div>
+    </div>
+</div>
+@{
+     var noteMessage = @Html.Raw($"* Data is available from {DateTime.Today.AddMonths(-3).ToShortDateString()} onward <br/> * The Virtual Currency is applied for Sportsbook and Number Game products. Other products are based on Actual Currency");
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var labelFrom = 'From';
+        var labelTo = 'To';
+        var labelDate = 'Date';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var yesterday = '@DateTime.Today.AddDays(-1).ToShortDateString()';
+        @{
+
+            var dt = DateTime.Today.AddDays(-121);
+        }
+        var minDate = '@dt';
+        var dateAfterMoveBet = '@ViewBag.MoveBetDate.AddDays(1)';
+        var noteMessage = '@noteMessage';
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
+    <script type="text/javascript" src="~/tree-win-loss/scripts/VirtualRateHistory.js?ver=4"></script>
+    <script type="text/javascript" src="~/tree-win-loss/scripts/TreeWinLoss.js?ver=9"></script>
+    <script type="text/javascript" src="~/tree-win-loss/scripts/TreeWinLossByComm.js?ver=9"></script>
+    <script type="text/javascript" src="~/tree-win-loss/scripts/TreeWinLossBySuper.js?ver=9"></script>
+    <script type="text/javascript" src="~/tree-win-loss/scripts/TreeWinLossByMaster.js?ver=9"></script>
+    <script type="text/javascript" src="~/tree-win-loss/scripts/TreeWinLossByAgent.js?ver=10"></script>
+    <script type="text/javascript" src="~/tree-win-loss/scripts/ReportManager.js?ver=5"></script>
+}

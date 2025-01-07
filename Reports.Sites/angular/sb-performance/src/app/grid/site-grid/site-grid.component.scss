@@ -1,0 +1,19 @@
+@import '~nap-theme/scss/grid';
+.fa {
+  float: right;
+  line-height: 18px;
+}
+.total td {
+  font-weight: bold;
+}
+
+.nap-grid {
+    .body{
+      max-height: 500px !important;
+    }
+      .number-negative
+      {
+          color: red;
+      }
+
+}

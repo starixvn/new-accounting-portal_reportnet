@@ -1,0 +1,639 @@
+﻿@using Utilities.DateTimes
+@{
+    ViewBag.Title = "Bet Count";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/pager-pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/month-picker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="~/bet-count/styles/bet-count.css">
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>Misc / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div id="betCountReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_23 align-right">
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_2 align-right">
+                        Product
+                    </div>
+                    <div class="edit-field  col_7 align-left ddlProductContainer">
+                        <select id="ddlProduct">
+                        </select>
+                    </div>
+                    <div class="lbl-field col_3 align-right">
+                        Sport
+                    </div>
+                    <div class="edit-field col_7 align-left">
+                        <select id="ddlSport">
+                        </select>
+                    </div>
+                    <div class="submit col_6 prefix_2">
+                        <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                    </div>
+                    <div class="submit col_6 prefix_1">
+                        <input id="btnViewHistoryReport" name="btnViewHistoryReport" type="submit" value="HISTORY REPORT" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="historyBetCountReportFilter" class="display-none">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_2">
+                        <div>
+                            Month
+                        </div>
+                    </div>
+                    <div class="edit-field col_14">
+                        <div id="ddlMonth">
+                        </div>
+                    </div>
+                    <div class="lbl-field col_2 align-right">
+                        Product
+                    </div>
+                    <div class="edit-field  col_7 align-left ddlProductContainer_HistoryReport">
+                        <select id="ddlProduct_HistoryReport">
+                        </select>
+                    </div>
+                    <div class="lbl-field col_2 align-right">
+                        Sport
+                    </div>
+                    <div class="edit-field col_7 align-left">
+                        <select id="ddlSport_HistoryReport">
+                        </select>
+                    </div>
+                    <div class="submit col_4 prefix_1">
+                        <input id="btnGenerate_HistoryReport" name="btnGenerate_HistoryReport" type="submit"
+                               value="GENERATE" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnBack_HistoryReport" name="btnBack_HistoryReport" type="submit" value="BACK" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="ErrMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-grid  width-100percent">
+    <div>
+        <div id="betCountReportHeader" class="grid-title display-none">
+    <div class="grid-title-label" id="betCountReportTitle">
+    </div>
+    <div class="grid-toolbox">
+        <input id="betCountReport_ExportExcel" class="btnExcel" type="button" title="Export to Excel"
+               value="" name="btnExcel" />
+    </div>
+</div>
+<div id="betCountReport" class="freegrid display-none">
+    <div class="free-cell free-top-left">
+        <table class="grid-fixed-table free-cell-top-left">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="table-cell col80 height55">
+                            Site
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="row_header_wrapper">
+        <div class="row_header row-headers-background" id="betCountReportRowHeader">
+            <table class="grid-fixed-table row_header_content">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="table-cell col80 height55">
+                                Site
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col_header row-headers-background scroll-y">
+        <div class="header-container">
+            <table class="grid-fixed-table col_header_content">
+                <thead>
+                    <tr>
+                        <th rowspan="2">
+                            <div class="table-cell col80 height55">
+                                Site
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col120 height55">
+                                Bet Count
+                            </div>
+                        </th>
+                        <th colspan="3">
+                            <div class="table-cell col430 height25">
+                                Member
+                            </div>
+                        </th>
+                        <th colspan="4">
+                            <div class="table-cell col530 height25">
+                                SMA Winloss
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    Commission
+                                </div>
+                                <div id="colHeaderCommission" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    ExtraPT
+                                </div>
+                                <div id="colHeaderExtraPT" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    House Real Income
+                                </div>
+                                <div id="colHeaderCompanyWinLoss" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="table-cell col140 table-cell height25 colSorter">
+                                <div class="display-inline-block">
+                                    Turnover
+                                </div>
+                                <div id="colHeaderTurnover" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col150 height25 colSorter">
+                                <div class="display-inline-block">
+                                    WinLoss
+                                </div>
+                                <div id="colHeaderMemberWinLoss" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col80 height25 colSorter">
+                                <div class="display-inline-block">
+                                    Margin %
+                                </div>
+                                <div id="colHeaderMarginPercent" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 table-cell height25 colSorter">
+                                <div class="display-inline-block">
+                                    Agent
+                                </div>
+                                <div id="colHeaderAgentWinLoss" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    Master
+                                </div>
+                                <div id="colHeaderMasterWinLoss" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    Super
+                                </div>
+                                <div id="colHeaderSuperWinLoss" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    Total
+                                </div>
+                                <div id="colHeaderTotalWinloss" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="grid-container container">
+        <div class="content-container">
+            <table id="betCountReportContent" class="grid-fixed-table col_body_content">
+                <thead>
+                    <tr>
+                        <th rowspan="2">
+                            <div class="table-cell col80 height55">
+                                Site
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col120 height55">
+                                Bet Count
+                            </div>
+                        </th>
+                        <th colspan="3">
+                            <div class="table-cell col430 height25">
+                                Member
+                            </div>
+                        </th>
+                        <th colspan="4">
+                            <div class="table-cell col530 height25">
+                                SMA Winloss
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55">
+                                Commission
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55">
+                                Extra PT
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55">
+                                House Real Income
+                            </div>
+                        </th>                        
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="table-cell col140 table-cell height25">
+                                Turnover
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                WinLoss
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col80 height25">
+                                Margin %
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 table-cell height25">
+                                Agent
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                Master
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                Super
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                Total
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row_footer row-footer-background z999">
+        <table class="grid-fixed-table row_footer_content">
+            <thead>
+            </thead>
+        </table>
+    </div>
+    <div class="col_footer row-footer-background scroll-y">
+        <div class="footer-container">
+            <table class="col_footer_content grid-fixed-table">
+                <thead>
+                </thead>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div>
+        <div id="historyBetCountReportHeader" class="grid-title display-none">
+    <div class="grid-title-label" id="historyBetCountReportTitle">
+    </div>
+    <div class="grid-toolbox">
+        <input id="historyBetCountReport_ExportExcel" class="btnExcel" type="button" title="Export to Excel"
+               value="" name="btnExcel" />
+    </div>
+</div>
+<div id="historyBetCountReport" class="freegrid display-none">
+    <div class="free-cell free-top-left">
+        <table class="grid-fixed-table free-cell-top-left">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="table-cell col80 height55">
+                            Site
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="row_header_wrapper">
+        <div class="row_header row-headers-background" id="historyBetCountReportRowHeader">
+            <table class="grid-fixed-table row_header_content">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="table-cell col80 height55">
+                                Site
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col_header row-headers-background scroll-y">
+        <div class="header-container">
+            <table class="grid-fixed-table col_header_content">
+                <thead>
+                    <tr>
+                        <th rowspan="2">
+                            <div class="table-cell col80 height55">
+                                Site
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col120 height55">
+                                Bet Count
+                            </div>
+                        </th>
+                        <th colspan="3">
+                            <div class="table-cell col430 height25">
+                                Member
+                            </div>
+                        </th>
+                        <th colspan="4">
+                            <div class="table-cell col530 height25">
+                                SMA Winloss
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    Commission
+                                </div>
+                                <div id="colHeaderCommission_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    Extra PT
+                                </div>
+                                <div id="colHeaderExtraPT_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    House Real Income
+                                </div>
+                                <div id="colHeaderCompanyWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="table-cell col140 table-cell height25 colSorter">
+                                <div class="display-inline-block">
+                                    Turnover
+                                </div>
+                                <div id="colHeaderTurnover_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col150 height25 colSorter">
+                                <div class="display-inline-block">
+                                    WinLoss
+                                </div>
+                                <div id="colHeaderMemberWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col80 height25 colSorter">
+                                <div class="display-inline-block">
+                                    Margin %
+                                </div>
+                                <div id="colHeaderMarginPercent_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 table-cell height25 colSorter">
+                                <div class="display-inline-block">
+                                    Agent
+                                </div>
+                                <div id="colHeaderAgentWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    Master
+                                </div>
+                                <div id="colHeaderMasterWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    Super
+                                </div>
+                                <div id="colHeaderSuperWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    Total
+                                </div>
+                                <div id="colHeaderTotal_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="grid-container container">
+        <div class="content-container">
+            <table id="historyBetCountReportContent" class="grid-fixed-table col_body_content">
+                <thead>
+                    <tr>
+                        <th rowspan="2">
+                            <div class="table-cell col80 height55">
+                                Site
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col120 height55">
+                                Bet Count
+                            </div>
+                        </th>
+                        <th colspan="3">
+                            <div class="table-cell col430 height25">
+                                Member
+                            </div>
+                        </th>
+                        <th colspan="4">
+                            <div class="table-cell col530 height25">
+                                SMA Winloss
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55">
+                                House Real Income
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="table-cell col140 table-cell height25">
+                                Turnover
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col150 height25">
+                                WinLoss
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col80 height25">
+                                Margin %
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 table-cell height25">
+                                Agent
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                Master
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                Super
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                Total
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row_footer row-footer-background z999">
+        <table class="grid-fixed-table row_footer_content">
+            <thead>
+            </thead>
+        </table>
+    </div>
+    <div class="col_footer row-footer-background scroll-y">
+        <div class="footer-container">
+            <table class="col_footer_content grid-fixed-table">
+                <thead>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var noteMessage = '@Html.Raw("Data is only available from last 3 months up to yesterday (after 11AM GMT-4). For more historical data, please click <span class=\"bold-tip\">HISTORY REPORT</span>")';
+        var labelFrom = 'From';
+        var labelTo = 'To';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var mindate = new Date('@DateTime.Today.FirstDayOfMonth().AddMonths(-3).ToString()');
+        var minHistoryReportDate = new Date(2009, 1, 1);
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.min.js?ver=10"></script>
+    <script type="text/javascript" src="~/bet-count/scripts/ReportManager.js?v=1"></script>
+    <script type="text/javascript" src="~/bet-count/scripts/NormalReport.js?v=3"></script>
+    <script type="text/javascript" src="~/bet-count/scripts/HistoryReport.js?v=4"></script>
+    <script type="text/javascript" src="~/bet-count/scripts/BaseReport.js?v=3"></script>
+}

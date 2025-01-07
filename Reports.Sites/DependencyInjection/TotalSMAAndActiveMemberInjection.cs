@@ -1,0 +1,12 @@
+﻿using TotalSMAAndActiveMember.Services;
+
+namespace Reports.Sites.DependencyInjection;
+
+public static class TotalSMAAndActiveMemberInjection
+{
+    public static void RegisterTotalSMAAndActiveMemberServices(this IServiceCollection service)
+    {
+        service.AddTransient<TotalSMAMemberActiveService, TotalSMAMemberActiveServiceImp>();
+        service.AddTransient<TotalSMAMemberActiveExcelService, TotalSMAMemberActiveExcelServiceImp>();
+    }
+}

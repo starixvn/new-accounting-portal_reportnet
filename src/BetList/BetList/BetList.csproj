@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <SonarQubeExclude>true</SonarQubeExclude>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3" />
+    <PackageReference Include="Fanex.RemotingRef" Version="1.5.5.1" />
+    <PackageReference Include="Fanex.Result.Core-Sportsbook" Version="4.0.0-upgrade-05" />
+    <PackageReference Include="Fanex.Result.Core.RemotingRef" Version="2.0.0.4" />
+  </ItemGroup>
+
+</Project>

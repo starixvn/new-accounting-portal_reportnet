@@ -1,0 +1,111 @@
+﻿using Utilities.CustomerTrackingSystem.Model;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Xml.Linq;
+
+namespace Utilities.CustomerTrackingSystem;
+
+public interface CustomerTrackingService
+{
+    Task<List<CustomerDevice>> GetAssociatedCustomers(string host, int custId);
+
+    Task<string> GetLatestIP(string host, int custId);
+
+    Task<string> GetCategory(string host, string custId);
+
+    Task<List<CustomerByUsername>> GetAssociatedCustomerByDeviceOrManual(string host, int custId, int associationType);
+
+    Task<List<CustomerById>> GetAssociatedCustomersByIp(string host, int custId);
+}
+
+public class CustomerTrackingServiceImp : CustomerTrackingService
+{
+    private const int AssociatedByIP = 3;
+
+    private static readonly HttpClient jsonClient = new();
+
+    public async Task<List<CustomerDevice>> GetAssociatedCustomers(string host, int custId)
+    {
+        jsonClient.DefaultRequestHeaders.Accept.Clear();
+        jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var path = $"{host}/associatedcustomers/{custId}";
+        var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
+        return response.IsSuccessStatusCode
+            ? await response.Content.ReadFromJsonAsync<List<CustomerDevice>>().ConfigureAwait(false)
+            : [];
+    }
+
+    public async Task<string> GetLatestIP(string host, int custId)
+    {
+        jsonClient.DefaultRequestHeaders.Accept.Clear();
+        jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var path = $"{host}/Get10LatestIps/{custId}";
+        var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode)
+        {
+            return string.Empty;
+        }
+
+        var result = await response.Content.ReadFromJsonAsync<List<string>>().ConfigureAwait(false);
+
+        return result.FirstOrDefault(ip => ip != "127.0.0.1");
+    }
+
+    public async Task<string> GetCategory(string host, string custId)
+    {
+        var result = new List<string>();
+
+        jsonClient.DefaultRequestHeaders.Accept.Clear();
+        jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var path = $"{host}/GetCustomerClassification/?custIdList={custId}";
+        var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
+        if (!response.IsSuccessStatusCode)
+        {
+            return string.Empty;
+        }
+
+        var responseData = await response.Content.ReadFromJsonAsync<string>();
+        var xdoc = XDocument.Parse(responseData);
+        var elements = xdoc.Descendants("Root").Descendants("CustomerClassification");
+        if (!elements.Any())
+        {
+            return string.Join(", ", result);
+        }
+
+        result.AddRange(elements.Select(element => element.Attribute("CategoryName")?.Value));
+
+        return string.Join(", ", result);
+    }
+
+    public async Task<List<CustomerByUsername>> GetAssociatedCustomerByDeviceOrManual(string host, int custId, int associationType)
+    {
+        jsonClient.DefaultRequestHeaders.Accept.Clear();
+        jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var path = $"{host}/cts/GetAssociationPerType?custId={custId}&associationType={associationType}";
+        var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
+        var responseData = response.IsSuccessStatusCode
+            ? await response.Content.ReadAsStringAsync().ConfigureAwait(false)
+            : string.Empty;
+
+        return JsonConvert.DeserializeObject<List<CustomerByUsername>>(responseData);
+    }
+
+    public async Task<List<CustomerById>> GetAssociatedCustomersByIp(string host, int custId)
+    {
+        jsonClient.DefaultRequestHeaders.Accept.Clear();
+        jsonClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        var path = $"{host}/cts/GetAssociationPerType?custId={custId}&associationType={AssociatedByIP}";
+        var response = await jsonClient.GetAsync(path).ConfigureAwait(false);
+        var responseData = response.IsSuccessStatusCode
+            ? await response.Content.ReadAsStringAsync().ConfigureAwait(false)
+            : string.Empty;
+
+        return JsonConvert.DeserializeObject<List<CustomerById>>(responseData);
+    }
+}

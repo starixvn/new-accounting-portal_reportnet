@@ -1,0 +1,107 @@
+<ng-template #colgroup>
+  <colgroup>
+    <col style="width: 250px" />
+    <col style="width: 100px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+
+<ng-template #thead>
+  <thead>
+    <tr>
+      <th scope="col" (click)="sort('Username')">Username
+        <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'Username',
+        'fa-sort-asc': (sortColumnName == 'Username' && sortDirection == 'desc'),
+        'fa-sort-desc': (sortColumnName == 'Username' && sortDirection == 'asc')}"></i>
+      </th>
+      <th scope="col" (click)="sort('BetCount')">Bet Count
+        <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'BetCount',
+        'fa-sort-asc': (sortColumnName == 'BetCount' && sortDirection == 'desc'),
+        'fa-sort-desc': (sortColumnName == 'BetCount' && sortDirection == 'asc')}"></i>
+      </th>
+      <th scope="col" (click)="sort('RealIncome')">{{isChangedColumnName ? 'Win Loss' : 'Real Income'}}
+        <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'RealIncome',
+        'fa-sort-asc': (sortColumnName == 'RealIncome' && sortDirection == 'desc'),
+        'fa-sort-desc': (sortColumnName == 'RealIncome' && sortDirection == 'asc')}"></i>
+      </th>
+      <th scope="col" (click)="sort('RealTurnover')">{{isChangedColumnName ? 'Turnover' : 'Real Turnover'}}
+        <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'RealTurnover',
+        'fa-sort-asc': (sortColumnName == 'RealTurnover' && sortDirection == 'desc'),
+        'fa-sort-desc': (sortColumnName == 'RealTurnover' && sortDirection == 'asc')}"></i>
+      </th>
+      <th scope="col" (click)="sort('RealMargin')">Margin
+        <i class="fa" [ngClass]="{'fa-sort': sortColumnName != 'RealMargin',
+        'fa-sort-asc': (sortColumnName == 'RealMargin' && sortDirection == 'desc'),
+        'fa-sort-desc': (sortColumnName == 'RealMargin' && sortDirection == 'asc')}"></i>
+      </th>
+    </tr>
+  </thead>
+</ng-template>
+
+<ng-template #rowItem let-item="item">
+  <td class="text-left">{{item.Username}}</td>
+  <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+  <td *ngIf="isShowFullColumn" class="text-right" [napDecimalFormat]="item.RealIncome"></td>
+  <td *ngIf="!isShowFullColumn" class="text-right">N/A</td>
+  <td *ngIf="isShowFullColumn" class="text-right" [napDecimalFormat]="item.RealTurnover"></td>
+  <td *ngIf="!isShowFullColumn" class="text-right">N/A</td>
+  <td class="text-right" [napPercentFormat]="item.RealMargin"></td>
+</ng-template>
+
+<ng-template #rowTotalItem let-item="item">
+  <td class="text-right">Total</td>
+  <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+  <td *ngIf="isShowFullColumn" class="text-right" [napDecimalFormat]="item.RealIncome"></td>
+  <td *ngIf="!isShowFullColumn" class="text-right">N/A</td>
+  <td *ngIf="isShowFullColumn" class="text-right" [napDecimalFormat]="item.RealTurnover"></td>
+  <td *ngIf="!isShowFullColumn" class="text-right">N/A</td>
+  <td class="text-right" [napPercentFormat]="item.RealMargin"></td>
+</ng-template>
+
+<div *ngIf="data" [ngSwitch]="hasData">
+  <div class="nap-grid">
+    <div style="width: 730px;">
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <ng-template [ngTemplateOutlet]="thead"></ng-template>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let item of data.Entities">
+              <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th class="no-data" colspan="5">
+                The data is not available.
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="footer">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tfoot>
+            <tr class="total">
+              <ng-template [ngTemplateOutlet]="rowTotalItem" [ngTemplateOutletContext]="{ item: data.Total }">
+              </ng-template>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

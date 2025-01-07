@@ -1,0 +1,129 @@
+<ng-template #colgroup>
+  <colgroup>
+      <col style="width: 150px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 100px" />
+      <col style="width: 80px" />
+      <col style="width: 280px" />
+      <col style="width: 140px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 100px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+      <tr>
+          <th>Username</th>
+          <th>Agent</th>
+          <th>Master</th>
+          <th>Super</th>
+          <th>Division</th>
+          <th>Currency</th>
+          <th>Danger Level</th>
+          <th>Given Credit</th>
+          <th>Bet Count</th>
+          <th>Member Turnover</th>
+          <th>Member Win Loss</th>
+          <th>Margin</th>
+          <th>AVG Stake</th>
+          <th>House Turnover</th>
+          <th>House Income</th>
+          <th>No.Associated Accounts</th>
+      </tr>
+  </thead>
+</ng-template>
+<ng-template #breadcrumbToolboxTemplate>
+  <div class="breadcrumb-toolbox">
+      <div class="toolbox-item">
+          <i class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()"></i>
+      </div>
+  </div>
+</ng-template>
+<ng-template #rowItem let-item="item">
+  <td>{{ item.UserName }}</td>
+  <td>{{ item.AgentName }}</td>
+  <td>{{ item.MasterName }}</td>
+  <td>{{ item.SuperName }}</td>
+  <td>{{ item.Division }}</td>
+  <td>{{ item.Currency }}</td>
+  <td class="text-center">{{ item.DangerLevel }}</td>
+  <td class="text-right" [napDecimalFormat]="item.GivenCredit"></td>
+  <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberTO"></td>
+  <td class="text-right red-positive" [napDecimalFormat]="item.MemberWL"></td>
+  <td class="text-right red-positive" [napPercentFormat]="item.Margin"></td>
+  <td class="text-right" [napDecimalFormat]="item.AVGStake"></td>
+  <td class="text-right" [napDecimalFormat]="item.HouseTO"></td>
+  <td class="text-right red-negative" [napDecimalFormat]="item.HouseIncome"></td>
+  <td class="text-right" [napIntegerFormat]="item.NumberOfAssociatedAccount"></td>
+</ng-template>
+<div *ngIf="dataModel" [ngSwitch]="dataModel.Entities.length > 0">
+  <div class="nap-grid">
+      <div style="width: 2070px;">
+          <nap-breadcrumb *ngSwitchCase="true" [items]="breadcrumbItems" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+          <nap-breadcrumb *ngSwitchCase="false" [items]="breadcrumbItems"></nap-breadcrumb>
+      </div>
+      <div style="width: 2070px">
+          <div class="header">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <ng-template [ngTemplateOutlet]="thead"></ng-template>
+              </table>
+          </div>
+          <div *ngSwitchCase="true" class="body">
+              <table class="table-striped">
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tbody>
+                      <tr *ngFor="let item of displayData">
+                        <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+                        </ng-template>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="false" class="body stretch">
+              <table>
+                  <tbody>
+                      <tr>
+                          <th class="no-data" colspan="16">
+                              There is no data
+                          </th>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="true" class="footer">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tfoot>
+                      <tr class="font-weight-bold">
+                          <td colspan="7" class="text-right">Total</td>
+                          <td class="text-right" [napDecimalFormat]="dataModel.Total.GivenCredit"></td>
+                          <td class="text-right" [napIntegerFormat]="dataModel.Total.BetCount"></td>
+                          <td class="text-right" [napDecimalFormat]="dataModel.Total.MemberTO"></td>
+                          <td class="text-right red-positive" [napDecimalFormat]="dataModel.Total.MemberWL"></td>
+                          <td class="text-right red-positive" [napPercentFormat]="dataModel.Total.Margin"></td>
+                          <td class="text-right" [napDecimalFormat]="dataModel.Total.AVGStake"></td>
+                          <td class="text-right" [napDecimalFormat]="dataModel.Total.HouseTO"></td>
+                          <td class="text-right red-negative" [napDecimalFormat]="dataModel.Total.HouseIncome"></td>
+                          <td class="text-right" [napIntegerFormat]="dataModel.Total.NumberOfAssociatedAccount"></td>
+                      </tr>
+                      <tr>
+                          <td colspan="16">
+                              <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

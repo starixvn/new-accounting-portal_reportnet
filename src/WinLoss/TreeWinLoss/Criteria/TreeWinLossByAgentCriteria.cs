@@ -1,0 +1,34 @@
+namespace TreeWinLoss.Criteria;
+
+using Fanex.Data;
+using Fanex.Data.Repository;
+using System;
+
+public class TreeWinLossByAgentCriteria : CriteriaBase
+{
+    [SpParam(Ignored = true)]
+    public bool IsNormalMode { get; set; }
+
+    public DateTime FromDate { get; set; }
+
+    public DateTime ToDate { get; set; }
+
+    [SpParam(Ignored = true)]
+    public string ProductSelection { get; set; }
+
+    public string Products { get; set; }
+
+    public int Recommend { get; set; }
+
+    public string SportType { get; set; }
+
+    public override bool IsValid()
+    {
+        return true;
+    }
+
+    public override string GetSettingKey()
+    {
+        return "WinLoss_TreeWinLoss_GetDataByAgent";
+    }
+}

@@ -1,0 +1,194 @@
+<ng-template #colgroup>
+  <colgroup>
+    <col style="width: 70px" />
+    <col *ngIf="isShowFullColumn" style="width: 150px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+    <col style="width: 130px" />
+    <col style="width: 130px" />
+    <col style="width: 150px" />
+    <col style="width: 120px" />
+    <col style="width: 300px" />
+    <col style="width: 320px" />
+    <col style="width: 130px" />
+    <col style="width: 130px" />
+    <col style="width: 90px" />
+    <col style="width: 100px" />
+    <col style="width: 100px" />
+    <col style="width: 100px" />
+    <col style="width: 120px" />
+    <col style="width: 140px" />
+    <col style="width: 140px" />
+    <col style="width: 100px" />
+    <col style="width: 120px" />
+    <col style="width: 120px" />
+    <col style="width: 100px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+    <col style="width: 150px" />
+    <col style="width: 130px" />
+    <col style="width: 130px" />
+    <col style="width: 140px" />
+    <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+    <tr>
+      <th scope="col" rowspan="2">Date</th>
+      <th *ngIf="isShowFullColumn" scope="col" rowspan="2">Username</th>
+      <th scope="col" rowspan="2">Site Group</th>
+      <th scope="col" rowspan="2">Currency</th>
+      <th scope="col" rowspan="2">Original Ticket ID</th>
+      <th scope="col" rowspan="2">Cash Out Ticket ID</th>
+      <th scope="col" rowspan="2">Cash Out Bet Ticket ID</th>
+      <th scope="col" rowspan="2">Sport</th>
+      <th scope="col" rowspan="2">League</th>
+      <th scope="col" rowspan="2">Match</th>
+      <th scope="col" rowspan="2">Bet Time</th>
+      <th scope="col" rowspan="2">Cash Out Time</th>
+      <th scope="col" rowspan="2">Bet Type</th>
+      <th scope="col" rowspan="2">Bet Choice</th>
+      <th scope="col" rowspan="2">Bet Odds</th>
+      <th scope="col" rowspan="2">Bet Score</th>
+      <th scope="col" class="bg-green" rowspan="2">Current GoalLine</th>
+      <th scope="col" class="bg-green" rowspan="2">Current Home Odds</th>
+      <th scope="col" class="bg-green" rowspan="2">Current Away Odds</th>
+      <th scope="col" class="bg-green" rowspan="2">Current Score</th>
+      <th scope="col" colspan="3">Original Currency</th>
+      <th scope="col" colspan="11">Base RM</th>
+    </tr>
+    <tr>
+      <th scope="col">Cash Out Turnover</th>
+      <th scope="col">Buy Back Amount</th>
+      <th scope="col">Member WL</th>
+      <th scope="col">Cash Out Turnover</th>
+      <th scope="col">Actutal Turnover</th>
+      <th scope="col">Buy Back Amount</th>
+      <th scope="col">Member WL</th>
+      <th scope="col">Assumed Payout</th>
+      <th scope="col">Hyp.GGR NO CO (Full PT)</th>
+      <th scope="col">Cash Out Profit (Full PT)</th>
+      <th scope="col">Margin</th>
+      <th scope="col">Commission</th>
+      <th scope="col">Cash Out Income</th>
+      <th scope="col">Total Income (House PT)</th>
+    </tr>
+  </thead>
+</ng-template>
+<ng-template #rowItem let-item="item">
+  <td class="text-center">{{ item.WLDate | date: 'yyyy-MM-dd' }}</td>
+  <td *ngIf="isShowFullColumn">{{ item.Username }}</td>
+  <td class="text-center">{{ item.SiteGroup }}</td>
+  <td class="text-center">{{ item.Currency }}</td>
+  <td class="text-center">{{ item.OrigID }}</td>
+  <td class="text-center">{{ item.BuyBackID }}</td>
+  <td class="text-center">{{ item.CashOutID }}</td>
+  <td class="text-center">{{ item.SportName }}</td>
+  <td>{{ item.LeagueName }}</td>
+  <td>{{ item.MatchName }}</td>
+  <td class="text-center">{{ item.BetTime | date: 'yyyy-MM-dd hh:mm aaa' }}</td>
+  <td class="text-center">{{ item.CashOutTime | date: 'yyyy-MM-dd hh:mm aaa' }}</td>
+  <td>{{ item.BetTypeName }}</td>
+  <td>{{ item.BetChoice }}</td>
+  <td>{{ item.BetOdd }}</td>
+  <td>{{ item.BetScore }}</td>
+  <td>{{ item.CurrentGoalLine }}</td>
+  <td>{{ item.CurrentHomeOdds }}</td>
+  <td>{{ item.CurrentAwayOdds }}</td>
+  <td class="text-center">{{ item.CurrentScore }}</td>
+  <td class="text-right" [napDecimalFormat]="item.COTurnover"></td>
+  <td class="text-right" [napDecimalFormat]="item.BBAmount"></td>
+  <td class="text-right red-positive" [napDecimalFormat]="item.MemberWL"></td>
+  <td class="text-right" [napDecimalFormat]="item.COTurnover_RM"></td>
+  <td *ngIf="isShowNotAvailable(item.ActualTurnover)" class="text-right">&nbsp;</td>
+  <td *ngIf="!isShowNotAvailable(item.ActualTurnover)" class="text-right" [napDecimalFormat]="item.ActualTurnover"></td>
+  <td class="text-right" [napDecimalFormat]="item.BBAmount_RM"></td>
+  <td class="text-right red-positive" [napDecimalFormat]="item.MemberWL_RM"></td>
+  <td *ngIf="isShowNotAvailable(item.AssumedPayout)" class="text-right">&nbsp;</td>
+  <td *ngIf="!isShowNotAvailable(item.AssumedPayout)" class="text-right" [napDecimalFormat]="item.AssumedPayout"></td>
+  <td *ngIf="isShowNotAvailable(item.HypGGR)" class="text-right">&nbsp;</td>
+  <td *ngIf="!isShowNotAvailable(item.HypGGR)" class="text-right red-positive" [napDecimalFormat]="item.HypGGR"></td>
+  <td *ngIf="isShowNotAvailable(item.COProfit)" class="text-right">&nbsp;</td>
+  <td *ngIf="!isShowNotAvailable(item.COProfit)" class="text-right red-positive" [napDecimalFormat]="item.COProfit">
+  </td>
+  <td *ngIf="isShowNotAvailable(item.Margin)" class="text-right">&nbsp;</td>
+  <td *ngIf="!isShowNotAvailable(item.Margin)" class="text-right number red-positive" [napPercentFormat]="item.Margin"></td>
+  <td class="text-right" [napDecimalFormat]="item.Comm_RM"></td>
+  <td class="text-right red-positive" [napDecimalFormat]="item.COIncome_RM"></td>
+  <td class="text-right red-positive" [napDecimalFormat]="item.TotalIncome_RM"></td>
+</ng-template>
+<div *ngIf="dataViewModel" [ngSwitch]="dataViewModel.Total > 0">
+  <div class="nap-grid">
+    <div [style.width]="isShowFullColumn ? '4690px' : '4540px'">
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <ng-template [ngTemplateOutlet]="thead"></ng-template>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let item of dataViewModel.TicketList">
+              <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th scope="col" class="no-data" [attr.colspan]="isShowFullColumn ? 34 : 33">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="footer">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tfoot>
+            <tr class="font-weight-bold">
+              <td [attr.colspan]="isShowFullColumn ? 23 : 22" class="text-right">Grand Total</td>
+              <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.COTurnover_RM"></td>
+              <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.ActualTurnover)" class="text-right">&nbsp;</td>
+              <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.ActualTurnover)" class="text-right"
+                [napDecimalFormat]="dataViewModel.TotalTicket.ActualTurnover"></td>
+              <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.BBAmount_RM"></td>
+              <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.MemberWL_RM"></td>
+              <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.AssumedPayout)" class="text-right">&nbsp;</td>
+              <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.AssumedPayout)" class="text-right"
+                [napDecimalFormat]="dataViewModel.TotalTicket.AssumedPayout"></td>
+              <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.HypGGR)" class="text-right">&nbsp;</td>
+              <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.HypGGR)" class="text-right red-positive"
+                [napDecimalFormat]="dataViewModel.TotalTicket.HypGGR"></td>
+              <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.COProfit)" class="text-right">&nbsp;</td>
+              <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.COProfit)" class="text-right red-positive"
+                [napDecimalFormat]="dataViewModel.TotalTicket.COProfit"></td>
+              <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.Margin)" class="text-right">&nbsp;</td>
+              <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.Margin)" class="text-right number red-positive"
+                [napPercentFormat]="dataViewModel.TotalTicket.Margin"></td>
+              <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.Comm_RM"></td>
+              <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.COIncome_RM"></td>
+              <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.TotalIncome_RM"></td>
+            </tr>
+            <tr>
+              <td [attr.colspan]="isShowFullColumn ? 34 : 33">
+                <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

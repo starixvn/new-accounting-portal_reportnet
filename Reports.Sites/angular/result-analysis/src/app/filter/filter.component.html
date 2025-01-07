@@ -1,0 +1,60 @@
+<div class="nap-filter">
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>Sport</label>
+          <div class="nap-control">
+            <nap-dropdown-select [items]="sportSelectItems" [(value)]="sport" (valueChange)="onSportChange()">
+            </nap-dropdown-select>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>From</label>
+          <div class="nap-control">
+            <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="endDate"></nap-date-picker>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>To</label>
+          <div class="nap-control">
+            <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate"></nap-date-picker>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>League Group</label>
+          <div class="nap-control">
+            <ngx-dropdown-treeview #leagueGroupDropdownTreeview [items]="leagueGroups | leagueGroupTreeviewItem"
+              [config]="leagueGroupTreeviewConfig" (selectedChange)="selectedLeagueGroups = $event">
+            </ngx-dropdown-treeview>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
+          <label>League</label>
+          <div class="nap-control width-420">
+            <nap-dropdown-typeahead [(text)]="leagueName" [query]="leagueNameTypeaheadQuery"
+              [placeholder]="leagueNamePlaceholder">
+            </nap-dropdown-typeahead>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="nap-col col-buttons">
+        <label>&nbsp;</label>
+        <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
+          GENERATE
+        </button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,106 @@
+<div class="nap-filter">
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>From</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="endDate"
+            (dateChange)="onDateChangeFrom()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>To</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate"
+            (dateChange)="onDateChangeTo()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Time Range(GMT-4)</label>
+        <div class="nap-control">
+          <select class="form-control" [disabled]="isDisableTimeRangeOptions" [(ngModel)]="timeRangeSelected">
+            <option *ngFor="let item of timeRangeOptions" [ngValue]="item">
+              {{item.Name}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Margin(%) &le;</label>
+        <div class="nap-control">
+          <input type="number" [(ngModel)]="margin" class="width-150" step="0.01">
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Top rows</label>
+        <div class="nap-control width-65">
+          <select class="form-control" [(ngModel)]="topRowSelected">
+            <option *ngFor="let item of topRowOptions" [ngValue]="item">
+              {{item.Name}}
+            </option>
+          </select>
+        </div>
+        <div class="nap-control width-180 ml-3">
+          <select class="form-control" [(ngModel)]="topBySelected">
+            <option *ngFor="let item of topByOptions" [ngValue]="item">
+              {{item.Name}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Turnover</label>
+        <div class="nap-control">
+          <div class="form-check nap-form-checkbox" *ngFor="let option of turnoverOptions">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="searchBy" [(ngModel)]="turnover" [value]="option.value" /> {{option.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="form-check nap-form-checkbox">
+        <label class="form-check-label">
+          <input name="excludeTestCheckbox" type="checkbox" class="form-check-input" [(ngModel)]="isExcludeParlay" />
+          Exclude Parlay
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>&nbsp;</label>
+        <div class="nap-control">
+          <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
+            GENERATE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>&nbsp;</label>
+        <div class="nap-control width-545">
+          <p class="mb-0"><span>Note:</span><strong> * Margin (%) &le;</strong> is only applied for Margin (%) By Sites and Margin (%) By Sports</p>
+          <p><span></span><strong> * Top rows</strong> is only applied for Top Winning Members and Top Losing Leagues</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

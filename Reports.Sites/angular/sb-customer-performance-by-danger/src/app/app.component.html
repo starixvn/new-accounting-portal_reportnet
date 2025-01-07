@@ -1,0 +1,13 @@
+<nap-navbar></nap-navbar>
+<div class="container-fluid" style="min-width: 1215px;">
+    <div class="nap-header">
+        <div class="title">
+            Fraud & Risk /
+            <span class="active">SB Customer Performance By Dangers</span>
+        </div>
+    </div>
+    <app-filter (generated)="generate($event)" (reset)="reset()"></app-filter>
+    <nap-toast></nap-toast>
+    <app-grid *ngIf="filterModel" [filterModel]="filterModel"></app-grid>
+</div>
+<nap-spinner></nap-spinner>

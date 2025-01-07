@@ -1,0 +1,71 @@
+﻿@{
+    var showMenus = ViewBag.ShowMenus != null ? (bool)ViewBag.ShowMenus : true;
+    var napConfig = new
+    {
+        Today = Convert.ToInt64(DateTime.Today
+           .Subtract(new DateTime(1970, 1, 1, 0, 0, 0))
+           .TotalMilliseconds),
+        RootUrl = Url.Content("~").TrimEnd(['/'])
+    };
+}
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app.@ViewBag.AngularAppName" data-ng-strict-di>
+<head>
+    <meta charset="utf-8" />
+    <title>Accounting Reports - @ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/content/Themes/img/site.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <link href="@Url.Content("~/content/themes/style.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/scripts/libs/tipsy/tipsy.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/style/fanex-legend.css")" rel="stylesheet" />
+    @RenderSection("Styles", false)
+    <script type="text/javascript">
+        var napConfig = @Html.Raw(Json.Serialize(napConfig));
+    </script>
+</head>
+<body>
+    @if (showMenus)
+    {
+        <header>
+            <div class="logo">
+                <a href="~/?ref=logo"></a>
+            </div>
+            @await Component.InvokeAsync("Menu")
+            <div class="user-info">
+                <div class="greeting">
+                    <h2>Welcome <span class="info-acc">@Context.User.Identity.Name</span><span class="info-more"></span></h2>
+                    <ul>
+                        <li><a href="@Url.Content("~/Auth/ChangePassword")">Change Password</a></li>
+                        <li><a href="@Url.Content("~/Auth/LogOut")">Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+    }
+    <section id="headline">
+        @RenderSection("Headline", false)
+    </section>
+    <section id="body">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+    <div id="dialog-popup"></div>
+    @RenderSection("Scripts", false)
+    @if (!Context.User.Identity.Name.Contains("starix"))
+    {
+	    <!-- Google tag (gtag.js) -->
+	    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1MDEJEL4L2"></script>
+	    <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-1MDEJEL4L2');
+            gtag('username', '@Context.User.Identity.Name');
+        </script>
+    }
+</body>
+</html>

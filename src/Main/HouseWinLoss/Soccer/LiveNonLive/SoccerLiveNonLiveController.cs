@@ -1,0 +1,59 @@
+﻿namespace HouseWinLoss.Soccer.LiveNonLive;
+
+using AutoMapper;
+using Fanex.Excel.Models;
+using Common.BasicWinLoss;
+using Common.ColumnDecorators;
+using Configuration;
+using Microsoft.AspNetCore.Mvc;
+using Utilities.ExcelResult;
+
+[Route("api/house-win-loss-by-products/soccer/live-nonlive")]
+[ApiController]
+public class SoccerLiveNonLiveController(
+    SoccerLiveNonLiveWinLossService service,
+    BasicGridOptionsBuilder builder,
+    GridOptionColumnDecoratorFull decorator,
+    IMapper mapper)
+    : ControllerBase
+{
+    private readonly GridOptionColumnDecorator decorator = decorator;
+
+    [Route("")]
+    public async Task<IActionResult> Json(QueryModel queryModel)
+    {
+        var gridOptions = await BuildGridOptions(queryModel);
+        return Ok(gridOptions);
+    }
+
+    private async Task<IEnumerable<GridOptions>> BuildGridOptions(QueryModel queryModel)
+    {
+        var criteria = mapper.Map<Criteria>(queryModel);
+        var winlosses = (await service.Query(criteria)).ToArray();
+
+        var majorMinorGridOptions = builder.Build(winlosses[0], "Major/Minor");
+        var majorMinorGridOptionsDecoration = decorator.Build(majorMinorGridOptions, "Major/Minor");
+
+        var liveNonLiveGridOptions = builder.Build(winlosses[1], "Live/Non-Live");
+        var liveNonLiveGridOptionsDecoration = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
+
+        return [majorMinorGridOptionsDecoration, liveNonLiveGridOptionsDecoration];
+    }
+
+    [Route("excel")]
+    public async Task<IActionResult> Excel(ExcelQueryModel queryModel)
+    {
+        var criteria = mapper.Map<Criteria>(queryModel);
+        var winlosses = (await service.Query(criteria)).ToArray();
+
+        var majorMinorGridOptions = builder.Build(winlosses[0], queryModel.MajorMinorTitle);
+        majorMinorGridOptions = decorator.Build(majorMinorGridOptions, "Major/Minor");
+
+        var liveNonLiveGridOptions = builder.Build(winlosses[1], queryModel.LiveNonLiveTitle);
+        liveNonLiveGridOptions = decorator.Build(liveNonLiveGridOptions, "Live/Non-Live");
+
+        return new FanexExcelResult(
+            [majorMinorGridOptions, liveNonLiveGridOptions],
+            Constants.SheetName);
+    }
+}

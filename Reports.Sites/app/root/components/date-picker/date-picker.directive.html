@@ -1,0 +1,45 @@
+﻿<div class="input-group input-group-sm date-picker">
+    <input type="text" class="form-control date-picker-input" data-ng-model="vm.text" readonly="readonly" data-ng-click="vm.openCalendar()" />
+    <ul class="dropdown-menu" dropdown-nested data-ng-if="vm.isOpen">
+        <li>
+            <div class="container-fluid date-picker-calendar">
+                <div class="form-group form-group-sm calendar-header">
+                    <div class="col-xs-2 calendar-previous">
+                        <button class="btn btn-sm btn-primary" data-ng-class="{disabled: vm.previousDisabled}" data-ng-click="vm.goPreviousMonth()"><i class="glyphicon glyphicon-circle-arrow-left" /></button>
+                    </div>
+                    <div class="col-xs-4 calendar-month">
+                        <select class="input-sm form-control calendar-month-select"
+                                data-ng-model="vm.month"
+                                data-ng-change="vm.changeMonth()"
+                                data-ng-options="monthOption.name for monthOption in vm.monthOptions track by monthOption.value"></select>
+                    </div>
+                    <div class="col-xs-4 calendar-year">
+                        <select class="input-sm form-control calendar-year-select"
+                                data-ng-model="vm.year"
+                                data-ng-change="vm.changeYear()"
+                                data-ng-options="yearOption for yearOption in vm.yearOptions track by yearOption"></select>
+                    </div>
+                    <div class="col-xs-2 calendar-next">
+                        <button class="btn btn-sm btn-primary" data-ng-class="{disabled: vm.nextDisabled}" data-ng-click="vm.goNextMonth()"><i class="glyphicon glyphicon-circle-arrow-right" /></button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center calendar-day" data-ng-repeat="dayHeader in vm.dayHeaders" data-ng-class="{weekend: dayHeader.weekend}" title="{{dayHeader.title}}">{{dayHeader.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="week in vm.weeks">
+                            <td class="calendar-date"
+                                data-ng-repeat="date in week.dates"
+                                data-ng-click="vm.changeDate(date)">
+                                <button type="button" style="min-width: 100%" class="btn btn-default btn-sm date-button" data-ng-class="{'btn-primary': date.active, 'date-past': date.past, 'date-future': date.future}" data-ng-disabled="date.disabled">{{date.text}}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+    </ul>
+</div>

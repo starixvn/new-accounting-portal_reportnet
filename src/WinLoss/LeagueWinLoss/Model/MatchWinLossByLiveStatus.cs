@@ -1,0 +1,20 @@
+﻿namespace LeagueWinLoss.Model;
+
+public class MatchWinLossByLiveStatus : BaseWinLoss
+{
+    public int MatchId { get; set; }
+
+    public string MatchCode { get; set; }
+
+    public bool LiveIndicator { get; set; }
+
+    public string MatchEvent { get; set; }
+
+    public bool IsHedge { get; set; }
+
+    public bool IsOutright { get; set; }
+
+    public string BetTypeName { get; set; }
+
+    public string Choice { get; set; }
+}

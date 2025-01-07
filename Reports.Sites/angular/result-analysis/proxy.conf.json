@@ -1,0 +1,10 @@
+{
+    "/api": {
+        "target": "https://localhost:7237/",
+        "secure": false
+    },
+    "/state-api": {
+        "target": "https://localhost:7237/",
+        "secure": false
+    }
+}

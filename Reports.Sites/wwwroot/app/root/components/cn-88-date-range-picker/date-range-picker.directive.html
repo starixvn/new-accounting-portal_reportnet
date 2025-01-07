@@ -1,0 +1,19 @@
+﻿<div class="date-range-picker">
+    <div class="col-label bold">Time period</div>
+    <div class="col-input">
+        <select name="time-period" ng-model="vm.timePeriod" data-ng-change="vm.changeTimePeriod()">
+            <option value="yesterday" selected="selected">Yesterday</option>
+            <option value="current-month">Current Month</option>
+            <option value="last-month">Last Month</option>
+            <option value="specific-period">Specific Date</option>
+        </select>
+    </div>
+    <div class="col-label">From Date</div>
+    <div class="col-input">
+        <nap-date-picker data-ng-model="vm.datefrom" data-min-date="vm.minDateFrom" data-max-date="vm.maxDateFrom" data-picker-name="from"></nap-date-picker>
+    </div>
+    <div class="col-label">To Date</div>
+    <div class="col-input">
+        <nap-date-picker data-ng-model="vm.dateto" data-min-date="vm.minDateTo" data-max-date="vm.maxDateTo" data-picker-name="to"></nap-date-picker>
+    </div>
+</div>

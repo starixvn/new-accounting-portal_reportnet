@@ -1,0 +1,111 @@
+<ng-template #colgroup>
+  <colgroup>
+    <col style="width: 150px" />
+    <col style="width: 100px" />
+    <col style="width: 180px" />
+    <col style="width: 180px" />
+    <col style="width: 120px" />
+    <col style="width: 80px" />
+    <col style="width: 100px" />
+    <col style="width: 120px" />
+    <col style="width: 80px" />
+    <col style="width: 100px" />
+    <col style="width: 150px" />
+    <col style="width: 300px" />
+    <col style="width: 180px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+    <tr>
+      <th>Ref No</th>
+      <th>Sport</th>
+      <th>League</th>
+      <th>Match</th>
+      <th>Reason</th>
+      <th>Odds</th>
+      <th>Currency</th>
+      <th>Stake</th>
+      <th>HDP</th>
+      <th>Score</th>
+      <th>TransTime</th>
+      <th>IP</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+</ng-template>
+<ng-template #rowItem let-item="item">
+  <td class="text-center">{{ item.RefNo }}</td>
+  <td class="text-center">{{ item.Sport }}</td>
+  <td class="text-center">{{ item.League }}</td>
+  <td class="text-center">{{ item.Match }}</td>
+  <td class="text-center">{{ item.Reason }}</td>
+  <td *ngIf='isMixParlay(item.Sport)' class="text-right">-</td>
+  <td *ngIf='!isMixParlay(item.Sport)' class="text-right" [napDecimalFormat]="item.Odds"></td>
+  <td class="text-center">{{ item.Currency }}</td>
+  <td class="text-right" [napDecimalFormat]="item.Stake"></td>
+  <td *ngIf='isMixParlay(item.Sport)' class="text-right">-</td>
+  <td *ngIf='!isMixParlay(item.Sport)' class="text-right" [napDecimalFormat]="item.HDP"></td>
+  <td class="text-center">{{ item.Score }}</td>
+  <td class="text-center">{{ item.TransTime }}</td>
+  <td class="text-center">{{ item.IP }}</td>
+  <td class="text-center">{{ item.Location }}</td>
+</ng-template>
+<ng-template #breadcrumbToolboxTemplate>
+  <div class="breadcrumb-toolbox">
+    <div class="toolbox-item">
+      <i class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()"></i>
+    </div>
+  </div>
+</ng-template>
+<div *ngIf="displayMember" [ngSwitch]="hasData">
+  <div class="nap-grid">
+    <div style="width: 1860px;">
+      <nap-breadcrumb *ngSwitchCase="true" [items]="breadcrumbItems" [toolboxTemplate]="breadcrumbToolboxTemplate">
+      </nap-breadcrumb>
+      <nap-breadcrumb *ngSwitchCase="false" [items]="breadcrumbItems"></nap-breadcrumb>
+    </div>
+    <div style="width: 1860px;">
+      <div class="header">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <ng-template [ngTemplateOutlet]="thead"></ng-template>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="body">
+        <table class="table-striped">
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tbody>
+            <tr *ngFor="let item of displayMember">
+              <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="false" class="body stretch">
+        <table>
+          <tbody>
+            <tr>
+              <th class="no-data" colspan="13">
+                There is no data
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="true" class="footer">
+        <table>
+          <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+          <tfoot>
+            <tr>
+              <td colspan="13">
+                <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

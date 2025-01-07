@@ -1,0 +1,148 @@
+namespace SuperBalance.Services;
+
+using Fanex.Data.Repository;
+using Criteria;
+using Model;
+using Utilities.Currencies;
+using Utilities.LinqDynamicSum;
+
+public interface SuperBalanceService
+{
+    Task<SuperBalanceModel> GetSuperBalance(SuperBalanceCriteria criteria);
+
+    Task<SuperBalanceModel> GetSuperBalanceDownLine(SuperDownlineCriteria criteria);
+
+    Task<SuperBalanceModel> GetMasterDownLine(MasterDownlineCriteria criteria);
+
+    Task<SuperBalanceModel> GetAgentDownLine(AgentDownlineCriteria criteria);
+
+    Task<List<CurrenciesModel>> GetCurrencies();
+
+    List<string> GetListAlphabet();
+}
+
+public class SuperBalanceServiceImp(IDynamicRepository repository, CurrenciesService currenciesService) : SuperBalanceService
+{
+    public async Task<SuperBalanceModel> GetSuperBalance(SuperBalanceCriteria criteria)
+    {
+        var result = new SuperBalanceModel
+        {
+            SuperBalanceItems = [],
+            BaseBalanceTotal = new BalanceItemModel()
+        };
+
+        if (criteria.Currency == 0)
+        {
+            criteria.Currency = null;
+        }
+
+        criteria.Username ??= string.Empty;
+
+        criteria.FirstLetter ??= string.Empty;
+
+        var rawData = await repository.FetchAsync<BalanceItemModel>(criteria);
+
+        if (rawData == null)
+        {
+            return result;
+        }
+
+        if (criteria.IsViewTotalOnly)
+        {
+            var total = criteria.Total;
+            var totalReward = criteria.TotalReward;
+               
+            var balanceTotal = new BalanceItemModel
+            {
+                CustId = null,
+                Username = null,
+                Currency = null,
+                CurrencyName = null,
+                Balance = 0,
+                BaseBalance = total,
+                RewardRM = totalReward
+            };
+
+            result.BaseBalanceTotal = balanceTotal;
+            result.HasData = !Convert.IsDBNull(total);
+        }
+        else
+        {
+            result.SuperBalanceItems = rawData.Where(item => Math.Round(item.Balance, 2, MidpointRounding.AwayFromZero) != 0
+                                                             || Math.Round(item.BaseBalance, 2, MidpointRounding.AwayFromZero) != 0).ToList();
+            result.BaseBalanceTotal = result.SuperBalanceItems.DynamicSum();
+
+        }
+
+        return result;
+    }
+
+
+    public async Task<SuperBalanceModel> GetSuperBalanceDownLine(SuperDownlineCriteria criteria)
+    {
+        var result = await GetBalanceDownline(criteria);
+
+        return result;
+    }
+
+
+    public async Task<SuperBalanceModel>GetMasterDownLine(MasterDownlineCriteria criteria)
+    {
+        var result = await GetBalanceDownline(criteria);
+
+        return result;
+    }
+
+
+    public async Task<SuperBalanceModel> GetAgentDownLine(AgentDownlineCriteria criteria)
+    {
+        var result = await GetBalanceDownline(criteria);
+
+        return result;
+    }
+
+    public async Task<List<CurrenciesModel>> GetCurrencies()
+    {
+        var result = await currenciesService.GetCurrencies();
+
+        return result.OrderBy(x => x.CurrencyName).ToList();
+    }
+
+    public List<string> GetListAlphabet()
+    {
+        var arrLetter = new List<string>
+        {
+            "All",
+            "0-9"
+        };
+        for (var i = 'A'; i <= 'Z'; i++)
+        {
+            arrLetter.Add(i.ToString());
+        }
+
+        return arrLetter;
+    }
+
+    private async Task<SuperBalanceModel> GetBalanceDownline(CriteriaBase criteria)
+    {
+        var result = new SuperBalanceModel
+        {
+            SuperBalanceItems = [],
+            BaseBalanceTotal = new BalanceItemModel()
+        };
+
+
+        var rawData = await repository.FetchAsync<BalanceItemModel>(criteria);
+
+        if (rawData == null)
+        {
+            return result;
+        }
+
+        result.SuperBalanceItems = rawData.Where(item => Math.Round(item.Balance, 2, MidpointRounding.AwayFromZero) != 0
+                                                         && Math.Round(item.BaseBalance, 2, MidpointRounding.AwayFromZero) != 0).ToList();
+        result.BaseBalanceTotal = result.SuperBalanceItems.DynamicSum();
+
+        return result;
+    }
+}

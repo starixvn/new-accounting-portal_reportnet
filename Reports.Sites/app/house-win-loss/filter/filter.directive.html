@@ -1,0 +1,53 @@
+﻿<div>
+    <div class="well well-sm" data-ng-hide="vm.accessDenied">
+        <div class="legend-information">
+            <span class="information-button" data-toggle="modal" data-target="#legend-information-modal">
+            </span>
+            <div class="modal fade" id="legend-information-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog legend-information-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div class="modal-title">{{vm.legentTitle}}</div>
+                        </div>
+                        <div class="modal-body">
+                            <div data-nap-legend data-menu-id="vm.dataMenuId"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form class="form-inline">
+            <div class="form-group" data-ng-show="vm.normalMode">
+                <label>Date</label>
+                <nap-date-picker data-ng-model="vm.date" data-min-date="vm.minDate" data-max-date="vm.today"></nap-date-picker>
+                <div class="radio-group" ng-init="vm.turnover=0">
+                    <label class="bold">Turnover</label>
+                    <label><input type="radio" ng-value="0" ng-model="vm.turnover"> Normal</label>
+                    <label><input type="radio" ng-value="1" ng-model="vm.turnover"> No Draw</label>
+                </div>
+                <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.generate()">Generate</button>
+                <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.todayClicked()">{{vm.today | amDateFormat:'MMM DD, YYYY'}}</button>
+                <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.yesterdayClicked()">{{vm.yesterday | amDateFormat:'MMM DD, YYYY'}}</button>
+                <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.viewHistoryMode()" data-ng-show="vm.showBothMode">History Report</button>
+            </div>
+            <div class="form-group" data-ng-hide="vm.normalMode">
+                <nap-house-win-loss-date-range-picker data-start-date="vm.startDate" data-end-date="vm.endDate" data-min-date="vm.minDate" data-max-date="vm.today"></nap-house-win-loss-date-range-picker>
+                <div class="radio-group" ng-init="vm.turnover=0">
+                    <label class="bold">Turnover</label>
+                    <label><input type="radio" ng-value="0" ng-model="vm.turnover"> Normal</label>
+                    <label><input type="radio" ng-value="1" ng-model="vm.turnover"> No Draw</label>
+                </div>
+                <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.generate()">Generate</button>
+                <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.viewNormalMode()" data-ng-show="vm.showBothMode">Back</button>
+            </div>
+        </form>
+        <div class="note-message">
+            <p>Note: *If you can't find today data of recent settled matches, please try again in 3 minutes.</p>
+        </div>
+    </div>
+
+    <div class="well well-sm" data-ng-show="vm.accessDenied">
+        You are not authorized to access this report.
+    </div>
+</div>

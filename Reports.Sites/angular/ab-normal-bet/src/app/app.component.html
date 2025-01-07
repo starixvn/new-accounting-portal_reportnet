@@ -1,0 +1,12 @@
+<nap-navbar></nap-navbar>
+<div class="container-fluid" style="min-width: 1250px;">
+    <div class="nap-header">
+        <div class="title">
+            Misc / <span class="active"> Abnormal Bet Report</span>
+        </div>
+    </div>
+    <app-filter (generated)="generate($event)" (reset)="reset()"></app-filter>
+    <nap-toast></nap-toast>
+    <app-grid [filterModel]="filterModel"></app-grid>
+</div>
+<nap-spinner></nap-spinner>

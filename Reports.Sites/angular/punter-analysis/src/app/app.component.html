@@ -1,0 +1,17 @@
+<nap-navbar></nap-navbar>
+<div class="container-fluid" style="min-width: 1000px">
+  <div class="nap-header">
+    <div class="title">
+        Fraud &amp; Risk /
+        <span class="active">Punter Analysis</span>
+    </div>
+</div>
+  <nap-filter (generate)="onGenerate($event)" (reset)="onReset()"></nap-filter>
+  <nap-toast></nap-toast>
+  <div *ngIf="filterModel" [ngSwitch]="filterModel.searchBy">
+    <nap-grid *ngSwitchCase="SearchBy.User" [filterModel]="filterModel"></nap-grid>
+    <nap-grid *ngSwitchCase="SearchBy.League" [filterModel]="filterModel"></nap-grid>
+    <nap-performance *ngSwitchCase="SearchBy.Performance" [filterModel]="filterModel"></nap-performance>
+  </div>
+</div>
+<nap-spinner></nap-spinner>

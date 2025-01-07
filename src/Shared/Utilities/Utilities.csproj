@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>Utilities</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <SonarQubeExclude>true</SonarQubeExclude>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.5.2" />
+    <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.5" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3" />
+    <PackageReference Include="Fanex.Excel" Version="2.7.2.2" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
+    <PackageReference Include="Fanex.RemotingRef" Version="1.5.5.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\MainLabels.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainLabels.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\MainLabels.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainLabels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿namespace LeagueWinLoss.Model;
+
+public class LeagueWinLossModel
+{
+    public List<SportWinLoss> SportWinLoss { get; set; }
+
+    public LeagueWinLossItem Total { get; set; }
+
+    public LeagueWinLossItem SoccerRM { get; set; }
+
+    public LeagueWinLossItem SabaSoccerRM { get; set; }
+
+    public LeagueWinLossItem SabaPinGoalRM { get; set; }
+
+    public LeagueWinLossItem OtherSportRM { get; set; }
+
+    public LeagueWinLossItem SoccerBARM { get; set; }
+
+    public LeagueWinLossItem SabaSoccerBARM { get; set; }
+
+    public LeagueWinLossItem SabaPinGoalBARM { get; set; }
+
+    public LeagueWinLossItem OtherSportBARM { get; set; }
+
+    public LeagueWinLossItem GrandTotal { get; set; }
+}

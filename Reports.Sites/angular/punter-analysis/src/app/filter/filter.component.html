@@ -1,0 +1,131 @@
+<div class="nap-filter">
+    <nap-legend [legendId]="218" [legendTitle]="'Punter Analysis Legend'"></nap-legend>
+    <div class="row">
+        <div class="col-x1">
+            <div class="col-label">
+                <label class="col-form-label">Search by</label>
+            </div>
+            <div class="col-value">
+                <div class="form-check form-check-inline" *ngFor="let option of searchByOptions">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="searchBy" [(ngModel)]="searchBy" [value]="option.value" (ngModelChange)="onSearchByChange()" /> {{option.text}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-x2" [hidden]="searchBy === SearchBy.Performance">
+            <div class="col-label">
+                <label class="col-form-label">Top rows</label>
+            </div>
+            <div class="col-value">
+                <input style="width: 80px" class="form-control" type="text" [(ngModel)]="topRows" [napInputInteger]="{max: 9999}" />
+            </div>
+        </div>
+        <div class="col-x3" *ngIf="searchBy !== SearchBy.Performance">
+            <div class="col-label">
+                <label class="col-form-label">Order by</label>
+            </div>
+            <div class="col-value">
+                <div class="d-inline-block">
+                    <nap-dropdown-select [items]="orderByOptions" [(value)]="orderBy"></nap-dropdown-select>
+                </div>
+                <div class="float-right d-inline-block">
+                    <nap-dropdown-select [items]="sortByOptions" [(value)]="sortBy"></nap-dropdown-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nap-period-type [hidden]="searchBy === SearchBy.Performance" [minDate]="minDate" [maxDate]="maxDate" (periodTypeChange)="onPeriodTypeChange($event)"></nap-period-type>
+    <div class="row" *ngIf="searchBy === SearchBy.Performance">
+        <div class="col-x1">
+            <div class="col-label">
+                <label class="col-form-label">From</label>
+            </div>
+            <div class="col-value">
+                <nap-month-picker class="month-range" [hasYearLabel]="false" [hasMonthLabel]="false"  [(date)]="monthRangeFromDate" [minDate]="minDate" [maxDate]="monthRangeToDate"></nap-month-picker>
+            </div>
+        </div>
+        <div class="col-x2">
+            <div class="col-label">
+                <label class="col-form-label">To</label>
+            </div>
+            <div class="col-value">
+                <nap-month-picker class="month-range" [hasYearLabel]="false" [hasMonthLabel]="false" [(date)]="monthRangeToDate" [minDate]="monthRangeFromDate" [maxDate]="maxDate"></nap-month-picker>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-x1" *ngIf="searchBy !== SearchBy.League">
+            <div class="col-label">
+                <label class="col-form-label">Depth</label>
+            </div>
+            <div class="col-value">
+                <nap-dropdown-select [items]="depthOptions | napDropdownSelect:'text'" [(value)]="depth"></nap-dropdown-select>
+            </div>
+        </div>
+        <div class="col-x1" [hidden]="searchBy !== SearchBy.League">
+            <div class="col-label">
+                <label class="col-form-label">Sport</label>
+            </div>
+            <div class="col-value">
+                <nap-select [options]="sportOptions" [(ngModel)]="sportType" (ngModelChange)="onSportChange()"></nap-select>
+            </div>
+        </div>
+        <div class="col-x2" *ngIf="searchBy !== SearchBy.League">
+            <div class="col-label">
+                <label class="col-form-label">Account name<span *ngIf="isUserNameRequired" class="text-danger">*</span></label>
+            </div>
+            <div class="col-value">
+                <nap-dropdown-typeahead [(text)]="userName" [query]="userNameTypeaheadQuery" [placeholder]="userNamePlaceholder">
+                </nap-dropdown-typeahead>
+            </div>
+        </div>
+        <div class="col-x23" [hidden]="searchBy !== SearchBy.League">
+            <div class="col-label">
+                <label class="col-form-label">League<span class="text-danger">*</span></label>
+            </div>
+            <div class="col-value">
+                <nap-dropdown-typeahead [(text)]="leagueName" [query]="leagueTypeaheadQuery" [placeholder]="'League name'">
+                </nap-dropdown-typeahead>
+            </div>
+        </div>
+        <div class="col-x3" *ngIf="searchBy === SearchBy.User">
+            <div class="col-label">
+                <label class="col-form-label">Product</label>
+            </div>
+            <div class="col-value dropdown-product">
+                <ngx-dropdown-treeview [items]="productTreeviewItems" [config]="productTreeviewConfig" (selectedChange)="onProductSelectedChange($event)">
+                </ngx-dropdown-treeview>
+            </div>
+        </div>
+        <div class="col-x2" *ngIf="searchBy === SearchBy.User && showLeagueFilter">
+            <div class="col-label">
+                <label class="col-form-label">League Group</label>
+            </div>
+            <div class="col-value">
+                <ngx-dropdown-treeview [items]="leagueGroupTreeviewItems" [config]="leagueGroupTreeviewConfig" (selectedChange)="onLeagueGroupSelectedChange($event)">
+                </ngx-dropdown-treeview>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="searchBy === SearchBy.League">
+        <div class="col-x1">
+            <div class="col-label">
+                <label class="col-form-label">Bet Type</label>
+            </div>
+            <div class="col-value">
+                <ngx-dropdown-treeview [items]="betTypeTreeviewItems" [config]="betTypeTreeviewConfig" (selectedChange)="onBetTypeSelectedChange($event)">
+                </ngx-dropdown-treeview>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-x1">
+            <div class="col-label">
+            </div>
+            <div class="col-value">
+                <button type="submit" class="btn btn-primary" (click)="onGenerate()">GENERATE</button>
+            </div>
+        </div>
+    </div>
+</div>

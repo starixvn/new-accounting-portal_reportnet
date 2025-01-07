@@ -1,0 +1,54 @@
+<div class="nap-filter">
+  <nap-legend [legendId]="546" [legendTitle]="'Updated Username &amp; Given Credit List Legend'"></nap-legend>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Date</label>
+        <div class="control-nap">
+          <nap-dropdown-select [items]="timePeriodSelectItems" [(value)]="timePeriod" (valueChange)="onTimePeriodChange()">
+          </nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>From Date</label>
+        <div class="control-nap">
+          <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="maxEndDate" (dateChange)="onDateChange()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>To Date</label>
+        <div class="control-nap">
+          <nap-date-picker [(date)]="endDate" [minDate]="startDate" [maxDate]="maxEndDate" (dateChange)="onDateChange()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Username</label>
+        <div class="control-nap">
+          <input type="text" class="form-control" placeholder="Search All" #username />
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label>Report by</label>
+        <div class="control-nap">
+          <select class="form-control" #reportBy>
+            <option value="Updated Username">Update Username</option>
+            <option value="Updated Credit">Updated Credit</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col col-buttons">
+      <button class="btn btn-primary" (click)="onGenerate(username.value, reportBy.value)">GENERATE</button>
+    </div>
+  </div>
+</div>

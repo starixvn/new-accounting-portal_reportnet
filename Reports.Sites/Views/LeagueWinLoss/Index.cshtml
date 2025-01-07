@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "League Win Loss";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/month-picker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/pager-pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/scrollbars.css" />
+    <link rel="stylesheet" type="text/css" href="~/league-win-loss/styles/league-win-loss.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>Win Loss / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right bold">
+                    Sport
+                </div>
+                <div class="edit-field col_12 align-left ddl-sport">
+                    <select id="dropdown-sport"></select>
+                </div>
+            </div>
+            <div id="bettrans-mode" class="filter-cell">
+                <div id="datepickerplugin" class="lbl-field col_23 align-right">
+                </div>
+            </div>
+            <div id="warehouse-mode" class="filter-cell">
+                <div id="historyDatepickerplugin" class="lbl-field col_23 align-right">
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    Turnover
+                </div>
+                <div class="lbl-field col_9 align-right">
+                    <div class="col_3 alpha">
+                        <input id="radio-turnover-normal" type="radio" value="0" checked="checked" name="radio-turnover"
+                               class="radio-turnover" />
+                        <label for="radio-turnover-normal">
+                            Normal
+                        </label>
+                    </div>
+                    <div class="col_3">
+                        <input id="radio-turnover-nodraw" type="radio" value="1" name="radio-turnover"
+                               class="radio-turnover" />
+                        <label for="radio-turnover-nodraw">
+                            No Draw
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right bold">
+                    League
+                </div>
+                <div class="edit-field col_12 align-left">
+                    <input id="txt-league" type="text" maxlength="200" placeholder="League Name" class="default-suggestionbox" />
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right bold">
+                    Division
+                </div>
+                <div class="edit-field col_11 align-left ddl-division">
+                    <select id="dropdown-division"></select>
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field col_2 align-right bold">
+                    Status
+                </div>
+                <div class="edit-field col_4 align-left">
+                    <select id="ddlStatus" class="alpha">
+                        @foreach (var item in ViewBag.Status)
+                        {
+                            <option value="@item.Value">@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field col_8 align-right bold">
+                    Global Show Time(GMT+8)
+                </div>
+                <div class="edit-field col_6 align-left">
+                    <select id="ddlGlobalShowTime"></select>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="submit width-auto col_4 mr-left-80">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" class="" />
+                </div>
+            </div>
+            <div id="bettrans-mode-btn" class="filter-cell">
+                <div class="submit width-auto col_4">
+                    <input id="btnToday" name="btnToday" type="submit" value="Today" class="" />
+                </div>
+                <div class="submit width-auto col_4">
+                    <input id="btnYesterday" name="btnYesterday" type="submit" value="Yesterday" class="" />
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="submit width-auto col_4">
+                    <input id="btnReportMode" name="btnReportMode" type="submit" value="HISTORY REPORT" class="" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="note-message mr-left-80">
+                    <p>Note: *If you can't find today data of recent settled matches, please try again in 3 minutes.</p>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="ErrMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="leagueWinLossReportContainer">
+        <div id="leagueWinLossReport" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="leagueWinLossReportMatchesContainer" class="display-none">
+        <div id="leagueWinLossReportMatches" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="leagueWinLossBetTypeContainer" class="display-none">
+        <div id="leagueWinLossBetType" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="leagueWinLossSiteContainer" class="display-none">
+        <div id="leagueWinLossSite" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="leagueWinLossSuperContainer" class="display-none">
+        <div id="leagueWinLossSuper" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="leagueWinLossVirtualRateContainer" class="display-none">
+        <div id="leagueWinLossVirtualRate" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="leagueWinLossBetTypeByStatusContainer" class="display-none">
+        <div id="liveReport">
+            <div id="leagueWinLossBetTypeLive" class="freegrid display-none">
+            </div>
+        </div>
+        <div id="nonLiveReport">
+            <div id="leagueWinLossBetTypeNonLive" class="freegrid display-none">
+            </div>
+        </div>
+    </div>
+    @await Component.InvokeAsync("ScoreInformation")
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var labelDate = 'Date';
+        var minDate = '@ViewBag.MinDate';
+        var maxDate = '@(DateTime.Today.ToShortDateString())';
+        var toDay = '@DateTime.Today.ToShortDateString()';
+        var is8RMActive = 'true';
+        var isBARMActive = 'true';
+        var todayStr = '@DateTime.Today.ToString("MMM dd, yyyy")';
+        var yesterdayStr = '@DateTime.Today.AddDays(-1).ToString("MMM dd, yyyy")';
+        var minWareHouseDate = '@(new DateTime(2017, 1, 1))';
+        var labelFrom = 'From';
+        var labelTo = 'To';
+        var isFullModePermission = '@ViewBag.IsFullModePermission';
+        var isNormalModePermission = '@ViewBag.IsNormalMode';
+        var permissionProfileID = '@ViewBag.PermissionProfileID';
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/LeagueWinLoss.js?v=2"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/LeagueWinLossViewBetTypes.js?v=3"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/LeagueWinLossViewBetTypesByStatus.js?v=2"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/LeagueWinLossViewMatches.js?v=3"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/LeagueWinLossViewSites.js?v=1"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/LeagueWinLossViewSupers.js?v=1"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/LeagueWinLossViewVirtualRate.js"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/LeagueWinLossViewMatchesFromBetTypeStatus.js?v=2"></script>
+    <script type="text/javascript" src="~/league-win-loss/scripts/ReportManager.js?v=2"></script>
+}

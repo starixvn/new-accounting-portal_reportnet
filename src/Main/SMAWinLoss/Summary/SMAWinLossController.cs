@@ -1,0 +1,25 @@
+﻿using MediatR;
+
+namespace SMAWinLoss.Summary;
+
+using Microsoft.AspNetCore.Mvc;
+using Utilities.ExcelResult;
+
+[Route("api/sma-win-loss/summary")]
+[ApiController]
+public class SMAWinLossController(IMediator mediator) : ControllerBase
+{
+    [Route("")]
+    public async Task<IActionResult> Summary(WinLossHttpParameter httpParameters)
+    {
+        var viewModel = await mediator.Send(httpParameters);
+        return Ok(viewModel);
+    }
+
+    [Route("excel")]
+    public async Task<IActionResult> Excel(WinLossHttpParameterExcel httpParameter)
+    {
+        var excelPackage = await mediator.Send(httpParameter);
+        return new EpplusExcelResult(excelPackage);
+    }
+}

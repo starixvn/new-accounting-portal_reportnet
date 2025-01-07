@@ -1,0 +1,11 @@
+@import '~nap-theme/scss/grid.scss';
+@import '~nap-theme/scss/breadcrumb';
+:host /deep/ .breadcrumb-container {
+    width: 100%;
+}
+
+.nap-grid {
+    div.body {
+        overflow-x: hidden;
+    }
+}

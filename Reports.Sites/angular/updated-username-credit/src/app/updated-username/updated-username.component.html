@@ -1,0 +1,111 @@
+<ng-template #colgroup>
+    <colgroup>
+        <col style="width: 50px" />
+        <col style="width: 80px" />
+        <col style="width: 50px" />
+        <col style="width: 150px" />
+        <col style="width: 100px" />
+        <col style="width: 100px" />
+        <col style="width: 200px" />
+        <col style="width: 80px" />
+        <col style="width: 200px" />
+        <col style="width: 200px" />
+        <col style="width: 200px" />
+        <col style="width: 200px" />
+        <col style="width: 200px" />
+        <col style="width: 200px" />
+    </colgroup>
+</ng-template>
+<ng-template #thead>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Year</th>
+            <th>Month</th>
+            <th>Log Date</th>
+            <th>Department</th>
+            <th>Admin</th>
+            <th>Current Username</th>
+            <th>Level</th>
+            <th>Headline</th>
+            <th>Super</th>
+            <th>Master</th>
+            <th>Agent</th>
+            <th>From Username</th>
+            <th>To Username</th>
+        </tr>
+    </thead>
+</ng-template>
+<ng-template #breadcrumbToolboxTemplate>
+    <div class="breadcrumb-toolbox">
+        <div class="toolbox-item">
+            <i class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()"></i>
+        </div>
+    </div>
+</ng-template>
+<ng-template #rowItem let-item="item" let-index="index">
+    <td class="text-center" [napIntegerFormat]="index"></td>
+    <td class="text-center">{{ item.Year }}</td>
+    <td class="text-center">{{ item.Month }}</td>
+    <td>{{ item.LogDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+    <td>{{ item.Department }}</td>
+    <td>{{ item.Admin }}</td>
+    <td>{{ item.CurrentUsername }}</td>
+    <td>{{ item.Level }}</td>
+    <td>{{ item.Headline }}</td>
+    <td>{{ item.Super }}</td>
+    <td>{{ item.Master }}</td>
+    <td>{{ item.Agent }}</td>
+    <td>{{ item.FromUsername }}</td>
+    <td>{{ item.ToUsername }}</td>
+</ng-template>
+<div *ngIf="updatedUsernameData" [ngSwitch]="updatedUsernameData.length > 0">
+    <div class="nap-grid">
+        <div style="width: 2030px;">
+            <nap-breadcrumb *ngSwitchCase="true" [items]="breadcrumbItems" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+            <nap-breadcrumb *ngSwitchCase="false" [items]="breadcrumbItems"></nap-breadcrumb>
+        </div>
+        <div style="width: 2030px;">
+            <div class="header">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <ng-template [ngTemplateOutlet]="thead"></ng-template>
+                </table>
+            </div>
+            <div *ngSwitchCase="true" class="body">
+                <table class="table-striped">
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tbody>
+                        <tr *ngFor="let item of displayUpdatedUsernameData; let i = index">
+                            <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item, index: paginationInstance.itemsPerPage * (paginationInstance.currentPage - 1) + i + 1 }">
+                            </ng-template>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngSwitchCase="false" class="body stretch">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th class="no-data" colspan="14">
+                                There is no data
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngSwitchCase="true" class="footer">
+                <table>
+                    <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                    <tfoot>
+                        <tr>
+                            <td colspan="14">
+                                <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

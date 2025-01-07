@@ -1,0 +1,121 @@
+<ng-template #colgroup>
+  <colgroup>
+      <col style="width: 300px" />
+      <col style="width: 80px" />
+      <col style="width: 80px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+      <col style="width: 120px" />
+  </colgroup>
+</ng-template>
+<ng-template #thead>
+  <thead>
+      <tr>
+          <th scope="col" rowspan="2">Event</th>
+          <th scope="col" rowspan="2">Member Count</th>
+          <th scope="col" rowspan="2">Bet Count</th>
+          <th scope="col" rowspan="2">Turnover</th>
+          <th scope="col" colspan="3">Member</th>
+          <th scope="col" colspan="3">Licensee</th>
+          <th scope="col" colspan="4">Company</th>
+      </tr>
+      <tr>
+          <th scope="col">WinLoss</th>
+          <th scope="col">Commission</th>
+          <th scope="col">Total</th>
+          <th scope="col">WinLoss</th>
+          <th scope="col">Commission</th>
+          <th scope="col">Total</th>
+          <th scope="col">WinLoss</th>
+          <th scope="col">Commission</th>
+          <th scope="col">Pay To Supplier</th>
+          <th scope="col">Net Income</th>
+      </tr>
+  </thead>
+</ng-template>
+<ng-template #rowItem let-item="item">
+  <td>{{ item.Name }}</td>
+  <td class="text-right" [napIntegerFormat]="item.MemberCount"></td>
+  <td class="text-right" [napIntegerFormat]="item.BetCount"></td>
+  <td class="text-right" [napDecimalFormat]="item.TurnOver"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberWinLoss"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberCommission"></td>
+  <td class="text-right" [napDecimalFormat]="item.MemberTotal"></td>
+  <td class="text-right" [napDecimalFormat]="item.LicenseeWinLoss"></td>
+  <td class="text-right" [napDecimalFormat]="item.LicenseeCommission"></td>
+  <td class="text-right" [napDecimalFormat]="item.LicenseeTotal"></td>
+  <td class="text-right" [napDecimalFormat]="item.CompanyWinLoss"></td>
+  <td class="text-right" [napDecimalFormat]="item.CompanyCommission"></td>
+  <td class="text-right" [napDecimalFormat]="item.PayToSupplier"></td>
+  <td class="text-right" [napDecimalFormat]="item.CompanyNetIncome"></td>
+</ng-template>
+<div *ngIf="exchangeModel" [ngSwitch]="exchangeModel.Entities.length > 0">
+  <div class="nap-grid">
+      <div style="width: 1800px">
+          <div class="header">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <ng-template [ngTemplateOutlet]="thead"></ng-template>
+              </table>
+          </div>
+          <div *ngSwitchCase="true" class="body">
+              <table class="table-striped">
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tbody>
+                      <tr *ngFor="let item of displayExchange">
+                          <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+                          </ng-template>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="false" class="body stretch">
+              <table>
+                  <tbody>
+                      <tr>
+                          <th class="no-data" colspan="15">
+                              There is no data
+                          </th>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div *ngSwitchCase="true" class="footer">
+              <table>
+                  <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+                  <tfoot>
+                      <tr class="font-weight-bold">
+                          <td>Grand Total</td>
+                          <td class="text-right" [napIntegerFormat]="exchangeModel.Total.MemberCount"></td>
+                          <td class="text-right" [napIntegerFormat]="exchangeModel.Total.BetCount"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.TurnOver"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.MemberWinLoss"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.MemberCommission"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.MemberTotal"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.LicenseeWinLoss"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.LicenseeCommission"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.LicenseeTotal"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.CompanyWinLoss"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.CompanyCommission"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.PayToSupplier"></td>
+                          <td class="text-right" [napDecimalFormat]="exchangeModel.Total.CompanyNetIncome"></td>
+                      </tr>
+                      <tr>
+                          <td colspan="14">
+                              <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

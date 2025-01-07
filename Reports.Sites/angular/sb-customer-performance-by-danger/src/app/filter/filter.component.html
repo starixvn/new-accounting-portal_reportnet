@@ -1,0 +1,97 @@
+<div class="nap-filter">
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">From Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="fromDate" [minDate]="minStartDate" [maxDate]="maxEndDate"
+            (dateChange)="onFromDateChange()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">To Date</label>
+        <div class="nap-control">
+          <nap-date-picker [(date)]="toDate" [minDate]="fromDate" [maxDate]="maxEndDate"
+            (dateChange)="onToDateChange()"></nap-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Division</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #siteDropdownTreeview [items]="sites | siteTreeview:sites"
+            [config]="siteTreeviewConfig" (selectedChange)="selectedSites = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Danger Level</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #dangerLevelDropdownTreeview [items]="dangerLevelTreeviewItems" [config]="dangerLevelTreeviewConfig" (selectedChange)="selectedDangerLevel = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Sport</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #sportDropdownTreeview [items]="sports | sportTreeview:sports"
+            [config]="sportTreeviewConfig" (selectedChange)="onSportSelectedChange($event)">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">League Group</label>
+        <div class="nap-control">
+          <ngx-dropdown-treeview #leagueGroupDropdownTreeview [items]="leagueGroups | leagueGroupTreeview:leagueGroups"
+            [config]="leagueGroupTreeviewConfig" (selectedChange)="selectedleagueGroups = $event">
+          </ngx-dropdown-treeview>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Status</label>
+        <div class="nap-control">
+          <nap-dropdown-select [items]="statusOptions" [(value)]="status"></nap-dropdown-select>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">Top rows</label>
+        <div class="nap-control">
+          <input type="number" [(ngModel)]="topRows">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="nap-col">
+      <div class="nap-group">
+        <label class="col-form-label">League</label>
+        <div class="nap-control width-400">
+          <nap-dropdown-typeahead [(text)]="leagueName" [query]="leagueNameTypeaheadQuery"
+            [placeholder]="leagueNamePlaceholder">
+          </nap-dropdown-typeahead>
+        </div>
+      </div>
+    </div>
+    <div class="nap-col col-buttons">
+      <label>&nbsp;</label>
+      <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
+        GENERATE
+      </button>
+    </div>
+  </div>
+</div>

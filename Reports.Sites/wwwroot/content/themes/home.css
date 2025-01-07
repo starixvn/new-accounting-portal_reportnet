@@ -1,0 +1,51 @@
+﻿.server-time {
+    display: none;
+}
+
+.home-info {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #5a7dc1;
+}
+
+    .home-info div#welcome {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .home-info span#user {
+        background-color: #5a7dc1;
+        color: #fff;
+        padding: 2px 5px;
+        border-radius: 3px;
+    }
+
+    .home-info div#button {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .home-info a#change-pass {
+        background-color: #5a7dc1;
+        padding: 5px 10px;
+        color: #fff;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        font-weight: bold;
+    }
+
+    .home-info a#logout {
+        background-color: #fff;
+        color: #5a7dc1;
+        padding: 5px 10px;
+        border-radius: 3px;
+        border: 1px solid #3C5B9B;
+        margin-left: 10px;
+        font-weight: bold;
+    }
+
+    .home-info div#time {
+        color: black;
+    }
