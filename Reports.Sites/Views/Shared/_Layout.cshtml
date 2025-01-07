@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject IConfiguration configuration
+@{
     var showMenus = ViewBag.ShowMenus != null ? (bool)ViewBag.ShowMenus : true;
     var napConfig = new
     {
@@ -53,7 +54,7 @@
     </section>
     <div id="dialog-popup"></div>
     @RenderSection("Scripts", false)
-    @if (!Context.User.Identity.Name.Contains("starix"))
+    @if (!Context.User.Identity.Name.Contains("starix") && configuration.GetSection("Fanex.NAP.Client:Environment").Value == "LIVE")
     {
 	    <!-- Google tag (gtag.js) -->
 	    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1MDEJEL4L2"></script>
