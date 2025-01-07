@@ -1,3 +1,4 @@
+using Fanex.Caching;
 using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client.Attributes;
@@ -22,8 +23,14 @@ builder.WebHost.ConfigureKestrel(options =>
 services.AddAuthentication(configuration);
 services.AddGlobalServices();
 services.AddOneBookUm(configuration);
+services.AddRemotingRef(configuration);
+services.AddResultCore(configuration);
+services.AddFanexData(configuration);
+services.AddNapClient(configuration);
+services.AddFanexLogSentry(configuration);
+services.AddMemoryCache(configuration.GetSection("fanex.caching"));
 services.AddAllAutoMapper();
-services.RegisterMediatR();
+services.AddAllMediatR();
 services.AddInternalServices();
 
 services.AddAllWebOptimizer();
@@ -44,11 +51,6 @@ services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
-services.AddRemotingRef(configuration);
-services.AddResultCore(configuration);
-services.AddFanexData(configuration);
-services.AddNapClient(configuration);
-services.AddFanexLogSentry(configuration);
 
 var app = builder.Build();
 
