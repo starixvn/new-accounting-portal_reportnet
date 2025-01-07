@@ -1,0 +1,19 @@
+@import '~nap-theme/scss/grid';
+@import '~nap-theme/scss/breadcrumb';
+
+.nap-grid {
+    .red-negative {
+      color: red;
+    }
+    .body {
+        overflow-x: hidden;
+    }
+    table {
+        margin-bottom: 0px;
+    }
+}
+
+.excel-title {
+    display: block;
+    line-height: 20px;
+}

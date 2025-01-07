@@ -440,4 +440,10 @@
 			<Mapping DataField="RptDate" ObjectProperty="Date" />
 		</Setting>
 	</Function>
+	<Function Name="SabaPromotion">
+		<Setting Key="Acc_Rpt_SabaPromotion" SpName="Acc_Rpt_SabaPromotion" DbName="DBWH.bodb_dwrs.wsv_nap" >
+			<Mapping DataField="RptDate" ObjectProperty="Date" />
+		</Setting>
+		<Setting Key="Acc_Rpt_SabaPromotion_Promo_Sel" SpName="Acc_Rpt_SabaPromotion_Promo_Sel" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
+	</Function>
 </Functions>

@@ -81,6 +81,7 @@ public static class ServiceCollectionExtensions
         services.RegisterDuplicateTicketsServices();
         services.RegisterMostVisitedPageServices();
         services.RegisterBetConstructPerformanceServices();
+        services.RegisterSabaPromotionServices();
     }
 
     public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)

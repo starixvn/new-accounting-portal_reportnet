@@ -1,0 +1,93 @@
+@import '~nap-theme/css/theme.css';
+@import '~nap-theme/scss/fanex-grid.scss';
+@import '~font-awesome/css/font-awesome.min.css';
+body {
+  padding-top: 2.5rem;
+}
+
+.navbar-brand {
+  .logo {
+    background-image: url("assets/logo.png");
+    height: 16px;
+    width: 147px;
+  }
+}
+
+.spinner-loading {
+    background-image: url("assets/spinner.gif");
+}
+
+.form-control+.input-group-addon:not(:first-child) {
+    border-left: 0;
+}
+.input-group-addon {
+    padding: .15rem .3rem;
+    margin-bottom: 0;
+    font-size: .8125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #464a4c;
+    text-align: center;
+    background-color: #eceeef;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .2rem;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.form-control:focus {
+    color: #464a4c;
+    background-color: #fff;
+    border-color: #5cb3fd;
+    outline: 0;
+    box-shadow: 0 0 0 2px hsla(0,0%,80%,.5);
+  }
+
+  .btn-outline-secondary {
+    color: #6c757d;
+    background-color: transparent;
+    background-image: none;
+    border-color: #6c757d;
+     &:hover {
+      color: #6c757d;
+      background-color: #e6e6e6;
+      border-color: #adadad;
+     }
+     &.disabled, &:disabled {
+      color: #6c757d;
+      background-color: transparent;
+     }
+     &.focus, &:focus {
+      box-shadow: 0 0 0 2px hsla(0,0%,80%,.5);
+     }
+  }
+
+ .style-box {
+	color: #292b2c;
+	background-color: #e6e6e6;
+	border-color: #adadad;
+ }
+
+.btn-outline-secondary:not(:disabled):not(.disabled) {
+    &:active, &.active {
+        @extend .style-box;
+    }
+    &.focus, &:focus {
+        box-shadow: 0 0 0 2px hsla(0,0%,80%,.5);
+    }
+}
+
+.show > .btn-outline-secondary.dropdown-toggle {
+    @extend .style-box;
+    &:focus {
+        box-shadow: 0 0 0 2px hsla(0,0%,80%,.5);
+    }
+}
+
+.nap-control .dropdown-menu {
+    .ngb-dp-arrow, .ngb-dp-day, .ngb-dp-weekday, .ngb-dp-week-number, .btn-light {
+         width: 2rem !important;
+        height: 2rem !important;
+        line-height: 1.6rem !important;
+    }
+}

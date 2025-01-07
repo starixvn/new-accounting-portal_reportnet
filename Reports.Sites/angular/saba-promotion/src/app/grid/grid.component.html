@@ -1,0 +1,85 @@
+<ng-template #breadcrumbToolboxTemplate>
+    <div class="breadcrumb-toolbox">
+        <div class="toolbox-item">
+            <i *ngIf="data !== undefined && data.Items.length > 0" class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()">
+            </i>
+        </div>
+    </div>
+</ng-template>
+<ng-template #colgroup>
+    <colgroup>
+      <col style="width: 150px" />
+      <col style="width: 300px" />
+      <col style="width: 150px" />
+      <col style="width: 200px" />
+    </colgroup>
+  </ng-template>
+  <ng-template #thead>
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Bet Type</th>
+        <th scope="col">Site</th>
+        <th scope="col">House Bonus Expense</th>
+      </tr>
+    </thead>
+  </ng-template>
+  <ng-template #rowItem let-item="item">
+    <tr>
+        <td class="text-center">{{item.Date | date: 'yyyy-MM-dd'}}</td>
+        <td>{{item.BetType}}</td>
+        <td>{{item.Site}}</td>
+        <td class="text-right" [ngClass]="item.HouseBonusExpense < 0 ? 'red-negative' : ''">{{ item.HouseBonusExpense | number: '1.2-2' }}</td>
+    </tr>
+  </ng-template>
+  <ng-template #rowTotalItem let-item="item">
+    <tr>
+        <td class="text-center font-weight-bold" colspan="3">Grand Total</td>
+        <td class="text-right font-weight-bold" [ngClass]="item.HouseBonusExpense < 0 ? 'red-negative' : ''">{{ item.HouseBonusExpense | number: '1.2-2' }}</td>
+    </tr>
+  </ng-template>
+  <div *ngIf="data" [ngSwitch]="data.Items.length > 0">
+    <nap-breadcrumb style="width: 820px" class="excel-title" [items]="['SABA Promotion']" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
+    <div class="nap-grid">
+      <div style="width: 820px">
+        <div class="header">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <ng-template [ngTemplateOutlet]="thead"></ng-template>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="body">
+          <table class="table">
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tbody>
+              <ng-container *ngFor="let item of data.Items">
+                <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
+                </ng-template>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="false" class="body stretch">
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col" class="no-data" colspan="9">
+                  There is no data
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngSwitchCase="true" class="footer">
+          <table>
+            <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
+            <tfoot>
+                <ng-template [ngTemplateOutlet]="rowTotalItem" [ngTemplateOutletContext]="{ item: data.Total }">
+                </ng-template>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
