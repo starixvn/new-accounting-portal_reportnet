@@ -15,7 +15,7 @@ namespace Reports.Sites.DependencyInjection;
 
 public static class MediatRInjection
 {
-    public static void RegisterMediatR(this IServiceCollection service)
+    public static void AddAllMediatR(this IServiceCollection service)
     {
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SMAWinLossAttribute).GetTypeInfo().Assembly));
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SBPerformanceAttribute).GetTypeInfo().Assembly));

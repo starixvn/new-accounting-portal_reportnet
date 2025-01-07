@@ -66,7 +66,7 @@
     <script type="text/javascript" src="/scripts/nap-report-common.js?v=2"></script>
     @RenderSection("Scripts", false)
     @RenderSection("Foot", false)
-    @if (!Context.User.Identity.Name.Contains("starix"))
+    @if (!Context.User.Identity.Name.Contains("starix") && configuration.GetSection("Fanex.NAP.Client:Environment").Value =="LIVE")
     {
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-1MDEJEL4L2"></script>
