@@ -1278,6 +1278,7 @@
     <Folder Include="ExcelTemplate\NegativeBalance\" />
     <Folder Include="ExcelTemplate\DailyCreatedCustomer\" />
     <Folder Include="ExcelTemplate\LeagueWinLoss\" />
+    <Folder Include="ExcelTemplate\SabaPromotion\" />
     <Folder Include="ExcelTemplate\TraderPerformanceOtherSports\" />
     <Folder Include="ExcelTemplate\SuperBalance\" />
     <Folder Include="ExcelTemplate\PeakConcurrentUser\" />
@@ -1400,6 +1401,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\ResultAnalysis\SimpleResultAnalysis.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ExcelTemplate\SabaPromotion\SabaPromotion.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ExcelTemplate\SBCustomerPerformanceByDangers\SBCustomerPerformanceByDangers.xlsx">

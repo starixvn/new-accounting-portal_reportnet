@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FilterComponent } from './filter/filter.component';
@@ -19,6 +19,14 @@ import { TreeviewModule } from 'ngx-treeview';
 import { FilterItemTreeviewPipe } from './filter/filter-item-treeview.pipe';
 import { GridComponent } from './grid/grid.component';
 import { BreadcrumbModule } from 'nap-components/breadcrumb';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationModule, PaginationConfig } from 'nap-components/pagination';
+
+@Injectable()
+export class CustomPaginationConfig extends PaginationConfig {
+    pageSizes = [100, 200, 300, 500];
+    itemsPerPage = 100;
+}
 
 @NgModule({
   declarations: [
@@ -39,10 +47,13 @@ import { BreadcrumbModule } from 'nap-components/breadcrumb';
     DateModule,
     DropdownSelectModule,
     TreeviewModule.forRoot(),
-    BreadcrumbModule
+    BreadcrumbModule,
+    NgxPaginationModule,
+    PaginationModule.forRoot()
   ],
   providers: [
     { provide: NavbarService, useClass: CustomNavbarService },
+    { provide: PaginationConfig, useClass: CustomPaginationConfig },
     AppService,
     {
       provide: APP_INITIALIZER,

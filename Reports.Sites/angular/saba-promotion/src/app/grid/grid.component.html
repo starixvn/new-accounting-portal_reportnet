@@ -1,7 +1,7 @@
 <ng-template #breadcrumbToolboxTemplate>
     <div class="breadcrumb-toolbox">
         <div class="toolbox-item">
-            <i *ngIf="data !== undefined && data.Items.length > 0" class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()">
+            <i *ngIf="displayedData !== undefined && displayedData.Items.length > 0" class="nap-icon nap-icon-breadcrumb-excel" aria-hidden="true" title="Export excel" (click)="exportExcel()">
             </i>
         </div>
     </div>
@@ -33,12 +33,18 @@
     </tr>
   </ng-template>
   <ng-template #rowTotalItem let-item="item">
+    <tr class="footer-border-top"></tr>
     <tr>
         <td class="text-center font-weight-bold" colspan="3">Grand Total</td>
         <td class="text-right font-weight-bold" [ngClass]="item.HouseBonusExpense < 0 ? 'red-negative' : ''">{{ item.HouseBonusExpense | number: '1.2-2' }}</td>
     </tr>
+    <tr>
+      <td colspan="4">
+          <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange()"></nap-pagination>
+      </td>
+  </tr>
   </ng-template>
-  <div *ngIf="data" [ngSwitch]="data.Items.length > 0">
+  <div *ngIf="displayedData.Items.length > 0" [ngSwitch]="displayedData.Items.length > 0">
     <nap-breadcrumb style="width: 820px" class="excel-title" [items]="['SABA Promotion']" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
     <div class="nap-grid">
       <div style="width: 820px">
@@ -52,7 +58,7 @@
           <table class="table">
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
             <tbody>
-              <ng-container *ngFor="let item of data.Items">
+              <ng-container *ngFor="let item of displayedData.Items">
                 <ng-template [ngTemplateOutlet]="rowItem" [ngTemplateOutletContext]="{ item: item }">
                 </ng-template>
               </ng-container>
@@ -63,7 +69,7 @@
           <table>
             <tbody>
               <tr>
-                <th scope="col" class="no-data" colspan="9">
+                <th scope="col" class="no-data" colspan="4">
                   There is no data
                 </th>
               </tr>
@@ -74,7 +80,7 @@
           <table>
             <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
             <tfoot>
-                <ng-template [ngTemplateOutlet]="rowTotalItem" [ngTemplateOutletContext]="{ item: data.Total }">
+                <ng-template [ngTemplateOutlet]="rowTotalItem" [ngTemplateOutletContext]="{ item: displayedData.Total }">
                 </ng-template>
             </tfoot>
           </table>
