@@ -26,6 +26,7 @@
     "ejs": "^3.1.9",
     "font-awesome": "^4.7.0",
     "gulp": "^4.0.2",
+    "moment": "^2.29.1",
     "nap-components": "^12.2.20",
     "nap-theme": "^12.2.11",
     "node-sass": "^5.0.0",
