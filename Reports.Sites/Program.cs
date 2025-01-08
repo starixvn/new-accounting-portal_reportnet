@@ -22,7 +22,6 @@ builder.WebHost.ConfigureKestrel(options =>
 
 services.AddAuthentication(configuration);
 services.AddGlobalServices();
-services.AddOneBookUm(configuration);
 services.AddRemotingRef(configuration);
 services.AddResultCore(configuration);
 services.AddFanexData(configuration);
@@ -32,7 +31,6 @@ services.AddMemoryCache(configuration.GetSection("fanex.caching"));
 services.AddAllAutoMapper();
 services.AddAllMediatR();
 services.AddInternalServices();
-
 services.AddAllWebOptimizer();
 
 // Add services to the container.
@@ -51,6 +49,8 @@ services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
+
+services.AddOneBookUm(configuration);
 
 var app = builder.Build();
 
