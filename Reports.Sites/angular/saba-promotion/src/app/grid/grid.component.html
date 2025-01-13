@@ -44,7 +44,7 @@
       </td>
   </tr>
   </ng-template>
-  <div *ngIf="displayedData.Items.length > 0" [ngSwitch]="displayedData.Items.length > 0">
+  <div *ngIf="data" [ngSwitch]="displayedData.Items.length > 0">
     <nap-breadcrumb style="width: 820px" class="excel-title" [items]="['SABA Promotion']" [toolboxTemplate]="breadcrumbToolboxTemplate"></nap-breadcrumb>
     <div class="nap-grid">
       <div style="width: 820px">
