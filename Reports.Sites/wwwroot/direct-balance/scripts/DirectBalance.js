@@ -83,7 +83,8 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 					    HeaderText: customerType, Width: 150, Name: "CustomerType", CustomCellRender: function (currentCell) {
 					        return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\',' + _params.directBalanceReport.BalanceType + ')">' + currentCell.Value.Username + '</div>';
 					    }
-					},
+                    },
+                    { HeaderText: "Role", Width: 80, Name: "Role", CellAlign: "center" },
 					{ HeaderText: "Currency", Width: 80, Name: "Currency", CellAlign: "center" },
 					{ HeaderText: "Balance", Width: 150, Name: "Balance", CellAlign: "right", HeaderAlign: "center" , FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
@@ -94,7 +95,8 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
         else {
             columns = [
 					{ HeaderText: "No", Width: 60, Name: "Number", CellAlign: "center" },
-					{ HeaderText: customerType, Width: 150, Name: "CustomerType" },
+                    { HeaderText: customerType, Width: 150, Name: "CustomerType" },
+                    { HeaderText: "Role", Width: 80, Name: "Role", CellAlign: "center" },
 					{ HeaderText: "Currency", Width: 80, Name: "Currency", CellAlign: "center" },
 					{ HeaderText: "Balance", Width: 150, Name: "Balance", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
@@ -108,6 +110,7 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
             groupHeaderRows: [{
                 Columns: [{ HeaderText: "No", Name: "Number", MergeRowNumber: 2 },
                 { HeaderText: customerType, Name: "CustomerType", MergeRowNumber: 2 },
+                { HeaderText: "Role", Name: "Role", MergeRowNumber: 2 },
                 { HeaderText: "Currency", Name: "Currency", MergeRowNumber: 2 },
                 { HeaderText: "Main Wallet", Name: "Balance", MergeColNumber: 2 },
                 { HeaderText: "Reward Wallet", Name: "Reward", MergeColNumber: 2 }]
@@ -198,7 +201,8 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 							{
 							    Columns: [
 										{ Name: "Number", Value: customerIndex + 1 },
-										{ Name: "CustomerType", Value: currentCustomer },
+                                        { Name: "CustomerType", Value: currentCustomer },
+                                        { Name: "Role", Value: currentCustomer.Role },
 										{ Name: "Currency", Value: currentCustomer.CurrencyName },
 										{ Name: "Balance", Value: currentCustomer.Balance },
                                         { Name: "BaseRM", Value: currentCustomer.BaseBalance },
@@ -212,7 +216,8 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 							{
 							    Columns: [
 										{ Name: "Number", Value: customerIndex + 1 },
-										{ Name: "CustomerType", Value: currentCustomer.Username },
+                                        { Name: "CustomerType", Value: currentCustomer.Username },
+                                        { Name: "Role", Value: currentCustomer.Role },
 										{ Name: "Currency", Value: currentCustomer.CurrencyName },
 										{ Name: "Balance", Value: currentCustomer.Balance },
                                         { Name: "BaseRM", Value: currentCustomer.BaseBalance },
@@ -226,7 +231,7 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
                         var footerData = [
 						{
 						    Columns: [
-										{ Name: "Number", Value: "Total", MergeColNumber: 4 },
+									{ Name: "Number", Value: "Total", MergeColNumber: 5 },
                                     { Name: "BaseRM", Value: rs.Total.BaseBalance },
                                     { Name: "Reward", Value: "" },
                                 { Name: "RewardRM", Value: rs.Total.RewardRM }

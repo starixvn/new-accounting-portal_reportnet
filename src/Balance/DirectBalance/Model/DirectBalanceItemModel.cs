@@ -6,6 +6,8 @@ public class DirectBalanceItemModel
 
     public string Username { get; set; }
 
+    public string Role { get; set; }
+
     public string Currency { get; set; }
 
     public string CurrencyName { get;set; }

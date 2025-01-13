@@ -8,6 +8,8 @@ public class WinLossEntity
 
     public string Username { get; set; }
 
+    public string Role { get; set; }
+
     public string Currency { get; set; }
 
     public decimal RealTurnover { get; set; }
