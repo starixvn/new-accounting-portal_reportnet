@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { SelectItem } from 'nap-components/dropdown-select';
-import { CommonConstants } from '../common/constants';
 import { TurnoverType } from '../common/model';
 
 @Injectable({
@@ -20,4 +19,12 @@ export class FilterService {
         value: TurnoverType.NoDraw
     }];
   }
+
+  getStatusSelectItems(): SelectItem[] {
+    return [
+        { text: 'All', value:  undefined },
+        { text: 'Live', value: 1 },
+        { text: 'Non-Live', value: 0 }
+    ];
+   }
 }

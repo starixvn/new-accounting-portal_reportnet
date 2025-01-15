@@ -14,4 +14,6 @@ public class SportExcelRequest : IRequest<ExcelPackage>
     public int? SportId { get; set; }
 
     public string SportName { get; set; }
+
+    public byte? LiveStatus { get; set; }
 }

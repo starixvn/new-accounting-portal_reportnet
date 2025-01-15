@@ -18,6 +18,15 @@
       </div>
       <div class="nap-col">
         <div class="nap-group">
+          <label>Status</label>
+          <div class="nap-control">
+            <nap-dropdown-select [items]="ticketStatusSelectItems" [(value)]="ticketStatus">
+            </nap-dropdown-select>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col">
+        <div class="nap-group">
           <label>Turnover</label>
           <div class="nap-control turnover">
             <div class="form-check form-check-inline" *ngFor="let option of turnoverOptions">

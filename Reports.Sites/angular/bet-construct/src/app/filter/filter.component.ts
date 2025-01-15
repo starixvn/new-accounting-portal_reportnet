@@ -23,6 +23,8 @@ export class FilterComponent implements OnInit {
   endDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));
   turnoverOptions: SelectItem[] = [];
   turnover = TurnoverType.Normal;
+  ticketStatusSelectItems = this.filterService.getStatusSelectItems();
+  ticketStatus: number | undefined;
 
   constructor(private readonly filterService: FilterService,
     private readonly toastService: ToastService
@@ -48,7 +50,8 @@ export class FilterComponent implements OnInit {
       sportId: undefined,
       sportName: '',
       noDraw: this.turnover === TurnoverType.NoDraw,
-      breadCrumb: []
+      breadCrumb: [],
+      liveStatus: this.ticketStatus
     };
     return model;
   }

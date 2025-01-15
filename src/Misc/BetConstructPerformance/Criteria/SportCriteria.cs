@@ -12,6 +12,8 @@ public class SportCriteria : CriteriaBase
 
     public int? SportId { get; set; }
 
+    public byte? LiveStatus { get; set; }
+
     public override string GetSettingKey() => "Acc_Rpt_BetConstructPerformance";
 
     public override bool IsValid() => true;
