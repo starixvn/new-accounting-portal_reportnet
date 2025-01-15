@@ -28,7 +28,7 @@
 	</Function>
 	<Function Name="SMA Win Loss">
 		<Setting Key="SMAWinLoss-CurrencySel" SpName="Acc_Rpt_SMAWinlossSummary_CurrencySel" DbName="DBWH.bodb_dwrs.wsv_nap" />
-		<Setting Key="SMAWinLoss-Summary" SpName="Acc_Rpt_SMAWinlossSummary" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0" />
+		<Setting Key="SMAWinLoss-Summary" SpName="Acc_Rpt_SMAWinlossSummary_xtest" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0" />
 		<Setting Key="SMAWinLoss-SiteSel" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="SMAWinLoss-SportSel" SpName="Acc_Rpt_SMAWinlossSummary_SportSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="SMAWinLoss-VirtualRate" SpName="Acc_Rpt_SMAWinlossSummary_CustVirtualMultiplierSel" DbName="DBWH.bodb_dwrs.wsv_nap" />

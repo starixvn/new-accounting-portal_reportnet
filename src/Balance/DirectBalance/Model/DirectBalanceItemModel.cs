@@ -26,6 +26,7 @@ public class DirectBalanceItemModel
         {
             CustId = string.Empty,
             Username = string.Empty,
+            Role = string.Empty,
             Currency = string.Empty,
             Balance = a.Balance + b.Balance,
             BaseBalance = a.BaseBalance + b.BaseBalance,
