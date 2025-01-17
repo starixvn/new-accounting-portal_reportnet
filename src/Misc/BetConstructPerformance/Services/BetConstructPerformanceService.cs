@@ -22,7 +22,7 @@ public class BetConstructPerformanceServiceImp(IDynamicRepository repository) : 
         };
         if (criteria.SportId.HasValue)
         {
-            data.Total.MatchCount = rawData.Select(x => x.MatchId).Distinct().Count();
+            data.Total.MatchCount = criteria.MatchCount;
         }
         return Task.FromResult(data);
     }

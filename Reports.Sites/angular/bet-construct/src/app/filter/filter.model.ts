@@ -6,4 +6,5 @@ export interface FilterModel {
     sportName: string;
     breadCrumb: string[];
     liveStatus?: number;
+    matchCount?: number;
   }

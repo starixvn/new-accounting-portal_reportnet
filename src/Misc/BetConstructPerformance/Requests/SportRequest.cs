@@ -14,4 +14,6 @@ public class SportRequest : IRequest<SportModel>
     public int? SportId { get; set; }
 
     public byte? LiveStatus { get; set; }
+
+    public int MatchCount { get; set; }
 }

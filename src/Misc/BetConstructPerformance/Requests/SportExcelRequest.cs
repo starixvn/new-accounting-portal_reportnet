@@ -16,4 +16,6 @@ public class SportExcelRequest : IRequest<ExcelPackage>
     public string SportName { get; set; }
 
     public byte? LiveStatus { get; set; }
+
+    public int MatchCount { get; set; }
 }

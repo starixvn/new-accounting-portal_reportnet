@@ -30,9 +30,10 @@ export class SportGridComponent implements Grid {
     });
   }
 
-  showSportDetail(sportId: number, sportName: string): void {
+  showSportDetail(sportId: number, sportName: string, matchCount: number): void {
     this.gridService.filterModel.sportId = sportId;
     this.gridService.filterModel.sportName = sportName;
+    this.gridService.filterModel.matchCount = matchCount;
     this.gridService.generate!(GridType.SportDetail);
   }
 
