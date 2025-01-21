@@ -29,4 +29,5 @@ public static class FunctionKeys
     public const string MarginReport = "MarginReport";
     public const string DailyCreatedCustomers = "DailyCreatedCustomers";
     public const string BetConstructPerformance = "BetConstructPerformance";
+    public const string SabaPromotion = "SabaPromotion";
 }

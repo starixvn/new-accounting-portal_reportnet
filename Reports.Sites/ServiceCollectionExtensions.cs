@@ -4,6 +4,7 @@ using Fanex.Result.Core.Base;
 using Fanex.Result.Core.RemotingRef;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Reports.Sites.DependencyInjection;
+using SabaPromotion;
 
 namespace Reports.Sites;
 
@@ -81,6 +82,7 @@ public static class ServiceCollectionExtensions
         services.RegisterDuplicateTicketsServices();
         services.RegisterMostVisitedPageServices();
         services.RegisterBetConstructPerformanceServices();
+        services.RegisterSabaPromotionServices();
     }
 
     public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -302,6 +304,7 @@ public static class ServiceCollectionExtensions
             cfg.InitializeDuplicateTickets();
             cfg.InitializeBetConstructPerformance();
             cfg.InitializeLeagueWinLoss();
+            cfg.InitializeSabaPromotion();
         });
 
         var mapper = config.CreateMapper();
