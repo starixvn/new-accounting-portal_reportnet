@@ -1,4 +1,5 @@
-﻿using Fanex.Data.Repository;
+﻿using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace BetConstructPerformance.Criteria;
 
@@ -11,6 +12,11 @@ public class SportCriteria : CriteriaBase
     public bool NoDraw { get; set; }
 
     public int? SportId { get; set; }
+
+    public byte? LiveStatus { get; set; }
+
+    [SpParam(Ignored = true)]
+    public int MatchCount { get; set; }
 
     public override string GetSettingKey() => "Acc_Rpt_BetConstructPerformance";
 

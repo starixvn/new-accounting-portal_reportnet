@@ -5,4 +5,6 @@ export interface FilterModel {
     noDraw: boolean;
     sportName: string;
     breadCrumb: string[];
+    liveStatus?: number;
+    matchCount?: number;
   }

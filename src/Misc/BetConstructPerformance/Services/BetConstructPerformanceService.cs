@@ -20,6 +20,10 @@ public class BetConstructPerformanceServiceImp(IDynamicRepository repository) : 
             Items = rawData,
             Total = rawData.DynamicSum()
         };
+        if (criteria.SportId.HasValue)
+        {
+            data.Total.MatchCount = criteria.MatchCount;
+        }
         return Task.FromResult(data);
     }
 }

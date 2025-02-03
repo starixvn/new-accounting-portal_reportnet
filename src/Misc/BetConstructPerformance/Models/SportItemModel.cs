@@ -16,6 +16,8 @@ public class SportItemModel
 
     public string LiveStatus { get; set; }
 
+    public int MatchId { get; set; }
+
     public int MatchCount { get; set; }
 
     public int BetCount { get; set; }
