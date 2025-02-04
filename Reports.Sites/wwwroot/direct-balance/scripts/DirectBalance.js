@@ -81,7 +81,11 @@ Fanex.AccountingReports.Balance.DirectBalance = function () {
 					{ HeaderText: "No", Width: 60, Name: "Number", CellAlign: "center" },
 					{
 					    HeaderText: customerType, Width: 150, Name: "CustomerType", CustomCellRender: function (currentCell) {
-					        return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\',' + _params.directBalanceReport.BalanceType + ')">' + currentCell.Value.Username + '</div>';
+                            if (currentCell.Value.Role == "Member") {
+                                return currentCell.Value.Username;
+                            } else {
+                                return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\',' + _params.directBalanceReport.BalanceType + ')">' + currentCell.Value.Username + '</div>';
+                            }
 					    }
                     },
                     { HeaderText: "Role", Width: 80, Name: "Role", CellAlign: "center" },

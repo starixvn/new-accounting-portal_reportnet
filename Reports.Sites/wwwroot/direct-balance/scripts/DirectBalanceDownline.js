@@ -28,7 +28,11 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                     { HeaderText: "No", Width: 60, Name: "Number", CellAlign: "center" },
                     {
                         HeaderText: customerType, Width: 150, Name: "CustomerType", CustomCellRender: function (currentCell) {
-                            return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\',' + self._params.balanceType + ')">' + currentCell.Value.Username + '</div>';
+                            if (currentCell.Value.Role == "Member") {
+                                return currentCell.Value.Username;
+                            } else {
+                                return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\',' + self._params.balanceType + ')">' + currentCell.Value.Username + '</div>';
+                            }
                         }
                     },
                     { HeaderText: "Role", Width: 80, Name: "Role", CellAlign: "center" },
@@ -116,7 +120,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                 if (rs && rs.DirectBalanceItems) {
                     //// Buid Grid Data
                     var bodyData = [];
-                    var _title = "Agent Balance";
+                    var _title = "Agent Balance & Master's Direct Member Balance";
                     var customerLength = rs.DirectBalanceItems.length;
                     for (var customerIndex = 0; customerIndex < customerLength; customerIndex++) {
                         var currentCustomer = rs.DirectBalanceItems[customerIndex];

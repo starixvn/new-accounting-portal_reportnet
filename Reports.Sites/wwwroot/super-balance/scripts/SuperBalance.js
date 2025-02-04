@@ -145,17 +145,17 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
 
         _tables.reportContainer.removeClass("display-none");
 
-        if (customerType != 'Member') {
-            columns = [
+         if (customerType != 'Member') {
+             columns = [
                 { HeaderText: "No", Width: 60, Name: "Number", HeaderAlign: "center", CellAlign: "center" },
                 {
                     HeaderText: customerType, Width: 150, Name: "CustomerType", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell)
                     {
-                        if (currentCell.Value.HeadlineEnabled) {
+                        if (currentCell.Value.Role == "Member") {
                             return currentCell.Value.Username;                            
                         }
                         else {
-                            return '<div class="link" onclick="viewSuperBalanceDownline(\'' + customerType + '\',' + currentCell.Value.CustId + ',\'' + currentCell.Value.Username + '\')">' + currentCell.Value.Username + '</div>';
+                            return '<div class="link" onclick="viewSuperBalanceDownline(\'' + currentCell.Value.Role + '\',' + currentCell.Value.CustId + ',\'' + currentCell.Value.Username + '\')">' + currentCell.Value.Username + '</div>';
                         }
                     }
                 },
@@ -166,9 +166,8 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
                 { HeaderText: "Reward Receivable", Width: 150, Name: "Reward", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Reward Receivable (RM)", Width: 150, Name: "RewardRM", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }
             ];
-        }
-        else {
-            columns = [
+         } else {
+              columns = [
                 { HeaderText: "No", Width: 60, Name: "Number", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: customerType, Width: 150, Name: "CustomerType", HeaderAlign: "center", CellAlign: "left" },
                 { HeaderText: "Role", Width: 80, Name: "Role", HeaderAlign: "center", CellAlign: "center" },
@@ -178,7 +177,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
                 { HeaderText: "Reward Receivable", Width: 150, Name: "Reward", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Reward Receivable (RM)", Width: 150, Name: "RewardRM", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }
             ];
-        }
+         }
 
         if (rs && rs.SuperBalanceItems) {
             var customerLength = rs.SuperBalanceItems.length;
