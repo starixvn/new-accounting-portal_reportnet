@@ -38,6 +38,7 @@ public class WinLossEntity
             CustId = 0,
             Username = string.Empty,
             Currency = string.Empty,
+            Role = string.Empty,
             RealTurnover = a.RealTurnover + b.RealTurnover,
             RealIncome = a.RealIncome + b.RealIncome,
             LevelTurnover = a.LevelTurnover + b.LevelTurnover,
