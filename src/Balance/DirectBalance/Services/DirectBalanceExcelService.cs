@@ -29,11 +29,12 @@ public class DirectBalanceExcelServiceImp(ConfigurationService configurationServ
     public Task<ExcelPackage> ExportExcelDirectBalance(DirectBalanceModel data, string level)
     {
         LoadTemplate("DirectBalance.xlsx");
-        BuildTitle($"{level} Balance", "A1:G1");
+        var title = level == "Agent" ? "Agent Balance & Master's Direct Member Balance" : $"{level} Balance";
+        BuildTitle(title, "A1:G1");
         var startIndexOfTotal = data.DirectBalanceItems.Count() + StartRowIndex;
         BuildBodyRows(data.DirectBalanceItems, StartRowIndex);
         BuildTotalRow(data.Total, startIndexOfTotal);
-        sheet.Cells["B2:B3"].Value = $"{level} Balance";
+        sheet.Cells["B2:B3"].Value = level;
         ClearTemplate();
         return Task.FromResult(ExcelPackage);
     }
