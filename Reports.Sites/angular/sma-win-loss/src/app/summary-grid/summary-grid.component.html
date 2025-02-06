@@ -1,6 +1,6 @@
 <ng-template #colgroup>
   <colgroup>
-    <col style="width: 120px" />
+    <col style="width: 160px" />
     <col style="width: 80px" />
     <col style="width: 80px" />
     <col style="width: 120px" />
@@ -65,12 +65,12 @@
 </ng-template>
 <div *ngIf="displaySummaryWinLosses" [ngSwitch]="hasData">
   <div class="nap-grid">
-    <div style="width: 2080px;" [ngSwitch]="isSuperLevel">
+    <div style="width: 2120px;" [ngSwitch]="isSuperLevel">
       <nap-breadcrumb *ngSwitchCase="true" [items]="breadcrumbItems" [toolboxTemplate]="breadcrumbToolboxTemplate">
       </nap-breadcrumb>
       <nap-breadcrumb *ngSwitchCase="false" [items]="breadcrumbItems"></nap-breadcrumb>
     </div>
-    <div style="width: 2080px;">
+    <div style="width: 2120px;">
       <div class="header">
         <table>
           <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
