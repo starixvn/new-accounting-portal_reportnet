@@ -53,6 +53,7 @@
         </div>
     </section>
     <div id="dialog-popup"></div>
+    <script src="@Url.Content("~/nap-auth/re-checkin.js")" type="text/javascript"></script>
     @RenderSection("Scripts", false)
     @if (!Context.User.Identity.Name.Contains("starix") && configuration.GetSection("Fanex.NAP.Client:Environment").Value == "LIVE")
     {

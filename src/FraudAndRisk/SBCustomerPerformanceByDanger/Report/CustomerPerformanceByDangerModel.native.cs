@@ -5,9 +5,21 @@ public class CustomerPerformanceByDangerModel
 
     public string UserName { get; set; }
 
-    public string AgentName { get; set; }
+    public string agentName;
 
-    public string MasterName { get; set; }
+    public string AgentName
+    {
+        get => string.IsNullOrEmpty(agentName) ? "-" : agentName;
+        set => agentName = value;
+    }
+
+    public string masterName;
+
+    public string MasterName
+    {
+        get => string.IsNullOrEmpty(masterName) ? "-" : masterName;
+        set => masterName = value;
+    }
 
     public string SuperName { get; set; }
 

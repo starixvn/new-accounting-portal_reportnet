@@ -23,11 +23,11 @@ public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelB
 
     private const int StartColIndex = 1;
 
-    private const int EndColIndex = 17;
+    private const int EndColIndex = 18;
 
     private const int NumberRowPerUser = 5;
 
-    private const int StartMonthlyColIndex = 4;
+    private const int StartMonthlyColIndex = 5;
 
     private ExcelPackage ExcelPackage { get; set; }
 
@@ -56,23 +56,23 @@ public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelB
 
     private void BuildTitle(string title)
     {
-        summarySheet.Cells["A1:Q1"].Value = title;
+        summarySheet.Cells["A1:R1"].Value = title;
     }
 
     private void BuildHeader(int year)
     {
-        summarySheet.Cells["D3:D3"].Value = $"Jan, {year}";
-        summarySheet.Cells["E3:E3"].Value = $"Feb, {year}";
-        summarySheet.Cells["F3:F3"].Value = $"Mar, {year}";
-        summarySheet.Cells["G3:G3"].Value = $"Apr, {year}";
-        summarySheet.Cells["H3:H3"].Value = $"May, {year}";
-        summarySheet.Cells["I3:I3"].Value = $"Jun, {year}";
-        summarySheet.Cells["J3:J3"].Value = $"Jul, {year}";
-        summarySheet.Cells["K3:K3"].Value = $"Aug, {year}";
-        summarySheet.Cells["L3:L3"].Value = $"Sep, {year}";
-        summarySheet.Cells["M3:M3"].Value = $"Oct, {year}";
-        summarySheet.Cells["N3:N3"].Value = $"Nov, {year}";
-        summarySheet.Cells["O3:O3"].Value = $"Dec, {year}";
+        summarySheet.Cells["E3:E3"].Value = $"Jan, {year}";
+        summarySheet.Cells["F3:F3"].Value = $"Feb, {year}";
+        summarySheet.Cells["G3:G3"].Value = $"Mar, {year}";
+        summarySheet.Cells["H3:H3"].Value = $"Apr, {year}";
+        summarySheet.Cells["I3:I3"].Value = $"May, {year}";
+        summarySheet.Cells["J3:J3"].Value = $"Jun, {year}";
+        summarySheet.Cells["K3:K3"].Value = $"Jul, {year}";
+        summarySheet.Cells["L3:L3"].Value = $"Aug, {year}";
+        summarySheet.Cells["M3:M3"].Value = $"Sep, {year}";
+        summarySheet.Cells["N3:N3"].Value = $"Oct, {year}";
+        summarySheet.Cells["O3:O3"].Value = $"Nov, {year}";
+        summarySheet.Cells["P3:P3"].Value = $"Dec, {year}";
     }
 
     private void BuildBody(WinLossModel winlosses)
@@ -96,7 +96,7 @@ public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelB
             numberRowOfTotal++;
         }
 
-        summarySheet.Cells[$"A{rowIndex - numberRowOfTotal}:B{rowIndex - 1}"].Merge = true;
+        summarySheet.Cells[$"A{rowIndex - numberRowOfTotal}:C{rowIndex - 1}"].Merge = true;
     }
 
     private void BuildRow(UsernameWinLoss username, int rowIndex)
@@ -117,8 +117,9 @@ public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelB
 
         var monthlyColIndex = StartMonthlyColIndex;
         summarySheet.Cells[$"A{rowIndex}:A{rowIndex}"].Value = username.Username;
-        summarySheet.Cells[$"B{rowIndex}:B{rowIndex}"].Value = username.Currency;
-        summarySheet.Cells[$"C{rowIndex}:C{rowIndex}"].Value = username.Name;
+        summarySheet.Cells[$"B{rowIndex}:B{rowIndex}"].Value = username.Role;
+        summarySheet.Cells[$"C{rowIndex}:C{rowIndex}"].Value = username.Currency;
+        summarySheet.Cells[$"D{rowIndex}:D{rowIndex}"].Value = username.Name;
 
         foreach (var month in username.Months)
         {
@@ -126,7 +127,7 @@ public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelB
             monthlyColIndex++;
         }
 
-        summarySheet.Cells[$"Q{rowIndex}:Q{rowIndex}"].Value = username.VirtualRate;
+        summarySheet.Cells[$"R{rowIndex}:R{rowIndex}"].Value = username.VirtualRate;
     }
 
     private void BuildTotalRow(UsernameWinLoss username, int rowIndex)
@@ -136,8 +137,9 @@ public class ExcelBuilderImp(ConfigurationService configurationService) : ExcelB
             .Copy(summarySheet.Cells[rowIndex, StartColIndex, rowIndex, EndColIndex]);
         var monthlyColIndex = StartMonthlyColIndex;
         summarySheet.Cells[$"A{rowIndex}:A{rowIndex}"].Value = username.Username;
-        summarySheet.Cells[$"B{rowIndex}:B{rowIndex}"].Value = username.Currency;
-        summarySheet.Cells[$"C{rowIndex}:C{rowIndex}"].Value = username.Name;
+        summarySheet.Cells[$"B{rowIndex}:B{rowIndex}"].Value = username.Role;
+        summarySheet.Cells[$"C{rowIndex}:C{rowIndex}"].Value = username.Currency;
+        summarySheet.Cells[$"D{rowIndex}:D{rowIndex}"].Value = username.Name;
 
         foreach (var month in username.Months)
         {

@@ -11,17 +11,20 @@ public class DirectBalanceItemExcelModel
     public string Username { get; set; }
 
     [Cell("C4")]
-    public string CurrencyName { get; set; }
+    public string Role { get; set; }
 
     [Cell("D4")]
-    public decimal Balance { get; set; }
+    public string CurrencyName { get; set; }
 
     [Cell("E4")]
-    public decimal BaseBalance { get; set; }
+    public decimal Balance { get; set; }
 
     [Cell("F4")]
-    public decimal Reward { get; set; }
+    public decimal BaseBalance { get; set; }
 
     [Cell("G4")]
+    public decimal Reward { get; set; }
+
+    [Cell("H4")]
     public decimal RewardRM { get; set; }
 }

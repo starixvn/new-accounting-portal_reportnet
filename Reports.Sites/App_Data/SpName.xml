@@ -28,7 +28,7 @@
 	</Function>
 	<Function Name="SMA Win Loss">
 		<Setting Key="SMAWinLoss-CurrencySel" SpName="Acc_Rpt_SMAWinlossSummary_CurrencySel" DbName="DBWH.bodb_dwrs.wsv_nap" />
-		<Setting Key="SMAWinLoss-Summary" SpName="Acc_Rpt_SMAWinlossSummary" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0" />
+		<Setting Key="SMAWinLoss-Summary" SpName="Acc_Rpt_SMAWinlossSummary_xtest" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="0" />
 		<Setting Key="SMAWinLoss-SiteSel" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="SMAWinLoss-SportSel" SpName="Acc_Rpt_SMAWinlossSummary_SportSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="SMAWinLoss-VirtualRate" SpName="Acc_Rpt_SMAWinlossSummary_CustVirtualMultiplierSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
@@ -287,20 +287,20 @@
 		<Setting Key="Licensee_CompanyWinloss_GetLicensee" SpName="Acc_Rpt_CompanyWinloss_GetLicensees" DbName="DBEXT.bodb02.wsv_nap" TimeOut="600" />
 	</Function>
 	<Function Name="Balance">
-		<Setting Key="Balance_DirectBalance_DirectMaster" SpName="Acc_Rpt_Balance_Direct_Master" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_DirectBalance_DirectAgent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_DirectBalance_DirectMember" SpName="Acc_Rpt_Balance_Direct_Member" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_DirectBalance_DirectMasterYesterday" SpName="Acc_Rpt_Balance_Direct_Master_Yesterday" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_DirectBalance_DirectAgentYesterday" SpName="Acc_Rpt_Balance_Direct_Agent_Yesterday" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_DirectBalance_DirectMemberYesterday" SpName="Acc_Rpt_Balance_Direct_Member_Yesterday" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_SuperBalance_Super" SpName="Acc_Rpt_Balance_Super" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_SuperBalance_Master" SpName="Acc_Rpt_Balance_Master" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_SuperBalance_Agent" SpName="Acc_Rpt_Balance_Agent" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_SuperBalance_Member" SpName="Acc_Rpt_Balance_Member" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_SuperBalance_SuperYesterday" SpName="Acc_Rpt_Balance_Super_Yesterday" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_SuperBalance_MasterYesterday" SpName="Acc_Rpt_Balance_Master_Yesterday" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_SuperBalance_AgentYesterday" SpName="Acc_Rpt_Balance_Agent_Yesterday" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
-		<Setting Key="Balance_SuperBalance_MemberYesterday" SpName="Acc_Rpt_Balance_Member_Yesterday" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_DirectBalance_DirectMaster" SpName="Acc_Rpt_Balance_Direct_Master_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_DirectBalance_DirectAgent" SpName="Acc_Rpt_Balance_Direct_Agent_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_DirectBalance_DirectMember" SpName="Acc_Rpt_Balance_Direct_Member_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_DirectBalance_DirectMasterYesterday" SpName="Acc_Rpt_Balance_Direct_Master_Yesterday_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_DirectBalance_DirectAgentYesterday" SpName="Acc_Rpt_Balance_Direct_Agent_Yesterday_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_DirectBalance_DirectMemberYesterday" SpName="Acc_Rpt_Balance_Direct_Member_Yesterday_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_SuperBalance_Super" SpName="Acc_Rpt_Balance_Super_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_SuperBalance_Master" SpName="Acc_Rpt_Balance_Master_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_SuperBalance_Agent" SpName="Acc_Rpt_Balance_Agent_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_SuperBalance_Member" SpName="Acc_Rpt_Balance_Member_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_SuperBalance_SuperYesterday" SpName="Acc_Rpt_Balance_Super_Yesterday_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_SuperBalance_MasterYesterday" SpName="Acc_Rpt_Balance_Master_Yesterday_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_SuperBalance_AgentYesterday" SpName="Acc_Rpt_Balance_Agent_Yesterday_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
+		<Setting Key="Balance_SuperBalance_MemberYesterday" SpName="Acc_Rpt_Balance_Member_Yesterday_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600"></Setting>
 	</Function>
 	<Function Name="Core - Currencies">
 		<Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBAGE.bodb02.wsv_nap">

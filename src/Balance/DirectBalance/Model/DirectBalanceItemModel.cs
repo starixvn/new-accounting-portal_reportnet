@@ -6,6 +6,8 @@ public class DirectBalanceItemModel
 
     public string Username { get; set; }
 
+    public string Role { get; set; }
+
     public string Currency { get; set; }
 
     public string CurrencyName { get;set; }
@@ -24,6 +26,7 @@ public class DirectBalanceItemModel
         {
             CustId = string.Empty,
             Username = string.Empty,
+            Role = string.Empty,
             Currency = string.Empty,
             Balance = a.Balance + b.Balance,
             BaseBalance = a.BaseBalance + b.BaseBalance,

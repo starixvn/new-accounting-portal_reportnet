@@ -1,6 +1,7 @@
 <ng-template #colgroup>
   <colgroup>
-    <col style="width: 120px" />
+    <col style="width: 160px" />
+    <col style="width: 80px" />
     <col style="width: 80px" />
     <col style="width: 120px" />
     <col style="width: 120px" />
@@ -23,6 +24,7 @@
   <thead>
     <tr>
       <th>Username</th>
+      <th>Role</th>
       <th>Currency</th>
       <th>Data</th>
       <th>Jan, {{year}}</th>
@@ -44,6 +46,7 @@
 </ng-template>
 <ng-template #rowItem let-item="item">
   <td class="text-left">{{ item.Username }}</td>
+  <td class="text-center">{{ item.Role }}</td>
   <td class="text-center">{{ item.Currency }}</td>
   <td class="text-left">{{ item.Name }}</td>
   <td *ngFor="let cellItem of item.Months" class="text-right" [ngSwitch]="isValidNumber(cellItem.Value)">
@@ -62,12 +65,12 @@
 </ng-template>
 <div *ngIf="displaySummaryWinLosses" [ngSwitch]="hasData">
   <div class="nap-grid">
-    <div style="width: 2000px;" [ngSwitch]="isSuperLevel">
+    <div style="width: 2120px;" [ngSwitch]="isSuperLevel">
       <nap-breadcrumb *ngSwitchCase="true" [items]="breadcrumbItems" [toolboxTemplate]="breadcrumbToolboxTemplate">
       </nap-breadcrumb>
       <nap-breadcrumb *ngSwitchCase="false" [items]="breadcrumbItems"></nap-breadcrumb>
     </div>
-    <div style="width: 2000px;">
+    <div style="width: 2120px;">
       <div class="header">
         <table>
           <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
@@ -91,7 +94,7 @@
         <table>
           <tbody>
             <tr>
-              <th class="no-data" colspan="17">
+              <th class="no-data" colspan="18">
                 There is no data
               </th>
             </tr>
@@ -103,7 +106,7 @@
           <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
           <tfoot>
             <tr *ngFor="let item of summaryWinLosses.Total; first as isFirst" class="font-weight-bold">
-              <td *ngIf="isFirst" rowspan="3" colspan="2" class="text-center">{{item.Username}}</td>
+              <td *ngIf="isFirst" rowspan="3" colspan="3" class="text-center">{{item.Username}}</td>
               <td class="text-left">{{ item.Name }}</td>
               <td *ngFor="let cellItem of item.Months" class="text-right" [ngSwitch]="isValidNumber(cellItem.Value)">
                 <div *ngSwitchCase="true" [napDecimalFormat]="cellItem.Value"></div>
@@ -111,7 +114,7 @@
               </td>
             </tr>
             <tr>
-              <td class="paging" colspan="17">
+              <td class="paging" colspan="18">
                 <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
               </td>
             </tr>

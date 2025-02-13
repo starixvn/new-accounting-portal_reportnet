@@ -15,7 +15,12 @@ import angular from "angular";
         return service;
 
         function resolveUrl(url) {
-            return config.legacyPath + url;
+            if (config.legacyPath != null && config.legacyPath != "") {
+                return config.legacyPath + url;
+            } else {
+                return url;
+            }
+            
         }
     }
 })(angular);

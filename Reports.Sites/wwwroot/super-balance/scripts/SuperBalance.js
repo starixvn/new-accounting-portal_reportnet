@@ -145,38 +145,39 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
 
         _tables.reportContainer.removeClass("display-none");
 
-        if (customerType != 'Member') {
-            columns = [
+         if (customerType != 'Member') {
+             columns = [
                 { HeaderText: "No", Width: 60, Name: "Number", HeaderAlign: "center", CellAlign: "center" },
                 {
                     HeaderText: customerType, Width: 150, Name: "CustomerType", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell)
                     {
-                        if (currentCell.Value.HeadlineEnabled) {
+                        if (currentCell.Value.Role == "Member") {
                             return currentCell.Value.Username;                            
                         }
                         else {
-                            return '<div class="link" onclick="viewSuperBalanceDownline(\'' + customerType + '\',' + currentCell.Value.CustId + ',\'' + currentCell.Value.Username + '\')">' + currentCell.Value.Username + '</div>';
+                            return '<div class="link" onclick="viewSuperBalanceDownline(\'' + currentCell.Value.Role + '\',' + currentCell.Value.CustId + ',\'' + currentCell.Value.Username + '\')">' + currentCell.Value.Username + '</div>';
                         }
                     }
                 },
+                { HeaderText: "Role", Width: 80, Name: "Role", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Currency", Width: 80, Name: "Currency", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Balance", Width: 150, Name: "Balance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Reward Receivable", Width: 150, Name: "Reward", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Reward Receivable (RM)", Width: 150, Name: "RewardRM", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }
             ];
-        }
-        else {
-            columns = [
+         } else {
+              columns = [
                 { HeaderText: "No", Width: 60, Name: "Number", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: customerType, Width: 150, Name: "CustomerType", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Role", Width: 80, Name: "Role", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Currency", Width: 80, Name: "Currency", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Balance", Width: 150, Name: "Balance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Reward Receivable", Width: 150, Name: "Reward", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Reward Receivable (RM)", Width: 150, Name: "RewardRM", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER }
             ];
-        }
+         }
 
         if (rs && rs.SuperBalanceItems) {
             var customerLength = rs.SuperBalanceItems.length;
@@ -189,6 +190,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
                         Columns: [
                                 { Name: "Number", Value: customerIndex + 1 },
                                 { Name: "CustomerType", Value: currentCustomer },
+                                { Name: "Role", Value: currentCustomer.Role },
                                 { Name: "Currency", Value: currentCustomer.CurrencyName },
                                 { Name: "Balance", Value: currentCustomer.Balance },
                                 { Name: "BaseRM", Value: currentCustomer.BaseBalance },
@@ -202,6 +204,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
                         Columns: [
                                 { Name: "Number", Value: customerIndex + 1 },
                                 { Name: "CustomerType", Value: currentCustomer.Username },
+                                { Name: "Role", Value: currentCustomer.Role },
                                 { Name: "Currency", Value: currentCustomer.CurrencyName },
                                 { Name: "Balance", Value: currentCustomer.Balance },
                                 { Name: "BaseRM", Value: currentCustomer.BaseBalance },
@@ -215,7 +218,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
                 footerData = [
                 {
                     Columns: [
-				                { Name: "Number", Value: "Total", MergeColNumber: 4 },
+				                { Name: "Number", Value: "Total", MergeColNumber: 5 },
                                 { Name: "BaseRM", Value: rs.BaseBalanceTotal.BaseBalance },
                                 { Name: "Reward", Value: "" },
                                 { Name: "RewardRM", Value: rs.BaseBalanceTotal.RewardRM }
@@ -229,6 +232,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             groupHeaderRows: [{
                 Columns: [{ HeaderText: "No", Name: "Number", MergeRowNumber: 2 },
                 { HeaderText: customerType, Name: "CustomerType", MergeRowNumber: 2 },
+                { HeaderText: "Role", Name: "Role", MergeRowNumber: 2 },
                 { HeaderText: "Currency", Name: "Currency", MergeRowNumber: 2 },
                 { HeaderText: "Main Wallet", Name: "Balance", MergeColNumber: 2 },
                 { HeaderText: "Reward Wallet", Name: "Reward", MergeColNumber: 2 }]
@@ -281,7 +285,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             bodyData = [
             {
                 CssClass: "totalRow",
-                Columns: [{ Name: "Number", Value: "Total", MergeColNumber: 4 },
+                Columns: [{ Name: "Number", Value: "Total", MergeColNumber: 5 },
                     { Name: "BaseRM", Value: rs.BaseBalanceTotal.BaseBalance, CellAlign: "right" },
                     { Name: "Reward", Value: "", CellAlign: "right" },
                     { Name: "RewardRM", Value: rs.BaseBalanceTotal.RewardRM, CellAlign: "right" }]
@@ -290,6 +294,7 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
 
         columns = [{ HeaderText: "No", Width: 60, Name: "Number", HeaderAlign: "center", CellAlign: "center", CssClass: "display-none" },
             { HeaderText: "CustomerType", Width: 150, Name: "CustomerType", HeaderAlign: "center", CellAlign: "center", CssClass: "display-none" },
+            { HeaderText: "Role", Width: 80, Name: "Role", HeaderAlign: "center", CellAlign: "center", CssClass: "display-none" },
             { HeaderText: "Currency", Width: 80, Name: "Currency", HeaderAlign: "center", CellAlign: "center", CssClass: "display-none" },
             { HeaderText: "Balance", Width: 150, Name: "Balance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, CssClass: "display-none" },
             { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, CssClass: "display-none" },

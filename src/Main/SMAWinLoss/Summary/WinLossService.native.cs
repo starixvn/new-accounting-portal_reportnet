@@ -45,7 +45,7 @@ namespace SMAWinLoss.Summary
             var criteria = mapper.Map<WinLossCriteria>(parameters);
             var rawData = await repository.FetchMultipleAsync<WinLossEntity, WinLossEntity, int>(criteria);
 
-            var usernameGroups = rawData.Item1.GroupBy(x => new { x.CustId, x.Username, x.Currency, x.VirtualRate });
+            var usernameGroups = rawData.Item1.GroupBy(x => new { x.CustId, x.Username, x.Role, x.Currency, x.VirtualRate });
 
             foreach (var group in usernameGroups)
             {
@@ -56,7 +56,7 @@ namespace SMAWinLoss.Summary
 
                 var userNameTotal = usernameGroupRawData.DynamicSum();
 
-                var usernameData = InitUserData(group.Key.CustId, group.Key.Username, group.Key.Currency, group.Key.VirtualRate, parameters.Year);
+                var usernameData = InitUserData(group.Key.CustId, group.Key.Username, group.Key.Role, group.Key.Currency, group.Key.VirtualRate, parameters.Year);
 
                 foreach (var monthlyRawDataByUsername in usernameGroupRawData)
                 {
@@ -89,6 +89,7 @@ namespace SMAWinLoss.Summary
         private List<UsernameWinLoss> InitUserData(
             int custId,
             string username,
+            string role,
             string currency,
             string virtualRate,
             int year)
@@ -97,6 +98,7 @@ namespace SMAWinLoss.Summary
             {
                 CustId = custId,
                 Username = username,
+                Role = role,
                 Currency = currency,
                 Name = "Real Turnover",
                 VirtualRate = virtualRate,
@@ -106,6 +108,7 @@ namespace SMAWinLoss.Summary
             {
                 CustId = custId,
                 Username = username,
+                Role = role,
                 Currency = currency,
                 Name = "Real Income",
                 VirtualRate = virtualRate,
@@ -115,6 +118,7 @@ namespace SMAWinLoss.Summary
             {
                 CustId = custId,
                 Username = username,
+                Role = role,
                 Currency = currency,
                 Name = "Real Margin (%)",
                 VirtualRate = virtualRate,
@@ -124,6 +128,7 @@ namespace SMAWinLoss.Summary
             {
                 CustId = custId,
                 Username = username,
+                Role = role,
                 Currency = currency,
                 Name = "Average PT (%)",
                 VirtualRate = virtualRate,
@@ -133,6 +138,7 @@ namespace SMAWinLoss.Summary
             {
                 CustId = custId,
                 Username = username,
+                Role = role,
                 Currency = currency,
                 Name = "Average Bet",
                 VirtualRate = virtualRate,
