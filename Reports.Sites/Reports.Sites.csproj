@@ -61,6 +61,7 @@
     <ProjectReference Include="..\src\Misc\TotalSMAAndActiveMember\TotalSMAAndActiveMember.csproj" />
     <ProjectReference Include="..\src\Misc\UpdatedUsernameCredit\UpdatedUsernameCredit.csproj" />
     <ProjectReference Include="..\src\Shared\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\src\TGR\SoccerPerformanceDetail\SoccerPerformanceDetail.csproj" />
     <ProjectReference Include="..\src\WinLoss\DailyMixParlay\DailyMixParlay.csproj" />
     <ProjectReference Include="..\src\WinLoss\LeagueWinLoss\LeagueWinLoss.csproj" />
     <ProjectReference Include="..\src\WinLoss\TreeWinLoss\TreeWinLoss.csproj" />
@@ -83,6 +84,7 @@
 
   <ItemGroup>
     <None Include="app\**">
+    <Folder Include="wwwroot\soccer-performance-detail\" />
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="App_Data\**">

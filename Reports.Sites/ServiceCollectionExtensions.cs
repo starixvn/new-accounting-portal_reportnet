@@ -290,6 +290,10 @@ public static class ServiceCollectionExtensions
             pipeline.AddLessBundle(
                 "/themes/base/common.css",
                 "/themes/base/common.less");
+
+            pipeline.AddLessBundle(
+                "/soccer-performance-detail/styles/performance-detail.css",
+                "/soccer-performance-detail/styles/performance-detail.less");
         });
     }
 
