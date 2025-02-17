@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.TGRS.Reports.Models.PerformanceDetail
+﻿namespace SoccerPerformanceDetail.Model
 {
     public class BetTypeBetChoicePerformanceInfo
     {       

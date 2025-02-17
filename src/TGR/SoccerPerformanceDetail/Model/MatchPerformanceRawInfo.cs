@@ -7,7 +7,7 @@
 //   <change who="Long.Luu" date="2016.10.9">Created</change>
 // </history>
 
-namespace Fanex.NAP.TGRS.Reports.Models.PerformanceDetail
+namespace SoccerPerformanceDetail.Model
 {
     using System;
 

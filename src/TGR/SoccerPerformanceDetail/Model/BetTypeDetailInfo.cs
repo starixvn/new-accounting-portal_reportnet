@@ -7,7 +7,7 @@
 //   <change who="Ken.Nguyen" date="2014.7.28">Created</change>
 // </history>
 
-namespace Fanex.NAP.TGRS.Reports.Models.PerformanceDetail
+namespace SoccerPerformanceDetail.Model
 {
     /// <summary>
     /// Bet type detail model.

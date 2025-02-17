@@ -1,7 +1,7 @@
 ﻿using System;
 using Fanex.NAP.Framework.Data;
 
-namespace Fanex.NAP.TGRS.Reports.Criteria.PerformanceDetail
+namespace SoccerPerformanceDetail.Criteria
 {
     public class GetLeagueDetailTeam:CriteriaBase
     {

@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.TGRS.Reports.Criteria.PerformanceDetail
+﻿namespace SoccerPerformanceDetail.Criteria
 {
     using System;
     using Fanex.Data;

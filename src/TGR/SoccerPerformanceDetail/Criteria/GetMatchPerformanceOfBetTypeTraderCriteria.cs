@@ -8,7 +8,7 @@
 //   <change who="Thai.Tran" date="2016.3.29">Update sp name</change>
 // </history>
 
-namespace Fanex.NAP.TGRS.Reports.Criteria.PerformanceDetail
+namespace SoccerPerformanceDetail.Criteria
 {
     using Fanex.Data;
     using Fanex.Data.Repository;

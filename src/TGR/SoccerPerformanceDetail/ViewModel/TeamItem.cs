@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2014.6.14">Created</change>
 // </history>
 
-namespace Fanex.NAP.TGRS.Reports.ViewModels.PerformanceDetail
+namespace SoccerPerformanceDetail.ViewModel
 {
     using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
 

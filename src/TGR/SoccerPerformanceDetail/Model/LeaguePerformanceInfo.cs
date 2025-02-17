@@ -6,7 +6,7 @@
 // <history>
 //   <change who="Jason.Ly" date="2014.6.9">Created</change>
 // </history>
-namespace Fanex.NAP.TGRS.Reports.Models.PerformanceDetail
+namespace SoccerPerformanceDetail.Model
 {
     /// <summary>
     /// League performance model.

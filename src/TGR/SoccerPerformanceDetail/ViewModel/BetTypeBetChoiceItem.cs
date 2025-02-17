@@ -1,4 +1,4 @@
-﻿namespace Fanex.NAP.TGRS.Reports.ViewModels.PerformanceDetail
+﻿namespace SoccerPerformanceDetail.ViewModel
 {
     using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
     using System;

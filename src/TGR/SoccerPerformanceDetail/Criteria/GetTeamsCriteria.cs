@@ -7,7 +7,7 @@
 //   <change who="Jason" date="2014.6.14">Created</change>
 // </history>
 
-namespace Fanex.NAP.TGRS.Reports.Criteria.PerformanceDetail
+namespace SoccerPerformanceDetail.Criteria
 {
     using Fanex.Data.Repository;
 

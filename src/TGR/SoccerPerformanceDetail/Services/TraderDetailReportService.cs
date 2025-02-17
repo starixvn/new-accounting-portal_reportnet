@@ -8,7 +8,7 @@
 //   <change who="Ken.Nguyen" date="2014.6.13">Add Excel export</change>
 // </history>
 
-namespace Fanex.NAP.TGRS.Reports.Services
+namespace SoccerPerformanceDetail.Services
 {
     using Fanex.Data.Repository;
     using Fanex.NAP.Core.Web;    

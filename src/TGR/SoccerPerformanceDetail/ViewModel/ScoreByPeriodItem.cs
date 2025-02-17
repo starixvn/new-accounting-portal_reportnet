@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.NAP.TGRS.Reports.ViewModels.PerformanceDetail
+namespace SoccerPerformanceDetail.ViewModel
 {
     using System;
     using Fanex.Common;
