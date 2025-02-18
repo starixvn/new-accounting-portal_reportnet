@@ -9,7 +9,7 @@
 
 namespace SoccerPerformanceDetail.ViewModel
 {
-    using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
+    using SoccerPerformanceDetail.Model;
 
     /// <summary>
     /// Team view model.

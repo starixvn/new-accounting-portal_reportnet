@@ -1,26 +1,25 @@
-﻿namespace SoccerPerformanceDetail.Model
+﻿namespace SoccerPerformanceDetail.Model;
+
+public class PointHDPPerformanceInfo
 {
-    public class PointHDPPerformanceInfo
-    {
-        public decimal PointHDP { get; set; }
+    public decimal PointHDP { get; set; }
 
-        public int LeagueCount { get; set; }
+    public int LeagueCount { get; set; }
 
-        public int MatchCount { get; set; }
+    public int MatchCount { get; set; }
 
-        public int BetCount { get; set; }
+    public int BetCount { get; set; }
 
-        public decimal Turnover { get; set; }
+    public decimal Turnover { get; set; }
 
-        public decimal WinLoss { get; set; }
+    public decimal WinLoss { get; set; }
 
-        public decimal? Margin { get; set; }        
+    public decimal? Margin { get; set; }        
 
-        public decimal TurnoverReal { get; set; }
+    public decimal TurnoverReal { get; set; }
 
-        public decimal WinLossReal { get; set; }
+    public decimal WinLossReal { get; set; }
 
-        public decimal? MarginReal { get; set; }
-        
-    }
+    public decimal? MarginReal { get; set; }
+    
 }

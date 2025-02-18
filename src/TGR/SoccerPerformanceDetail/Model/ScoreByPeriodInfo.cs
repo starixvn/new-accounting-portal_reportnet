@@ -1,29 +1,15 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ScoreByPeriodInfo.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
+﻿
+namespace SoccerPerformanceDetail.Model;
 
-namespace SoccerPerformanceDetail.Model
+public class ScoreByPeriodInfo
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    public short? BetType { get; set; }
 
-    /// <summary>
-    /// Score by period model.
-    /// </summary>
-    public class ScoreByPeriodInfo
-    {
-        public short? BetType { get; set; }
+    public DateTime? FromDate { get; set; }
 
-        public DateTime? FromDate { get; set; }
+    public DateTime? ToDate { get; set; }
 
-        public DateTime? ToDate { get; set; }
+    public decimal? Benchmark { get; set; }
 
-        public decimal? Benchmark { get; set; }
-
-        public decimal? Score { get; set; }
-    }
+    public decimal? Score { get; set; }
 }

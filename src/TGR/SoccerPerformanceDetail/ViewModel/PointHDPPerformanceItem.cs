@@ -1,7 +1,7 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel
 {
     using Fanex.Common;
-    using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
+    using SoccerPerformanceDetail.Model;
     using System;
 
     [Serializable]

@@ -8,7 +8,7 @@ namespace SoccerPerformanceDetail.ViewModel
 {
     using System;
     using Fanex.Common;
-    using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
+    using SoccerPerformanceDetail.Model;
 
     /// <summary>
     /// Score by period item.

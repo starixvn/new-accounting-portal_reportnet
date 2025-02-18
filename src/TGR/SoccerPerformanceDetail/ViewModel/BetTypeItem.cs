@@ -10,7 +10,7 @@
 namespace SoccerPerformanceDetail.ViewModel
 {
     using System;
-    using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
+    using SoccerPerformanceDetail.Model;
 
     /// <summary>
     /// Bet type view model.

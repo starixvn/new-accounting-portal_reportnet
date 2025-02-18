@@ -13,7 +13,7 @@ namespace SoccerPerformanceDetail.ViewModel
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.TGRS.Core.Helpers;
     using Fanex.NAP.TGRS.Core.Resources;
-    using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
+    using SoccerPerformanceDetail.Model;
     using System;
 
     /// <summary>

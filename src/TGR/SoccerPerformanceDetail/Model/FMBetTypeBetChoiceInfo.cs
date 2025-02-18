@@ -1,9 +1,8 @@
-﻿namespace SoccerPerformanceDetail.Model
-{
-    public class FMBetTypeBetChoiceInfo
-    {
-        public bool IsFMBetType { get; set; }
+﻿namespace SoccerPerformanceDetail.Model;
 
-        public bool IsBetChoiceDetail { get; set; }
-    }
+public class FMBetTypeBetChoiceInfo
+{
+    public bool IsFMBetType { get; set; }
+
+    public bool IsBetChoiceDetail { get; set; }
 }

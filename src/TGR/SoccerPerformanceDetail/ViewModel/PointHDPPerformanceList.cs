@@ -1,7 +1,7 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel
 {
     using Fanex.NAP.TGRS.Core.Configurations;
-    using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
+    using SoccerPerformanceDetail.Model;
     using System;
     using System.Collections.Generic;
     using System.Linq;

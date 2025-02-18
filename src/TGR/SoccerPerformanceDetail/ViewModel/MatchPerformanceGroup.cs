@@ -13,7 +13,7 @@ namespace SoccerPerformanceDetail.ViewModel
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.NAP.TGRS.Core.Helpers;
-    using Fanex.NAP.TGRS.Reports.Models.PerformanceDetail;
+    using SoccerPerformanceDetail.Model;
 
     /// <summary>
     /// Match performance group view model.
