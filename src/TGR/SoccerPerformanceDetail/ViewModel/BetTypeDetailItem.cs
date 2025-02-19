@@ -1,6 +1,5 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-
 public class BetTypeDetailItem
 {
     public short BetType { get; set; }

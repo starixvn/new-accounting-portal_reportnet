@@ -1,45 +1,43 @@
-﻿namespace SoccerPerformanceDetail.Criteria
+﻿namespace SoccerPerformanceDetail.Criteria;
+
+using Fanex.Data;
+using Fanex.Data.Repository;
+
+public class GetPointHDPPerformanceOfBetTypeBetChoiceCriteria : CriteriaBase
 {
-    using Fanex.Data;
-    using Fanex.Data.Repository;
-    using System;
+    public DateTime FromDate { get; set; }
 
-    public class GetPointHDPPerformanceOfBetTypeBetChoiceCriteria : CriteriaBase
+    public DateTime ToDate { get; set; }
+
+    public string LeagueName { get; set; }
+
+    public string LeagueGroupIds { get; set; }
+
+    public short BetType { get; set; }
+
+    public string BetTeam { get; set; }       
+
+    public bool IsExcludeLeagues { get; set; }
+
+    public Int16 Market
     {
-        public DateTime FromDate { get; set; }
-
-        public DateTime ToDate { get; set; }
-
-        public string LeagueName { get; set; }
-
-        public string LeagueGroupIds { get; set; }
-
-        public short BetType { get; set; }
-
-        public string BetTeam { get; set; }       
-
-        public bool IsExcludeLeagues { get; set; }
-
-        public Int16 Market
+        get
         {
-            get
+            if (this.IsLive)
             {
-                if (this.IsLive)
-                {
-                    return 1;
-                }
-
-                return 0;
+                return 1;
             }
+
+            return 0;
         }
-
-        [SpParam(Ignored = true)]
-        public bool IsLive { get; set; }
-
-        public override string GetSettingKey()
-            => "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_PointHDP";
-
-        public override bool IsValid()
-            => true;
     }
+
+    [SpParam(Ignored = true)]
+    public bool IsLive { get; set; }
+
+    public override string GetSettingKey()
+        => "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_PointHDP";
+
+    public override bool IsValid()
+        => true;
 }

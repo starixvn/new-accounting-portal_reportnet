@@ -1,21 +1,20 @@
 ﻿
-namespace SoccerPerformanceDetail.Criteria
+namespace SoccerPerformanceDetail.Criteria;
+
+using Fanex.Data.Repository;
+
+public class GetLeagueGroupSoccerCriteria : CriteriaBase
 {
-    using Fanex.Data.Repository;
+    public string LeagueGroupIds { get; set; }
 
-    public class GetLeagueGroupSoccerCriteria : CriteriaBase
+    public override string GetSettingKey()
     {
-        public string LeagueGroupIds { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "TGRS_LeagueGroupSoccer_Get";
-        }
-
-        public override bool IsValid()
-        {
-            return true;
-        }
-
+        return "TGRS_LeagueGroupSoccer_Get";
     }
+
+    public override bool IsValid()
+    {
+        return true;
+    }
+
 }

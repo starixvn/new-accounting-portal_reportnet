@@ -9,9 +9,8 @@
 
 namespace SoccerPerformanceDetail.ViewModel
 {
-    using System;
-    using Fanex.Common;
     using SoccerPerformanceDetail.Model;
+    using System;
 
     /// <summary>
     /// Bet type performance view model.
@@ -29,16 +28,16 @@ namespace SoccerPerformanceDetail.ViewModel
             {
                 this.BetTypeId = betTypeData.BetType.Value;
                 this.BetTypeName = betTypeData.TypeName;
-                this.NoOfTraders = Converter.ToInt(betTypeData.TraderCount);
-                this.NoOfLeagues = Converter.ToInt(betTypeData.LeagueCount);
-                this.NoOfMatches = Converter.ToInt(betTypeData.MatchCount);
-                this.Turnover = Converter.ToDecimal(betTypeData.Turnover);
-                this.WinLoss = Converter.ToDecimal(betTypeData.WinLoss);
+                this.NoOfTraders = Convert.ToInt32(betTypeData.TraderCount);
+                this.NoOfLeagues = Convert.ToInt32(betTypeData.LeagueCount);
+                this.NoOfMatches = Convert.ToInt32(betTypeData.MatchCount);
+                this.Turnover = Convert.ToDecimal(betTypeData.Turnover);
+                this.WinLoss = Convert.ToDecimal(betTypeData.WinLoss);
                 this.Margin = betTypeData.Margin;
-                this.TurnoverReal = Converter.ToDecimal(betTypeData.TurnoverReal);
-                this.WinLossReal = Converter.ToDecimal(betTypeData.WinLossReal);
+                this.TurnoverReal = Convert.ToDecimal(betTypeData.TurnoverReal);
+                this.WinLossReal = Convert.ToDecimal(betTypeData.WinLossReal);
                 this.MarginReal = betTypeData.MarginReal;
-                this.BetCount = Converter.ToInt(betTypeData.BetCount);                
+                this.BetCount = Convert.ToInt32(betTypeData.BetCount);                
                 this.IsLive = betTypeData.IsLive;
                 this.FlagForViewReport = betTypeData.FlagForViewReport;
             }

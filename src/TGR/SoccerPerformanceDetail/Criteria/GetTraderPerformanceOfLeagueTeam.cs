@@ -1,6 +1,5 @@
 ﻿namespace SoccerPerformanceDetail.Criteria
 {
-    using System;
     using Fanex.Data;
     using Fanex.Data.Repository;
 

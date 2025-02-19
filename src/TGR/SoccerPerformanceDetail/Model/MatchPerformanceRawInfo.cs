@@ -1,7 +1,6 @@
 ﻿
 namespace SoccerPerformanceDetail.Model;
 
-
 public class MatchPerformanceRawInfo
 {
     public int? LeagueId { get; set; }

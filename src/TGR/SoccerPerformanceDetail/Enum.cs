@@ -7,3 +7,10 @@ public enum Market
     Live,
     NonLive
 }
+
+public enum TimeMachineType
+{
+    Interval,
+    HDP,
+    Point
+}

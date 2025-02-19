@@ -1,69 +1,59 @@
-﻿namespace SoccerPerformanceDetail.Criteria
+﻿namespace SoccerPerformanceDetail.Criteria;
+
+using Fanex.Data;
+using Fanex.Data.Repository;
+
+public class GetLeaguePerformanceOfBetChoiceCriteria : CriteriaBase
 {
-    using Fanex.Data;
-    using Fanex.Data.Repository;
-    using System;
+    [SpParam(Ignored = true)]
+    public bool IsLive { get; set; }
 
-    public class GetLeaguePerformanceOfBetChoiceCriteria : CriteriaBase
+    public Int16 Market
     {
-        [SpParam(Ignored = true)]
-        public bool IsLive { get; set; }
-
-        public Int16 Market
+        get
         {
-            get
+            if (this.IsLive)
             {
-                if (this.IsLive)
-                {
-                    return 1;
-                }
-
-                return 0;
+                return 1;
             }
+
+            return 0;
         }
+    }
 
-        public short BetType { get; set; }
+    public short BetType { get; set; }
 
-        public string BetChoice { get; set; }
+    public string BetChoice { get; set; }
 
-        public string BetTeam { get; set; }
+    public string BetTeam { get; set; }
 
-        public decimal Oddsspread { get; set; }
+    public decimal Oddsspread { get; set; }
 
-        public bool IsFMBetType { get; set; }
+    public bool IsFMBetType { get; set; }
 
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public bool IsExcludeLeagues { get; set; }
+    public bool IsExcludeLeagues { get; set; }
 
-        public string LeagueGroupIds { get; set; }
+    public string LeagueGroupIds { get; set; }
 
-        public string LeagueName { get; set; }
+    public string LeagueName { get; set; }
 
-        [SpParam(Ignored = true)]
-        public bool IsReal { get; set; }
+    [SpParam(Ignored = true)]
+    public bool IsReal { get; set; }
 
-        [SpParam(Ignored = true)]
-        public bool IsVirtual { get; set; }
+    [SpParam(Ignored = true)]
+    public bool IsVirtual { get; set; }
 
-        /// <summary>
-        /// Gets Setting Key.
-        /// </summary>
-        /// <returns>Setting key of the criteria.</returns>
-        public override string GetSettingKey()
-        {
-            return "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_League";
-        }
+    public override string GetSettingKey()
+    {
+        return "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_League";
+    }
 
-        /// <summary>
-        /// Checks validation of the criteria.
-        /// </summary>
-        /// <returns>Whether or not the criteria is valid.</returns>
-        public override bool IsValid()
-        {
-            return true;
-        }
+    public override bool IsValid()
+    {
+        return true;
     }
 }

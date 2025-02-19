@@ -18,6 +18,7 @@ public class BetTypeBetChoiceList
 
     public List<BetTypeBetChoiceItem> ItemList { get; set; }
 
+
     public BetTypeBetChoiceItem Total { get; set; }
 
     public void AddItem(IEnumerable<BetTypeBetChoicePerformanceInfo> infos)

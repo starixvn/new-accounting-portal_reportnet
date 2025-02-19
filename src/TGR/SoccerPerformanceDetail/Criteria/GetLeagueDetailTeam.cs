@@ -1,5 +1,4 @@
-﻿using System;
-using Fanex.NAP.Framework.Data;
+﻿using Fanex.Data.Repository;
 
 namespace SoccerPerformanceDetail.Criteria
 {

@@ -1,22 +1,7 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BetTypePerformanceList.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Jason.Ly" date="2014.5.17">Created</change>
-// </history>
-
-namespace SoccerPerformanceDetail.ViewModel
+﻿namespace SoccerPerformanceDetail.ViewModel
 {
     using SoccerPerformanceDetail.Model;
-    using System;
-    using System.Collections.Generic;
 
-    /// <summary>
-    /// Bet type performance list view model.
-    /// </summary>
-    [Serializable]
     public class BetTypePerformanceList
     {
         public BetTypePerformanceList()

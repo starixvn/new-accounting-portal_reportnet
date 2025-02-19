@@ -1,65 +1,43 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="GetTraderPerformanceOfLeagueCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Jason.Ly" date="2014.6.9">Created</change>
-// </history>
+﻿namespace SoccerPerformanceDetail.Criteria;
 
-namespace SoccerPerformanceDetail.Criteria
+using Fanex.Data;
+using Fanex.Data.Repository;
+
+public class GetTraderPerformanceOfLeagueCriteria : CriteriaBase
 {
-    using Fanex.Data;
-    using Fanex.Data.Repository;
-    using System;
+    [SpParam(Ignored = true)]
+    public bool IsLive { get; set; }
 
-    /// <summary>
-    /// The criteria which are used to get the trader performance data of a league.
-    /// </summary>
-    public class GetTraderPerformanceOfLeagueCriteria : CriteriaBase
+    public Int16 Market
     {
-        [SpParam(Ignored = true)]
-        public bool IsLive { get; set; }
-
-        public Int16 Market
+        get
         {
-            get
+            if (this.IsLive)
             {
-                if (this.IsLive)
-                {
-                    return 1;
-                }
-
-                return 0;
+                return 1;
             }
+
+            return 0;
         }
+    }
 
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public int LeagueId { get; set; }
+    public int LeagueId { get; set; }
 
-        public string BetTypes { get; set; }
+    public string BetTypes { get; set; }
 
-        public bool IsExcludeLeagues { get; set; }
+    public bool IsExcludeLeagues { get; set; }
 
-        /// <summary>
-        /// Gets the setting key.
-        /// </summary>
-        /// <returns>The setting key.</returns>
-        public override string GetSettingKey()
-        {
-            return "TGRS_Rpt_PerformanceDetail_League_Trader";
-        }
+    public override string GetSettingKey()
+    {
+        return "TGRS_Rpt_PerformanceDetail_League_Trader";
+    }
 
-        /// <summary>
-        /// Determines whether this criteria is valid.
-        /// </summary>
-        /// <returns>Whether this criteria is valid or not.</returns>
-        public override bool IsValid()
-        {
-            return true;
-        }
+    public override bool IsValid()
+    {
+        return true;
     }
 }

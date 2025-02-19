@@ -1,53 +1,51 @@
-﻿namespace SoccerPerformanceDetail.Criteria
+﻿namespace SoccerPerformanceDetail.Criteria;
+
+using Fanex.Data;
+using Fanex.Data.Repository;
+
+public class GetBetChoicePerformanceOfBetTypeCriteria : CriteriaBase
 {
-    using Fanex.Data;
-    using Fanex.Data.Repository;
-    using System;
+    [SpParam(Ignored = true)]
+    public bool IsLive { get; set; }
 
-    public class GetBetChoicePerformanceOfBetTypeCriteria : CriteriaBase
+    public Int16 Market
     {
-        [SpParam(Ignored = true)]
-        public bool IsLive { get; set; }
-
-        public Int16 Market
+        get
         {
-            get
+            if (this.IsLive)
             {
-                if (this.IsLive)
-                {
-                    return 1;
-                }
-
-                return 0;
+                return 1;
             }
+
+            return 0;
         }
+    }
 
-        public short BetType { get; set; }
+    public short BetType { get; set; }
 
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public bool IsExcludeLeagues { get; set; }
+    public bool IsExcludeLeagues { get; set; }
 
-        public string LeagueGroupIds { get; set; }
+    public string LeagueGroupIds { get; set; }
 
-        public string LeagueName { get; set; }
+    public string LeagueName { get; set; }
 
-        [SpParam(Ignored = true)]
-        public bool IsReal { get; set; }
+    [SpParam(Ignored = true)]
+    public bool IsReal { get; set; }
 
-        [SpParam(Ignored = true)]
-        public bool IsVirtual { get; set; }
+    [SpParam(Ignored = true)]
+    public bool IsVirtual { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice";
-        }
+    public override string GetSettingKey()
+    {
+        return "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice";
+    }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+    public override bool IsValid()
+    {
+        return true;
     }
 }

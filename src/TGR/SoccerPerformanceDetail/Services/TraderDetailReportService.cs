@@ -7,39 +7,57 @@ using SoccerPerformanceDetail.ViewModel;
 
 public interface SoccerPerformanceDetailService
 {
-    Task<IEnumerable<GroupBetTypes>> GetGroupBetTypes(int userid, BettypeViewPermission permission = BettypeViewPermission.All);
+    Task<BetTypePerformanceList> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria);
 }
 
 
 public class DetailReportService(IDynamicRepository repository) : SoccerPerformanceDetailService
 {
-    public async Task<IEnumerable<GroupBetTypes>> GetGroupBetTypes(int userId, BettypeViewPermission permission = BettypeViewPermission.All)
+    public async Task<BetTypePerformanceList> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria)
     {
-        var groupBetTypes = Enumerable.Empty<GroupBetTypes>();
-      
-        var criteria = new GetBetTypesCriteria(permission) { UserId = userId };
-        
-        var data = await repository.FetchAsync<BetTypeInfo>(criteria);
+        var betTypeData = await repository.FetchAsync<BetTypePerformanceInfo>(criteria);
+        BetTypePerformanceList betTypePerformance = new BetTypePerformanceList();
 
-        if (data != null && data.Any())
+        if (betTypeData != null && betTypeData.Any())
         {
-            groupBetTypes = data
-                .GroupBy(g => new { g.GroupBettypeId, g.GroupBettypeName })
-                .Select(x => new { Group = x.Key, BetTypeList = x.ToList() })
-                .Select(x => new GroupBetTypes
-                {
-                    GroupId = x.Group.GroupBettypeId,
-                    GroupName = x.Group.GroupBettypeName,
-                    TotalDefaultCheckOfBetTypeList = x.BetTypeList.Where(y => y.IsDefault).Count(),
-                    BetTypeList = x.BetTypeList.Select(y => new BetType
-                    {
-                        BetTypeId = y.BetType,
-                        BetTypeName = y.TypeName,
-                        IsDefaultCheck = y.IsDefault
-                    })
-                });
+            if (criteria.MarketFilter == Market.All)
+            {
+                var data = SortBetTypePerformanceInfo(betTypeData);
+
+                betTypePerformance.AddBetTypeList(data);
+            }
+            else
+            {
+                betTypePerformance.AddBetTypeList(betTypeData, criteria.MarketFilter == Market.Live);
+            }
+
+            betTypePerformance.CalculateTotalMargin();
         }
 
-        return groupBetTypes;
+        return betTypePerformance;
+    }
+
+    private IEnumerable<BetTypePerformanceInfo> SortBetTypePerformanceInfo(IEnumerable<BetTypePerformanceInfo> betTypeData)
+    {
+        return betTypeData.AsEnumerable()
+                          .OrderByDescending(c => c.BetType)
+                          .ThenByDescending(c => c.IsLive)
+                          .Select(c => new BetTypePerformanceInfo
+                          {
+                              BetType = c.BetType,
+                              TypeName = c.TypeName,
+                              TraderCount = c.TraderCount,
+                              LeagueCount = c.LeagueCount,
+                              MatchCount = c.MatchCount,
+                              Turnover = c.Turnover,
+                              WinLoss = c.WinLoss,
+                              Margin = c.Margin,
+                              TurnoverReal = c.TurnoverReal,
+                              WinLossReal = c.WinLossReal,
+                              MarginReal = c.MarginReal,
+                              BetCount = c.BetCount,
+                              IsLive = c.IsLive,
+                              FlagForViewReport = betTypeData.Count(b => b.BetType == c.BetType)
+                          });
     }
 }

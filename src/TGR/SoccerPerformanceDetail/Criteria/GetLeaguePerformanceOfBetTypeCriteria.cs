@@ -1,67 +1,46 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="GetLeaguePerformanceOfBetTypeCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Jason.Ly" date="2014.6.18">Created</change>
-// </history>
+﻿
+namespace SoccerPerformanceDetail.Criteria;
 
-namespace SoccerPerformanceDetail.Criteria
+using Fanex.Data;
+using Fanex.Data.Repository;
+
+public class GetLeaguePerformanceOfBetTypeCriteria : CriteriaBase
 {
-    using Fanex.Data;
-    using Fanex.Data.Repository;
-    using System;
+    [SpParam(Ignored = true)]
+    public bool IsLive { get; set; }
 
-    /// <summary>
-    /// Getting league performance on a bet type.
-    /// </summary>
-    public class GetLeaguePerformanceOfBetTypeCriteria : CriteriaBase
+    public Int16 Market
     {
-        [SpParam(Ignored = true)]
-        public bool IsLive { get; set; }
-
-        public Int16 Market
+        get
         {
-            get
+            if (this.IsLive)
             {
-                if (this.IsLive)
-                {
-                    return 1;
-                }
-
-                return 0;
+                return 1;
             }
+
+            return 0;
         }
+    }
 
-        public short BetType { get; set; }
+    public short BetType { get; set; }
 
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public bool IsExcludeLeagues { get; set; }
+    public bool IsExcludeLeagues { get; set; }
 
-        public string LeagueGroupIds { get; set; }
+    public string LeagueGroupIds { get; set; }
 
-        public string LeagueName { get; set; }
+    public string LeagueName { get; set; }
 
-        /// <summary>
-        /// Gets Setting Key.
-        /// </summary>
-        /// <returns>Setting key of the criteria.</returns>
-        public override string GetSettingKey()
-        {
-            return "TGRS_Rpt_PerformanceDetail_Bettype_League";
-        }
+    public override string GetSettingKey()
+    {
+        return "TGRS_Rpt_PerformanceDetail_Bettype_League";
+    }
 
-        /// <summary>
-        /// Checks validation of the criteria.
-        /// </summary>
-        /// <returns>Whether or not the criteria is valid.</returns>
-        public override bool IsValid()
-        {
-            return true;
-        }
+    public override bool IsValid()
+    {
+        return true;
     }
 }
