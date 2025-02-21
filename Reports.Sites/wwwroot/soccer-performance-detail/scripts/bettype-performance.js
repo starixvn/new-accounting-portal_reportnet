@@ -3,9 +3,10 @@
 /* global Namespace, numeral, Fanex, common, validator, labels, datepickerSetting, forecastBettype, messages */
 
 ////'use strict';
+var validator = new Fanex.TGRS.Validator();
+var layout = new Fanex.TGRS.Layout();
 $(document).ready(function () {
     var betTypePerformance = new Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance();
-
     betTypePerformance.InitPage();
 });
 
@@ -13,7 +14,7 @@ Namespace.Register('Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance');
 Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     var $this = this;
     var urls = {
-        GetBetTypePerformance: common.ResolveRootUrl('PerformanceDetail/GetBetTypePerformance'),
+        GetBetTypePerformance: window.rootUrl + '/PerformanceDetail/GetBetTypePerformance',
         ExportBetTypePerformance: common.ResolveRootUrl('PerformanceDetail/ExportBetTypePerformance'),
         ExportBetChoicePerformanceOfBetType: common.ResolveRootUrl('PerformanceDetail/ExportBetChoicePerformanceOfBetType'),
         ExportLeaguePerformanceOfBetChoice: common.ResolveRootUrl('PerformanceDetail/ExportLeaguePerformanceOfBetChoice'),

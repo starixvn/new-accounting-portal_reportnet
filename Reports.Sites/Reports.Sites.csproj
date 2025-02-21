@@ -84,7 +84,6 @@
 
   <ItemGroup>
     <None Include="app\**">
-    <Folder Include="wwwroot\soccer-performance-detail\" />
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="App_Data\**">

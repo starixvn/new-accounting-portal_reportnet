@@ -12,6 +12,9 @@
 }
 @section Head
 {
+	<link rel="stylesheet" type="text/css" href="~/tgrs/styles/common.css" />
+	<link rel="stylesheet" type="text/css" href="~/style/pager-pagination.css" />
+	<link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
     <link rel="stylesheet" type="text/css" href="~/soccer-performance-detail/styles/performance-detail.css" />
 }
 @section Headline
@@ -20,6 +23,11 @@
 		<div>
 			<span>TGR / </span><span class="curr">@ViewBag.Title</span>
 		</div>
+	</div>
+	<div class="header-button">
+		<a href="#" class="green-button change-list disabled">
+			<span class="list-icon"></span>BetType
+		</a>
 	</div>
 }
 <div class="filter-bar">
@@ -171,14 +179,16 @@
 @section Foot
 {
 	<script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
-    <script type="text/javascript" src="~/soccer-performance-detail/scripts/performance-detail-helper.js"></script>
-    <script type="text/javascript" src="~/soccer-performance-detail/scripts/bettype-performance.js"></script>
+	<script type="text/javascript" src="~/scripts/tgrs/common-tgrs.js"></script>
+	<script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
+	<script type="text/javascript" src="~/scripts/msg-box.js"></script>
+	<script type="text/javascript" src="~/scripts/bettype-performance.js"></script>
     <script type="text/javascript">
         var datepickerSetting = {
             MinDate: '@(((DateTime)ViewBag.MinDate).ToShortFormatedDate())',
             DefaultFromDate: '@(((DateTime)ViewBag.DefaultFromDate).ToShortFormatedDate())',
             DefaultToDate: '@(((DateTime)ViewBag.DefaultToDate).ToShortFormatedDate())',
-            AllowYearRange: parseInt('@ViewBag.AllowYearRange')
+            AllowYearRange: @ViewBag.AllowYearRange
         };
         var forecastBettype = '@ViewBag.ForecastBetType';
         var labels = {
@@ -235,7 +245,7 @@
             RequiredField: 'Invalid value!'
         };
 
-        var isVirtualPerformancePermission = '@ViewBag.IsVirtualPerformancePermission' == "True";
-        var isRealPerformancePermission = '@ViewBag.IsRealPerformancePermission' == "True";
+        var isVirtualPerformancePermission = '@ViewBag.IsVirtualPerformancePermission' === 'True';
+        var isRealPerformancePermission = '@ViewBag.IsRealPerformancePermission' === 'True';
     </script>
 }

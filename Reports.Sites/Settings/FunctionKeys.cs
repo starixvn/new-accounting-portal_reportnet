@@ -30,4 +30,5 @@ public static class FunctionKeys
     public const string DailyCreatedCustomers = "DailyCreatedCustomers";
     public const string BetConstructPerformance = "BetConstructPerformance";
     public const string SabaPromotion = "SabaPromotion";
+    public const string SoccerPerformanceDetail = "SoccerPerformanceDetail";
 }

@@ -85,6 +85,7 @@ public static class ServiceCollectionExtensions
         services.RegisterMostVisitedPageServices();
         services.RegisterBetConstructPerformanceServices();
         services.RegisterSabaPromotionServices();
+        services.RegisterSoccerPerformanceDetailServices();
     }
 
     public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -204,6 +205,27 @@ public static class ServiceCollectionExtensions
             pipeline.AddJavaScriptBundle("/scripts/fanex-legend.js",
                 "/scripts/FanexLegend.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/tgrs/common-tgrs.js",
+                "/scripts/tgrs/jquery.nexDatePicker.js",
+                "/scripts/tgrs/monPickr-0.0.3.js",
+                "/scripts/tgrs/moment.js",
+                "/scripts/tgrs/jquery.multiselect.js",
+                "/scripts/tgrs/native-object-extensions.js",
+                "/scripts/tgrs/jquery.extensions.js",
+                "/scripts/tgrs/validator.js",
+                "/scripts/tgrs/layout.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/tgrs/tgrs.js",
+                "/scripts/tgrs/tgrs.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/bettype-performance.js",
+                "/soccer-performance-detail/scripts/grade-performance.js",
+                "/soccer-performance-detail/scripts/team-performance.js",
+                "/soccer-performance-detail/scripts/grade-history.js",
+                "/soccer-performance-detail/scripts/team-history.js",
+                "/soccer-performance-detail/scripts/bettype-performance.js",
+                "/soccer-performance-detail/scripts/performance-detail-helper.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");
@@ -290,6 +312,13 @@ public static class ServiceCollectionExtensions
             pipeline.AddLessBundle(
                 "/themes/base/common.css",
                 "/themes/base/common.less");
+
+            pipeline.AddLessBundle(
+                "/tgrs/styles/common.css",
+                "/tgrs/styles/reset.less",
+                "/stylesheets/tgrs/style.less",
+                "/stylesheets/multipleselect/jquery.multiselect.less",
+                "/stylesheets/monthpicker/monPickr-0.0.3.less");
 
             pipeline.AddLessBundle(
                 "/soccer-performance-detail/styles/performance-detail.css",

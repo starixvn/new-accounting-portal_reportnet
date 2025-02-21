@@ -1,0 +1,383 @@
+/********************************************************/
+/*                  Msgbox custom style                 */
+/********************************************************/
+.msgbox {
+    &.custom-confirm {
+        font-weight: normal;
+        background-color: @body_bg;
+        border-color: @border;
+        padding: 0;
+
+        .msgbox-header {
+            .bg_linear_gradient(@menu_bg_light, @menu_bg);
+            color: @white;
+            text-align: center;
+            padding: 5px;
+
+            .msgbox-close {
+                top: 7px;
+                right: 7px;
+                background-position: -1px -50px;
+                border: none;
+                
+                &:hover {
+                    background-color: transparent;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .msgbox-content {
+            background: url(Images/icon-question.png) no-repeat;
+            margin: 15px 20px;
+            padding: 15px 0 15px 55px;
+        }
+
+        .msgbox-btn-wrap {
+            padding: 15px 0;
+            margin: auto;
+            text-align: center;
+            width: 93%;
+            border-color: @border;
+
+            .msgbox-btn {
+                display: inline-block;
+                height: 23px !important;
+                min-width: 60px !important;
+                line-height: 22px;
+
+                &.ok {
+                    .blue-button;
+                    padding: 0 16px;
+                }
+
+                &.cancel {
+                    .red-button;
+                    padding: 0 16px;
+                }
+            }
+        }
+    }
+}
+
+/********************************************************/
+/*                  Custom CSS for Tipsy                */
+/********************************************************/
+.tipsy {
+    font-size: .85em;
+}
+
+.error-tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }
+.error-tipsy-inner {
+    background-color: @tipsy_error-bg;
+    color: @black;
+    max-width: 200px;
+    padding: 5px 8px 4px 8px;
+    text-align: center;
+    font-size: 13px;
+    .border_radius();
+    .box_shadow(0 0 5px #000000);
+}
+
+/* Rules to colour arrows */
+.error-tipsy-arrow { position: absolute; width: 0; height: 0; border: 5px solid transparent; }
+.error-tipsy-arrow-n { border-bottom-color: @tipsy_error_border; }
+.error-tipsy-arrow-s { border-top-color: @tipsy_error_border; }
+.error-tipsy-arrow-e { border-left-color: @tipsy_error_border; }
+.error-tipsy-arrow-w { border-right-color: @tipsy_error_border; }
+
+.error-tipsy-n .error-tipsy-arrow, .error-tipsy-nw .error-tipsy-arrow, .error-tipsy-ne .error-tipsy-arrow { top: 0; border-top: none; }
+.error-tipsy-s .error-tipsy-arrow, .error-tipsy-sw .error-tipsy-arrow, .error-tipsy-se .error-tipsy-arrow { bottom: 0; border-bottom: none; }
+.error-tipsy-n .error-tipsy-arrow, .error-tipsy-s .error-tipsy-arrow { left: 50%; margin-left: -5px; }
+.error-tipsy-nw .error-tipsy-arrow, .error-tipsy-sw .error-tipsy-arrow { left: 10px; }
+.error-tipsy-ne .error-tipsy-arrow, .error-tipsy-se .error-tipsy-arrow { right: 10px; }
+.error-tipsy-e .error-tipsy-arrow, .error-tipsy-w .error-tipsy-arrow { top: 50%; margin-top: -5px; }
+.error-tipsy-e .error-tipsy-arrow { right: 0; border-right: none; }
+.error-tipsy-w .error-tipsy-arrow { left: 0; border-left: none; }
+
+/********************************************************/
+/*             Multiselect and MonthPicker              */
+/********************************************************/
+input.ui-multiselect-state-default{
+    &:active, &:focus {
+        border: none;
+        .box_shadow(0 0 0px @filter_border);
+    }
+}
+.ui-multiselect, .monpickr-selected-month{
+    &:hover, &:focus, &:active {
+        .box_shadow(0 1px 3px  rgba(0, 0, 0, 0.5));
+    }
+
+    input[type='text'], select {
+        border:none;
+        box-shadow:none;
+    }
+}
+.ui-multiselect-state-active {
+    .box_shadow(0 1px 3px  rgba(0, 0, 0, 0.5));
+}
+
+/********************************************************/
+/*                      Fanex Grid                      */
+/********************************************************/
+.content-grid {
+    float:left;
+    margin-left: 10px;
+    margin-top: 10px;
+    min-width: 99%;
+}
+
+.grid-title {
+    .breadcrumb-link {
+        color: #4f82c6;
+        cursor: pointer;
+    }
+}
+
+.freegrid {
+    thead th, .grid-fixed-table thead th {
+        font-weight: normal;
+    }
+
+    .grid-fixed-table tr {
+        &.highlight-row:hover td {
+            background-color: #faffa8;
+        }
+
+        &.highlight td, td.highlight {
+            background-color: #FEECD1;
+        }
+
+        .dim {
+            background: #5c85d6;
+        }
+
+        .header-nova {
+            background: #43a2ff;
+        }
+
+        .header-cash {
+            background: #3bbf6b;
+        }
+
+        .header-cn88 {
+            background: #757170;
+        }
+
+        .header-sum {
+            background: #3c5ea5;
+        }
+
+        .body-nova-to-wl {
+            background: #ddebf6;
+        }
+
+        .body-nova-margin {
+            background: #fff2cd;
+        }
+
+        .body-cash-to-wl {
+            background: #e2efdb;
+        }
+
+        .body-cash-margin {
+            background: #fff2cd;
+        }
+
+        .body-cn88-to-wl {
+            background: #f2f2f2;
+        }
+
+        .body-cn88-margin {
+            background: #fff2cd;
+        }
+
+        .body-sum-to-wl {
+            background: #ddebf6;
+        }
+
+        .body-sum-margin {
+            background: #fed966;
+        }
+    }
+
+    .freegrid-even td {
+        background-color: #ebf5fc;
+    }
+
+    .col_footer table thead th {
+        font-weight: bold;
+    }
+
+    .clearable-field {
+        height: 20px;
+    }
+
+    input[type=text] {
+        border: 1px solid #cecccd;
+        padding: 2px;
+    }
+}
+
+/********************************************************/
+/*         Custom jQuery Dialog and Datepicker          */
+/********************************************************/
+.ui-widget {
+    font-family: Tahoma,Arial,Helvetica,sans-serif;
+    font-size: 1em;
+
+    input, textarea, select, button {
+        font-family: Tahoma,Arial,Helvetica,sans-serif;
+        font-size: 1em;
+    }
+}
+
+.ui-widget-header, .ui-state-active {
+    .bg_linear_gradient(@menu_bg_light, @menu_bg);
+}
+
+.ui-datepicker {
+    .ui-datepicker-title {
+        select {
+            font-size: 0.9em; 
+            margin:1px 6px; 
+            border: 1px solid #CECCCD;
+            height: 18px;
+        }
+    }
+
+    .ui-datepicker-prev {
+        margin:1.5px 0 0px 1.5px;
+    }
+
+    .ui-datepicker-next {
+        margin:1.5px 1.5px 0 0;
+    }
+
+    .ui-datepicker-week-end {
+        color: #C84519;
+    }
+}
+.hide-calendar .ui-datepicker-calendar {
+    display: none;
+}
+
+.ui-dialog {
+    .box_shadow(0 3px 9px rgba(0, 0, 0, 0.5));
+    .border_radius(0);
+    padding: 0;
+
+    .ui-widget-header {
+        .border_radius(0);
+        border: none;
+        font-weight: normal;
+        text-align: center;
+
+        .ui-dialog-title {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ui-dialog-titlebar-close {
+            background: none;
+            border: none;
+            padding: 0;
+
+            .ui-icon-closethick {
+                background: url(Images/btn-close.png) no-repeat -1px -48px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            &.ui-state-hover {
+                background: none;
+                border: none;
+            }
+        }
+    }
+
+    .ui-dialog-content {
+        background: #fff;
+        float: left;
+
+        .form-bar {
+            .box_shadow(none);
+            background: none;
+            border: none;
+            margin: 0 5px;
+
+            .form {
+                background-color: transparent;
+                border: none;
+                padding: 0;
+
+                input[type=button], input[type=submit] {
+                    font-family: Tahoma,Arial,Helvetica,sans-serif;
+                }
+            }
+        }
+    }
+}
+
+.ui-widget-overlay {
+    background: #000;
+    overflow: hidden;
+}
+
+/********************************************************/
+/*              Custom jQuery Month picker              */
+/********************************************************/
+.ui-separate-label {
+    display: inline;
+    float: left;
+    width: 20px;
+    text-align: center;
+    padding: 5px 0 0 0;
+
+    &.month-label {
+        margin: 0 2px;
+    }
+}
+
+.ui-separate-label-small {
+    display: inline;
+    float: left;
+    width: 8px;
+    text-align: center;
+    padding: 5px 0 0 0;
+}
+
+.ui-month-picker {
+    display: inline;
+    float: left;
+    width: 124px;
+    margin: 0 3px;
+
+    &.second-month {
+        margin: 0 5px 0 1px;
+    }
+}
+
+/********************************************************/
+/*              Custom jQuery Clear Field               */
+/********************************************************/
+.clearable-field {
+    display: inline-block;
+    position: relative;
+    height: 26px;
+
+    span.x-icon {
+        display: inline-block;
+        position: absolute;
+        float: left;
+        top: 8px;
+
+        &.disabled {
+            display: none;
+        }
+    }
+}

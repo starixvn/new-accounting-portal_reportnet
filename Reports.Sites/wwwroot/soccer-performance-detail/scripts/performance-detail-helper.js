@@ -9,7 +9,7 @@ Fanex.NAP.TGRS.PerformanceDetail.Helper = function () {
     var $this = this;
     var defaultBettypes = {};
     var urls = {
-        GetDefaultBettypes: common.ResolveRootUrl('PerformanceDetail/GetDefaultBettypes')
+        GetDefaultBettypes: window.rootUrl + '/PerformanceDetail/GetDefaultBettypes'
     };
 
     var intializeFilterData = function () {

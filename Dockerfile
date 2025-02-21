@@ -41,6 +41,7 @@ COPY src/Licensee/CompanyWinLoss/*.csproj ./src/Licensee/CompanyWinLoss/
 COPY src/Balance/SuperBalance/*.csproj ./src/Balance/SuperBalance/
 COPY src/Balance/DirectBalance/*.csproj ./src/Balance/DirectBalance/
 COPY src/Balance/CompanyBalanceDifference/*.csproj ./src/Balance/CompanyBalanceDifference/
+COPY src/TGR/SoccerPerformanceDetail/*.csproj ./src/TGR/SoccerPerformanceDetail/
 COPY Reports.Sites/*.csproj ./Reports.Sites/
 
 
