@@ -322,7 +322,8 @@ public static class ServiceCollectionExtensions
 
             pipeline.AddLessBundle(
                 "/soccer-performance-detail/styles/performance-detail.css",
-                "/soccer-performance-detail/styles/performance-detail.less");
+                "/soccer-performance-detail/styles/performance-detail.less",
+                "/soccer-performance-detail/styles/performance-summary.less");
         });
     }
 
