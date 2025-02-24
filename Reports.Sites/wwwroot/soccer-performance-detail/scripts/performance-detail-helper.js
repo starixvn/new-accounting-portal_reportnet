@@ -9,7 +9,7 @@ Fanex.NAP.TGRS.PerformanceDetail.Helper = function () {
     var $this = this;
     var defaultBettypes = {};
     var urls = {
-        GetDefaultBettypes: window.rootUrl + '/PerformanceDetail/GetDefaultBettypes'
+        GetDefaultBettypes: window.rootUrl + '/api/soccer-performance-detail/default-bettypes'
     };
 
     var intializeFilterData = function () {

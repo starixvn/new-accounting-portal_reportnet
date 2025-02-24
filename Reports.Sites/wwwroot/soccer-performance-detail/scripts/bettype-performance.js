@@ -14,7 +14,7 @@ Namespace.Register('Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance');
 Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     var $this = this;
     var urls = {
-        GetBetTypePerformance: window.rootUrl + '/PerformanceDetail/GetBetTypePerformance',
+        GetBetTypePerformance: window.rootUrl + '/api/soccer-performance-detail/bettypes',
         ExportBetTypePerformance: common.ResolveRootUrl('PerformanceDetail/ExportBetTypePerformance'),
         ExportBetChoicePerformanceOfBetType: common.ResolveRootUrl('PerformanceDetail/ExportBetChoicePerformanceOfBetType'),
         ExportLeaguePerformanceOfBetChoice: common.ResolveRootUrl('PerformanceDetail/ExportLeaguePerformanceOfBetChoice'),

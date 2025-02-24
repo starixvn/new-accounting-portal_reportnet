@@ -455,5 +455,6 @@
 		<Setting Key="TGRS_LeagueGroupSoccer_Get" SpName="TGRS_LeagueGroupSoccer_Get" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 		<Setting Key="TGRS_UserSetting_GetBettypes" SpName="TGRS_UserSetting_GetBettypes" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 		<Setting Key="TGRS_Rpt_PerformanceDetail_BetType" SpName="TGRS_Rpt_PerformanceDetail_BetType" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
+		<Setting Key="TGRS_LeagueExclusion_SelectConfig" SpName="TGRS_LeagueExclusion_SelectConfig" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 	</Function>
 </Functions>

@@ -1,11 +1,18 @@
-﻿namespace SoccerPerformanceDetail.Controller;
+﻿using Fanex.NAP.Client;
+using SoccerPerformanceDetail.Model;
+
+namespace SoccerPerformanceDetail.Controller;
 
 using Microsoft.AspNetCore.Mvc;
-using SoccerPerformanceDetail.Criteria;
-using SoccerPerformanceDetail.Services;
+using Criteria;
+using Services;
 
-public class PerformanceDetailController(SoccerPerformanceDetailService soccerDetailService) : ControllerBase
+[Route("api/soccer-performance-detail")]
+[ApiController]
+public class PerformanceDetailController(SoccerPerformanceDetailService soccerDetailService,
+    INapSession napSession) : ControllerBase
 {
+    [Route("bettypes")]
     public async Task<IActionResult> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria)
     {
         if (criteria.IsAllLeagueGroup)
@@ -16,5 +23,20 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         var betTypePerformance = await soccerDetailService.GetBetTypePerformance(criteria);
 
         return Ok(betTypePerformance);
+    }
+
+    [Route("default-bettypes")]
+    public async Task<IActionResult> GetDefaultBettypes()
+    {
+        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+
+        var betTypeList = from betType in betTypes
+            where betType.IsDefaultCheck
+            select betType.BetTypeId;
+
+        return Ok(new
+        {
+            DefaultBettypes = betTypeList
+        });
     }
 }

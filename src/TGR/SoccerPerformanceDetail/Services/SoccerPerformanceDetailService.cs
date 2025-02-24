@@ -12,14 +12,18 @@ public interface SoccerPerformanceDetailService
     Task<IEnumerable<GroupBetTypes>> GetGroupBetTypes(int userId, BettypeViewPermission permission);
 
     Task<IEnumerable<LeagueGroup>> GetLeagueGroups();
+
+    Task<IEnumerable<BetTypeItem>>
+        GetBetTypes(int userId, BettypeViewPermission permission);
 }
 
 public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : SoccerPerformanceDetailService
 {
     public async Task<BetTypePerformanceList> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria)
     {
+        criteria.IsExcludeLeagues = (await GetLeagueExclusionConfig()).IsExcludeLeagues;
         var betTypeData = await repository.FetchAsync<BetTypePerformanceInfo>(criteria);
-        BetTypePerformanceList betTypePerformance = new BetTypePerformanceList();
+        var betTypePerformance = new BetTypePerformanceList();
 
         if (betTypeData != null && betTypeData.Any())
         {
@@ -106,5 +110,24 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
                               IsLive = c.IsLive,
                               FlagForViewReport = betTypeData.Count(b => b.BetType == c.BetType)
                           });
+    }
+
+    public async Task<IEnumerable<BetTypeItem>> GetBetTypes(int userId, BettypeViewPermission permission)
+    {
+        List<BetTypeItem>? betTypes = null;
+        var criteria = new GetBetTypesCriteria(permission) { UserId = userId };
+        var data = await repository.FetchAsync<BetTypeInfo>(criteria);
+
+        if (data != null && data.Any())
+        {
+            betTypes = data.Select(obj => new BetTypeItem(obj)).ToList();
+        }
+
+        return betTypes ?? [];
+    }
+
+    private async Task<LeagueExclusionConfig> GetLeagueExclusionConfig()
+    {
+        return await repository.GetAsync<LeagueExclusionConfig>(new LeagueExclusionConfigGetCriteria());
     }
 }
