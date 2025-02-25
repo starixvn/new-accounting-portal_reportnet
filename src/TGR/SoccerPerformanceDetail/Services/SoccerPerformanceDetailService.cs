@@ -4,6 +4,7 @@ using Fanex.Data.Repository;
 using Criteria;
 using Model;
 using ViewModel;
+using Microsoft.Extensions.DependencyInjection;
 
 public interface SoccerPerformanceDetailService
 {
@@ -13,8 +14,9 @@ public interface SoccerPerformanceDetailService
 
     Task<IEnumerable<LeagueGroup>> GetLeagueGroups();
 
-    Task<IEnumerable<BetTypeItem>>
-        GetBetTypes(int userId, BettypeViewPermission permission);
+    Task<IEnumerable<BetTypeItem>> GetBetTypes(int userId, BettypeViewPermission permission);
+
+    Task<BetTypeBetChoiceList> GetBetTypeBetChoicePerformance(GetBetChoicePerformanceOfBetTypeCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : SoccerPerformanceDetailService
@@ -129,5 +131,25 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
     private async Task<LeagueExclusionConfig> GetLeagueExclusionConfig()
     {
         return await repository.GetAsync<LeagueExclusionConfig>(new LeagueExclusionConfigGetCriteria());
+    }
+
+    public async Task<BetTypeBetChoiceList> GetBetTypeBetChoicePerformance(GetBetChoicePerformanceOfBetTypeCriteria criteria)
+    {
+        var betTypeBetChoiceList = new BetTypeBetChoiceList();
+
+        var rawData = await repository.FetchMultipleAsync<BetTypeBetChoicePerformanceInfo, FMBetTypeBetChoiceInfo>(criteria);
+
+        var betChoiceData = rawData.Item1;
+        var betChoiceOfBetTypeInfo = rawData.Item2;
+
+        if (betChoiceOfBetTypeInfo != null && betChoiceOfBetTypeInfo.Any())
+        {
+            betTypeBetChoiceList.IsFMBetType = betChoiceOfBetTypeInfo.ToList()[0].IsFMBetType;
+            betTypeBetChoiceList.IsBetChoiceDetail = betChoiceOfBetTypeInfo.ToList()[0].IsBetChoiceDetail;
+        }
+
+        betTypeBetChoiceList.AddItem(betChoiceData);
+
+        return betTypeBetChoiceList;
     }
 }

@@ -3,8 +3,8 @@ using SoccerPerformanceDetail.Model;
 
 namespace SoccerPerformanceDetail.Controller;
 
-using Microsoft.AspNetCore.Mvc;
 using Criteria;
+using Microsoft.AspNetCore.Mvc;
 using Services;
 
 [Route("api/soccer-performance-detail")]
@@ -38,5 +38,15 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         {
             DefaultBettypes = betTypeList
         });
+    }
+
+    [Route("bet-choice-detail")]
+    public async Task<IActionResult> GetBetChoicePerformanceOfBetType(GetBetChoicePerformanceOfBetTypeCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+
+        var result = await soccerDetailService.GetBetTypeBetChoicePerformance(criteria);
+
+        return Ok(result);
     }
 }
