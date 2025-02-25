@@ -17,6 +17,10 @@ public interface SoccerPerformanceDetailService
     Task<IEnumerable<BetTypeItem>> GetBetTypes(int userId, BettypeViewPermission permission);
 
     Task<BetTypeBetChoiceList> GetBetTypeBetChoicePerformance(GetBetChoicePerformanceOfBetTypeCriteria criteria);
+
+    Task<TraderPerformanceList> GetTraderPerformanceOfBetType(GetTraderPerformanceOfBetTypeCriteria criteria);
+   
+   // Task<LeaguePerformanceList> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : SoccerPerformanceDetailService
@@ -152,4 +156,52 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
 
         return betTypeBetChoiceList;
     }
+
+    public async Task<TraderPerformanceList> GetTraderPerformanceOfBetType(GetTraderPerformanceOfBetTypeCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
+
+        var traderPerformance = new TraderPerformanceList();
+
+        if (rawData != null && rawData.Any())
+        {
+            traderPerformance.AddTraderList(rawData, criteria.IsLive);
+
+           traderPerformance.CalculateTotalMargin();
+        }
+
+        return traderPerformance;
+    }
+
+    //public async Task<LeaguePerformanceList> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria)
+    //{
+    //    var rawData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
+
+    //    LeaguePerformanceList leaguePerformance = new LeaguePerformanceList();
+
+    //    if (leagueData != null && rawData.Any())
+    //    {
+    //        leaguePerformance.AddLeagueList(rawData, criteria.IsLive);
+    //        leaguePerformance.Total.Margin = CalculateTotalMargin(leaguePerformance.Total.WinLoss, leaguePerformance.Total.Turnover);
+    //        leaguePerformance.Total.MarginReal = CalculateTotalMargin(leaguePerformance.Total.WinLossReal, leaguePerformance.Total.TurnoverReal);
+    //    }
+
+    //    return leaguePerformance;
+    //}
+
+    //public async Task<List<LeagueGroup>> GetLeagueGroups()
+    //{
+    //    var criteria = new GetLeagueGroupSoccerCriteria { LeagueGroupIds = string.Empty };
+
+    //    var leagueGroupList = new List<LeagueGroup>();
+
+    //    var rawData = await repository.FetchAsync<LeagueGroup>(criteria);
+
+    //    if (rawData != null && rawData.Any())
+    //    {
+    //        leagueGroupList = rawData.Distinct(x => x.TargetLeagueGroupId).ToList();
+    //    }
+
+    //    return leagueGroupList;
+    //}
 }

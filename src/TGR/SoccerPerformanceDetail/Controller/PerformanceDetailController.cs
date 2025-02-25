@@ -6,6 +6,7 @@ namespace SoccerPerformanceDetail.Controller;
 using Criteria;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using SoccerPerformanceDetail.ViewModel;
 
 [Route("api/soccer-performance-detail")]
 [ApiController]
@@ -49,4 +50,22 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
 
         return Ok(result);
     }
+
+    [Route("trader-detail")]
+    public async Task<IActionResult> GetTraderPerformanceOfBetType(GetTraderPerformanceOfBetTypeCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        TraderPerformanceList traderPerformance = await soccerDetailService.GetTraderPerformanceOfBetType(criteria);
+      
+        return Ok(traderPerformance);
+    }
+
+    //[Route("league-detail")]
+    //public async Task<IActionResult> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria)
+    //{
+    //    criteria.IsExcludeLeagues = true;
+    //    var leaguePerformance = await soccerDetailService.GetLeaguePerformanceOfBetType(criteria);
+      
+    //    return Ok(leaguePerformance);
+    //}
 }

@@ -43,6 +43,12 @@ namespace SoccerPerformanceDetail.ViewModel
             }
         }
 
+        public void CalculateTotalMargin()
+        {
+            Total.Margin = Total.Turnover != 0 ? Total.WinLoss / Total.Turnover : null;
+            Total.MarginReal = Total.TurnoverReal != 0 ? Total.WinLossReal / Total.TurnoverReal : null;
+        }
+
         private void AddItem(TraderPerformanceItem item, bool isLive)
         {
             if (isLive)

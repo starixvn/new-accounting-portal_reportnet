@@ -1,14 +1,10 @@
-﻿namespace SoccerPerformanceDetail.ViewModel
+﻿namespace SoccerPerformanceDetail.ViewModel;
+
+public class LeagueGroup
 {
-    using System;
+    public int LeagueGroupId { get; set; }
 
-    [Serializable]
-    public class LeagueGroup
-    {
-        public int LeagueGroupId { get; set; }
+    public string LeagueGroupName { get; set; }
 
-        public string LeagueGroupName { get; set; }
-
-        public int TargetLeagueGroupId { get; set; }
-    }
+    public int TargetLeagueGroupId { get; set; }
 }
