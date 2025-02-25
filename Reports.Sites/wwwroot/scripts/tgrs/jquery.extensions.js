@@ -352,6 +352,11 @@
             
             //elements.ddlPeriodTypes.append($('<option value="3">Year</option>'));
 
+            elements.divDatePickers.show();
+            elements.divWeekPickers.hide();
+            elements.divMonthPickers.hide();
+            elements.divYearPicker.hide();
+
             elements.ddlPeriodTypes.on('change', function () {
                 var selectedValue = parseInt(elements.ddlPeriodTypes.val());
 
@@ -385,14 +390,7 @@
                         break;
                 }
             });
-
-            elements.ddlPeriodTypes.multiselect({
-                multiple: false,
-                selectedList: 1,
-                header: false,
-                minWidth: 70,
-                height: opts.isGenerateOptionWeek == true ? 70 : 47
-            }).change();
+          
         };
 
         var initializeDatePickers = function () {

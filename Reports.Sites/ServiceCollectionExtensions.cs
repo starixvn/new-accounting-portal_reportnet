@@ -206,9 +206,8 @@ public static class ServiceCollectionExtensions
                 "/scripts/FanexLegend.js");
 
             pipeline.AddJavaScriptBundle("/scripts/tgrs/common-tgrs.js",
-                "/scripts/tgrs/jquery.nexDatePicker.js",
-                "/scripts/tgrs/monPickr-0.0.3.js",
                 "/scripts/tgrs/moment.js",
+                "/scripts/tgrs/jquery.nexDatePicker.js",
                 "/scripts/tgrs/jquery.multiselect.js",
                 "/scripts/tgrs/native-object-extensions.js",
                 "/scripts/tgrs/jquery.extensions.js",
@@ -317,8 +316,7 @@ public static class ServiceCollectionExtensions
                 "/tgrs/styles/common.css",
                 "/tgrs/styles/reset.less",
                 "/stylesheets/tgrs/style.less",
-                "/stylesheets/multipleselect/jquery.multiselect.less",
-                "/stylesheets/monthpicker/monPickr-0.0.3.less");
+                "/stylesheets/multipleselect/jquery.multiselect.less");
 
             pipeline.AddLessBundle(
                 "/soccer-performance-detail/styles/performance-detail.css",
