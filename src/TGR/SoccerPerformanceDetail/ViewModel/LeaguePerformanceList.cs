@@ -29,55 +29,51 @@
 
         public LeaguePerformanceItem TotalItemNonLive { get; set; }
 
-        //public void AddLeagueList(IEnumerable<LeaguePerformanceInfo> leaguePerformanceInfos)
-        //{
-        //    var leagueGroups = SessionManager.Get<List<LeagueGroup>>("Fanex.NAP.TGRS.Reports.LeagueGroups");
+        public void AddLeagueList(IEnumerable<LeaguePerformanceInfo> leaguePerformanceInfos, IEnumerable<LeagueGroup> leagueGroups)
+        {
+            foreach (var item in leaguePerformanceInfos)
+            {
+                if (item != null)
+                {
+                    var leagueGroupName = string.Empty;
+                    if (leagueGroups != null && item.LeagueGroupID.HasValue)
+                    {
+                        var group = leagueGroups
+                            .Where(x => x.TargetLeagueGroupId.Equals(item.LeagueGroupID.Value))
+                            .Select(x => x.LeagueGroupName).ToList();
 
-        //    foreach (var item in leaguePerformanceInfos)
-        //    {
-        //        if (item != null)
-        //        {
-        //            var leagueGroupName = string.Empty;
-        //            if (leagueGroups != null && item.LeagueGroupID.HasValue)
-        //            {
-        //                var group = leagueGroups
-        //                    .Where(x => x.TargetLeagueGroupId.Equals(item.LeagueGroupID.Value))
-        //                    .Select(x => x.LeagueGroupName).ToList();
+                        leagueGroupName = group.Any() ? group[0] : "-";
+                    }
+                    var itemData = new LeaguePerformanceItem(item);
+                    itemData.LeagueGroupName = leagueGroupName;
 
-        //                leagueGroupName = group.Any() ? group[0] : "-";
-        //            }
-        //            var itemData = new LeaguePerformanceItem(item);
-        //            itemData.LeagueGroupName = leagueGroupName;
+                    this.AddItem(itemData);
+                }
+            }
+        }
 
-        //            this.AddItem(itemData);
-        //        }
-        //    }
-        //}
+        public void AddLeagueList(IEnumerable<LeaguePerformanceInfo> leaguePerformanceInfos, IEnumerable<LeagueGroup> leagueGroups, bool isLive)
+        {
+            foreach (var item in leaguePerformanceInfos)
+            {
+                if (item != null)
+                {
+                    var leagueGroupName = string.Empty;
+                    if (leagueGroups != null && item.LeagueGroupID.HasValue)
+                    {
+                        var group = leagueGroups
+                            .Where(x => x.TargetLeagueGroupId.Equals(item.LeagueGroupID.Value))
+                            .Select(x => x.LeagueGroupName).ToList();
 
-        //public void AddLeagueList(IEnumerable<LeaguePerformanceInfo> leaguePerformanceInfos, bool isLive)
-        //{
-        //    var leagueGroups = SessionManager.Get<List<LeagueGroup>>("Fanex.NAP.TGRS.Reports.LeagueGroups");
+                        leagueGroupName = group.Any() ? group[0] : "-";
+                    }
+                    var itemData = new LeaguePerformanceItem(item);
+                    itemData.LeagueGroupName = leagueGroupName;
 
-        //    foreach (var item in leaguePerformanceInfos)
-        //    {
-        //        if (item != null)
-        //        {
-        //            var leagueGroupName = string.Empty;
-        //            if (leagueGroups != null && item.LeagueGroupID.HasValue)
-        //            {
-        //                var group = leagueGroups
-        //                    .Where(x => x.TargetLeagueGroupId.Equals(item.LeagueGroupID.Value))
-        //                    .Select(x => x.LeagueGroupName).ToList();
-
-        //                leagueGroupName = group.Any() ? group[0] : "-";
-        //            }
-        //            var itemData = new LeaguePerformanceItem(item);
-        //            itemData.LeagueGroupName = leagueGroupName;
-
-        //            this.AddItem(itemData, isLive);
-        //        }
-        //    }
-        //}
+                    this.AddItem(itemData, isLive);
+                }
+            }
+        }
 
         public void CalculateTotalMargin()
         {

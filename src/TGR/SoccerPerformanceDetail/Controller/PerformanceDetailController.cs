@@ -60,12 +60,12 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         return Ok(traderPerformance);
     }
 
-    //[Route("league-detail")]
-    //public async Task<IActionResult> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria)
-    //{
-    //    criteria.IsExcludeLeagues = true;
-    //    var leaguePerformance = await soccerDetailService.GetLeaguePerformanceOfBetType(criteria);
-      
-    //    return Ok(leaguePerformance);
-    //}
+    [Route("league-detail")]
+    public async Task<IActionResult> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var leaguePerformance = await soccerDetailService.GetLeaguePerformanceOfBetType(criteria);
+
+        return Ok(leaguePerformance);
+    }
 }

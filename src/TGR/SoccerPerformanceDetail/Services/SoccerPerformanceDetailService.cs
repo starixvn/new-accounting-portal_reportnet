@@ -20,7 +20,7 @@ public interface SoccerPerformanceDetailService
 
     Task<TraderPerformanceList> GetTraderPerformanceOfBetType(GetTraderPerformanceOfBetTypeCriteria criteria);
    
-   // Task<LeaguePerformanceList> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria);
+    Task<LeaguePerformanceList> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : SoccerPerformanceDetailService
@@ -173,35 +173,32 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
         return traderPerformance;
     }
 
-    //public async Task<LeaguePerformanceList> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria)
-    //{
-    //    var rawData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
+    public async Task<LeaguePerformanceList> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
 
-    //    LeaguePerformanceList leaguePerformance = new LeaguePerformanceList();
+        LeaguePerformanceList leaguePerformance = new LeaguePerformanceList();
 
-    //    if (leagueData != null && rawData.Any())
-    //    {
-    //        leaguePerformance.AddLeagueList(rawData, criteria.IsLive);
-    //        leaguePerformance.Total.Margin = CalculateTotalMargin(leaguePerformance.Total.WinLoss, leaguePerformance.Total.Turnover);
-    //        leaguePerformance.Total.MarginReal = CalculateTotalMargin(leaguePerformance.Total.WinLossReal, leaguePerformance.Total.TurnoverReal);
-    //    }
+        if (rawData != null && rawData.Any())
+        {
+            var leagueGroups = await GetLeagueGroups();
+            leaguePerformance.AddLeagueList(rawData, leagueGroups, criteria.IsLive);
+            leaguePerformance.Total.Margin = CalculateTotalMargin(leaguePerformance.Total.WinLoss, leaguePerformance.Total.Turnover);
+            leaguePerformance.Total.MarginReal = CalculateTotalMargin(leaguePerformance.Total.WinLossReal, leaguePerformance.Total.TurnoverReal);
+        }
 
-    //    return leaguePerformance;
-    //}
+        return leaguePerformance;
+    }
 
-    //public async Task<List<LeagueGroup>> GetLeagueGroups()
-    //{
-    //    var criteria = new GetLeagueGroupSoccerCriteria { LeagueGroupIds = string.Empty };
+    private decimal? CalculateTotalMargin(decimal winLoss, decimal turnover)
+    {
+        decimal? margin = null;
 
-    //    var leagueGroupList = new List<LeagueGroup>();
+        if (turnover != 0)
+        {
+            margin = winLoss / turnover * 100;
+        }
 
-    //    var rawData = await repository.FetchAsync<LeagueGroup>(criteria);
-
-    //    if (rawData != null && rawData.Any())
-    //    {
-    //        leagueGroupList = rawData.Distinct(x => x.TargetLeagueGroupId).ToList();
-    //    }
-
-    //    return leagueGroupList;
-    //}
+        return margin;
+    }
 }

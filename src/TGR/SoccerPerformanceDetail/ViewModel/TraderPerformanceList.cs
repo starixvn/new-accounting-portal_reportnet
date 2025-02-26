@@ -7,71 +7,66 @@
 //   <change who="Jason.Ly" date="2014.5.17">Created</change>
 // </history>
 
-namespace SoccerPerformanceDetail.ViewModel
+namespace SoccerPerformanceDetail.ViewModel;
+
+using SoccerPerformanceDetail.Model;
+using System;
+using System.Collections.Generic;
+
+public class TraderPerformanceList
 {
-    using SoccerPerformanceDetail.Model;
-    using System;
-    using System.Collections.Generic;
-
-    /// <summary>
-    /// League performance list view model.
-    /// </summary>
-    [Serializable]
-    public class TraderPerformanceList
+    public TraderPerformanceList()
     {
-        public TraderPerformanceList()
+        this.ItemLiveList = new List<TraderPerformanceItem>();
+        this.ItemNonLiveList = new List<TraderPerformanceItem>();
+        this.Total = new TraderPerformanceItem();
+    }
+
+    public List<TraderPerformanceItem> ItemLiveList { get; set; }
+
+    public List<TraderPerformanceItem> ItemNonLiveList { get; set; }
+
+    public TraderPerformanceItem Total { get; set; }
+ 
+    public void AddTraderList(IEnumerable<TraderPerformanceInfo> traderPerformanceInfos, bool isLive)
+    {
+        foreach (var item in traderPerformanceInfos)
         {
-            this.ItemLiveList = new List<TraderPerformanceItem>();
-            this.ItemNonLiveList = new List<TraderPerformanceItem>();
-            this.Total = new TraderPerformanceItem();
-        }
-
-        public List<TraderPerformanceItem> ItemLiveList { get; set; }
-
-        public List<TraderPerformanceItem> ItemNonLiveList { get; set; }
-
-        public TraderPerformanceItem Total { get; set; }
-     
-        public void AddTraderList(IEnumerable<TraderPerformanceInfo> traderPerformanceInfos, bool isLive)
-        {
-            foreach (var item in traderPerformanceInfos)
+            if (item != null)
             {
-                if (item != null)
-                {
-                    this.AddItem(new TraderPerformanceItem(item), isLive);
-                }                
-            }
+                this.AddItem(new TraderPerformanceItem(item), isLive);
+            }                
         }
+    }
 
-        public void CalculateTotalMargin()
+    public void CalculateTotalMargin()
+    {
+        Total.Margin = Total.Turnover != 0 ? Total.WinLoss / Total.Turnover : null;
+        Total.MarginReal = Total.TurnoverReal != 0 ? Total.WinLossReal / Total.TurnoverReal : null;
+    }
+
+    private void AddItem(TraderPerformanceItem item, bool isLive)
+    {
+        if (isLive)
         {
-            Total.Margin = Total.Turnover != 0 ? Total.WinLoss / Total.Turnover : null;
-            Total.MarginReal = Total.TurnoverReal != 0 ? Total.WinLossReal / Total.TurnoverReal : null;
+            this.ItemLiveList.Add(item);
         }
-
-        private void AddItem(TraderPerformanceItem item, bool isLive)
+        else
         {
-            if (isLive)
-            {
-                this.ItemLiveList.Add(item);
-            }
-            else
-            {
-                this.ItemNonLiveList.Add(item);
-            }
-
-            CalculateTotal(item);
+            this.ItemNonLiveList.Add(item);
         }
 
-        private void CalculateTotal(TraderPerformanceItem item)
-        {
-            this.Total.NoOfLeagues += item.NoOfLeagues;
-            this.Total.NoOfMatches += item.NoOfMatches;
-            this.Total.Turnover += item.Turnover;
-            this.Total.WinLoss += item.WinLoss;           
-            this.Total.TurnoverReal += item.TurnoverReal;
-            this.Total.WinLossReal += item.WinLossReal;
-            this.Total.BetCount += item.BetCount;
-        }
+        CalculateTotal(item);
+    }
+
+    private void CalculateTotal(TraderPerformanceItem item)
+    {
+        this.Total.NoOfLeagues += item.NoOfLeagues;
+        this.Total.NoOfMatches += item.NoOfMatches;
+        this.Total.Turnover += item.Turnover;
+        this.Total.WinLoss += item.WinLoss;           
+        this.Total.TurnoverReal += item.TurnoverReal;
+        this.Total.WinLossReal += item.WinLossReal;
+        this.Total.BetCount += item.BetCount;
     }
 }

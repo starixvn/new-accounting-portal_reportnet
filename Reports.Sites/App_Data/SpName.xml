@@ -458,5 +458,6 @@
 		<Setting Key="TGRS_LeagueExclusion_SelectConfig" SpName="TGRS_LeagueExclusion_SelectConfig" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_BetChoice" SpName="TGRS_Rpt_PerformanceDetail_Bettype_BetChoice" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_Trader" SpName="TGRS_Rpt_PerformanceDetail_Bettype_Trader" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
+		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_League" SpName="TGRS_Rpt_PerformanceDetail_Bettype_League" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 	</Function>
 </Functions>
