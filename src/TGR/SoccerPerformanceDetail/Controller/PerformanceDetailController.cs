@@ -7,10 +7,12 @@ using Criteria;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using SoccerPerformanceDetail.ViewModel;
+using Utilities.Constants;
 
 [Route("api/soccer-performance-detail")]
 [ApiController]
 public class PerformanceDetailController(SoccerPerformanceDetailService soccerDetailService,
+    SoccerPerformanceDetailExcelService soccerDetailExcelService,
     INapSession napSession) : ControllerBase
 {
     [Route("bettypes")]
@@ -39,6 +41,21 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         {
             DefaultBettypes = betTypeList
         });
+    }
+
+    [HttpGet("export-bettypes")]
+    public async Task<IActionResult> ExportExcelBetType([FromQuery] GetBetTypePerformanceCriteria criteria)
+    {
+        if (criteria.IsAllLeagueGroup)
+        {
+            criteria.LeagueGroupIds = string.Empty;
+        }
+
+        var data = await soccerDetailService.GetBetTypePerformance(criteria);
+        var excelPackage = await soccerDetailExcelService.ExportExcelBetTypePerformance(data, criteria);
+        var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+        var fileName = $"Performance_Detail_BetType_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 
     [Route("bet-choice-detail")]

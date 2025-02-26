@@ -15,7 +15,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     var $this = this;
     var urls = {
         GetBetTypePerformance: window.rootUrl + '/api/soccer-performance-detail/bettypes',
-        ExportBetTypePerformance: common.ResolveRootUrl('PerformanceDetail/ExportBetTypePerformance'),
+        ExportBetTypePerformance: window.rootUrl + '/api/soccer-performance-detail/export-bettypes',
         ExportBetChoicePerformanceOfBetType: common.ResolveRootUrl('PerformanceDetail/ExportBetChoicePerformanceOfBetType'),
         ExportLeaguePerformanceOfBetChoice: common.ResolveRootUrl('PerformanceDetail/ExportLeaguePerformanceOfBetChoice'),
         GetTraderPerformanceOfBetType: window.rootUrl + '/api/soccer-performance-detail/trader-detail',
@@ -784,7 +784,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
 
     // Export bet type performance to excel.
     var exportBetTypePerformance = function () {
-        common.DownloadFile(urls.ExportBetTypePerformance, parameters);
+        AccReport.downloadFile(urls.ExportBetTypePerformance, parameters);
     };
 
     var exportBetChoicePerformanceOfBetType = function () {

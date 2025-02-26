@@ -5,6 +5,7 @@ using Fanex.Result.Core.RemotingRef;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Reports.Sites.DependencyInjection;
 using SabaPromotion;
+using SoccerPerformanceDetail;
 
 namespace Reports.Sites;
 
@@ -208,6 +209,7 @@ public static class ServiceCollectionExtensions
             pipeline.AddJavaScriptBundle("/scripts/tgrs/common-tgrs.js",
                 "/scripts/tgrs/moment.js",
                 "/scripts/tgrs/jquery.nexDatePicker.js",
+                "/scripts/tgrs/monPickr-0.0.3.js",
                 "/scripts/tgrs/jquery.multiselect.js",
                 "/scripts/tgrs/native-object-extensions.js",
                 "/scripts/tgrs/jquery.extensions.js",
@@ -353,6 +355,7 @@ public static class ServiceCollectionExtensions
             cfg.InitializeBetConstructPerformance();
             cfg.InitializeLeagueWinLoss();
             cfg.InitializeSabaPromotion();
+            cfg.InitializeSoccerPerformanceDetail();
         });
 
         var mapper = config.CreateMapper();
