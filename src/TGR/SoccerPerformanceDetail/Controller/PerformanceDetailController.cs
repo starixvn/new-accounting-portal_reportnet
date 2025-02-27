@@ -46,13 +46,10 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     [HttpGet("export-bettypes")]
     public async Task<IActionResult> ExportExcelBetType([FromQuery] GetBetTypePerformanceCriteria criteria)
     {
-        if (criteria.IsAllLeagueGroup)
-        {
-            criteria.LeagueGroupIds = string.Empty;
-        }
-
+        var leagueGroups = await soccerDetailService.GetLeagueGroups();
+        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
         var data = await soccerDetailService.GetBetTypePerformance(criteria);
-        var excelPackage = await soccerDetailExcelService.ExportExcelBetTypePerformance(data, criteria);
+        var excelPackage = await soccerDetailExcelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypes);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileName = $"Performance_Detail_BetType_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");

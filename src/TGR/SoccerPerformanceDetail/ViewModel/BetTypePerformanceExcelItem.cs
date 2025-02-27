@@ -28,7 +28,7 @@ public class BetTypePerformanceExcelItem
     [Cell("H5")]
     public decimal Turnover { get; set; }
 
-    [Cell("I5")] public decimal AvgToPerMatch => Turnover / NoOfMatches;
+    [Cell("I5")] public decimal AvgToPerMatch => NoOfMatches > 0 ? Turnover / NoOfMatches : 0;
 
     [Cell("J5")]
     public decimal WinLoss { get; set; }
@@ -39,7 +39,7 @@ public class BetTypePerformanceExcelItem
     [Cell("L5")]
     public decimal TurnoverReal { get; set; }
 
-    [Cell("M5")] public decimal AvgToPerMatchReal => TurnoverReal / NoOfMatches;
+    [Cell("M5")] public decimal AvgToPerMatchReal => NoOfMatches > 0 ? TurnoverReal / NoOfMatches : 0;
 
     [Cell("N5")]
     public decimal WinLossReal { get; set; }
