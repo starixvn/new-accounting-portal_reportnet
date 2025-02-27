@@ -85,4 +85,13 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
 
         return Ok(leaguePerformance);
     }
+
+    [Route("live-league-detail")]
+    public async Task<IActionResult> GetLeaguePerformanceOfBetChoice(GetLeaguePerformanceOfBetChoiceCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var leaguePerformance = await soccerDetailService.GetLeaguePerformanceOfBetChoice(criteria);
+
+        return Ok(leaguePerformance);
+    }
 }

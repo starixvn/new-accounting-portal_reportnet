@@ -1,10 +1,9 @@
 ﻿namespace SoccerPerformanceDetail.Services;
 
-using Fanex.Data.Repository;
 using Criteria;
+using Fanex.Data.Repository;
 using Model;
 using ViewModel;
-using Microsoft.Extensions.DependencyInjection;
 
 public interface SoccerPerformanceDetailService
 {
@@ -21,6 +20,8 @@ public interface SoccerPerformanceDetailService
     Task<TraderPerformanceList> GetTraderPerformanceOfBetType(GetTraderPerformanceOfBetTypeCriteria criteria);
    
     Task<LeaguePerformanceList> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria);
+
+    Task<LeaguePerformanceList> GetLeaguePerformanceOfBetChoice(GetLeaguePerformanceOfBetChoiceCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : SoccerPerformanceDetailService
@@ -200,5 +201,21 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
         }
 
         return margin;
+    }
+
+    public async Task<LeaguePerformanceList> GetLeaguePerformanceOfBetChoice(GetLeaguePerformanceOfBetChoiceCriteria criteria)
+    {
+        var leagueData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
+        var leaguePerformance = new LeaguePerformanceList();
+
+        if (leagueData != null && leagueData.Any())
+        {
+            var leagueGroups = await GetLeagueGroups();
+            leaguePerformance.AddLeagueList(leagueData, leagueGroups, criteria.IsLive);
+            leaguePerformance.Total.Margin = CalculateTotalMargin(leaguePerformance.Total.WinLoss, leaguePerformance.Total.Turnover);
+            leaguePerformance.Total.MarginReal = CalculateTotalMargin(leaguePerformance.Total.WinLossReal, leaguePerformance.Total.TurnoverReal);
+        }
+
+        return leaguePerformance;
     }
 }
