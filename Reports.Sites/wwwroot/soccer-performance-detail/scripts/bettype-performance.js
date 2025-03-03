@@ -19,7 +19,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         ExportBetChoicePerformanceOfBetType: common.ResolveRootUrl('PerformanceDetail/ExportBetChoicePerformanceOfBetType'),
         ExportLeaguePerformanceOfBetChoice: common.ResolveRootUrl('PerformanceDetail/ExportLeaguePerformanceOfBetChoice'),
         GetTraderPerformanceOfBetType: window.rootUrl + '/api/soccer-performance-detail/trader-detail',
-        GetMatchPerformanceOfBetTypeTrader: common.ResolveRootUrl('PerformanceDetail/GetMatchPerformanceOfBetTypeTrader'),
+        GetMatchPerformanceOfBetTypeTrader: window.rootUrl + '/api/soccer-performance-detail/trader-match-detail',
         GetLeaguePerformanceOfBetType: window.rootUrl + '/api/soccer-performance-detail/league-detail',
         GetLeaguePerformanceOfBetChoice: window.rootUrl + '/api/soccer-performance-detail/live-league-detail',
         GetTraderPerformanceOfBetTypeLeague: common.ResolveRootUrl('PerformanceDetail/GetTraderPerformanceOfBetTypeLeague'),

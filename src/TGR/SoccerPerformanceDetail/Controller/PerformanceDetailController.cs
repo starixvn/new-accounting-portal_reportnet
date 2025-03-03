@@ -91,4 +91,13 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
 
         return Ok(leaguePerformance);
     }
+
+    [Route("trader-match-detail")]
+    public async Task<IActionResult> GetMatchPerformanceOfBetTypeTrader(GetMatchPerformanceOfBetTypeTraderCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var matchPerformance = await soccerDetailService.GetMatchPerformanceOfBetTypeTrader(criteria);
+       
+        return Ok(matchPerformance);
+    }
 }

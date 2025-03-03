@@ -22,6 +22,9 @@ public interface SoccerPerformanceDetailService
     Task<LeaguePerformanceList> GetLeaguePerformanceOfBetType(GetLeaguePerformanceOfBetTypeCriteria criteria);
 
     Task<LeaguePerformanceList> GetLeaguePerformanceOfBetChoice(GetLeaguePerformanceOfBetChoiceCriteria criteria);
+
+    Task<MatchPerformanceList> GetMatchPerformanceOfTeamTrader(GetMatchPerformanceOfTeamTraderCriteria criteria);
+    Task<MatchPerformanceList> GetMatchPerformanceOfBetTypeTrader(GetMatchPerformanceOfBetTypeTraderCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : SoccerPerformanceDetailService
@@ -217,5 +220,70 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
         }
 
         return leaguePerformance;
+    }
+
+    public async Task<MatchPerformanceList> GetMatchPerformanceOfTeamTrader(GetMatchPerformanceOfTeamTraderCriteria criteria)
+    {
+        var matchData = await repository.FetchAsync<MatchPerformanceInfo>(criteria);
+
+        var matchPerformance = new MatchPerformanceList();
+
+        if (matchData != null && matchData.Any())
+        {
+            IEnumerable<IGrouping<int?, MatchPerformanceInfo>> leagueGroups = matchData.GroupBy(obj => obj.LeagueId);
+            MatchPerformanceGroup leagueGroup = null;
+
+            foreach (IGrouping<int?, MatchPerformanceInfo> group in leagueGroups)
+            {
+                if (group.Key.HasValue)
+                {
+                    leagueGroup = new MatchPerformanceGroup(group.Key);
+                    leagueGroup.AddMatchList(group, criteria.IsLive);
+                    leagueGroup.Total.Margin = CalculateTotalMargin(leagueGroup.Total.WinLoss, leagueGroup.Total.Turnover);
+                    leagueGroup.Total.MarginReal = CalculateTotalMargin(leagueGroup.Total.WinLossReal, leagueGroup.Total.TurnoverReal);
+                    matchPerformance.AddItem(leagueGroup);
+                }
+            }
+
+            matchPerformance.GroupList = matchPerformance.GroupList.OrderBy(obj => obj.LeagueName).ToList();
+            matchPerformance.GrandTotal.Margin = CalculateTotalMargin(matchPerformance.GrandTotal.WinLoss, matchPerformance.GrandTotal.Turnover);
+            matchPerformance.GrandTotal.MarginReal = CalculateTotalMargin(matchPerformance.GrandTotal.WinLossReal, matchPerformance.GrandTotal.TurnoverReal);
+            matchPerformance.TotalItems = matchData.Count();
+        }
+
+        return matchPerformance;
+    }
+
+    public async Task<MatchPerformanceList> GetMatchPerformanceOfBetTypeTrader(GetMatchPerformanceOfBetTypeTraderCriteria criteria)
+    {
+        var matchData = await repository.FetchAsync<MatchPerformanceRawInfo>(criteria);
+
+        var matchPerformance = new MatchPerformanceList();
+
+        if (matchData != null && matchData.Any())
+        {
+            IEnumerable<IGrouping<int?, MatchPerformanceRawInfo>> leagueGroups = matchData.GroupBy(obj => obj.LeagueId);
+            MatchPerformanceGroup leagueGroup = null;
+
+            foreach (IGrouping<int?, MatchPerformanceRawInfo> group in leagueGroups)
+            {
+                if (group.Key.HasValue)
+                {
+                    leagueGroup = new MatchPerformanceGroup(group.Key);
+                    leagueGroup.AddMatchList(group, criteria.IsLive);
+                    leagueGroup.Total.Margin = CalculateTotalMargin(leagueGroup.Total.WinLoss, leagueGroup.Total.Turnover);
+                    leagueGroup.Total.MarginReal = CalculateTotalMargin(leagueGroup.Total.WinLossReal, leagueGroup.Total.TurnoverReal);
+                    leagueGroup.Total.Score = leagueGroup.Total.SumCategory == 0 ? 0 : (leagueGroup.Total.WinLossScore * 100 / leagueGroup.Total.SumCategory);
+                    matchPerformance.AddItem(leagueGroup);
+                }
+            }
+
+            matchPerformance.GroupList = matchPerformance.GroupList.OrderBy(obj => obj.LeagueName).ToList();
+            matchPerformance.GrandTotal.Margin = CalculateTotalMargin(matchPerformance.GrandTotal.WinLoss, matchPerformance.GrandTotal.Turnover);
+            matchPerformance.GrandTotal.MarginReal = CalculateTotalMargin(matchPerformance.GrandTotal.WinLossReal, matchPerformance.GrandTotal.TurnoverReal);
+            matchPerformance.TotalItems = matchData.Count();
+        }
+
+        return matchPerformance;
     }
 }
