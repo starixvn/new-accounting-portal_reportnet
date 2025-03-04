@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Epplus.Mapper.Extensions;
 using NPOI.SS.Formula.Functions;
+using NPOI.SS.Util;
 using OfficeOpenXml;
 using SoccerPerformanceDetail.Constants;
 using SoccerPerformanceDetail.Criteria;
@@ -28,7 +29,7 @@ public class SoccerPerformanceDetailExcelServiceImp(ConfigurationService configu
 
     private ExcelWorksheet? totalSheet;
 
-    private const int StartRowIndex = 5;
+    private const int StartFilterBlockRowIndex = 3;
 
     private ExcelPackage? ExcelPackage { get; set; }
 
@@ -38,48 +39,51 @@ public class SoccerPerformanceDetailExcelServiceImp(ConfigurationService configu
         IEnumerable<BetTypeItem> betTypes)
     {
         LoadTemplate("BetType.xlsx");
-        BuildFilterBlock(criteria, leagueGroups, betTypes);
+        var rowIndex = BuildFilterBlock(criteria, leagueGroups, betTypes);
+        var startBodyRowIndex = rowIndex + 4;
         var bodyData = criteria.MarketFilter switch
         {
             Market.NonLive => data.ItemNonLiveList,
             Market.Live => data.ItemLiveList,
             _ => data.ItemByOrderList
         };
-        BuildBodyRows(bodyData, StartRowIndex);
-        var startTotalRowIndex = data.ItemByOrderList.Count + StartRowIndex;
+        BuildBodyRows(bodyData, startBodyRowIndex);
+        var startTotalRowIndex = data.ItemByOrderList.Count + startBodyRowIndex;
         BuildTotalRow(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex);
         ClearTemplate();
         return Task.FromResult(ExcelPackage!);
     }
 
-    private void BuildFilterBlock(GetBetTypePerformanceCriteria criteria, IEnumerable<LeagueGroup> leagueGroups, IEnumerable<BetTypeItem> betTypes)
+    private int BuildFilterBlock(GetBetTypePerformanceCriteria criteria, IEnumerable<LeagueGroup> leagueGroups, IEnumerable<BetTypeItem> betTypes)
     {
-        var cellAddress = sheet!.Cells["A2:O2"];
-        cellAddress.Merge = true;
-        cellAddress.IsRichText = true;
-        cellAddress.Style.Font.Size = 8;
-        cellAddress.Style.WrapText = true;
-        var richText = cellAddress.RichText;
-        richText.Add("Market: ").Bold = true;
-        richText.Add($"{criteria.MarketFilter.ToString()}").Bold = false;
-        richText.Add("\nFrom Date: ").Bold = true;
-        richText.Add($"{criteria.FromDate:MM/dd/yyyy} - ").Bold = false;
-        richText.Add("To Date: ").Bold = true;
-        richText.Add($"{criteria.ToDate:MM/dd/yyyy}").Bold = false;
-        richText.Add("\nBetType: ").Bold = true;
-        richText.Add($"{MakeBetTypeSelectString(betTypes, criteria.Bettypes)}").Bold = false;
+        var rowIndex = StartFilterBlockRowIndex;
+        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.MarketFilter;
+        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.FromDate.ToString("MM/dd/yyyy");
+        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
+        sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value =
+            MakeBetTypeSelectString(betTypes, criteria.Bettypes);
+        var lineCount = (int)Math.Ceiling((double)sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Text.Length / ExcelConstants.Width);
+        sheet.Row(rowIndex++).Height = 8 * lineCount;
         if (criteria.IsVirtual)
         {
             if (criteria.Turnover.HasValue)
             {
-                richText.Add("\nMinimum Virtual Turnover: ").Bold = true;
-                richText.Add($"{criteria.Turnover:#,##0.00}").Bold = false;
+                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
+                    criteria.Turnover.Value.ToString("#,##0.00");
+            }
+            else
+            {
+                sheet!.DeleteRow(rowIndex);
             }
 
             if (criteria.WinLoss.HasValue)
             {
-                richText.Add("\nMinimum Virtual WinLoss: ").Bold = true;
-                richText.Add($"{criteria.WinLoss:#,##0.00}").Bold = false;
+                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
+                    criteria.WinLoss.Value.ToString("#,##0.00");
+            }
+            else
+            {
+                sheet!.DeleteRow(rowIndex);
             }
         }
 
@@ -87,37 +91,48 @@ public class SoccerPerformanceDetailExcelServiceImp(ConfigurationService configu
         {
             if (criteria.TurnoverReal.HasValue)
             {
-                richText.Add("\nMinimum Real Turnover: ").Bold = true;
-                richText.Add($"{criteria.TurnoverReal:#,##0.00}").Bold = false;
+                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
+                    criteria.TurnoverReal.Value.ToString("#,##0.00");
+            }
+            else
+            {
+                sheet!.DeleteRow(rowIndex);
             }
 
             if (criteria.WinLossReal.HasValue)
             {
-                richText.Add("\nMinimum Real WinLoss: ").Bold = true;
-                richText.Add($"{criteria.WinLossReal:#,##0.00}").Bold = false;
+                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
+                    criteria.WinLossReal.Value.ToString("#,##0.00");
+            }
+            else
+            {
+                sheet!.DeleteRow(rowIndex);
             }
         }
 
         if (criteria.IsVirtual && criteria.MarginFrom.HasValue || criteria.MarginTo.HasValue)
         {
             var marginString = GenerateMarginString(criteria.MarginFrom, criteria.MarginTo);
-            richText.Add("\nVirtual Margin %: ").Bold = true;
-            richText.Add($"{marginString}").Bold = false;
+            sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = marginString;
+        }
+        else
+        {
+            sheet!.DeleteRow(rowIndex);
         }
 
         if (criteria.IsReal && criteria.MarginFromReal.HasValue || criteria.MarginToReal.HasValue)
         {
             var marginString = GenerateMarginString(criteria.MarginFromReal, criteria.MarginToReal);
-            richText.Add("\nReal Margin %: ").Bold = true;
-            richText.Add($"{marginString}").Bold = false;
+            sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = marginString;
+        }
+        else
+        {
+            sheet!.DeleteRow(rowIndex);
         }
 
-        richText.Add("\nLeague Group: ").Bold = true;
-        richText.Add($"{MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups)}").Bold = false;
-        
-        var lineCount = (int)Math.Ceiling((double)cellAddress.Text.Length / ExcelConstants.Width);
+        sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value = MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
 
-        sheet.Row(2).Height = lineCount * 8;
+        return rowIndex;
     }
 
     private void BuildBodyRows(IEnumerable<BetTypePerformanceItem> list, int startRowIndex)
