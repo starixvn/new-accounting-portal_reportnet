@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
 using Epplus.Mapper.Extensions;
-using NPOI.SS.Formula.Functions;
-using NPOI.SS.Util;
 using OfficeOpenXml;
 using SoccerPerformanceDetail.Constants;
 using SoccerPerformanceDetail.Criteria;
+using SoccerPerformanceDetail.Utilities;
 using SoccerPerformanceDetail.ViewModel;
 using Utilities.Configurations;
 
 namespace SoccerPerformanceDetail.Services;
 
-public interface SoccerPerformanceDetailExcelService
+public interface ExcelService
 {
     Task<ExcelPackage> ExportExcelBetTypePerformance(BetTypePerformanceList data,
         GetBetTypePerformanceCriteria criteria,
@@ -18,8 +17,8 @@ public interface SoccerPerformanceDetailExcelService
         IEnumerable<BetTypeItem> betTypes);
 }
 
-public class SoccerPerformanceDetailExcelServiceImp(ConfigurationService configurationService,
-    IMapper mapper) : SoccerPerformanceDetailExcelService
+public class ExcelServiceImp(ConfigurationService configurationService,
+    IMapper mapper) : ExcelService
 {
     private ExcelWorksheet? sheet;
 
@@ -61,7 +60,7 @@ public class SoccerPerformanceDetailExcelServiceImp(ConfigurationService configu
         sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.FromDate.ToString("MM/dd/yyyy");
         sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
         sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value =
-            MakeBetTypeSelectString(betTypes, criteria.Bettypes);
+            ModelsHelper.MakeBetTypeSelectString(betTypes, criteria.Bettypes);
         var lineCount = (int)Math.Ceiling((double)sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Text.Length / ExcelConstants.Width);
         if (lineCount > 1)
         {
@@ -135,7 +134,7 @@ public class SoccerPerformanceDetailExcelServiceImp(ConfigurationService configu
             sheet!.DeleteRow(rowIndex);
         }
 
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value = MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
+        sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value = ModelsHelper.MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
 
         return rowIndex;
     }
@@ -200,52 +199,6 @@ public class SoccerPerformanceDetailExcelServiceImp(ConfigurationService configu
             return $"≥ {marginFrom}";
         else
             return $"from {marginFromString} to {marginToString}";
-    }
-
-    private string MakeLeagueGroupSelectString(string leagueGroupIds, IEnumerable<LeagueGroup> leagueGroups)
-    {
-        var leagueGroupNames = string.Empty;
-
-        if (string.IsNullOrEmpty(leagueGroupIds))
-            return leagueGroupNames;
-
-        if (leagueGroups == null || !leagueGroups.Any())
-            return leagueGroupNames;
-
-        var ids = leagueGroupIds.Split(',');
-
-        foreach (var id in ids)
-        {
-            var group = leagueGroups
-                .Where(x => x.TargetLeagueGroupId.ToString().Equals(id))
-                .Select(x => x.LeagueGroupName).ToList();
-
-            if (group != null && group.Any())
-            {
-                leagueGroupNames += group[0] + ", ";
-            }
-        }
-
-        leagueGroupNames = leagueGroupNames.TrimEnd(new char[] { ' ', ',' });
-
-        return leagueGroupNames;
-    }
-
-    private string MakeBetTypeSelectString(IEnumerable<BetTypeItem> betTypes, string betTypeIds)
-    {
-        if (string.IsNullOrEmpty(betTypeIds) || betTypeIds == "0")
-        {
-            return string.Join(", ", betTypes.Select(obj => obj.BetTypeName));
-        }
-        else
-        {
-            var betTypeList = betTypeIds.Split(',').Select(int.Parse).ToList();
-
-            var result = betTypes.Join(betTypeList, b1 => b1.BetTypeId, b2 => b2,
-                (b1, b2) => new { b1.BetTypeName }).Select(x => x.BetTypeName);
-
-            return string.Join(", ", result);
-        }
     }
 
     private void LoadTemplate(string fileExcel)

@@ -1,18 +1,21 @@
 ﻿using Fanex.NAP.Client;
+using SoccerPerformanceDetail.Constants;
 using SoccerPerformanceDetail.Model;
+using SoccerPerformanceDetail.Utilities;
 
 namespace SoccerPerformanceDetail.Controller;
 
 using Criteria;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.SS.UserModel;
 using Services;
-using SoccerPerformanceDetail.ViewModel;
-using Utilities.Constants;
+using ViewModel;
 
 [Route("api/soccer-performance-detail")]
 [ApiController]
 public class PerformanceDetailController(SoccerPerformanceDetailService soccerDetailService,
-    SoccerPerformanceDetailExcelService soccerDetailExcelService,
+    ExcelService excelService,
+    BetChoiceExcelService betChoiceExcelService,
     INapSession napSession) : ControllerBase
 {
     [Route("bettypes")]
@@ -49,7 +52,7 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         var leagueGroups = await soccerDetailService.GetLeagueGroups();
         var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
         var data = await soccerDetailService.GetBetTypePerformance(criteria);
-        var excelPackage = await soccerDetailExcelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypes);
+        var excelPackage = await excelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypes);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileName = $"Performance_Detail_BetType_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
@@ -63,6 +66,26 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         var result = await soccerDetailService.GetBetTypeBetChoicePerformance(criteria);
 
         return Ok(result);
+    }
+
+    [HttpGet("export-bet-choice-detail")]
+    public async Task<IActionResult> ExportExcelBetChoicePerformanceOfBetType([FromQuery] GetBetChoicePerformanceOfBetTypeCriteria criteria)
+    {
+        var leagueGroups = await soccerDetailService.GetLeagueGroups();
+        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypesString = ModelsHelper.MakeBetTypeSelectString(betTypes, criteria.BetType.ToString());
+        var market = criteria.Market switch
+        {
+            -1 => "All",
+            1 => ExcelConstants.LiveText,
+            _ => ExcelConstants.NonLiveText
+        };
+        criteria.IsExcludeLeagues = true;
+        var data = await soccerDetailService.GetBetTypeBetChoicePerformance(criteria);
+        var excelPackage = await betChoiceExcelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypesString);
+        var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+        var fileName = $"Performance_Detail_{betTypesString.Replace(" ", "_")}_{market}_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 
     [Route("trader-detail")]

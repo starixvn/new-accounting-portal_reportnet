@@ -7,6 +7,7 @@ public static class SoccerPerformanceDetailInjection
     public static void RegisterSoccerPerformanceDetailServices(this IServiceCollection service)
     {
         service.AddTransient<SoccerPerformanceDetailService, SoccerPerformanceDetailServiceImp>();
-        service.AddTransient<SoccerPerformanceDetailExcelService, SoccerPerformanceDetailExcelServiceImp>();
+        service.AddTransient<ExcelService, ExcelServiceImp>();
+        service.AddTransient<BetChoiceExcelService, BetChoiceExcelServiceImp>();
     }
 }
