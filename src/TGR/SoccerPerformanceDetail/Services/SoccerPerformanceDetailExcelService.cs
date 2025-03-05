@@ -63,7 +63,12 @@ public class SoccerPerformanceDetailExcelServiceImp(ConfigurationService configu
         sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value =
             MakeBetTypeSelectString(betTypes, criteria.Bettypes);
         var lineCount = (int)Math.Ceiling((double)sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Text.Length / ExcelConstants.Width);
-        sheet.Row(rowIndex++).Height = 8 * lineCount;
+        if (lineCount > 1)
+        {
+            sheet.Row(rowIndex).Height = 8 * lineCount;
+        }
+
+        rowIndex++;
         if (criteria.IsVirtual)
         {
             if (criteria.Turnover.HasValue)
