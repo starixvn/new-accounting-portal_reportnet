@@ -1,4 +1,6 @@
-﻿using SoccerPerformanceDetail.ViewModel;
+﻿using OfficeOpenXml;
+using SoccerPerformanceDetail.Constants;
+using SoccerPerformanceDetail.ViewModel;
 
 namespace SoccerPerformanceDetail.Utilities;
 
@@ -48,5 +50,10 @@ public static class ModelsHelper
 
             return string.Join(", ", result);
         }
+    }
+
+    public static void FormatCellWithNumber(ExcelRange cell, decimal? data)
+    {
+        cell.Value = data.HasValue ? data.Value : ExcelConstants.NotAvailableText;
     }
 }

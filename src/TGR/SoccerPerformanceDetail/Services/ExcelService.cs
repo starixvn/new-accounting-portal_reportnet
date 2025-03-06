@@ -149,7 +149,8 @@ public class ExcelServiceImp(ConfigurationService configurationService,
             var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
             item.No = index++;
             item.Market = item.IsLive ? ExcelConstants.LiveText : ExcelConstants.NonLiveText;
-            sheet.ApplyModel(template, item, rowIndex++);
+            sheet.ApplyModel(template, item, rowIndex);
+            UpdateValueSpecificColumns(rowIndex++, item);
         }
     }
 
@@ -170,22 +171,12 @@ public class ExcelServiceImp(ConfigurationService configurationService,
 
     private void UpdateValueSpecificColumns(int startIndex, BetTypePerformanceExcelItem model)
     {
-        if (model.AvgToPerMatch == 0)
-        {
-            sheet!.Cells[$"I{startIndex}"].Value = ExcelConstants.NotAvailableText;
-        }
-        if (!model.Margin.HasValue)
-        {
-            sheet!.Cells[$"K{startIndex}"].Value = ExcelConstants.NotAvailableText;
-        }
-        if (model.AvgToPerMatchReal == 0)
-        {
-            sheet!.Cells[$"M{startIndex}"].Value = ExcelConstants.NotAvailableText;
-        }
-        if (!model.MarginReal.HasValue)
-        {
-            sheet!.Cells[$"O{startIndex}"].Value = ExcelConstants.NotAvailableText;
-        }
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"K{startIndex}"], model.Margin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"O{startIndex}"], model.MarginReal);
+        sheet!.Cells[$"I{startIndex}"].Value =
+            model.NoOfMatches > 0 ? model.Turnover / model.NoOfMatches : ExcelConstants.NotAvailableText;
+        sheet!.Cells[$"M{startIndex}"].Value =
+            model.NoOfMatches > 0 ? model.TurnoverReal / model.NoOfMatches : ExcelConstants.NotAvailableText;
     }
 
     private string GenerateMarginString(decimal? marginFrom, decimal? marginTo)

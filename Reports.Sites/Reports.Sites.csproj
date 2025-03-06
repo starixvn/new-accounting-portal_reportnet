@@ -87,6 +87,9 @@
     <Folder Include="ExcelTemplate\SoccerPerformanceDetail\BetType\" />
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="ExcelTemplate\SoccerPerformanceDetail\BetType\BetChoice.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="ExcelTemplate\SoccerPerformanceDetail\BetType\BetType.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

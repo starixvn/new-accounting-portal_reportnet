@@ -1,7 +1,8 @@
-﻿namespace SoccerPerformanceDetail.ViewModel
+﻿using Utilities.DateTimes;
+
+namespace SoccerPerformanceDetail.ViewModel
 {
     using SoccerPerformanceDetail.Model;
-    using Utilities.DateTimes;
 
     public class MatchPerformanceItem
     {

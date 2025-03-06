@@ -30,7 +30,7 @@ public class BetChoiceExcelServiceImp(ConfigurationService configurationService,
 
     private const int StartFilterBlockRowIndex = 3;
 
-    private const int StartRowIndex = 10;
+    private const int StartRowIndex = 11;
 
     private ExcelPackage? ExcelPackage { get; set; }
 
@@ -55,7 +55,8 @@ public class BetChoiceExcelServiceImp(ConfigurationService configurationService,
         {
             var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
             item.No = index++;
-            sheet.ApplyModel(template, item, rowIndex++);
+            sheet.ApplyModel(template, item, rowIndex);
+            UpdateValueSpecificColumns(rowIndex++, item);
         }
     }
 
@@ -64,7 +65,19 @@ public class BetChoiceExcelServiceImp(ConfigurationService configurationService,
         var excelModel = mapper.Map<BetTypeBetChoiceExcelItem>(data);
         sheet.ApplyModel(totalSheet, excelModel, startIndex);
         var cellTotalAddress = $"A{startIndex}:D{startIndex}";
+        sheet!.Cells[cellTotalAddress].Merge = true;
         sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
+        UpdateValueSpecificColumns(startIndex, excelModel);
+    }
+
+    private void UpdateValueSpecificColumns(int startIndex, BetTypeBetChoiceExcelItem model)
+    {
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{startIndex}"], model.Margin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{startIndex}"], model.MarginReal);
+        sheet!.Cells[$"G{startIndex}"].Value =
+            model.MatchCount > 0 ? model.Turnover / model.MatchCount : ExcelConstants.NotAvailableText;
+        sheet!.Cells[$"K{startIndex}"].Value =
+            model.MatchCount > 0 ? model.TurnoverReal / model.MatchCount : ExcelConstants.NotAvailableText;
     }
 
 

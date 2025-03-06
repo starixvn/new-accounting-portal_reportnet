@@ -22,7 +22,8 @@ public class BetTypeBetChoiceExcelItem
     [Cell("F5")]
     public decimal Turnover { get; set; }
 
-    [Cell("G5")] public decimal AvgToPerMatch => MatchCount > 0 ? Turnover / MatchCount : 0;
+    [Cell("G5")]
+    public decimal? AvgToPerMatch { get; set; }
 
     [Cell("H5")]
     public decimal WinLoss { get; set; }
@@ -33,7 +34,8 @@ public class BetTypeBetChoiceExcelItem
     [Cell("J5")]
     public decimal TurnoverReal { get; set; }
 
-    [Cell("K5")] public decimal AvgToPerMatchReal => MatchCount > 0 ? TurnoverReal / MatchCount : 0;
+    [Cell("K5")]
+    public decimal? AvgToPerMatchReal { get; set; }
 
     [Cell("L5")]
     public decimal WinLossReal { get; set; }
