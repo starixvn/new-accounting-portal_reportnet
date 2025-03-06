@@ -1,5 +1,6 @@
 ﻿namespace SoccerPerformanceDetail.Services;
 
+using AutoMapper;
 using Criteria;
 using Fanex.Data.Repository;
 using Model;
@@ -27,7 +28,7 @@ public interface SoccerPerformanceDetailService
     Task<MatchPerformanceList> GetMatchPerformanceOfBetTypeTrader(GetMatchPerformanceOfBetTypeTraderCriteria criteria);
 }
 
-public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : SoccerPerformanceDetailService
+public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IMapper mapper) : SoccerPerformanceDetailService
 {
     public async Task<BetTypePerformanceList> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria)
     {
