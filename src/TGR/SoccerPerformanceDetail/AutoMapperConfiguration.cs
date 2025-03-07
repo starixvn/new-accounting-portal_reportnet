@@ -9,5 +9,6 @@ public static class AutoMapperConfiguration
     {
         cfg.CreateMap<BetTypePerformanceItem, BetTypePerformanceExcelItem>();
         cfg.CreateMap<BetTypeBetChoiceItem, BetTypeBetChoiceExcelItem>();
+        cfg.CreateMap<LeaguePerformanceItem, LeaguePerformanceExcelItem>();
     }
 }

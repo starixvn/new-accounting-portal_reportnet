@@ -17,7 +17,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         GetBetTypePerformance: window.rootUrl + '/api/soccer-performance-detail/bettypes',
         ExportBetTypePerformance: window.rootUrl + '/api/soccer-performance-detail/export-bettypes',
         ExportBetChoicePerformanceOfBetType: window.rootUrl + '/api/soccer-performance-detail/export-bet-choice-detail',
-        ExportLeaguePerformanceOfBetChoice: common.ResolveRootUrl('PerformanceDetail/ExportLeaguePerformanceOfBetChoice'),
+        ExportLeaguePerformanceOfBetChoice: window.rootUrl + '/api/soccer-performance-detail/export-live-league-detail',
         GetTraderPerformanceOfBetType: window.rootUrl + '/api/soccer-performance-detail/trader-detail',
         GetMatchPerformanceOfBetTypeTrader: window.rootUrl + '/api/soccer-performance-detail/trader-match-detail',
         GetLeaguePerformanceOfBetType: window.rootUrl + '/api/soccer-performance-detail/league-detail',
@@ -792,7 +792,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     };
 
     var exportLeaguePerformanceOfBetChoice = function () {
-        common.DownloadFile(urls.ExportLeaguePerformanceOfBetChoice, leaguePerformanceOfBetChoiceParams);
+        AccReport.downloadFile(urls.ExportLeaguePerformanceOfBetChoice, leaguePerformanceOfBetChoiceParams);
     };
 
     // Get betchoice performance on a specific bet type.

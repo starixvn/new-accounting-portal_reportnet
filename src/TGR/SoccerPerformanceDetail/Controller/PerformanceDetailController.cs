@@ -16,6 +16,7 @@ using ViewModel;
 public class PerformanceDetailController(SoccerPerformanceDetailService soccerDetailService,
     ExcelService excelService,
     BetChoiceExcelService betChoiceExcelService,
+    LiveLeagueExcelService liveLeagueService,
     INapSession napSession) : ControllerBase
 {
     [Route("bettypes")]
@@ -84,7 +85,7 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         var data = await soccerDetailService.GetBetTypeBetChoicePerformance(criteria);
         var excelPackage = await betChoiceExcelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypesString);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
-        var fileName = $"Performance_Detail_{betTypesString.Replace(" ", "_")}_{market}_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        var fileName = $"Performance_Detail_{betTypesString.Replace(" ", "_")}_{market}_{criteria.FromDate:yyyyMMdd}_{criteria.ToDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 
@@ -113,6 +114,27 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         var leaguePerformance = await soccerDetailService.GetLeaguePerformanceOfBetChoice(criteria);
 
         return Ok(leaguePerformance);
+    }
+
+    [HttpGet("export-live-league-detail")]
+    public async Task<IActionResult> ExportLeaguePerformanceOfBetChoice([FromQuery]GetLeaguePerformanceOfBetChoiceCriteria criteria)
+    {
+        var leagueGroups = await soccerDetailService.GetLeagueGroups();
+        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypesString = ModelsHelper.MakeBetTypeSelectString(betTypes, criteria.BetType.ToString());
+        var market = criteria.Market switch
+        {
+            -1 => "All",
+            1 => ExcelConstants.LiveText,
+            _ => ExcelConstants.NonLiveText
+        };
+        criteria.IsExcludeLeagues = true;
+        var data = await soccerDetailService.GetLeaguePerformanceOfBetChoice(criteria);
+        var excelPackage = await liveLeagueService.ExportExcel(data, criteria, leagueGroups, betTypesString);
+        var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+        var fileName =
+            $"Performance_Detail_{betTypesString.Replace(" ", "_")}_{market}_{criteria.BetChoice}_{criteria.FromDate:yyyyMMdd}_{criteria.ToDate:yyyyMMdd}";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 
     [Route("trader-match-detail")]
