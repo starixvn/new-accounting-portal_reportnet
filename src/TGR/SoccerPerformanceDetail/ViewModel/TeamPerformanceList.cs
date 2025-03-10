@@ -34,10 +34,6 @@ public class TeamPerformanceList
         }
     }
 
-    /// <summary>
-    /// Adds an item to the group.
-    /// </summary>
-    /// <param name="item">The item that needs to be added.</param>
     private void AddItem(TeamPerformanceItem item, bool isLive)
     {
         if (isLive)

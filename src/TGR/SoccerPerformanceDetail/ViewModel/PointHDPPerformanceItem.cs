@@ -45,7 +45,7 @@ public class PointHDPPerformanceItem
     
     private string ConvertPointHDP(decimal pointHDP, short betType, string betOption)
     {
-        var newPointHDP = string.Empty;
+        string newPointHDP;
 
         switch (betType)
         {                

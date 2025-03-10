@@ -20,19 +20,19 @@ public interface BetChoiceExcelService
 public class BetChoiceExcelServiceImp(ConfigurationService configurationService,
     IMapper mapper) : BetChoiceExcelService
 {
-    private ExcelWorksheet? sheet;
+    private ExcelWorksheet sheet;
 
-    private ExcelWorksheet? oddSheet;
+    private ExcelWorksheet oddSheet;
 
-    private ExcelWorksheet? evenSheet;
+    private ExcelWorksheet evenSheet;
 
-    private ExcelWorksheet? totalSheet;
+    private ExcelWorksheet totalSheet;
 
     private const int StartFilterBlockRowIndex = 3;
 
     private const int StartRowIndex = 11;
 
-    private ExcelPackage? ExcelPackage { get; set; }
+    private ExcelPackage ExcelPackage { get; set; }
 
     public Task<ExcelPackage> ExportExcelBetTypePerformance(BetTypeBetChoiceList data, GetBetChoicePerformanceOfBetTypeCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups, string betType)

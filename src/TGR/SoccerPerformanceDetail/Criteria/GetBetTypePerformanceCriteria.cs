@@ -8,7 +8,7 @@ public class GetBetTypePerformanceCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public Market MarketFilter { get; set; }
 
-    public Int16 Market
+    public short Market
     {
         get
         {

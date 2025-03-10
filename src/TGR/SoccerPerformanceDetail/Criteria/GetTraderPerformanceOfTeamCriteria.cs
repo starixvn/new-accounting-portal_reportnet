@@ -8,18 +8,7 @@ public class GetTraderPerformanceOfTeamCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public bool IsLive { get; set; }
 
-    public Int16 Market
-    {
-        get
-        {
-            if (IsLive)
-            {
-                return 1;
-            }
-
-            return 0;
-        }
-    }
+    public short Market => IsLive ? (short)1 : (short)0;
 
     public DateTime FromDate { get; set; }
 

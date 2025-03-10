@@ -20,17 +20,17 @@ public interface ExcelService
 public class ExcelServiceImp(ConfigurationService configurationService,
     IMapper mapper) : ExcelService
 {
-    private ExcelWorksheet? sheet;
+    private ExcelWorksheet sheet;
 
-    private ExcelWorksheet? oddSheet;
+    private ExcelWorksheet oddSheet;
 
-    private ExcelWorksheet? evenSheet;
+    private ExcelWorksheet evenSheet;
 
-    private ExcelWorksheet? totalSheet;
+    private ExcelWorksheet totalSheet;
 
     private const int StartFilterBlockRowIndex = 3;
 
-    private ExcelPackage? ExcelPackage { get; set; }
+    private ExcelPackage ExcelPackage { get; set; }
 
     public Task<ExcelPackage> ExportExcelBetTypePerformance(BetTypePerformanceList data,
         GetBetTypePerformanceCriteria criteria,
@@ -186,9 +186,7 @@ public class ExcelServiceImp(ConfigurationService configurationService,
 
         if (marginFrom == null)
             return $"≤ {marginTo}";
-        if (marginTo == null)
-            return $"≥ {marginFrom}";
-        return $"from {marginFromString} to {marginToString}";
+        return marginTo == null ? $"≥ {marginFrom}" : $"from {marginFromString} to {marginToString}";
     }
 
     private void LoadTemplate(string fileExcel)

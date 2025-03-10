@@ -8,7 +8,7 @@ public class SabaPromotionCriteria: CriteriaBase
 
     public DateTime ToDate { get; set; }
 
-    public string? BetTypeIds { get; set; }
+    public string BetTypeIds { get; set; }
 
     public bool IsTest { get; set; }
 

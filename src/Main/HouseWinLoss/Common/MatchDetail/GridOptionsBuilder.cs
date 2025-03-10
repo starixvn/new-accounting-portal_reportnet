@@ -134,7 +134,7 @@ public class GridOptionsBuilderImp(GetTeamNameAndSuffixService teamNameService) 
         var baseColumnIndex = notDisplayHomeAwaySportTypeList.Contains(item.SportType) ? 2 : 4;
         var columns = new List<Columns>
         {
-            new Columns
+            new()
             {
                 ColumnIndex = 0,
                 Name = "MatchCode",

@@ -1,6 +1,5 @@
 ﻿namespace SoccerPerformanceDetail.Services;
 
-using AutoMapper;
 using Criteria;
 using Fanex.Data.Repository;
 using Model;
@@ -28,7 +27,7 @@ public interface SoccerPerformanceDetailService
     Task<MatchPerformanceList> GetMatchPerformanceOfBetTypeTrader(GetMatchPerformanceOfBetTypeTraderCriteria criteria);
 }
 
-public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IMapper mapper) : SoccerPerformanceDetailService
+public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : SoccerPerformanceDetailService
 {
     public async Task<BetTypePerformanceList> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria)
     {
@@ -125,7 +124,7 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
 
     public async Task<IEnumerable<BetTypeItem>> GetBetTypes(int userId, BettypeViewPermission permission)
     {
-        List<BetTypeItem>? betTypes = null;
+        List<BetTypeItem> betTypes = null;
         var criteria = new GetBetTypesCriteria(permission) { UserId = userId };
         var data = await repository.FetchAsync<BetTypeInfo>(criteria);
 
@@ -230,7 +229,7 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
         {
             var leagueGroups = matchData.GroupBy(obj => obj.LeagueId);
 
-            foreach (IGrouping<int?, MatchPerformanceInfo> group in leagueGroups)
+            foreach (var group in leagueGroups)
             {
                 if (group.Key.HasValue)
                 {
@@ -261,7 +260,7 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
         {
             var leagueGroups = matchData.GroupBy(obj => obj.LeagueId);
 
-            foreach (IGrouping<int?, MatchPerformanceRawInfo> group in leagueGroups)
+            foreach (var group in leagueGroups)
             {
                 if (group.Key.HasValue)
                 {

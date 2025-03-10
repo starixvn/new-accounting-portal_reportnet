@@ -72,12 +72,7 @@ public class LeaguePerformanceItem
 
     private string GetMarketToString(Market market)
     {
-        if (market == SoccerPerformanceDetail.Market.Live)
-        {
-            return "Live";
-        }
-
-        return "Non Live";
+        return market == SoccerPerformanceDetail.Market.Live ? "Live" : "Non Live";
     }
 
     public bool IsLive { get; set; }

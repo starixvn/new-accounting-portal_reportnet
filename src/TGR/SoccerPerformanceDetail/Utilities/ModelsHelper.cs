@@ -24,7 +24,7 @@ public static class ModelsHelper
                 .Where(x => x.TargetLeagueGroupId.ToString().Equals(id))
                 .Select(x => x.LeagueGroupName).ToList();
 
-            if (group != null && group.Any())
+            if (group.Any())
             {
                 leagueGroupNames += group[0] + ", ";
             }
