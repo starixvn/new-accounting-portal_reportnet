@@ -1,10 +1,10 @@
-﻿using Fanex.Common;
-using OfficeOpenXml;
+﻿namespace TraderPerformance.Services;
+
 using System.Collections.ObjectModel;
 using System.Data;
+using Fanex.Common;
+using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace TraderPerformance.Services;
 
 public interface TraderPerformanceSumPHExcelService
 {

@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace HouseWinLoss.Common.Criteria;
 
-namespace HouseWinLoss.Common.Criteria;
+using Fanex.Data.Repository;
 
 public class PermissionCriteria : CriteriaBase
 {

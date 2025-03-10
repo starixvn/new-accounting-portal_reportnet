@@ -1,7 +1,7 @@
-﻿using LeagueWinLoss.Model;
-using Utilities.Sorting;
+﻿namespace LeagueWinLoss.Services;
 
-namespace LeagueWinLoss.Services;
+using Model;
+using Utilities.Sorting;
 
 public interface SortingService
 {

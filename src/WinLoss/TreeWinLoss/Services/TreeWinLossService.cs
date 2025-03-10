@@ -1,16 +1,15 @@
-﻿using AutoMapper;
-using Fanex.Data.Repository;
-using Utilities.DateTimes;
+﻿namespace TreeWinLoss.Services;
+
 using System.Xml.Linq;
-using TreeWinLoss.Constants;
-using TreeWinLoss.Criteria;
-using TreeWinLoss.Entities;
-using TreeWinLoss.Model;
+using AutoMapper;
+using Constants;
+using Criteria;
+using Entities;
+using Fanex.Data.Repository;
+using Model;
+using Utilities.DateTimes;
 using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;
-
-
-namespace TreeWinLoss.Services;
 
 public interface TreeWinLossService
 {

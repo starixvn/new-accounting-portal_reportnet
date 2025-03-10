@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace HouseWinLoss.MetricGaming.BetType;
 
-namespace HouseWinLoss.MetricGaming.BetType;
+using AutoMapper;
+using Common.BasicWinLoss;
+using Common.ColumnDecorators;
+using Common.Criteria;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/house-win-loss-by-products/metric-gaming-superlive/bet-type")]
 [ApiController]

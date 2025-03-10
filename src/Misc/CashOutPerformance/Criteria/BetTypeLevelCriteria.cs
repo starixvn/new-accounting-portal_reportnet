@@ -1,7 +1,7 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿namespace CashOutPerformance.Criteria;
 
-namespace CashOutPerformance.Criteria;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 public class BetTypeLevelCriteria : CriteriaBase
 {

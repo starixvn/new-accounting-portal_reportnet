@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using BetConstructPerformance.Criteria;
-using BetConstructPerformance.Models;
-using BetConstructPerformance.Requests;
+﻿namespace BetConstructPerformance;
 
-namespace BetConstructPerformance;
+using AutoMapper;
+using Criteria;
+using Models;
+using Requests;
 
 public static class AutoMapperConfiguration
 {

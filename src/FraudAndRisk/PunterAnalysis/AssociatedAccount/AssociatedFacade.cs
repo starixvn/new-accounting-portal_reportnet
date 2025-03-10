@@ -1,10 +1,10 @@
-﻿using Fanex.Data.Repository;
-using Utilities.CustomerTrackingSystem;
-using PunterAnalysis.AssociatedAccount.Model;
-using Utilities.Configurations;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.AssociatedAccount;
 
-namespace PunterAnalysis.AssociatedAccount;
+using Fanex.Data.Repository;
+using Model;
+using Utilities.Configurations;
+using Utilities.CustomerTrackingSystem;
+using Utilities.LinqDynamicSum;
 
 public interface AssociatedFacade
 {

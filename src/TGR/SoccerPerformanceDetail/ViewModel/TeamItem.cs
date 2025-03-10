@@ -7,26 +7,25 @@
 //   <change who="Jason.Ly" date="2014.6.14">Created</change>
 // </history>
 
-namespace SoccerPerformanceDetail.ViewModel
+namespace SoccerPerformanceDetail.ViewModel;
+
+using Model;
+
+/// <summary>
+/// Team view model.
+/// </summary>
+public class TeamItem
 {
-    using SoccerPerformanceDetail.Model;
-
-    /// <summary>
-    /// Team view model.
-    /// </summary>
-    public class TeamItem
+    public TeamItem(TeamInfo teamData)
     {
-        public TeamItem(TeamInfo teamData)
+        if (teamData != null)
         {
-            if (teamData != null)
-            {
-                this.TeamId = teamData.TeamId;
-                this.TeamName = teamData.TeamName;
-            }
+            TeamId = teamData.TeamId;
+            TeamName = teamData.TeamName;
         }
-
-        public short TeamId { get; set; }
-
-        public string TeamName { get; set; }
     }
+
+    public short TeamId { get; set; }
+
+    public string TeamName { get; set; }
 }

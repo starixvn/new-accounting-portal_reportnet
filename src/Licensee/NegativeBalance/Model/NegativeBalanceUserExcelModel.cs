@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace NegativeBalance.Model;
 
-namespace NegativeBalance.Model;
+using Epplus.Mapper.Annotations;
 
 public class NegativeBalanceUserExcelModel
 {

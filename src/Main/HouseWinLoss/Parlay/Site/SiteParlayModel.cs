@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.Parlay.Site;
 
-namespace HouseWinLoss.Parlay.Site;
+using Common.Models;
 
 public class SiteParlayModel
 {

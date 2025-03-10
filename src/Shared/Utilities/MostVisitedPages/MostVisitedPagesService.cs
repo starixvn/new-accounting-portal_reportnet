@@ -1,10 +1,10 @@
-﻿using Fanex.Caching;
-using Fanex.Data.Repository;
-using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client;
-using Utilities.Configurations;
+﻿namespace Utilities.MostVisitedPages;
 
-namespace Utilities.MostVisitedPages;
+using Configurations;
+using Fanex.Caching;
+using Fanex.Data.Repository;
+using Fanex.NAP.Client;
+using Fanex.NAP.Client.Configuration;
 
 public interface MostVisitedPagesService
 {

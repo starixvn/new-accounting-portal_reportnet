@@ -1,10 +1,10 @@
-using Fanex.Data.Repository;
-using LeagueWinLoss.Criteria;
-using LeagueWinLoss.Entities;
-using LeagueWinLoss.Model;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace LeagueWinLoss.Services;
+
+using Criteria;
+using Entities;
+using Fanex.Data.Repository;
+using Model;
 
 public interface LeagueWinLossService
 {

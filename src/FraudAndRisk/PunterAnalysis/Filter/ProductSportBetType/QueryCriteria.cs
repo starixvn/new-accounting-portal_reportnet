@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.Filter.ProductSportBetType;
 
-namespace PunterAnalysis.Filter.ProductSportBetType;
+using Fanex.Data.Repository;
 
 public class QueryCriteria : CriteriaBase
 {

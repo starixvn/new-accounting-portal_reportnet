@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.Models;
-using Utilities.RemotingRef;
+﻿namespace HouseWinLoss.Common.Services;
 
-namespace HouseWinLoss.Common.Services;
+using AutoMapper;
+using Models;
+using Utilities.RemotingRef;
 
 public interface CalculationService
 {

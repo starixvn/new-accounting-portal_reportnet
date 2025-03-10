@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace LeagueWinLoss.Model;
 
-namespace LeagueWinLoss.Model;
+using Epplus.Mapper.Annotations;
 
 public class LeagueWinLossItemExcelModel
 {

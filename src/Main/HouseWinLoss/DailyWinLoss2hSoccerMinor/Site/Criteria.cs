@@ -1,6 +1,6 @@
 namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.Site;
 
-using HouseWinLoss.Common.Criteria;
+using Common.Criteria;
 using Configuration;
 
 public class Criteria : WinLossCriteria

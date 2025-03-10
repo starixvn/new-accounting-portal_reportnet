@@ -1,9 +1,9 @@
 ﻿namespace HouseWinLoss.Common.BasicWinLoss;
 
-using Fanex.Excel.Models;
 using ColumnDecorators;
-using Criteria;
 using Configuration;
+using Criteria;
+using Fanex.Excel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
 

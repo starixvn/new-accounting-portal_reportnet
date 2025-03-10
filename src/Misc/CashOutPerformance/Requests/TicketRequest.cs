@@ -1,7 +1,7 @@
-﻿using CashOutPerformance.ViewModels;
-using MediatR;
+﻿namespace CashOutPerformance.Requests;
 
-namespace CashOutPerformance.Requests;
+using MediatR;
+using ViewModels;
 
 public class TicketRequest<T> : IRequest<TicketViewModel<T>>
 {

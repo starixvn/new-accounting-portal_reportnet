@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using MediatR;
-using OfficeOpenXml;
-using PunterAnalysis.League.Model;
-using PunterAnalysis.Shared;
+﻿namespace PunterAnalysis.League;
 
-namespace PunterAnalysis.League;
+using AutoMapper;
+using MediatR;
+using Model;
+using OfficeOpenXml;
+using Shared;
 
 public class HandlerExcel(
     LeagueServiceFactory leagueServiceFactory,

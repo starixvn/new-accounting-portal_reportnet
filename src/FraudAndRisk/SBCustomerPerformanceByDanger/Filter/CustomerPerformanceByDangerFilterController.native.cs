@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace SBCustomerPerformanceByDanger.Filter;
 
-namespace SBCustomerPerformanceByDanger.Filter;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/sb-customer-performance-by-danger/filter")]
 [ApiController]

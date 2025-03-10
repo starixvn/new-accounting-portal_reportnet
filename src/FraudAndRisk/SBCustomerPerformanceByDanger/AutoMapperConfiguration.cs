@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using SBCustomerPerformanceByDanger.Filter;
-using SBCustomerPerformanceByDanger.Report;
-using Utilities.LinqDynamicSum;
+﻿namespace SBCustomerPerformanceByDanger;
 
-namespace SBCustomerPerformanceByDanger;
+using AutoMapper;
+using Filter;
+using Report;
+using Utilities.LinqDynamicSum;
 
 public static class AutoMapperConfiguration
 {

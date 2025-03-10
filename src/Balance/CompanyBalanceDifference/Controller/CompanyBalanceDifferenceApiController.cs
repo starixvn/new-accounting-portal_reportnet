@@ -1,7 +1,7 @@
-using CompanyBalanceDifference.Services;
-using Microsoft.AspNetCore.Mvc;
-
 namespace CompanyBalanceDifference.Controller;
+
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/company-balance-difference")]
 [ApiController]

@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace PunterAnalysis.SportType.Model;
 
-namespace PunterAnalysis.SportType.Model;
+using Epplus.Mapper.Annotations;
 
 public class SportTypeExcelModel
 {

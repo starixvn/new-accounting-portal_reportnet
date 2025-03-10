@@ -1,10 +1,8 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.BetTypeGroup;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-using PunterAnalysis.BetTypeGroup.Model;
-
-namespace PunterAnalysis.BetTypeGroup;
-
+using Model;
 using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/bet-type-group")]

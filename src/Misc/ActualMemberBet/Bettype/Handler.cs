@@ -1,9 +1,9 @@
-﻿using ActualMemberBet.Common;
+﻿namespace ActualMemberBet.Bettype;
+
 using AutoMapper;
+using Common;
 using MediatR;
 using Utilities.LinqDynamicSum;
-
-namespace ActualMemberBet.Bettype;
 
 public class Handler(ActualMemberBetService service, IMapper mapper)
     : IRequestHandler<HttpParameter, SummaryEntity<BetTypeActualMemberBet>>

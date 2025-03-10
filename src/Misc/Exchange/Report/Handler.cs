@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace Exchange.Report;
 
-namespace Exchange.Report;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class Handler(Service service) : IRequestHandler<LicenseeHttpParameterJson, ExchangeModel>,
     IRequestHandler<HttpParameterJson, SummaryEntity<ExchangeItemModel>>

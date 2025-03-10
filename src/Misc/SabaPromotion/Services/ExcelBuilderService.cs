@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using Epplus.Mapper.Extensions;
-using OfficeOpenXml;
-using SabaPromotion.Models;
-using Utilities.Configurations;
+﻿namespace SabaPromotion.Services;
 
-namespace SabaPromotion.Services;
+using AutoMapper;
+using Epplus.Mapper.Extensions;
+using Models;
+using OfficeOpenXml;
+using Utilities.Configurations;
 
 public interface ExcelBuilderService
 {

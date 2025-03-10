@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace PunterAnalysis.AssociatedAccount.Model;
 
-namespace PunterAnalysis.AssociatedAccount.Model;
+using MediatR;
+using OfficeOpenXml;
 
 public class HttpParameterExcel : HttpParameterJson, IRequest<ExcelPackage>
 {

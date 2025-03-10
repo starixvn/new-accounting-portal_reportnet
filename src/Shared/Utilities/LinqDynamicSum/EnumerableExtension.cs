@@ -1,6 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿namespace Utilities.LinqDynamicSum;
 
-namespace Utilities.LinqDynamicSum;
+using System.Linq.Expressions;
 
 public static class EnumerableExtension
 {

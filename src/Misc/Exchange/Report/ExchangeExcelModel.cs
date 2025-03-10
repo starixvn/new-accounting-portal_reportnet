@@ -1,6 +1,6 @@
-﻿using Utilities.LinqDynamicSum;
+﻿namespace Exchange.Report;
 
-namespace Exchange.Report;
+using Utilities.LinqDynamicSum;
 
 public class ExchangeExcelModel
 {

@@ -1,10 +1,10 @@
-using DirectBalance.Criteria;
-using DirectBalance.Model;
+namespace DirectBalance.Services;
+
+using Criteria;
 using Fanex.Data.Repository;
+using Model;
 using Utilities.Currencies;
 using Utilities.LinqDynamicSum;
-
-namespace DirectBalance.Services;
 
 public interface DirectBalanceService
 {

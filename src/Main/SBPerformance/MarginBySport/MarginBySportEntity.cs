@@ -1,6 +1,6 @@
-﻿using SBPerformance.Constants;
+﻿namespace SBPerformance.MarginBySport;
 
-namespace SBPerformance.MarginBySport;
+using Constants;
 
 public class MarginBySportEntity
 {

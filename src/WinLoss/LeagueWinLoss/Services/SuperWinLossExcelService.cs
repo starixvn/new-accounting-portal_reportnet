@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+﻿namespace LeagueWinLoss.Services;
+
+using AutoMapper;
 using Epplus.Mapper.Extensions;
-using LeagueWinLoss.Model;
+using Model;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace LeagueWinLoss.Services;
 
 public interface SuperWinLossExcelService
 {

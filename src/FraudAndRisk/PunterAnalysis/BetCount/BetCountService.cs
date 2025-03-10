@@ -1,9 +1,9 @@
-﻿using Fanex.Data.Repository;
-using PunterAnalysis.BetCount.Model;
-using PunterAnalysis.Shared;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.BetCount;
 
-namespace PunterAnalysis.BetCount;
+using Fanex.Data.Repository;
+using Model;
+using Shared;
+using Utilities.LinqDynamicSum;
 
 public interface BetCountService
 {

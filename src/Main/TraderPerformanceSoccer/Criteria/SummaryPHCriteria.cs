@@ -1,6 +1,6 @@
-using Fanex.Data.Repository;
-
 namespace TraderPerformance.Criteria;
+
+using Fanex.Data.Repository;
 
 public class SummaryPHCriteria : CriteriaBase
 {

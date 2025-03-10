@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace PunterAnalysis.GameBetType.Model;
 
-namespace PunterAnalysis.GameBetType.Model;
+using Epplus.Mapper.Annotations;
 
 public class GameBetTypeExcelModel
 {

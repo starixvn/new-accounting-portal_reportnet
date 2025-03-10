@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.Models;
-using HouseWinLoss.Common.Services;
+﻿namespace HouseWinLoss.Products;
 
-namespace HouseWinLoss.Products;
+using AutoMapper;
+using Common.Models;
+using Common.Services;
 
 public interface Service
 {

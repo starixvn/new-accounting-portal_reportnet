@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using MediatR;
-using OfficeOpenXml;
-using ResultAnalysis.Criteria;
-using ResultAnalysis.Models;
-using ResultAnalysis.Requests;
-using ResultAnalysis.Services;
+﻿namespace ResultAnalysis.Handlers;
 
-namespace ResultAnalysis.Handlers;
+using AutoMapper;
+using Criteria;
+using MediatR;
+using Models;
+using OfficeOpenXml;
+using Requests;
+using Services;
 
 public class ResultAnalysisExcelHandler(
     ResultAnalysisService service,

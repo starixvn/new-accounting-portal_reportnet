@@ -146,10 +146,7 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
     {
         var betTypeBetChoiceList = new BetTypeBetChoiceList();
 
-        var rawData = await repository.FetchMultipleAsync<BetTypeBetChoicePerformanceInfo, FMBetTypeBetChoiceInfo>(criteria);
-
-        var betChoiceData = rawData.Item1;
-        var betChoiceOfBetTypeInfo = rawData.Item2;
+        var (betChoiceData, betChoiceOfBetTypeInfo) = await repository.FetchMultipleAsync<BetTypeBetChoicePerformanceInfo, FMBetTypeBetChoiceInfo>(criteria);
 
         if (betChoiceOfBetTypeInfo != null && betChoiceOfBetTypeInfo.Any())
         {
@@ -182,7 +179,7 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
     {
         var rawData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
 
-        LeaguePerformanceList leaguePerformance = new LeaguePerformanceList();
+        var leaguePerformance = new LeaguePerformanceList();
 
         if (rawData != null && rawData.Any())
         {
@@ -231,14 +228,13 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
 
         if (matchData != null && matchData.Any())
         {
-            IEnumerable<IGrouping<int?, MatchPerformanceInfo>> leagueGroups = matchData.GroupBy(obj => obj.LeagueId);
-            MatchPerformanceGroup leagueGroup = null;
+            var leagueGroups = matchData.GroupBy(obj => obj.LeagueId);
 
             foreach (IGrouping<int?, MatchPerformanceInfo> group in leagueGroups)
             {
                 if (group.Key.HasValue)
                 {
-                    leagueGroup = new MatchPerformanceGroup(group.Key);
+                    var leagueGroup = new MatchPerformanceGroup(group.Key);
                     leagueGroup.AddMatchList(group, criteria.IsLive);
                     leagueGroup.Total.Margin = CalculateTotalMargin(leagueGroup.Total.WinLoss, leagueGroup.Total.Turnover);
                     leagueGroup.Total.MarginReal = CalculateTotalMargin(leagueGroup.Total.WinLossReal, leagueGroup.Total.TurnoverReal);
@@ -263,18 +259,17 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
 
         if (matchData != null && matchData.Any())
         {
-            IEnumerable<IGrouping<int?, MatchPerformanceRawInfo>> leagueGroups = matchData.GroupBy(obj => obj.LeagueId);
-            MatchPerformanceGroup leagueGroup = null;
+            var leagueGroups = matchData.GroupBy(obj => obj.LeagueId);
 
             foreach (IGrouping<int?, MatchPerformanceRawInfo> group in leagueGroups)
             {
                 if (group.Key.HasValue)
                 {
-                    leagueGroup = new MatchPerformanceGroup(group.Key);
+                    var leagueGroup = new MatchPerformanceGroup(group.Key);
                     leagueGroup.AddMatchList(group, criteria.IsLive);
                     leagueGroup.Total.Margin = CalculateTotalMargin(leagueGroup.Total.WinLoss, leagueGroup.Total.Turnover);
                     leagueGroup.Total.MarginReal = CalculateTotalMargin(leagueGroup.Total.WinLossReal, leagueGroup.Total.TurnoverReal);
-                    leagueGroup.Total.Score = leagueGroup.Total.SumCategory == 0 ? 0 : (leagueGroup.Total.WinLossScore * 100 / leagueGroup.Total.SumCategory);
+                    leagueGroup.Total.Score = leagueGroup.Total.SumCategory == 0 ? 0 : leagueGroup.Total.WinLossScore * 100 / leagueGroup.Total.SumCategory;
                     matchPerformance.AddItem(leagueGroup);
                 }
             }

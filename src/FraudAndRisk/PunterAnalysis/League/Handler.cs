@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using MediatR;
-using PunterAnalysis.League.Model;
+﻿namespace PunterAnalysis.League;
 
-namespace PunterAnalysis.League;
+using AutoMapper;
+using MediatR;
+using Model;
 
 public class Handler(LeagueServiceFactory leagueServiceFactory, IMapper mapper)
     : IRequestHandler<HttpParameterJson, ReportModel>

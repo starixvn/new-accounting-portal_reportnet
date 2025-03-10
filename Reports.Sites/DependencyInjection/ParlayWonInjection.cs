@@ -1,6 +1,6 @@
-﻿using ParlayWon.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using ParlayWon.Services;
 
 public static class ParlayWonInjection
 {

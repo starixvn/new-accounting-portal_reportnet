@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Soccer.BaseService;
+﻿namespace HouseWinLoss.Soccer.GroupBetType;
 
-namespace HouseWinLoss.Soccer.GroupBetType;
+using BaseService;
 
 public class GroupBetTypeWinLossModel : BaseBetTypeWinLossModel
 {

@@ -7,69 +7,59 @@
 //   <change who="Jason.Ly" date="2014.5.17">Created</change>
 // </history>
 
-namespace SoccerPerformanceDetail.ViewModel
+namespace SoccerPerformanceDetail.ViewModel;
+
+using Model;
+
+/// <summary>
+/// Grade performance list view model.
+/// </summary>
+[Serializable]
+public class GradePerformanceList
 {
-    using SoccerPerformanceDetail.Model;
-    using System;
-    using System.Collections.Generic;
+    public List<GradePerformanceItem> ItemLiveList { get; set; } = [];
 
-    /// <summary>
-    /// Grade performance list view model.
-    /// </summary>
-    [Serializable]
-    public class GradePerformanceList
+    public List<GradePerformanceItem> ItemNonLiveList { get; set; } = [];
+
+    public GradePerformanceItem Total { get; set; } = new();
+
+    public void AddGradeList(IEnumerable<GradePerformanceInfo> gradePerformanceInfos, bool isLive)
     {
-        public GradePerformanceList()
+        foreach (var item in gradePerformanceInfos)
         {
-            this.ItemLiveList = new List<GradePerformanceItem>();
-            this.ItemNonLiveList = new List<GradePerformanceItem>();
-            this.Total = new GradePerformanceItem();
-        }
-
-        public List<GradePerformanceItem> ItemLiveList { get; set; }
-
-        public List<GradePerformanceItem> ItemNonLiveList { get; set; }
-
-        public GradePerformanceItem Total { get; set; }
-
-        public void AddGradeList(IEnumerable<GradePerformanceInfo> gradePerformanceInfos, bool isLive)
-        {
-            foreach (var item in gradePerformanceInfos)
+            if (item != null)
             {
-                if (item != null)
-                {
-                    this.AddItem(new GradePerformanceItem(item), isLive);
-                }
+                AddItem(new GradePerformanceItem(item), isLive);
             }
         }
+    }
        
-        private void AddItem(GradePerformanceItem item, bool isLive)
+    private void AddItem(GradePerformanceItem item, bool isLive)
+    {
+        if (isLive)
         {
-            if (isLive)
-            {
-                this.ItemLiveList.Add(item);
+            ItemLiveList.Add(item);
                 
-            }
-            else
-            {
-                this.ItemNonLiveList.Add(item);
-            }
-
-            CalculateTotal(item);
         }
-
-        private void CalculateTotal(GradePerformanceItem item)
+        else
         {
-            this.Total.NoOfTraders += item.NoOfTraders;
-            this.Total.NoOfLeagues += item.NoOfLeagues;
-            this.Total.NoOfMatches += item.NoOfMatches;
-            this.Total.Turnover += item.Turnover;
-            this.Total.WinLoss += item.WinLoss;            
-            this.Total.Margin += item.Margin;
-            this.Total.TurnoverReal += item.TurnoverReal;
-            this.Total.WinLossReal += item.WinLossReal;
-            this.Total.MarginReal += item.MarginReal;
-            this.Total.BetCount += item.BetCount;
+            ItemNonLiveList.Add(item);
         }
+
+        CalculateTotal(item);
+    }
+
+    private void CalculateTotal(GradePerformanceItem item)
+    {
+        Total.NoOfTraders += item.NoOfTraders;
+        Total.NoOfLeagues += item.NoOfLeagues;
+        Total.NoOfMatches += item.NoOfMatches;
+        Total.Turnover += item.Turnover;
+        Total.WinLoss += item.WinLoss;            
+        Total.Margin += item.Margin;
+        Total.TurnoverReal += item.TurnoverReal;
+        Total.WinLossReal += item.WinLossReal;
+        Total.MarginReal += item.MarginReal;
+        Total.BetCount += item.BetCount;
     }
 }

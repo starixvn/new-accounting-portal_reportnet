@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace PunterAnalysis.AssociatedAccount.Model;
 
-namespace PunterAnalysis.AssociatedAccount.Model;
+using Epplus.Mapper.Annotations;
 
 public class AssociatedSummaryExcelModel
 {

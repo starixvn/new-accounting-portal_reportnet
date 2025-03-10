@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using MediatR;
-using PunterAnalysis.Shared;
-using PunterAnalysis.SportType.Model;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.SportType;
 
-namespace PunterAnalysis.SportType;
+using AutoMapper;
+using MediatR;
+using Model;
+using Shared;
+using Utilities.LinqDynamicSum;
 
 public class Handler(PunterAnalysisService punterAnalysisService, IMapper mapper)
     : HandlerBase(punterAnalysisService, mapper), IRequestHandler<HttpParameterJson, SummaryEntity<SportTypeModel>>

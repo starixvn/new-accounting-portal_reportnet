@@ -1,6 +1,6 @@
-﻿using AbnormalBet.Model;
-using MediatR;
+﻿namespace AbnormalBet.HttpParameter;
 
-namespace AbnormalBet.HttpParameter;
+using MediatR;
+using Model;
 
 public class CurrencyHttpParameter : IRequest<IEnumerable<FilterItemModel>>;

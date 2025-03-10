@@ -1,46 +1,37 @@
-﻿namespace SoccerPerformanceDetail.ViewModel
+﻿namespace SoccerPerformanceDetail.ViewModel;
+
+using Model;
+
+[Serializable]
+public class TimeMachinePerformanceList
 {
-    using SoccerPerformanceDetail.Model;
-    using System;
-    using System.Collections.Generic;
+    public List<TimeMachinePerformanceItem> ItemList { get; set; } = [];
 
-    [Serializable]
-    public class TimeMachinePerformanceList
+    public TimeMachinePerformanceItem Total { get; set; } = new();
+
+    public void AddItem(IEnumerable<TimeMachinePerformanceInfo> infos, short betType)
     {
-        public TimeMachinePerformanceList()
+        foreach (var info in infos)
         {
-            this.ItemList = new List<TimeMachinePerformanceItem>();
-            this.Total = new TimeMachinePerformanceItem();
-        }
-
-        public List<TimeMachinePerformanceItem> ItemList { get; set; }
-
-        public TimeMachinePerformanceItem Total { get; set; }
-
-        public void AddItem(IEnumerable<TimeMachinePerformanceInfo> infos, short betType)
-        {
-            foreach (var info in infos)
+            if (info != null)
             {
-                if (info != null)
-                {
-                    var item = new TimeMachinePerformanceItem(info, betType);
+                var item = new TimeMachinePerformanceItem(info, betType);
 
-                    this.ItemList.Add(item);
+                ItemList.Add(item);
 
-                    CalculateTotal(item);
-                }
+                CalculateTotal(item);
             }
         }
+    }
 
-        private void CalculateTotal(TimeMachinePerformanceItem item)
-        {
-            this.Total.NoOfLeagues += item.NoOfLeagues;
-            this.Total.NoOfMatches += item.NoOfMatches;
-            this.Total.Turnover += item.Turnover;
-            this.Total.WinLoss += item.WinLoss;
-            this.Total.TurnoverReal += item.TurnoverReal;
-            this.Total.WinLossReal += item.WinLossReal;
-            this.Total.BetCount += item.BetCount;
-        }
+    private void CalculateTotal(TimeMachinePerformanceItem item)
+    {
+        Total.NoOfLeagues += item.NoOfLeagues;
+        Total.NoOfMatches += item.NoOfMatches;
+        Total.Turnover += item.Turnover;
+        Total.WinLoss += item.WinLoss;
+        Total.TurnoverReal += item.TurnoverReal;
+        Total.WinLossReal += item.WinLossReal;
+        Total.BetCount += item.BetCount;
     }
 }

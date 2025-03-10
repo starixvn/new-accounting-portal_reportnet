@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Common.MatchDetail;
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor;
 
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor;
+using Common.MatchDetail;
 
 public interface MatchSortingService
 {

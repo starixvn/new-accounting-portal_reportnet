@@ -1,13 +1,13 @@
-﻿using Fanex.Data.Repository;
-using ParlayWon.Constant;
-using ParlayWon.Criteria;
-using ParlayWon.Entities;
-using ParlayWon.Model;
+﻿namespace ParlayWon.Services;
+
+using Constant;
+using Criteria;
+using Entities;
+using Fanex.Data.Repository;
+using Model;
 using Utilities.BalanceUpServices;
 using Utilities.LinqDynamicSum;
 using Utilities.Sorting;
-
-namespace ParlayWon.Services;
 
 public interface ParlayWonService
 {

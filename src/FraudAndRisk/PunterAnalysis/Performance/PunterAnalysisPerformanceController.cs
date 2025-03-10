@@ -1,9 +1,9 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using PunterAnalysis.Performance.Sportsbook;
-using PunterAnalysis.Performance.Summary;
+﻿namespace PunterAnalysis.Performance;
 
-namespace PunterAnalysis.Performance;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Sportsbook;
+using Summary;
 
 [Route("api/punter-analysis/performance")]
 [ApiController]

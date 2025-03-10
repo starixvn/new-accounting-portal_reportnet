@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace SBCustomerPerformanceByDanger.Report;
 
-namespace SBCustomerPerformanceByDanger.Report;
+using Epplus.Mapper.Annotations;
 
 public class CustomerPerformanceByDangerExcelModel
 {

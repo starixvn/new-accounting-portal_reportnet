@@ -1,8 +1,8 @@
-﻿using ActualMemberBet.Bettype;
+﻿namespace Reports.Sites.DependencyInjection;
+
+using ActualMemberBet.Bettype;
 using ActualMemberBet.Common;
 using ActualMemberBet.Product;
-
-namespace Reports.Sites.DependencyInjection;
 
 public static class ActualMemberBetInjection
 {

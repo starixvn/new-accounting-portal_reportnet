@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace AbnormalBet.Criteria;
 
-namespace AbnormalBet.Criteria;
+using Fanex.Data.Repository;
 
 public class SportQueryCriteria : CriteriaBase
 {

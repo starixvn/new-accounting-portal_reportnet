@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace HouseWinLoss.Common.MatchDetail;
+
+using AutoMapper;
 using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;
-
-namespace HouseWinLoss.Common.MatchDetail;
 
 public interface CalculationService
 {

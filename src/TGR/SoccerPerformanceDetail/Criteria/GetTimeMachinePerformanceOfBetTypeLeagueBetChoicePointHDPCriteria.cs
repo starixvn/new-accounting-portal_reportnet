@@ -23,7 +23,7 @@ public class GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDPCriteria :
     {
         get
         {
-            if (this.IsLive)
+            if (IsLive)
             {
                 return 1;
             }

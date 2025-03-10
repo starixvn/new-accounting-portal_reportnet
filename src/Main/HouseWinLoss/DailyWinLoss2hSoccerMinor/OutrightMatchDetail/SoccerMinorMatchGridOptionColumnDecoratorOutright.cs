@@ -1,8 +1,8 @@
-﻿using Fanex.Excel.Enums;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.ColumnDecorators;
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.OutrightMatchDetail;
 
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.OutrightMatchDetail;
+using Common.ColumnDecorators;
+using Fanex.Excel.Enums;
+using Fanex.Excel.Models;
 
 public interface SoccerMinorMatchGridOptionColumnDecoratorOutright
 {

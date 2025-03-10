@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.AssociatedAccount.Model;
 
-namespace PunterAnalysis.AssociatedAccount.Model;
+using Fanex.Data.Repository;
 
 public class MemberPerformanceCriteria : CriteriaBase
 {

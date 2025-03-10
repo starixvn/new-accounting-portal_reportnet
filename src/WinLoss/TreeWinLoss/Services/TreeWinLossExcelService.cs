@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using Epplus.Mapper.Extensions;
-using Utilities.DateTimes;
-using OfficeOpenXml;
-using TreeWinLoss.Criteria;
-using TreeWinLoss.Model;
-using Utilities.Configurations;
+﻿namespace TreeWinLoss.Services;
 
-namespace TreeWinLoss.Services;
+using AutoMapper;
+using Criteria;
+using Epplus.Mapper.Extensions;
+using Model;
+using OfficeOpenXml;
+using Utilities.Configurations;
+using Utilities.DateTimes;
 
 public interface TreeWinLossExcelService
 {

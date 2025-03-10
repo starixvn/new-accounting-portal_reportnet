@@ -1,8 +1,8 @@
-﻿using MediatR;
-using PunterAnalysis.AssociatedAccount.Model;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.AssociatedAccount;
 
-namespace PunterAnalysis.AssociatedAccount;
+using MediatR;
+using Model;
+using Utilities.LinqDynamicSum;
 
 public class Handler(AssociatedFacade associatedFacade)
     : IRequestHandler<HttpParameterJson, SummaryEntity<AssociatedSummaryModel>>

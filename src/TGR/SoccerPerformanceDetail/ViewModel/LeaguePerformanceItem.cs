@@ -1,6 +1,6 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using SoccerPerformanceDetail.Model;
+using Model;
 
 public class LeaguePerformanceItem
 {
@@ -12,25 +12,25 @@ public class LeaguePerformanceItem
     {
         if (leagueData != null && leagueData.LeagueId.HasValue)
         {
-            this.LeagueId = leagueData.LeagueId.Value;
-            this.LeagueName = leagueData.LeagueName;
-            this.LeagueGroupId = Convert.ToInt32(leagueData.LeagueGroupID);
-            this.NoOfTraders = Convert.ToInt32(leagueData.TraderCount);
-            this.NoOfMatches = Convert.ToInt32(leagueData.MatchCount);
-            this.NoOfBetChoices = Convert.ToInt32(leagueData.BetChoiceCount);
-            this.Turnover = Convert.ToDecimal(leagueData.Turnover);
-            this.WinLoss = Convert.ToDecimal(leagueData.WinLoss);
-            this.Margin = leagueData.Margin;
-            this.TurnoverReal = Convert.ToDecimal(leagueData.TurnoverReal);
-            this.WinLossReal = Convert.ToDecimal(leagueData.WinLossReal);
-            this.MarginReal = leagueData.MarginReal;
-            this.BetCount = Convert.ToInt32(leagueData.BetCount);
-            this.BetTypeBMShift1 = leagueData.BetTypeBMShift1;
-            this.BetTypeBMShift2 = leagueData.BetTypeBMShift2;
-            this.BetTypeBMShift3 = leagueData.BetTypeBMShift3;              
-            this.Market = GetMaketToString(leagueData.Market);
-            this.IsLive = leagueData.IsLive;
-            this.FlagForViewReport = leagueData.FlagForViewReport;
+            LeagueId = leagueData.LeagueId.Value;
+            LeagueName = leagueData.LeagueName;
+            LeagueGroupId = Convert.ToInt32(leagueData.LeagueGroupID);
+            NoOfTraders = Convert.ToInt32(leagueData.TraderCount);
+            NoOfMatches = Convert.ToInt32(leagueData.MatchCount);
+            NoOfBetChoices = Convert.ToInt32(leagueData.BetChoiceCount);
+            Turnover = Convert.ToDecimal(leagueData.Turnover);
+            WinLoss = Convert.ToDecimal(leagueData.WinLoss);
+            Margin = leagueData.Margin;
+            TurnoverReal = Convert.ToDecimal(leagueData.TurnoverReal);
+            WinLossReal = Convert.ToDecimal(leagueData.WinLossReal);
+            MarginReal = leagueData.MarginReal;
+            BetCount = Convert.ToInt32(leagueData.BetCount);
+            BetTypeBMShift1 = leagueData.BetTypeBMShift1;
+            BetTypeBMShift2 = leagueData.BetTypeBMShift2;
+            BetTypeBMShift3 = leagueData.BetTypeBMShift3;              
+            Market = GetMarketToString(leagueData.Market);
+            IsLive = leagueData.IsLive;
+            FlagForViewReport = leagueData.FlagForViewReport;
         }
     }
 
@@ -70,7 +70,7 @@ public class LeaguePerformanceItem
 
     public string Market { get; set; }
 
-    private string GetMaketToString(Market market)
+    private string GetMarketToString(Market market)
     {
         if (market == SoccerPerformanceDetail.Market.Live)
         {

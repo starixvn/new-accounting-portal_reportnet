@@ -1,5 +1,5 @@
-﻿using MediatR;
+﻿namespace Exchange.Filter.Licensee;
 
-namespace Exchange.Filter.Licensee;
+using MediatR;
 
 public class HttpParameterJson : IRequest<IEnumerable<LicenseeModel>>;

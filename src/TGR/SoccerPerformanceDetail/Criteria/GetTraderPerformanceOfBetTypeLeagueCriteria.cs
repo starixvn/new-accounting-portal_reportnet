@@ -12,7 +12,7 @@ public class GetTraderPerformanceOfBetTypeLeagueCriteria : CriteriaBase
     {
         get
         {
-            if (this.IsLive)
+            if (IsLive)
             {
                 return 1;
             }

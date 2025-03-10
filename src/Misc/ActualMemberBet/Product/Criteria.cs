@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace ActualMemberBet.Product;
 
-namespace ActualMemberBet.Product;
+using Fanex.Data.Repository;
 
 public class Criteria : CriteriaBase
 {

@@ -1,8 +1,8 @@
-using Fanex.Data.Repository;
-using NegativeBalance.Criteria;
-using NegativeBalance.Model;
-
 namespace NegativeBalance.Services;
+
+using Criteria;
+using Fanex.Data.Repository;
+using Model;
 
 public interface NegativeBalanceService
 {

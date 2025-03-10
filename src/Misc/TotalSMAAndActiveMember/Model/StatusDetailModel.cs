@@ -1,6 +1,6 @@
-using Utilities.DateTimes;
-
 namespace TotalSMAAndActiveMember.Model;
+
+using Utilities.DateTimes;
 
 public class StatusDetailModel
 {

@@ -1,7 +1,7 @@
-﻿using PunterAnalysis.Shared;
-using Utilities.Configurations;
+﻿namespace PunterAnalysis.SportType;
 
-namespace PunterAnalysis.SportType;
+using Shared;
+using Utilities.Configurations;
 
 public interface SportTypeExcelSetting
 {

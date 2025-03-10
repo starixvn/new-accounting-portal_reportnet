@@ -1,5 +1,5 @@
-﻿using MediatR;
+﻿namespace Exchange.Filter.Sport;
 
-namespace Exchange.Filter.Sport;
+using MediatR;
 
 public class HttpParameterJson : IRequest<IEnumerable<SportModel>>;

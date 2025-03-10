@@ -1,94 +1,84 @@
-﻿namespace SoccerPerformanceDetail.ViewModel
+﻿namespace SoccerPerformanceDetail.ViewModel;
+
+using Model;
+
+public class MatchPerformanceGroup()
 {
-    using SoccerPerformanceDetail.Model;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    public class MatchPerformanceGroup
+    public MatchPerformanceGroup(int? leagueId)
+        : this()
     {
-        public MatchPerformanceGroup()
+        if (leagueId.HasValue)
         {
-            this.ItemLiveList = new LinkedList<MatchPerformanceItem>();
-            this.ItemNonLiveList = new LinkedList<MatchPerformanceItem>();
-            this.Total = new MatchPerformanceItem();
+            LeagueId = leagueId.Value;
+            LeagueName = string.Empty;//CacheRef.GetLeagueName(this.LeagueId);
         }
+    }
 
-        public MatchPerformanceGroup(int? leagueId)
-            : this()
+    public int LeagueId { get; set; }
+
+    public string LeagueName { get; set; }
+
+    public ICollection<MatchPerformanceItem> ItemLiveList { get; set; } = new LinkedList<MatchPerformanceItem>();
+
+    public ICollection<MatchPerformanceItem> ItemNonLiveList { get; set; } = new LinkedList<MatchPerformanceItem>();
+
+    public MatchPerformanceItem Total { get; set; } = new();
+
+    public void AddMatchList(IEnumerable<MatchPerformanceInfo> matchPerformanceInfos, bool isLive)
+    {
+        foreach (var item in matchPerformanceInfos)
         {
-            if (leagueId.HasValue)
+            if (item != null)
             {
-                this.LeagueId = leagueId.Value;
-                this.LeagueName = string.Empty;//CacheRef.GetLeagueName(this.LeagueId);
+                AddItem(new MatchPerformanceItem(item), isLive);
             }
         }
+    }
 
-        public int LeagueId { get; set; }
-
-        public string LeagueName { get; set; }
-
-        public ICollection<MatchPerformanceItem> ItemLiveList { get; set; }
-
-        public ICollection<MatchPerformanceItem> ItemNonLiveList { get; set; }
-
-        public MatchPerformanceItem Total { get; set; }
-
-        public void AddMatchList(IEnumerable<MatchPerformanceInfo> matchPerformanceInfos, bool isLive)
+    public void AddMatchList(IEnumerable<MatchPerformanceRawInfo> matchPerformanceInfos, bool isLive)
+    {
+        foreach (var item in matchPerformanceInfos)
         {
-            foreach (var item in matchPerformanceInfos)
+            if (item != null)
             {
-                if (item != null)
-                {
-                    this.AddItem(new MatchPerformanceItem(item), isLive);
-                }
+                AddItem(new MatchPerformanceItem(item), isLive);
             }
         }
+    }
 
-        public void AddMatchList(IEnumerable<MatchPerformanceRawInfo> matchPerformanceInfos, bool isLive)
+    public void AddMatchList(IGrouping<int?, MatchPerformanceInfo> grouping, bool isLive)
+    {
+        foreach (var item in grouping)
         {
-            foreach (var item in matchPerformanceInfos)
+            if (item != null)
             {
-                if (item != null)
-                {
-                    this.AddItem(new MatchPerformanceItem(item), isLive);
-                }
+                AddItem(new MatchPerformanceItem(item), isLive);
             }
         }
+    }
 
-        public void AddMatchList(IGrouping<int?, MatchPerformanceInfo> grouping, bool isLive)
+    private void AddItem(MatchPerformanceItem item, bool isLive)
+    {
+        if (isLive)
         {
-            foreach (var item in grouping)
-            {
-                if (item != null)
-                {
-                    this.AddItem(new MatchPerformanceItem(item), isLive);
-                }
-            }
+            ItemLiveList.Add(item);
+        }
+        else
+        {
+            ItemNonLiveList.Add(item);
         }
 
-        private void AddItem(MatchPerformanceItem item, bool isLive)
-        {
-            if (isLive)
-            {
-                this.ItemLiveList.Add(item);
-            }
-            else
-            {
-                this.ItemNonLiveList.Add(item);
-            }
+        CalculateTotal(item);
+    }
 
-            CalculateTotal(item);
-        }
-
-        private void CalculateTotal(MatchPerformanceItem item)
-        {
-            this.Total.Turnover += item.Turnover;
-            this.Total.WinLoss += item.WinLoss;
-            this.Total.TurnoverReal += item.TurnoverReal;
-            this.Total.WinLossReal += item.WinLossReal;
-            this.Total.BetCount += item.BetCount;
-            this.Total.WinLossScore += item.WinLossScore;
-            this.Total.SumCategory += item.SumCategory;
-        }
+    private void CalculateTotal(MatchPerformanceItem item)
+    {
+        Total.Turnover += item.Turnover;
+        Total.WinLoss += item.WinLoss;
+        Total.TurnoverReal += item.TurnoverReal;
+        Total.WinLossReal += item.WinLossReal;
+        Total.BetCount += item.BetCount;
+        Total.WinLossScore += item.WinLossScore;
+        Total.SumCategory += item.SumCategory;
     }
 }

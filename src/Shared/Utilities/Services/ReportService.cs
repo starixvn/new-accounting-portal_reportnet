@@ -1,6 +1,6 @@
-﻿using Utilities.Constants;
+﻿namespace Utilities.Services;
 
-namespace Utilities.Services;
+using Constants;
 
 public static class ReportService
 {

@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Common.Criteria;
+﻿namespace HouseWinLoss.Common.MatchDetail;
 
-namespace HouseWinLoss.Common.MatchDetail;
+using Criteria;
 
 public interface WinLossService
 {

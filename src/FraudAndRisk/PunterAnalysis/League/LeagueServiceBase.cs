@@ -1,8 +1,8 @@
-﻿using Fanex.Data.Repository;
-using PunterAnalysis.League.Model;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.League;
 
-namespace PunterAnalysis.League;
+using Fanex.Data.Repository;
+using Model;
+using Utilities.LinqDynamicSum;
 
 public abstract class LeagueServiceBase(IDynamicRepository repository) : LeagueService
 {

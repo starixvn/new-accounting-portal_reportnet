@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SBPerformance.MarginBySport;
 
-namespace SBPerformance.MarginBySport;
+using Fanex.Data.Repository;
 
 public class MarginBySportCriteria : CriteriaBase
 {

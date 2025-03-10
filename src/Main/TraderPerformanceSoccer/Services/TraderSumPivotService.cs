@@ -1,7 +1,7 @@
-﻿using Fanex.Common;
-using System.Data;
+﻿namespace TraderPerformance.Services;
 
-namespace TraderPerformance.Services;
+using System.Data;
+using Fanex.Common;
 
 public interface TraderSumPivotService
 {

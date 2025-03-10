@@ -12,7 +12,7 @@ public class GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria : CriteriaBa
     {
         get
         {
-            if (this.IsLive)
+            if (IsLive)
             {
                 return 1;
             }

@@ -1,9 +1,7 @@
-﻿using MediatR;
+﻿namespace Exchange.Report;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
-namespace Exchange.Report;
-
 using Utilities.ExcelResult;
 
 [Route("api/exchange")]

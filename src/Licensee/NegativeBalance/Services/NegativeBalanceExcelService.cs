@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿namespace NegativeBalance.Services;
+
+using AutoMapper;
+using Criteria;
 using Epplus.Mapper.Extensions;
-using NegativeBalance.Criteria;
-using NegativeBalance.Model;
+using Model;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace NegativeBalance.Services;
 
 public interface NegativeBalanceExcelService
 {

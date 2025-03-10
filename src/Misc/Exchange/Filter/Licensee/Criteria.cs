@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace Exchange.Filter.Licensee;
 
-namespace Exchange.Filter.Licensee;
+using Fanex.Data.Repository;
 
 public class Criteria : CriteriaBase
 {

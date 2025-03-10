@@ -1,9 +1,9 @@
-﻿using AbnormalBet.Criteria;
-using AbnormalBet.IpLocation;
-using AbnormalBet.Model;
-using Fanex.Data.Repository;
+﻿namespace AbnormalBet.Report;
 
-namespace AbnormalBet.Report;
+using Criteria;
+using Fanex.Data.Repository;
+using IpLocation;
+using Model;
 
 public interface ReportService
 {

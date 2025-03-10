@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace ActualMemberBet.Product;
 
-namespace ActualMemberBet.Product;
+using MediatR;
+using OfficeOpenXml;
 
 public class HttpParameterExcel : IRequest<ExcelPackage>
 {

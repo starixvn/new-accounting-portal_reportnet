@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace SBPerformance.Main;
 
-namespace SBPerformance.Main;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class HttpParameter : IRequest<SummaryEntity<ItemModel>>
 {

@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace BetConstructPerformance.Models;
 
-namespace BetConstructPerformance.Models;
+using Epplus.Mapper.Annotations;
 
 public class SportDetailItemExcelModel
 {

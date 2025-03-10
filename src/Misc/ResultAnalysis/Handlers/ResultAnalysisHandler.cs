@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using MediatR;
-using ResultAnalysis.Criteria;
-using ResultAnalysis.Models;
-using ResultAnalysis.Requests;
-using ResultAnalysis.Services;
+﻿namespace ResultAnalysis.Handlers;
 
-namespace ResultAnalysis.Handlers;
+using AutoMapper;
+using Criteria;
+using MediatR;
+using Models;
+using Requests;
+using Services;
 
 public class ResultAnalysisHandler(ResultAnalysisService service, IMapper mapper)
     : IRequestHandler<LeagueRequest, IEnumerable<LeagueModel>>,

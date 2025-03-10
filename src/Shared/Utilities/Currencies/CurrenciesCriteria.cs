@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace Utilities.Currencies;
 
-namespace Utilities.Currencies;
+using Fanex.Data.Repository;
 
 public class CurrenciesCriteria : CriteriaBase
 {

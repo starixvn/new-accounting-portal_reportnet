@@ -1,7 +1,6 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using SoccerPerformanceDetail.Model;
-using System;
+using Model;
 
 /// <summary>
 /// Trader performance view model.
@@ -17,24 +16,24 @@ public class TraderPerformanceItem
     {
         if (traderData != null && traderData.CustId.HasValue)
         {
-            this.TraderId = traderData.CustId.Value;
-            this.TraderName = traderData.Username;
-            this.Grade = Convert.ToInt32(traderData.Grade);
-            this.HasGradeHistory = Convert.ToInt32(traderData.NoOfGradeChanged) > 1;
-            this.TeamId = Convert.ToInt32(traderData.TeamId);
-            this.TeamName = traderData.TeamName;
-            this.HasTeamHistory = Convert.ToInt32(traderData.NoOfTeamChanged) > 1;
-            this.NoOfLeagues = Convert.ToInt32(traderData.LeagueCount);
-            this.NoOfMatches = Convert.ToInt32(traderData.MatchCount);
-            this.BetCount = Convert.ToInt32(traderData.BetCount);
-            this.Turnover = Convert.ToDecimal(traderData.Turnover);
-            this.WinLoss = Convert.ToDecimal(traderData.WinLoss);               
-            this.Margin = traderData.Margin;
-            this.TurnoverReal = Convert.ToDecimal(traderData.TurnoverReal);
-            this.WinLossReal = Convert.ToDecimal(traderData.WinLossReal);
-            this.MarginReal = traderData.MarginReal;
-            this.Score = traderData.Score;
-            this.IsLive = traderData.IsLive;
+            TraderId = traderData.CustId.Value;
+            TraderName = traderData.Username;
+            Grade = Convert.ToInt32(traderData.Grade);
+            HasGradeHistory = Convert.ToInt32(traderData.NoOfGradeChanged) > 1;
+            TeamId = Convert.ToInt32(traderData.TeamId);
+            TeamName = traderData.TeamName;
+            HasTeamHistory = Convert.ToInt32(traderData.NoOfTeamChanged) > 1;
+            NoOfLeagues = Convert.ToInt32(traderData.LeagueCount);
+            NoOfMatches = Convert.ToInt32(traderData.MatchCount);
+            BetCount = Convert.ToInt32(traderData.BetCount);
+            Turnover = Convert.ToDecimal(traderData.Turnover);
+            WinLoss = Convert.ToDecimal(traderData.WinLoss);               
+            Margin = traderData.Margin;
+            TurnoverReal = Convert.ToDecimal(traderData.TurnoverReal);
+            WinLossReal = Convert.ToDecimal(traderData.WinLossReal);
+            MarginReal = traderData.MarginReal;
+            Score = traderData.Score;
+            IsLive = traderData.IsLive;
         }
     }
 

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ParlayWon.Criteria;
-using ParlayWon.Services;
+﻿namespace ParlayWon.Controller;
 
-namespace ParlayWon.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/parlay-won")]
 

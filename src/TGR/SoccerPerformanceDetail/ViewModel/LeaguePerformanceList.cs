@@ -1,168 +1,158 @@
-﻿namespace SoccerPerformanceDetail.ViewModel
+﻿namespace SoccerPerformanceDetail.ViewModel;
+
+using Model;
+
+public class LeaguePerformanceList
 {
-    using SoccerPerformanceDetail.Model;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    public List<LeaguePerformanceItem> ItemByOrderList { get; set; } = [];
 
-    public class LeaguePerformanceList
+    public List<LeaguePerformanceItem> ItemLiveList { get; set; } = [];
+
+    public List<LeaguePerformanceItem> ItemNonLiveList { get; set; } = [];
+
+    public LeaguePerformanceItem Total { get; set; } = new();
+
+    public LeaguePerformanceItem TotalItemLive { get; set; } = new();
+
+    public LeaguePerformanceItem TotalItemNonLive { get; set; } = new();
+
+    public void AddLeagueList(IEnumerable<LeaguePerformanceInfo> leaguePerformanceInfos, IEnumerable<LeagueGroup> leagueGroups)
     {
-        public LeaguePerformanceList()
+        foreach (var item in leaguePerformanceInfos)
         {
-            this.ItemByOrderList = new List<LeaguePerformanceItem>();
-            this.ItemLiveList = new List<LeaguePerformanceItem>();
-            this.ItemNonLiveList = new List<LeaguePerformanceItem>();
-            this.Total = new LeaguePerformanceItem();
-            this.TotalItemLive = new LeaguePerformanceItem();
-            this.TotalItemNonLive = new LeaguePerformanceItem();
-        }
-
-        public List<LeaguePerformanceItem> ItemByOrderList { get; set; }
-
-        public List<LeaguePerformanceItem> ItemLiveList { get; set; }
-
-        public List<LeaguePerformanceItem> ItemNonLiveList { get; set; }
-
-        public LeaguePerformanceItem Total { get; set; }
-
-        public LeaguePerformanceItem TotalItemLive { get; set; }
-
-        public LeaguePerformanceItem TotalItemNonLive { get; set; }
-
-        public void AddLeagueList(IEnumerable<LeaguePerformanceInfo> leaguePerformanceInfos, IEnumerable<LeagueGroup> leagueGroups)
-        {
-            foreach (var item in leaguePerformanceInfos)
+            if (item != null)
             {
-                if (item != null)
+                var leagueGroupName = string.Empty;
+                if (leagueGroups != null && item.LeagueGroupID.HasValue)
                 {
-                    var leagueGroupName = string.Empty;
-                    if (leagueGroups != null && item.LeagueGroupID.HasValue)
-                    {
-                        var group = leagueGroups
-                            .Where(x => x.TargetLeagueGroupId.Equals(item.LeagueGroupID.Value))
-                            .Select(x => x.LeagueGroupName).ToList();
+                    var group = leagueGroups
+                        .Where(x => x.TargetLeagueGroupId.Equals(item.LeagueGroupID.Value))
+                        .Select(x => x.LeagueGroupName).ToList();
 
-                        leagueGroupName = group.Any() ? group[0] : "-";
-                    }
-                    var itemData = new LeaguePerformanceItem(item);
-                    itemData.LeagueGroupName = leagueGroupName;
-
-                    this.AddItem(itemData);
+                    leagueGroupName = group.Any() ? group[0] : "-";
                 }
-            }
-        }
-
-        public void AddLeagueList(IEnumerable<LeaguePerformanceInfo> leaguePerformanceInfos, IEnumerable<LeagueGroup> leagueGroups, bool isLive)
-        {
-            foreach (var item in leaguePerformanceInfos)
-            {
-                if (item != null)
+                var itemData = new LeaguePerformanceItem(item)
                 {
-                    var leagueGroupName = string.Empty;
-                    if (leagueGroups != null && item.LeagueGroupID.HasValue)
-                    {
-                        var group = leagueGroups
-                            .Where(x => x.TargetLeagueGroupId.Equals(item.LeagueGroupID.Value))
-                            .Select(x => x.LeagueGroupName).ToList();
+                    LeagueGroupName = leagueGroupName
+                };
 
-                        leagueGroupName = group.Any() ? group[0] : "-";
-                    }
-                    var itemData = new LeaguePerformanceItem(item);
-                    itemData.LeagueGroupName = leagueGroupName;
+                AddItem(itemData);
+            }
+        }
+    }
 
-                    this.AddItem(itemData, isLive);
+    public void AddLeagueList(IEnumerable<LeaguePerformanceInfo> leaguePerformanceInfos, IEnumerable<LeagueGroup> leagueGroups, bool isLive)
+    {
+        foreach (var item in leaguePerformanceInfos)
+        {
+            if (item != null)
+            {
+                var leagueGroupName = string.Empty;
+                if (leagueGroups != null && item.LeagueGroupID.HasValue)
+                {
+                    var group = leagueGroups
+                        .Where(x => x.TargetLeagueGroupId.Equals(item.LeagueGroupID.Value))
+                        .Select(x => x.LeagueGroupName).ToList();
+
+                    leagueGroupName = group.Any() ? group[0] : "-";
                 }
+                var itemData = new LeaguePerformanceItem(item)
+                {
+                    LeagueGroupName = leagueGroupName
+                };
+
+                AddItem(itemData, isLive);
             }
         }
+    }
 
-        public void CalculateTotalMargin()
+    public void CalculateTotalMargin()
+    {
+        if (Total != null)
         {
-            if (this.Total != null)
-            {
-                this.Total.Margin = CalculateTotalMargin(this.Total.WinLoss, this.Total.Turnover);
-                this.Total.MarginReal = CalculateTotalMargin(this.Total.WinLossReal, this.Total.TurnoverReal);
-            }
-
-            if (this.TotalItemLive != null)
-            {
-                this.TotalItemLive.Margin = CalculateTotalMargin(this.TotalItemLive.WinLoss, this.TotalItemLive.Turnover);
-                this.TotalItemLive.MarginReal = CalculateTotalMargin(this.TotalItemLive.WinLossReal, this.TotalItemLive.TurnoverReal);
-            }
-
-            if (this.TotalItemNonLive != null)
-            {
-                this.TotalItemNonLive.Margin = CalculateTotalMargin(this.TotalItemNonLive.WinLoss, this.TotalItemNonLive.Turnover);
-                this.TotalItemNonLive.MarginReal = CalculateTotalMargin(this.TotalItemNonLive.WinLossReal, this.TotalItemNonLive.TurnoverReal);
-            }
+            Total.Margin = CalculateTotalMargin(Total.WinLoss, Total.Turnover);
+            Total.MarginReal = CalculateTotalMargin(Total.WinLossReal, Total.TurnoverReal);
         }
 
-        private void AddItem(LeaguePerformanceItem item)
+        if (TotalItemLive != null)
         {
-            this.ItemByOrderList.Add(item);
-
-            CalculateTotal(item, item.IsLive);
+            TotalItemLive.Margin = CalculateTotalMargin(TotalItemLive.WinLoss, TotalItemLive.Turnover);
+            TotalItemLive.MarginReal = CalculateTotalMargin(TotalItemLive.WinLossReal, TotalItemLive.TurnoverReal);
         }
 
-        private void AddItem(LeaguePerformanceItem item, bool isLive)
+        if (TotalItemNonLive != null)
         {
-            if (isLive)
-            {
-                this.ItemLiveList.Add(item);
-            }
-            else
-            {
-                this.ItemNonLiveList.Add(item);
-            }
-
-            CalculateTotal(item);
+            TotalItemNonLive.Margin = CalculateTotalMargin(TotalItemNonLive.WinLoss, TotalItemNonLive.Turnover);
+            TotalItemNonLive.MarginReal = CalculateTotalMargin(TotalItemNonLive.WinLossReal, TotalItemNonLive.TurnoverReal);
         }
+    }
 
-        private void CalculateTotal(LeaguePerformanceItem item)
+    private void AddItem(LeaguePerformanceItem item)
+    {
+        ItemByOrderList.Add(item);
+
+        CalculateTotal(item, item.IsLive);
+    }
+
+    private void AddItem(LeaguePerformanceItem item, bool isLive)
+    {
+        if (isLive)
         {
-            this.Total.NoOfTraders += item.NoOfTraders;
-            this.Total.NoOfMatches += item.NoOfMatches;
-            this.Total.NoOfBetChoices += item.NoOfBetChoices;
-            this.Total.Turnover += item.Turnover;
-            this.Total.WinLoss += item.WinLoss;
-            this.Total.TurnoverReal += item.TurnoverReal;
-            this.Total.WinLossReal += item.WinLossReal;
-            this.Total.BetCount += item.BetCount;
+            ItemLiveList.Add(item);
         }
-
-        private void CalculateTotal(LeaguePerformanceItem item, bool isLive)
+        else
         {
-            if (isLive)
-            {
-                this.TotalItemLive.NoOfTraders += item.NoOfTraders;
-                this.TotalItemLive.NoOfMatches += item.NoOfMatches;
-                this.TotalItemLive.Turnover += item.Turnover;
-                this.TotalItemLive.WinLoss += item.WinLoss;
-                this.TotalItemLive.TurnoverReal += item.TurnoverReal;
-                this.TotalItemLive.WinLossReal += item.WinLossReal;
-                this.TotalItemLive.BetCount += item.BetCount;
-            }
-            else
-            {
-                this.TotalItemNonLive.NoOfTraders += item.NoOfTraders;
-                this.TotalItemNonLive.NoOfMatches += item.NoOfMatches;
-                this.TotalItemNonLive.Turnover += item.Turnover;
-                this.TotalItemNonLive.WinLoss += item.WinLoss;
-                this.TotalItemNonLive.TurnoverReal += item.TurnoverReal;
-                this.TotalItemNonLive.WinLossReal += item.WinLossReal;
-                this.TotalItemNonLive.BetCount += item.BetCount;
-            }
+            ItemNonLiveList.Add(item);
         }
 
-        private decimal? CalculateTotalMargin(decimal winLoss, decimal turnover)
+        CalculateTotal(item);
+    }
+
+    private void CalculateTotal(LeaguePerformanceItem item)
+    {
+        Total.NoOfTraders += item.NoOfTraders;
+        Total.NoOfMatches += item.NoOfMatches;
+        Total.NoOfBetChoices += item.NoOfBetChoices;
+        Total.Turnover += item.Turnover;
+        Total.WinLoss += item.WinLoss;
+        Total.TurnoverReal += item.TurnoverReal;
+        Total.WinLossReal += item.WinLossReal;
+        Total.BetCount += item.BetCount;
+    }
+
+    private void CalculateTotal(LeaguePerformanceItem item, bool isLive)
+    {
+        if (isLive)
         {
-            decimal? margin = null;
-
-            if (turnover != 0)
-            {
-                margin = winLoss / turnover * 100;
-            }
-
-            return margin;
+            TotalItemLive.NoOfTraders += item.NoOfTraders;
+            TotalItemLive.NoOfMatches += item.NoOfMatches;
+            TotalItemLive.Turnover += item.Turnover;
+            TotalItemLive.WinLoss += item.WinLoss;
+            TotalItemLive.TurnoverReal += item.TurnoverReal;
+            TotalItemLive.WinLossReal += item.WinLossReal;
+            TotalItemLive.BetCount += item.BetCount;
         }
+        else
+        {
+            TotalItemNonLive.NoOfTraders += item.NoOfTraders;
+            TotalItemNonLive.NoOfMatches += item.NoOfMatches;
+            TotalItemNonLive.Turnover += item.Turnover;
+            TotalItemNonLive.WinLoss += item.WinLoss;
+            TotalItemNonLive.TurnoverReal += item.TurnoverReal;
+            TotalItemNonLive.WinLossReal += item.WinLossReal;
+            TotalItemNonLive.BetCount += item.BetCount;
+        }
+    }
+
+    private decimal? CalculateTotalMargin(decimal winLoss, decimal turnover)
+    {
+        decimal? margin = null;
+
+        if (turnover != 0)
+        {
+            margin = winLoss / turnover * 100;
+        }
+
+        return margin;
     }
 }

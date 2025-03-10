@@ -1,9 +1,7 @@
-﻿using MediatR;
+﻿namespace ActualMemberBet.Bettype;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
-namespace ActualMemberBet.Bettype;
-
 using Utilities.ExcelResult;
 
 [Route("api/actual-member-bet/bettype")]

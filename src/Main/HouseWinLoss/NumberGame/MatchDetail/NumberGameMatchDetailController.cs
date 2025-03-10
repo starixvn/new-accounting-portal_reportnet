@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.MatchDetailByCode;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace HouseWinLoss.NumberGame.MatchDetail;
 
-namespace HouseWinLoss.NumberGame.MatchDetail;
+using AutoMapper;
+using Common.ColumnDecorators;
+using Common.Criteria;
+using Common.MatchDetailByCode;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/house-win-loss-by-products/number-game/match-detail")]
 [ApiController]

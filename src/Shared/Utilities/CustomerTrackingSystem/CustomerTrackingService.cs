@@ -1,10 +1,10 @@
-﻿using Utilities.CustomerTrackingSystem.Model;
-using Newtonsoft.Json;
+﻿namespace Utilities.CustomerTrackingSystem;
+
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Xml.Linq;
-
-namespace Utilities.CustomerTrackingSystem;
+using Model;
+using Newtonsoft.Json;
 
 public interface CustomerTrackingService
 {

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TraderPerformance.Criteria;
-using TraderPerformance.Services;
+﻿namespace TraderPerformance.Controller;
 
-namespace TraderPerformance.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/trader-performance-soccer")]
 [ApiController]

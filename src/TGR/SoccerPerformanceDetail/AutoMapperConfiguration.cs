@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using SoccerPerformanceDetail.ViewModel;
+﻿namespace SoccerPerformanceDetail;
 
-namespace SoccerPerformanceDetail;
+using AutoMapper;
+using ViewModel;
 
 public static class AutoMapperConfiguration
 {

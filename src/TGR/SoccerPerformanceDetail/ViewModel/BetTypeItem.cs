@@ -7,31 +7,29 @@
 //   <change who="Jason.Ly" date="2014.6.9">Created</change>
 // </history>
 
-namespace SoccerPerformanceDetail.ViewModel
+namespace SoccerPerformanceDetail.ViewModel;
+
+using Model;
+
+/// <summary>
+/// Bet type view model.
+/// </summary>
+[Serializable]
+public class BetTypeItem
 {
-    using System;
-    using SoccerPerformanceDetail.Model;
-
-    /// <summary>
-    /// Bet type view model.
-    /// </summary>
-    [Serializable]
-    public class BetTypeItem
+    public BetTypeItem(BetTypeInfo betType)
     {
-        public BetTypeItem(BetTypeInfo betType)
+        if (betType != null)
         {
-            if (betType != null)
-            {
-                this.BetTypeId = betType.BetType;
-                this.BetTypeName = betType.TypeName;
-                this.IsDefaultCheck = betType.IsDefault;
-            }
+            BetTypeId = betType.BetType;
+            BetTypeName = betType.TypeName;
+            IsDefaultCheck = betType.IsDefault;
         }
-
-        public short BetTypeId { get; set; }
-
-        public string BetTypeName { get; set; }
-
-        public bool IsDefaultCheck { get; set; }
     }
+
+    public short BetTypeId { get; set; }
+
+    public string BetTypeName { get; set; }
+
+    public bool IsDefaultCheck { get; set; }
 }

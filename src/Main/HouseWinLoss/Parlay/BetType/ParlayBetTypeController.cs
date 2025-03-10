@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.ColumnDecorators;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace HouseWinLoss.Parlay.BetType;
 
-namespace HouseWinLoss.Parlay.BetType;
+using AutoMapper;
+using Common.BasicWinLoss;
+using Common.ColumnDecorators;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/house-win-loss-by-products/parlay/bet-type")]
 [ApiController]

@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace PunterAnalysis.SportType.Model;
 
-namespace PunterAnalysis.SportType.Model;
+using MediatR;
+using OfficeOpenXml;
 
 public class HttpParameterExcel : IRequest<ExcelPackage>
 {

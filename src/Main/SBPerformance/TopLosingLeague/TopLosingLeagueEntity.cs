@@ -1,6 +1,6 @@
-﻿using SBPerformance.Constants;
+﻿namespace SBPerformance.TopLosingLeague;
 
-namespace SBPerformance.TopLosingLeague;
+using Constants;
 
 public class TopLosingLeagueEntity
 {

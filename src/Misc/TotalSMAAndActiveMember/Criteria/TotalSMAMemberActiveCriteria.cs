@@ -1,6 +1,6 @@
-using Fanex.Data.Repository;
-
 namespace TotalSMAAndActiveMember.Criteria;
+
+using Fanex.Data.Repository;
 
 public class TotalSMAMemberActiveCriteria : CriteriaBase
 {

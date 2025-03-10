@@ -1,9 +1,9 @@
-﻿using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
+﻿namespace HouseWinLoss.Common.SiteWinLoss;
+
+using ColumnDecorators;
+using Criteria;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
-
-namespace HouseWinLoss.Common.SiteWinLoss;
 
 public class SiteWinLossController(
     WinLossService service,

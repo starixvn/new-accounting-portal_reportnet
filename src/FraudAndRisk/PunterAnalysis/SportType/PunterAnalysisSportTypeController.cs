@@ -1,10 +1,8 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.SportType;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-using PunterAnalysis.SportType.Model;
-
-namespace PunterAnalysis.SportType;
-
+using Model;
 using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/sport-type")]

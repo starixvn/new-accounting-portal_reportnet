@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using Epplus.Mapper.Extensions;
-using OfficeOpenXml;
-using SuperBalance.Model;
-using Utilities.Configurations;
+﻿namespace SuperBalance.Services;
 
-namespace SuperBalance.Services;
+using AutoMapper;
+using Epplus.Mapper.Extensions;
+using Model;
+using OfficeOpenXml;
+using Utilities.Configurations;
 
 public interface SuperBalanceExcelService
 {

@@ -1,15 +1,14 @@
-using CreditMovementMonitor.Criteria;
-using CreditMovementMonitor.Entities;
-using CreditMovementMonitor.Model;
+namespace CreditMovementMonitor.Services;
+
+using Criteria;
+using Entities;
 using Fanex.Caching;
 using Fanex.Data.Repository;
 using Fanex.Excel.Enums;
 using Fanex.Excel.Models;
-using Utilities.DateTimes;
-
-namespace CreditMovementMonitor.Services;
-
 using Fanex.NAP.Client;
+using Model;
+using Utilities.DateTimes;
 
 public interface CreditMovementService
 {

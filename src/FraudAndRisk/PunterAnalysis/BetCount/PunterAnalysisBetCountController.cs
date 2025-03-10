@@ -1,10 +1,8 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.BetCount;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-using PunterAnalysis.BetCount.Model;
-
-namespace PunterAnalysis.BetCount;
-
+using Model;
 using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/bet-count")]

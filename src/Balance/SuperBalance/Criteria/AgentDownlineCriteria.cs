@@ -1,7 +1,7 @@
+namespace SuperBalance.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace SuperBalance.Criteria;
 
 public class AgentDownlineCriteria : CriteriaBase
 {

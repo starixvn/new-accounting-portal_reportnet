@@ -1,9 +1,9 @@
-﻿using Epplus.Mapper.Extensions;
+﻿namespace Exchange.Report;
+
+using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;
-
-namespace Exchange.Report;
 
 public interface ExcelBuilder
 {

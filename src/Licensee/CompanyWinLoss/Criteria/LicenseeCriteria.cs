@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace CompanyWinLoss.Criteria;
 
-namespace CompanyWinLoss.Criteria;
+using Fanex.Data.Repository;
 
 public class LicenseeCriteria : CriteriaBase
 {

@@ -7,72 +7,62 @@
 //   <change who="Jason.Ly" date="2014.5.17">Created</change>
 // </history>
 
-namespace SoccerPerformanceDetail.ViewModel
+namespace SoccerPerformanceDetail.ViewModel;
+
+using Model;
+
+/// <summary>
+/// League performance list view model.
+/// </summary>
+[Serializable]
+public class TeamPerformanceList
 {
-    using SoccerPerformanceDetail.Model;
-    using System;
-    using System.Collections.Generic;
+    public List<TeamPerformanceItem> ItemLiveList { get; set; } = [];
+
+    public List<TeamPerformanceItem> ItemNonLiveList { get; set; } = [];
+
+    public TeamPerformanceItem Total { get; set; } = new();
+
+    public void AddTeamList(IEnumerable<TeamPerformanceInfo> teamPerformanceInfos, bool isLive)
+    {
+        foreach (var item in teamPerformanceInfos)
+        {
+            if (item != null)
+            {
+                AddItem(new TeamPerformanceItem(item), isLive);
+            }
+        }
+    }
 
     /// <summary>
-    /// League performance list view model.
+    /// Adds an item to the group.
     /// </summary>
-    [Serializable]
-    public class TeamPerformanceList
+    /// <param name="item">The item that needs to be added.</param>
+    private void AddItem(TeamPerformanceItem item, bool isLive)
     {
-        public TeamPerformanceList()
+        if (isLive)
         {
-            this.ItemLiveList = new List<TeamPerformanceItem>();
-            this.ItemNonLiveList = new List<TeamPerformanceItem>();
-            this.Total = new TeamPerformanceItem();
+            ItemLiveList.Add(item);
+        }
+        else
+        {
+            ItemNonLiveList.Add(item);
         }
 
-        public List<TeamPerformanceItem> ItemLiveList { get; set; }
+        CalculateTotal(item);
+    }
 
-        public List<TeamPerformanceItem> ItemNonLiveList { get; set; }
-
-        public TeamPerformanceItem Total { get; set; }
-
-        public void AddTeamList(IEnumerable<TeamPerformanceInfo> teamPerformanceInfos, bool isLive)
-        {
-            foreach (var item in teamPerformanceInfos)
-            {
-                if (item != null)
-                {
-                    this.AddItem(new TeamPerformanceItem(item), isLive);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Adds an item to the group.
-        /// </summary>
-        /// <param name="item">The item that needs to be added.</param>
-        private void AddItem(TeamPerformanceItem item, bool isLive)
-        {
-            if (isLive)
-            {
-                this.ItemLiveList.Add(item);
-            }
-            else
-            {
-                this.ItemNonLiveList.Add(item);
-            }
-
-            CalculateTotal(item);
-        }
-
-        private void CalculateTotal(TeamPerformanceItem item)
-        {
-            this.Total.NoOfTraders += item.NoOfTraders;
-            this.Total.NoOfLeagues += item.NoOfLeagues;
-            this.Total.NoOfMatches += item.NoOfMatches;
-            this.Total.Turnover += item.Turnover;
-            this.Total.WinLoss += item.WinLoss;           
-            this.Total.Margin += item.Margin;
-            this.Total.TurnoverReal += item.TurnoverReal;
-            this.Total.WinLossReal += item.WinLossReal;
-            this.Total.MarginReal += item.MarginReal;
-            this.Total.BetCount += item.BetCount;
-        }
+    private void CalculateTotal(TeamPerformanceItem item)
+    {
+        Total.NoOfTraders += item.NoOfTraders;
+        Total.NoOfLeagues += item.NoOfLeagues;
+        Total.NoOfMatches += item.NoOfMatches;
+        Total.Turnover += item.Turnover;
+        Total.WinLoss += item.WinLoss;           
+        Total.Margin += item.Margin;
+        Total.TurnoverReal += item.TurnoverReal;
+        Total.WinLossReal += item.WinLossReal;
+        Total.MarginReal += item.MarginReal;
+        Total.BetCount += item.BetCount;
     }
 }

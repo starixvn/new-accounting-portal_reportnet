@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using MediatR;
+﻿namespace ActualMemberBet.Filter;
 
-namespace ActualMemberBet.Filter;
+using Fanex.Data.Repository;
+using MediatR;
 
 public class CurrencyHandler(IDynamicRepository repository)
     : IRequestHandler<CurrencyHttpParameter, IEnumerable<Currency>>

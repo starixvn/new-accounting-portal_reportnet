@@ -1,11 +1,11 @@
-﻿using AbnormalBet.Criteria;
-using AbnormalBet.HttpParameter;
-using AbnormalBet.Model;
-using AutoMapper;
-using MediatR;
-using OfficeOpenXml;
+﻿namespace AbnormalBet.Report;
 
-namespace AbnormalBet.Report;
+using AutoMapper;
+using Criteria;
+using HttpParameter;
+using MediatR;
+using Model;
+using OfficeOpenXml;
 
 public class ReportHandlerExcel(ReportService service, ReportExcelBuilder excelBuilder, IMapper mapper)
     : IRequestHandler<LicenseeHttpParameterExcel, ExcelPackage>,

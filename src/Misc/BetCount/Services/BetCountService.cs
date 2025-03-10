@@ -1,14 +1,13 @@
-﻿using AutoMapper;
-using BetCount.Constants;
-using BetCount.Criteria;
-using BetCount.Entities;
-using BetCount.Model;
+﻿namespace BetCount.Services;
+
+using AutoMapper;
+using Constants;
+using Criteria;
+using Entities;
 using Fanex.Data.Repository;
-using Utilities.Sorting;
 using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;
-
-namespace BetCount.Services;
+using Utilities.Sorting;
 
 public interface BetCountService
 {

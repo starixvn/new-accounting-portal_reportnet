@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using MediatR;
-using OfficeOpenXml;
-using PunterAnalysis.AssociatedAccount.Model;
-using PunterAnalysis.Shared;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.AssociatedAccount;
 
-namespace PunterAnalysis.AssociatedAccount;
+using AutoMapper;
+using MediatR;
+using Model;
+using OfficeOpenXml;
+using Shared;
+using Utilities.LinqDynamicSum;
 
 public class HandlerExcel(
     AssociatedFacade associatedFacade,

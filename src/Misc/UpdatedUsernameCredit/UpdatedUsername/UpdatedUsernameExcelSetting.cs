@@ -1,7 +1,7 @@
-﻿using UpdatedUsernameCredit.Common;
-using Utilities.Configurations;
+﻿namespace UpdatedUsernameCredit.UpdatedUsername;
 
-namespace UpdatedUsernameCredit.UpdatedUsername;
+using Common;
+using Utilities.Configurations;
 
 public interface UpdatedUsernameExcelSetting
 {

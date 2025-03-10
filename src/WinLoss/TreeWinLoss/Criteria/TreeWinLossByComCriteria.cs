@@ -1,7 +1,7 @@
+namespace TreeWinLoss.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace TreeWinLoss.Criteria;
 
 public class TreeWinLossByComCriteria : CriteriaBase
 {

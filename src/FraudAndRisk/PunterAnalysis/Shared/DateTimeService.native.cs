@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿namespace PunterAnalysis.Shared;
 
-namespace PunterAnalysis.Shared;
+using System.Globalization;
 
 public interface DateTimeService
 {

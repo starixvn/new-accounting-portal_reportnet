@@ -1,10 +1,10 @@
-﻿using ActualMemberBet.Common;
-using AutoMapper;
-using MediatR;
-using Utilities.LinqDynamicSum;
-using OfficeOpenXml;
+﻿namespace ActualMemberBet.Bettype;
 
-namespace ActualMemberBet.Bettype;
+using AutoMapper;
+using Common;
+using MediatR;
+using OfficeOpenXml;
+using Utilities.LinqDynamicSum;
 
 public class HandlerExcel(ActualMemberBetService service, BettypeExcelBuilder excelBuilder, IMapper mapper)
     : IRequestHandler<HttpParameterExcel, ExcelPackage>

@@ -1,9 +1,9 @@
-﻿using AbnormalBet.Criteria;
-using AbnormalBet.HttpParameter;
-using AbnormalBet.Model;
-using AutoMapper;
+﻿namespace AbnormalBet;
 
-namespace AbnormalBet;
+using AutoMapper;
+using Criteria;
+using HttpParameter;
+using Model;
 
 public static class AutoMapperConfiguration
 {

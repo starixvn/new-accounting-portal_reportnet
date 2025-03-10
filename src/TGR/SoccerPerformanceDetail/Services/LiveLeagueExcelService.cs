@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using Epplus.Mapper.Extensions;
-using OfficeOpenXml;
-using SoccerPerformanceDetail.Constants;
-using SoccerPerformanceDetail.Criteria;
-using SoccerPerformanceDetail.Utilities;
-using SoccerPerformanceDetail.ViewModel;
-using Utilities.Configurations;
+﻿namespace SoccerPerformanceDetail.Services;
 
-namespace SoccerPerformanceDetail.Services;
+using AutoMapper;
+using Constants;
+using Criteria;
+using Epplus.Mapper.Extensions;
+using global::Utilities.Configurations;
+using OfficeOpenXml;
+using Utilities;
+using ViewModel;
 
 public interface LiveLeagueExcelService
 {

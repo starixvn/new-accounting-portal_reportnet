@@ -1,6 +1,6 @@
-using Epplus.Mapper.Annotations;
-
 namespace BetCount.Model;
+
+using Epplus.Mapper.Annotations;
 
 public class TransactionExcelModel
 {

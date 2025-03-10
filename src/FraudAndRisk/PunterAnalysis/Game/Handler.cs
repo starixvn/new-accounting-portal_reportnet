@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using MediatR;
-using PunterAnalysis.Game.Model;
-using PunterAnalysis.Shared;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.Game;
 
-namespace PunterAnalysis.Game;
+using AutoMapper;
+using MediatR;
+using Model;
+using Shared;
+using Utilities.LinqDynamicSum;
 
 public class Handler(PunterAnalysisService punterAnalysisService, IMapper mapper)
     : HandlerBase(punterAnalysisService, mapper), IRequestHandler<HttpParameterJson, SummaryEntity<GameModel>>

@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.Shared;
 
-namespace PunterAnalysis.Shared;
+using Fanex.Data.Repository;
 
 public abstract class BetCountAndLeagueCriteriaBase : CriteriaBase
 {

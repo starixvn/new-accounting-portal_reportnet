@@ -1,6 +1,5 @@
 ﻿namespace SoccerPerformanceDetail.Criteria;
 
-using System;
 using Fanex.Data;
 using Fanex.Data.Repository;
 
@@ -13,7 +12,7 @@ public class GetBettypeDetailTeamCriteria : CriteriaBase
     {
         get
         {
-            if (this.IsLive)
+            if (IsLive)
             {
                 return 1;
             }

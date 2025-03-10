@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace TotalSMAAndActiveMember.Model;
 
-namespace TotalSMAAndActiveMember.Model;
+using Epplus.Mapper.Annotations;
 
 public class StatusDetailExcelModel
 {

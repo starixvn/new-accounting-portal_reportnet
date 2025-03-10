@@ -1,11 +1,9 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.AssociatedAccount;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 using OfficeOpenXml;
-
-using PunterAnalysis.AssociatedAccount.Model;
-
-namespace PunterAnalysis.AssociatedAccount;
-
 using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/associated-account")]

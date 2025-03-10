@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using SBPerformance.Main;
-using SBPerformance.MarginBySite;
-using SBPerformance.MarginBySport;
-using SBPerformance.TopLosingLeague;
-using SBPerformance.TopWinningMember;
+﻿namespace SBPerformance;
 
-namespace SBPerformance;
+using AutoMapper;
+using Main;
+using MarginBySite;
+using MarginBySport;
+using TopLosingLeague;
+using TopWinningMember;
 
 public static class AutoMapperConfiguration
 {

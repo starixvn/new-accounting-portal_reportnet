@@ -1,7 +1,8 @@
-﻿using AutoMapper;
-using Exchange.Report;
+﻿namespace Exchange;
+
+using AutoMapper;
+using Report;
 using Utilities.LinqDynamicSum;
-namespace Exchange;
 
 public static class AutoMapperConfiguration
 {

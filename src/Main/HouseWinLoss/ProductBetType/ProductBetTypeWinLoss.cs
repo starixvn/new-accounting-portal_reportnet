@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.ProductBetType;
 
-namespace HouseWinLoss.ProductBetType;
+using Common.Models;
 
 public class ProductBetTypeWinLoss
 {

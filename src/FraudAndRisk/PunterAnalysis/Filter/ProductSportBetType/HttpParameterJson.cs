@@ -1,5 +1,5 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.Filter.ProductSportBetType;
 
-namespace PunterAnalysis.Filter.ProductSportBetType;
+using MediatR;
 
 public class HttpParameterJson : IRequest<IEnumerable<ProductSportBetTypeEntity>>;

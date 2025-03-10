@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace SaveBetReport.Models;
 
-namespace SaveBetReport.Models;
+using Microsoft.AspNetCore.Mvc;
 
 public class ApiResult
 {

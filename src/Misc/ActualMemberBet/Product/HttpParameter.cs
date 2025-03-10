@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace ActualMemberBet.Product;
 
-namespace ActualMemberBet.Product;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class HttpParameter : IRequest<SummaryEntity<ProductActualMemberBet>>
 {

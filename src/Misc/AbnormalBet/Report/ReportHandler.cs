@@ -1,10 +1,10 @@
-﻿using AbnormalBet.Criteria;
-using AbnormalBet.HttpParameter;
-using AbnormalBet.Model;
-using AutoMapper;
-using MediatR;
+﻿namespace AbnormalBet.Report;
 
-namespace AbnormalBet.Report;
+using AutoMapper;
+using Criteria;
+using HttpParameter;
+using MediatR;
+using Model;
 
 public class ReportHandler(ReportService service, IMapper mapper)
     : IRequestHandler<LicenseeHttpParameter, LicenseeModel>,

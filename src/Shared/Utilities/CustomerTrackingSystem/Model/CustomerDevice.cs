@@ -1,7 +1,5 @@
 ﻿namespace Utilities.CustomerTrackingSystem.Model;
 
-using System;
-
 public class CustomerDevice
 {
     public string Account { get; set; }

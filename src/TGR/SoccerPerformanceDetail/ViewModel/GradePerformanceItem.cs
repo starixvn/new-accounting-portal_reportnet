@@ -1,6 +1,6 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using SoccerPerformanceDetail.Model;
+using Model;
 
 public class GradePerformanceItem
 {
@@ -12,19 +12,19 @@ public class GradePerformanceItem
     {
         if (gradeData != null && gradeData.Grade.HasValue)
         {
-            this.Grade = gradeData.Grade.Value;
-            this.NoOfTraders = Convert.ToInt32(gradeData.TraderCount);
-            this.NoOfLeagues = Convert.ToInt32(gradeData.LeagueCount);
-            this.NoOfMatches = Convert.ToInt32(gradeData.MatchCount);
-            this.Turnover = Convert.ToDecimal(gradeData.Turnover);
-            this.WinLoss = Convert.ToDecimal(gradeData.WinLoss);                
-            this.Margin = gradeData.Margin;
-            this.TurnoverReal = Convert.ToDecimal(gradeData.TurnoverReal);
-            this.WinLossReal = Convert.ToDecimal(gradeData.WinLossReal);
-            this.MarginReal = gradeData.MarginReal;
-            this.BetCount = Convert.ToInt32(gradeData.BetCount);
-            this.Score = gradeData.Score;
-            this.IsLive = gradeData.IsLive;
+            Grade = gradeData.Grade.Value;
+            NoOfTraders = Convert.ToInt32(gradeData.TraderCount);
+            NoOfLeagues = Convert.ToInt32(gradeData.LeagueCount);
+            NoOfMatches = Convert.ToInt32(gradeData.MatchCount);
+            Turnover = Convert.ToDecimal(gradeData.Turnover);
+            WinLoss = Convert.ToDecimal(gradeData.WinLoss);                
+            Margin = gradeData.Margin;
+            TurnoverReal = Convert.ToDecimal(gradeData.TurnoverReal);
+            WinLossReal = Convert.ToDecimal(gradeData.WinLossReal);
+            MarginReal = gradeData.MarginReal;
+            BetCount = Convert.ToInt32(gradeData.BetCount);
+            Score = gradeData.Score;
+            IsLive = gradeData.IsLive;
         }
     }
 

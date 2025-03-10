@@ -1,7 +1,7 @@
-﻿using MediatR;
-using ResultAnalysis.Models;
+﻿namespace ResultAnalysis.Requests;
 
-namespace ResultAnalysis.Requests;
+using MediatR;
+using Models;
 
 public class LeagueRequest: IRequest<IEnumerable<LeagueModel>>
 {

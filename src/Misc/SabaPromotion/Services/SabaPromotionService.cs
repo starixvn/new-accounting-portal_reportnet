@@ -1,8 +1,8 @@
-﻿using Fanex.Data.Repository;
-using SabaPromotion.Criteria;
-using SabaPromotion.Models;
+﻿namespace SabaPromotion.Services;
 
-namespace SabaPromotion.Services;
+using Criteria;
+using Fanex.Data.Repository;
+using Models;
 
 public interface SabaPromotionService
 {

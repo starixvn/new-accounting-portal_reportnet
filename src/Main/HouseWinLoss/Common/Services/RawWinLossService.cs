@@ -1,8 +1,8 @@
-﻿using Fanex.Data.Repository;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.Common.Services;
 
-namespace HouseWinLoss.Common.Services;
+using Criteria;
+using Fanex.Data.Repository;
+using Models;
 
 public interface RawWinLossService
 {

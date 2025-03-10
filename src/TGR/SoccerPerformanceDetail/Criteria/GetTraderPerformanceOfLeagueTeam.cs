@@ -1,46 +1,45 @@
-﻿namespace SoccerPerformanceDetail.Criteria
+﻿namespace SoccerPerformanceDetail.Criteria;
+
+using Fanex.Data;
+using Fanex.Data.Repository;
+
+public class GetTraderPerformanceOfLeagueTeam : CriteriaBase
 {
-    using Fanex.Data;
-    using Fanex.Data.Repository;
+    [SpParam(Ignored = true)]
+    public bool IsLive { get; set; }
 
-    public class GetTraderPerformanceOfLeagueTeam : CriteriaBase
+    public Int16 Market
     {
-        [SpParam(Ignored = true)]
-        public bool IsLive { get; set; }
-
-        public Int16 Market
+        get
         {
-            get
+            if (IsLive)
             {
-                if (this.IsLive)
-                {
-                    return 1;
-                }
-
-                return 0;
+                return 1;
             }
+
+            return 0;
         }
+    }
 
-        public DateTime FromDate { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime ToDate { get; set; }
+    public DateTime ToDate { get; set; }
 
-        public short TeamId { get; set; }
+    public short TeamId { get; set; }
 
-        public int LeagueId { get; set; }
+    public int LeagueId { get; set; }
 
-        public string Bettypes { get; set; }
+    public string Bettypes { get; set; }
 
-        public bool IsExcludeLeagues { get; set; }
+    public bool IsExcludeLeagues { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "TGRS_Rpt_PerformanceDetail_Team_League_Trader";
-        }
+    public override string GetSettingKey()
+    {
+        return "TGRS_Rpt_PerformanceDetail_Team_League_Trader";
+    }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
+    public override bool IsValid()
+    {
+        return true;
     }
 }

@@ -1,4 +1,7 @@
-﻿using AbnormalBet;
+﻿namespace Reports.Sites.DependencyInjection;
+
+using System.Reflection;
+using AbnormalBet;
 using ActualMemberBet;
 using BetConstructPerformance;
 using CashOutPerformance;
@@ -8,10 +11,7 @@ using ResultAnalysis;
 using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
-using System.Reflection;
 using UpdatedUsernameCredit;
-
-namespace Reports.Sites.DependencyInjection;
 
 public static class MediatRInjection
 {

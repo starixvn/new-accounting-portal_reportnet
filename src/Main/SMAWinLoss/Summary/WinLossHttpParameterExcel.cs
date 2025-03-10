@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace SMAWinLoss.Summary;
 
-namespace SMAWinLoss.Summary;
+using MediatR;
+using OfficeOpenXml;
 
 public class WinLossHttpParameterExcel : IRequest<ExcelPackage>
 {

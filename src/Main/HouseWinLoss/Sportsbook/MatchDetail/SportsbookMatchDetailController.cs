@@ -3,7 +3,7 @@
 using AutoMapper;
 using Common.ColumnDecorators;
 using Common.Criteria;
-using HouseWinLoss.Common.MatchDetail;
+using Common.MatchDetail;
 using Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;

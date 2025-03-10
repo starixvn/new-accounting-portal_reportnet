@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using SabaPromotion.Models;
+﻿namespace SabaPromotion;
 
-namespace SabaPromotion;
+using AutoMapper;
+using Models;
 
 public static class AutoMapperConfiguration
 {

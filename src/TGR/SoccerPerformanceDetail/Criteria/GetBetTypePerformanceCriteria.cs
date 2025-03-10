@@ -12,7 +12,7 @@ public class GetBetTypePerformanceCriteria : CriteriaBase
     {
         get
         {
-            switch (this.MarketFilter)
+            switch (MarketFilter)
             {
                 case SoccerPerformanceDetail.Market.Live:
                     return 1;

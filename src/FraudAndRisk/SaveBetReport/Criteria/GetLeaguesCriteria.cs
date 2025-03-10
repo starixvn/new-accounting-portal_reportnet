@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SaveBetReport.Criteria;
 
-namespace SaveBetReport.Criteria;
+using Fanex.Data.Repository;
 
 public class GetLeaguesCriteria : CriteriaBase
 {

@@ -1,8 +1,7 @@
-﻿using Epplus.Mapper.Extensions;
+﻿namespace ActualMemberBet.Product;
+
+using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
-
-namespace ActualMemberBet.Product;
-
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;
 

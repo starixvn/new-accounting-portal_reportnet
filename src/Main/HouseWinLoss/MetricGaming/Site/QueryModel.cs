@@ -1,6 +1,7 @@
 ﻿namespace HouseWinLoss.MetricGaming.Site;
 
 using Configuration;
+
 public class QueryModel
 {
     public DateTime StartDate { get; set; }

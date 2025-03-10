@@ -1,7 +1,7 @@
-﻿using MediatR;
-using PunterAnalysis.Constants;
+﻿namespace PunterAnalysis.League.Model;
 
-namespace PunterAnalysis.League.Model;
+using Constants;
+using MediatR;
 
 public class HttpParameterJson : IRequest<ReportModel>
 {

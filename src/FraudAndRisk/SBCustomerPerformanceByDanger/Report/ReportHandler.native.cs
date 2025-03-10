@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace SBCustomerPerformanceByDanger.Report;
+
+using AutoMapper;
 using MediatR;
 using Utilities.LinqDynamicSum;
-
-namespace SBCustomerPerformanceByDanger.Report;
 
 public class ReportHandler(ReportService service, IMapper mapper)
     : IRequestHandler<CustomerPerformanceByDangerQueryHttpParameter,

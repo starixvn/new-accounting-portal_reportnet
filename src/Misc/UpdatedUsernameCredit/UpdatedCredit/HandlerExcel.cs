@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿namespace UpdatedUsernameCredit.UpdatedCredit;
+
+using AutoMapper;
+using Common;
 using MediatR;
 using OfficeOpenXml;
-using UpdatedUsernameCredit.Common;
-
-namespace UpdatedUsernameCredit.UpdatedCredit;
 
 public class HandlerExcel(
     UpdatedCreditService service,

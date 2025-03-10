@@ -1,11 +1,11 @@
-﻿using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Business;
+﻿namespace SMAWinLoss.Filter;
+
 using Fanex.NAP.Client;
+using Fanex.NAP.Client.Configuration;
+using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-namespace SMAWinLoss.Filter;
 
 [Route("api/sma-win-loss/filter")]
 [ApiController]

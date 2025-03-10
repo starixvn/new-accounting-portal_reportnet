@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using Epplus.Mapper.Extensions;
-using OfficeOpenXml;
-using SoccerPerformanceDetail.Constants;
-using SoccerPerformanceDetail.Criteria;
-using SoccerPerformanceDetail.Utilities;
-using SoccerPerformanceDetail.ViewModel;
-using Utilities.Configurations;
+﻿namespace SoccerPerformanceDetail.Services;
 
-namespace SoccerPerformanceDetail.Services;
+using AutoMapper;
+using Constants;
+using Criteria;
+using Epplus.Mapper.Extensions;
+using global::Utilities.Configurations;
+using OfficeOpenXml;
+using Utilities;
+using ViewModel;
 
 public interface ExcelService
 {
@@ -186,10 +186,9 @@ public class ExcelServiceImp(ConfigurationService configurationService,
 
         if (marginFrom == null)
             return $"≤ {marginTo}";
-        else if (marginTo == null)
+        if (marginTo == null)
             return $"≥ {marginFrom}";
-        else
-            return $"from {marginFromString} to {marginToString}";
+        return $"from {marginFromString} to {marginToString}";
     }
 
     private void LoadTemplate(string fileExcel)

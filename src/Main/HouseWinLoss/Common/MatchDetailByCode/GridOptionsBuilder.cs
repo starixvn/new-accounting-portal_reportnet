@@ -1,8 +1,8 @@
-﻿using Fanex.Excel.Enums;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.Common.MatchDetailByCode;
 
-namespace HouseWinLoss.Common.MatchDetailByCode;
+using Fanex.Excel.Enums;
+using Fanex.Excel.Models;
+using Models;
 
 public interface GridOptionsBuilder
 {

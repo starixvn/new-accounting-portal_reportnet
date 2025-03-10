@@ -1,6 +1,6 @@
-﻿using Margin.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using Margin.Services;
 
 public static class MarginReportInjection
 {

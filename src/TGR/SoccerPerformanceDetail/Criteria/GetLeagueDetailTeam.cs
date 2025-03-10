@@ -1,25 +1,24 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SoccerPerformanceDetail.Criteria;
 
-namespace SoccerPerformanceDetail.Criteria
+using Fanex.Data.Repository;
+
+public class GetLeagueDetailTeam:CriteriaBase
 {
-    public class GetLeagueDetailTeam:CriteriaBase
+    public DateTime FromDate { get; set; }
+
+    public DateTime ToDate { get; set; }
+
+    public short TeamId { get; set; }
+
+    public string Bettypes { get; set; }
+
+    public override bool IsValid()
     {
-        public DateTime FromDate { get; set; }
+        return true;
+    }
 
-        public DateTime ToDate { get; set; }
-
-        public short TeamId { get; set; }
-
-        public string Bettypes { get; set; }
-
-        public override bool IsValid()
-        {
-            return true;
-        }
-
-        public override string GetSettingKey()
-        {
-            return "TGRS_Rpt_PerformanceDetail_Team_League";
-        }
+    public override string GetSettingKey()
+    {
+        return "TGRS_Rpt_PerformanceDetail_Team_League";
     }
 }

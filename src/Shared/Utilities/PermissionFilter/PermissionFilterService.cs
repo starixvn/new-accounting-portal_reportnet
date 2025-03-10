@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace Utilities.PermissionFilter;
 
-namespace Utilities.PermissionFilter;
+using Fanex.Data.Repository;
 
 public interface PermissionFilterService
 {

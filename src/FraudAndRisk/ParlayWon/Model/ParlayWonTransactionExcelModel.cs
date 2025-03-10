@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace ParlayWon.Model;
 
-namespace ParlayWon.Model;
+using Epplus.Mapper.Annotations;
 
 public class ParlayWonTransactionExcelModel
 {

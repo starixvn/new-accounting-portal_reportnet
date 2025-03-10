@@ -1,7 +1,7 @@
 ﻿
-using CompanyBalanceDifference.Services;
-
 namespace Reports.Sites.DependencyInjection;
+
+using CompanyBalanceDifference.Services;
 
 public static class CompanyBalanceDifferenceInjection
 {

@@ -1,6 +1,6 @@
-using Fanex.Data.Repository;
-
 namespace DailyMixParlay.Criteria;
+
+using Fanex.Data.Repository;
 
 public class GetCombinationWinLossCriteria : CriteriaBase
 {

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PeakConcurrentUsers.Criteria;
-using PeakConcurrentUsers.Services;
+﻿namespace PeakConcurrentUsers.Controller;
 
-namespace PeakConcurrentUsers.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/peak-concurrent-user")]
 

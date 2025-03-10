@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using ResultAnalysis.Criteria;
-using ResultAnalysis.Models;
-using ResultAnalysis.Requests;
+﻿namespace ResultAnalysis;
 
-namespace ResultAnalysis;
+using AutoMapper;
+using Criteria;
+using Models;
+using Requests;
 
 public static class AutoMapperConfiguration
 {

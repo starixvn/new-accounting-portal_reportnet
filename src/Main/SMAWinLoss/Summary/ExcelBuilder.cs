@@ -1,7 +1,6 @@
-﻿using OfficeOpenXml;
+﻿namespace SMAWinLoss.Summary;
 
-namespace SMAWinLoss.Summary;
-
+using OfficeOpenXml;
 using Utilities.Configurations;
 
 public interface ExcelBuilder

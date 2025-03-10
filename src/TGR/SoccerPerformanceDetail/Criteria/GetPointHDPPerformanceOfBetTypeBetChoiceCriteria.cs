@@ -23,7 +23,7 @@ public class GetPointHDPPerformanceOfBetTypeBetChoiceCriteria : CriteriaBase
     {
         get
         {
-            if (this.IsLive)
+            if (IsLive)
             {
                 return 1;
             }

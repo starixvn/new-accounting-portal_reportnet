@@ -1,8 +1,8 @@
+namespace TotalSMAAndActiveMember.Criteria;
+
+using Constant;
 using Fanex.Data;
 using Fanex.Data.Repository;
-using TotalSMAAndActiveMember.Constant;
-
-namespace TotalSMAAndActiveMember.Criteria;
 
 public class StatusDetailsCriteria : CriteriaBase
 {

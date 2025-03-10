@@ -1,7 +1,7 @@
-﻿using Fanex.Caching;
-using Fanex.Data.Repository;
+﻿namespace Utilities.Currencies;
 
-namespace Utilities.Currencies;
+using Fanex.Caching;
+using Fanex.Data.Repository;
 
 public interface CurrenciesService
 {

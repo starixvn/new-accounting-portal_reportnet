@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using Utilities.BalanceUpServices;
+﻿namespace SBCustomerPerformanceByDanger.Filter;
 
-namespace SBCustomerPerformanceByDanger.Filter;
+using Fanex.Data.Repository;
+using Utilities.BalanceUpServices;
 
 public interface FilterService
 {

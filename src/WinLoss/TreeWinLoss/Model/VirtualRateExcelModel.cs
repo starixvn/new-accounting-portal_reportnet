@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace TreeWinLoss.Model;
 
-namespace TreeWinLoss.Model;
+using Epplus.Mapper.Annotations;
 
 public class VirtualRateExcelModel
 {

@@ -1,11 +1,11 @@
 ﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
 
 using AutoMapper;
-using Fanex.Excel.Models;
 using Common.BasicWinLoss;
 using Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
+using Common.Criteria;
 using Configuration;
+using Fanex.Excel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
 

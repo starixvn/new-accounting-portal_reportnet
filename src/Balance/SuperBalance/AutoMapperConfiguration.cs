@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using SuperBalance.Model;
+﻿namespace SuperBalance;
 
-namespace SuperBalance;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

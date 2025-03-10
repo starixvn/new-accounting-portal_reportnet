@@ -7,24 +7,21 @@
 //   <change who="Tony.Nguyen" date="2023.6.27">Created</change>
 // </history>
 
-namespace SoccerPerformanceDetail.ViewModel
+namespace SoccerPerformanceDetail.ViewModel;
+
+/// <summary>
+/// Filter block performance detail view model.
+/// </summary>
+[Serializable]
+public class FilterBlockPerformanceDetail
 {
-    using System;
+    public string BetTypeName { get; set; }
 
-    /// <summary>
-    /// Filter block performance detail view model.
-    /// </summary>
-    [Serializable]
-    public class FilterBlockPerformanceDetail
-    {
-        public string BetTypeName { get; set; }
+    public string MarketName { get; set; }
 
-        public string MarketName { get; set; }
+    public string LeagueGroupName { get; set; }
 
-        public string LeagueGroupName { get; set; }
+    public DateTime FromDate { get; set; }
 
-        public DateTime FromDate { get; set; }
-
-        public DateTime ToDate { get; set; }
-    }
+    public DateTime ToDate { get; set; }
 }

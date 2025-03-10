@@ -1,6 +1,6 @@
-﻿using MediatR;
-using UpdatedUsernameCredit.Common;
+﻿namespace UpdatedUsernameCredit.UpdatedCredit;
 
-namespace UpdatedUsernameCredit.UpdatedCredit;
+using Common;
+using MediatR;
 
 public class Message : BaseMessage, IRequest<IEnumerable<UpdatedCreditModel>>;

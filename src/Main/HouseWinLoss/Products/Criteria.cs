@@ -1,6 +1,6 @@
-using HouseWinLoss.Common.Criteria;
-
 namespace HouseWinLoss.Products;
+
+using Common.Criteria;
 
 public class Criteria : WinLossCriteria
 {

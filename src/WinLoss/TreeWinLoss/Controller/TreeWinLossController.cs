@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Utilities.DateTimes;
-using TreeWinLoss.Criteria;
-using TreeWinLoss.Model;
-using TreeWinLoss.Services;
+﻿namespace TreeWinLoss.Controller;
 
-namespace TreeWinLoss.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Model;
+using Services;
+using Utilities.DateTimes;
 
 [Route("api/tree-win-loss")]
 

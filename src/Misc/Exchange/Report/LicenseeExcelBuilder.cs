@@ -1,8 +1,8 @@
-﻿using Epplus.Mapper.Extensions;
+﻿namespace Exchange.Report;
+
+using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace Exchange.Report;
 
 public interface LicenseeExcelBuilder
 {

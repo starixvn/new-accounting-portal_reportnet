@@ -1,6 +1,6 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using SoccerPerformanceDetail.Model;
+using Model;
 
 public class BetTypeBetChoiceItem
 {
@@ -8,20 +8,20 @@ public class BetTypeBetChoiceItem
 
     public BetTypeBetChoiceItem(BetTypeBetChoicePerformanceInfo info)
     {          
-        this.BetChoice = info.BetChoice;
-        this.BetOption = info.BetOption;
-        this.BetTeam = info.BetTeam;
-        this.OddsSpread = info.OddsSpread;
-        this.LeagueCount = info.LeagueCount;
-        this.MatchCount = info.MatchCount;
-        this.BetCount = info.BetCount;
-        this.Turnover = info.Turnover;
-        this.WinLoss = info.WinLoss;
-        this.Margin = info.Margin;
-        this.TurnoverReal = info.TurnoverReal;
-        this.WinLossReal = info.WinLossReal;
-        this.MarginReal = info.MarginReal;
-        this.IsLive = info.IsLive;
+        BetChoice = info.BetChoice;
+        BetOption = info.BetOption;
+        BetTeam = info.BetTeam;
+        OddsSpread = info.OddsSpread;
+        LeagueCount = info.LeagueCount;
+        MatchCount = info.MatchCount;
+        BetCount = info.BetCount;
+        Turnover = info.Turnover;
+        WinLoss = info.WinLoss;
+        Margin = info.Margin;
+        TurnoverReal = info.TurnoverReal;
+        WinLossReal = info.WinLossReal;
+        MarginReal = info.MarginReal;
+        IsLive = info.IsLive;
     }
 
     public string BetChoice { get; set; }

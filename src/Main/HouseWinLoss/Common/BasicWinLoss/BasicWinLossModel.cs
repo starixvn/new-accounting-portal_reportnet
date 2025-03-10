@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.Common.BasicWinLoss;
 
-namespace HouseWinLoss.Common.BasicWinLoss;
+using Models;
 
 public class BasicWinLossModel
 {

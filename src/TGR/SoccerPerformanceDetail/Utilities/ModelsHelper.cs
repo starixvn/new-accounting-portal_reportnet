@@ -1,8 +1,8 @@
-﻿using OfficeOpenXml;
-using SoccerPerformanceDetail.Constants;
-using SoccerPerformanceDetail.ViewModel;
+﻿namespace SoccerPerformanceDetail.Utilities;
 
-namespace SoccerPerformanceDetail.Utilities;
+using Constants;
+using OfficeOpenXml;
+using ViewModel;
 
 public static class ModelsHelper
 {
@@ -30,7 +30,7 @@ public static class ModelsHelper
             }
         }
 
-        leagueGroupNames = leagueGroupNames.TrimEnd(new char[] { ' ', ',' });
+        leagueGroupNames = leagueGroupNames.TrimEnd(' ', ',');
 
         return leagueGroupNames;
     }
@@ -41,15 +41,13 @@ public static class ModelsHelper
         {
             return string.Join(", ", betTypes.Select(obj => obj.BetTypeName));
         }
-        else
-        {
-            var betTypeList = betTypeIds.Split(',').Select(int.Parse).ToList();
 
-            var result = betTypes.Join(betTypeList, b1 => b1.BetTypeId, b2 => b2,
-                (b1, b2) => new { b1.BetTypeName }).Select(x => x.BetTypeName);
+        var betTypeList = betTypeIds.Split(',').Select(int.Parse).ToList();
 
-            return string.Join(", ", result);
-        }
+        var result = betTypes.Join(betTypeList, b1 => b1.BetTypeId, b2 => b2,
+            (b1, _) => new { b1.BetTypeName }).Select(x => x.BetTypeName);
+
+        return string.Join(", ", result);
     }
 
     public static void FormatCellWithNumber(ExcelRange cell, decimal? data)

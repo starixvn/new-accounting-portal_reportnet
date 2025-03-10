@@ -1,10 +1,10 @@
-﻿using CompanyWinLoss.Criteria;
-using CompanyWinLoss.Services;
+﻿namespace CompanyWinLoss.Controller;
+
+using Criteria;
 using Fanex.Excel;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 using Utilities.DateTimes;
-
-namespace CompanyWinLoss.Controller;
 
 [Route("api/company-win-loss")]
 

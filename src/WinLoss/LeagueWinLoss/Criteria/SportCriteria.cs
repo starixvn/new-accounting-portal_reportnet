@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace LeagueWinLoss.Criteria;
 
-namespace LeagueWinLoss.Criteria;
+using Fanex.Data.Repository;
 
 public class SportCriteria : CriteriaBase
 {

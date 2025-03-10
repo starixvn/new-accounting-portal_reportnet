@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using CashOutPerformance.Constants;
-using CashOutPerformance.Criteria;
-using CashOutPerformance.Models;
-using CashOutPerformance.Requests;
-using CashOutPerformance.Services;
-using CashOutPerformance.ViewModels;
-using MediatR;
+﻿namespace CashOutPerformance.Handlers;
 
-namespace CashOutPerformance.Handlers;
+using AutoMapper;
+using Constants;
+using Criteria;
+using MediatR;
+using Models;
+using Requests;
+using Services;
+using ViewModels;
 
 public class Handler(CashOutPerformanceService service, IMapper mapper, ModelsHelperService modelsHelperService)
     : IRequestHandler<SportRequest, IEnumerable<FilterGroupItemModel>>,

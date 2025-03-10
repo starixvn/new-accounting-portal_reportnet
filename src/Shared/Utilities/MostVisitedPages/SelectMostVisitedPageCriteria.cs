@@ -1,7 +1,7 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿namespace Utilities.MostVisitedPages;
 
-namespace Utilities.MostVisitedPages;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 public class SelectMostVisitedPageCriteria : CriteriaBase
 {

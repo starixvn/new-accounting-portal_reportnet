@@ -1,9 +1,9 @@
-﻿using Epplus.Mapper.Extensions;
+﻿namespace SBCustomerPerformanceByDanger.Report;
+
+using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;
-
-namespace SBCustomerPerformanceByDanger.Report;
 
 public interface ReportExcelBuilder
 {

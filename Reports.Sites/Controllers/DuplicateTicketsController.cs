@@ -1,11 +1,10 @@
-﻿using Fanex.NAP.Client.Attributes;
+﻿namespace Reports.Sites.Controllers;
+
+using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using Utilities.BalanceUpServices;
-
-namespace Reports.Sites.Controllers;
-
 using Utilities;
+using Utilities.BalanceUpServices;
 
 public class DuplicateTicketsController(BalanceUpService balanceUpService) : Controller
 {

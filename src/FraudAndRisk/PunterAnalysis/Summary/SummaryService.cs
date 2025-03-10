@@ -1,10 +1,10 @@
-﻿using Utilities.CustomerTrackingSystem;
-using PunterAnalysis.Shared;
-using PunterAnalysis.Summary.Model;
-using Utilities.Configurations;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.Summary;
 
-namespace PunterAnalysis.Summary;
+using Model;
+using Shared;
+using Utilities.Configurations;
+using Utilities.CustomerTrackingSystem;
+using Utilities.LinqDynamicSum;
 
 public interface SummaryService
 {

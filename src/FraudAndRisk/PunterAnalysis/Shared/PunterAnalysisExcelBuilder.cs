@@ -1,8 +1,8 @@
-﻿using Epplus.Mapper.Extensions;
+﻿namespace PunterAnalysis.Shared;
+
+using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using Utilities.LinqDynamicSum;
-
-namespace PunterAnalysis.Shared;
 
 public interface PunterAnalysisExcelBuilder
 {

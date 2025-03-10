@@ -1,7 +1,7 @@
-﻿using CashOutPerformance.Models;
-using CashOutPerformance.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using CashOutPerformance.Models;
+using CashOutPerformance.Services;
 
 public static class CashOutPerformanceInjection
 {

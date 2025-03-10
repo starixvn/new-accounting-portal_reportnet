@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿namespace Exchange.Report;
+
+using AutoMapper;
 using MediatR;
 using OfficeOpenXml;
 using Utilities.LinqDynamicSum;
-
-namespace Exchange.Report;
 
 public class HandlerExcel(Service service, ExcelBuilder excelBuilder, IMapper mapper)
     : IRequestHandler<HttpParameterExcel, ExcelPackage>

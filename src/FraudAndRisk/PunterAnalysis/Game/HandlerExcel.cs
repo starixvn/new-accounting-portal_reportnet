@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using MediatR;
-using OfficeOpenXml;
-using PunterAnalysis.Game.Model;
-using PunterAnalysis.Shared;
+﻿namespace PunterAnalysis.Game;
 
-namespace PunterAnalysis.Game;
+using AutoMapper;
+using MediatR;
+using Model;
+using OfficeOpenXml;
+using Shared;
 
 public class HandlerExcel(
     PunterAnalysisService punterAnalysisService,

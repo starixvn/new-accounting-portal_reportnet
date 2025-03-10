@@ -1,8 +1,8 @@
-﻿using AbnormalBet.HttpParameter;
+﻿namespace AbnormalBet.Filter;
+
+using HttpParameter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-namespace AbnormalBet.Filter;
 
 [Route("api/ab-normal-bet/filter")]
 [ApiController]

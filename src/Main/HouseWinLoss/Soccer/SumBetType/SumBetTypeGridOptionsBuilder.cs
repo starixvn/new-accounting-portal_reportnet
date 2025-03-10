@@ -1,10 +1,10 @@
-﻿using Fanex.Excel.Enums;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.Models;
-using HouseWinLoss.Soccer.BaseService;
+﻿namespace HouseWinLoss.Soccer.SumBetType;
 
-namespace HouseWinLoss.Soccer.SumBetType;
+using BaseService;
+using Common.BasicWinLoss;
+using Common.Models;
+using Fanex.Excel.Enums;
+using Fanex.Excel.Models;
 
 public interface SumBetTypeGridOptionsBuilder
 {

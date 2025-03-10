@@ -1,7 +1,7 @@
-﻿using PunterAnalysis.Shared;
-using Utilities.Configurations;
+﻿namespace PunterAnalysis.BetCount;
 
-namespace PunterAnalysis.BetCount;
+using Shared;
+using Utilities.Configurations;
 
 public interface BetCountExcelSetting
 {

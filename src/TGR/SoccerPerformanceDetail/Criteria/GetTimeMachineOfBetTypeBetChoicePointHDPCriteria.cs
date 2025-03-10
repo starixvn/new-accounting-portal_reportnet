@@ -2,7 +2,6 @@
 
 using Fanex.Data;
 using Fanex.Data.Repository;
-using System;
 
 public class GetTimeMachineOfBetTypeBetChoicePointHDPCriteria : CriteriaBase
 {
@@ -17,7 +16,7 @@ public class GetTimeMachineOfBetTypeBetChoicePointHDPCriteria : CriteriaBase
     {
         get
         {
-            if (this.IsLive)
+            if (IsLive)
             {
                 return 1;
             }

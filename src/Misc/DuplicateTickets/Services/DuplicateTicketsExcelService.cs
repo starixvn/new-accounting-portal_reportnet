@@ -1,11 +1,11 @@
-﻿using System.Drawing;
+﻿namespace DuplicateTickets.Services;
+
+using System.Drawing;
 using AutoMapper;
-using DuplicateTickets.Model;
 using Epplus.Mapper.Extensions;
+using Model;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace DuplicateTickets.Services;
 
 public interface DuplicateTicketsExcelService
 {

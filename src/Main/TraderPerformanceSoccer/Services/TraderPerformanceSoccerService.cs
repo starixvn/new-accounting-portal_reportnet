@@ -1,10 +1,10 @@
-using System.Data;
-using TraderPerformance.Criteria;
-using TraderPerformance.Model;
-using TraderPerformance.Repositories;
-using Utilities.Sorting;
-
 namespace TraderPerformance.Services;
+
+using System.Data;
+using Criteria;
+using Model;
+using Repositories;
+using Utilities.Sorting;
 
 public interface TraderPerformanceSoccerService
 {

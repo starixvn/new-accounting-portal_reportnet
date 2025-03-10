@@ -1,6 +1,6 @@
-﻿using MediatR;
-using PunterAnalysis.Performance.Sportsbook.Model;
+﻿namespace PunterAnalysis.Performance.Sportsbook;
 
-namespace PunterAnalysis.Performance.Sportsbook;
+using MediatR;
+using Model;
 
 public class SportsbookHttpParameterJson : HttpParameterJson, IRequest<ViewModelJson>;

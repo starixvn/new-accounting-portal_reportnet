@@ -1,8 +1,8 @@
-﻿using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.Services;
+﻿namespace HouseWinLoss.Soccer.LiveNonLive;
 
-namespace HouseWinLoss.Soccer.LiveNonLive;
+using Common.BasicWinLoss;
+using Common.Criteria;
+using Common.Services;
 
 public interface SoccerLiveNonLiveWinLossService
 {

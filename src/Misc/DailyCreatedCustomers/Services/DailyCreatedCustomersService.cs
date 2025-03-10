@@ -1,11 +1,11 @@
-using DailyCreatedCustomers.Criteria;
-using DailyCreatedCustomers.Entities;
-using DailyCreatedCustomers.Model;
+namespace DailyCreatedCustomers.Services;
+
+using Criteria;
+using Entities;
 using Fanex.Data.Repository;
+using Model;
 using Utilities.DateTimes;
 using Utilities.LinqDynamicSum;
-
-namespace DailyCreatedCustomers.Services;
 
 public interface DailyCreatedCustomersService
 {

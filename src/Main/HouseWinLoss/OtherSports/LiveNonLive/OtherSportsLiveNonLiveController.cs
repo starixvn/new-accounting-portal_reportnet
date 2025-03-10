@@ -1,10 +1,10 @@
 ﻿namespace HouseWinLoss.OtherSports.LiveNonLive;
 
 using AutoMapper;
-using Fanex.Excel.Models;
 using Common.BasicWinLoss;
 using Common.ColumnDecorators;
 using Configuration;
+using Fanex.Excel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
 

@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace Exchange.Report;
+
+using AutoMapper;
 using Fanex.Data.Repository;
 using Utilities.LinqDynamicSum;
-
-namespace Exchange.Report;
 
 public interface Service
 {

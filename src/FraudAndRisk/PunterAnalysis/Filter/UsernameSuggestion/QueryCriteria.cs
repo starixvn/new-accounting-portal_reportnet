@@ -1,7 +1,7 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.Filter.UsernameSuggestion;
 
-namespace PunterAnalysis.Filter.UsernameSuggestion;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 public class QueryCriteria : CriteriaBase
 {

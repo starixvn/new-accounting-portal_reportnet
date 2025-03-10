@@ -1,11 +1,11 @@
-﻿using BetConstructPerformance.Models;
+﻿namespace BetConstructPerformance.Services;
+
+using System.Drawing;
 using Epplus.Mapper.Extensions;
+using Models;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using System.Drawing;
 using Utilities.Configurations;
-
-namespace BetConstructPerformance.Services;
 
 public interface ExcelBuilderService
 {

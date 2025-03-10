@@ -1,10 +1,10 @@
-﻿using Fanex.Excel.Models;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
+﻿namespace HouseWinLoss.Common.MatchDetail;
+
+using ColumnDecorators;
+using Criteria;
+using Fanex.Excel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
-
-namespace HouseWinLoss.Common.MatchDetail;
 
 public class MatchDetailController(
     WinLossService service,

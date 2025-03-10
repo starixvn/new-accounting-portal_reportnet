@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace SBPerformance.TopWinningMember;
 
-namespace SBPerformance.TopWinningMember;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/sb-performance/main")]
 [ApiController]

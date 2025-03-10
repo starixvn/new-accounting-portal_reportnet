@@ -1,20 +1,15 @@
 ﻿namespace SoccerPerformanceDetail.Criteria;
 
 using Fanex.Data.Repository;
-using SoccerPerformanceDetail.Model;
+using Model;
 
-public class GetBetTypesCriteria : CriteriaBase
+public class GetBetTypesCriteria(BettypeViewPermission permission) : CriteriaBase
 {
     public GetBetTypesCriteria() : this(BettypeViewPermission.All) { }
 
-    public GetBetTypesCriteria(BettypeViewPermission permission)
-    {
-        BettypePermission = (int)permission;
-    }
-
     public int UserId { get; set; }
 
-    public int BettypePermission { get; set; }
+    public int BettypePermission { get; set; } = (int)permission;
 
     public override string GetSettingKey()
     {

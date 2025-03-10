@@ -1,7 +1,7 @@
 ﻿
-using Epplus.Mapper.Annotations;
-
 namespace Margin.Model;
+
+using Epplus.Mapper.Annotations;
 
 public class MarginWinLossExcelModel
 {

@@ -14,7 +14,7 @@ public class BetTypeLevelModel : CommonTicketModel
 
     public int BetCount { get; set; }
 
-    public List<ChildItemBetTypeModel> ChildItems { get; set; } = new List<ChildItemBetTypeModel>();
+    public List<ChildItemBetTypeModel> ChildItems { get; set; } = [];
 
     public static BetTypeLevelModel operator +(BetTypeLevelModel a, BetTypeLevelModel b)
     {

@@ -1,6 +1,6 @@
-﻿using LeagueWinLoss.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using LeagueWinLoss.Services;
 
 public static class LeagueWinLossInjection
 {

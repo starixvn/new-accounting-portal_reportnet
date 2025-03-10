@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿namespace PunterAnalysis.Shared;
+
+using AutoMapper;
 using Fanex.Data.Repository;
 using MediatR;
 using Utilities.LinqDynamicSum;
-
-namespace PunterAnalysis.Shared;
 
 public class HandlerBase
 {

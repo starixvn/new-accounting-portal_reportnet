@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace DailyCreatedCustomers.Model;
 
-namespace DailyCreatedCustomers.Model;
+using Epplus.Mapper.Annotations;
 
 public class SummaryItemExcelModel
 {

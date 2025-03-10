@@ -1,7 +1,7 @@
+namespace DailyCreatedCustomers.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace DailyCreatedCustomers.Criteria;
 
 public class DailyCreatedCustomersDetailsCriteria : CriteriaBase
 {

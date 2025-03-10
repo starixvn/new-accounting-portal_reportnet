@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Soccer.BetType;
+﻿namespace HouseWinLoss.Soccer.BetTypeFull;
 
-namespace HouseWinLoss.Soccer.BetTypeFull;
+using AutoMapper;
+using BetType;
+using Common.BasicWinLoss;
+using Common.ColumnDecorators;
+using Fanex.Excel.Models;
 
 public class GridOptionFactoryBetType(
     BasicWinLossService basicWinLossService,

@@ -1,12 +1,12 @@
-using DuplicateTickets.Criteria;
-using DuplicateTickets.Entities;
-using DuplicateTickets.Model;
+namespace DuplicateTickets.Services;
+
+using Criteria;
+using Entities;
 using Fanex.Data.Repository;
 using Fanex.Logging;
 using Fanex.NAP.Client;
+using Model;
 using Newtonsoft.Json;
-
-namespace DuplicateTickets.Services;
 
 public interface DuplicateTicketsService
 {

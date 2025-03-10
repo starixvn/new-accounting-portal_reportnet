@@ -2,7 +2,6 @@
 
 using Fanex.Data.Repository;
 
-
 public class GetScoreByPeriodCriteria : CriteriaBase
 {
     public DateTime FromDate { get; set; }

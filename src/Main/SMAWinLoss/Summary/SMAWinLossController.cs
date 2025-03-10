@@ -1,7 +1,6 @@
-﻿using MediatR;
+﻿namespace SMAWinLoss.Summary;
 
-namespace SMAWinLoss.Summary;
-
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
 

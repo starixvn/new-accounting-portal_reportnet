@@ -1,6 +1,6 @@
-﻿using SBPerformance.Constants;
+﻿namespace SBPerformance.MarginBySite;
 
-namespace SBPerformance.MarginBySite;
+using Constants;
 
 public class MarginBySiteEntity
 {

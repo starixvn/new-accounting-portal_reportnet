@@ -1,9 +1,9 @@
-using Fanex.Data.Repository;
-using PeakConcurrentUsers.Criteria;
-using PeakConcurrentUsers.Entities;
-using PeakConcurrentUsers.Model;
-
 namespace PeakConcurrentUsers.Services;
+
+using Criteria;
+using Entities;
+using Fanex.Data.Repository;
+using Model;
 
 public interface PeakConcurrentUserService
 {

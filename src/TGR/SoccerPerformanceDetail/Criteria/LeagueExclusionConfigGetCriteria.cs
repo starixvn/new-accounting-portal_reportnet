@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SoccerPerformanceDetail.Criteria;
 
-namespace SoccerPerformanceDetail.Criteria;
+using Fanex.Data.Repository;
 
 public class LeagueExclusionConfigGetCriteria: CriteriaBase
 {

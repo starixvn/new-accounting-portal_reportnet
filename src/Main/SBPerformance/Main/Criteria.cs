@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SBPerformance.Main;
 
-namespace SBPerformance.Main;
+using Fanex.Data.Repository;
 
 public class Criteria : CriteriaBase
 {

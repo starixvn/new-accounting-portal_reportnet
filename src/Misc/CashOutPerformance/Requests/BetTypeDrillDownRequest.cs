@@ -1,8 +1,8 @@
-﻿using CashOutPerformance.Models;
-using CashOutPerformance.ViewModels;
-using MediatR;
+﻿namespace CashOutPerformance.Requests;
 
-namespace CashOutPerformance.Requests;
+using MediatR;
+using Models;
+using ViewModels;
 
 public class BetTypeDrillDownRequest : IRequest<TicketViewModel<BetTypeLevelModel>>
 {

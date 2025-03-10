@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace Exchange.Report;
 
-namespace Exchange.Report;
+using Epplus.Mapper.Annotations;
 
 public class ExchangeExcelEntity
 {

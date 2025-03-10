@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿namespace Utilities.Configurations;
 
-namespace Utilities.Configurations;
+using Microsoft.Extensions.Configuration;
 
 public interface ConfigurationService
 {

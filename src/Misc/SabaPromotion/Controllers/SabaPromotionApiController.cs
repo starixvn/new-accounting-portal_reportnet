@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SabaPromotion.Criteria;
-using SabaPromotion.Services;
-using Utilities.ExcelResult;
+﻿namespace SabaPromotion.Controllers;
 
-namespace SabaPromotion.Controllers;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
+using Utilities.ExcelResult;
 
 [Route("api/saba-promotion")]
 [ApiController]

@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SBCustomerPerformanceByDanger.Filter;
 
-namespace SBCustomerPerformanceByDanger.Filter;
+using Fanex.Data.Repository;
 
 public class DivisionQueryCriteria : CriteriaBase
 {

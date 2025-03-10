@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace Utilities.BalanceUpServices;
 
-namespace Utilities.BalanceUpServices;
+using Fanex.Data.Repository;
 
 public class BalanceUpCriteria : CriteriaBase
 {

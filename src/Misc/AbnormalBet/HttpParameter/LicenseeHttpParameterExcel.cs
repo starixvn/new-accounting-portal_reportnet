@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace AbnormalBet.HttpParameter;
 
-namespace AbnormalBet.HttpParameter;
+using MediatR;
+using OfficeOpenXml;
 
 public class LicenseeHttpParameterExcel : IRequest<ExcelPackage>
 {

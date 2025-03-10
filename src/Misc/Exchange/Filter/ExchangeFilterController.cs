@@ -1,9 +1,10 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using HttpParameterLicensee = Exchange.Filter.Licensee.HttpParameterJson;
+﻿using HttpParameterLicensee = Exchange.Filter.Licensee.HttpParameterJson;
 using HttpParameterSport = Exchange.Filter.Sport.HttpParameterJson;
 
 namespace Exchange.Filter;
+
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/exchange/filter")]
 [ApiController]

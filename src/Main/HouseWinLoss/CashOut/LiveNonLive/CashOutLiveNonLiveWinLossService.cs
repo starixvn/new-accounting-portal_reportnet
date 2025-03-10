@@ -1,8 +1,8 @@
-﻿using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.Services;
+﻿namespace HouseWinLoss.CashOut.LiveNonLive;
 
-namespace HouseWinLoss.CashOut.LiveNonLive;
+using Common.BasicWinLoss;
+using Common.Criteria;
+using Common.Services;
 
 public interface CashOutLiveNonLiveWinLossService
 {

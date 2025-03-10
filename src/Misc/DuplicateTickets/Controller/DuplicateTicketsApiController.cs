@@ -1,8 +1,8 @@
-﻿using DuplicateTickets.Criteria;
-using DuplicateTickets.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace DuplicateTickets.Controller;
 
-namespace DuplicateTickets.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/duplicate-tickets")]
 [ApiController]

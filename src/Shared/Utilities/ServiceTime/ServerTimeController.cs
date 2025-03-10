@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace Utilities.ServiceTime;
 
-namespace Utilities.ServiceTime;
+using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("state-api/application")]

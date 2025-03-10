@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+﻿namespace PunterAnalysis.Performance.Summary;
+
+using AutoMapper;
+using Criteria;
 using Fanex.Data.Repository;
 using MediatR;
-using PunterAnalysis.Performance.Summary.Criteria;
-using PunterAnalysis.Performance.Summary.Model;
-
-namespace PunterAnalysis.Performance.Summary;
+using Model;
 
 public class Handler(IDynamicRepository repository, IMapper mapper)
     : IRequestHandler<SummaryHttpParameterJson, ViewModelJson>

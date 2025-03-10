@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using BetCount.Entities;
-using BetCount.Model;
+﻿namespace BetCount;
 
-namespace BetCount;
+using AutoMapper;
+using Entities;
+using Model;
 
 public static class AutoMapperConfiguration
 {

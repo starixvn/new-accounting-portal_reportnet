@@ -2,7 +2,6 @@ namespace TreeWinLoss.Criteria;
 
 using Fanex.Data;
 using Fanex.Data.Repository;
-using System;
 
 public class TreeWinLossByAgentCriteria : CriteriaBase
 {

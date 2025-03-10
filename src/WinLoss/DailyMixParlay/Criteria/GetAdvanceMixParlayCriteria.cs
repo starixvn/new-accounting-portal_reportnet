@@ -1,7 +1,7 @@
+namespace DailyMixParlay.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace DailyMixParlay.Criteria;
 
 public class GetAdvanceMixParlayCriteria : CriteriaBase
 {

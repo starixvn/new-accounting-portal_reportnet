@@ -1,6 +1,6 @@
-﻿using SuperBalance.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using SuperBalance.Services;
 
 public static class SuperBalanceInjection
 {

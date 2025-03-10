@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using Margin.Model;
+﻿namespace Margin;
 
-namespace Margin;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

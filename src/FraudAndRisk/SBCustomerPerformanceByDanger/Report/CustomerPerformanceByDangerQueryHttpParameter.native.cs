@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace SBCustomerPerformanceByDanger.Report;
 
-namespace SBCustomerPerformanceByDanger.Report;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class CustomerPerformanceByDangerQueryHttpParameter : IRequest<SummaryEntity<CustomerPerformanceByDangerModel>>
 {

@@ -1,11 +1,10 @@
-﻿using Fanex.NAP.Client.Attributes;
+﻿namespace Reports.Sites.Controllers;
+
+using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PeakConcurrentUsers.Services;
-
-namespace Reports.Sites.Controllers;
-
 using Utilities;
 
 public class PeakConcurrentUsersController(PeakConcurrentUserService service) : Controller

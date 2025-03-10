@@ -1,6 +1,6 @@
-using HouseWinLoss.Common.Criteria;
-
 namespace HouseWinLoss.Parlay.Site;
+
+using Common.Criteria;
 
 public class Criteria : WinLossCriteria
 {

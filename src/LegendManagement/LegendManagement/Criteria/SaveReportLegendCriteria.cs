@@ -1,8 +1,8 @@
+namespace LegendManagement.Criteria;
+
+using Configurations;
 using Fanex.Data;
 using Fanex.Data.Repository;
-using LegendManagement.Configurations;
-
-namespace LegendManagement.Criteria;
 
 public class SaveReportLegendCriteria : CriteriaBase, INonQueryCommand
 {

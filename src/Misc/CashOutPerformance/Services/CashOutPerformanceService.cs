@@ -1,10 +1,10 @@
-﻿using CashOutPerformance.Criteria;
-using CashOutPerformance.Models;
-using CashOutPerformance.ViewModels;
-using Fanex.Data.Repository;
-using Utilities.LinqDynamicSum;
+﻿namespace CashOutPerformance.Services;
 
-namespace CashOutPerformance.Services;
+using Criteria;
+using Fanex.Data.Repository;
+using Models;
+using Utilities.LinqDynamicSum;
+using ViewModels;
 
 public interface CashOutPerformanceService
 {

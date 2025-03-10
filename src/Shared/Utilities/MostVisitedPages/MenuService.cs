@@ -1,8 +1,7 @@
-﻿using Fanex.NAP.Client.Models;
-
-namespace Utilities.MostVisitedPages;
+﻿namespace Utilities.MostVisitedPages;
 
 using Fanex.NAP.Client;
+using Fanex.NAP.Client.Models;
 
 public interface MenuService
 {

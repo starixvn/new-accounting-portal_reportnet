@@ -1,5 +1,5 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.Filter.AvailableDatabase;
 
-namespace PunterAnalysis.Filter.AvailableDatabase;
+using MediatR;
 
 public class HttpParameterJson : IRequest<bool>;

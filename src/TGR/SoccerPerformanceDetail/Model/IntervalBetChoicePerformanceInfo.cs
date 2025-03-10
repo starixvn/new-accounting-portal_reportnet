@@ -14,25 +14,13 @@ public class IntervalBetChoicePerformanceInfo
 
     public decimal WinLoss { get; set; }
 
-    public decimal? Margin
-    {
-        get
-        {
-            return Turnover != 0 ? ((decimal?)(WinLoss / Turnover * 100)) : null;
-        }
-    }
+    public decimal? Margin => Turnover != 0 ? WinLoss / Turnover * 100 : null;
 
     public decimal TurnoverReal { get; set; }
 
     public decimal WinLossReal { get; set; }
 
-    public decimal? MarginReal
-    {
-        get
-        {
-            return TurnoverReal != 0 ? ((decimal?)(WinLossReal / TurnoverReal * 100)) : null;
-        }
-    }
+    public decimal? MarginReal => TurnoverReal != 0 ? WinLossReal / TurnoverReal * 100 : null;
 
     public bool IsLive { get; set; }
 

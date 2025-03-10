@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace UpdatedUsernameCredit.UpdatedCredit;
 
-namespace UpdatedUsernameCredit.UpdatedCredit;
+using Epplus.Mapper.Annotations;
 
 public class UpdatedCreditExcelModel
 {

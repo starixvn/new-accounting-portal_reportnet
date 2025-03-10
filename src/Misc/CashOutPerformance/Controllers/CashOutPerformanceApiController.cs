@@ -1,11 +1,9 @@
-﻿using CashOutPerformance.Models;
-using CashOutPerformance.Requests;
+﻿namespace CashOutPerformance.Controllers;
+
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
-namespace CashOutPerformance.Controllers;
-
+using Models;
+using Requests;
 using Utilities.ExcelResult;
 
 [Route("api/cash-out-performance")]

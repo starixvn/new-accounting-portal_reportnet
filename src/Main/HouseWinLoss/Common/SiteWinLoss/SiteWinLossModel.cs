@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.Common.SiteWinLoss;
 
-namespace HouseWinLoss.Common.SiteWinLoss;
+using Models;
 
 public class SiteWinLossModel
 {

@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SMAWinLoss.Filter;
 
-namespace SMAWinLoss.Filter;
+using Fanex.Data.Repository;
 
 public class LeagueGroupCriteria : CriteriaBase
 {

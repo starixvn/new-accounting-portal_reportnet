@@ -1,8 +1,8 @@
-﻿using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.Models;
-using Newtonsoft.Json;
+﻿namespace HouseWinLoss.SimpleGrid;
 
-namespace HouseWinLoss.SimpleGrid;
+using Common.Criteria;
+using Common.Models;
+using Newtonsoft.Json;
 
 public interface SimpleCriteriaFactory
 {

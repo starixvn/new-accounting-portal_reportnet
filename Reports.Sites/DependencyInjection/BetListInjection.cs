@@ -1,6 +1,6 @@
-﻿using BetList.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using BetList.Services;
 
 public static class BetListInjection
 {

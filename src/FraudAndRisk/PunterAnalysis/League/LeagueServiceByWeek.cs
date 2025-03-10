@@ -1,8 +1,8 @@
-﻿using Fanex.Data.Repository;
-using PunterAnalysis.League.Model;
-using PunterAnalysis.Shared;
+﻿namespace PunterAnalysis.League;
 
-namespace PunterAnalysis.League;
+using Fanex.Data.Repository;
+using Model;
+using Shared;
 
 public class LeagueServiceByWeek(IDynamicRepository repository, DateTimeService dateTimeService)
     : LeagueServiceBase(repository)

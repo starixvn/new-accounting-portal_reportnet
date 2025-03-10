@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using BetConstructPerformance.Criteria;
-using BetConstructPerformance.Models;
-using BetConstructPerformance.Requests;
-using BetConstructPerformance.Services;
-using MediatR;
-using OfficeOpenXml;
+﻿namespace BetConstructPerformance.Handlers;
 
-namespace BetConstructPerformance.Handlers;
+using AutoMapper;
+using Criteria;
+using MediatR;
+using Models;
+using OfficeOpenXml;
+using Requests;
+using Services;
 
 public class ExcelHandler(
     BetConstructPerformanceService service,

@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using Utilities.LinqDynamicSum;
+﻿namespace SBCustomerPerformanceByDanger.Report;
 
-namespace SBCustomerPerformanceByDanger.Report;
+using Fanex.Data.Repository;
+using Utilities.LinqDynamicSum;
 
 public interface ReportService
 {

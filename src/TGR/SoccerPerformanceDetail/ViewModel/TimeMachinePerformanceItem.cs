@@ -1,22 +1,23 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using SoccerPerformanceDetail.Model;
+using Model;
+
 public class TimeMachinePerformanceItem
 {
     public TimeMachinePerformanceItem() { }
 
     public TimeMachinePerformanceItem(TimeMachinePerformanceInfo info, short betType)
     {
-        this.Minute = ConvertMinute(info.HDP1, betType);
-        this.NoOfLeagues = Convert.ToInt32(info.LeagueCount);
-        this.NoOfMatches = Convert.ToInt32(info.MatchCount);
-        this.BetCount = Convert.ToInt32(info.BetCount);
-        this.Turnover = info.Turnover;
-        this.WinLoss = info.WinLoss;
-        this.Margin = info.Margin;
-        this.TurnoverReal = info.TurnoverReal;
-        this.WinLossReal = info.WinLossReal;
-        this.MarginReal = info.MarginReal;
+        Minute = ConvertMinute(info.HDP1, betType);
+        NoOfLeagues = Convert.ToInt32(info.LeagueCount);
+        NoOfMatches = Convert.ToInt32(info.MatchCount);
+        BetCount = Convert.ToInt32(info.BetCount);
+        Turnover = info.Turnover;
+        WinLoss = info.WinLoss;
+        Margin = info.Margin;
+        TurnoverReal = info.TurnoverReal;
+        WinLossReal = info.WinLossReal;
+        MarginReal = info.MarginReal;
     }
 
     public string Minute { get; set; }

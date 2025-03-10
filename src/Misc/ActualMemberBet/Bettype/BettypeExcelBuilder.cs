@@ -1,9 +1,9 @@
-﻿using Epplus.Mapper.Extensions;
+﻿namespace ActualMemberBet.Bettype;
+
+using Epplus.Mapper.Extensions;
+using OfficeOpenXml;
 using Utilities.Configurations;
 using Utilities.LinqDynamicSum;
-using OfficeOpenXml;
-
-namespace ActualMemberBet.Bettype;
 
 public interface BettypeExcelBuilder
 {

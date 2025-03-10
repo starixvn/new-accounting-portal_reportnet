@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace ResultAnalysis.Models;
 
-namespace ResultAnalysis.Models;
+using Epplus.Mapper.Annotations;
 
 public class ResultAnalysisSummaryOfQuarterExcelModel
 {

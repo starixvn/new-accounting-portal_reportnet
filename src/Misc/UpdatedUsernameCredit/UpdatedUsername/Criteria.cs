@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace UpdatedUsernameCredit.UpdatedUsername;
 
-namespace UpdatedUsernameCredit.UpdatedUsername;
+using Fanex.Data.Repository;
 
 public class Criteria : CriteriaBase
 {

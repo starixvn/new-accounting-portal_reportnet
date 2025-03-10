@@ -1,7 +1,7 @@
-﻿using AbnormalBet.Model;
-using MediatR;
+﻿namespace AbnormalBet.HttpParameter;
 
-namespace AbnormalBet.HttpParameter;
+using MediatR;
+using Model;
 
 public class BetTypeHttpParameter : IRequest<IEnumerable<FilterItemModel>>
 {

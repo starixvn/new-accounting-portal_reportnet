@@ -1,18 +1,17 @@
-﻿using Fanex.Caching;
+﻿namespace Reports.Sites.DependencyInjection;
+
+using Fanex.Caching;
 using Fanex.Caching.Memory;
 using Fanex.Data.Repository;
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Services;
 using Fanex.RemotingRef;
-using Utilities.Currencies;
-using Utilities.CustomerTrackingSystem;
 using Utilities.BalanceUpServices;
 using Utilities.Configurations;
+using Utilities.Currencies;
+using Utilities.CustomerTrackingSystem;
 using Utilities.PermissionFilter;
-
-namespace Reports.Sites.DependencyInjection;
-
-using Fanex.NAP.Client;
 
 public static class GlobalInjection
 {

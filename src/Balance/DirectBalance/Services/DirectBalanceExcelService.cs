@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using DirectBalance.Model;
+﻿namespace DirectBalance.Services;
+
+using AutoMapper;
 using Epplus.Mapper.Extensions;
+using Model;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace DirectBalance.Services;
 
 public interface DirectBalanceExcelService
 {

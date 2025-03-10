@@ -1,6 +1,6 @@
-﻿using PunterAnalysis.BetType.Model;
+﻿namespace PunterAnalysis.GameBetType.Model;
 
-namespace PunterAnalysis.GameBetType.Model;
+using BetType.Model;
 
 public class GameBetTypeModel : BetTypeModel
 {

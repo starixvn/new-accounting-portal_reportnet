@@ -1,6 +1,6 @@
-using Epplus.Mapper.Annotations;
-
 namespace DuplicateTickets.Model;
+
+using Epplus.Mapper.Annotations;
 
 public class DuplicateTicketsByUserNameExcelModel
 {

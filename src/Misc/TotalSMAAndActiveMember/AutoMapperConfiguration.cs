@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using TotalSMAAndActiveMember.Model;
+﻿namespace TotalSMAAndActiveMember;
 
-namespace TotalSMAAndActiveMember;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿namespace UpdatedUsernameCredit.UpdatedCredit;
 
-namespace UpdatedUsernameCredit.UpdatedCredit;
+using MediatR;
 
 public class Handler(UpdatedCreditService service) : IRequestHandler<Message, IEnumerable<UpdatedCreditModel>>
 {

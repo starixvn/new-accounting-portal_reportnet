@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.Common.MatchDetailByCode;
 
-namespace HouseWinLoss.Common.MatchDetailByCode;
+using Models;
 
 public class WinLossModel
 {

@@ -1,7 +1,7 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿namespace BetConstructPerformance.Criteria;
 
-namespace BetConstructPerformance.Criteria;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 public class SportCriteria : CriteriaBase
 {

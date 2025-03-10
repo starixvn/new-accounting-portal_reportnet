@@ -1,6 +1,6 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using SoccerPerformanceDetail.Model;
+using Model;
 
 public class TeamPerformanceItem
 {
@@ -12,20 +12,20 @@ public class TeamPerformanceItem
     {
         if (teamData != null && teamData.TeamId.HasValue)
         {
-            this.TeamId = teamData.TeamId.Value;
-            this.TeamName = teamData.TeamName;
-            this.NoOfTraders = Convert.ToInt32(teamData.TraderCount);
-            this.NoOfLeagues = Convert.ToInt32(teamData.LeagueCount);
-            this.NoOfMatches = Convert.ToInt32(teamData.MatchCount);
-            this.Turnover = Convert.ToDecimal(teamData.Turnover);
-            this.WinLoss = Convert.ToDecimal(teamData.WinLoss);               
-            this.Margin = teamData.Margin;
-            this.TurnoverReal = Convert.ToDecimal(teamData.TurnoverReal);
-            this.WinLossReal = Convert.ToDecimal(teamData.WinLossReal);
-            this.MarginReal = teamData.MarginReal;
-            this.BetCount = Convert.ToInt32(teamData.BetCount);
-            this.Score = teamData.Score;
-            this.IsLive = teamData.IsLive;
+            TeamId = teamData.TeamId.Value;
+            TeamName = teamData.TeamName;
+            NoOfTraders = Convert.ToInt32(teamData.TraderCount);
+            NoOfLeagues = Convert.ToInt32(teamData.LeagueCount);
+            NoOfMatches = Convert.ToInt32(teamData.MatchCount);
+            Turnover = Convert.ToDecimal(teamData.Turnover);
+            WinLoss = Convert.ToDecimal(teamData.WinLoss);               
+            Margin = teamData.Margin;
+            TurnoverReal = Convert.ToDecimal(teamData.TurnoverReal);
+            WinLossReal = Convert.ToDecimal(teamData.WinLossReal);
+            MarginReal = teamData.MarginReal;
+            BetCount = Convert.ToInt32(teamData.BetCount);
+            Score = teamData.Score;
+            IsLive = teamData.IsLive;
         }
     }
 

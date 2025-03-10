@@ -1,14 +1,11 @@
-﻿using Fanex.Common.Extensions;
+﻿namespace Reports.Sites.Controllers;
+
 using Fanex.NAP.Client;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail;
 using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
 using Utilities.Configurations;
-using Utilities.DateTimes;
-
-namespace Reports.Sites.Controllers;
 
 public class SoccerPerformanceDetailController(SoccerPerformanceDetailService service,
     INapSession napSession,

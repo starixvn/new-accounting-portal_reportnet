@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿namespace SBCustomerPerformanceByDanger.Filter;
 
-namespace SBCustomerPerformanceByDanger.Filter;
+using MediatR;
 
 public class LeagueQueryHttpParameter : IRequest<IEnumerable<string>>
 {

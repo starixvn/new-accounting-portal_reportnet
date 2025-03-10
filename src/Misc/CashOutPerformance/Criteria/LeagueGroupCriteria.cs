@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace CashOutPerformance.Criteria;
 
-namespace CashOutPerformance.Criteria;
+using Fanex.Data.Repository;
 
 public class LeagueGroupCriteria : CriteriaBase
 {

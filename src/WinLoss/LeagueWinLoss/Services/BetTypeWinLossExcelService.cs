@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿namespace LeagueWinLoss.Services;
+
+using AutoMapper;
 using Epplus.Mapper.Extensions;
-using LeagueWinLoss.Model;
+using Model;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using Utilities.Configurations;
-
-namespace LeagueWinLoss.Services;
 
 public interface BetTypeWinLossExcelService
 {

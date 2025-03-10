@@ -1,6 +1,6 @@
-using Fanex.Data.Repository;
-
 namespace DuplicateTickets.Criteria;
+
+using Fanex.Data.Repository;
 
 public class DuplicateTicketsCriteria : CriteriaBase
 {

@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SabaPromotion.Criteria;
 
-namespace SabaPromotion.Criteria;
+using Fanex.Data.Repository;
 
 public class SabaPromotionCriteria: CriteriaBase
 {

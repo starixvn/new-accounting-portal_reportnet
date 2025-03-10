@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace SBPerformance.MarginBySport;
+
+using AutoMapper;
 using Fanex.Data.Repository;
 using Utilities.LinqDynamicSum;
-
-namespace SBPerformance.MarginBySport;
 
 public interface MarginBySportService
 {

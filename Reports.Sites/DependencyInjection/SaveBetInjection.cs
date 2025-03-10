@@ -1,6 +1,6 @@
-﻿using SaveBetReport.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using SaveBetReport.Services;
 
 public static class SaveBetInjection
 {

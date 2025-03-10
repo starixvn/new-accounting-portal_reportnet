@@ -12,7 +12,7 @@ public class GetMatchPerformanceOfGradeTraderCriteria : CriteriaBase
     {
         get
         {
-            if (this.IsLive)
+            if (IsLive)
             {
                 return 1;
             }

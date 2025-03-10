@@ -1,6 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using HttpParameterAvailableDatabase = PunterAnalysis.Filter.AvailableDatabase.HttpParameterJson;
+﻿using HttpParameterAvailableDatabase = PunterAnalysis.Filter.AvailableDatabase.HttpParameterJson;
 using HttpParameterAvailableDataRange = PunterAnalysis.Filter.AvailableDateRange.HttpParameterJson;
 using HttpParameterLeagueGroup = PunterAnalysis.Filter.LeagueGroup.HttpParameterJson;
 using HttpParameterProductSportBetType = PunterAnalysis.Filter.ProductSportBetType.HttpParameterJson;
@@ -9,6 +7,9 @@ using HttpParameterSportTypeLeague = PunterAnalysis.Filter.SportTypeLeague.HttpP
 using HttpParameterUsernameSuggestion = PunterAnalysis.Filter.UsernameSuggestion.HttpParameterJson;
 
 namespace PunterAnalysis.Filter;
+
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/punter-analysis/filter")]
 [ApiController]

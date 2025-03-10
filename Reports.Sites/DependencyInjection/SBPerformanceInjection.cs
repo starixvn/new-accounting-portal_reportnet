@@ -1,10 +1,10 @@
-﻿using SBPerformance.Main;
+﻿namespace Reports.Sites.DependencyInjection;
+
+using SBPerformance.Main;
 using SBPerformance.MarginBySite;
 using SBPerformance.MarginBySport;
 using SBPerformance.TopLosingLeague;
 using SBPerformance.TopWinningMember;
-
-namespace Reports.Sites.DependencyInjection;
 
 public static class SBPerformanceInjection
 {

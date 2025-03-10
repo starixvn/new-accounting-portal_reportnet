@@ -1,10 +1,10 @@
 ﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.OutrightMatchDetail;
 
 using AutoMapper;
-using Fanex.Excel.Models;
 using Common.Criteria;
-using HouseWinLoss.Common.MatchDetail;
+using Common.MatchDetail;
 using Configuration;
+using Fanex.Excel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
 
