@@ -217,4 +217,66 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                 report.BARM.LineTotal != 0 ||
                 report.GrandTotal.LineTotal != 0);
     };
+
+    showChart = function (value) {
+        var labels = ['January', 'February', 'March', 'April', 'May', 'June'];
+        var barData = [-65, -59, -80, -81, -56, -55];
+        var lineData = [-65, -59, -80, -81, -56, -55];
+
+        // Get the context of the canvas element we want to select
+        var ctx = document.getElementById('marginChart').getContext('2d');
+
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        // Create a new chart instance
+        myChart = new Chart(ctx, {
+            type: 'bar', // Specify the chart type
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Line Dataset',
+                    data: lineData,
+                    type: 'line',
+                    borderColor: '#5b9bd5'
+                }, 
+                {
+                    label: 'Bar Dataset',
+                    data: barData,
+                    backgroundColor: '#873d87',
+                    borderColor: '#873d87',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        reverse: true, // This makes negative numbers appear at the top
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+
+        // Show the modal
+        var modal = document.getElementById('chartModal');
+        var span = document.getElementsByClassName('close')[0];
+
+        modal.style.display = 'block';
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                }
+            }
+        }
 }

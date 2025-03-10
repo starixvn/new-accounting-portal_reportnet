@@ -420,6 +420,7 @@
 			<Mapping DataField="virtualMultiplier" ObjectProperty="VirtualRate" />
 			<Mapping DataField="islive" ObjectProperty="LiveStatus" />
 		</Setting>
+		<Setting Key="Acc_Rpt_LeagueWL_Margin_6_Months" SpName="Acc_Rpt_LeagueWL_Margin_6_Months" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
 	</Function>
 	<Function Name="Misc - Duplicate Tickets">
 		<Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600" />

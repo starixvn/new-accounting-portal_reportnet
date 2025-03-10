@@ -38,6 +38,8 @@ public interface LeagueWinLossService
     Task<List<VirtualRateModel>> GetVirtualRate(VirtualRateCriteria criteria);
 
     Task<LeagueSuggestionViewModel> GetLeagueSuggestion(LeagueSuggestionCriteria criteria);
+
+    Task<IEnumerable<MarginModel>> GetMargins(MarginCriteria criteria);
 }
 
 public class LeagueWinLossServiceImp(
@@ -762,6 +764,11 @@ public class LeagueWinLossServiceImp(
         };
         leagues.ToList().ForEach(x => suggestionResult.Suggestions.Add(x));
         return suggestionResult;
+    }
+
+    public Task<IEnumerable<MarginModel>> GetMargins(MarginCriteria criteria)
+    {
+        return repository.FetchAsync<MarginModel>(criteria);
     }
 
     private LeagueWinLossItem CalculateSportTotal(string sport, IEnumerable<LeagueWinLossEntity> sportGroup)

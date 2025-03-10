@@ -537,7 +537,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                   { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
                                   { Name: "ColRealTurnOver", Value: info.RealTurnover },
                                   { Name: "ColVirtualMargin", Value: info.VirtualMargin },
-                                  { Name: "ColRealMargin", Value: info.RealMargin }],
+                                  { Name: "ColRealMargin", Value: info.RealMargin, CustomCellRender: self.RenderRealMarginLink }],
                         CssClass: j % 2 == 0 ? "even" : ""
                     };
 
@@ -1111,4 +1111,15 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         _tables.ddlGlobalShowTime = $("#ddlGlobalShowTime");
     };
+
+    self.RenderRealMarginLink = function (currentCell) {
+        var cssClass = currentCell.Value > 0 ? 'format-positive' : '';
+        var realMarginValue = currentCell.Value;
+        var clickEvent = ' onclick = "showChart(\'' + realMarginValue + '\');"';
+        var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + '</div>';
+        return html;
+    }
 }

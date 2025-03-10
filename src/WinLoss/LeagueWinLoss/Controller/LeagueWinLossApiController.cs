@@ -236,4 +236,11 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
         var result = await service.GetLeagueSuggestion(criteria);
         return Ok(result);
     }
+
+    [Route("margins")]
+    public async Task<IActionResult> GeMargins(MarginCriteria criteria)
+    {
+        var result = await service.GetMargins(criteria);
+        return Ok(result);
+    }
 }
