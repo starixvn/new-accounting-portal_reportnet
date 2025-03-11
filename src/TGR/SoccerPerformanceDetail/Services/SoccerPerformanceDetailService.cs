@@ -2,6 +2,7 @@
 
 using Criteria;
 using Fanex.Data.Repository;
+using global::Utilities.LinqDynamicSum;
 using Model;
 using ViewModel;
 
@@ -37,18 +38,35 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
 
         if (betTypeData != null && betTypeData.Any())
         {
+            var data = SortBetTypePerformanceInfo(betTypeData);
+            var itemByOderList = mapper.Map<List<BetTypePerformanceItem>>(data);
+            
+            var liveData = itemByOderList.Where(x => x.IsLive).ToList();
+            var liveTotal = liveData.DynamicSum();
+
+            var nonLiveData = itemByOderList.Where(x => !x.IsLive).ToList();
+            var nonLiveTotal = nonLiveData.DynamicSum();
+
+            var allTotal = itemByOderList.DynamicSum();
+
             if (criteria.MarketFilter == Market.All)
             {
-                var data = SortBetTypePerformanceInfo(betTypeData);
-
-                betTypePerformance.AddBetTypeList(data);
+               
+                betTypePerformance.ItemByOrderList = itemByOderList;
+               
+                var total = liveData.DynamicSum();
+                betTypePerformance.Total = total;
             }
             else
             {
-                betTypePerformance.AddBetTypeList(betTypeData, criteria.MarketFilter == Market.Live);
+                var isLive = criteria.MarketFilter == Market.Live;
+                betTypePerformance.ItemLiveList = liveData;
+                betTypePerformance.ItemNonLiveList = nonLiveData;
+                betTypePerformance.TotalItemLive = liveTotal;
+                betTypePerformance.TotalItemNonLive = nonLiveTotal;
             }
 
-            betTypePerformance.CalculateTotalMargin();
+
         }
 
         return betTypePerformance;
@@ -101,15 +119,15 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
     private IEnumerable<BetTypePerformanceInfo> SortBetTypePerformanceInfo(IEnumerable<BetTypePerformanceInfo> betTypeData)
     {
         return betTypeData.AsEnumerable()
-                          .OrderByDescending(c => c.BetType)
+                          .OrderByDescending(c => c.BetTypeId)
                           .ThenByDescending(c => c.IsLive)
                           .Select(c => new BetTypePerformanceInfo
                           {
-                              BetType = c.BetType,
-                              TypeName = c.TypeName,
-                              TraderCount = c.TraderCount,
-                              LeagueCount = c.LeagueCount,
-                              MatchCount = c.MatchCount,
+                              BetTypeId = c.BetTypeId,
+                              BetTypeName = c.BetTypeName,
+                              NoOfTraders = c.NoOfTraders,
+                              NoOfLeagues = c.NoOfLeagues,
+                              NoOfMatches = c.NoOfMatches,
                               Turnover = c.Turnover,
                               WinLoss = c.WinLoss,
                               Margin = c.Margin,
@@ -118,7 +136,7 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
                               MarginReal = c.MarginReal,
                               BetCount = c.BetCount,
                               IsLive = c.IsLive,
-                              FlagForViewReport = betTypeData.Count(b => b.BetType == c.BetType)
+                              FlagForViewReport = betTypeData.Count(b => b.BetTypeId == c.BetTypeId)
                           });
     }
 
@@ -160,15 +178,23 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository) : 
 
     public async Task<TraderPerformanceList> GetTraderPerformanceOfBetType(GetTraderPerformanceOfBetTypeCriteria criteria)
     {
-        var rawData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
+        var rawData = (await repository.FetchAsync<TraderPerformanceInfo>(criteria)).ToList();
 
         var traderPerformance = new TraderPerformanceList();
 
         if (rawData != null && rawData.Any())
         {
-            traderPerformance.AddTraderList(rawData, criteria.IsLive);
+            var data = mapper.Map<List<TraderPerformanceItem>>(rawData);
 
-           traderPerformance.CalculateTotalMargin();
+            var liveData = data.Where(x => x.IsLive).ToList();
+            var nonLiveData = data.Where(x => !x.IsLive).ToList();
+
+            traderPerformance.ItemLiveList = liveData;
+            traderPerformance.ItemNonLiveList = nonLiveData;
+
+            var total = data.DynamicSum();
+
+           traderPerformance.Total = total;
         }
 
         return traderPerformance;
