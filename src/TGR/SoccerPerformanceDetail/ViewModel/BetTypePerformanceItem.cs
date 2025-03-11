@@ -42,4 +42,5 @@ public class BetTypePerformanceItem
             WinLossReal = a.WinLossReal + b.WinLossReal,
             BetCount = a.BetCount + b.BetCount
         };
+    }
 }

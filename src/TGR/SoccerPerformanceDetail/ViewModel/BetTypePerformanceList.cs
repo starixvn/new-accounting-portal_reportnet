@@ -1,7 +1,5 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using Model;
-
 public class BetTypePerformanceList
 {
     public List<BetTypePerformanceItem> ItemByOrderList { get; set; } = [];
@@ -15,5 +13,4 @@ public class BetTypePerformanceList
     public BetTypePerformanceItem TotalItemLive { get; set; } = new();
 
     public BetTypePerformanceItem TotalItemNonLive { get; set; } = new();
-    }
 }

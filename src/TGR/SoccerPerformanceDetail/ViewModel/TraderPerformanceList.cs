@@ -5,9 +5,6 @@ using Model;
 public class TraderPerformanceList
 {
     public List<TraderPerformanceItem> ItemLiveList { get; set; } = [];
-        ItemLiveList = new List<TraderPerformanceItem>();
-        ItemNonLiveList = new List<TraderPerformanceItem>();
-        Total = new TraderPerformanceItem();
 
     public List<TraderPerformanceItem> ItemNonLiveList { get; set; } = [];
 
