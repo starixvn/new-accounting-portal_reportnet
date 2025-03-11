@@ -103,6 +103,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
 
     var showBetType = function (info, bodyData, liveStatus) {
         var hedgeText = self.Params.reportParams.IsHedge ? " (hedge) " : "";
+        var liveStatusText = liveStatus ? "Live" : "Non-Live";
         var currentRow = {
             Columns: [
                 {
@@ -127,7 +128,18 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
                 { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
                 { Name: "ColRealTurnOver", Value: info.RealTurnover },
                 { Name: "ColVirtualMargin", Value: info.VirtualMargin },
-                { Name: "ColRealMargin", Value: info.RealMargin }],
+                {
+                    Name: "ColRealMargin",
+                    Value: {
+                        value: info.RealMargin,
+                        sportType: self.Params.reportParams.SportType,
+                        leagueId: self.Params.reportParams.LeagueId,
+                        betType: info.Bettype,
+                        title: self.Params.reportParams.SportName + ' - ' + liveStatusText + ' - ' +
+                                self.Params.reportParams.LeagueName + ' - ' + info.BettypeName
+                    },
+                    CustomCellRender: self.RenderRealMarginLink
+                }],
         };
 
         bodyData.push(currentRow);
@@ -320,6 +332,26 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
     self.isShowGrandTotalRow = function (report) {
         return self.isShowTotalRow(report.RM)
         || self.isShowTotalRow(report.BARM);
+    };
+
+    self.RenderRealMarginLink = function (currentCell) {
+        var cssClass = currentCell.Value.value > 0 ? 'format-positive' : '';
+        var realMarginValue = currentCell.Value.value;
+        var clickEvent = ' onclick = "showChart(\'' + currentCell.Value.sportType + '\',\'' + currentCell.Value.leagueId + '\',\'' + currentCell.Value.betType + '\',\'' + currentCell.Value.title + '\');"';
+        var html = '';
+        if (currentCell.Value.sportType === 1) {
+            html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + currentCell.Value.value.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + '</div>';
+        } else {
+            html = '<div>' + currentCell.Value.value.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + '</div>';
+        }
+        
+        return html;
     };
 
 

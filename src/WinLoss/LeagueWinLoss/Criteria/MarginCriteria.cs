@@ -4,9 +4,9 @@ namespace LeagueWinLoss.Criteria;
 
 public class MarginCriteria : CriteriaBase
 {
-    public DateTime FromDate { get; set; }
+    public DateTime FromDate => DateTime.Today;
 
-    public DateTime ToDate { get; set; }
+    public DateTime ToDate => DateTime.Today.AddMonths(-6);
 
     public string LeagueId { get; set; }
 

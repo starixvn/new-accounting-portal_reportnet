@@ -537,7 +537,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                   { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
                                   { Name: "ColRealTurnOver", Value: info.RealTurnover },
                                   { Name: "ColVirtualMargin", Value: info.VirtualMargin },
-                                  { Name: "ColRealMargin", Value: info.RealMargin, CustomCellRender: self.RenderRealMarginLink }],
+                                  { 
+                                      Name: "ColRealMargin",
+                                      Value: {
+                                          value: info.RealMargin,
+                                          sportType: info.SportType,
+                                          leagueId: info.LeagueId,
+                                          title: info.Sport + ' - ' + $("#ddlStatus option:selected").text() + ' - ' + info.LeagueName
+                                      },
+                                      CustomCellRender: self.RenderRealMarginLink }
+                                  ],
                         CssClass: j % 2 == 0 ? "even" : ""
                     };
 
@@ -1113,13 +1122,22 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
 
     self.RenderRealMarginLink = function (currentCell) {
-        var cssClass = currentCell.Value > 0 ? 'format-positive' : '';
-        var realMarginValue = currentCell.Value;
-        var clickEvent = ' onclick = "showChart(\'' + realMarginValue + '\');"';
-        var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', {
+        var cssClass = currentCell.Value.value > 0 ? 'format-positive' : '';
+        var realMarginValue = currentCell.Value.value;
+        var clickEvent = ' onclick = "showChart(\'' + currentCell.Value.sportType + '\',\'' + currentCell.Value.leagueId + '\',' + null + ',\'' + currentCell.Value.title + '\');"';
+        var html = '';
+        if (currentCell.Value.sportType === 1) {
+            html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + currentCell.Value.value.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }) + '</div>';
+        } else {
+            html = '<div>' + currentCell.Value.value.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + '</div>';
+        }
+        
         return html;
     }
 }

@@ -218,65 +218,115 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                 report.GrandTotal.LineTotal != 0);
     };
 
-    showChart = function (value) {
-        var labels = ['January', 'February', 'March', 'April', 'May', 'June'];
-        var barData = [-65, -59, -80, -81, -56, -55];
-        var lineData = [-65, -59, -80, -81, -56, -55];
-
-        // Get the context of the canvas element we want to select
-        var ctx = document.getElementById('marginChart').getContext('2d');
-
-        if (myChart) {
-            myChart.destroy();
+    showChart = function (sportType, leagueId, betType, title) {
+        var param = {
+            FromDate: _leagueWinLoss.Params.reportParams.StartDate,
+            ToDate: _leagueWinLoss.Params.reportParams.EndDate,
+            IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
+            SportType: sportType,
+            LeagueId: leagueId,
+            BetType: betType
         }
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "/api/league-win-loss/margins",
+            param,
+            function (data) {
+                var labels = data.map(function(item) {
+                    return item.MonthYear;
+                });
+                var barMarginData = data.map(function(item) {
+                    return item.CompanyMargin; 
+                });
+                var lineMarginData = data.map(function(item) {
+                    return item.CompanyMargin;
+                });
 
-        // Create a new chart instance
-        myChart = new Chart(ctx, {
-            type: 'bar', // Specify the chart type
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Line Dataset',
-                    data: lineData,
-                    type: 'line',
-                    borderColor: '#5b9bd5'
-                }, 
-                {
-                    label: 'Bar Dataset',
-                    data: barData,
-                    backgroundColor: '#873d87',
-                    borderColor: '#873d87',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        reverse: true, // This makes negative numbers appear at the top
-                        beginAtZero: false
+                // Get the context of the canvas element we want to select
+                var ctx = document.getElementById('marginChart').getContext('2d');
+
+                if (myChart) {
+                    myChart.destroy();
+                }
+
+                // Create a new chart instance
+                myChart = new Chart(ctx, {
+                    type: 'bar', // Specify the chart type
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Line Dataset',
+                            data: lineMarginData,
+                            type: 'line',
+                            borderColor: '#9D00FF'
+                        }, 
+                        {
+                            label: 'Bar Dataset',
+                            data: barMarginData,
+                            backgroundColor: '#134980',
+                            borderColor: '#134980',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                        y: {
+                            reverse: true, // This makes negative numbers appear at the top
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return (value * 100).toFixed(2) + '%'; // Convert decimal to percentage
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title,
+                            font: {
+                                size: 15
+                            },
+                            color: "#2626ff"
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += (context.raw * 100).toFixed(2) + '%'; // Convert decimal to percentage
+                                    return label;
+                                }
+                            }
+                        }
                     }
+                    }
+                });
+
+                // Show the modal
+                var modal = document.getElementById('chartModal');
+                var span = document.getElementsByClassName('close')[0];
+
+                modal.style.display = 'block';
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                    modal.style.display = 'none';
                 }
-            }
-        });
 
-        // Show the modal
-        var modal = document.getElementById('chartModal');
-        var span = document.getElementsByClassName('close')[0];
-
-        modal.style.display = 'block';
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = 'none';
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-                }
-            }
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                        }
+                    }
+            },
+            null,
+            AccReport.enableInput,
+            false);
+        
         }
 }
