@@ -218,14 +218,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                 report.GrandTotal.LineTotal != 0);
     };
 
-    showChart = function (sportType, leagueId, betType, title) {
+    showChart = function (sportType, leagueId, betType, liveStatus, title) {
         var param = {
-            FromDate: _leagueWinLoss.Params.reportParams.StartDate,
-            ToDate: _leagueWinLoss.Params.reportParams.EndDate,
             IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
             SportType: sportType,
             LeagueId: leagueId,
-            BetType: betType
+            BetType: betType,
+            Site: _leagueWinLoss.Params.reportParams.SiteName,
+            LiveStatus: liveStatus
         }
         AccReport.utility.CallAjax(this,
             window.rootUrl + "/api/league-win-loss/margins",
@@ -257,14 +257,31 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                             label: 'Line Dataset',
                             data: lineMarginData,
                             type: 'line',
-                            borderColor: '#9D00FF'
+                            borderColor: '#fa8334',
+                            datalabels: {
+                                display: false
+                            }
                         }, 
                         {
                             label: 'Bar Dataset',
                             data: barMarginData,
                             backgroundColor: '#134980',
                             borderColor: '#134980',
-                            borderWidth: 1
+                            borderWidth: 1,
+                            datalabels: {
+                                display: true,
+                                align: 'center',
+                                anchor: 'center',
+                                formatter: function(value) {
+                                    return (value * 100).toFixed(2) + '%'; // Convert decimal to percentage
+                                },
+                                color: '#fff',
+                                font: {
+                                    weight: 'bold'
+                                },
+                                clip: false,
+                                clamp: true
+                            }
                         }]
                     },
                     options: {
@@ -272,6 +289,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                         maintainAspectRatio: false,
                         scales: {
                         y: {
+                            border: {
+                                display: false
+                            },
                             reverse: true, // This makes negative numbers appear at the top
                             beginAtZero: false,
                             ticks: {
@@ -302,8 +322,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                                 }
                             }
                         }
-                    }
-                    }
+                        },
+                    },
+                    plugins: [ChartDataLabels]
                 });
 
                 // Show the modal

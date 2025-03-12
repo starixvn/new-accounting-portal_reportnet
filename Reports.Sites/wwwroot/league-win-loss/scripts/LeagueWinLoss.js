@@ -543,6 +543,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                           value: info.RealMargin,
                                           sportType: info.SportType,
                                           leagueId: info.LeagueId,
+                                          liveStatus: self.Params.reportParams.LiveIndicator,
                                           title: info.Sport + ' - ' + $("#ddlStatus option:selected").text() + ' - ' + info.LeagueName
                                       },
                                       CustomCellRender: self.RenderRealMarginLink }
@@ -1124,7 +1125,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     self.RenderRealMarginLink = function (currentCell) {
         var cssClass = currentCell.Value.value > 0 ? 'format-positive' : '';
         var realMarginValue = currentCell.Value.value;
-        var clickEvent = ' onclick = "showChart(\'' + currentCell.Value.sportType + '\',\'' + currentCell.Value.leagueId + '\',' + null + ',\'' + currentCell.Value.title + '\');"';
+        var clickEvent = ' onclick = "showChart(' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + '\',' + null + ',' + currentCell.Value.liveStatus + ',\'' + currentCell.Value.title + '\');"';
         var html = '';
         if (currentCell.Value.sportType === 1) {
             html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + currentCell.Value.value.toLocaleString('en-US', {
