@@ -8,6 +8,8 @@ public class LeaguePerformanceInfo
 
     public short? LeagueGroupID { get; set; }
 
+    public string LeagueGroupName { get; set; }
+
     public decimal? LeagueBenchmark { get; set; }
 
     public decimal? BetTypeBMShift1 { get; set; }
@@ -16,11 +18,11 @@ public class LeaguePerformanceInfo
 
     public decimal? BetTypeBMShift3 { get; set; }
 
-    public int? TraderCount { get; set; }
+    public int? NoOfTraders { get; set; }
 
-    public int? MatchCount { get; set; }
+    public int? NoOfMatches { get; set; }
 
-    public int? BetChoiceCount { get; set; }
+    public int? NoOfBetChoices { get; set; }
 
     public decimal? Turnover { get; set; }
 

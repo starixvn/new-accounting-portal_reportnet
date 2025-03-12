@@ -1,39 +1,9 @@
-﻿namespace SoccerPerformanceDetail.ViewModel;
+﻿using NPOI.SS.Formula.Functions;
 
-using Model;
+namespace SoccerPerformanceDetail.ViewModel;
 
 public class LeaguePerformanceItem
 {
-    public LeaguePerformanceItem()
-    {
-    }
-
-    public LeaguePerformanceItem(LeaguePerformanceInfo leagueData)
-    {
-        if (leagueData != null && leagueData.LeagueId.HasValue)
-        {
-            LeagueId = leagueData.LeagueId.Value;
-            LeagueName = leagueData.LeagueName;
-            LeagueGroupId = Convert.ToInt32(leagueData.LeagueGroupID);
-            NoOfTraders = Convert.ToInt32(leagueData.TraderCount);
-            NoOfMatches = Convert.ToInt32(leagueData.MatchCount);
-            NoOfBetChoices = Convert.ToInt32(leagueData.BetChoiceCount);
-            Turnover = Convert.ToDecimal(leagueData.Turnover);
-            WinLoss = Convert.ToDecimal(leagueData.WinLoss);
-            Margin = leagueData.Margin;
-            TurnoverReal = Convert.ToDecimal(leagueData.TurnoverReal);
-            WinLossReal = Convert.ToDecimal(leagueData.WinLossReal);
-            MarginReal = leagueData.MarginReal;
-            BetCount = Convert.ToInt32(leagueData.BetCount);
-            BetTypeBMShift1 = leagueData.BetTypeBMShift1;
-            BetTypeBMShift2 = leagueData.BetTypeBMShift2;
-            BetTypeBMShift3 = leagueData.BetTypeBMShift3;              
-            Market = GetMarketToString(leagueData.Market);
-            IsLive = leagueData.IsLive;
-            FlagForViewReport = leagueData.FlagForViewReport;
-        }
-    }
-
     public int LeagueId { get; set; }
 
     public string LeagueName { get; set; }
@@ -52,7 +22,7 @@ public class LeaguePerformanceItem
 
     public decimal WinLoss { get; set; }
 
-    public decimal? Margin { get; set; }
+    public decimal? Margin => Turnover != 0 ? WinLoss / Turnover * 100 : null;
 
     public int BetCount { get; set; }
 
@@ -60,7 +30,7 @@ public class LeaguePerformanceItem
 
     public decimal WinLossReal { get; set; }
 
-    public decimal? MarginReal { get; set; }
+    public decimal? MarginReal => TurnoverReal != 0 ? WinLossReal / TurnoverReal* 100 : null;
 
     public decimal? BetTypeBMShift1 { get; set; }
 
@@ -69,13 +39,24 @@ public class LeaguePerformanceItem
     public decimal? BetTypeBMShift3 { get; set; }
 
     public string Market { get; set; }
-
-    private string GetMarketToString(Market market)
-    {
-        return market == SoccerPerformanceDetail.Market.Live ? "Live" : "Non Live";
-    }
+       
 
     public bool IsLive { get; set; }
 
     public int FlagForViewReport { get; set; }
+
+    public static LeaguePerformanceItem operator +(LeaguePerformanceItem a, LeaguePerformanceItem b)
+    {
+        return new LeaguePerformanceItem
+        {
+            NoOfTraders = a.NoOfTraders + b.NoOfTraders,
+            NoOfMatches = a.NoOfMatches + b.NoOfMatches,
+            NoOfBetChoices = a.NoOfBetChoices + b.NoOfBetChoices,
+            Turnover = a.Turnover + b.Turnover,
+            WinLoss = a.WinLoss + b.WinLoss,
+            TurnoverReal = a.TurnoverReal + b.TurnoverReal,
+            WinLossReal = a.WinLossReal + b.WinLossReal,
+            BetCount = a.BetCount + b.BetCount
+        };
+    }
 }

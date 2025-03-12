@@ -1,52 +1,12 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using global::Utilities.DateTimes;
-using Model;
-
 public class MatchPerformanceItem
 {
-    public MatchPerformanceItem()
-    {
-    }
+    public int LeagueId { get; set; }
 
-    public MatchPerformanceItem(MatchPerformanceInfo matchData)
-    {
-        if (matchData != null && matchData.MatchId.HasValue)
-        {
-            MatchId = matchData.MatchId.Value;
-            MatchName = string.Empty; //string.Format("{0} {1} {2}", CacheRef.GetTeamName(matchData.HomeId), ViewLang.Vs, CacheRef.GetTeamName(matchData.AwayId));
-            EventDate = Convert.ToDateTime(matchData.EventDate).ToShortFormatedDate();
-            Turnover = Convert.ToDecimal(matchData.Turnover);
-            WinLoss = Convert.ToDecimal(matchData.WinLoss);
-            BetCount = Convert.ToInt32(matchData.BetCount);
-            Margin = matchData.Margin;
-            TurnoverReal = Convert.ToDecimal(matchData.TurnoverReal);
-            WinLossReal = Convert.ToDecimal(matchData.WinLossReal);
-            MarginReal = matchData.MarginReal;
-            Score = matchData.Score;
-            IsLive = matchData.IsLive;
-        }
-    }
+    public int HomeId { get; set; }
 
-    public MatchPerformanceItem(MatchPerformanceRawInfo matchData)
-    {
-        if (matchData != null && matchData.MatchId.HasValue)
-        {
-            MatchId = matchData.MatchId.Value;
-            MatchName = string.Empty; // string.Format("{0} {1} {2}", CacheRef.GetTeamName(matchData.HomeId), ViewLang.Vs, CacheRef.GetTeamName(matchData.AwayId));
-            EventDate = Convert.ToDateTime(matchData.EventDate).ToShortFormatedDate();
-            BetCount = Convert.ToInt32(matchData.BetCount);
-            Turnover = Convert.ToDecimal(matchData.Turnover);
-            WinLoss = Convert.ToDecimal(matchData.WinLoss);
-            Margin = matchData.Margin;
-            TurnoverReal = Convert.ToDecimal(matchData.TurnoverReal);
-            WinLossReal = Convert.ToDecimal(matchData.WinLossReal);
-            MarginReal = matchData.MarginReal;
-            Score = matchData.SumCategory == 0 ? null : matchData.WinLossScore * 100 / matchData.SumCategory;
-            WinLossScore = Convert.ToDecimal(matchData.WinLossScore);
-            SumCategory = Convert.ToDecimal(matchData.SumCategory);
-        }
-    }
+    public int AwayId { get; set; }
 
     public int MatchId { get; set; }
 
@@ -60,13 +20,13 @@ public class MatchPerformanceItem
 
     public decimal WinLoss { get; set; }
 
-    public decimal? Margin { get; set; }
+    public decimal? Margin => Turnover != 0 ? WinLoss / Turnover * 100 : null;
 
     public decimal TurnoverReal { get; set; }
 
     public decimal WinLossReal { get; set; }
 
-    public decimal? MarginReal { get; set; }
+    public decimal? MarginReal => TurnoverReal != 0 ? WinLossReal / TurnoverReal * 100 : null;
 
     public decimal? Score { get; set; }
 
@@ -75,4 +35,16 @@ public class MatchPerformanceItem
     public decimal SumCategory { get; set; }
 
     public bool IsLive { get; set; }
+
+    public static MatchPerformanceItem operator +(MatchPerformanceItem a, MatchPerformanceItem b)
+    {
+        return new MatchPerformanceItem
+        {
+            Turnover = a.Turnover + b.Turnover,
+            WinLoss = a.WinLoss + b.WinLoss,
+            TurnoverReal = a.TurnoverReal + b.TurnoverReal,
+            WinLossReal = a.WinLossReal + b.WinLossReal,
+            BetCount = a.BetCount + b.BetCount
+        };
+    }
 }
