@@ -52,22 +52,18 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
 
             if (criteria.MarketFilter == Market.All)
             {
-               
                 betTypePerformance.ItemByOrderList = itemByOderList;
-               
-                var total = liveData.DynamicSum();
-                betTypePerformance.Total = total;
             }
             else
             {
                 var isLive = criteria.MarketFilter == Market.Live;
                 betTypePerformance.ItemLiveList = liveData;
                 betTypePerformance.ItemNonLiveList = nonLiveData;
-                betTypePerformance.TotalItemLive = liveTotal;
-                betTypePerformance.TotalItemNonLive = nonLiveTotal;
             }
 
-
+            betTypePerformance.TotalItemLive = liveTotal;
+            betTypePerformance.TotalItemNonLive = nonLiveTotal;
+            betTypePerformance.Total = allTotal;
         }
 
         return betTypePerformance;
@@ -171,8 +167,12 @@ public class SoccerPerformanceDetailServiceImp(IDynamicRepository repository, IM
             betTypeBetChoiceList.IsFMBetType = betChoiceOfBetTypeInfo.ToList()[0].IsFMBetType;
             betTypeBetChoiceList.IsBetChoiceDetail = betChoiceOfBetTypeInfo.ToList()[0].IsBetChoiceDetail;
         }
+        var betChoiceList = mapper.Map<List<BetTypeBetChoiceItem>>(betChoiceData);
 
-        betTypeBetChoiceList.AddItem(betChoiceData);
+        betTypeBetChoiceList.ItemList = betChoiceList;
+
+        var total = betChoiceList.DynamicSum();
+        betTypeBetChoiceList.Total = total;
 
         return betTypeBetChoiceList;
     }

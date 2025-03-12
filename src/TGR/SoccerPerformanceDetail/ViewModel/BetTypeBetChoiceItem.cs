@@ -1,29 +1,7 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using Model;
-
 public class BetTypeBetChoiceItem
 {
-    public BetTypeBetChoiceItem() { }
-
-    public BetTypeBetChoiceItem(BetTypeBetChoicePerformanceInfo info)
-    {          
-        BetChoice = info.BetChoice;
-        BetOption = info.BetOption;
-        BetTeam = info.BetTeam;
-        OddsSpread = info.OddsSpread;
-        LeagueCount = info.LeagueCount;
-        MatchCount = info.MatchCount;
-        BetCount = info.BetCount;
-        Turnover = info.Turnover;
-        WinLoss = info.WinLoss;
-        Margin = info.Margin;
-        TurnoverReal = info.TurnoverReal;
-        WinLossReal = info.WinLossReal;
-        MarginReal = info.MarginReal;
-        IsLive = info.IsLive;
-    }
-
     public string BetChoice { get; set; }
 
     public string BetOption { get; set; }
@@ -42,13 +20,26 @@ public class BetTypeBetChoiceItem
 
     public decimal WinLoss { get; set; }
 
-    public decimal? Margin { get; set; }
+    public decimal? Margin => Turnover != 0 ? WinLoss / Turnover * 100 : null;
 
     public decimal TurnoverReal { get; set; }
 
     public decimal WinLossReal { get; set; }
 
-    public decimal? MarginReal { get; set; }
+    public decimal? MarginReal => TurnoverReal != 0 ? WinLossReal / TurnoverReal * 100 : null;
 
     public bool IsLive { get; set; }
+
+    public static BetTypeBetChoiceItem operator +(BetTypeBetChoiceItem a, BetTypeBetChoiceItem b)
+    {
+        return new BetTypeBetChoiceItem
+        {
+            Turnover = a.Turnover + b.Turnover,
+            WinLoss = a.WinLoss + b.WinLoss,
+            TurnoverReal = a.TurnoverReal + b.TurnoverReal,
+            WinLossReal = a.WinLossReal + b.WinLossReal,
+            BetCount = a.BetCount + b.BetCount,
+            MatchCount = a.MatchCount + b.MatchCount
+        };
+    }
 }

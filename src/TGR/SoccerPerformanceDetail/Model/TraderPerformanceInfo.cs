@@ -3,9 +3,9 @@ namespace SoccerPerformanceDetail.Model;
 
 public class TraderPerformanceInfo
 {
-    public int? CustId { get; set; }
+    public int? TraderId { get; set; }
 
-    public string Username { get; set; }
+    public string TraderName { get; set; }
 
     public byte? Grade { get; set; }
 
@@ -13,9 +13,9 @@ public class TraderPerformanceInfo
 
     public string TeamName { get; set; }
 
-    public int? LeagueCount { get; set; }
+    public int? NoOfLeagues { get; set; }
 
-    public int? MatchCount { get; set; }
+    public int? NoOfMatches { get; set; }
 
     public int? BetCount { get; set; }
 

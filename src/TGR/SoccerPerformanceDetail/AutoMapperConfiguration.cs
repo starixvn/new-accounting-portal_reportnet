@@ -1,7 +1,7 @@
-﻿using SoccerPerformanceDetail.Model;
-namespace SoccerPerformanceDetail;
+﻿namespace SoccerPerformanceDetail;
 
 using AutoMapper;
+using SoccerPerformanceDetail.Model;
 using ViewModel;
 
 public static class AutoMapperConfiguration
@@ -12,9 +12,9 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<BetTypeBetChoiceItem, BetTypeBetChoiceExcelItem>();
         cfg.CreateMap<LeaguePerformanceItem, LeaguePerformanceExcelItem>();
         cfg.CreateMap<BetTypePerformanceInfo, BetTypePerformanceItem>();
-      //  cfg.CreateMap<List<BetTypePerformanceInfo>, List<BetTypePerformanceItem>>();
+        cfg.CreateMap<BetTypeBetChoicePerformanceInfo, BetTypeBetChoiceItem>();
 
-        cfg.CreateMap<BetTypePerformanceInfo, TraderPerformanceItem>();
+        cfg.CreateMap<TraderPerformanceInfo, TraderPerformanceItem>();
       //  cfg.CreateMap<List<BetTypePerformanceInfo>, List<TraderPerformanceItem>>();
     }
 }

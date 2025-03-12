@@ -16,13 +16,13 @@ public class BetTypePerformanceItem
 
     public decimal WinLoss { get; set; }
 
-    public decimal? Margin => Turnover != 0 ? WinLoss / Turnover : null;
+    public decimal? Margin => Turnover != 0 ? WinLoss / Turnover * 100 : null;
 
     public decimal TurnoverReal { get; set; }
 
     public decimal WinLossReal { get; set; }
 
-    public decimal? MarginReal => TurnoverReal != 0 ? WinLossReal / TurnoverReal : null;
+    public decimal? MarginReal => TurnoverReal != 0 ? WinLossReal / TurnoverReal * 100 : null;
 
     public int BetCount { get; set; }
 
