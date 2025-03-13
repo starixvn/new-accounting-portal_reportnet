@@ -38,11 +38,11 @@
 		<Setting Key="SMAWinLoss-BetFromSel" SpName="Acc_Rpt_SMAWinlossSummary_BetfromSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
 	<Function Name="SBPerformance">
-		<Setting Key="SBPerformanceMonitor-Dashboard" SpName="Acc_Rpt_SBPerformanceMonitor_Dashboard_DWH" DbName="DBWH.bodb_dwrs.wsv_nap" />
-		<Setting Key="SBPerformanceMonitor-Site" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Site" DbName="DBWH.bodb_dwrs.wsv_nap" />
-		<Setting Key="SBPerformanceMonitor-Sport" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Sport" DbName="DBWH.bodb_dwrs.wsv_nap" />
-		<Setting Key="SBPerformanceMonitor-League" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_League" DbName="DBWH.bodb_dwrs.wsv_nap" />
-		<Setting Key="SBPerformanceMonitor-Member" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Member" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-Dashboard" SpName="Acc_Rpt_SBPerformanceMonitor_Dashboard_DWH_xtest" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-Site" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Site_xtest" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-Sport" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Sport_xtest" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-League" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_League_xtest" DbName="DBWH.bodb_dwrs.wsv_nap" />
+		<Setting Key="SBPerformanceMonitor-Member" SpName="Acc_Rpt_SBPerformanceMonitor_DWH_Member_xtest" DbName="DBWH.bodb_dwrs.wsv_nap" />
 	</Function>
 	<Function Name="Abnormal Bet Report">
 		<Setting Key="Acc_Rpt_AbnormalBet_SportSel" SpName="Acc_Rpt_AbnormalBet_SportSel" DbName="DBWH.bodb_dwrs.wsv_nap" />
@@ -69,10 +69,10 @@
 	<Function Name="CashOutPerformance">
 		<Setting Key="Acc_Rpt_COPerformance_SportSel" SpName="Acc_Rpt_COPerformance_SportSel" DbName="DBACC.bodb02.wsv_nap" />
 		<Setting Key="Acc_Rpt_COPerformance_LeagueGroupSel" SpName="Acc_Rpt_COPerformance_LeagueGroupSel" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
-		<Setting Key="Acc_Rpt_COPerformance_SportType_Bettrans" SpName="Acc_Rpt_COPerformance_SportType" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
-		<Setting Key="Acc_Rpt_COPerformance_LiveStatus_Bettrans" SpName="Acc_Rpt_COPerformance_LiveStatus" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
-		<Setting Key="Acc_Rpt_COPerformance_BetType_Bettrans" SpName="Acc_Rpt_COPerformance_BetType" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
-		<Setting Key="Acc_Rpt_COPerformance_Cust_Bettrans" SpName="Acc_Rpt_COPerformance_Cust" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_SportType_Bettrans" SpName="Acc_Rpt_COPerformance_SportType_xtest" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_LiveStatus_Bettrans" SpName="Acc_Rpt_COPerformance_LiveStatus_xtest" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_BetType_Bettrans" SpName="Acc_Rpt_COPerformance_BetType_xtest" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
+		<Setting Key="Acc_Rpt_COPerformance_Cust_Bettrans" SpName="Acc_Rpt_COPerformance_Cust_xtest" TimeOut="0" DbName="DBACC.bodb02.wsv_nap" />
 		<Setting Key="Acc_Rpt_COPerformance_SportType_WareHouse" SpName="Acc_Rpt_COPerformance_SportType" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Acc_Rpt_COPerformance_LiveStatus_WareHouse" SpName="Acc_Rpt_COPerformance_LiveStatus" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Acc_Rpt_COPerformance_BetType_WareHouse" SpName="Acc_Rpt_COPerformance_BetType" TimeOut="0" DbName="DBWH.bodb_dwrs.wsv_nap" />
