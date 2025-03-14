@@ -152,4 +152,14 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
 
         return Ok(traderPerformance);
     }
+
+    [Route("league-bet-choice-detail")]
+    public async Task<IActionResult> GetBetChoicePerformaceOfBetTypeLeague(GetBetChoicePerformanceOfBetTypeLeagueCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+
+        var result = await soccerDetailService.GetBetChoicePerformanceOfBetTypeLeague(criteria);
+
+        return Ok(result);
+    }
 }

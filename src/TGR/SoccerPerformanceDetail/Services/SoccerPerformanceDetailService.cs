@@ -5,6 +5,7 @@ using Criteria;
 using Fanex.Data.Repository;
 using global::Utilities.LinqDynamicSum;
 using global::Utilities.RemotingRef;
+using Microsoft.Extensions.DependencyInjection;
 using Model;
 using ViewModel;
 
@@ -30,6 +31,8 @@ public interface SoccerPerformanceDetailService
     Task<MatchPerformanceList> GetMatchPerformanceOfBetTypeTrader(GetMatchPerformanceOfBetTypeTraderCriteria criteria);
 
     Task<TraderPerformanceList> GetTraderPerformanceOfBetTypeLeague(GetTraderPerformanceOfBetTypeLeagueCriteria criteria);
+
+    Task<BetTypeBetChoiceList> GetBetChoicePerformanceOfBetTypeLeague(GetBetChoicePerformanceOfBetTypeLeagueCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -164,21 +167,9 @@ public class SoccerPerformanceDetailServiceImp(
 
     public async Task<BetTypeBetChoiceList> GetBetTypeBetChoicePerformance(GetBetChoicePerformanceOfBetTypeCriteria criteria)
     {
-        var betTypeBetChoiceList = new BetTypeBetChoiceList();
-
         var (betChoiceData, betChoiceOfBetTypeInfo) = await repository.FetchMultipleAsync<BetTypeBetChoicePerformanceInfo, FMBetTypeBetChoiceInfo>(criteria);
 
-        if (betChoiceOfBetTypeInfo != null && betChoiceOfBetTypeInfo.Any())
-        {
-            betTypeBetChoiceList.IsFMBetType = betChoiceOfBetTypeInfo.ToList()[0].IsFMBetType;
-            betTypeBetChoiceList.IsBetChoiceDetail = betChoiceOfBetTypeInfo.ToList()[0].IsBetChoiceDetail;
-        }
-        var betChoiceList = mapper.Map<List<BetTypeBetChoiceItem>>(betChoiceData);
-
-        betTypeBetChoiceList.ItemList = betChoiceList;
-
-        var total = betChoiceList.DynamicSum();
-        betTypeBetChoiceList.Total = total;
+        var betTypeBetChoiceList = CalculateBetTypeBetChoiceList(betChoiceData, betChoiceOfBetTypeInfo);
 
         return betTypeBetChoiceList;
     }
@@ -372,5 +363,35 @@ public class SoccerPerformanceDetailServiceImp(
         }
 
         return traderPerformance;
+    }
+
+    public async Task<BetTypeBetChoiceList> GetBetChoicePerformanceOfBetTypeLeague(GetBetChoicePerformanceOfBetTypeLeagueCriteria criteria)
+    {
+        var (betChoiceData, betChoiceOfBetTypeInfo) = await repository.FetchMultipleAsync<BetTypeBetChoicePerformanceInfo, FMBetTypeBetChoiceInfo>(criteria);
+
+        var betTypeBetChoiceList = CalculateBetTypeBetChoiceList(betChoiceData, betChoiceOfBetTypeInfo);
+
+        return betTypeBetChoiceList;
+    }
+
+    private BetTypeBetChoiceList CalculateBetTypeBetChoiceList(
+        IEnumerable<BetTypeBetChoicePerformanceInfo> betChoiceData,
+        IEnumerable<FMBetTypeBetChoiceInfo> betChoiceOfBetTypeInfo)
+    {
+        var betTypeBetChoiceList = new BetTypeBetChoiceList();
+
+        if (betChoiceOfBetTypeInfo != null && betChoiceOfBetTypeInfo.Any())
+        {
+            betTypeBetChoiceList.IsFMBetType = betChoiceOfBetTypeInfo.ToList()[0].IsFMBetType;
+            betTypeBetChoiceList.IsBetChoiceDetail = betChoiceOfBetTypeInfo.ToList()[0].IsBetChoiceDetail;
+        }
+        var betChoiceList = mapper.Map<List<BetTypeBetChoiceItem>>(betChoiceData);
+
+        betTypeBetChoiceList.ItemList = betChoiceList;
+
+        var total = betChoiceList.DynamicSum();
+        betTypeBetChoiceList.Total = total;
+
+        return betTypeBetChoiceList;
     }
 }

@@ -488,5 +488,6 @@
 			<Mapping DataField="MatchCount" ObjectProperty="NoOfMatches" />
 			<Mapping DataField="TypeName" ObjectProperty="BetTypeName" />
 		</Setting>
+		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice" SpName="TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 	</Function>
 </Functions>
