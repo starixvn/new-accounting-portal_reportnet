@@ -22,7 +22,7 @@
     
     <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3" />
     <PackageReference Include="Fanex.Excel" Version="2.7.2.2" />
-    <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.3" />
     <PackageReference Include="Fanex.RemotingRef" Version="1.5.5.1" />
   </ItemGroup>
   <ItemGroup>
