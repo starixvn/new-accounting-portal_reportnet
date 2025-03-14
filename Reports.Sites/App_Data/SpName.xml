@@ -481,5 +481,12 @@
 			<Mapping DataField="MatchCount" ObjectProperty="NoOfMatches" />
 		</Setting>
 		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_Trader_Match" SpName="TGRS_Rpt_PerformanceDetail_Bettype_Trader_Match" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
+		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_League_Trader" SpName="TGRS_Rpt_PerformanceDetail_Bettype_League_Trader" DbName="DBTGRS.bodb_TGRS.wsv_tgrs">
+			<Mapping DataField="CustId" ObjectProperty="TraderId" />
+			<Mapping DataField="Username" ObjectProperty="TraderName" />
+			<Mapping DataField="LeagueCount" ObjectProperty="NoOfLeagues" />
+			<Mapping DataField="MatchCount" ObjectProperty="NoOfMatches" />
+			<Mapping DataField="TypeName" ObjectProperty="BetTypeName" />
+		</Setting>
 	</Function>
 </Functions>

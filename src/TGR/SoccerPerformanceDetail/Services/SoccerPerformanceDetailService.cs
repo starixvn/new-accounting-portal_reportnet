@@ -28,6 +28,8 @@ public interface SoccerPerformanceDetailService
 
     Task<MatchPerformanceList> GetMatchPerformanceOfTeamTrader(GetMatchPerformanceOfTeamTraderCriteria criteria);
     Task<MatchPerformanceList> GetMatchPerformanceOfBetTypeTrader(GetMatchPerformanceOfBetTypeTraderCriteria criteria);
+
+    Task<TraderPerformanceList> GetTraderPerformanceOfBetTypeLeague(GetTraderPerformanceOfBetTypeLeagueCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -185,22 +187,7 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var rawData = (await repository.FetchAsync<TraderPerformanceInfo>(criteria)).ToList();
 
-        var traderPerformance = new TraderPerformanceList();
-
-        if (rawData != null && rawData.Any())
-        {
-            var data = mapper.Map<List<TraderPerformanceItem>>(rawData);
-
-            var liveData = data.Where(x => x.IsLive).ToList();
-            var nonLiveData = data.Where(x => !x.IsLive).ToList();
-
-            traderPerformance.ItemLiveList = liveData;
-            traderPerformance.ItemNonLiveList = nonLiveData;
-
-            var total = data.DynamicSum();
-
-            traderPerformance.Total = total;
-        }
+        var traderPerformance = CalculateBetTypeTraderPerformanceList(rawData);
 
         return traderPerformance;
     }
@@ -354,5 +341,36 @@ public class SoccerPerformanceDetailServiceImp(
         }
 
         return leaguePerformance;
+    }
+
+    public async Task<TraderPerformanceList> GetTraderPerformanceOfBetTypeLeague(GetTraderPerformanceOfBetTypeLeagueCriteria criteria)
+    {
+        var traderData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
+
+        var traderPerformance = CalculateBetTypeTraderPerformanceList(traderData);
+        
+        return traderPerformance;
+    }
+
+    private TraderPerformanceList CalculateBetTypeTraderPerformanceList(IEnumerable<TraderPerformanceInfo> rawData)
+    {
+        var traderPerformance = new TraderPerformanceList();
+
+        if (rawData != null && rawData.Any())
+        {
+            var data = mapper.Map<List<TraderPerformanceItem>>(rawData);
+
+            var liveData = data.Where(x => x.IsLive).ToList();
+            var nonLiveData = data.Where(x => !x.IsLive).ToList();
+
+            traderPerformance.ItemLiveList = liveData;
+            traderPerformance.ItemNonLiveList = nonLiveData;
+
+            var total = data.DynamicSum();
+
+            traderPerformance.Total = total;
+        }
+
+        return traderPerformance;
     }
 }
