@@ -10,7 +10,7 @@ namespace HouseWinLoss.Common.ColumnDecorators
         {
         }
 
-        public GridOptions Build(GridOptions gridOptions)
+        public GridOptions Build(GridOptions gridOptions, string sortColumnName, string sortDirection)
         {
             RemoveBodyAndFooterColumn(gridOptions, MatchDetailVirtualMarginIndex, MatchDetailVirtualTurnoverIndex, MatchDetailVirtualIncomeIndex, MatchDetailVarianceIndex);
             gridOptions.CustomizeHeader = true;

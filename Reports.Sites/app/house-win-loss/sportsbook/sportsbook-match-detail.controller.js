@@ -14,7 +14,8 @@ import angular from "angular";
         $scope.generate = generate;
         $scope.viewMatchInformation = viewMatchInformation;
         $scope.viewSetting = {};
-
+        $scope.sortData = sortData;
+        
         function generate(viewSetting) {
             $scope.viewSetting = viewSetting;
             pane.service.getData(viewSetting, pane.data).then(function (data) {
@@ -90,6 +91,12 @@ import angular from "angular";
 
             data.titleInfo = titleInfo;
             data.showPager = true;
+            data.sortOption = {
+                serverSortFunction:
+                  function (sortColumnName, sortDirection) {
+                      sortData(sortColumnName, sortDirection);
+                  }
+            };
             data.pagerOption = {
                 itemsPerPage: 50,
                 currentPage: 0,
@@ -111,6 +118,21 @@ import angular from "angular";
             angular.extend(httpData, { title: title });
 
             pane.service.exportExcel($scope.viewSetting, httpData, pane.getFileName());
+        }
+
+        function sortData(sortColumnName, sortDirection) {
+            var data = {};
+            angular.extend(data, pane.data);
+            angular.extend(data, {
+                sortColumnName: sortColumnName,
+                sortDirection: sortDirection
+            });
+
+            pane.data = data;
+            pane.service.getData($scope.viewSetting, data).then(function (newData) {                
+                renderGrid(newData);
+                pane.compileAll();
+            });
         }
     }
 })(angular);

@@ -6,7 +6,7 @@ namespace HouseWinLoss.Common.ColumnDecorators;
 public class MatchGridOptionColumnDecoratorVirtualSport(GridOptionColumnRemoval columnRemoval)
     : GridOptionColumnDecoratorBase(columnRemoval), MatchGridOptionColumnDecorator
 {
-    public GridOptions Build(GridOptions gridOptions)
+    public GridOptions Build(GridOptions gridOptions, string sortColumnName, string sortDirection)
     {
         gridOptions.BodyRows[0].Columns[1].MergeColNumber -= 2;
         gridOptions.CustomizeHeader = true;

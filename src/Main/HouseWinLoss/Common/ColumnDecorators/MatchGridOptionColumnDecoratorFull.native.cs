@@ -6,16 +6,16 @@ namespace HouseWinLoss.Common.ColumnDecorators;
 public class MatchGridOptionColumnDecoratorFull(GridOptionColumnRemoval columnRemoval)
     : GridOptionColumnDecoratorBase(columnRemoval), MatchGridOptionColumnDecorator
 {
-    public GridOptions Build(GridOptions gridOptions)
+    public GridOptions Build(GridOptions gridOptions, string sortColumnName, string sortDirection)
     {
         gridOptions.CustomizeHeader = true;
-        gridOptions.Columns = BuildFullMatchColumns();
+        gridOptions.Columns = BuildFullMatchColumns(sortColumnName, sortDirection);
         gridOptions.GroupHeaderRows = BuildFullMatchGroupHeaderRows();
 
         return gridOptions;
     }
 
-    private List<HeaderColumns> BuildFullMatchColumns()
+    private List<HeaderColumns> BuildFullMatchColumns(string sortColumnName, string sortDirection)
     {
         var headerColumns = new List<HeaderColumns>
         {
@@ -25,7 +25,7 @@ public class MatchGridOptionColumnDecoratorFull(GridOptionColumnRemoval columnRe
             new() { HeaderText = string.Empty, Width = 150, Name = "Away", CellAlignment = HAlignment.Left }
         };
 
-        var baseHeaderColumns = CreateCoreHeaderColumns();
+        var baseHeaderColumns = CreateCoreHeaderColumnsWithSort(sortColumnName, sortDirection);
         headerColumns.AddRange(baseHeaderColumns);
 
         return headerColumns;
