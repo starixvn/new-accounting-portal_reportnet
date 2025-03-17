@@ -1,7 +1,6 @@
 ﻿namespace HouseWinLoss.Sportsbook.MatchDetail;
 
 using Configuration;
-using Fanex.Data;
 
 public class QueryModel
 {

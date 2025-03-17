@@ -28,7 +28,7 @@ namespace HouseWinLoss.Common.ColumnDecorators
                 new HeaderColumns { HeaderText = "SMA Win Loss", Width = 100, Name = "SMAWinLoss", CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double },
                 new HeaderColumns { HeaderText = "Extra PT", Width = 100, Name = "ExtraPT", CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double },
                 new HeaderColumns { HeaderText = "Commission", Width = 100, Name = "Commission", CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double },
-                new HeaderColumns { HeaderText = "Variance", Width = 100, Name = "VarianceIncome", CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.DoubleRedPositive },
+                new HeaderColumns { HeaderText = "Variance", Width = 100, Name = "Variance", CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.DoubleRedPositive },
                 new HeaderColumns { HeaderText = "Virtual Winloss", Width = 100, Name = "VirtualIncome", CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.DoubleRedPositive },
                 new HeaderColumns { HeaderText = "Real Income", Width = 100, Name = "RealIncome", CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.DoubleRedPositive },
                 new HeaderColumns { HeaderText = "Virtual", Width = 100, Name = "VirtualTurnover", CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double },
@@ -47,7 +47,7 @@ namespace HouseWinLoss.Common.ColumnDecorators
                 new HeaderColumns { HeaderText = "SMA Win Loss", Name = "SMAWinLoss", MergeRowNumber = 2, Width = 100 },
                  new HeaderColumns { HeaderText = "Extra PT", Name = "ExtraPT", MergeRowNumber = 2, Width = 100 },
                 new HeaderColumns { HeaderText = "Commission", Name = "Commission", MergeRowNumber = 2, Width = 100 },
-                new HeaderColumns { HeaderText = "House", Name = "VarianceIncome", MergeColNumber = 3, Width = 100 },
+                new HeaderColumns { HeaderText = "House", Name = "Variance", MergeColNumber = 3, Width = 100 },
                 new HeaderColumns { HeaderText = "House Turnover", Name = "VirtualTurnover", MergeColNumber = 2, Width = 100 },
                 new HeaderColumns { HeaderText = "Margin", Name = "VirtualMargin", MergeColNumber = 2, Width = 100 }
             };

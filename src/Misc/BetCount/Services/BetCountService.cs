@@ -4,7 +4,6 @@ using BetCount.Criteria;
 using BetCount.Entities;
 using BetCount.Model;
 using Fanex.Data.Repository;
-using OfficeOpenXml.Drawing.Chart;
 using Utilities.Sorting;
 using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;

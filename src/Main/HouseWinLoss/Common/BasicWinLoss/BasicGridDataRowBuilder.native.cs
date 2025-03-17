@@ -27,7 +27,7 @@ public class BasicGridDataRowBuilderImp : BasicGridDataRowBuilder
             new() { ColumnIndex = columnIndex++, Name = "SMAWinLoss", Value =  item.SMAWinLoss, CustomAttributes = sportTypeAttribute },
             new(columnIndex++, "ExtraPT", item.ExtraPT),
             new(columnIndex++, "Commission", item.Commission),
-            new(columnIndex++, "VarianceIncome", item.Variance),
+            new(columnIndex++, "Variance", item.Variance),
             new(columnIndex++, "VirtualIncome", item.VirtualIncome),
             new(columnIndex++, "RealIncome", item.RealIncome),
             new(columnIndex++, "VirtualTurnover", item.VirtualTurnover),
