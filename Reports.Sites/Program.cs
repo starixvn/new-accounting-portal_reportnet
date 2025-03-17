@@ -32,6 +32,7 @@ services.AddAllAutoMapper();
 services.AddAllMediatR();
 services.AddInternalServices();
 services.AddAllWebOptimizer();
+services.AddPasswordMaskActionFilter();
 
 // Add services to the container.
 services.AddControllersWithViews(options =>
