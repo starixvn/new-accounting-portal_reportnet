@@ -5,6 +5,7 @@ using Constants;
 using Criteria;
 using Entities;
 using Fanex.Data.Repository;
+using Model;
 using Utilities.LinqDynamicSum;
 using Utilities.RemotingRef;
 using Utilities.Sorting;
