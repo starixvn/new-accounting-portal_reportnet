@@ -25,4 +25,8 @@ public class QueryModel
     public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
 
     public int PermissionProfileID { get; set; }
+
+    public string SortColumnName { get; set; }
+
+    public string SortDirection { get; set; }
 }

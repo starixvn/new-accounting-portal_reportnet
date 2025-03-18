@@ -11,7 +11,7 @@ namespace HouseWinLoss.Common.ColumnDecorators
         {
         }
 
-        public GridOptions Build(GridOptions gridOptions)
+        public GridOptions Build(GridOptions gridOptions, string sortColumnName, string sortDirection)
         {
             gridOptions.CustomizeHeader = false;
             gridOptions.Columns = BuildCodeColumns();

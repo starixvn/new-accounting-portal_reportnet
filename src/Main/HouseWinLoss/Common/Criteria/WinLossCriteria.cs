@@ -11,6 +11,6 @@ public abstract class WinLossCriteria : CriteriaBase
     public DateTime StartDate { get; set; }
 
     public DateTime EndDate { get; set; }
-
+    
     public override bool IsValid() => true;
 }

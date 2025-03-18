@@ -6,7 +6,7 @@ namespace HouseWinLoss.Common.ColumnDecorators;
 public class MatchGridOptionColumnDecoratorOutright(GridOptionColumnRemoval columnRemoval)
     : GridOptionColumnDecoratorBase(columnRemoval), MatchGridOptionColumnDecorator
 {
-    public GridOptions Build(GridOptions gridOptions)
+    public GridOptions Build(GridOptions gridOptions, string sortColumnName, string sortDirection)
     {
         DecorateMatchRow(gridOptions);
         RemoveBodyAndFooterColumn(

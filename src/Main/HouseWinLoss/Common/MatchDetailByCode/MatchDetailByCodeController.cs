@@ -30,6 +30,6 @@ public class MatchDetailByCodeController(
         var winlosses = await service.Query(criteria);
         var gridOptions = builder.Build(winlosses, title);
 
-        return decorator.Build(gridOptions);
+        return decorator.Build(gridOptions, string.Empty, string.Empty);
     }
 }

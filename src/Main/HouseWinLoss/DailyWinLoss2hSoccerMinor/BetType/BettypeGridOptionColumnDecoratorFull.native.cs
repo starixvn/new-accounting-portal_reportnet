@@ -49,11 +49,11 @@ public class BettypeGridOptionColumnDecoratorFull(GridOptionColumnRemoval column
             {
                 HeaderText = "Variance",
                 Width = 100,
-                Name = "VarianceIncome",
+                Name = "Variance",
                 CellAlignment = HAlignment.Right,
                 CustomCellType = ExcelCellType.DoubleRedPositive,
                 Sort = true,
-                SortDirection = sortColumnName == "VarianceIncome" ? sortDirection : string.Empty
+                SortDirection = sortColumnName == "Variance" ? sortDirection : string.Empty
             },
 
             new HeaderColumns
@@ -133,7 +133,7 @@ public class BettypeGridOptionColumnDecoratorFull(GridOptionColumnRemoval column
             new() { HeaderText = "SMA Win Loss", Name = "SMAWinLoss", MergeRowNumber = 2, Width = 100 },
             new() { HeaderText = "Extra PT", Name = "ExtraPT", MergeRowNumber = 2, Width = 100 },
             new() { HeaderText = "Commission", Name = "Commission", MergeRowNumber = 2, Width = 100 },
-            new() { HeaderText = "House", Name = "VarianceIncome", MergeColNumber = 3, Width = 100 },
+            new() { HeaderText = "House", Name = "Variance", MergeColNumber = 3, Width = 100 },
             new() { HeaderText = "House Turnover", Name = "VirtualTurnover", MergeColNumber = 2, Width = 100 },
             new() { HeaderText = "Margin", Name = "VirtualMargin", MergeColNumber = 2, Width = 100 }
         };
