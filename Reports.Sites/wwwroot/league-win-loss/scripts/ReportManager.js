@@ -254,7 +254,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Line Dataset',
+                            label: 'Trendline',
                             data: lineMarginData,
                             type: 'line',
                             borderColor: '#fa8334',
@@ -263,7 +263,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                             }
                         }, 
                         {
-                            label: 'Bar Dataset',
+                            label: 'Bar',
                             data: barMarginData,
                             backgroundColor: '#134980',
                             borderColor: '#134980',
