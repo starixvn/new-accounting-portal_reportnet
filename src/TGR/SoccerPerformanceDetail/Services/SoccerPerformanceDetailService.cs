@@ -5,7 +5,6 @@ using Criteria;
 using Fanex.Data.Repository;
 using global::Utilities.LinqDynamicSum;
 using global::Utilities.RemotingRef;
-using Microsoft.Extensions.DependencyInjection;
 using Model;
 using ViewModel;
 
@@ -33,6 +32,8 @@ public interface SoccerPerformanceDetailService
     Task<TraderPerformanceList> GetTraderPerformanceOfBetTypeLeague(GetTraderPerformanceOfBetTypeLeagueCriteria criteria);
 
     Task<BetTypeBetChoiceList> GetBetChoicePerformanceOfBetTypeLeague(GetBetChoicePerformanceOfBetTypeLeagueCriteria criteria);
+
+    Task<MatchPerformanceGroup> GetMatchPerformanceOfBetTypeLeagueTrader(GetMatchPerformanceOfBetTypeLeagueTraderCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -393,5 +394,28 @@ public class SoccerPerformanceDetailServiceImp(
         betTypeBetChoiceList.Total = total;
 
         return betTypeBetChoiceList;
+    }
+
+    public async Task<MatchPerformanceGroup> GetMatchPerformanceOfBetTypeLeagueTrader(GetMatchPerformanceOfBetTypeLeagueTraderCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<MatchPerformanceInfo>(criteria);
+
+        MatchPerformanceGroup matchPerformance = new MatchPerformanceGroup();
+
+        if (rawData != null && rawData.Any())
+        {
+            var matches = mapper.Map<List<MatchPerformanceItem>>(rawData);
+
+            var liveMatches = matches.Where(x => x.IsLive).ToList();
+            var nonLiveMatches = matches.Where(x => !x.IsLive).ToList();
+
+            var total = matches.DynamicSum();
+
+            matchPerformance.ItemLiveList = CalculateMatchByLiveStatus(liveMatches); 
+            matchPerformance.ItemNonLiveList = CalculateMatchByLiveStatus(nonLiveMatches);
+            matchPerformance.Total = total;
+        }
+
+        return matchPerformance;
     }
 }

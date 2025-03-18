@@ -6,7 +6,6 @@ using Fanex.NAP.Client;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Services;
-using SoccerPerformanceDetail.ViewModel;
 using Utilities;
 
 [Route("api/soccer-performance-detail")]
@@ -159,6 +158,16 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         criteria.IsExcludeLeagues = true;
 
         var result = await soccerDetailService.GetBetChoicePerformanceOfBetTypeLeague(criteria);
+
+        return Ok(result);
+    }
+
+    [Route("league-trader-match")]
+    public async Task<IActionResult> GetMatchPerformanceOfBetTypeLeagueTrader(
+        GetMatchPerformanceOfBetTypeLeagueTraderCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var result = await soccerDetailService.GetMatchPerformanceOfBetTypeLeagueTrader(criteria);
 
         return Ok(result);
     }
