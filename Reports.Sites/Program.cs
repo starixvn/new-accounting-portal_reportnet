@@ -53,7 +53,6 @@ services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
-services.AddOneBookUmForWeb(configuration);
 var app = builder.Build();
 
 app.UseDeveloperExceptionPage();
