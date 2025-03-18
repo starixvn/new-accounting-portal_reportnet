@@ -1,6 +1,7 @@
 using Fanex.Caching;
 using Fanex.Data;
 using Fanex.Logging.Sentry.RavenClient;
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Reports.Sites;
@@ -26,6 +27,7 @@ services.AddRemotingRef(configuration);
 services.AddResultCore(configuration);
 services.AddFanexData(configuration);
 services.AddNapClient(configuration);
+services.AddOneBookUmForWeb(configuration);
 services.AddFanexLogSentry(configuration);
 services.AddMemoryCache(configuration.GetSection("fanex.caching"));
 services.AddAllAutoMapper();
@@ -50,8 +52,6 @@ services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
-
-services.AddOneBookUm(configuration);
 
 var app = builder.Build();
 
