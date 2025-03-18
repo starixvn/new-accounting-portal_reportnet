@@ -21,6 +21,7 @@ using Exchange;
 using HouseWinLoss;
 using LeagueWinLoss;
 using Margin;
+using Microsoft.AspNetCore.DataProtection;
 using NegativeBalance;
 using ParlayWon;
 using PunterAnalysis;
@@ -28,6 +29,7 @@ using ResultAnalysis;
 using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
+using StackExchange.Redis;
 using SuperBalance;
 using TotalSMAAndActiveMember;
 using TreeWinLoss;
@@ -113,6 +115,20 @@ public static class ServiceCollectionExtensions
             options.Cookie.IsEssential = true;
             options.IdleTimeout = TimeSpan.FromMinutes(timeout);
             options.Cookie.Name = "Nap-Reports.Session";
+        });
+
+        var redisConfig = configuration.GetSection("AuthSettings:RedisConfig").Value;
+        var redisMultiplexer = ConnectionMultiplexer.Connect(redisConfig);
+
+        services.AddDataProtection()
+            .PersistKeysToStackExchangeRedis(redisMultiplexer, "Fanex.Reports-ProtectionKeys");
+
+        services.AddSingleton<IConnectionMultiplexer>(redisMultiplexer);
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = redisConfig;
+            options.InstanceName = "Fanex.Reports.Session-";
         });
     }
 
