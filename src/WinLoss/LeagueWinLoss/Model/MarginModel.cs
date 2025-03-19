@@ -4,7 +4,7 @@ public class MarginModel
 {
     public string Date { get; set; }
 
-    public string MonthYear => $"{Date.Substring(4, 2)}-{Date[..4]}";
+    public string MonthYear { get; set; }
 
     public int LeagueId { get; set; }
 

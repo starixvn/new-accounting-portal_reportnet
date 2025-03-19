@@ -275,7 +275,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                                 formatter: function(value) {
                                     return (value * 100).toFixed(2) + '%'; // Convert decimal to percentage
                                 },
-                                color: '#fff',
+                                color: '#000',
                                 font: {
                                     weight: 'bold'
                                 },

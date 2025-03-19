@@ -2,6 +2,7 @@ using Fanex.Data.Repository;
 using LeagueWinLoss.Criteria;
 using LeagueWinLoss.Entities;
 using LeagueWinLoss.Model;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LeagueWinLoss.Services;
 
@@ -766,10 +767,49 @@ public class LeagueWinLossServiceImp(
         return suggestionResult;
     }
 
-    public Task<IEnumerable<MarginModel>> GetMargins(MarginCriteria criteria)
+    public async Task<IEnumerable<MarginModel>> GetMargins(MarginCriteria criteria)
     {
-        return repository.FetchAsync<MarginModel>(criteria);
+        var result = new List<MarginModel>();
+        var months = GetMonthsFromCriteria(criteria.FromDate, criteria.ToDate);
+        var margins = await repository.FetchAsync<MarginModel>(criteria);
+        foreach (var month in months)
+        {
+            var margin = margins.FirstOrDefault(item => item.Date == month);
+            if (margin == null)
+            {
+                result.Add(new MarginModel
+                {
+                    MonthYear = $"{month.Substring(4, 2)}-{month[..4]}",
+                    CompanyMargin = 0
+                });
+            }
+            else
+            {
+                result.Add(new MarginModel
+                {
+                    MonthYear = $"{month.Substring(4, 2)}-{month[..4]}",
+                    CompanyMargin = margin.CompanyMargin
+                });
+            }
+        }
+
+        return result;
     }
+
+    private List<string> GetMonthsFromCriteria(DateTime fromDate, DateTime toDate)
+    {
+        var months = new List<string>();
+        var currentDate = fromDate;
+
+        while (currentDate <= toDate)
+        {
+            months.Add(currentDate.ToString("yyyyMM"));
+            currentDate = currentDate.AddMonths(1);
+        }
+
+        return months;
+    }
+
 
     private LeagueWinLossItem CalculateSportTotal(string sport, IEnumerable<LeagueWinLossEntity> sportGroup)
     {
