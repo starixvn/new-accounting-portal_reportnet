@@ -342,15 +342,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
         var clickEvent = ' onclick = "showChart(' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + '\',\'' + currentCell.Value.betType  + '\',' + currentCell.Value.liveStatus + ',\'' + currentCell.Value.title + '\');"';
         var html = '';
         if (currentCell.Value.sportType === 1) {
-            html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + currentCell.Value.value.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }) + '</div>';
+            html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
         } else {
-            html = '<div>' + currentCell.Value.value.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }) + '</div>';
+            html = '<div>' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
         }
         
         return html;
