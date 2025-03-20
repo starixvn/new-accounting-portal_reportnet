@@ -12,7 +12,9 @@ public class MarginCriteria : CriteriaBase
 
     public int SportType { get; set; }
 
-    public string BetType { get; set; }
+    public string SportBettype { get; set; }
+
+    public int? BetType { get; set; }
 
     public byte LiveStatus { get; set; }
 

@@ -218,10 +218,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                 report.GrandTotal.LineTotal != 0);
     };
 
-    showChart = function (sportType, leagueId, betType, liveStatus, title) {
+    showChart = function (sportType, sportBettype, leagueId, betType, liveStatus, title) {
         var param = {
             IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
             SportType: sportType,
+            SportBettype: sportBettype,
             LeagueId: leagueId,
             BetType: betType,
             Site: _leagueWinLoss.Params.reportParams.SiteName,
