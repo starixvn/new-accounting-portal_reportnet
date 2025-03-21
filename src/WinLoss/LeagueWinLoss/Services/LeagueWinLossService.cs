@@ -41,6 +41,8 @@ public interface LeagueWinLossService
     Task<LeagueSuggestionViewModel> GetLeagueSuggestion(LeagueSuggestionCriteria criteria);
 
     Task<IEnumerable<MarginModel>> GetMargins(MarginCriteria criteria);
+
+    Task<IEnumerable<MarginModel>> RunCachedMargins(MarginCriteria criteria);
 }
 
 public class LeagueWinLossServiceImp(
@@ -765,6 +767,11 @@ public class LeagueWinLossServiceImp(
         };
         leagues.ToList().ForEach(x => suggestionResult.Suggestions.Add(x));
         return suggestionResult;
+    }
+
+    public Task<IEnumerable<MarginModel>> RunCachedMargins(MarginCriteria criteria)
+    {
+        return repository.FetchAsync<MarginModel>(criteria);
     }
 
     public async Task<IEnumerable<MarginModel>> GetMargins(MarginCriteria criteria)

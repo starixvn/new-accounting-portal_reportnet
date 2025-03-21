@@ -39,6 +39,7 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
     public async Task<IActionResult> GetLeagueWinLoss(LeagueWinLossCriteria criteria)
     {
         var result = await service.GetLeagueWinLoss(criteria);
+        _ = Task.Run(() => service.RunCachedMargins(new MarginCriteria() { SportBettype = criteria.SportBettype }));
         return Ok(result);
     }
 
