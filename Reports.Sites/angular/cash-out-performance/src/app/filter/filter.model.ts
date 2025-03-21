@@ -47,7 +47,8 @@ export interface FilterModel {
     isShowFullColumn: boolean;
     exchangeBy: boolean,
     filterType: number,
-    evenOddCust?: boolean
+    evenOddCust?: boolean,
+    priceService?: number
   }
 
   export interface SiteModel {

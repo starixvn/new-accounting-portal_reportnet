@@ -38,4 +38,6 @@ public class SportLevelExcelRequest : IRequest<ExcelPackage>
     public int FilterType { get; set; }
 
     public bool? EvenOddCust { get; set; }
+
+    public byte? PriceService { get; set; }
 }
