@@ -34,6 +34,8 @@ public interface SoccerPerformanceDetailService
     Task<BetTypeBetChoiceList> GetBetChoicePerformanceOfBetTypeLeague(GetBetChoicePerformanceOfBetTypeLeagueCriteria criteria);
 
     Task<MatchPerformanceGroup> GetMatchPerformanceOfBetTypeLeagueTrader(GetMatchPerformanceOfBetTypeLeagueTraderCriteria criteria);
+
+    Task<LeaguePerformanceList> GetLeaguePerformance(Fanex.Data.Repository.ICriteria criteria, bool isGroupOfLeague = false);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -417,5 +419,10 @@ public class SoccerPerformanceDetailServiceImp(
         }
 
         return matchPerformance;
+    }
+
+    public Task<LeaguePerformanceList> GetLeaguePerformance(ICriteria criteria, bool isGroupOfLeague = false)
+    {
+        throw new NotImplementedException();
     }
 }
