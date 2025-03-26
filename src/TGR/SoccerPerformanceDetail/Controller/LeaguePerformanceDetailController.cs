@@ -6,10 +6,11 @@ using SoccerPerformanceDetail.ViewModel;
 
 namespace SoccerPerformanceDetail.Controller;
 
-[Route("api/soccer-performance-detail")]
+[Route("api/soccer-performance-detail/league/")]
 [ApiController]
 public class LeaguePerformanceDetailController(SoccerPerformanceDetailService service) : ControllerBase
 {
+    [Route("main")]
     public async Task<IActionResult> GetLeaguePerformance(GetLeaguePerformanceCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;
@@ -25,6 +26,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
         return Ok(leaguePerformance);
     }
 
+    [Route("league-trader-detail")]
     public async Task<IActionResult> GetTraderPerformanceOfLeague(GetTraderPerformanceOfLeagueCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;
@@ -33,6 +35,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
         return Ok(traderPerformance);
     }
 
+    [Route("league-match-detail")]
     public async Task<IActionResult> GetMatchPerformanceOfLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;
@@ -41,6 +44,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
         return Ok(matchPerformance);
     }
 
+    [Route("league-bettype-detail")]
     public async Task<IActionResult> GetBettypeDetailLeague(GetBettypeDetailLeague criteria)
     {
         criteria.IsExcludeLeagues = true;
