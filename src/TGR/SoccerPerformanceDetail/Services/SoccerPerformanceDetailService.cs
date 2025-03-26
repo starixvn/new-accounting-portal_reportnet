@@ -43,7 +43,7 @@ public interface SoccerPerformanceDetailService
 
     Task<MatchPerformanceGroup> GetMatchPerformanceOfLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria);
 
-    Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailLeague(GetBettypeDetailLeague criteria);
+    Task<List<BetTypeDetailItem>> GetBettypeDetailLeague(GetBettypeDetailLeague criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
