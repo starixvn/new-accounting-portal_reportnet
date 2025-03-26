@@ -218,7 +218,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                 report.GrandTotal.LineTotal != 0);
     };
 
-    showChart = function (sportType, sportBettype, leagueId, betType, liveStatus, title) {
+    showChart = function (sportType, sportBettype, leagueId, betType, liveStatus, showHedgeOrNormalMatchOnly, title) {
         var param = {
             IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
             SportType: sportType,
@@ -226,7 +226,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             LeagueId: leagueId,
             BetType: betType,
             Site: _leagueWinLoss.Params.reportParams.SiteName,
-            LiveStatus: liveStatus
+            LiveStatus: liveStatus,
+            ShowHedgeOrNormalMatchOnly: showHedgeOrNormalMatchOnly
         }
         AccReport.utility.CallAjax(this,
             window.rootUrl + "/api/league-win-loss/margins",

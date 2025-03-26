@@ -138,6 +138,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
                         betType: info.Bettype,
                         liveStatus: liveStatusValue,
                         sportBettype: self.Params.reportParams.SportBettype,
+                        showHedgeOrNormalMatchOnly: info.IsHedge ? 1 : 2,
                         title: self.Params.reportParams.SportName + ' - ' + liveStatusText + ' - ' +
                                 self.Params.reportParams.LeagueName + ' - ' + info.BettypeName
                     },
@@ -340,7 +341,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
     self.RenderRealMarginLink = function (currentCell) {
         var cssClass = currentCell.Value.value > 0 ? 'format-positive' : '';
         var realMarginValue = currentCell.Value.value;
-        var clickEvent = ' onclick = "showChart(' + currentCell.Value.sportType + ',\'' + currentCell.Value.sportBettype + '\',\'' + currentCell.Value.leagueId + '\',' + currentCell.Value.betType  + ',' + currentCell.Value.liveStatus + ',\'' + currentCell.Value.title + '\');"';
+        var clickEvent = ' onclick = "showChart(' + currentCell.Value.sportType + ',\'' + currentCell.Value.sportBettype + '\',\'' + currentCell.Value.leagueId + '\',' + currentCell.Value.betType + ',' + currentCell.Value.liveStatus + ',' + currentCell.Value.showHedgeOrNormalMatchOnly + ',\'' + currentCell.Value.title + '\');"';
         var html = '';
         if (currentCell.Value.sportType === 1) {
             html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';

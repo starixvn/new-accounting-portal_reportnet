@@ -22,6 +22,8 @@ public class MarginCriteria : CriteriaBase
 
     public bool IsNoDraw { get; set; }
 
+    public byte ShowHedgeOrNormalMatchOnly { get; set; }
+
     public override string GetSettingKey() => "Acc_Rpt_LeagueWL_Margin_6_Months";
 
     public override bool IsValid() => true;
