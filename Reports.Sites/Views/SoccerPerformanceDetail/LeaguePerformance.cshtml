@@ -36,7 +36,7 @@
 		</a>
 	</div>
 }
-@* <div class="filter-bar">
+<div class="filter-bar">
     <div id="divLeaguePerformanceFilter" class="filter-form">
         <div class="filter-row">
             <div class="lbl-field col_6">
@@ -52,7 +52,7 @@
             </div>
             <div class="date-range"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
             <div class="lbl-field col_4">
-                <label for="ddlBetType">@ViewLang.BetType</label>
+                <label for="ddlBetType">BetType</label>
             </div>
             <div class="edit-field col_8">
                 <select id="ddlBetType" multiple="multiple" style="width: 160px">
@@ -78,24 +78,24 @@
         {
             <div class="filter-row">
                 <div class="lbl-field col_6">
-                    <label for="txtMinTurnover">@ViewLang.MinimumVirtualTurnover</label>
+                    <label for="txtMinTurnover">Minimum Virtual Turnover</label>
                 </div>
                 <div class="edit-field col_5">
-                    <input type="text" id="txtMinTurnover" style="width:10em" maxlength="10" data-val-number="@Messages.InvalidValueError" />
+                    <input type="text" id="txtMinTurnover" style="width:10em" maxlength="10" data-val-number="Invalid value!" />
                 </div>
                 <div class="lbl-field col_5 min-winloss">
-                    <label for="txtMinWinLoss">@ViewLang.MinimumVirtualWinLoss</label>
+                    <label for="txtMinWinLoss">Minimum Virtual WinLoss</label>
                 </div>
                 <div class="edit-field col_5">
-                    <input type="text" id="txtMinWinLoss" maxlength="10" data-val-number="@Messages.InvalidValueError" />
+                    <input type="text" id="txtMinWinLoss" maxlength="10" data-val-number="Invalid value!" />
                 </div>
                 <div class="lbl-field col_5 margin">
-                    <label for="txtMarginFrom">@ViewLang.VirtualMargin</label>
+                    <label for="txtMarginFrom">Virtual Margin %</label>
                 </div>
                 <div class="edit-field col_12">
-                    <input type="text" id="txtMarginFrom" class="margin" maxlength="5" data-val-number="@Messages.InvalidValueError" />
+                    <input type="text" id="txtMarginFrom" class="margin" maxlength="5" data-val-number="Invalid value!" />
                     <span> - </span>
-                    <input type="text" id="txtMarginTo" class="margin" maxlength="5" data-val-number="@Messages.InvalidValueError" />
+                    <input type="text" id="txtMarginTo" class="margin" maxlength="5" data-val-number="Invalid value!" />
                 </div>
             </div>
         }
@@ -104,31 +104,31 @@
         {
             <div class="filter-row">
                 <div class="lbl-field col_6">
-                    <label for="txtMinTurnoverReal">@ViewLang.MinimumRealTurnover</label>
+                    <label for="txtMinTurnoverReal">Minimum Real Turnover</label>
                 </div>
                 <div class="edit-field col_5">
-                    <input type="text" id="txtMinTurnoverReal" style="width:10em" maxlength="10" data-val-number="@Messages.InvalidValueError" />
+                    <input type="text" id="txtMinTurnoverReal" style="width:10em" maxlength="10" data-val-number="Invalid value!" />
                 </div>
                 <div class="lbl-field col_5 min-winloss">
-                    <label for="txtMinWinLossReal">@ViewLang.MinimumRealWinLoss</label>
+                    <label for="txtMinWinLossReal">Minimum Real WinLoss</label>
                 </div>
                 <div class="edit-field col_5">
-                    <input type="text" id="txtMinWinLossReal" maxlength="10" data-val-number="@Messages.InvalidValueError" />
+                    <input type="text" id="txtMinWinLossReal" maxlength="10" data-val-number="Invalid value!" />
                 </div>
                 <div class="lbl-field col_5 margin">
-                    <label for="txtMarginFromReal">@ViewLang.RealMargin</label>
+                    <label for="txtMarginFromReal">Real Margin %</label>
                 </div>
                 <div class="edit-field col_12">
-                    <input type="text" id="txtMarginFromReal" class="margin" maxlength="5" data-val-number="@Messages.InvalidValueError" />
+                    <input type="text" id="txtMarginFromReal" class="margin" maxlength="5" data-val-number="Invalid value!" />
                     <span> - </span>
-                    <input type="text" id="txtMarginToReal" class="margin" maxlength="5" data-val-number="@Messages.InvalidValueError" />
+                    <input type="text" id="txtMarginToReal" class="margin" maxlength="5" data-val-number="Invalid value!" />
                 </div>
             </div>
         }
 
         <div class="filter-row">
             <div class="lbl-field col_6">
-                <label for="txtLeague">@ViewLang.LeagueGroup</label>
+                <label for="txtLeague">League Group</label>
             </div>
             <div class="edit-field col_5">
                 <select id="ddlLeagueGroup" multiple="multiple">
@@ -139,18 +139,18 @@
                 </select>
             </div>
             <div class="lbl-field col_6" style="width: 159px">
-                <label for="txtLeague">@ViewLang.League</label>
+                <label for="txtLeague">League</label>
             </div>
             <div class="edit-field col_5">
                 <input type="text" id="txtLeague" maxlength="100" />
             </div>
             <div class="lbl-field col_3 league-bm"></div>
             <div class="submit col_4">
-                <input id="btnGenerate" type="button" class="blue-button" value="@ViewLang.Generate" />
+                <input id="btnGenerate" type="button" class="blue-button" value="Generate" />
             </div>
         </div>
     </div>
-</div> *@
+</div>
 <div id="divLeaguePerformanceContainer" class="content-grid display-none">
     <div id="divLeaguePerformanceGrid" class="freegrid"></div>
 </div>
@@ -169,62 +169,66 @@
 <div id="divBettypePerformanceOfLeagueMatchContainer" class="content-grid display-none">
     <div id="divBettypePerformanceOfLeagueMatchGrid" class="freegrid"></div>
 </div>
-@* @section Foot
+@section Foot
 {
-    @Scripts.Render("~/scripts/leaguePerformance")
+	<script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+	<script type="text/javascript" src="~/scripts/tgrs/common-tgrs.js?v=3"></script>
+	<script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
+	<script type="text/javascript" src="~/scripts/msg-box.js"></script>
+	<script type="text/javascript" src="~/scripts/league-performance.js"></script>
     <script type="text/javascript">
         var datepickerSetting = {
             MinDate: '@(((DateTime)ViewBag.MinDate).ToShortFormatedDate())',
             DefaultFromDate: '@(((DateTime)ViewBag.DefaultFromDate).ToShortFormatedDate())',
             DefaultToDate: '@(((DateTime)ViewBag.DefaultToDate).ToShortFormatedDate())',
-            AllowYearRange: parseInt('@ViewBag.AllowYearRange')
+            AllowYearRange: @ViewBag.AllowYearRange
         };
         var forecastBettype = '@ViewBag.ForecastBetType';
         var labels = {
             No: '#',
-            League: '@ViewLang.League',
-            LeagueGroup: '@ViewLang.LeagueGroup',
-            Market: '@ViewLang.Market',
-            MarketNonLive: '@ViewLang.MarketNonLive',
-            MarketLive: '@ViewLang.MarketLive',
-            NoOfTraders: '@ViewLang.NoOfTraders',
-            NoOfMatches: '@ViewLang.NoOfMatches',
-            Turnover: '@ViewLang.Turnover',
-            AvgTurnoverPerMatch: '@ViewLang.AvgTurnoverPerMatch',
-            WinLoss: '@ViewLang.WinLoss',
-            BetCount: '@ViewLang.BetCount',
-            Margin: '@ViewLang.Margin',
-            LeagueBM: '@ViewLang.LeagueBM',
-            BetTypeBM: '@ViewLang.BetTypeBM',
-            BetType: '@ViewLang.BetType',
-            BetTypeDetail: '@ViewLang.BetTypeDetail',
-            Trader: '@ViewLang.Trader',
-            Grade: '@ViewLang.Grade',
-            Team: '@ViewLang.Team',
-            Match: '@ViewLang.Match',
-            Total: '@ViewLang.Total',
-            GrandTotal: '@ViewLang.GrandTotal',
-            AllBetTypes: '@ViewLang.AllBetTypes',
-            AllLeagueGroups: '@ViewLang.AllLeagueGroups',
-            NA: '@ViewLang.NA',
-            Forecast: '@ViewLang.Forecast',
-            EffectiveDate: '@ViewLang.EffectiveDate',
-            LeaguePerformance: '@ViewLang.LeaguePerformance',
-            TraderPerformance: '@ViewLang.TraderPerformance',
-            MatchPerformance: '@ViewLang.MatchPerformance',
-            TeamHistoryDetail: '@ViewLang.TeamHistoryDetail',
-            GradeHistoryDetail: '@ViewLang.GradeHistoryDetail',
-            Score: '@ViewLang.Score',
-            Benchmark: '@ViewLang.BM',
-            ScoreByLatestBenchMark: '@ViewLang.ScoreByLatestBenchMark',
-            ScoreByPeriod: '@ViewLang.ScoreByPeriod'
+            League: 'League',
+            LeagueGroup: 'League Group',
+            Market: 'Market',
+            MarketNonLive: 'Non-Live',
+            MarketLive: 'Live',
+            NoOfTraders: 'No. Of Traders',
+            NoOfMatches: 'No. Of Matches',
+            Turnover: 'Turnover',
+            AvgTurnoverPerMatch: 'Avg. TO Per Match',
+            WinLoss: 'Win Loss',
+            BetCount: 'Bet Count',
+            Margin: 'Margin %',
+            LeagueBM: 'League BM %',
+            BetTypeBM: 'Bet Type BM %',
+            BetType: 'Bet Type',
+            BetTypeDetail: 'Bet Type Detail',
+            Trader: 'Trader',
+            Grade: 'Grade',
+            Team: 'Team',
+            Match: 'Match',
+            Total: 'Total',
+            GrandTotal: 'Grand Total',
+            AllBetTypes: 'All Bet Types',
+            AllLeagueGroups: 'All League Groups',
+            NA: 'N/A',
+            Forecast: 'Forecast',
+            EffectiveDate: 'Effective Date',
+            LeaguePerformance: 'League Performance',
+            TraderPerformance: 'Trader Performance',
+            MatchPerformance: 'Match Performance',
+            TeamHistoryDetail: 'Team History Detail',
+            GradeHistoryDetail: 'Grade History Detail',
+            Score: 'Score',
+            Benchmark: 'BM %',
+            ScoreByLatestBenchMark: 'Score By Latest BM',
+            ScoreByPeriod: 'Score By Period'
         };
         var messages = {
-            InvalidValue: '@Messages.InvalidValueError',
-            RequiredField: '@Messages.RequiredFieldError'
+            InvalidValue: 'Invalid value!',
+            RequiredField: 'Invalid value!'
         };
 
-        var isVirtualPerformancePermission = '@ViewBag.IsVirtualPerformancePermission' == "True";
-        var isRealPerformancePermission = '@ViewBag.IsRealPerformancePermission' == "True";
+        var isVirtualPerformancePermission = '@ViewBag.IsVirtualPerformancePermission' === 'True';
+        var isRealPerformancePermission = '@ViewBag.IsRealPerformancePermission' === 'True';
     </script>
-} *@
+}

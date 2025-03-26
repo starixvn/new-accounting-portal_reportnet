@@ -101,4 +101,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\soccer-performance-detail\scripts\league-performance.js" />
+  </ItemGroup>
+
 </Project>

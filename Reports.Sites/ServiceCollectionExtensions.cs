@@ -226,6 +226,14 @@ public static class ServiceCollectionExtensions
                 "/soccer-performance-detail/scripts/bettype-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/league-performance.js",
+                "/soccer-performance-detail/scripts/grade-performance.js",
+                "/soccer-performance-detail/scripts/team-performance.js",
+                "/soccer-performance-detail/scripts/grade-history.js",
+                "/soccer-performance-detail/scripts/team-history.js",
+                "/soccer-performance-detail/scripts/league-performance.js",
+                "/soccer-performance-detail/scripts/performance-detail-helper.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");
