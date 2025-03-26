@@ -14,7 +14,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
     {
         criteria.IsExcludeLeagues = true;
         criteria.LeagueName = criteria.LeagueName ?? string.Empty;
-        
+
         if (criteria.IsAllLeagueGroup)
         {
             criteria.LeagueGroupIds = string.Empty;
@@ -23,5 +23,30 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
         var leaguePerformance = service.GetLeaguePerformance(criteria, criteria.MarketFilter == Market.All);
 
         return Ok(leaguePerformance);
+    }
+
+    public async Task<IActionResult> GetTraderPerformanceOfLeague(GetTraderPerformanceOfLeagueCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var traderPerformance = service.GetTraderPerformanceOfLeague(criteria);
+
+        return Ok(traderPerformance);
+    }
+
+    public async Task<IActionResult> GetMatchPerformanceOfLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var matchPerformance = service.GetMatchPerformanceOfLeagueTrader(criteria);
+
+        return Ok(matchPerformance);
+    }
+
+    public async Task<IActionResult> GetBettypeDetailLeague(GetBettypeDetailLeague criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+       
+        var bettypeDetail = service.GetBettypeDetailLeague(criteria);
+        
+        return Ok(bettypeDetail);
     }
 }

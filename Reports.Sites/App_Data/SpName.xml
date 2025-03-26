@@ -490,5 +490,10 @@
 		</Setting>
 		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice" SpName="TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_League_Trader_Match" SpName="TGRS_Rpt_PerformanceDetail_Bettype_League_Trader_Match" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
+		<Setting Key="TGRS_Rpt_PerformanceDetail_League" SpName="TGRS_Rpt_PerformanceDetail_League" DbName="DBTGRS.bodb_TGRS.wsv_tgrs">
+			<Mapping DataField="TraderCount" ObjectProperty="NoOfTraders" />
+			<Mapping DataField="BetChoiceCount" ObjectProperty="NoOfBetChoices" />
+			<Mapping DataField="MatchCount" ObjectProperty="NoOfMatches" />
+		</Setting>
 	</Function>
 </Functions>

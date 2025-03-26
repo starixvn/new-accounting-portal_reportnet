@@ -3,9 +3,11 @@
 using AutoMapper;
 using Criteria;
 using Fanex.Data.Repository;
+using Fanex.NAP.Client;
 using global::Utilities.LinqDynamicSum;
 using global::Utilities.RemotingRef;
 using Model;
+using System.Collections.Generic;
 using ViewModel;
 
 public interface SoccerPerformanceDetailService
@@ -35,7 +37,13 @@ public interface SoccerPerformanceDetailService
 
     Task<MatchPerformanceGroup> GetMatchPerformanceOfBetTypeLeagueTrader(GetMatchPerformanceOfBetTypeLeagueTraderCriteria criteria);
 
-    Task<LeaguePerformanceList> GetLeaguePerformance(Fanex.Data.Repository.ICriteria criteria, bool isGroupOfLeague = false);
+    Task<LeaguePerformanceList> GetLeaguePerformance(GetLeaguePerformanceCriteria criteria, bool isGroupOfLeague = false);
+
+    Task<TraderPerformanceList> GetTraderPerformanceOfLeague(GetTraderPerformanceOfLeagueCriteria criteria);
+
+    Task<MatchPerformanceGroup> GetMatchPerformanceOfLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria);
+
+    Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailLeague(GetBettypeDetailLeague criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -179,9 +187,9 @@ public class SoccerPerformanceDetailServiceImp(
 
     public async Task<TraderPerformanceList> GetTraderPerformanceOfBetType(GetTraderPerformanceOfBetTypeCriteria criteria)
     {
-        var rawData = (await repository.FetchAsync<TraderPerformanceInfo>(criteria)).ToList();
+        var rawData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
 
-        var traderPerformance = CalculateBetTypeTraderPerformanceList(rawData);
+        var traderPerformance = CalculateTraderPerformanceList(rawData);
 
         return traderPerformance;
     }
@@ -341,12 +349,12 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var traderData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
 
-        var traderPerformance = CalculateBetTypeTraderPerformanceList(traderData);
+        var traderPerformance = CalculateTraderPerformanceList(traderData);
         
         return traderPerformance;
     }
 
-    private TraderPerformanceList CalculateBetTypeTraderPerformanceList(IEnumerable<TraderPerformanceInfo> rawData)
+    private TraderPerformanceList CalculateTraderPerformanceList(IEnumerable<TraderPerformanceInfo> rawData)
     {
         var traderPerformance = new TraderPerformanceList();
 
@@ -402,7 +410,12 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var rawData = await repository.FetchAsync<MatchPerformanceInfo>(criteria);
 
-        MatchPerformanceGroup matchPerformance = new MatchPerformanceGroup();
+        return CalculateMatchPerformance(rawData);
+    }
+
+    private MatchPerformanceGroup CalculateMatchPerformance(IEnumerable<MatchPerformanceInfo> rawData)
+    {
+        var matchPerformance = new MatchPerformanceGroup();
 
         if (rawData != null && rawData.Any())
         {
@@ -413,7 +426,7 @@ public class SoccerPerformanceDetailServiceImp(
 
             var total = matches.DynamicSum();
 
-            matchPerformance.ItemLiveList = CalculateMatchByLiveStatus(liveMatches); 
+            matchPerformance.ItemLiveList = CalculateMatchByLiveStatus(liveMatches);
             matchPerformance.ItemNonLiveList = CalculateMatchByLiveStatus(nonLiveMatches);
             matchPerformance.Total = total;
         }
@@ -421,8 +434,121 @@ public class SoccerPerformanceDetailServiceImp(
         return matchPerformance;
     }
 
-    public Task<LeaguePerformanceList> GetLeaguePerformance(ICriteria criteria, bool isGroupOfLeague = false)
+    public async Task<LeaguePerformanceList> GetLeaguePerformance(GetLeaguePerformanceCriteria criteria, bool isGroupOfLeague = false)
     {
-        throw new NotImplementedException();
+        var rawData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
+
+        var leaguePerformance = new LeaguePerformanceList();
+
+        if (rawData != null && rawData.Any())
+        {
+            leaguePerformance = CalculateLeaguePerformanceByGroup(rawData, isGroupOfLeague);
+        }
+
+        return leaguePerformance;
+    }
+
+    private LeaguePerformanceList CalculateLeaguePerformanceByGroup(IEnumerable<LeaguePerformanceInfo> rawData, bool isGroupOfLeague)
+    {
+        if (isGroupOfLeague)
+        {
+            var leagueData = rawData
+                    .OrderBy(c => c.LeagueId)
+                    .ThenByDescending(c => c.IsLive)
+                    .Select(c => new LeaguePerformanceInfo
+                    {
+                        LeagueId = c.LeagueId,
+                        LeagueName = c.LeagueName,
+                        LeagueGroupID = c.LeagueGroupID,
+                        LeagueBenchmark = c.LeagueBenchmark,
+                        BetTypeBMShift1 = c.BetTypeBMShift1,
+                        BetTypeBMShift2 = c.BetTypeBMShift2,
+                        BetTypeBMShift3 = c.BetTypeBMShift3,
+                        NoOfTraders = c.NoOfTraders,
+                        NoOfMatches = c.NoOfMatches,
+                        Turnover = c.Turnover,
+                        WinLoss = c.WinLoss,
+                        Margin = c.Margin,
+                        TurnoverReal = c.TurnoverReal,
+                        WinLossReal = c.WinLossReal,
+                        MarginReal = c.MarginReal,
+                        BetCount = c.BetCount,
+                        Market = c.Market,
+                        IsLive = c.IsLive,
+                        FlagForViewReport = rawData.Count(b => b.LeagueId == c.LeagueId)
+                    });
+
+            return CalculatePerformanceLeague(leagueData);
+        }
+        else
+        {
+            return CalculatePerformanceLeague(rawData);
+        }
+    }
+
+    public async Task<TraderPerformanceList> GetTraderPerformanceOfLeague(GetTraderPerformanceOfLeagueCriteria criteria)
+    {
+        var  rawData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
+
+        return CalculateTraderPerformanceList(rawData);
+    }
+
+    public async Task<MatchPerformanceGroup> GetMatchPerformanceOfLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<MatchPerformanceInfo>(criteria);
+
+        return CalculateMatchPerformance(rawData);
+    }
+
+    public async Task<List<BetTypeDetailItem>> GetBettypeDetailLeague(GetBettypeDetailLeague criteria)
+    {
+        var rawData = await repository.FetchAsync<BetTypeDetailInfo>(criteria);
+
+        var bettypeDetail = new List<BetTypeDetailItem>();
+
+        if (rawData != null && rawData.Any())
+        {
+            if (criteria.IsLive)
+            {
+                GetScoreByPeriodCriteria scoreByPeriodCriteria = new GetScoreByPeriodCriteria
+                {
+                    FromDate = criteria.FromDate,
+                    ToDate = criteria.ToDate,
+                    CustId = criteria.CustId,
+                    MatchId = criteria.MatchId,
+                    Bettypes = string.Join(",", rawData.Select(b => b.BetType.ToString())),
+                    IsExcludeLeagues = true,
+                    LeagueGroupIds = criteria.LeagueGroupIds
+                };
+
+                var scoreByPeriodData = await repository.FetchAsync<ScoreByPeriodInfo>(scoreByPeriodCriteria);
+
+                bettypeDetail = CalculateLiveBetTypeDetail(rawData, scoreByPeriodData);
+            }
+            else
+            {
+                bettypeDetail = mapper.Map<List<BetTypeDetailItem>>(rawData);
+            }
+        }
+
+        return bettypeDetail;
+    }
+
+    private List<BetTypeDetailItem> CalculateLiveBetTypeDetail(
+        IEnumerable<BetTypeDetailInfo> rawData,
+        IEnumerable<ScoreByPeriodInfo> scorePeriodRawData)
+    {
+        var result = new List<BetTypeDetailItem>();
+
+        foreach (var rawItem in rawData)
+        {
+            var item = mapper.Map<BetTypeDetailItem>(rawItem);
+            item.Score = scorePeriodRawData.Where(s => s.BetType == rawItem.BetType).First().Score;
+            item.ScoreByPeriod = scorePeriodRawData.Where(s => s.BetType == rawItem.BetType).Select(i => new ScoreByPeriodItem(i)).ToList();
+
+            result.Add(item);
+        }
+
+        return result;
     }
 }
