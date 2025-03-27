@@ -153,7 +153,7 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     }
 
     [Route("league-bet-choice-detail")]
-    public async Task<IActionResult> GetBetChoicePerformaceOfBetTypeLeague(GetBetChoicePerformanceOfBetTypeLeagueCriteria criteria)
+    public async Task<IActionResult> GetBetChoicePerformanceOfBetTypeLeague(GetBetChoicePerformanceOfBetTypeLeagueCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;
 

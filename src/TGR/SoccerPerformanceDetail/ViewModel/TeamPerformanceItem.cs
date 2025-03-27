@@ -10,7 +10,7 @@ public class TeamPerformanceItem
 
     public TeamPerformanceItem(TeamPerformanceInfo teamData)
     {
-        if (teamData != null && teamData.TeamId.HasValue)
+        if (teamData is { TeamId: not null })
         {
             TeamId = teamData.TeamId.Value;
             TeamName = teamData.TeamName;

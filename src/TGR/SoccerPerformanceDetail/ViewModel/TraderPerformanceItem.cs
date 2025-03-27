@@ -1,7 +1,5 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-using Model;
-
 public class TraderPerformanceItem
 {
     public int TraderId { get; set; }

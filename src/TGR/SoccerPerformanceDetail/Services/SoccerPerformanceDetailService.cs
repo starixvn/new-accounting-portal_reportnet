@@ -3,7 +3,6 @@
 using AutoMapper;
 using Criteria;
 using Fanex.Data.Repository;
-using Fanex.NAP.Client;
 using global::Utilities.LinqDynamicSum;
 using global::Utilities.RemotingRef;
 using Model;
@@ -47,7 +46,7 @@ public interface SoccerPerformanceDetailService
 
     Task<GradePerformanceList> GetGradePerformance(GetGradePerformanceCriteria criteria);
 
-    Task<TraderPerformanceList> GetTraderPerformance(Fanex.Data.Repository.ICriteria criteria);
+    Task<TraderPerformanceList> GetTraderPerformance(ICriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -80,7 +79,6 @@ public class SoccerPerformanceDetailServiceImp(
             }
             else
             {
-                var isLive = criteria.MarketFilter == Market.Live;
                 betTypePerformance.ItemLiveList = liveData;
                 betTypePerformance.ItemNonLiveList = nonLiveData;
             }
@@ -248,8 +246,10 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var leagueGroupName = remotingRefService.GetLeagueName(leagueGroupId);
 
-        var leagueGroup = new MatchPerformanceGroup();
-        leagueGroup.LeagueName = leagueGroupName;
+        var leagueGroup = new MatchPerformanceGroup
+        {
+            LeagueName = leagueGroupName
+        };
 
         var groupMatchByLeague = matchDataList.Where(x => x.LeagueId == leagueGroupId).ToList();
         var groupTotal = groupMatchByLeague.DynamicSum();
@@ -484,10 +484,8 @@ public class SoccerPerformanceDetailServiceImp(
 
             return CalculatePerformanceLeague(leagueData);
         }
-        else
-        {
-            return CalculatePerformanceLeague(rawData);
-        }
+
+        return CalculatePerformanceLeague(rawData);
     }
 
     public async Task<TraderPerformanceList> GetTraderPerformanceOfLeague(GetTraderPerformanceOfLeagueCriteria criteria)
@@ -514,7 +512,7 @@ public class SoccerPerformanceDetailServiceImp(
         {
             if (criteria.IsLive)
             {
-                GetScoreByPeriodCriteria scoreByPeriodCriteria = new GetScoreByPeriodCriteria
+                var scoreByPeriodCriteria = new GetScoreByPeriodCriteria
                 {
                     FromDate = criteria.FromDate,
                     ToDate = criteria.ToDate,
@@ -547,7 +545,7 @@ public class SoccerPerformanceDetailServiceImp(
         foreach (var rawItem in rawData)
         {
             var item = mapper.Map<BetTypeDetailItem>(rawItem);
-            item.Score = scorePeriodRawData.Where(s => s.BetType == rawItem.BetType).First().Score;
+            item.Score = scorePeriodRawData.First(s => s.BetType == rawItem.BetType).Score;
             item.ScoreByPeriod = scorePeriodRawData.Where(s => s.BetType == rawItem.BetType).Select(i => new ScoreByPeriodItem(i)).ToList();
 
             result.Add(item);
@@ -558,8 +556,8 @@ public class SoccerPerformanceDetailServiceImp(
 
     public async Task<GradePerformanceList> GetGradePerformance(GetGradePerformanceCriteria criteria)
     {
-        IEnumerable<GradePerformanceInfo> gradeData = await repository.FetchAsync<GradePerformanceInfo>(criteria);
-        GradePerformanceList gradePerformance = new GradePerformanceList();
+        var gradeData = await repository.FetchAsync<GradePerformanceInfo>(criteria);
+        var gradePerformance = new GradePerformanceList();
 
         if (gradeData != null && gradeData.Any())
         {
@@ -594,7 +592,7 @@ public class SoccerPerformanceDetailServiceImp(
     public Task<TraderPerformanceList> GetTraderPerformance(ICriteria criteria)
     {
         IEnumerable<TraderPerformanceInfo> traderData = this.GetData<TraderPerformanceInfo>(criteria);
-        TraderPerformanceList traderPerformance = new TraderPerformanceList();
+        var traderPerformance = new TraderPerformanceList();
 
         if (traderData != null && traderData.Any())
         {

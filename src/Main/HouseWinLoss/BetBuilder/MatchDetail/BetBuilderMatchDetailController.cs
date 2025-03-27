@@ -18,7 +18,7 @@ public class BetBuilderMatchDetailController(
     MatchGridOptionColumnDecoratorFull decorator,
     MatchSortingService sortingService,
     IMapper mapper)
-    : ControllerBase()
+    : ControllerBase
 {
     [Route("")]
     public async Task<IActionResult> Json(QueryModel queryModel)

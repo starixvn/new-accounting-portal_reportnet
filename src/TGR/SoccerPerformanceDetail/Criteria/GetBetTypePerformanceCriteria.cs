@@ -12,15 +12,12 @@ public class GetBetTypePerformanceCriteria : CriteriaBase
     {
         get
         {
-            switch (MarketFilter)
+            return MarketFilter switch
             {
-                case SoccerPerformanceDetail.Market.Live:
-                    return 1;
-                case SoccerPerformanceDetail.Market.NonLive:
-                    return 0;
-                default:
-                    return -1;
-            }
+                SoccerPerformanceDetail.Market.Live => 1,
+                SoccerPerformanceDetail.Market.NonLive => 0,
+                _ => -1
+            };
         }
     }
 

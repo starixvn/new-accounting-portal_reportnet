@@ -42,23 +42,13 @@ public class TimeMachinePerformanceItem
 
     private string ConvertMinute(decimal hdp1, short betType)
     {
-        var minute = string.Empty;
-
-        if (betType == 228)
+        var minute = betType switch
         {
-            minute = "Before Minute " + (hdp1 + 1).ToString("N0");
-        }
-        else if(betType == 229)
-        {
-            if (hdp1 < 10)
-            {
-                minute = "00:00" + " - " + "0" + (hdp1 + 1).ToString("N0") + ":00";
-            }
-            else
-            {
-                minute = "00:00" + " - " + (hdp1 + 1).ToString("N0") + ":00";
-            }
-        }
+            228 => "Before Minute " + (hdp1 + 1).ToString("N0"),
+            229 when hdp1 < 10 => "00:00" + " - " + "0" + (hdp1 + 1).ToString("N0") + ":00",
+            229 => "00:00" + " - " + (hdp1 + 1).ToString("N0") + ":00",
+            _ => string.Empty
+        };
 
         return minute;
     }

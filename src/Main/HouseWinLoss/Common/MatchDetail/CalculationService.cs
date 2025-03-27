@@ -18,7 +18,7 @@ public class CalculationServiceImp(RemotingRefService refService, IMapper mapper
     public WinLoss FromRawWinLoss(RawWinLoss rawWinLoss)
     {
         var winLoss = mapper.Map<WinLoss>(rawWinLoss);
-        if (winLoss.SportType == SportTypeConstants.VirtualSoccer || winLoss.SportType == SportTypeConstants.VirtualBetByBasketball)
+        if (winLoss.SportType is SportTypeConstants.VirtualSoccer or SportTypeConstants.VirtualBetByBasketball)
         {
             winLoss.AwayName = refService.GetTeamName3rd(rawWinLoss.AwayId);
             winLoss.HomeName = GetHomeName3rd(rawWinLoss.HomeId, rawWinLoss.IsNeutral);

@@ -54,36 +54,41 @@ public class PointHDPPerformanceItem
             case 477: // Corner 3-Way Handicap --- Corner
             case 478: // 1H Corner 3-Way Handicap --- Corner
                 newPointHDP = "0";
-                if (betOption == "1")
+                switch (betOption)
                 {
-                    if (pointHDP > 0)
+                    case "1" when pointHDP > 0:
                         newPointHDP = "-" + Math.Abs(pointHDP).ToString("0.##");
-                    else if (pointHDP < 0)
-                        newPointHDP = "+" + Math.Abs(pointHDP).ToString("0.##");                        
-                }
-                else if (betOption == "2")
-                {
-                    if (pointHDP > 0)
+                        break;
+                    case "1":
+                    {
+                        if (pointHDP < 0)
+                            newPointHDP = "+" + Math.Abs(pointHDP).ToString("0.##");
+                        break;
+                    }
+                    case "2" when pointHDP > 0:
                         newPointHDP = "+" + Math.Abs(pointHDP).ToString("0.##");
-                    else if (pointHDP < 0)
-                        newPointHDP = "-" + Math.Abs(pointHDP).ToString("0.##");
-                }
-                else
-                {
-                    if (pointHDP > 0)
-                        newPointHDP = "A+" + pointHDP.ToString("0.##");
-                    else if (pointHDP < 0)
-                        newPointHDP = "H+" + Math.Abs(pointHDP).ToString("0.##");
+                        break;
+                    case "2":
+                    {
+                        if (pointHDP < 0)
+                            newPointHDP = "-" + Math.Abs(pointHDP).ToString("0.##");
+                        break;
+                    }
+                    default:
+                    {
+                        if (pointHDP > 0)
+                            newPointHDP = "A+" + pointHDP.ToString("0.##");
+                        else if (pointHDP < 0)
+                            newPointHDP = "H+" + Math.Abs(pointHDP).ToString("0.##");
+                        break;
+                    }
                 }
                 break;                                  
             case 228: // SABA OU Time Machine --- Total Goal
                 newPointHDP = pointHDP.ToString("0.##");
                 break;
             case 229: // SABA HDP Time Machine --- Total Goal
-                if (betOption.ToUpper() == "A")
-                    newPointHDP = (-1 * pointHDP).ToString("0.##");
-                else
-                    newPointHDP = pointHDP.ToString("0.##");
+                newPointHDP = betOption.ToUpper() == "A" ? (-1 * pointHDP).ToString("0.##") : pointHDP.ToString("0.##");
                 break;
             default:
                 newPointHDP = pointHDP.ToString("0.##");

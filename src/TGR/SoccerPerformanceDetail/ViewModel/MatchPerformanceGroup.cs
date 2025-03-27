@@ -1,6 +1,6 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
 
-public class MatchPerformanceGroup()
+public class MatchPerformanceGroup
 {
     public int LeagueId { get; set; }
 

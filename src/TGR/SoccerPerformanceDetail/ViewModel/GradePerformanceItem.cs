@@ -10,7 +10,7 @@ public class GradePerformanceItem
 
     public GradePerformanceItem(GradePerformanceInfo gradeData)
     {
-        if (gradeData != null && gradeData.Grade.HasValue)
+        if (gradeData is { Grade: not null })
         {
             Grade = gradeData.Grade.Value;
             NoOfTraders = Convert.ToInt32(gradeData.TraderCount);

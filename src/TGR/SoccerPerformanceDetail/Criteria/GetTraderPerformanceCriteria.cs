@@ -10,19 +10,16 @@ public class GetTraderPerformanceCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public Market MarketFilter { get; set; }
 
-    public Int16 Market
+    public short Market
     {
         get
         {
-            switch (this.MarketFilter)
+            return MarketFilter switch
             {
-                case SoccerPerformanceDetail.Market.Live:
-                    return 1;
-                case SoccerPerformanceDetail.Market.NonLive:
-                    return 0;
-                default:
-                    return -1;
-            }
+                SoccerPerformanceDetail.Market.Live => 1,
+                SoccerPerformanceDetail.Market.NonLive => 0,
+                _ => -1
+            };
         }
     }
 

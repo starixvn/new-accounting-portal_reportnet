@@ -1,6 +1,4 @@
-﻿using NPOI.SS.Formula.Functions;
-
-namespace SoccerPerformanceDetail.ViewModel;
+﻿namespace SoccerPerformanceDetail.ViewModel;
 
 public class LeaguePerformanceItem
 {
