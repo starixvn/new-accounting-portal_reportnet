@@ -237,10 +237,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                     return item.MonthYear;
                 });
                 var barMarginData = data.map(function(item) {
-                    return item.CompanyMargin; 
+                    return (item.CompanyMargin * 100).toFixed(2); 
                 });
                 var lineMarginData = data.map(function(item) {
-                    return item.CompanyMargin;
+                    return (item.CompanyMargin * 100).toFixed(2);
                 });
 
                 // Get the context of the canvas element we want to select
@@ -275,7 +275,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                                 align: 'center',
                                 anchor: 'center',
                                 formatter: function(value) {
-                                    return (value * 100).toFixed(2) + '%'; // Convert decimal to percentage
+                                    return value + '%';
                                 },
                                 color: function (context) {
                                     return context.dataset.data[context.dataIndex] > 0 ? 'red' : '#000'; // Black if negative
@@ -301,7 +301,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                             beginAtZero: false,
                             ticks: {
                                 callback: function(value) {
-                                    return (value * 100).toFixed(2) + '%'; // Convert decimal to percentage
+                                    return value.toFixed(2) + '%';
                                 }
                             }
                         }
@@ -322,7 +322,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                                     if (label) {
                                         label += ': ';
                                     }
-                                    label += (context.raw * 100).toFixed(2) + '%'; // Convert decimal to percentage
+                                    label += context.raw + '%';
                                     return label;
                                 }
                             }
