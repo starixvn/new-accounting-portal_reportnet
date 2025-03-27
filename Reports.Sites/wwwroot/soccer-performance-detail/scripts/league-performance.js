@@ -3,6 +3,7 @@
 /* global Namespace, numeral, Fanex, common, validator, labels, datepickerSetting, forecastBettype, messages */
 
 ////'use strict';
+var validator = new Fanex.TGRS.Validator();
 $(document).ready(function () {
     var leaguePerformance = new Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance();
 
@@ -45,14 +46,14 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         divBettypePerformanceOfLeagueMatchGrid: null
     };
     var urls = {
-        GetInitializedData: common.ResolveRootUrl('PerformanceDetail/GetInitializedData'),
-        GetLeaguePerformance: common.ResolveRootUrl('PerformanceDetail/GetLeaguePerformance'),
-        ExportLeaguePerformance: common.ResolveRootUrl('PerformanceDetail/ExportLeaguePerformance'),
-        GetTraderPerformanceOfLeague: common.ResolveRootUrl('PerformanceDetail/GetTraderPerformanceOfLeague'),
-        GetMatchPerformanceOfLeagueTrader: common.ResolveRootUrl('PerformanceDetail/GetMatchPerformanceOfLeagueTrader'),
-        GetMatchPerformanceOfLeague: common.ResolveRootUrl('PerformanceDetail/GetMatchPerformanceOfLeague'),
-        GetBettypeDetail: common.ResolveRootUrl('PerformanceDetail/GetBettypeDetailLeague'),
-        GetBettypePerformanceOfLeagueMatch: common.ResolveRootUrl('PerformanceDetail/GetBettypePerformanceOfLeagueMatch')
+        GetInitializedData: window.rootUrl + '/api/soccer-performance-detail/league/initialized-data',
+        GetLeaguePerformance: window.rootUrl + '/api/soccer-performance-detail/league/main',
+        ExportLeaguePerformance: window.rootUrl + '/api/soccer-performance-detail/league/export',
+        GetTraderPerformanceOfLeague: window.rootUrl + '/api/soccer-performance-detail/league/league-trader-detail',
+        GetMatchPerformanceOfLeagueTrader: window.rootUrl + '/api/soccer-performance-detail/league/league-match-detail',
+        GetMatchPerformanceOfLeague: window.rootUrl + '/api/soccer-performance-detail/league/match-performance',
+        GetBettypeDetail: window.rootUrl + '/api/soccer-performance-detail/league/bettype-detail',
+        GetBettypePerformanceOfLeagueMatch: window.rootUrl + '/api/soccer-performance-detail/league/match-bettype-performance'
     };
     var parameters = {
         MarketFilter: null,
@@ -762,14 +763,15 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         // Hide previous report.
         domElements.divLeaguePerformanceContainer.addClass('display-none');
         var gridOptions = renderTraderPerformanceGridOptions(leagueId, isLive, leagueName);
+        
         gridOptions.bodyRows = bodyData;
         gridOptions.footerRows = footerData;
         domElements.divTraderPerformanceGrid.fanexGrid(gridOptions);
-
+        
         if (!common.HasViewScorePermission) {
             domElements.divTraderPerformanceGrid.fanexGrid("hideColumns", gridOptions, [6]);
         }
-
+        
         handleTraderPerformanceGridEvents(leagueId, leagueName);
     };
 
@@ -895,7 +897,6 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         var bodyData = [];       
         var row;
         var items = data.ItemLiveList.length > 0 ? data.ItemLiveList : data.ItemNonLiveList;
-
         $.each(items, function (index, item) {
             traderCol = traderFormat.format(item.TraderId, item.TeamId, item.IsLive, item.TraderName);
             noOfMatchesCol = noOfMatchesFormat.format(item.IsLive, labels.MatchPerformance, numeral(item.NoOfMatches).format(common.Formats.IntegerFormat));
@@ -912,7 +913,6 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 { Name: 'ColBetCount', Value: item.BetCount },
                 { Name: 'ColScore', Value: common.GetNumWithLabel(common.HasViewScorePermission ? item.Score : labels.NA, labels.NA) }
             ]
-
             if (isVirtualPerformancePermission) {
                 currentColumns = currentColumns.concat([{ Name: 'ColTurnover', Value: item.Turnover },
                     { Name: 'ColAvgTurnoverPerMatch', Value: (item.Turnover / item.NoOfMatches) },
@@ -931,7 +931,6 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
 
             bodyData.push(row);
         });
-
         return bodyData;
     }
 

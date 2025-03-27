@@ -4,7 +4,7 @@ using SoccerPerformanceDetail.Services;
 
 namespace SoccerPerformanceDetail.Controller;
 
-[Route("api/soccer-performance-detail/league/")]
+[Route("api/soccer-performance-detail/league")]
 [ApiController]
 public class LeaguePerformanceDetailController(SoccerPerformanceDetailService service) : ControllerBase
 {
@@ -19,7 +19,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
             criteria.LeagueGroupIds = string.Empty;
         }
 
-        var leaguePerformance = service.GetLeaguePerformance(criteria, criteria.MarketFilter == Market.All);
+        var leaguePerformance = await service.GetLeaguePerformance(criteria, criteria.MarketFilter == Market.All);
 
         return Ok(leaguePerformance);
     }
@@ -28,7 +28,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
     public async Task<IActionResult> GetTraderPerformanceOfLeague(GetTraderPerformanceOfLeagueCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;
-        var traderPerformance = service.GetTraderPerformanceOfLeague(criteria);
+        var traderPerformance = await service.GetTraderPerformanceOfLeague(criteria);
 
         return Ok(traderPerformance);
     }
@@ -37,7 +37,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
     public async Task<IActionResult> GetMatchPerformanceOfLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;
-        var matchPerformance = service.GetMatchPerformanceOfLeagueTrader(criteria);
+        var matchPerformance = await service.GetMatchPerformanceOfLeagueTrader(criteria);
 
         return Ok(matchPerformance);
     }
@@ -47,7 +47,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
     {
         criteria.IsExcludeLeagues = true;
        
-        var bettypeDetail = service.GetBettypeDetailLeague(criteria);
+        var bettypeDetail = await service.GetBettypeDetailLeague(criteria);
         
         return Ok(bettypeDetail);
     }

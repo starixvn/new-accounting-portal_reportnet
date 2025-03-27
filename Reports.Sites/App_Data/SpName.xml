@@ -495,5 +495,6 @@
 			<Mapping DataField="BetChoiceCount" ObjectProperty="NoOfBetChoices" />
 			<Mapping DataField="MatchCount" ObjectProperty="NoOfMatches" />
 		</Setting>
+		<Setting Key="TGRS_Rpt_PerformanceDetail_League_Trader" SpName="TGRS_Rpt_PerformanceDetail_League_Trader" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 	</Function>
 </Functions>
