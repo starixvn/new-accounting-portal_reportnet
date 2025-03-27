@@ -44,6 +44,10 @@ public interface SoccerPerformanceDetailService
     Task<MatchPerformanceGroup> GetMatchPerformanceOfLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria);
 
     Task<List<BetTypeDetailItem>> GetBettypeDetailLeague(GetBettypeDetailLeague criteria);
+
+    Task<GradePerformanceList> GetGradePerformance(GetGradePerformanceCriteria criteria);
+
+    Task<TraderPerformanceList> GetTraderPerformance(Fanex.Data.Repository.ICriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -550,5 +554,65 @@ public class SoccerPerformanceDetailServiceImp(
         }
 
         return result;
+    }
+
+    public async Task<GradePerformanceList> GetGradePerformance(GetGradePerformanceCriteria criteria)
+    {
+        IEnumerable<GradePerformanceInfo> gradeData = await repository.FetchAsync<GradePerformanceInfo>(criteria);
+        GradePerformanceList gradePerformance = new GradePerformanceList();
+
+        if (gradeData != null && gradeData.Any())
+        {
+            var gradePerformanceNonLive = gradeData.AsEnumerable().Where(c => !c.IsLive).Select(c => c);
+
+            var gradePerformanceLive = gradeData.AsEnumerable().Where(c => c.IsLive).Select(c => c);
+
+            gradePerformance.AddGradeList(gradePerformanceNonLive, false);
+
+            gradePerformance.AddGradeList(gradePerformanceLive, true);
+
+            gradePerformance.Total.Margin = CalculateTotalMargin(gradePerformance.Total.WinLoss, gradePerformance.Total.Turnover);
+
+            gradePerformance.Total.MarginReal = CalculateTotalMargin(gradePerformance.Total.WinLossReal, gradePerformance.Total.TurnoverReal);
+        }
+
+        return gradePerformance;
+    }
+
+    private decimal? CalculateTotalMargin(decimal winLoss, decimal turnover)
+    {
+        decimal? margin = null;
+
+        if (turnover != 0)
+        {
+            margin = winLoss / turnover * 100;
+        }
+
+        return margin;
+    }
+
+    public Task<TraderPerformanceList> GetTraderPerformance(ICriteria criteria)
+    {
+        IEnumerable<TraderPerformanceInfo> traderData = this.GetData<TraderPerformanceInfo>(criteria);
+        TraderPerformanceList traderPerformance = new TraderPerformanceList();
+
+        if (traderData != null && traderData.Any())
+        {
+            // Non live
+            var traderPerformanceNonLive = traderData.AsEnumerable().Where(c => !c.IsLive).Select(c => c);
+
+            // Live
+            var traderPerformanceLive = traderData.AsEnumerable().Where(c => c.IsLive).Select(c => c);
+
+            traderPerformance.AddTraderList(traderPerformanceNonLive, false);
+            traderPerformance.AddTraderList(traderPerformanceLive, true);
+
+            traderPerformance.Total.Margin = CalculateTotalMargin(traderPerformance.Total.WinLoss, traderPerformance.Total.Turnover);
+            traderPerformance.Total.MarginReal = CalculateTotalMargin(traderPerformance.Total.WinLossReal, traderPerformance.Total.TurnoverReal);
+
+            SessionManager.Set<TraderPerformanceList>(TraderPerformanceDetailReportSessionKey, traderPerformance);
+        }
+
+        return traderPerformance;
     }
 }
