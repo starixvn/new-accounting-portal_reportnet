@@ -58,4 +58,10 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
         ViewBag.LeagueGroups = await service.GetLeagueGroups();
         return View();
     }
+
+    [HttpGet]
+    public IActionResult GetViewScorePermission()
+    {
+        return Json(true);
+    }
 }
