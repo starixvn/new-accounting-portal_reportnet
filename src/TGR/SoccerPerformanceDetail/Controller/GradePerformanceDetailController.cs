@@ -7,19 +7,19 @@ namespace SoccerPerformanceDetail.Controller
 {
     public class GradePerformanceDetailController(SoccerPerformanceDetailService service) : ControllerBase
     {
-        public JsonResult GetGradePerformance(GetGradePerformanceCriteria criteria)
-        {
-            criteria.IsExcludeLeagues = true;
+        //public JsonResult GetGradePerformance(GetGradePerformanceCriteria criteria)
+        //{
+        //    criteria.IsExcludeLeagues = true;
             
-            if (criteria.IsAllLeagueGroup)
-            {
-                criteria.LeagueGroupIds = string.Empty;
-            }
+        //    if (criteria.IsAllLeagueGroup)
+        //    {
+        //        criteria.LeagueGroupIds = string.Empty;
+        //    }
 
-            GradePerformanceList gradePerformance = service.GetGradePerformance(criteria);
-            JsonResult jsonResult = Json(gradePerformance);
-            jsonResult.MaxJsonLength = int.MaxValue;
-            return jsonResult;
-        }
+        //    GradePerformanceList gradePerformance = service.GetGradePerformance(criteria);
+        //    JsonResult jsonResult = Json(gradePerformance);
+        //    jsonResult.MaxJsonLength = int.MaxValue;
+        //    return jsonResult;
+        //}
     }
 }
