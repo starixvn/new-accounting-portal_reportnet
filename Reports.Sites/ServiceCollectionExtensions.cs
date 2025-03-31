@@ -234,6 +234,12 @@ public static class ServiceCollectionExtensions
                 "/soccer-performance-detail/scripts/league-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/trader-performance.js",
+                "/soccer-performance-detail/scripts/grade-history.js",
+                "/soccer-performance-detail/scripts/team-history.js",
+                "/soccer-performance-detail/scripts/trader-performance.js",
+                "/soccer-performance-detail/scripts/performance-detail-helper.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");

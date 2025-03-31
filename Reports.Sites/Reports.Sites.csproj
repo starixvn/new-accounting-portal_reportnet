@@ -103,6 +103,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\soccer-performance-detail\scripts\league-performance.js" />
+    <Content Remove="wwwroot\soccer-performance-detail\scripts\trader-performance.js" />
   </ItemGroup>
 
   <ItemGroup>
