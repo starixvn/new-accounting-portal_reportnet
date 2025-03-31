@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
+using SoccerPerformanceDetail.Constants;
 using SoccerPerformanceDetail.Criteria;
 using SoccerPerformanceDetail.Utilities;
 using SoccerPerformanceDetail.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SoccerPerformanceDetail.Constants;
 using Utilities.Configurations;
 
 namespace SoccerPerformanceDetail.Services;
@@ -27,9 +22,9 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
 {
     private ExcelWorksheet sheet;
 
-    private ExcelWorksheet oddSheet;
+    private ExcelWorksheet titleSheet;
 
-    private ExcelWorksheet evenSheet;
+    private ExcelWorksheet bodySheet;
 
     private ExcelWorksheet totalSheet;
 
@@ -40,9 +35,22 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
     public Task<ExcelPackage> ExportExcelTraderPerformance(TraderPerformanceList data, GetTraderPerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups, IEnumerable<BetTypeItem> betTypes)
     {
-        LoadTemplate("League.xlsx");
+        LoadTemplate("Trader.xlsx");
         var rowIndex = BuildFilterBlock(criteria, leagueGroups, betTypes);
+        var currentRowIndex = rowIndex + 4;
+        if (data.ItemLiveList.Any())
+        {
+            BuildBodyRows(data.ItemLiveList, currentRowIndex, ExcelConstants.LiveText);
+            currentRowIndex += data.ItemLiveList.Count;
+        }
 
+        if (data.ItemNonLiveList.Any())
+        {
+            BuildBodyRows(data.ItemNonLiveList, currentRowIndex + 1, ExcelConstants.NonLiveText);
+            currentRowIndex += data.ItemNonLiveList.Count + 1;
+        }
+
+        BuildTotalRow(data.Total, currentRowIndex + 1);
         ClearTemplate();
         return Task.FromResult(ExcelPackage!);
     }
@@ -50,10 +58,10 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
     private int BuildFilterBlock(GetTraderPerformanceCriteria criteria, IEnumerable<LeagueGroup> leagueGroups, IEnumerable<BetTypeItem> betTypes)
     {
         var rowIndex = StartFilterBlockRowIndex;
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.MarketFilter;
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.FromDate.ToString("MM/dd/yyyy");
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value =
+        sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value = criteria.MarketFilter;
+        sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value = criteria.FromDate.ToString("MM/dd/yyyy");
+        sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
+        sheet!.Cells[$"B{rowIndex}:P{rowIndex}"].Value =
             ModelsHelper.MakeBetTypeSelectString(betTypes, criteria.BetTypes);
         var lineCount = (int)Math.Ceiling((double)sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Text.Length / ExcelConstants.Width);
         if (lineCount > 1)
@@ -66,7 +74,7 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
         {
             if (criteria.Turnover.HasValue)
             {
-                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
+                sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value =
                     criteria.Turnover.Value.ToString("#,##0.00");
             }
             else
@@ -76,7 +84,7 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
 
             if (criteria.WinLoss.HasValue)
             {
-                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
+                sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value =
                     criteria.WinLoss.Value.ToString("#,##0.00");
             }
             else
@@ -89,7 +97,7 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
         {
             if (criteria.TurnoverReal.HasValue)
             {
-                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
+                sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value =
                     criteria.TurnoverReal.Value.ToString("#,##0.00");
             }
             else
@@ -99,7 +107,7 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
 
             if (criteria.WinLossReal.HasValue)
             {
-                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
+                sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value =
                     criteria.WinLossReal.Value.ToString("#,##0.00");
             }
             else
@@ -111,7 +119,7 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
         if (criteria.IsVirtual && criteria.MarginFrom.HasValue || criteria.MarginTo.HasValue)
         {
             var marginString = GenerateMarginString(criteria.MarginFrom, criteria.MarginTo);
-            sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = marginString;
+            sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value = marginString;
         }
         else
         {
@@ -121,55 +129,54 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
         if (criteria.IsReal && criteria.MarginFromReal.HasValue || criteria.MarginToReal.HasValue)
         {
             var marginString = GenerateMarginString(criteria.MarginFromReal, criteria.MarginToReal);
-            sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = marginString;
+            sheet!.Cells[$"B{rowIndex}:P{rowIndex++}"].Value = marginString;
         }
         else
         {
             sheet!.DeleteRow(rowIndex);
         }
 
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value = ModelsHelper.MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
+        sheet!.Cells[$"B{rowIndex}:P{rowIndex}"].Value = ModelsHelper.MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
 
         return rowIndex;
     }
 
-    private void BuildBodyRows(IEnumerable<TraderPerformanceItem> list, int startRowIndex)
+    private void BuildBodyRows(IEnumerable<TraderPerformanceItem> list, int startRowIndex, string title)
     {
         var index = 1;
         var rowIndex = startRowIndex;
-        var excelModels = mapper.Map<IEnumerable<LeaguePerformanceExcelItem>>(list);
+        var titleExcelItem = new TraderPerformanceExcelTitleItem
+        {
+            Title = title
+        };
+        sheet.ApplyModel(titleSheet, titleExcelItem, rowIndex++);
+        var excelModels = mapper.Map<IEnumerable<TraderPerformanceExcelItem>>(list);
         foreach (var item in excelModels)
         {
-            var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
             item.No = index++;
-            item.Market = item.IsLive ? ExcelConstants.LiveText : ExcelConstants.NonLiveText;
-            sheet.ApplyModel(template, item, rowIndex);
+            sheet.ApplyModel(bodySheet, item, rowIndex);
             UpdateValueSpecificColumns(rowIndex++, item);
         }
     }
 
-    private void BuildTotalRow(TraderPerformanceItem liveData, TraderPerformanceItem nonLivedata, int startIndex)
+    private void BuildTotalRow(TraderPerformanceItem data, int startIndex)
     {
-        var excelModel = mapper.Map<LeaguePerformanceExcelItem>(liveData);
-        excelModel.Market = ExcelConstants.LiveText;
+        var excelModel = mapper.Map<TraderPerformanceExcelItem>(data);
         sheet.ApplyModel(totalSheet, excelModel, startIndex);
         UpdateValueSpecificColumns(startIndex, excelModel);
-        excelModel = mapper.Map<LeaguePerformanceExcelItem>(nonLivedata);
-        excelModel.Market = ExcelConstants.NonLiveText;
-        sheet.ApplyModel(totalSheet, excelModel, startIndex + 1);
-        UpdateValueSpecificColumns(startIndex + 1, excelModel);
-        var cellTotalAddress = $"A{startIndex}:B{startIndex + 1}";
+        var cellTotalAddress = $"A{startIndex}:D{startIndex}";
         sheet!.Cells[cellTotalAddress].Merge = true;
         sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
     }
 
-    private void UpdateValueSpecificColumns(int startIndex, LeaguePerformanceExcelItem model)
+    private void UpdateValueSpecificColumns(int startIndex, TraderPerformanceExcelItem model)
     {
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"K{startIndex}"], model.Margin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"O{startIndex}"], model.MarginReal);
-        sheet!.Cells[$"I{startIndex}"].Value =
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"H{startIndex}"], model.Score);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"L{startIndex}"], model.Margin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"P{startIndex}"], model.MarginReal);
+        sheet!.Cells[$"J{startIndex}"].Value =
             model.NoOfMatches > 0 ? model.Turnover / model.NoOfMatches : ExcelConstants.NotAvailableText;
-        sheet!.Cells[$"M{startIndex}"].Value =
+        sheet!.Cells[$"N{startIndex}"].Value =
             model.NoOfMatches > 0 ? model.TurnoverReal / model.NoOfMatches : ExcelConstants.NotAvailableText;
     }
 
@@ -189,15 +196,15 @@ public class TraderExcelServiceImp(ConfigurationService configurationService,
         using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
         ExcelPackage = new ExcelPackage(stream);
         sheet = ExcelPackage.Workbook.Worksheets["Trader Performance"];
-        evenSheet = ExcelPackage.Workbook.Worksheets["EvenTemplate"];
-        oddSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
+        titleSheet = ExcelPackage.Workbook.Worksheets["TitleTemplate"];
+        bodySheet = ExcelPackage.Workbook.Worksheets["BodyTemplate"];
         totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
     }
 
     private void ClearTemplate()
     {
-        ExcelPackage!.Workbook.Worksheets.Delete("EvenTemplate");
-        ExcelPackage!.Workbook.Worksheets.Delete("OddTemplate");
+        ExcelPackage!.Workbook.Worksheets.Delete("TitleTemplate");
+        ExcelPackage!.Workbook.Worksheets.Delete("BodyTemplate");
         ExcelPackage!.Workbook.Worksheets.Delete("TotalTemplate");
     }
 }

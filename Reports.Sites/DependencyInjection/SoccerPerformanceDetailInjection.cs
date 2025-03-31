@@ -11,5 +11,6 @@ public static class SoccerPerformanceDetailInjection
         service.AddTransient<BetChoiceExcelService, BetChoiceExcelServiceImp>();
         service.AddTransient<LiveLeagueExcelService, LiveLeagueExcelServiceImp>();
         service.AddTransient<LeagueExcelService, LeagueExcelServiceImp>();
+        service.AddTransient<TraderExcelService, TraderExcelServiceImp>();
     }
 }

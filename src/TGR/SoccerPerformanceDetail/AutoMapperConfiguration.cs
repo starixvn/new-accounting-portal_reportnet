@@ -20,5 +20,7 @@ public static class AutoMapperConfiguration
 
         cfg.CreateMap<MatchPerformanceInfo, MatchPerformanceItem>();
         cfg.CreateMap<BetTypeDetailInfo, BetTypeDetailItem>();
+
+        cfg.CreateMap<TraderPerformanceItem, TraderPerformanceExcelItem>();
     }
 }

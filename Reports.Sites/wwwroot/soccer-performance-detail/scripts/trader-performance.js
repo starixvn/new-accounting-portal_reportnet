@@ -41,7 +41,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
     var urls = {
         GetInitializedData: window.rootUrl + '/api/soccer-performance-detail/trader/initialized-data',
         GetTraderPerformance: window.rootUrl + '/api/soccer-performance-detail/trader/main',
-        ExportTraderPerformance: window.rootUrl + '/api/soccer-performance-detail/trader/export',
+        ExportTraderPerformance: window.rootUrl + '/api/soccer-performance-detail/trader/export-trader',
         GetMatchPerformanceOfTrader: window.rootUrl + '/api/soccer-performance-detail/trader/trader-match-detail',
         GetBettypeDetail: window.rootUrl + '/api/soccer-performance-detail/trader/trader-bettype-detail'
     };
@@ -643,7 +643,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
 
     // Export trader performance to excel.
     var exportTraderPerformance = function () {
-        common.DownloadFile(urls.ExportTraderPerformance, parameters);
+        AccReport.downloadFile(urls.ExportTraderPerformance, parameters);
     };
 
     // Get match performance by trader.
