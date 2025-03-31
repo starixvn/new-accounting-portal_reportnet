@@ -6,7 +6,6 @@ using Fanex.Data.Repository;
 using global::Utilities.LinqDynamicSum;
 using global::Utilities.RemotingRef;
 using Model;
-using Org.BouncyCastle.Asn1.Pkcs;
 using System.Collections.Generic;
 using ViewModel;
 
@@ -29,6 +28,7 @@ public interface SoccerPerformanceDetailService
     Task<LeaguePerformanceList> GetLeaguePerformanceOfBetChoice(GetLeaguePerformanceOfBetChoiceCriteria criteria);
 
     Task<MatchPerformanceList> GetMatchPerformanceOfTeamTrader(GetMatchPerformanceOfTeamTraderCriteria criteria);
+
     Task<MatchPerformanceList> GetMatchPerformanceOfBetTypeTrader(GetMatchPerformanceOfBetTypeTraderCriteria criteria);
 
     Task<TraderPerformanceList> GetTraderPerformanceOfBetTypeLeague(GetTraderPerformanceOfBetTypeLeagueCriteria criteria);
@@ -52,15 +52,23 @@ public interface SoccerPerformanceDetailService
 
     Task<GradePerformanceList> GetGradePerformance(GetGradePerformanceCriteria criteria);
 
-    Task<TraderPerformanceList> GetTraderPerformance(GetTraderPerformanceCriteria criteria);
+    Task<TraderPerformanceList> GetTraderPerformance(ICriteria criteria);
 
-    Task<MatchPerformanceList> GetMatchPerformanceOfTrader(GetMatchPerformanceOfTraderCriteria criteria);
+    Task<MatchPerformanceList> GetMatchPerformanceOfTrader(ICriteria criteria);
 
     Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailTrader(GetBettypeDetailTrader criteria);
 
     Task<TraderPerformanceList> GetTraderPerformanceOfGrade(GetTraderPerformanceOfGradeCriteria criteria);
 
     Task<LeaguePerformanceList> GetLeaguePerformanceOfGrade(GetLeaguePerformanceOfGradeCriteria criteria);
+
+    Task<TeamPerformanceList> GetTeamPerformance(GetTeamPerformanceCriteria criteria);
+
+    Task<TraderPerformanceList> GetTraderPerformanceOfTeam(GetTraderPerformanceOfTeamCriteria criteria);
+
+    Task<LeaguePerformanceList> GetLeaguePerformance(GetLeagueDetailTeamCriteria criteria, bool isGroupOfLeague = false);
+    
+    Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailTeam(GetBettypeDetailTeamCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -610,40 +618,28 @@ public class SoccerPerformanceDetailServiceImp(
 
     public async Task<GradePerformanceList> GetGradePerformance(GetGradePerformanceCriteria criteria)
     {
-        var gradeData = await repository.FetchAsync<GradePerformanceInfo>(criteria);
+        var rawData = await repository.FetchAsync<GradePerformanceInfo>(criteria);
+        
         var gradePerformance = new GradePerformanceList();
 
-        if (gradeData != null && gradeData.Any())
+        if (rawData != null && rawData.Any())
         {
-            var gradePerformanceNonLive = gradeData.AsEnumerable().Where(c => !c.IsLive).Select(c => c);
+            var gradeData = mapper.Map<List<GradePerformanceItem>>(rawData);
 
-            var gradePerformanceLive = gradeData.AsEnumerable().Where(c => c.IsLive).Select(c => c);
+            var gradePerformanceLive = gradeData.Where(x => x.IsLive).ToList();
+            var gradePerformanceNonLive = gradeData.Where(x => !x.IsLive).ToList();
+            var total = gradeData.DynamicSum();
 
-            gradePerformance.AddGradeList(gradePerformanceNonLive, false);
+            gradePerformance.ItemLiveList = gradePerformanceLive;
+            gradePerformance.ItemNonLiveList = gradePerformanceNonLive;
+            gradePerformance.Total = total;
 
-            gradePerformance.AddGradeList(gradePerformanceLive, true);
-
-            gradePerformance.Total.Margin = CalculateTotalMargin(gradePerformance.Total.WinLoss, gradePerformance.Total.Turnover);
-
-            gradePerformance.Total.MarginReal = CalculateTotalMargin(gradePerformance.Total.WinLossReal, gradePerformance.Total.TurnoverReal);
         }
 
         return gradePerformance;
     }
 
-    private decimal? CalculateTotalMargin(decimal winLoss, decimal turnover)
-    {
-        decimal? margin = null;
-
-        if (turnover != 0)
-        {
-            margin = winLoss / turnover * 100;
-        }
-
-        return margin;
-    }
-
-    public async Task<TraderPerformanceList> GetTraderPerformance(GetTraderPerformanceCriteria criteria)
+    public async Task<TraderPerformanceList> GetTraderPerformance(ICriteria criteria)
     {
         var rawData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
 
@@ -652,7 +648,7 @@ public class SoccerPerformanceDetailServiceImp(
         return traderPerformance;
     }
 
-    public async Task<MatchPerformanceList> GetMatchPerformanceOfTrader(GetMatchPerformanceOfTraderCriteria criteria)
+    public async Task<MatchPerformanceList> GetMatchPerformanceOfTrader(ICriteria criteria)
     {
         var rawData = await repository.FetchAsync<MatchPerformanceInfo>(criteria);
 
@@ -696,5 +692,70 @@ public class SoccerPerformanceDetailServiceImp(
         var leaguePerformance = CalculatePerformanceLeague(leagueData, false);
 
         return leaguePerformance;
+    }
+
+    public async Task<TeamPerformanceList> GetTeamPerformance(GetTeamPerformanceCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<TeamPerformanceInfo>(criteria);
+
+        TeamPerformanceList teamPerformance = new TeamPerformanceList();
+
+        if (rawData != null && rawData.Any())
+        {
+            var teamData = mapper.Map<List<TeamPerformanceItem>>(rawData);
+
+            var teamPerformanceNonLive = teamData.Where(x => !x.IsLive).ToList();
+            var teamPerformanceLive = teamData.Where(x => x.IsLive).ToList();
+            var total = teamData.DynamicSum();
+
+            teamPerformance.ItemLiveList = teamPerformanceLive;
+            teamPerformance.ItemNonLiveList = teamPerformanceNonLive;
+            teamPerformance.Total = total;  
+        }
+
+        return teamPerformance;
+    }
+
+    public async Task<TraderPerformanceList> GetTraderPerformanceOfTeam(GetTraderPerformanceOfTeamCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
+
+        var traderPerformance = CalculateTraderPerformanceList(rawData);
+
+        return traderPerformance;
+    }
+
+    public async Task<LeaguePerformanceList> GetLeaguePerformance(GetLeagueDetailTeamCriteria criteria, bool isGroupOfLeague = false)
+    {
+        var rawData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
+
+        var leaguePerformance = new LeaguePerformanceList();
+
+        if (rawData != null && rawData.Any())
+        {
+            leaguePerformance = CalculateLeaguePerformanceByGroup(rawData, isGroupOfLeague, false);
+        }
+
+        return leaguePerformance;
+    }
+
+    public async Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailTeam(GetBettypeDetailTeamCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<BetTypeDetailInfo>(criteria);
+
+        var scoreByPeriodCriteria = new GetScoreByPeriodCriteria
+        {
+            FromDate = criteria.FromDate,
+            ToDate = criteria.ToDate,
+            CustId = criteria.CustId,
+            MatchId = criteria.MatchId,
+            Bettypes = string.Join(",", rawData.Select(b => b.BetType.ToString())),
+            IsExcludeLeagues = true,
+            LeagueGroupIds = criteria.LeagueGroupIds
+        };
+
+        var bettypeDetail = await CalculateBetType(rawData, criteria.IsLive, scoreByPeriodCriteria);
+
+        return bettypeDetail;
     }
 }
