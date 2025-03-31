@@ -10,14 +10,16 @@ public class MatchPerformanceList
 
     public void AddItem(MatchPerformanceGroup group)
     {
-        if (group != null)
+        if (group == null)
         {
-            GroupList.Add(group);
-            GrandTotal.Turnover += group.Total.Turnover;
-            GrandTotal.WinLoss += group.Total.WinLoss;
-            GrandTotal.TurnoverReal += group.Total.TurnoverReal;
-            GrandTotal.WinLossReal += group.Total.WinLossReal;
-            GrandTotal.BetCount += group.Total.BetCount;
+            return;
         }
+
+        GroupList.Add(group);
+        GrandTotal.Turnover += group.Total.Turnover;
+        GrandTotal.WinLoss += group.Total.WinLoss;
+        GrandTotal.TurnoverReal += group.Total.TurnoverReal;
+        GrandTotal.WinLossReal += group.Total.WinLossReal;
+        GrandTotal.BetCount += group.Total.BetCount;
     }
 }

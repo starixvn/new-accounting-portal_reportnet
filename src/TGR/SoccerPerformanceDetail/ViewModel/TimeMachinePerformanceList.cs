@@ -13,14 +13,16 @@ public class TimeMachinePerformanceList
     {
         foreach (var info in infos)
         {
-            if (info != null)
+            if (info == null)
             {
-                var item = new TimeMachinePerformanceItem(info, betType);
-
-                ItemList.Add(item);
-
-                CalculateTotal(item);
+                continue;
             }
+
+            var item = new TimeMachinePerformanceItem(info, betType);
+
+            ItemList.Add(item);
+
+            CalculateTotal(item);
         }
     }
 

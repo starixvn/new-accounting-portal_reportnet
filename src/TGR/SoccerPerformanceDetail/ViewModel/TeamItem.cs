@@ -18,11 +18,13 @@ public class TeamItem
 {
     public TeamItem(TeamInfo teamData)
     {
-        if (teamData != null)
+        if (teamData == null)
         {
-            TeamId = teamData.TeamId;
-            TeamName = teamData.TeamName;
+            return;
         }
+
+        TeamId = teamData.TeamId;
+        TeamName = teamData.TeamName;
     }
 
     public short TeamId { get; set; }

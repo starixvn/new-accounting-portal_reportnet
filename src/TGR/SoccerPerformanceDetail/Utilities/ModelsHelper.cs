@@ -11,10 +11,16 @@ public static class ModelsHelper
         var leagueGroupNames = string.Empty;
 
         if (string.IsNullOrEmpty(leagueGroupIds))
+        {
             return leagueGroupNames;
+        }
+
 
         if (leagueGroups == null || !leagueGroups.Any())
+        {
             return leagueGroupNames;
+        }
+
 
         var ids = leagueGroupIds.Split(',');
 
@@ -24,7 +30,7 @@ public static class ModelsHelper
                 .Where(x => x.TargetLeagueGroupId.ToString().Equals(id))
                 .Select(x => x.LeagueGroupName).ToList();
 
-            if (group.Any())
+            if (group.Count != 0)
             {
                 leagueGroupNames += group[0] + ", ";
             }

@@ -82,33 +82,35 @@ public class SoccerPerformanceDetailServiceImp(
         var betTypeData = await repository.FetchAsync<BetTypePerformanceInfo>(criteria);
         var betTypePerformance = new BetTypePerformanceList();
 
-        if (betTypeData != null && betTypeData.Any())
+        if (betTypeData == null || !betTypeData.Any())
         {
-            var data = SortBetTypePerformanceInfo(betTypeData);
-            var itemByOderList = mapper.Map<List<BetTypePerformanceItem>>(data);
-
-            var liveData = itemByOderList.Where(x => x.IsLive).ToList();
-            var liveTotal = liveData.DynamicSum();
-
-            var nonLiveData = itemByOderList.Where(x => !x.IsLive).ToList();
-            var nonLiveTotal = nonLiveData.DynamicSum();
-
-            var allTotal = itemByOderList.DynamicSum();
-
-            if (criteria.MarketFilter == Market.All)
-            {
-                betTypePerformance.ItemByOrderList = itemByOderList;
-            }
-            else
-            {
-                betTypePerformance.ItemLiveList = liveData;
-                betTypePerformance.ItemNonLiveList = nonLiveData;
-            }
-
-            betTypePerformance.TotalItemLive = liveTotal;
-            betTypePerformance.TotalItemNonLive = nonLiveTotal;
-            betTypePerformance.Total = allTotal;
+            return betTypePerformance;
         }
+
+        var data = SortBetTypePerformanceInfo(betTypeData);
+        var itemByOderList = mapper.Map<List<BetTypePerformanceItem>>(data);
+
+        var liveData = itemByOderList.Where(x => x.IsLive).ToList();
+        var liveTotal = liveData.DynamicSum();
+
+        var nonLiveData = itemByOderList.Where(x => !x.IsLive).ToList();
+        var nonLiveTotal = nonLiveData.DynamicSum();
+
+        var allTotal = itemByOderList.DynamicSum();
+
+        if (criteria.MarketFilter == Market.All)
+        {
+            betTypePerformance.ItemByOrderList = itemByOderList;
+        }
+        else
+        {
+            betTypePerformance.ItemLiveList = liveData;
+            betTypePerformance.ItemNonLiveList = nonLiveData;
+        }
+
+        betTypePerformance.TotalItemLive = liveTotal;
+        betTypePerformance.TotalItemNonLive = nonLiveTotal;
+        betTypePerformance.Total = allTotal;
 
         return betTypePerformance;
     }
@@ -249,24 +251,26 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var matchPerformance = new MatchPerformanceList();
 
-        if (rawData != null && rawData.Any())
+        if (rawData == null || !rawData.Any())
         {
-            var matchDataList = mapper.Map<List<MatchPerformanceItem>>(rawData);
-
-            var leagueGroups = matchDataList.GroupBy(obj => obj.LeagueId);
-
-            foreach (var group in leagueGroups)
-            {
-                var leagueGroup = CalculateMatchGroupByLeague(group.Key, matchDataList);
-                matchPerformance.AddItem(leagueGroup);
-            }
-
-            var grandTotal = matchDataList.DynamicSum();
-
-            matchPerformance.GroupList = matchPerformance.GroupList.OrderBy(obj => obj.LeagueName).ToList();
-            matchPerformance.TotalItems = rawData.Count();
-            matchPerformance.GrandTotal = grandTotal;
+            return matchPerformance;
         }
+
+        var matchDataList = mapper.Map<List<MatchPerformanceItem>>(rawData);
+
+        var leagueGroups = matchDataList.GroupBy(obj => obj.LeagueId);
+
+        foreach (var group in leagueGroups)
+        {
+            var leagueGroup = CalculateMatchGroupByLeague(group.Key, matchDataList);
+            matchPerformance.AddItem(leagueGroup);
+        }
+
+        var grandTotal = matchDataList.DynamicSum();
+
+        matchPerformance.GroupList = matchPerformance.GroupList.OrderBy(obj => obj.LeagueName).ToList();
+        matchPerformance.TotalItems = rawData.Count();
+        matchPerformance.GrandTotal = grandTotal;
 
         return matchPerformance;
     }
@@ -325,27 +329,29 @@ public class SoccerPerformanceDetailServiceImp(
 
         var matchPerformance = new MatchPerformanceList();
 
-        if (matchData != null && matchData.Any())
+        if (matchData == null || !matchData.Any())
         {
-            var matchDataList = mapper.Map<List<MatchPerformanceItem>>(matchData);
-            
-            var leagueGroups = matchDataList.GroupBy(obj => obj.LeagueId);
-
-            foreach (var group in leagueGroups)
-            {
-                    var leagueGroup = CalculateMatchGroupByLeague(group.Key, matchDataList);
-                    leagueGroup.Total.Score = leagueGroup.Total.SumCategory == 0 ? 
-                    0 : 
-                    leagueGroup.Total.WinLossScore * 100 / leagueGroup.Total.SumCategory;
-                    matchPerformance.AddItem(leagueGroup);
-            }
-
-            var grandTotal = matchDataList.DynamicSum();
-
-            matchPerformance.GroupList = matchPerformance.GroupList.OrderBy(obj => obj.LeagueName).ToList();
-            matchPerformance.TotalItems = matchData.Count();
-            matchPerformance.GrandTotal = grandTotal;
+            return matchPerformance;
         }
+
+        var matchDataList = mapper.Map<List<MatchPerformanceItem>>(matchData);
+            
+        var leagueGroups = matchDataList.GroupBy(obj => obj.LeagueId);
+
+        foreach (var group in leagueGroups)
+        {
+            var leagueGroup = CalculateMatchGroupByLeague(group.Key, matchDataList);
+            leagueGroup.Total.Score = leagueGroup.Total.SumCategory == 0 ? 
+                0 : 
+                leagueGroup.Total.WinLossScore * 100 / leagueGroup.Total.SumCategory;
+            matchPerformance.AddItem(leagueGroup);
+        }
+
+        var grandTotal = matchDataList.DynamicSum();
+
+        matchPerformance.GroupList = matchPerformance.GroupList.OrderBy(obj => obj.LeagueName).ToList();
+        matchPerformance.TotalItems = matchData.Count();
+        matchPerformance.GrandTotal = grandTotal;
 
         return matchPerformance;
     }
@@ -354,33 +360,35 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var leaguePerformance = new LeaguePerformanceList();
 
-        if (rawData != null && rawData.Any())
+        if (rawData == null || !rawData.Any())
         {
-            var leaguePerformanceData = mapper.Map<List<LeaguePerformanceItem>>(rawData);
-
-            var liveData = leaguePerformanceData.Where(x => x.IsLive).ToList();
-            var liveTotal = liveData.DynamicSum();
-
-            var nonLiveData = leaguePerformanceData.Where(x => !x.IsLive).ToList();
-            var nonLiveTotal = nonLiveData.DynamicSum();
-
-            var total = leaguePerformanceData.DynamicSum();
-
-            if (isAllMarket)
-            {
-                leaguePerformance.ItemByOrderList = leaguePerformanceData;
-            }
-            else
-            {
-                leaguePerformance.ItemLiveList = liveData;
-                leaguePerformance.ItemNonLiveList = nonLiveData;
-            }
-
-            leaguePerformance.TotalItemLive = liveTotal;
-            leaguePerformance.TotalItemNonLive = nonLiveTotal;
-
-            leaguePerformance.Total = total;
+            return leaguePerformance;
         }
+
+        var leaguePerformanceData = mapper.Map<List<LeaguePerformanceItem>>(rawData);
+
+        var liveData = leaguePerformanceData.Where(x => x.IsLive).ToList();
+        var liveTotal = liveData.DynamicSum();
+
+        var nonLiveData = leaguePerformanceData.Where(x => !x.IsLive).ToList();
+        var nonLiveTotal = nonLiveData.DynamicSum();
+
+        var total = leaguePerformanceData.DynamicSum();
+
+        if (isAllMarket)
+        {
+            leaguePerformance.ItemByOrderList = leaguePerformanceData;
+        }
+        else
+        {
+            leaguePerformance.ItemLiveList = liveData;
+            leaguePerformance.ItemNonLiveList = nonLiveData;
+        }
+
+        leaguePerformance.TotalItemLive = liveTotal;
+        leaguePerformance.TotalItemNonLive = nonLiveTotal;
+
+        leaguePerformance.Total = total;
 
         return leaguePerformance;
     }
@@ -398,20 +406,22 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var traderPerformance = new TraderPerformanceList();
 
-        if (rawData != null && rawData.Any())
+        if (rawData == null || !rawData.Any())
         {
-            var data = mapper.Map<List<TraderPerformanceItem>>(rawData);
-
-            var liveData = data.Where(x => x.IsLive).ToList();
-            var nonLiveData = data.Where(x => !x.IsLive).ToList();
-
-            traderPerformance.ItemLiveList = liveData;
-            traderPerformance.ItemNonLiveList = nonLiveData;
-
-            var total = data.DynamicSum();
-
-            traderPerformance.Total = total;
+            return traderPerformance;
         }
+
+        var data = mapper.Map<List<TraderPerformanceItem>>(rawData);
+
+        var liveData = data.Where(x => x.IsLive).ToList();
+        var nonLiveData = data.Where(x => !x.IsLive).ToList();
+
+        traderPerformance.ItemLiveList = liveData;
+        traderPerformance.ItemNonLiveList = nonLiveData;
+
+        var total = data.DynamicSum();
+
+        traderPerformance.Total = total;
 
         return traderPerformance;
     }
@@ -457,19 +467,21 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var matchPerformance = new MatchPerformanceGroup();
 
-        if (rawData != null && rawData.Any())
+        if (rawData == null || !rawData.Any())
         {
-            var matches = mapper.Map<List<MatchPerformanceItem>>(rawData);
-
-            var liveMatches = matches.Where(x => x.IsLive).ToList();
-            var nonLiveMatches = matches.Where(x => !x.IsLive).ToList();
-
-            var total = matches.DynamicSum();
-
-            matchPerformance.ItemLiveList = CalculateMatchByLiveStatus(liveMatches);
-            matchPerformance.ItemNonLiveList = CalculateMatchByLiveStatus(nonLiveMatches);
-            matchPerformance.Total = total;
+            return matchPerformance;
         }
+
+        var matches = mapper.Map<List<MatchPerformanceItem>>(rawData);
+
+        var liveMatches = matches.Where(x => x.IsLive).ToList();
+        var nonLiveMatches = matches.Where(x => !x.IsLive).ToList();
+
+        var total = matches.DynamicSum();
+
+        matchPerformance.ItemLiveList = CalculateMatchByLiveStatus(liveMatches);
+        matchPerformance.ItemNonLiveList = CalculateMatchByLiveStatus(nonLiveMatches);
+        matchPerformance.Total = total;
 
         return matchPerformance;
     }
@@ -490,38 +502,39 @@ public class SoccerPerformanceDetailServiceImp(
 
     private LeaguePerformanceList CalculateLeaguePerformanceByGroup(IEnumerable<LeaguePerformanceInfo> rawData, bool isGroupOfLeague, bool isAllMarket)
     {
-        if (isGroupOfLeague)
+        if (!isGroupOfLeague)
         {
-            var leagueData = rawData
-                    .OrderBy(c => c.LeagueId)
-                    .ThenByDescending(c => c.IsLive)
-                    .Select(c => new LeaguePerformanceInfo
-                    {
-                        LeagueId = c.LeagueId,
-                        LeagueName = c.LeagueName,
-                        LeagueGroupID = c.LeagueGroupID,
-                        LeagueBenchmark = c.LeagueBenchmark,
-                        BetTypeBMShift1 = c.BetTypeBMShift1,
-                        BetTypeBMShift2 = c.BetTypeBMShift2,
-                        BetTypeBMShift3 = c.BetTypeBMShift3,
-                        NoOfTraders = c.NoOfTraders,
-                        NoOfMatches = c.NoOfMatches,
-                        Turnover = c.Turnover,
-                        WinLoss = c.WinLoss,
-                        Margin = c.Margin,
-                        TurnoverReal = c.TurnoverReal,
-                        WinLossReal = c.WinLossReal,
-                        MarginReal = c.MarginReal,
-                        BetCount = c.BetCount,
-                        Market = c.Market,
-                        IsLive = c.IsLive,
-                        FlagForViewReport = rawData.Count(b => b.LeagueId == c.LeagueId)
-                    });
-
-            return CalculatePerformanceLeague(leagueData, isAllMarket);
+            return CalculatePerformanceLeague(rawData, isAllMarket);
         }
 
-        return CalculatePerformanceLeague(rawData, isAllMarket);
+        var leagueData = rawData
+            .OrderBy(c => c.LeagueId)
+            .ThenByDescending(c => c.IsLive)
+            .Select(c => new LeaguePerformanceInfo
+            {
+                LeagueId = c.LeagueId,
+                LeagueName = c.LeagueName,
+                LeagueGroupID = c.LeagueGroupID,
+                LeagueBenchmark = c.LeagueBenchmark,
+                BetTypeBMShift1 = c.BetTypeBMShift1,
+                BetTypeBMShift2 = c.BetTypeBMShift2,
+                BetTypeBMShift3 = c.BetTypeBMShift3,
+                NoOfTraders = c.NoOfTraders,
+                NoOfMatches = c.NoOfMatches,
+                Turnover = c.Turnover,
+                WinLoss = c.WinLoss,
+                Margin = c.Margin,
+                TurnoverReal = c.TurnoverReal,
+                WinLossReal = c.WinLossReal,
+                MarginReal = c.MarginReal,
+                BetCount = c.BetCount,
+                Market = c.Market,
+                IsLive = c.IsLive,
+                FlagForViewReport = rawData.Count(b => b.LeagueId == c.LeagueId)
+            });
+
+        return CalculatePerformanceLeague(leagueData, isAllMarket);
+
     }
 
     public async Task<TraderPerformanceList> GetTraderPerformanceOfLeague(GetTraderPerformanceOfLeagueCriteria criteria)
@@ -581,18 +594,20 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var bettypeDetail = new List<BetTypeDetailItem>();
 
-        if (rawData != null && rawData.Any())
+        if (rawData == null || !rawData.Any())
         {
-            if (isLive)
-            {
-                var scoreByPeriodData = await repository.FetchAsync<ScoreByPeriodInfo>(scoreByPeriodCriteria);
+            return bettypeDetail;
+        }
 
-                bettypeDetail = CalculateLiveBetTypeDetail(rawData, scoreByPeriodData);
-            }
-            else
-            {
-                bettypeDetail = mapper.Map<List<BetTypeDetailItem>>(rawData);
-            }
+        if (isLive)
+        {
+            var scoreByPeriodData = await repository.FetchAsync<ScoreByPeriodInfo>(scoreByPeriodCriteria);
+
+            bettypeDetail = CalculateLiveBetTypeDetail(rawData, scoreByPeriodData);
+        }
+        else
+        {
+            bettypeDetail = mapper.Map<List<BetTypeDetailItem>>(rawData);
         }
 
         return bettypeDetail;
@@ -622,19 +637,20 @@ public class SoccerPerformanceDetailServiceImp(
         
         var gradePerformance = new GradePerformanceList();
 
-        if (rawData != null && rawData.Any())
+        if (rawData == null || !rawData.Any())
         {
-            var gradeData = mapper.Map<List<GradePerformanceItem>>(rawData);
-
-            var gradePerformanceLive = gradeData.Where(x => x.IsLive).ToList();
-            var gradePerformanceNonLive = gradeData.Where(x => !x.IsLive).ToList();
-            var total = gradeData.DynamicSum();
-
-            gradePerformance.ItemLiveList = gradePerformanceLive;
-            gradePerformance.ItemNonLiveList = gradePerformanceNonLive;
-            gradePerformance.Total = total;
-
+            return gradePerformance;
         }
+
+        var gradeData = mapper.Map<List<GradePerformanceItem>>(rawData);
+
+        var gradePerformanceLive = gradeData.Where(x => x.IsLive).ToList();
+        var gradePerformanceNonLive = gradeData.Where(x => !x.IsLive).ToList();
+        var total = gradeData.DynamicSum();
+
+        gradePerformance.ItemLiveList = gradePerformanceLive;
+        gradePerformance.ItemNonLiveList = gradePerformanceNonLive;
+        gradePerformance.Total = total;
 
         return gradePerformance;
     }
@@ -698,20 +714,22 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var rawData = await repository.FetchAsync<TeamPerformanceInfo>(criteria);
 
-        TeamPerformanceList teamPerformance = new TeamPerformanceList();
+        var teamPerformance = new TeamPerformanceList();
 
-        if (rawData != null && rawData.Any())
+        if (rawData == null || !rawData.Any())
         {
-            var teamData = mapper.Map<List<TeamPerformanceItem>>(rawData);
-
-            var teamPerformanceNonLive = teamData.Where(x => !x.IsLive).ToList();
-            var teamPerformanceLive = teamData.Where(x => x.IsLive).ToList();
-            var total = teamData.DynamicSum();
-
-            teamPerformance.ItemLiveList = teamPerformanceLive;
-            teamPerformance.ItemNonLiveList = teamPerformanceNonLive;
-            teamPerformance.Total = total;  
+            return teamPerformance;
         }
+
+        var teamData = mapper.Map<List<TeamPerformanceItem>>(rawData);
+
+        var teamPerformanceNonLive = teamData.Where(x => !x.IsLive).ToList();
+        var teamPerformanceLive = teamData.Where(x => x.IsLive).ToList();
+        var total = teamData.DynamicSum();
+
+        teamPerformance.ItemLiveList = teamPerformanceLive;
+        teamPerformance.ItemNonLiveList = teamPerformanceNonLive;
+        teamPerformance.Total = total;
 
         return teamPerformance;
     }

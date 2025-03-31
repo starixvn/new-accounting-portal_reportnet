@@ -19,12 +19,14 @@ public class BetTypeItem
 {
     public BetTypeItem(BetTypeInfo betType)
     {
-        if (betType != null)
+        if (betType == null)
         {
-            BetTypeId = betType.BetType;
-            BetTypeName = betType.TypeName;
-            IsDefaultCheck = betType.IsDefault;
+            return;
         }
+
+        BetTypeId = betType.BetType;
+        BetTypeName = betType.TypeName;
+        IsDefaultCheck = betType.IsDefault;
     }
 
     public short BetTypeId { get; set; }

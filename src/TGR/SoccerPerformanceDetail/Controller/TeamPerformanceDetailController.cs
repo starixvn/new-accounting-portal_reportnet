@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
 using SoccerPerformanceDetail.Services;
-using SoccerPerformanceDetail.ViewModel;
 
 namespace SoccerPerformanceDetail.Controller;
 
@@ -19,7 +18,7 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
             criteria.LeagueGroupIds = string.Empty;
         }
         
-        TeamPerformanceList teamPerformance = await service.GetTeamPerformance(criteria);
+        var teamPerformance = await service.GetTeamPerformance(criteria);
 
         return Ok(teamPerformance);
     }

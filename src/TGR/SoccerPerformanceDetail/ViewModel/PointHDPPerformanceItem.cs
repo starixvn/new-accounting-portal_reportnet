@@ -76,10 +76,12 @@ public class PointHDPPerformanceItem
                     }
                     default:
                     {
-                        if (pointHDP > 0)
-                            newPointHDP = "A+" + pointHDP.ToString("0.##");
-                        else if (pointHDP < 0)
-                            newPointHDP = "H+" + Math.Abs(pointHDP).ToString("0.##");
+                        newPointHDP = pointHDP switch
+                        {
+                            > 0 => "A+" + pointHDP.ToString("0.##"),
+                            < 0 => "H+" + Math.Abs(pointHDP).ToString("0.##"),
+                            _ => newPointHDP
+                        };
                         break;
                     }
                 }

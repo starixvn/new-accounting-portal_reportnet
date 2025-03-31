@@ -53,7 +53,7 @@
             </div>
             <div class="edit-field col_5">
                 <select id="ddlMarket" disabled="@isDisableMarket" style="width: 10.5em">
-                    @foreach (KeyValuePair<Market, string> item in markets)
+                    @foreach (var item in markets)
                     {
                         <option value="@item.Key">@item.Value</option>
                     }

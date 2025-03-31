@@ -75,9 +75,8 @@ public class Handler(CashOutPerformanceService service, IMapper mapper, ModelsHe
     {
         var criteria = mapper.Map<BetTypeLevelCriteria>(request);
         var rawData = await service.GetTickets<BetTypeLevelModel, BetTypeLevelCriteria>(criteria);
-        TicketViewModel<BetTypeLevelModel> data;
         var gameTimeCriteria = mapper.Map<GameTimeCriteria>(request);
-        data = request.Type switch
+        var data = request.Type switch
         {
             BetTypeDrillDownTypeConstants.GameTime => modelsHelperService.UpdateGameTimeLevelModel(
                 rawData.TicketList.ToList(), gameTimeCriteria),

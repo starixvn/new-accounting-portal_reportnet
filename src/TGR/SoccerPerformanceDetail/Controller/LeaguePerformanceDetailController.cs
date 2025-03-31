@@ -1,9 +1,7 @@
-﻿using Fanex.NAP.Client.Attributes;
-using Fanex.NAP.Client;
+﻿using Fanex.NAP.Client;
 using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
 using SoccerPerformanceDetail.Services;
-using SoccerPerformanceDetail.ViewModel;
 using SoccerPerformanceDetail.Model;
 
 namespace SoccerPerformanceDetail.Controller;
@@ -18,7 +16,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
     public async Task<IActionResult> GetLeaguePerformance(GetLeaguePerformanceCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;
-        criteria.LeagueName = criteria.LeagueName ?? string.Empty;
+        criteria.LeagueName ??= string.Empty;
 
         if (criteria.IsAllLeagueGroup)
         {

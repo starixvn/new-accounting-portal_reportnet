@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
 using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
-using SoccerPerformanceDetail.ViewModel;
 
 namespace SoccerPerformanceDetail.Controller;
 
@@ -16,18 +15,16 @@ public class TraderPerformanceDetailController(SoccerPerformanceDetailService se
     [Route("main")]
     public async Task<IActionResult> GetTraderPerformance(GetTraderPerformanceCriteria criteria)
     {
-        TraderPerformanceList traderPerformance = null;
-
         criteria.IsExcludeLeagues = true;
             
-        criteria.Username = criteria.Username ?? string.Empty;
+        criteria.Username ??= string.Empty;
             
         if (criteria.IsAllLeagueGroup)
         {
             criteria.LeagueGroupIds = string.Empty;
         }
            
-        traderPerformance = await service.GetTraderPerformance(criteria);
+        var traderPerformance = await service.GetTraderPerformance(criteria);
             
         return Ok(traderPerformance);
     }
@@ -48,9 +45,9 @@ public class TraderPerformanceDetailController(SoccerPerformanceDetailService se
     public async Task<IActionResult> GetMatchPerformanceOfTrader(GetMatchPerformanceOfTraderCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;
-        MatchPerformanceList martchPerformance = await service.GetMatchPerformanceOfTrader(criteria);
+        var matchPerformanceOfTrader = await service.GetMatchPerformanceOfTrader(criteria);
            
-        return Ok(martchPerformance);
+        return Ok(matchPerformanceOfTrader);
     }
 
     [Route("trader-bettype-detail")]
