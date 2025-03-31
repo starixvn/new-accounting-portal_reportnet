@@ -1,33 +1,6 @@
 ﻿namespace SoccerPerformanceDetail.ViewModel;
-
-using Model;
-
 public class GradePerformanceItem
 {
-    public GradePerformanceItem()
-    {
-    }
-
-    public GradePerformanceItem(GradePerformanceInfo gradeData)
-    {
-        if (gradeData is { Grade: not null })
-        {
-            Grade = gradeData.Grade.Value;
-            NoOfTraders = Convert.ToInt32(gradeData.TraderCount);
-            NoOfLeagues = Convert.ToInt32(gradeData.LeagueCount);
-            NoOfMatches = Convert.ToInt32(gradeData.MatchCount);
-            Turnover = Convert.ToDecimal(gradeData.Turnover);
-            WinLoss = Convert.ToDecimal(gradeData.WinLoss);                
-            Margin = gradeData.Margin;
-            TurnoverReal = Convert.ToDecimal(gradeData.TurnoverReal);
-            WinLossReal = Convert.ToDecimal(gradeData.WinLossReal);
-            MarginReal = gradeData.MarginReal;
-            BetCount = Convert.ToInt32(gradeData.BetCount);
-            Score = gradeData.Score;
-            IsLive = gradeData.IsLive;
-        }
-    }
-
     public int Grade { get; set; }
 
     public int NoOfTraders { get; set; }
@@ -40,17 +13,32 @@ public class GradePerformanceItem
 
     public decimal WinLoss { get; set; }
 
-    public decimal? Margin { get; set; }
+    public decimal? Margin => Turnover != 0 ? WinLoss / Turnover * 100 : null;
 
     public decimal TurnoverReal { get; set; }
 
     public decimal WinLossReal { get; set; }
 
-    public decimal? MarginReal { get; set; }
+    public decimal? MarginReal => TurnoverReal != 0 ? WinLossReal / TurnoverReal * 100 : null;
 
     public int BetCount { get; set; }
 
     public decimal? Score { get; set; }
 
     public bool IsLive { get; set; }
+
+    public static GradePerformanceItem operator +(GradePerformanceItem a, GradePerformanceItem b)
+    {
+        return new GradePerformanceItem
+        {
+            NoOfTraders = a.NoOfTraders + b.NoOfTraders,
+            NoOfMatches = a.NoOfMatches + b.NoOfMatches,
+            NoOfLeagues = a.NoOfLeagues + b.NoOfLeagues,
+            Turnover = a.Turnover + b.Turnover,
+            WinLoss = a.WinLoss + b.WinLoss,
+            TurnoverReal = a.TurnoverReal + b.TurnoverReal,
+            WinLossReal = a.WinLossReal + b.WinLossReal,
+            BetCount = a.BetCount + b.BetCount
+        };
+    }
 }

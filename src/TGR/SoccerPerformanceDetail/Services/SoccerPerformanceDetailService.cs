@@ -57,6 +57,10 @@ public interface SoccerPerformanceDetailService
     Task<MatchPerformanceList> GetMatchPerformanceOfTrader(GetMatchPerformanceOfTraderCriteria criteria);
 
     Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailTrader(GetBettypeDetailTrader criteria);
+
+    Task<TraderPerformanceList> GetTraderPerformanceOfGrade(GetTraderPerformanceOfGradeCriteria criteria);
+
+    Task<LeaguePerformanceList> GetLeaguePerformanceOfGrade(GetLeaguePerformanceOfGradeCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -675,5 +679,22 @@ public class SoccerPerformanceDetailServiceImp(
         var bettypeDetail = await CalculateBetType(rawData, criteria.IsLive, scoreByPeriodCriteria);
 
         return bettypeDetail;
+    }
+
+    public async Task<TraderPerformanceList> GetTraderPerformanceOfGrade(GetTraderPerformanceOfGradeCriteria criteria)
+    {
+        var traderData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
+        
+        var traderPerformance = CalculateTraderPerformanceList(traderData);
+
+        return traderPerformance;
+    }
+
+    public async Task<LeaguePerformanceList> GetLeaguePerformanceOfGrade(GetLeaguePerformanceOfGradeCriteria criteria)
+    {
+        var leagueData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
+        var leaguePerformance = CalculatePerformanceLeague(leagueData, false);
+
+        return leaguePerformance;
     }
 }
