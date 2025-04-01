@@ -17,27 +17,15 @@ public interface ExcelService
         IEnumerable<BetTypeItem> betTypes);
 }
 
-public class ExcelServiceImp(ConfigurationService configurationService,
-    IMapper mapper) : ExcelService
+public class ExcelServiceImp(ConfigurationService configurationService, IMapper mapper)
+    : BaseExcelService(configurationService), ExcelService
 {
-    private ExcelWorksheet sheet;
-
-    private ExcelWorksheet oddSheet;
-
-    private ExcelWorksheet evenSheet;
-
-    private ExcelWorksheet totalSheet;
-
-    private const int StartFilterBlockRowIndex = 3;
-
-    private ExcelPackage ExcelPackage { get; set; }
-
     public Task<ExcelPackage> ExportExcelBetTypePerformance(BetTypePerformanceList data,
         GetBetTypePerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
         IEnumerable<BetTypeItem> betTypes)
     {
-        LoadTemplate("BetType.xlsx");
+        LoadTemplate("BetType", "BetType.xlsx", ExcelConstants.BetTypePerformance);
         var rowIndex = BuildFilterBlock(criteria, leagueGroups, betTypes);
         var startBodyRowIndex = rowIndex + 4;
         var bodyData = criteria.MarketFilter switch
@@ -49,94 +37,8 @@ public class ExcelServiceImp(ConfigurationService configurationService,
         BuildBodyRows(bodyData, startBodyRowIndex);
         var startTotalRowIndex = data.ItemByOrderList.Count + startBodyRowIndex;
         BuildTotalRow(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex);
-        ClearTemplate();
+        ClearTemplate(ExcelConstants.BetTypePerformance);
         return Task.FromResult(ExcelPackage!);
-    }
-
-    private int BuildFilterBlock(GetBetTypePerformanceCriteria criteria, IEnumerable<LeagueGroup> leagueGroups, IEnumerable<BetTypeItem> betTypes)
-    {
-        var rowIndex = StartFilterBlockRowIndex;
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.MarketFilter;
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.FromDate.ToString("MM/dd/yyyy");
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value =
-            ModelsHelper.MakeBetTypeSelectString(betTypes, criteria.Bettypes);
-        var lineCount = (int)Math.Ceiling((double)sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Text.Length / ExcelConstants.Width);
-        if (lineCount > 1)
-        {
-            sheet.Row(rowIndex).Height = 8 * lineCount;
-        }
-
-        rowIndex++;
-        if (criteria.IsVirtual)
-        {
-            if (criteria.Turnover.HasValue)
-            {
-                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
-                    criteria.Turnover.Value.ToString("#,##0.00");
-            }
-            else
-            {
-                sheet!.DeleteRow(rowIndex);
-            }
-
-            if (criteria.WinLoss.HasValue)
-            {
-                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
-                    criteria.WinLoss.Value.ToString("#,##0.00");
-            }
-            else
-            {
-                sheet!.DeleteRow(rowIndex);
-            }
-        }
-
-        if (criteria.IsReal)
-        {
-            if (criteria.TurnoverReal.HasValue)
-            {
-                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
-                    criteria.TurnoverReal.Value.ToString("#,##0.00");
-            }
-            else
-            {
-                sheet!.DeleteRow(rowIndex);
-            }
-
-            if (criteria.WinLossReal.HasValue)
-            {
-                sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
-                    criteria.WinLossReal.Value.ToString("#,##0.00");
-            }
-            else
-            {
-                sheet!.DeleteRow(rowIndex);
-            }
-        }
-
-        if (criteria.IsVirtual && criteria.MarginFrom.HasValue || criteria.MarginTo.HasValue)
-        {
-            var marginString = GenerateMarginString(criteria.MarginFrom, criteria.MarginTo);
-            sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = marginString;
-        }
-        else
-        {
-            sheet!.DeleteRow(rowIndex);
-        }
-
-        if (criteria.IsReal && criteria.MarginFromReal.HasValue || criteria.MarginToReal.HasValue)
-        {
-            var marginString = GenerateMarginString(criteria.MarginFromReal, criteria.MarginToReal);
-            sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = marginString;
-        }
-        else
-        {
-            sheet!.DeleteRow(rowIndex);
-        }
-
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Value = ModelsHelper.MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
-
-        return rowIndex;
     }
 
     private void BuildBodyRows(IEnumerable<BetTypePerformanceItem> list, int startRowIndex)
@@ -177,33 +79,5 @@ public class ExcelServiceImp(ConfigurationService configurationService,
             model.NoOfMatches > 0 ? model.Turnover / model.NoOfMatches : ExcelConstants.NotAvailableText;
         sheet!.Cells[$"M{startIndex}"].Value =
             model.NoOfMatches > 0 ? model.TurnoverReal / model.NoOfMatches : ExcelConstants.NotAvailableText;
-    }
-
-    private string GenerateMarginString(decimal? marginFrom, decimal? marginTo)
-    {
-        var marginFromString = marginFrom != null ? marginFrom.ToString() : "min";
-        var marginToString = marginTo != null ? marginTo.ToString() : "max";
-
-        if (marginFrom == null)
-            return $"≤ {marginTo}";
-        return marginTo == null ? $"≥ {marginFrom}" : $"from {marginFromString} to {marginToString}";
-    }
-
-    private void LoadTemplate(string fileExcel)
-    {
-        var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/SoccerPerformanceDetail/BetType/{fileExcel}";
-        using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
-        ExcelPackage = new ExcelPackage(stream);
-        sheet = ExcelPackage.Workbook.Worksheets["Bet Type Performance"];
-        evenSheet = ExcelPackage.Workbook.Worksheets["EvenTemplate"];
-        oddSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
-        totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
-    }
-
-    private void ClearTemplate()
-    {
-        ExcelPackage!.Workbook.Worksheets.Delete("EvenTemplate");
-        ExcelPackage!.Workbook.Worksheets.Delete("OddTemplate");
-        ExcelPackage!.Workbook.Worksheets.Delete("TotalTemplate");
     }
 }

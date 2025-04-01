@@ -3,7 +3,7 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-public class GetBetTypePerformanceCriteria : CriteriaBase
+public class GetBetTypePerformanceCriteria : CriteriaBase, IBasePerformanceCriteria
 {
     [SpParam(Ignored = true)]
     public Market MarketFilter { get; set; }
@@ -47,7 +47,7 @@ public class GetBetTypePerformanceCriteria : CriteriaBase
 
     public decimal? MarginToReal { get; set; }
 
-    public string Bettypes { get; set; }
+    public string BetTypes { get; set; }
 
     public bool IsExcludeLeagues { get; set; }
 

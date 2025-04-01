@@ -7,4 +7,12 @@ public class ExcelConstants
     public const string NonLiveText = "Non-Live";
     public const int Width = 220;
     public const string NotAvailableText = "N/A";
+    public const string TraderPerformance = "Trader Performance";
+    public const string BetTypePerformance = "Bet Type Performance";
+    public const string LeaguePerformance = "League Performance";
+    public const string TitleTemplate = "TitleTemplate";
+    public const string BodyTemplate = "BodyTemplate";
+    public const string EvenTemplate = "EvenTemplate";
+    public const string OddTemplate = "OddTemplate";
+    public const string TotalTemplate = "TotalTemplate";
 }
