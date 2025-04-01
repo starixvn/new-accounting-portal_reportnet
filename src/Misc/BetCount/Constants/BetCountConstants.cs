@@ -18,6 +18,7 @@ public static class BetCountConstants
     public const int VGaming = 66;
     public const int MiscVirtualSportsThirdId = 77;
     public const int MiscVirtualSportsThirdIdOld = 49;
+    public const int VirtualSports7 = 106;
 
     public static readonly string BetCountSessionKey = "Fanex.AccountingReports.Misc.BetCount.BetCountReport";
     public static readonly string BetCountHistoryReportSessionKey = "Fanex.AccountingReports.Misc.BetCount.HistoryBetCountReport";
@@ -32,6 +33,7 @@ public static class BetCountConstants
         "bet builder",
         "saba.games",
         "vgaming",
-        "virtual sports 3"
+        "virtual sports 3",
+        "virtual sports 7"
     ];
 }
