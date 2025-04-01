@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail;
 using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
+using SoccerPerformanceDetail.ViewModel;
 using Utilities.Configurations;
 
 public class SoccerPerformanceDetailController(SoccerPerformanceDetailService service,
@@ -28,6 +29,14 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     public async Task<IActionResult> TraderPerformance()
     {
         await InitData();
+        return View();
+    }
+
+    public async Task<IActionResult> TeamPerformance()
+    {
+        await InitData();
+        var teams = await service.GetTeams();
+        ViewBag.Teams = teams;
         return View();
     }
 

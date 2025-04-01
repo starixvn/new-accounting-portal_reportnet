@@ -3,6 +3,8 @@
 /* global Namespace, numeral, Fanex, common, validator, labels, messages, datepickerSetting, forecastBettype */
 
 ////'use strict';
+var validator = new Fanex.TGRS.Validator();
+var layout = new Fanex.TGRS.Layout();
 $(document).ready(function () {
     var teamPerformance = new Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance();
 
@@ -37,14 +39,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
         divLeagueDetailGrid: null
     };
     var urls = {
-        GetTeamPerformance: common.ResolveRootUrl('PerformanceDetail/GetTeamPerformance'),
-        ExportTeamPerformance: common.ResolveRootUrl('PerformanceDetail/ExportTeamPerformance'),
-        GetTraderPerformanceOfTeam: common.ResolveRootUrl('PerformanceDetail/GetTraderPerformanceOfTeam'),
-        GetMatchPerformanceOfTeamTrader: common.ResolveRootUrl('PerformanceDetail/GetMatchPerformanceOfTeamTrader'),
-        GetBettypeDetail: common.ResolveRootUrl('PerformanceDetail/GetBettypeDetailTeam'),
-        GetLeagueDetail: common.ResolveRootUrl('PerformanceDetail/GetLeagueDetailTeam'),
-        GetTraderPerformanceOfLeague: common.ResolveRootUrl('PerformanceDetail/GetTraderPerformanceOfLeagueTeam'),
-        GetMatchTraderLeagueTeam: common.ResolveRootUrl('PerformanceDetail/GetMatchPerformanceOfTraderLeagueTeam')
+        GetTeamPerformance: window.rootUrl + '/api/soccer-performance-detail/team/main',
+        ExportTeamPerformance: window.rootUrl + '/api/soccer-performance-detail/team/export',
+        GetTraderPerformanceOfTeam: window.rootUrl + '/api/soccer-performance-detail/team/team-trader-detail',
+        GetMatchPerformanceOfTeamTrader: window.rootUrl + '/api/soccer-performance-detail/team/team-trader-match-detail',
+        GetBettypeDetail: window.rootUrl + '/api/soccer-performance-detail/team/team-trader-match-bettype-detail',
+        GetLeagueDetail: window.rootUrl + '/api/soccer-performance-detail/team/team-league-detail',
+        GetTraderPerformanceOfLeague: window.rootUrl + '/api/soccer-performance-detail/team/team-league-trader-detail',
+        GetMatchTraderLeagueTeam: window.rootUrl + '/api/soccer-performance-detail/team/team-league-trader-match-detail'
     };
     var parameters = {
         MarketFilter: null,
@@ -528,14 +530,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
             if (isVirtualPerformancePermission) {
                 currentColumns = currentColumns.concat([{ Name: 'ColTurnover', Value: item.Turnover },
-                    { Name: 'ColAvgTurnoverPerMatch', Value: (item.Turnover / item.NoOfMatches) },
+                    { Name: 'ColAvgTurnoverPerMatch', Value: item.NoOfMatches > 0 ? (item.Turnover / item.NoOfMatches) : 0 },
                     { Name: 'ColWinLoss', Value: item.WinLoss },
                     { Name: 'ColMargin', Value: common.GetNumWithLabel(item.Margin, labels.NA) }]);
             }
 
             if (isRealPerformancePermission) {
                 currentColumns = currentColumns.concat([{ Name: 'ColTurnoverReal', Value: item.TurnoverReal },
-                    { Name: 'ColAvgTurnoverPerMatchReal', Value: (item.TurnoverReal / item.NoOfMatches) },
+                    { Name: 'ColAvgTurnoverPerMatchReal', Value: item.NoOfMatches > 0 ? (item.TurnoverReal / item.NoOfMatches) : 0 },
                     { Name: 'ColWinLossReal', Value: item.WinLossReal },
                     { Name: 'ColMarginReal', Value: common.GetNumWithLabel(item.MarginReal, labels.NA) }]);
             }
@@ -568,14 +570,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
         if (isVirtualPerformancePermission) {
             columns = columns.concat([{ Name: 'ColTurnover', Value: data.Total.Turnover },
-                { Name: 'ColAvgTurnoverPerMatch', Value: (data.Total.Turnover / data.Total.NoOfMatches) },
+                { Name: 'ColAvgTurnoverPerMatch', Value: data.Total.NoOfMatches > 0 ? (data.Total.Turnover / data.Total.NoOfMatches) : 0 },
                 { Name: 'ColWinLoss', Value: data.Total.WinLoss },
                 { Name: 'ColMargin', Value: common.GetNumWithLabel(data.Total.Margin, labels.NA) }]);
         }
 
         if (isRealPerformancePermission) {
             columns = columns.concat([{ Name: 'ColTurnoverReal', Value: data.Total.TurnoverReal },
-                { Name: 'ColAvgTurnoverPerMatchReal', Value: (data.Total.TurnoverReal / data.Total.NoOfMatches) },
+                { Name: 'ColAvgTurnoverPerMatchReal', Value: data.Total.NoOfMatches > 0 ? (data.Total.TurnoverReal / data.Total.NoOfMatches) : 0 },
                 { Name: 'ColWinLossReal', Value: data.Total.WinLossReal },
                 { Name: 'ColMarginReal', Value: common.GetNumWithLabel(data.Total.MarginReal, labels.NA) }]);
         }
@@ -772,14 +774,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
             if (isVirtualPerformancePermission) {
                 currentColumns = currentColumns.concat([{ Name: 'ColTurnover', Value: item.Turnover },
-                    { Name: 'ColAvgTurnoverPerMatch', Value: (item.Turnover / item.NoOfMatches) },
+                    { Name: 'ColAvgTurnoverPerMatch', Value: item.NoOfMatches > 0 ? (item.Turnover / item.NoOfMatches) : 0 },
                     { Name: 'ColWinLoss', Value: item.WinLoss },
                     { Name: 'ColMargin', Value: common.GetNumWithLabel(item.Margin, labels.NA) }]);
             }
 
             if (isRealPerformancePermission) {
                 currentColumns = currentColumns.concat([{ Name: 'ColTurnoverReal', Value: item.TurnoverReal },
-                    { Name: 'ColAvgTurnoverPerMatchReal', Value: (item.TurnoverReal / item.NoOfMatches) },
+                    { Name: 'ColAvgTurnoverPerMatchReal', Value: item.NoOfMatches > 0 ? (item.TurnoverReal / item.NoOfMatches) : 0 },
                     { Name: 'ColWinLossReal', Value: item.WinLossReal },
                     { Name: 'ColMarginReal', Value: common.GetNumWithLabel(item.MarginReal, labels.NA) }]);
             }
@@ -801,14 +803,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
         if (isVirtualPerformancePermission) {
             columns = columns.concat([{ Name: 'ColTurnover', Value: data.Total.Turnover },
-                { Name: 'ColAvgTurnoverPerMatch', Value: (data.Total.Turnover / data.Total.NoOfMatches) },
+                { Name: 'ColAvgTurnoverPerMatch', Value: data.Total.NoOfMatches > 0 ? (data.Total.Turnover / data.Total.NoOfMatches) : 0 },
                 { Name: 'ColWinLoss', Value: data.Total.WinLoss },
                 { Name: 'ColMargin', Value: common.GetNumWithLabel(data.Total.Margin, labels.NA) }]);
         }
 
         if (isRealPerformancePermission) {
             columns = columns.concat([{ Name: 'ColTurnoverReal', Value: data.Total.TurnoverReal },
-                { Name: 'ColAvgTurnoverPerMatchReal', Value: (data.Total.TurnoverReal / data.Total.NoOfMatches) },
+                { Name: 'ColAvgTurnoverPerMatchReal', Value: data.Total.NoOfMatches > 0 ? (data.Total.TurnoverReal / data.Total.NoOfMatches) : 0 },
                 { Name: 'ColWinLossReal', Value: data.Total.WinLossReal },
                 { Name: 'ColMarginReal', Value: common.GetNumWithLabel(data.Total.MarginReal, labels.NA) }]);
         }
@@ -1027,14 +1029,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
             if (isVirtualPerformancePermission) {
                 columns = columns.concat([{ Name: 'ColTurnover', Value: item.Turnover },
-                    { Name: 'ColAvgTurnoverPerMatch', Value: (item.Turnover / item.NoOfMatches) },
+                    { Name: 'ColAvgTurnoverPerMatch', Value: item.NoOfMatches > 0 ? (item.Turnover / item.NoOfMatches) : 0 },
                     { Name: 'ColWinLoss', Value: item.WinLoss },
                     { Name: 'ColMargin', Value: common.GetNumWithLabel(item.Margin, labels.NA) }]);
             }
 
             if (isRealPerformancePermission) {
                 columns = columns.concat([{ Name: 'ColTurnoverReal', Value: item.TurnoverReal },
-                    { Name: 'ColAvgTurnoverPerMatchReal', Value: (item.TurnoverReal / item.NoOfMatches) },
+                    { Name: 'ColAvgTurnoverPerMatchReal', Value: item.NoOfMatches > 0 ? (item.TurnoverReal / item.NoOfMatches) : 0 },
                     { Name: 'ColWinLossReal', Value: item.WinLossReal },
                     { Name: 'ColMarginReal', Value: common.GetNumWithLabel(item.MarginReal, labels.NA) }]);
             }
@@ -1055,14 +1057,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
         if (isVirtualPerformancePermission) {
             columns = columns.concat([{ Name: 'ColTurnover', Value: data.Total.Turnover },
-                { Name: 'ColAvgTurnoverPerMatch', Value: (data.Total.Turnover / data.Total.NoOfMatches) },
+                { Name: 'ColAvgTurnoverPerMatch', Value: data.Total.NoOfMatches > 0 ? (data.Total.Turnover / data.Total.NoOfMatches) : 0 },
                 { Name: 'ColWinLoss', Value: data.Total.WinLoss },
                 { Name: 'ColMargin', Value: common.GetNumWithLabel(data.Total.Margin, labels.NA) }]);
         }
 
         if (isRealPerformancePermission) {
             columns = columns.concat([{ Name: 'ColTurnoverReal', Value: data.Total.TurnoverReal },
-                { Name: 'ColAvgTurnoverPerMatchReal', Value: (data.Total.TurnoverReal / data.Total.NoOfMatches) },
+                { Name: 'ColAvgTurnoverPerMatchReal', Value: data.Total.NoOfMatches > 0 ? (data.Total.TurnoverReal / data.Total.NoOfMatches) : 0 },
                 { Name: 'ColWinLossReal', Value: data.Total.WinLossReal },
                 { Name: 'ColMarginReal', Value: common.GetNumWithLabel(data.Total.MarginReal, labels.NA) }]);
         }
@@ -1459,8 +1461,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                     currentRowData = currentRowData.concat([{ Name: 'ColTurnoverReal', Value: item.TurnoverReal },
                         { Name: 'ColWinLossReal', Value: item.WinLossReal },
                         { Name: 'ColMarginReal', Value: common.GetNumWithLabel(item.MarginReal, labels.NA) }]);
-                }
-                
+                }             
+
                 row = {
                     Columns: currentRowData
                 };
@@ -1740,14 +1742,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
             if (isVirtualPerformancePermission) {
                 currentColumns = currentColumns.concat([{ Name: 'ColTurnover', Value: item.Turnover },
-                    { Name: 'ColAvgTurnoverPerMatch', Value: (item.Turnover / item.NoOfMatches) },
+                    { Name: 'ColAvgTurnoverPerMatch', Value: item.NoOfMatches > 0 ? (item.Turnover / item.NoOfMatches) : 0 },
                     { Name: 'ColWinLoss', Value: item.WinLoss },
                     { Name: 'ColMargin', Value: common.GetNumWithLabel(item.Margin, labels.NA) }]);
             }
 
             if (isRealPerformancePermission) {
                 currentColumns = currentColumns.concat([{ Name: 'ColTurnoverReal', Value: item.TurnoverReal },
-                    { Name: 'ColAvgTurnoverPerMatchReal', Value: (item.TurnoverReal / item.NoOfMatches) },
+                    { Name: 'ColAvgTurnoverPerMatchReal', Value: item.NoOfMatches > 0 ? (item.TurnoverReal / item.NoOfMatches) : 0 },
                     { Name: 'ColWinLossReal', Value: item.WinLossReal },
                     { Name: 'ColMarginReal', Value: common.GetNumWithLabel(item.MarginReal, labels.NA) }]);
             }
@@ -1769,14 +1771,14 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
         if (isVirtualPerformancePermission) {
             columns = columns.concat([{ Name: 'ColTurnover', Value: data.Total.Turnover },
-                { Name: 'ColAvgTurnoverPerMatch', Value: (data.Total.Turnover / data.Total.NoOfMatches) },
+                { Name: 'ColAvgTurnoverPerMatch', Value: data.Total.NoOfMatches > 0 ? (data.Total.Turnover / data.Total.NoOfMatches) : 0 },
                 { Name: 'ColWinLoss', Value: data.Total.WinLoss },
                 { Name: 'ColMargin', Value: common.GetNumWithLabel(data.Total.Margin, labels.NA) }]);
         }
 
         if (isRealPerformancePermission) {
             columns = columns.concat([{ Name: 'ColTurnoverReal', Value: data.Total.TurnoverReal },
-                { Name: 'ColAvgTurnoverPerMatchReal', Value: (data.Total.TurnoverReal / data.Total.NoOfMatches) },
+                { Name: 'ColAvgTurnoverPerMatchReal', Value: data.Total.NoOfMatches > 0 ? (data.Total.TurnoverReal / data.Total.NoOfMatches) : 0 },
                 { Name: 'ColWinLossReal', Value: data.Total.WinLossReal },
                 { Name: 'ColMarginReal', Value: common.GetNumWithLabel(data.Total.MarginReal, labels.NA) }]);
         }

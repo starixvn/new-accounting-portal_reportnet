@@ -17,6 +17,8 @@ public interface SoccerPerformanceDetailService
 
     Task<IEnumerable<LeagueGroup>> GetLeagueGroups();
 
+    Task<IEnumerable<TeamItem>> GetTeams();
+
     Task<IEnumerable<BetTypeItem>> GetBetTypes(int userId, BettypeViewPermission permission);
 
     Task<BetTypeBetChoiceList> GetBetTypeBetChoicePerformance(GetBetChoicePerformanceOfBetTypeCriteria criteria);
@@ -157,6 +159,11 @@ public class SoccerPerformanceDetailServiceImp(
         }
 
         return leagueGroupList;
+    }
+
+    public Task<IEnumerable<TeamItem>> GetTeams()
+    {
+        return repository.FetchAsync<TeamItem>(new GetTeamsCriteria());
     }
 
     private IEnumerable<BetTypePerformanceInfo> SortBetTypePerformanceInfo(IEnumerable<BetTypePerformanceInfo> betTypeData)

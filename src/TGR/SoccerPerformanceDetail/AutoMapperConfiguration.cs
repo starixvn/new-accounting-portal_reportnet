@@ -13,14 +13,12 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<LeaguePerformanceItem, LeaguePerformanceExcelItem>();
         cfg.CreateMap<BetTypePerformanceInfo, BetTypePerformanceItem>();
         cfg.CreateMap<BetTypeBetChoicePerformanceInfo, BetTypeBetChoiceItem>();
-
         cfg.CreateMap<TraderPerformanceInfo, TraderPerformanceItem>();
         cfg.CreateMap<LeaguePerformanceInfo, LeaguePerformanceItem>();
         cfg.CreateMap<MatchPerformanceRawInfo, MatchPerformanceItem>();
-
         cfg.CreateMap<MatchPerformanceInfo, MatchPerformanceItem>();
         cfg.CreateMap<BetTypeDetailInfo, BetTypeDetailItem>();
-
         cfg.CreateMap<TraderPerformanceItem, TraderPerformanceExcelItem>();
+        cfg.CreateMap<TeamPerformanceInfo, TeamPerformanceItem>();
     }
 }
