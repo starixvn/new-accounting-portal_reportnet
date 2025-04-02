@@ -2,7 +2,7 @@
 
 using Epplus.Mapper.Annotations;
 
-public class LeaguePerformanceExcelItem
+public class LeaguePerformanceExcelItem : BasePerformanceExcelItem
 {
     [Cell("A5")]
     public int No { get; set; }

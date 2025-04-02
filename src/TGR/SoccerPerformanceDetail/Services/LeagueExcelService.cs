@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using SoccerPerformanceDetail.Constants;
 using SoccerPerformanceDetail.Criteria;
-using SoccerPerformanceDetail.Utilities;
 using SoccerPerformanceDetail.ViewModel;
 using Utilities.Configurations;
 
@@ -20,6 +18,7 @@ public interface LeagueExcelService
 public class LeagueExcelServiceImp(ConfigurationService configurationService, IMapper mapper)
     : BaseExcelService(configurationService), LeagueExcelService
 {
+
     public Task<ExcelPackage> ExportExcelLeaguePerformance(LeaguePerformanceList data,
         GetLeaguePerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
@@ -34,50 +33,10 @@ public class LeagueExcelServiceImp(ConfigurationService configurationService, IM
             Market.Live => data.ItemLiveList,
             _ => data.ItemByOrderList
         };
-        BuildBodyRows(bodyData, startBodyRowIndex);
+        BuildBodyRows<LeaguePerformanceItem, LeaguePerformanceExcelItem>(bodyData, startBodyRowIndex, mapper);
         var startTotalRowIndex = data.ItemByOrderList.Count + startBodyRowIndex;
-        BuildTotalRow(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex);
+        BuildTotalRow<LeaguePerformanceItem, LeaguePerformanceExcelItem>(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex, mapper);
         ClearTemplate(ExcelConstants.LeaguePerformance);
         return Task.FromResult(ExcelPackage!);
-    }
-
-    private void BuildBodyRows(IEnumerable<LeaguePerformanceItem> list, int startRowIndex)
-    {
-        var index = 1;
-        var rowIndex = startRowIndex;
-        var excelModels = mapper.Map<IEnumerable<LeaguePerformanceExcelItem>>(list);
-        foreach (var item in excelModels)
-        {
-            var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
-            item.No = index++;
-            item.Market = item.IsLive ? ExcelConstants.LiveText : ExcelConstants.NonLiveText;
-            sheet.ApplyModel(template, item, rowIndex);
-            UpdateValueSpecificColumns(rowIndex++, item);
-        }
-    }
-
-    private void BuildTotalRow(LeaguePerformanceItem liveData, LeaguePerformanceItem nonLivedata, int startIndex)
-    {
-        var excelModel = mapper.Map<LeaguePerformanceExcelItem>(liveData);
-        excelModel.Market = ExcelConstants.LiveText;
-        sheet.ApplyModel(totalSheet, excelModel, startIndex);
-        UpdateValueSpecificColumns(startIndex, excelModel);
-        excelModel = mapper.Map<LeaguePerformanceExcelItem>(nonLivedata);
-        excelModel.Market = ExcelConstants.NonLiveText;
-        sheet.ApplyModel(totalSheet, excelModel, startIndex + 1);
-        UpdateValueSpecificColumns(startIndex + 1, excelModel);
-        var cellTotalAddress = $"A{startIndex}:B{startIndex + 1}";
-        sheet!.Cells[cellTotalAddress].Merge = true;
-        sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
-    }
-
-    private void UpdateValueSpecificColumns(int startIndex, LeaguePerformanceExcelItem model)
-    {
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"K{startIndex}"], model.Margin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"O{startIndex}"], model.MarginReal);
-        sheet!.Cells[$"I{startIndex}"].Value =
-            model.NoOfMatches > 0 ? model.Turnover / model.NoOfMatches : ExcelConstants.NotAvailableText;
-        sheet!.Cells[$"M{startIndex}"].Value =
-            model.NoOfMatches > 0 ? model.TurnoverReal / model.NoOfMatches : ExcelConstants.NotAvailableText;
     }
 }

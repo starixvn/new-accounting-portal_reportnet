@@ -1,4 +1,5 @@
 using AutoMapper;
+using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using SoccerPerformanceDetail.Constants;
 using SoccerPerformanceDetail.Utilities;
@@ -134,5 +135,50 @@ public abstract class BaseExcelService(ConfigurationService configurationService
             sheet!.DeleteRow(rowIndex);
         }
         return rowIndex;
+    }
+    
+    protected void BuildBodyRows<TData, TExcelModel>(IEnumerable<TData> list, int startRowIndex, IMapper mapper)
+        where TExcelModel : BasePerformanceExcelItem
+    {
+        var index = 1;
+        var rowIndex = startRowIndex;
+        var excelModels = mapper.Map<IEnumerable<TExcelModel>>(list);
+        foreach (var item in excelModels)
+        {
+            var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
+            item.No = index++;
+            item.Market = item.IsLive ? ExcelConstants.LiveText : ExcelConstants.NonLiveText;
+            sheet.ApplyModel(template, item, rowIndex);
+            UpdateValueSpecificColumns(rowIndex++, item);
+        }
+    }
+
+    protected void BuildTotalRow<TData, TExcelModel>(TData liveData, TData nonLivedata, int startIndex, IMapper mapper)
+        where TExcelModel : BasePerformanceExcelItem
+    {
+        var excelModel = mapper.Map<TExcelModel>(liveData);
+        excelModel.Market = ExcelConstants.LiveText;
+        sheet.ApplyModel(totalSheet, excelModel, startIndex);
+        UpdateValueSpecificColumns(startIndex, excelModel);
+
+        excelModel = mapper.Map<TExcelModel>(nonLivedata);
+        excelModel.Market = ExcelConstants.NonLiveText;
+        sheet.ApplyModel(totalSheet, excelModel, startIndex + 1);
+        UpdateValueSpecificColumns(startIndex + 1, excelModel);
+
+        var cellTotalAddress = $"A{startIndex}:B{startIndex + 1}";
+        sheet!.Cells[cellTotalAddress].Merge = true;
+        sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
+    }
+
+    protected void UpdateValueSpecificColumns<TExcelModel>(int startIndex, TExcelModel model)
+        where TExcelModel : BasePerformanceExcelItem
+    {
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"K{startIndex}"], model.Margin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"O{startIndex}"], model.MarginReal);
+        sheet!.Cells[$"I{startIndex}"].Value =
+            model.NoOfMatches > 0 ? model.Turnover / model.NoOfMatches : ExcelConstants.NotAvailableText;
+        sheet!.Cells[$"M{startIndex}"].Value =
+            model.NoOfMatches > 0 ? model.TurnoverReal / model.NoOfMatches : ExcelConstants.NotAvailableText;
     }
 } 
