@@ -40,7 +40,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
     };
     var urls = {
         GetTeamPerformance: window.rootUrl + '/api/soccer-performance-detail/team/main',
-        ExportTeamPerformance: window.rootUrl + '/api/soccer-performance-detail/team/export',
+        ExportTeamPerformance: window.rootUrl + '/api/soccer-performance-detail/team/export-team',
         GetTraderPerformanceOfTeam: window.rootUrl + '/api/soccer-performance-detail/team/team-trader-detail',
         GetMatchPerformanceOfTeamTrader: window.rootUrl + '/api/soccer-performance-detail/team/team-trader-match-detail',
         GetBettypeDetail: window.rootUrl + '/api/soccer-performance-detail/team/team-trader-match-bettype-detail',
@@ -620,7 +620,9 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
         $.ajax({
             type: 'POST',
             url: urls.GetLeagueDetail,
-            data: criteria,
+            contentType: 'application/json; charset=utf-8', // Specify JSON content type
+            dataType: 'json', // Expect JSON response
+            data: JSON.stringify(criteria), // Convert data to JSON string
             success: function (data) {
                 renderLeagueDetailGrid(data, teamId, teamName, isLive);
             },
@@ -1546,7 +1548,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
     // Export team performance to excel.
     var exportTeamPerformance = function () {
-        common.DownloadFile(urls.ExportTeamPerformance, parameters);
+        AccReport.downloadFile(urls.ExportTeamPerformance, parameters);
     };
 
     // Get trader performance on a specific team.

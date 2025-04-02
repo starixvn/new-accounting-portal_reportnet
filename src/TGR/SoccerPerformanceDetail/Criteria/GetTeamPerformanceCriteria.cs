@@ -3,7 +3,7 @@
 using Fanex.Data;
 using Fanex.Data.Repository;
 
-public class GetTeamPerformanceCriteria : CriteriaBase
+public class GetTeamPerformanceCriteria : CriteriaBase, IBasePerformanceCriteria
 {
     [SpParam(Ignored = true)]
     public Market MarketFilter { get; set; }

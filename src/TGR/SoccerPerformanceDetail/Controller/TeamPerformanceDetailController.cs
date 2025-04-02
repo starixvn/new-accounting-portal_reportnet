@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Fanex.NAP.Client;
+using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
+using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
 
 namespace SoccerPerformanceDetail.Controller;
@@ -7,7 +9,9 @@ namespace SoccerPerformanceDetail.Controller;
 
 [Route("api/soccer-performance-detail/team")]
 [ApiController]
-public class TeamPerformanceDetailController(SoccerPerformanceDetailService service) : ControllerBase
+public class TeamPerformanceDetailController(SoccerPerformanceDetailService service,
+    INapSession napSession,
+    TeamExcelService excelService) : ControllerBase
 {
     [Route("main")]
     public async Task<IActionResult> GetTeamPerformance(GetTeamPerformanceCriteria criteria)
@@ -21,6 +25,18 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
         var teamPerformance = await service.GetTeamPerformance(criteria);
 
         return Ok(teamPerformance);
+    }
+
+    [HttpGet("export-team")]
+    public async Task<IActionResult> ExportExcelTeam([FromQuery] GetTeamPerformanceCriteria criteria)
+    {
+        var leagueGroups = await service.GetLeagueGroups();
+        var betTypes = await service.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var data = await service.GetTeamPerformance(criteria);
+        var excelPackage = await excelService.ExportExcelTeamPerformance(data, criteria, leagueGroups, betTypes);
+        var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+        var fileName = $"Performance_Detail_Team_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 
     [Route("team-trader-detail")]

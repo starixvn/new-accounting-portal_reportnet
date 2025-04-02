@@ -57,7 +57,7 @@ public abstract class BaseExcelService(ConfigurationService configurationService
         using var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read);
         ExcelPackage = new ExcelPackage(stream);
         sheet = ExcelPackage.Workbook.Worksheets[mainSheetName];
-        if (mainSheetName == ExcelConstants.TraderPerformance)
+        if (mainSheetName is ExcelConstants.TraderPerformance or ExcelConstants.TeamPerformance)
         {
             titleSheet = ExcelPackage.Workbook.Worksheets[ExcelConstants.TitleTemplate];
             bodySheet = ExcelPackage.Workbook.Worksheets[ExcelConstants.BodyTemplate];
@@ -72,7 +72,7 @@ public abstract class BaseExcelService(ConfigurationService configurationService
 
     protected void ClearTemplate(string mainSheetName)
     {
-        if (mainSheetName == ExcelConstants.TraderPerformance)
+        if (mainSheetName is ExcelConstants.TraderPerformance or ExcelConstants.TeamPerformance)
         {
             ExcelPackage!.Workbook.Worksheets.Delete(ExcelConstants.TitleTemplate);
             ExcelPackage!.Workbook.Worksheets.Delete(ExcelConstants.BodyTemplate);

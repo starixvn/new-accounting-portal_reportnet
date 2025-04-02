@@ -8,11 +8,11 @@ public class TeamPerformanceInfo
 
     public decimal? TeamBenchmark { get; set; }
 
-    public int? TraderCount { get; set; }
+    public int? NoOfTraders { get; set; }
 
-    public int? LeagueCount { get; set; }
+    public int? NoOfLeagues { get; set; }
 
-    public int? MatchCount { get; set; }
+    public int? NoOfMatches { get; set; }
 
     public decimal? Turnover { get; set; }
 

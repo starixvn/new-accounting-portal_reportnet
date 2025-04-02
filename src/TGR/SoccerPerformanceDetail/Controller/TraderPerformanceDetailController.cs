@@ -30,7 +30,7 @@ public class TraderPerformanceDetailController(SoccerPerformanceDetailService se
     }
 
     [HttpGet("export-trader")]
-    public async Task<IActionResult> ExportExcelLeague([FromQuery] GetTraderPerformanceCriteria criteria)
+    public async Task<IActionResult> ExportExcelTrader([FromQuery] GetTraderPerformanceCriteria criteria)
     {
         var leagueGroups = await service.GetLeagueGroups();
         var betTypes = await service.GetBetTypes(napSession.UserId, BettypeViewPermission.All);

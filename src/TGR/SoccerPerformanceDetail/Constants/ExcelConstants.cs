@@ -8,6 +8,7 @@ public class ExcelConstants
     public const int Width = 220;
     public const string NotAvailableText = "N/A";
     public const string TraderPerformance = "Trader Performance";
+    public const string TeamPerformance = "Team Performance";
     public const string BetTypePerformance = "Bet Type Performance";
     public const string LeaguePerformance = "League Performance";
     public const string TitleTemplate = "TitleTemplate";
