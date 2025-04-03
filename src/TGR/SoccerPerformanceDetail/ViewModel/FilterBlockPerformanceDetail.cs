@@ -1,18 +1,5 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="FilterBlockPerformanceDetail.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Tony.Nguyen" date="2023.6.27">Created</change>
-// </history>
+﻿namespace SoccerPerformanceDetail.ViewModel;
 
-namespace SoccerPerformanceDetail.ViewModel;
-
-/// <summary>
-/// Filter block performance detail view model.
-/// </summary>
-[Serializable]
 public class FilterBlockPerformanceDetail
 {
     public string BetTypeName { get; set; }
