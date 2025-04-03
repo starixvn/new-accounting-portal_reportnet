@@ -103,6 +103,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
 
     var showBetType = function (info, bodyData, liveStatus) {
         var hedgeText = self.Params.reportParams.IsHedge ? " (hedge) " : "";
+        var liveStatusText = liveStatus ? "Live" : "Non-Live";
+        var liveStatusValue = liveStatus ? 1 : 0;
         var currentRow = {
             Columns: [
                 {
@@ -127,7 +129,21 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
                 { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
                 { Name: "ColRealTurnOver", Value: info.RealTurnover },
                 { Name: "ColVirtualMargin", Value: info.VirtualMargin },
-                { Name: "ColRealMargin", Value: info.RealMargin }],
+                {
+                    Name: "ColRealMargin",
+                    Value: {
+                        value: info.RealMargin,
+                        sportType: self.Params.reportParams.SportType,
+                        leagueId: self.Params.reportParams.LeagueId,
+                        betType: info.Bettype,
+                        liveStatus: liveStatusValue,
+                        sportBettype: self.Params.reportParams.SportBettype,
+                        showHedgeOrNormalMatchOnly: info.IsHedge ? 1 : 2,
+                        title: self.Params.reportParams.SportName + ' - ' + liveStatusText + ' - ' +
+                                self.Params.reportParams.LeagueName + ' - ' + info.BettypeName
+                    },
+                    CustomCellRender: self.RenderRealMarginLink
+                }],
         };
 
         bodyData.push(currentRow);
@@ -320,6 +336,20 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
     self.isShowGrandTotalRow = function (report) {
         return self.isShowTotalRow(report.RM)
         || self.isShowTotalRow(report.BARM);
+    };
+
+    self.RenderRealMarginLink = function (currentCell) {
+        var cssClass = currentCell.Value.value > 0 ? 'format-positive' : '';
+        var realMarginValue = currentCell.Value.value;
+        var clickEvent = ' onclick = "showChart(' + currentCell.Value.sportType + ',\'' + currentCell.Value.sportBettype + '\',\'' + currentCell.Value.leagueId + '\',' + currentCell.Value.betType + ',' + currentCell.Value.liveStatus + ',' + currentCell.Value.showHedgeOrNormalMatchOnly + ',\'' + currentCell.Value.title + '\');"';
+        var html = '';
+        if (currentCell.Value.sportType === 1) {
+            html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
+        } else {
+            html = '<div>' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
+        }
+        
+        return html;
     };
 
 

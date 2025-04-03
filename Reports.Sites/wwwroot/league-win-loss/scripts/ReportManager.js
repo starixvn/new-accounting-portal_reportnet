@@ -217,4 +217,142 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                 report.BARM.LineTotal != 0 ||
                 report.GrandTotal.LineTotal != 0);
     };
+
+    showChart = function (sportType, sportBettype, leagueId, betType, liveStatus, showHedgeOrNormalMatchOnly, title) {
+        var param = {
+            IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
+            SportType: sportType,
+            SportBettype: sportBettype,
+            LeagueId: leagueId,
+            BetType: betType,
+            Site: _leagueWinLoss.Params.reportParams.SiteName,
+            LiveStatus: liveStatus,
+            ShowHedgeOrNormalMatchOnly: showHedgeOrNormalMatchOnly
+        }
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "/api/league-win-loss/margins",
+            param,
+            function (data) {
+                var labels = data.map(function(item) {
+                    return item.MonthYear;
+                });
+                var barMarginData = data.map(function(item) {
+                    return (item.CompanyMargin * 100).toFixed(2); 
+                });
+                var lineMarginData = data.map(function(item) {
+                    return (item.CompanyMargin * 100).toFixed(2);
+                });
+
+                // Get the context of the canvas element we want to select
+                var ctx = document.getElementById('marginChart').getContext('2d');
+
+                if (myChart) {
+                    myChart.destroy();
+                }
+
+                // Create a new chart instance
+                myChart = new Chart(ctx, {
+                    type: 'bar', // Specify the chart type
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Trendline',
+                            data: lineMarginData,
+                            type: 'line',
+                            borderColor: '#fa8334',
+                            datalabels: {
+                                display: false
+                            }
+                        }, 
+                        {
+                            label: 'Bar',
+                            data: barMarginData,
+                            backgroundColor: '#134980',
+                            borderColor: '#134980',
+                            borderWidth: 1,
+                            datalabels: {
+                                display: true,
+                                align: 'center',
+                                anchor: 'center',
+                                formatter: function(value) {
+                                    return value + '%';
+                                },
+                                color: function (context) {
+                                    return context.dataset.data[context.dataIndex] > 0 ? 'red' : '#000'; // Black if negative
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: 13
+                                },
+                                clip: false,
+                                clamp: true
+                            }
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                        y: {
+                            border: {
+                                display: false
+                            },
+                            reverse: true, // This makes negative numbers appear at the top
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toFixed(2) + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title,
+                            font: {
+                                size: 15
+                            },
+                            color: "#2626ff"
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.raw + '%';
+                                    return label;
+                                }
+                            }
+                        }
+                        },
+                    },
+                    plugins: [ChartDataLabels]
+                });
+
+                // Show the modal
+                var modal = document.getElementById('chartModal');
+                var span = document.getElementsByClassName('close')[0];
+
+                modal.style.display = 'block';
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                    modal.style.display = 'none';
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                        }
+                    }
+            },
+            null,
+            AccReport.enableInput,
+            false);
+        
+        }
 }

@@ -39,6 +39,7 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
     public async Task<IActionResult> GetLeagueWinLoss(LeagueWinLossCriteria criteria)
     {
         var result = await service.GetLeagueWinLoss(criteria);
+        _ = Task.Run(() => service.RunCachedMargins(new MarginCriteria() { SportBettype = criteria.SportBettype }));
         return Ok(result);
     }
 
@@ -234,6 +235,13 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
             SearchText = query
         };
         var result = await service.GetLeagueSuggestion(criteria);
+        return Ok(result);
+    }
+
+    [Route("margins")]
+    public async Task<IActionResult> GeMargins(MarginCriteria criteria)
+    {
+        var result = await service.GetMargins(criteria);
         return Ok(result);
     }
 }
