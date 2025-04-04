@@ -140,7 +140,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
                         sportBettype: self.Params.reportParams.SportBettype,
                         showHedgeOrNormalMatchOnly: info.IsHedge ? 1 : 2,
                         title: self.Params.reportParams.SportName + ' - ' + liveStatusText + ' - ' +
-                                self.Params.reportParams.LeagueName + ' - ' + info.BettypeName
+                            self.Params.reportParams.LeagueName + ' - ' + (info.IsHedge ? info.BettypeName + " (hedge)" : info.BettypeName)
                     },
                     CustomCellRender: self.RenderRealMarginLink
                 }],
