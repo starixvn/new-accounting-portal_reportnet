@@ -219,6 +219,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
     };
 
     showChart = function (sportType, sportBettype, leagueId, betType, liveStatus, showHedgeOrNormalMatchOnly, title) {
+        var isAtZero = true;
         var param = {
             IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
             SportType: sportType,
@@ -243,6 +244,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                     return (item.CompanyMargin * 100).toFixed(2);
                 });
 
+                if (barMarginData.every(value => value === '0.00' || value === '-0.00')) {
+                    isAtZero = false; // Replace with your desired default value
+                }
+
                 // Get the context of the canvas element we want to select
                 var ctx = document.getElementById('marginChart').getContext('2d');
 
@@ -260,6 +265,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                             data: lineMarginData,
                             type: 'line',
                             borderColor: '#fa8334',
+                            backgroundColor: '#fa8334',
                             datalabels: {
                                 display: false
                             }
@@ -267,8 +273,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                         {
                             label: 'Bar',
                             data: barMarginData,
-                            backgroundColor: '#134980',
-                            borderColor: '#134980',
+                            backgroundColor: '#5a9bd5',
+                            borderColor: '#5a9bd5',
                             borderWidth: 1,
                             datalabels: {
                                 display: true,
@@ -293,12 +299,21 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {
+                        x: {
+                            grid: {
+                                color: (context) => context.tick?.value === 0 ? '#5a9bd5' : 'transparent', // Only show gridline at 0
+                              }
+
+                        },    
                         y: {
+                            grid: {
+                                color: (context) => context.tick?.value === 0 ? '#5a9bd5' : '#d9d9d9'
+                            },
                             border: {
                                 display: false
                             },
                             reverse: true, // This makes negative numbers appear at the top
-                            beginAtZero: false,
+                            beginAtZero: isAtZero,
                             ticks: {
                                 callback: function(value) {
                                     return value.toFixed(2) + '%';
