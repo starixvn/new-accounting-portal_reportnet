@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Fanex.NAP.Client.Attributes;
+using Fanex.NAP.Client;
+using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
 using SoccerPerformanceDetail.Services;
+using SoccerPerformanceDetail.ViewModel;
 
 namespace SoccerPerformanceDetail.Controller;
 
@@ -38,6 +41,33 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     {
         criteria.IsExcludeLeagues = true;
         var leaguePerformance = await service.GetLeaguePerformanceOfGrade(criteria);
+
+        return Ok(leaguePerformance);
+    }
+
+    [Route("trader-match-detail")]
+    public async Task<IActionResult> GetMatchPerformanceOfGradeTrader(GetMatchPerformanceOfGradeTraderCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var matchPerformance = await service.GetMatchPerformanceOfGradeTrader(criteria);
+
+        return Ok(matchPerformance);
+    }
+
+    [Route("trader-bettype-detail")]
+    public async Task<IActionResult> GetBettypeDetailGrade(GetBettypeDetailGradeCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var bettypeDetail = await service.GetBettypeDetailGrade(criteria);
+
+        return Ok(bettypeDetail);
+    }
+
+    [Route("trader-by-league-detail")]
+    public async Task<IActionResult> GetTraderPerformanceOfGradeByLeague(GetTraderPerformanceOfGradeByLeagueCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var leaguePerformance = await service.GetTraderPerformanceOfGradeByLeague(criteria);
 
         return Ok(leaguePerformance);
     }

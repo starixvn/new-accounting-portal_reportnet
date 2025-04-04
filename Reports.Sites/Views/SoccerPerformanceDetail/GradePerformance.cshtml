@@ -1,0 +1,238 @@
+﻿@using SoccerPerformanceDetail.ViewModel
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SoccerPerformanceDetail
+@using Utilities.DateTimes
+@{
+    ViewBag.Title = "Soccer Performance Detail";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@{
+    Dictionary<Market, string> markets = ViewBag.Markets;
+    var isDisableMarket = markets.Count == 1;
+}
+@section Head
+{
+    <link rel="stylesheet" type="text/css" href="~/tgrs/styles/common.css?v=2" />
+    <link rel="stylesheet" type="text/css" href="~/style/month-picker.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/month-picker-custom.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/nex-date-picker.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/pager-pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/soccer-performance-detail/styles/performance-detail.css" />
+}
+@section Headline
+{
+    <div class="title">
+        <div>
+            <span>TGR / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+    <div class="header-button">
+        <a href="@Url.Content("~/SoccerPerformanceDetail/LeaguePerformance")" class="green-button change-list">
+            <span class="list-icon"></span>League
+        </a>
+        <a href="@Url.Content("~/SoccerPerformanceDetail/TraderPerformance")" class="green-button change-list">
+            <span class="list-icon"></span>Trader
+        </a>
+        <a href="#" class="green-button change-list disabled">
+            <span class="list-icon"></span>Grade
+        </a>
+        <a href="@Url.Content("~/SoccerPerformanceDetail/TeamPerformance")" class="green-button change-list">
+            <span class="list-icon"></span>Team
+        </a>
+        <a href="@Url.Content("~/SoccerPerformanceDetail/BetTypePerformance")" class="green-button change-list">
+            <span class="list-icon"></span>BetType
+        </a>
+    </div>
+}
+<div class="filter-bar">
+    <div id="divGradePerformanceFilter" class="filter-form">
+        <div class="filter-row">
+            <div class="lbl-field col_6">
+                <label>Market</label>
+            </div>
+            <div class="edit-field col_5">
+                <select id="ddlMarket" disabled="@isDisableMarket" style="width: 10.5em">
+                    @foreach (KeyValuePair<Market, string> item in markets)
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                </select>
+            </div>
+            <div class="date-range"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
+            <div class="lbl-field col_4">
+                <label for="ddlBetType">BetType</label>
+            </div>
+            <div class="edit-field col_8">
+                <select id="ddlBetType" multiple="multiple" style="width: 160px">
+                    @foreach (var group in (IEnumerable<GroupBetTypes>)ViewBag.GroupBetTypes)
+                    {
+                        var check = false;
+                        if (group.TotalDefaultCheckOfBetTypeList == group.BetTypeList.Count())
+                        {
+                            check = true;
+                        }
+                        <optgroup label="@group.GroupName" checked=@check>
+                            @foreach (var bettype in (IEnumerable<BetType>)group.BetTypeList)
+                            {
+                                <option value="@bettype.BetTypeId" data-default="@bettype.IsDefaultCheck">@bettype.BetTypeName</option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+            </div>
+        </div>
+
+        @if (@ViewBag.IsVirtualPerformancePermission)
+        {
+            <div class="filter-row">
+                <div class="lbl-field col_6">
+                    <label for="txtMinTurnover">Minimum Virtual Turnover</label>
+                </div>
+                <div class="edit-field col_5">
+                    <input type="text" id="txtMinTurnover" style="width:10em" maxlength="10" data-val-number="Invalid value!" />
+                </div>
+                <div class="lbl-field col_5 min-winloss">
+                    <label for="txtMinWinLoss">Minimum Virtual WinLoss</label>
+                </div>
+                <div class="edit-field col_5">
+                    <input type="text" id="txtMinWinLoss" maxlength="10" data-val-number="Invalid value!" />
+                </div>
+                <div class="lbl-field col_3 margin">
+                    <label for="txtMarginFrom">Virtual Margin %</label>
+                </div>
+                <div class="edit-field col_12">
+                    <input type="text" id="txtMarginFrom" class="margin" maxlength="5" data-val-number="Invalid value!" />
+                    <span> - </span>
+                    <input type="text" id="txtMarginTo" class="margin" maxlength="5" data-val-number="Invalid value!" />
+                </div>
+            </div>
+        }
+
+        @if (@ViewBag.IsRealPerformancePermission)
+        {
+            <div class="filter-row">
+                <div class="lbl-field col_6">
+                    <label for="txtMinTurnoverReal">Minimum Real Turnover</label>
+                </div>
+                <div class="edit-field col_5">
+                    <input type="text" id="txtMinTurnoverReal" style="width:10em" maxlength="10" data-val-number="Invalid value!" />
+                </div>
+                <div class="lbl-field col_5 min-winloss">
+                    <label for="txtMinWinLossReal">Minimum Real WinLoss</label>
+                </div>
+                <div class="edit-field col_5">
+                    <input type="text" id="txtMinWinLossReal" maxlength="10" data-val-number="Invalid value!" />
+                </div>
+                <div class="lbl-field col_3 margin">
+                    <label for="txtMarginFromReal">Real Margin %</label>
+                </div>
+                <div class="edit-field col_12">
+                    <input type="text" id="txtMarginFromReal" class="margin" maxlength="5" data-val-number="Invalid value!" />
+                    <span> - </span>
+                    <input type="text" id="txtMarginToReal" class="margin" maxlength="5" data-val-number="Invalid value!" />
+                </div>
+            </div>
+        }
+
+        <div class="filter-row">
+            <div class="lbl-field col_6">
+                <label for="txtLeague">League Group</label>
+            </div>
+            <div class="edit-field col_5">
+                <select id="ddlLeagueGroup" multiple="multiple">
+                    @foreach (var leagueGroup in (IEnumerable<LeagueGroup>)ViewBag.LeagueGroups)
+                    {
+                        <option value=@leagueGroup.TargetLeagueGroupId selected>@leagueGroup.LeagueGroupName</option>
+                    }
+                </select>
+            </div>
+            <div class="lbl-field" style="width:75px"></div>
+            <div class="submit col_4">
+                <input id="btnGenerate" type="button" class="blue-button" value="Generate" />
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="divGradePerformanceContainer" class="content-grid display-none">
+    <div id="divGradePerformanceGrid" class="freegrid"></div>
+</div>
+<div id="divTraderPerformanceContainer" class="content-grid display-none">
+    <div id="divTraderPerformanceGrid" class="freegrid"></div>
+</div>
+<div id="divTraderPerformanceByLeagueContainer" class="content-grid display-none">
+    <div id="divTraderPerformanceByLeagueGrid" class="freegrid"></div>
+</div>
+<div id="divLeaguePerformanceContainer" class="content-grid display-none">
+    <div id="divLeaguePerformanceGrid" class="freegrid"></div>
+</div>
+<div id="divMatchPerformanceContainer" class="content-grid display-none">
+    <div id="divMatchPerformanceGrid" class="freegrid"></div>
+</div>
+<div id="divBettypeDetailContainer" class="content-grid display-none">
+    <div id="divBettypeDetailGrid" class="freegrid"></div>
+</div>
+@section Foot
+{
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/tgrs/common-tgrs.js?v=3"></script>
+    <script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
+    <script type="text/javascript" src="~/scripts/msg-box.js"></script>
+    <script type="text/javascript" src="~/scripts/grade-performance.js"></script>
+    <script type="text/javascript">
+        var datepickerSetting = {
+            MinDate: '@(((DateTime)ViewBag.MinDate).ToShortFormatedDate())',
+            DefaultFromDate: '@(((DateTime)ViewBag.DefaultFromDate).ToShortFormatedDate())',
+            DefaultToDate: '@(((DateTime)ViewBag.DefaultToDate).ToShortFormatedDate())',
+            AllowYearRange: parseInt('@ViewBag.AllowYearRange')
+        };
+        var forecastBettype = '@ViewBag.ForecastBetType';
+        var labels = {
+            MarketNonLive: 'Non-Live',
+            MarketLive: 'Live',
+            No: '#',
+            LeagueGroup: 'League Group',
+            NoOfLeagues: 'No. Of Leagues',
+            NoOfTraders: 'No. Of Traders',
+            NoOfMatches: 'No. Of Matches',
+            Turnover: 'Turnover',
+            AvgTurnoverPerMatch: 'Avg. TO Per Match',
+            WinLoss: 'Win Loss',
+            BetCount: 'Bet Count',
+            Margin: 'Margin %',
+            BetTypeBM: 'Bet Type BM %',
+            BetType: 'Bet Type',
+            BetTypeDetail: 'Bet Type Detail',
+            AllLeagueGroups: 'All League Groups',
+            Trader: 'Trader',
+            Grade: 'Grade',
+            Team: 'Team',
+            Match: 'Match',
+            Total: 'Total',
+            GrandTotal: 'Grand Total',
+            AllBetTypes: 'All Bet Types',
+            EventDate: 'Event Date',
+            EffectiveDate: 'Effective Date',
+            NA: 'N/A',
+            Forecast: 'Forecast',
+            GradePerformance: 'Grade Performance',
+            TraderPerformance: 'Trader Performance',
+            MatchPerformance: 'Match Performance',
+            TeamHistoryDetail: 'Team History Detail',
+            GradeHistoryDetail: 'Grade History Detail',
+            Score: 'Score',
+            Benchmark: 'BM %',
+            ScoreByLatestBenchMark: 'Score By Latest BM',
+            ScoreByPeriod: 'Score By Period'
+        };
+
+        var messages = {
+            InvalidValue: 'Invalid value!',
+            RequiredField: 'Invalid value!'
+        };
+
+        var isVirtualPerformancePermission = '@ViewBag.IsVirtualPerformancePermission' == "True";
+        var isRealPerformancePermission = '@ViewBag.IsRealPerformancePermission' == "True";
+    </script>
+}

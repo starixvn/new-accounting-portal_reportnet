@@ -40,6 +40,12 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
         return View();
     }
 
+    public async Task<IActionResult> GradePerformance()
+    {
+        await InitData();
+        return View();
+    }
+
     [HttpGet]
     public IActionResult GetViewScorePermission()
     {

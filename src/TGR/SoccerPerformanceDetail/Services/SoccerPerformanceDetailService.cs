@@ -6,6 +6,7 @@ using Fanex.Data.Repository;
 using global::Utilities.LinqDynamicSum;
 using global::Utilities.RemotingRef;
 using Model;
+using Org.BouncyCastle.Asn1.Pkcs;
 using System.Collections.Generic;
 using ViewModel;
 
@@ -71,6 +72,12 @@ public interface SoccerPerformanceDetailService
     Task<LeaguePerformanceList> GetLeaguePerformance(GetLeagueDetailTeamCriteria criteria, bool isGroupOfLeague = false);
     
     Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailTeam(GetBettypeDetailTeamCriteria criteria);
+
+    Task<MatchPerformanceList> GetMatchPerformanceOfGradeTrader(GetMatchPerformanceOfGradeTraderCriteria criteria);
+
+    Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailGrade(GetBettypeDetailGradeCriteria criteria);
+
+    Task<TraderPerformanceList> GetTraderPerformanceOfGradeByLeague(GetTraderPerformanceOfGradeByLeagueCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -782,5 +789,65 @@ public class SoccerPerformanceDetailServiceImp(
         var bettypeDetail = await CalculateBetType(rawData, criteria.IsLive, scoreByPeriodCriteria);
 
         return bettypeDetail;
+    }
+
+    public async Task<MatchPerformanceList> GetMatchPerformanceOfGradeTrader(GetMatchPerformanceOfGradeTraderCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<MatchPerformanceInfo>(criteria);
+        var matchPerformance = new MatchPerformanceList();
+
+        if (rawData == null || !rawData.Any())
+        {
+            return matchPerformance;
+        }
+
+        var matchDataList = mapper.Map<List<MatchPerformanceItem>>(rawData);
+
+        var leagueGroups = matchDataList.GroupBy(obj => obj.LeagueId);
+
+        foreach (var group in leagueGroups)
+        {
+            var leagueGroup = CalculateMatchGroupByLeague(group.Key, matchDataList);
+            matchPerformance.AddItem(leagueGroup);
+        }
+
+        var grandTotal = matchDataList.DynamicSum();
+
+        matchPerformance.GroupList = matchPerformance.GroupList.OrderBy(obj => obj.LeagueName).ToList();
+        matchPerformance.TotalItems = rawData.Count();
+        matchPerformance.GrandTotal = grandTotal;
+
+        return matchPerformance;
+
+
+    }
+
+    public async Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailGrade(GetBettypeDetailGradeCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<BetTypeDetailInfo>(criteria);
+
+        var scoreByPeriodCriteria = new GetScoreByPeriodCriteria
+        {
+            FromDate = criteria.FromDate,
+            ToDate = criteria.ToDate,
+            CustId = criteria.CustId,
+            MatchId = criteria.MatchId,
+            Bettypes = string.Join(",", rawData.Select(b => b.BetType.ToString())),
+            IsExcludeLeagues = true,
+            LeagueGroupIds = criteria.LeagueGroupIds
+        };
+
+        var bettypeDetail = await CalculateBetType(rawData, criteria.IsLive, scoreByPeriodCriteria);
+
+        return bettypeDetail;
+    }
+
+    public async Task<TraderPerformanceList> GetTraderPerformanceOfGradeByLeague(GetTraderPerformanceOfGradeByLeagueCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<TraderPerformanceInfo>(criteria);
+
+        var traderPerformance = CalculateTraderPerformanceList(rawData);
+
+        return traderPerformance;
     }
 }
