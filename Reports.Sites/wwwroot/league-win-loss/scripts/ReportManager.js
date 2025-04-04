@@ -230,6 +230,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             LiveStatus: liveStatus,
             ShowHedgeOrNormalMatchOnly: showHedgeOrNormalMatchOnly
         }
+        AccReport.disableInput();
         AccReport.utility.CallAjax(this,
             window.rootUrl + "/api/league-win-loss/margins",
             param,
