@@ -1,16 +1,17 @@
-﻿using Fanex.NAP.Client.Attributes;
-using Fanex.NAP.Client;
+﻿using Fanex.NAP.Client;
 using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
+using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
-using SoccerPerformanceDetail.ViewModel;
 
 namespace SoccerPerformanceDetail.Controller;
 
 
 [Route("api/soccer-performance-detail/grade")]
 [ApiController]
-public class GradePerformanceDetailController(SoccerPerformanceDetailService service) : ControllerBase
+public class GradePerformanceDetailController(SoccerPerformanceDetailService service,
+    INapSession napSession,
+    GradeExcelService excelService) : ControllerBase
 {
     [Route("main")]
     public async Task<IActionResult> GetGradePerformance(GetGradePerformanceCriteria criteria)
@@ -25,6 +26,18 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
         var gradePerformance = await service.GetGradePerformance(criteria);
         
         return Ok(gradePerformance);
+    }
+
+    [HttpGet("export-grade")]
+    public async Task<IActionResult> ExportExcelTrader([FromQuery] GetGradePerformanceCriteria criteria)
+    {
+        var leagueGroups = await service.GetLeagueGroups();
+        var betTypes = await service.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var data = await service.GetGradePerformance(criteria);
+        var excelPackage = await excelService.ExportExcelGradePerformance(data, criteria, leagueGroups, betTypes);
+        var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+        var fileName = $"Performance_Detail_Grade_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 
     [Route("trader-trader-detail")]
@@ -70,5 +83,13 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
         var leaguePerformance = await service.GetTraderPerformanceOfGradeByLeague(criteria);
 
         return Ok(leaguePerformance);
+    }
+
+    [Route("grade-league-trader")]
+    public async Task<IActionResult> GetMatchPerformanceOfGradeLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+        var matchPerformance = await service.GetMatchPerformanceOfLeagueTrader(criteria);
+        return Ok(matchPerformance);
     }
 }

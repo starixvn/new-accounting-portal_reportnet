@@ -22,5 +22,6 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<TeamPerformanceInfo, TeamPerformanceItem>();
         cfg.CreateMap<TeamPerformanceItem, TeamPerformanceExcelItem>();
         cfg.CreateMap<GradePerformanceInfo, GradePerformanceItem>();
+        cfg.CreateMap<GradePerformanceItem, GradePerformanceExcelItem>();
     }
 }

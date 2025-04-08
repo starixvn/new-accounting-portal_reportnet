@@ -13,5 +13,6 @@ public static class SoccerPerformanceDetailInjection
         service.AddTransient<LeagueExcelService, LeagueExcelServiceImp>();
         service.AddTransient<TraderExcelService, TraderExcelServiceImp>();
         service.AddTransient<TeamExcelService, TeamExcelServiceImp>();
+        service.AddTransient<GradeExcelService, GradeExcelServiceImp>();
     }
 }

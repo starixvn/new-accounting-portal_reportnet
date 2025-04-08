@@ -108,6 +108,7 @@
 
   <ItemGroup>
     <Folder Include="ExcelTemplate\SoccerPerformanceDetail\League\" />
+    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Grade\" />
     <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Team\" />
     <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Trader\" />
   </ItemGroup>

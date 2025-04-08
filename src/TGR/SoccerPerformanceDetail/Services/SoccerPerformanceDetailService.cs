@@ -720,8 +720,22 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var leagueData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
         var leaguePerformance = CalculatePerformanceLeague(leagueData, false);
+        var leagueGroups = await GetLeagueGroups();
+        if (!leagueGroups.Any()) return leaguePerformance;
+        UpdateLeagueName(leagueGroups, leaguePerformance.ItemLiveList);
+        UpdateLeagueName(leagueGroups, leaguePerformance.ItemNonLiveList);
 
         return leaguePerformance;
+    }
+
+    private void UpdateLeagueName(IEnumerable<LeagueGroup> leagueGroups, List<LeaguePerformanceItem> data)
+    {
+        data.ForEach(item =>
+        {
+            var group = leagueGroups.Where(x => x.TargetLeagueGroupId == item.LeagueGroupId)
+                .Select(x => x.LeagueGroupName).ToList();
+            item.LeagueGroupName = group.Any() ? group[0] : "-";
+        });
     }
 
     public async Task<TeamPerformanceList> GetTeamPerformance(GetTeamPerformanceCriteria criteria)

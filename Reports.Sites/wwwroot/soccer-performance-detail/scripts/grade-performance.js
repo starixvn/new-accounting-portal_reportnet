@@ -44,13 +44,13 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
     };
     var urls = {
         GetGradePerformance: window.rootUrl + '/api/soccer-performance-detail/grade/main',
-        ExportGradePerformance: window.rootUrl + '/api/soccer-performance-detail/grade/export',
+        ExportGradePerformance: window.rootUrl + '/api/soccer-performance-detail/grade/export-grade',
         GetTraderPerformanceOfGrade: window.rootUrl + '/api/soccer-performance-detail/grade/trader-trader-detail',
         GetTraderPerformanceOfGradeByLeague: window.rootUrl + '/api/soccer-performance-detail/grade/trader-by-league-detail',
         GetLeaguePerformanceOfGrade: window.rootUrl + '/api/soccer-performance-detail/grade/trader-league-detail',
         GetMatchPerformanceOfGradeTrader: window.rootUrl + '/api/soccer-performance-detail/grade/trader-match-detail',
         GetBettypeDetail: window.rootUrl + '/api/soccer-performance-detail/grade/trader-bettype-detail',
-        GetMatchPerformanceOfGradeLeagueTrader: common.ResolveRootUrl('PerformanceDetail/GetMatchPerformanceOfGradeLeagueTrader')
+        GetMatchPerformanceOfGradeLeagueTrader: window.rootUrl + '/api/soccer-performance-detail/grade/grade-league-trader'
     };
     var parameters = {
         MarketFilter: null,
@@ -597,7 +597,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
 
     // Export grade performance to excel.
     var exportGradePerformance = function () {
-        common.DownloadFile(urls.ExportGradePerformance, parameters);
+        AccReport.downloadFile(urls.ExportGradePerformance, parameters);
     };
 
     // Get league performance on a specific bet type.
