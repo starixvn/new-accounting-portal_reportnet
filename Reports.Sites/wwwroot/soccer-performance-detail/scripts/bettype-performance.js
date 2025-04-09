@@ -79,7 +79,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         Turnover: null,
         WinLoss: null,
         IsVirtual: null,
-        IsReal: null        
+        IsReal: null,
+        IsExcludeLeagues: null
     };
 
     var betChoicePerformanceOfBetTypeParams = {
@@ -90,7 +91,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         LeagueGroupIds: null,
         LeagueName: null,
         IsVirtual: null,
-        IsReal: null
+        IsReal: null,
+        IsExcludeLeagues: null
     };
 
     var leaguePerformanceOfBetChoiceParams = {
@@ -105,7 +107,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         Oddsspread: null,
         IsFMBetType: null,
         IsVirtual: null,
-        IsReal: null
+        IsReal: null,
+        IsExcludeLeagues: null
     };
 
     var cachedData = {
@@ -269,6 +272,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 parameters.LeagueName = domElements.txtLeague.val();
                 parameters.IsVirtual = isVirtualPerformancePermission;
                 parameters.IsReal = isRealPerformancePermission;
+                parameters.IsExcludeLeagues = isExcludeLeagues;
 
                 if (isVirtualPerformancePermission) {
                     parameters.MarginFrom = domElements.txtMarginFrom.val().replace(/,/g, '');
@@ -805,6 +809,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         betChoicePerformanceOfBetTypeParams.LeagueName = parameters.LeagueName;
         betChoicePerformanceOfBetTypeParams.IsVirtual = isVirtualPerformancePermission;
         betChoicePerformanceOfBetTypeParams.IsReal = isRealPerformancePermission;
+        betChoicePerformanceOfBetTypeParams.IsExcludeLeagues = isExcludeLeagues;
 
         common.DisableInput();
         $.ajax({
@@ -1979,6 +1984,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         leaguePerformanceOfBetChoiceParams.IsFMBetType = isFMBetType;
         leaguePerformanceOfBetChoiceParams.IsVirtual = isVirtualPerformancePermission;
         leaguePerformanceOfBetChoiceParams.IsReal = isRealPerformancePermission;
+        leaguePerformanceOfBetChoiceParams.IsExcludeLeagues = isExcludeLeagues;
 
         common.DisableInput();
         $.ajax({
@@ -2238,7 +2244,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             BetTypeBMFrom: parameters.BetTypeBMFrom,
             BetTypeBMTo: parameters.BetTypeBMTo,
             LeagueGroupIds: parameters.LeagueGroupIds,
-            LeagueName: parameters.LeagueName
+            LeagueName: parameters.LeagueName,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -2570,7 +2577,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             BetTypeBMFrom: parameters.BetTypeBMFrom,
             BetTypeBMTo: parameters.BetTypeBMTo,
             LeagueGroupIds: parameters.LeagueGroupIds,
-            LeagueName: parameters.LeagueName
+            LeagueName: parameters.LeagueName,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -2872,7 +2880,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
             LeagueGroupIds: parameters.LeagueGroupIds,
-            LeagueName: parameters.LeagueName
+            LeagueName: parameters.LeagueName,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -3208,7 +3217,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             LeagueId: leagueId,
             LeagueName: parameters.LeagueName,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -4078,7 +4088,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             LeagueId: leagueId,
             CustId: traderId,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();

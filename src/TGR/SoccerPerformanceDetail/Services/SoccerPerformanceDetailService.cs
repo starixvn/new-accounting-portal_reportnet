@@ -78,6 +78,8 @@ public interface SoccerPerformanceDetailService
     Task<IEnumerable<BetTypeDetailItem>> GetBettypeDetailGrade(GetBettypeDetailGradeCriteria criteria);
 
     Task<TraderPerformanceList> GetTraderPerformanceOfGradeByLeague(GetTraderPerformanceOfGradeByLeagueCriteria criteria);
+
+    Task<LeagueExclusionConfig> GetLeagueExclusionConfig();
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -87,7 +89,6 @@ public class SoccerPerformanceDetailServiceImp(
 {
     public async Task<BetTypePerformanceList> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria)
     {
-        criteria.IsExcludeLeagues = (await GetLeagueExclusionConfig()).IsExcludeLeagues;
         var betTypeData = await repository.FetchAsync<BetTypePerformanceInfo>(criteria);
         var betTypePerformance = new BetTypePerformanceList();
 
@@ -211,7 +212,7 @@ public class SoccerPerformanceDetailServiceImp(
         return betTypes ?? [];
     }
 
-    private async Task<LeagueExclusionConfig> GetLeagueExclusionConfig()
+    public async Task<LeagueExclusionConfig> GetLeagueExclusionConfig()
     {
         return await repository.GetAsync<LeagueExclusionConfig>(new LeagueExclusionConfigGetCriteria());
     }

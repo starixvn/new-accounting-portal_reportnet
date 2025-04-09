@@ -1,11 +1,14 @@
-﻿namespace Reports.Sites.Controllers;
+﻿using Reports.Sites.Settings;
+
+namespace Reports.Sites.Controllers;
 
 using Fanex.NAP.Client;
+using Fanex.NAP.Client.Attributes;
+using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail;
 using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
-using SoccerPerformanceDetail.ViewModel;
 using Utilities.Configurations;
 
 public class SoccerPerformanceDetailController(SoccerPerformanceDetailService service,
@@ -14,24 +17,28 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
 {
     private readonly int[] ForecastBetType = [1, 3, 7, 8];
 
+    [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> BetTypePerformance()
     {
         await InitData();
         return View();
     }
 
+    [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> LeaguePerformance()
     {
         await InitData();
         return View();
     }
 
+    [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> TraderPerformance()
     {
         await InitData();
         return View();
     }
 
+    [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> TeamPerformance()
     {
         await InitData();
@@ -40,6 +47,7 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
         return View();
     }
 
+    [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> GradePerformance()
     {
         await InitData();
@@ -47,6 +55,7 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     }
 
     [HttpGet]
+    [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public IActionResult GetViewScorePermission()
     {
         return Json(true);
@@ -72,5 +81,6 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
         ViewBag.IsRealPerformancePermission = true;
         ViewBag.GroupBetTypes = await service.GetGroupBetTypes(napSession.UserId, BettypeViewPermission.All);
         ViewBag.LeagueGroups = await service.GetLeagueGroups();
+        ViewBag.IsExcludeLeagues = (await service.GetLeagueExclusionConfig()).IsExcludeLeagues;
     }
 }
