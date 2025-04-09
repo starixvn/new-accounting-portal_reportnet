@@ -3,7 +3,6 @@ using Epplus.Mapper.Extensions;
 using LeagueWinLoss.Model;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using SixLabors.ImageSharp;
 using Utilities.Configurations;
 
 namespace LeagueWinLoss.Services;
@@ -51,47 +50,21 @@ public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationSer
         var rowIndex = StartRowIndex;
         LoadTemplate("LeagueWinLoss_Level.xlsx");
         BuildTitle(title, "A1:L2");
+        
         switch (liveIndicator)
         {
             case 2:
-            {
-                sheet.Cells["A4:L4"].Value = $"{header} Live";
-                sheet.Cells["A5:A6"].Value = "Bet Type";
-                if (data.BetTypeWinLossLive != null)
-                {
-                    ExportForBetTypeLive(data.BetTypeWinLossLive, ref rowIndex);
-                }
-                sheet.Cells["A4:L6"].Copy(sheet.Cells[$"A{rowIndex + 1}:L{rowIndex + 3}"]);
-                sheet.Cells[$"A{rowIndex + 1}:L{rowIndex + 1}"].Value = $"{header} Non-Live";
-                if (data.BetTypeWinLossNonLive != null)
-                {
-                    ExportForBetTypeNonLive(data.BetTypeWinLossNonLive, rowIndex + 4);
-                }
-
+                ProcessLiveData(data, header, ref rowIndex);
+                ProcessNonLiveData(data, header, rowIndex + 4, copyHeader: true);
                 break;
-            }
+                
             case 1:
-            {
-                sheet.Cells["A4:L4"].Value = $"{header} Live";
-                sheet.Cells["A5:A6"].Value = "Bet Type";
-                if (data.BetTypeWinLossLive != null)
-                {
-                    ExportForBetTypeLive(data.BetTypeWinLossLive, ref rowIndex);
-                }
-
+                ProcessLiveData(data, header, ref rowIndex);
                 break;
-            }
+                
             default:
-            {
-                sheet.Cells["A4:L4"].Value = $"{header} None-Live";
-                sheet.Cells["A5:A6"].Value = "Bet Type";
-                if (data.BetTypeWinLossNonLive != null)
-                {
-                    ExportForBetTypeNonLive(data.BetTypeWinLossNonLive, rowIndex);
-                }
-
+                ProcessNonLiveData(data, header, rowIndex, copyHeader: false);
                 break;
-            }
         }
         
         ClearTemplate();
@@ -298,5 +271,40 @@ public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationSer
         ExcelPackage.Workbook.Worksheets.Delete("TotalTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("SubItemTemplate");
         ExcelPackage.Workbook.Worksheets.Delete("GrandTotalTemplate");
+    }
+
+    private void ProcessLiveData(BetTypeWinLossByStatusModel data, string header, ref int rowIndex)
+    {
+        SetupHeader($"{header} Live", "Bet Type");
+        
+        if (data.BetTypeWinLossLive != null)
+        {
+            ExportForBetTypeLive(data.BetTypeWinLossLive, ref rowIndex);
+        }
+    }
+
+    private void ProcessNonLiveData(BetTypeWinLossByStatusModel data, string header, int startRowIndex, bool copyHeader)
+    {
+        if (copyHeader)
+        {
+            sheet.Cells["A4:L6"].Copy(sheet.Cells[$"A{startRowIndex - 3}:L{startRowIndex - 1}"]);
+            sheet.Cells[$"A{startRowIndex - 3}:L{startRowIndex - 3}"].Value = $"{header} Non-Live";
+            sheet.Cells[$"A{startRowIndex - 2}:A{startRowIndex - 1}"].Value = "Bet Type";
+        }
+        else
+        {
+            SetupHeader($"{header} Non-Live", "Bet Type");
+        }
+        
+        if (data.BetTypeWinLossNonLive != null)
+        {
+            ExportForBetTypeNonLive(data.BetTypeWinLossNonLive, startRowIndex);
+        }
+    }
+    
+    private void SetupHeader(string headerText, string subHeaderText)
+    {
+        sheet.Cells["A4:L4"].Value = headerText;
+        sheet.Cells["A5:A6"].Value = subHeaderText;
     }
 }
