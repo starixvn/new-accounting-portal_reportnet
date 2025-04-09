@@ -3,6 +3,7 @@ using Epplus.Mapper.Extensions;
 using LeagueWinLoss.Model;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using SixLabors.ImageSharp;
 using Utilities.Configurations;
 
 namespace LeagueWinLoss.Services;
@@ -11,7 +12,7 @@ public interface BetTypeWinLossExcelService
 {
     Task<ExcelPackage> ExportExcel(BettypeWinLossModel data, string title, string header);
 
-    Task<ExcelPackage> ExportExcelBetTypeByStatus(BetTypeWinLossByStatusModel data, string title, string header);
+    Task<ExcelPackage> ExportExcelBetTypeByStatus(BetTypeWinLossByStatusModel data, string title, string header, int liveIndicator);
 
     Task<ExcelPackage> ExportExcelBetTypeWithChoices(BettypeWinLossWithChoiceModel data, string title, string header);
 }
@@ -45,18 +46,54 @@ public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationSer
         return Task.FromResult(ExcelPackage);
     }
 
-    public Task<ExcelPackage> ExportExcelBetTypeByStatus(BetTypeWinLossByStatusModel data, string title, string header)
+    public Task<ExcelPackage> ExportExcelBetTypeByStatus(BetTypeWinLossByStatusModel data, string title, string header, int liveIndicator)
     {
         var rowIndex = StartRowIndex;
         LoadTemplate("LeagueWinLoss_Level.xlsx");
         BuildTitle(title, "A1:L2");
-        sheet.Cells["A4:L4"].Value = $"{header} Live";
-        sheet.Cells["A5:A6"].Value = "Bet Type";
-        ExportForBetTypeLive(data.BetTypeWinLossLive, ref rowIndex);
-        sheet.Cells["A4:L6"].Copy(sheet.Cells[$"A{rowIndex + 1}:L{rowIndex + 3}"]);
-        sheet.Cells[$"A{rowIndex + 1}:L{rowIndex + 1}"].Value = $"{header} Non-Live";
-        sheet.Cells[$"A{rowIndex + 2}:L{rowIndex + 3}"].Value = "Bet Type";
-        ExportForBetTypeNonLive(data.BetTypeWinLossNonLive, rowIndex + 4);
+        switch (liveIndicator)
+        {
+            case 2:
+            {
+                sheet.Cells["A4:L4"].Value = $"{header} Live";
+                sheet.Cells["A5:A6"].Value = "Bet Type";
+                if (data.BetTypeWinLossLive != null)
+                {
+                    ExportForBetTypeLive(data.BetTypeWinLossLive, ref rowIndex);
+                }
+                sheet.Cells["A4:L6"].Copy(sheet.Cells[$"A{rowIndex + 1}:L{rowIndex + 3}"]);
+                sheet.Cells[$"A{rowIndex + 1}:L{rowIndex + 1}"].Value = $"{header} Non-Live";
+                if (data.BetTypeWinLossNonLive != null)
+                {
+                    ExportForBetTypeNonLive(data.BetTypeWinLossNonLive, rowIndex + 4);
+                }
+
+                break;
+            }
+            case 1:
+            {
+                sheet.Cells["A4:L4"].Value = $"{header} Live";
+                sheet.Cells["A5:A6"].Value = "Bet Type";
+                if (data.BetTypeWinLossLive != null)
+                {
+                    ExportForBetTypeLive(data.BetTypeWinLossLive, ref rowIndex);
+                }
+
+                break;
+            }
+            default:
+            {
+                sheet.Cells["A4:L4"].Value = $"{header} None-Live";
+                sheet.Cells["A5:A6"].Value = "Bet Type";
+                if (data.BetTypeWinLossNonLive != null)
+                {
+                    ExportForBetTypeNonLive(data.BetTypeWinLossNonLive, rowIndex);
+                }
+
+                break;
+            }
+        }
+        
         ClearTemplate();
         return Task.FromResult(ExcelPackage);
     }
@@ -114,6 +151,7 @@ public class BetTypeWinLossExcelServiceImp(ConfigurationService configurationSer
             sheet.Cells["A7:L7"].Merge = true;
             sheet.Cells["A7:L7"].Value = "There is no data";
             sheet.Cells["A7:L7"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            sheet.Cells["A7:L7"].Style.Font.Color.SetColor(System.Drawing.Color.Red);
         }
         
     }
