@@ -36,6 +36,7 @@ public class BetTypePerformanceItem
         {
             NoOfTraders = a.NoOfTraders + b.NoOfTraders,
             NoOfMatches = a.NoOfMatches + b.NoOfMatches,
+            NoOfLeagues = a.NoOfLeagues + b.NoOfLeagues,
             Turnover = a.Turnover + b.Turnover,
             WinLoss = a.WinLoss + b.WinLoss,
             TurnoverReal = a.TurnoverReal + b.TurnoverReal,
