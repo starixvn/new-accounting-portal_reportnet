@@ -11,42 +11,36 @@ public class LeaguePerformanceExcelItem : BasePerformanceExcelItem
     public string LeagueName { get; set; }
 
     [Cell("C5")]
-    public string Market { get; set; }
-
-    [Cell("D5")]
     public string LeagueGroupName { get; set; }
 
-    [Cell("E5")]
-    public int NoOfTraders { get; set; }
-
-    [Cell("F5")]
+    [Cell("D5")]
     public int NoOfMatches { get; set; }
 
-    [Cell("G5")]
+    [Cell("E5")]
     public int BetCount { get; set; }
 
-    [Cell("H5")]
+    [Cell("F5")]
     public decimal Turnover { get; set; }
 
-    [Cell("I5")]
+    [Cell("G5")]
     public decimal? AvgToPerMatch { get; set; }
 
-    [Cell("J5")]
+    [Cell("H5")]
     public decimal WinLoss { get; set; }
 
-    [Cell("K5")]
+    [Cell("I5")]
     public decimal? Margin { get; set; }
 
-    [Cell("L5")]
+    [Cell("J5")]
     public decimal TurnoverReal { get; set; }
 
-    [Cell("M5")]
+    [Cell("K5")]
     public decimal? AvgToPerMatchReal { get; set; }
 
-    [Cell("N5")]
+    [Cell("L5")]
     public decimal WinLossReal { get; set; }
 
-    [Cell("O5")]
+    [Cell("M5")]
     public decimal? MarginReal { get; set; }
 
     public bool IsLive { get; set; }

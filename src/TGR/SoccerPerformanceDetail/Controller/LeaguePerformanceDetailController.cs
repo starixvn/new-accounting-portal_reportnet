@@ -10,7 +10,8 @@ namespace SoccerPerformanceDetail.Controller;
 [ApiController]
 public class LeaguePerformanceDetailController(SoccerPerformanceDetailService service,
     INapSession napSession,
-    LeagueExcelService excelService) : ControllerBase
+    LeagueExcelService excelService,
+    PermissionService permissionService) : ControllerBase
 {
     [Route("main")]
     public async Task<IActionResult> GetLeaguePerformance(GetLeaguePerformanceCriteria criteria)
@@ -31,8 +32,9 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
     [HttpGet("export-league")]
     public async Task<IActionResult> ExportExcelLeague([FromQuery] GetLeaguePerformanceCriteria criteria)
     {
+        var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await service.GetLeagueGroups();
-        var betTypes = await service.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypes = await service.GetBetTypes(napSession.UserId, betTypePermission);
         var data = await service.GetLeaguePerformance(criteria, criteria.MarketFilter == Market.All);
         var excelPackage = await excelService.ExportExcelLeaguePerformance(data, criteria, leagueGroups, betTypes);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());

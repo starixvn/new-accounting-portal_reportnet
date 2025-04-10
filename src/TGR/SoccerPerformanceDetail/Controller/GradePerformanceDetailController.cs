@@ -11,7 +11,8 @@ namespace SoccerPerformanceDetail.Controller;
 [ApiController]
 public class GradePerformanceDetailController(SoccerPerformanceDetailService service,
     INapSession napSession,
-    GradeExcelService excelService) : ControllerBase
+    GradeExcelService excelService,
+    PermissionService permissionService) : ControllerBase
 {
     [Route("main")]
     public async Task<IActionResult> GetGradePerformance(GetGradePerformanceCriteria criteria)
@@ -31,8 +32,9 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [HttpGet("export-grade")]
     public async Task<IActionResult> ExportExcelTrader([FromQuery] GetGradePerformanceCriteria criteria)
     {
+        var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await service.GetLeagueGroups();
-        var betTypes = await service.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypes = await service.GetBetTypes(napSession.UserId, betTypePermission);
         var data = await service.GetGradePerformance(criteria);
         var excelPackage = await excelService.ExportExcelGradePerformance(data, criteria, leagueGroups, betTypes);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());

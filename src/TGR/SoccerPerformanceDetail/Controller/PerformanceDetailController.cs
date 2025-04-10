@@ -14,7 +14,8 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     ExcelService excelService,
     BetChoiceExcelService betChoiceExcelService,
     LiveLeagueExcelService liveLeagueService,
-    INapSession napSession) : ControllerBase
+    INapSession napSession,
+    PermissionService permissionService) : ControllerBase
 {
     [Route("bettypes")]
     public async Task<IActionResult> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria)
@@ -32,7 +33,8 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     [Route("default-bettypes")]
     public async Task<IActionResult> GetDefaultBettypes()
     {
-        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypePermission = await permissionService.GetBettypePermission();
+        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, betTypePermission);
 
         var betTypeList = from betType in betTypes
             where betType.IsDefaultCheck
@@ -47,8 +49,9 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     [HttpGet("export-bettypes")]
     public async Task<IActionResult> ExportExcelBetType([FromQuery] GetBetTypePerformanceCriteria criteria)
     {
+        var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await soccerDetailService.GetLeagueGroups();
-        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, betTypePermission);
         var data = await soccerDetailService.GetBetTypePerformance(criteria);
         var excelPackage = await excelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypes);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
@@ -67,8 +70,9 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     [HttpGet("export-bet-choice-detail")]
     public async Task<IActionResult> ExportExcelBetChoicePerformanceOfBetType([FromQuery] GetBetChoicePerformanceOfBetTypeCriteria criteria)
     {
+        var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await soccerDetailService.GetLeagueGroups();
-        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, betTypePermission);
         var betTypesString = ModelsHelper.MakeBetTypeSelectString(betTypes, criteria.BetType.ToString());
         var market = criteria.Market switch
         {
@@ -111,8 +115,9 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     [HttpGet("export-live-league-detail")]
     public async Task<IActionResult> ExportLeaguePerformanceOfBetChoice([FromQuery]GetLeaguePerformanceOfBetChoiceCriteria criteria)
     {
+        var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await soccerDetailService.GetLeagueGroups();
-        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, betTypePermission);
         var betTypesString = ModelsHelper.MakeBetTypeSelectString(betTypes, criteria.BetType.ToString());
         var market = criteria.Market switch
         {

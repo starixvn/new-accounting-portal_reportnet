@@ -13,13 +13,18 @@ using Utilities.Configurations;
 
 public class SoccerPerformanceDetailController(SoccerPerformanceDetailService service,
     INapSession napSession,
-    ConfigurationService configurationService) : Controller
+    ConfigurationService configurationService,
+    PermissionService permissionService) : Controller
 {
     private readonly int[] ForecastBetType = [1, 3, 7, 8];
 
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> BetTypePerformance()
     {
+        if (permissionService.HasNotPermissionToAccessPage())
+        {
+            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
+        }
         await InitData();
         return View();
     }
@@ -27,6 +32,10 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> LeaguePerformance()
     {
+        if (permissionService.HasNotPermissionToAccessPage())
+        {
+            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
+        }
         await InitData();
         return View();
     }
@@ -34,6 +43,10 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> TraderPerformance()
     {
+        if (permissionService.HasNotPermissionToAccessPage())
+        {
+            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
+        }
         await InitData();
         return View();
     }
@@ -41,6 +54,10 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> TeamPerformance()
     {
+        if (permissionService.HasNotPermissionToAccessPage())
+        {
+            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
+        }
         await InitData();
         var teams = await service.GetTeams();
         ViewBag.Teams = teams;
@@ -50,6 +67,10 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> GradePerformance()
     {
+        if (permissionService.HasNotPermissionToAccessPage())
+        {
+            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
+        }
         await InitData();
         return View();
     }
@@ -77,8 +98,8 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
             { Market.Live, "Live" },
             { Market.NonLive, "Non-Live" }
         };
-        ViewBag.IsVirtualPerformancePermission = true;
-        ViewBag.IsRealPerformancePermission = true;
+        ViewBag.IsVirtualPerformancePermission = permissionService.IsVirtualPerformancePermission();
+        ViewBag.IsRealPerformancePermission = permissionService.IsRealPerformancePermission();
         ViewBag.GroupBetTypes = await service.GetGroupBetTypes(napSession.UserId, BettypeViewPermission.All);
         ViewBag.LeagueGroups = await service.GetLeagueGroups();
         ViewBag.IsExcludeLeagues = (await service.GetLeagueExclusionConfig()).IsExcludeLeagues;

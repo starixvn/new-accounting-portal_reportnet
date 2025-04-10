@@ -10,7 +10,8 @@ namespace SoccerPerformanceDetail.Controller;
 [ApiController]
 public class TraderPerformanceDetailController(SoccerPerformanceDetailService service,
     INapSession napSession,
-    TraderExcelService excelService) : ControllerBase
+    TraderExcelService excelService,
+    PermissionService permissionService) : ControllerBase
 {
     [Route("main")]
     public async Task<IActionResult> GetTraderPerformance(GetTraderPerformanceCriteria criteria)
@@ -32,8 +33,9 @@ public class TraderPerformanceDetailController(SoccerPerformanceDetailService se
     [HttpGet("export-trader")]
     public async Task<IActionResult> ExportExcelTrader([FromQuery] GetTraderPerformanceCriteria criteria)
     {
+        var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await service.GetLeagueGroups();
-        var betTypes = await service.GetBetTypes(napSession.UserId, BettypeViewPermission.All);
+        var betTypes = await service.GetBetTypes(napSession.UserId, betTypePermission);
         var data = await service.GetTraderPerformance(criteria);
         var excelPackage = await excelService.ExportExcelTraderPerformance(data, criteria, leagueGroups, betTypes);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
