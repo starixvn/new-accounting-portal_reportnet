@@ -105,11 +105,12 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
     [Route("export-bettypes-by-status")]
     public async Task<IActionResult> ExportExcelBetTypesByStatus(BetTypesCriteria criteria)
     {
+        var liveIndicator = criteria.LiveIndicator;
         var data = await service.GetBetTypesByLiveNonLiveStatus(criteria);
         var title =
             $"League Win Loss Report From {criteria.StartDate: MMM dd, yyyy} To {criteria.EndDate: MMM dd, yyyy}";
         var header = $"{criteria.SportName} - {criteria.LeagueName} - {criteria.MatchEvent}";
-        var excelPackage = await betTypeExcelService.ExportExcelBetTypeByStatus(data, title, header);
+        var excelPackage = await betTypeExcelService.ExportExcelBetTypeByStatus(data, title, header, liveIndicator);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileDownloadName = $"League_Win_Loss_Report_From_Date_{criteria.StartDate: MM_dd_yyyy}_To_{criteria.EndDate: MM_dd_yyyy}.xlsx";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileDownloadName);

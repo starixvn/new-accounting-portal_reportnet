@@ -1127,13 +1127,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         var cssClass = currentCell.Value.value > 0 ? 'format-positive' : '';
         var realMarginValue = currentCell.Value.value;
         var clickEvent = ' onclick = "showChart(' + currentCell.Value.sportType + ',\'' + currentCell.Value.sportBettype + '\',\'' + currentCell.Value.leagueId + '\',' + null + ',' + currentCell.Value.liveStatus + ',0,\'' + currentCell.Value.title + '\');"';
-        var html = '';
-        if (currentCell.Value.sportType === 1) {
-            html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
-        } else {
-            html = '<div>' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
-        }
-        
+        var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
         return html;
     }
 }
