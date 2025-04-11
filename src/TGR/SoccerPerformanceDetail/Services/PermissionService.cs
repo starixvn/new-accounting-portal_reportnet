@@ -21,6 +21,8 @@ public interface PermissionService
     bool IsSoccerLivePermission();
 
     bool HasNotPermissionToAccessPage();
+
+    Dictionary<Market, string> GetMarketsPermission();
 }
 
 public class PermissionServiceImp(IUserService userService, INapSession napSession, INapSettings napSettings) : PermissionService
@@ -76,5 +78,31 @@ public class PermissionServiceImp(IUserService userService, INapSession napSessi
     {
         return (!IsSoccerLivePermission() && !IsSoccerNoneLivePermission()) ||
                (!IsRealPerformancePermission() && !IsVirtualPerformancePermission());
+    }
+
+    public Dictionary<Market, string> GetMarketsPermission()
+    {
+        var markets = new Dictionary<Market, string>();
+
+        if (IsSoccerLivePermission() && IsSoccerNoneLivePermission())
+        {
+            markets.Add(Market.All, "All");
+            markets.Add(Market.Live, "Live");
+            markets.Add(Market.NonLive, "Non-Live");
+        }
+        else
+        {
+            if (IsSoccerLivePermission())
+            {
+                markets.Add(Market.Live, "Live");
+            }
+
+            if (IsSoccerNoneLivePermission())
+            {
+                markets.Add(Market.NonLive, "Non-Live");
+            }
+        }
+
+        return markets;
     }
 }

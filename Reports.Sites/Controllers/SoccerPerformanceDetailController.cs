@@ -92,12 +92,7 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
         ViewBag.DefaultToDate = DateTime.Today;
         ViewBag.AllowYearRange = configurationService.PerformanceAllowYearRange;
         ViewBag.ForecastBetType = string.Join(",", ForecastBetType);
-        ViewBag.Markets = new Dictionary<Market, string>
-        {
-            { Market.All, "All" },
-            { Market.Live, "Live" },
-            { Market.NonLive, "Non-Live" }
-        };
+        ViewBag.Markets = permissionService.GetMarketsPermission();
         ViewBag.IsVirtualPerformancePermission = permissionService.IsVirtualPerformancePermission();
         ViewBag.IsRealPerformancePermission = permissionService.IsRealPerformancePermission();
         ViewBag.GroupBetTypes = await service.GetGroupBetTypes(napSession.UserId, BettypeViewPermission.All);
