@@ -83,24 +83,22 @@ public class PermissionServiceImp(IUserService userService, INapSession napSessi
     public Dictionary<Market, string> GetMarketsPermission()
     {
         var markets = new Dictionary<Market, string>();
+        var hasLivePermission = IsSoccerLivePermission();
+        var hasNonLivePermission = IsSoccerNoneLivePermission();
 
-        if (IsSoccerLivePermission() && IsSoccerNoneLivePermission())
+        if (hasLivePermission && hasNonLivePermission)
         {
             markets.Add(Market.All, "All");
-            markets.Add(Market.Live, "Live");
-            markets.Add(Market.NonLive, "Non-Live");
         }
-        else
-        {
-            if (IsSoccerLivePermission())
-            {
-                markets.Add(Market.Live, "Live");
-            }
 
-            if (IsSoccerNoneLivePermission())
-            {
-                markets.Add(Market.NonLive, "Non-Live");
-            }
+        if (hasLivePermission)
+        {
+            markets.Add(Market.Live, "Live");
+        }
+
+        if (hasNonLivePermission)
+        {
+            markets.Add(Market.NonLive, "Non-Live");
         }
 
         return markets;
