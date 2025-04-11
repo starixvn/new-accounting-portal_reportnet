@@ -6,7 +6,6 @@ using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using SoccerPerformanceDetail;
 using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
 using Utilities.Configurations;
@@ -17,62 +16,36 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     PermissionService permissionService) : Controller
 {
     private readonly int[] ForecastBetType = [1, 3, 7, 8];
+    private const string ViewPath = "~/Views/SoccerPerformanceDetail/";
 
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> BetTypePerformance()
     {
-        if (permissionService.HasNotPermissionToAccessPage())
-        {
-            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
-        }
-        await InitData();
-        return View();
+        return await RenderViewWithPermissionCheck("BetTypePerformance");
     }
 
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> LeaguePerformance()
     {
-        if (permissionService.HasNotPermissionToAccessPage())
-        {
-            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
-        }
-        await InitData();
-        return View();
+        return await RenderViewWithPermissionCheck("LeaguePerformance");
     }
 
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> TraderPerformance()
     {
-        if (permissionService.HasNotPermissionToAccessPage())
-        {
-            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
-        }
-        await InitData();
-        return View();
+        return await RenderViewWithPermissionCheck("TraderPerformance");
     }
 
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> TeamPerformance()
     {
-        if (permissionService.HasNotPermissionToAccessPage())
-        {
-            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
-        }
-        await InitData();
-        var teams = await service.GetTeams();
-        ViewBag.Teams = teams;
-        return View();
+        return await RenderViewWithPermissionCheck("TeamPerformance");
     }
 
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> GradePerformance()
     {
-        if (permissionService.HasNotPermissionToAccessPage())
-        {
-            return View("~/Views/SoccerPerformanceDetail/NoPermission.cshtml");
-        }
-        await InitData();
-        return View();
+        return await RenderViewWithPermissionCheck("GradePerformance");
     }
 
     [HttpGet]
@@ -80,6 +53,24 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     public IActionResult GetViewScorePermission()
     {
         return Json(true);
+    }
+
+    private async Task<IActionResult> RenderViewWithPermissionCheck(string viewName)
+    {
+        if (permissionService.HasNotPermissionToAccessPage())
+        {
+            return View($"{ViewPath}NoPermission.cshtml");
+        }
+        
+        await InitData();
+        
+        if (viewName == "TeamPerformance")
+        {
+            var teams = await service.GetTeams();
+            ViewBag.Teams = teams;
+        }
+        
+        return View($"{ViewPath}{viewName}.cshtml");
     }
 
     private async Task InitData()
