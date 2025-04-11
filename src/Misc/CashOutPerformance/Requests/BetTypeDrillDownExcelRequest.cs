@@ -33,6 +33,8 @@ public class BetTypeDrillDownExcelRequest : IRequest<ExcelPackage>
 
     public bool? EvenOddCust { get; set; }
 
+    public byte? PriceService { get; set; }
+
     public int BetType { get; set; }
 
     public string OutCome { get; set; }

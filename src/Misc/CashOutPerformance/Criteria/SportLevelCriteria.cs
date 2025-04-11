@@ -34,6 +34,8 @@ public class SportLevelCriteria : CriteriaBase
 
     public bool? EvenOddCust { get; set; }
 
+    public byte? PriceService { get; set; }
+
     public override string GetSettingKey() => $"Acc_Rpt_COPerformance_SportType_{Server}";
 
     public override bool IsValid() => true;

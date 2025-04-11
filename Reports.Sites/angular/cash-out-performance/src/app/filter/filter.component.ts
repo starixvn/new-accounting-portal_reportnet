@@ -74,7 +74,9 @@ export class FilterComponent implements OnInit {
   exchangeRateSelectItems = this.filterService.getExchangeRateSelectItems();
   exchangeRate: ExchageRateValues = ExchageRateValues.SystemRate;
   evenOddCustSelectItems = this.filterService.getevenOddCustSelectItems();
+  priceServiceSelectItems = this.filterService.getPriceServiceSelectItems();
   evenOddCust: boolean = null;
+  priceService: number = null;
   filterByOptions: SelectItem[] = [];
   FilterType = FilterType;
   filterType = FilterType.SettledDate;
@@ -211,7 +213,8 @@ export class FilterComponent implements OnInit {
       isShowFullColumn: this.isShowFullColumn,
       exchangeBy: this.exchangeRate == ExchageRateValues.OandaRate,
       filterType: this.filterType,
-      evenOddCust: this.evenOddCust
+      evenOddCust: this.evenOddCust,
+      priceService: this.priceService
     };
   }
 

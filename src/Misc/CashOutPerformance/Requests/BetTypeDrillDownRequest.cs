@@ -41,4 +41,6 @@ public class BetTypeDrillDownRequest : IRequest<TicketViewModel<BetTypeLevelMode
     public string Type { get; set; }
 
     public string Guid { get; set; }
+
+    public byte? PriceService { get; set; }
 }

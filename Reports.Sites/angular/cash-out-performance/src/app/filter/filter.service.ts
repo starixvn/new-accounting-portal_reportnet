@@ -116,4 +116,12 @@ export class FilterService {
         { text: 'Even Customer ID', value: false }
     ];
    }
+
+   getPriceServiceSelectItems(): SelectItem[] {
+    return [
+        { text: 'All', value: null },
+        { text: 'In-house', value: 0 },
+        { text: 'Jack Time', value: 1 }
+    ];
+   }
 }
