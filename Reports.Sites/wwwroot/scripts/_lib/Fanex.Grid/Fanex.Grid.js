@@ -946,6 +946,36 @@
             var currentBodyRows = [];
             var currentPageStartIndex = 0;
 
+            // default sort
+            if (options.sortOption.serverSortFunction == null &&
+                options.sortOption.customGridSort == null) {
+                var defaultSort = false,
+                customSortFunction = null,
+                sortType = null,
+                columnName = '',
+                currentDirection = '';
+                for (var colIndex = 0; colIndex < options.columns.length; colIndex++) {
+                    if (options.columns[colIndex].SortDirection != null
+                    && options.columns[colIndex].SortDirection !== '') {
+                        defaultSort = true;
+                        currentDirection = options.columns[colIndex].SortDirection;
+                        customSortFunction = options.columns[colIndex].CustomSortFunction;
+                        columnName = options.columns[colIndex].Name;
+                        sortType = options.columns[colIndex].SortType;
+                        break;
+                    }
+                }
+
+                if (defaultSort) {
+                    options.bodyRows = Fanex.Grid.Helper.GetSortedArray(options.bodyRows,
+                                                                    columnName,
+                                                                    currentDirection,
+                                                                    customSortFunction,
+                                                                    sortType);
+
+                }
+            }
+
             //// If show pager, then take approriate data range
             if (options.showPager == true && options.customPager != true) {
                 var startIndex = (options.pagerOption.currentPage * options.pagerOption.itemsPerPage);
