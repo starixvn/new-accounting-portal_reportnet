@@ -545,6 +545,7 @@ public class SoccerPerformanceDetailServiceImp(
                 BetCount = c.BetCount,
                 Market = c.Market,
                 IsLive = c.IsLive,
+                LeagueGroupName = c.LeagueGroupName,
                 FlagForViewReport = rawData.Count(b => b.LeagueId == c.LeagueId)
             });
 
