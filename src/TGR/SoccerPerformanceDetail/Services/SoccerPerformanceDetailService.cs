@@ -80,6 +80,8 @@ public interface SoccerPerformanceDetailService
     Task<TraderPerformanceList> GetTraderPerformanceOfGradeByLeague(GetTraderPerformanceOfGradeByLeagueCriteria criteria);
 
     Task<LeagueExclusionConfig> GetLeagueExclusionConfig();
+
+    Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -865,5 +867,10 @@ public class SoccerPerformanceDetailServiceImp(
         var traderPerformance = CalculateTraderPerformanceList(rawData);
 
         return traderPerformance;
+    }
+
+    public Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
+    {
+        throw new NotImplementedException();
     }
 }

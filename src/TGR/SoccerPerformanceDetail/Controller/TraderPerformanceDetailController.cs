@@ -60,4 +60,13 @@ public class TraderPerformanceDetailController(SoccerPerformanceDetailService se
             
         return Ok(bettypeDetail);
     }
+
+    public async Task<IActionResult> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
+    {
+        criteria.IsExcludeLeagues = true;
+
+        var result = service.GetPointHDPPerformanceOfBetTypeBetChoice(criteria);
+
+        return Ok(result);
+    }
 }
