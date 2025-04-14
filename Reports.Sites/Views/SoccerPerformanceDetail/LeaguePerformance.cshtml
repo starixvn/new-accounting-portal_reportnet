@@ -184,7 +184,7 @@
 	<script type="text/javascript" src="~/scripts/tgrs/common-tgrs.js?v=3"></script>
 	<script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
 	<script type="text/javascript" src="~/scripts/msg-box.js"></script>
-	<script type="text/javascript" src="~/scripts/league-performance.js"></script>
+	<script type="text/javascript" src="~/scripts/league-performance.js?v=20250114"></script>
     <script type="text/javascript">
         var datepickerSetting = {
             MinDate: '@(((DateTime)ViewBag.MinDate).ToShortFormatedDate())',
@@ -239,5 +239,6 @@
 
         var isVirtualPerformancePermission = '@ViewBag.IsVirtualPerformancePermission' === 'True';
         var isRealPerformancePermission = '@ViewBag.IsRealPerformancePermission' === 'True';
+        var isExcludeLeagues = '@ViewBag.IsExcludeLeagues' === 'True';
     </script>
 }

@@ -224,6 +224,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 parameters.BetTypes = selectedBetTypes !== null ? selectedBetTypes.join(',') : null;
                 parameters.IsVirtual = isVirtualPerformancePermission;
                 parameters.IsReal = isRealPerformancePermission;
+                parameters.IsExcludeLeagues = isExcludeLeagues;
 
                 if (isVirtualPerformancePermission) {
                     parameters.MarginFrom = domElements.txtMarginFrom.val().replace(/,/g, '');
@@ -728,7 +729,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             LeagueId: leagueId,
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: isExcludeLeagues
         };
 
         common.DisableInput();
@@ -1023,7 +1025,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             CustId: traderId,
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: isExcludeLeagues
         };
 
         common.DisableInput();
@@ -1423,7 +1426,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             LeagueId: leagueId,
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: isExcludeLeagues
         };
 
         common.DisableInput();
@@ -1623,7 +1627,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             MatchId: matchId,
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: isExcludeLeagues
         };
         common.DisableInput();
         $.ajax({
