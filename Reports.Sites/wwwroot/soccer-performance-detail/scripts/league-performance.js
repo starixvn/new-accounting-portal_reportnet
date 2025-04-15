@@ -369,7 +369,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
     var generateLeaguePerformanceGridOptions = function () {
         var gridOptions = {
             columns: [],
-            gridExpandHeight: 260,
+            gridExpandHeight: 280,
             showTitle: true,
             titleInfo: {
                 showExcelButton: true,
@@ -455,9 +455,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, FormatNegative: '$', Sort: true
-                }
-            ]);
+                    FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
+                }]);
         }
 
         if (isRealPerformancePermission) {
@@ -481,8 +480,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMarginReal', HeaderAlign: 'center', CellAlign: 'right',
                     FormatNumber: common.Formats.DecimalFormat, FormatNegative: '$', Sort: true
-                }
-            ]);
+                }]);
         }
 
         gridOptions.groupHeaderRows = [{ Columns: groupHeaderColumns }];
@@ -778,7 +776,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
 
     var renderTraderPerformanceGridOptions = function (leagueId, isLive, leagueName) {
         var gridOptions = {            
-            gridExpandHeight: 260,
+            gridExpandHeight: 280,
             showNumberColumn: true,
             showTitle: true,
             titleInfo: {
@@ -852,7 +850,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, Sort: true, SortDirection: 'desc', FormatNegative: '$'
+                    FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
                 }]);
         }
 
@@ -1072,7 +1070,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             '<span id="spanTraderLink"  class="breadcrumb-link"> >> ({1}) {2}</span>' +
             '<span> >> {3}</span>';
         var gridOptions = {            
-            gridExpandHeight: 260,
+            gridExpandHeight: 280,
             showNumberColumn: true,
             showTitle: true,
             titleInfo: {
@@ -1272,7 +1270,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         //length of >>: 12
         var titleLength = 12 + labels.LeaguePerformance.length + leagueName.length + traderName.length;
         var gridOptions = {
-            gridExpandHeight: 260,
+            gridExpandHeight: 280,
             showTitle: true,
             titleInfo: {
                 text: titleFormat.format(labels.LeaguePerformance, isLive == 'true' ? labels.MarketLive : labels.MarketNonLive, leagueName, traderName, matchName, shortenName(common.HasViewScorePermission ? 113 : 93, titleLength, matchName))
@@ -1472,7 +1470,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         var titleFormat = '<span id="spanLeagueLink" class="breadcrumb-link">{0}</span>' +
             '<span> >> ({1}) {2}</span>';
         var gridOptions = {           
-            gridExpandHeight: 260,
+            gridExpandHeight: 280,
             showNumberColumn: true,
             showTitle: true,
             titleInfo: {
@@ -1661,7 +1659,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 
                
             ],
-            gridExpandHeight: 260,
+            gridExpandHeight: 280,
             showTitle: true,
             titleInfo: {
                 text: titleFormat.format(labels.LeaguePerformance, isLive == 'true' ? labels.MarketLive : labels.MarketNonLive, leagueName, matchName, shortenName(90, titleLength, matchName))

@@ -325,7 +325,7 @@ public class SoccerPerformanceDetailServiceImp(
         {
             var homeTeam = remotingRefService.GetTeamName(item.HomeId);
             var awayTeam = remotingRefService.GetTeamName(item.AwayId);
-            var matchName = $"{homeTeam} vs {awayTeam}";
+            var matchName = $"{homeTeam} -vs- {awayTeam}";
 
             var eventDateTime = Convert.ToDateTime(item.EventDate);
             var eventDate = $"{eventDateTime: MM/dd/yyyy}";
