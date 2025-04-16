@@ -766,7 +766,6 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         gridOptions.bodyRows = bodyData;
         gridOptions.footerRows = footerData;
         domElements.divTraderPerformanceGrid.fanexGrid(gridOptions);
-        
         if (!common.HasViewScorePermission) {
             domElements.divTraderPerformanceGrid.fanexGrid("hideColumns", gridOptions, [6]);
         }

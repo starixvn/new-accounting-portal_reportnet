@@ -34,8 +34,8 @@ public class LeagueExcelServiceImp(ConfigurationService configurationService, IM
             _ => data.ItemByOrderList
         };
         BuildBodyRows<LeaguePerformanceItem, LeaguePerformanceExcelItem>(bodyData, startBodyRowIndex, mapper);
-        var startTotalRowIndex = data.ItemByOrderList.Count + startBodyRowIndex;
-        BuildTotalRow<LeaguePerformanceItem, LeaguePerformanceExcelItem>(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex, mapper);
+        var startTotalRowIndex = bodyData.Count + startBodyRowIndex;
+        BuildTotalRow<LeaguePerformanceItem, LeaguePerformanceExcelItem>(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex, mapper, criteria.MarketFilter);
         ClearTemplate(ExcelConstants.LeaguePerformance);
         return Task.FromResult(ExcelPackage!);
     }

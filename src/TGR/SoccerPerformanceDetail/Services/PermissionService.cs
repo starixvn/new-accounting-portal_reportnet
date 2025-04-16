@@ -22,6 +22,8 @@ public interface PermissionService
 
     bool HasNotPermissionToAccessPage();
 
+    bool IsScoreViewingPermission();
+
     Dictionary<Market, string> GetMarketsPermission();
 }
 
@@ -78,6 +80,11 @@ public class PermissionServiceImp(IUserService userService, INapSession napSessi
     {
         return (!IsSoccerLivePermission() && !IsSoccerNoneLivePermission()) ||
                (!IsRealPerformancePermission() && !IsVirtualPerformancePermission());
+    }
+
+    public bool IsScoreViewingPermission()
+    {
+        return userService.GetPermission(napSession.UserId, napSettings.SiteId, FunctionKeyConstants.ScoreViewing) >= (int)Constant.Policy.Read;
     }
 
     public Dictionary<Market, string> GetMarketsPermission()

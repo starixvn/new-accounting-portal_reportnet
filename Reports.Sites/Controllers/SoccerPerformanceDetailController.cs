@@ -52,7 +52,8 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     [NapAuth(FunctionKey = FunctionKeys.PerformanceDetail, Policy = Constant.Policy.Read)]
     public IActionResult GetViewScorePermission()
     {
-        return Json(true);
+        var result = permissionService.IsScoreViewingPermission();
+        return Json(result);
     }
 
     private async Task<IActionResult> RenderViewWithPermissionCheck(string viewName)

@@ -35,7 +35,7 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
         };
         BuildBodyRows<BetTypePerformanceItem, BetTypePerformanceExcelItem>(bodyData, startBodyRowIndex, mapper);
         var startTotalRowIndex = data.ItemByOrderList.Count + startBodyRowIndex;
-        BuildTotalRow<BetTypePerformanceItem, BetTypePerformanceExcelItem>(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex, mapper);
+        BuildTotalRow<BetTypePerformanceItem, BetTypePerformanceExcelItem>(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex, mapper, criteria.MarketFilter);
         ClearTemplate(ExcelConstants.BetTypePerformance);
         return Task.FromResult(ExcelPackage!);
     }

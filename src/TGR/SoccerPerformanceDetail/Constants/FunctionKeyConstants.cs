@@ -8,4 +8,5 @@ public static class FunctionKeyConstants
     public const string SoccerNon_Live = "SoccerNon_Live";
     public const string VirtualPerformance = "VirtualPerformance";
     public const string RealPerformance = "RealPerformance";
+    public const string ScoreViewing = "ScoreViewing";
 }

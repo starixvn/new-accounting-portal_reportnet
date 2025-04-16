@@ -153,22 +153,39 @@ public abstract class BaseExcelService(ConfigurationService configurationService
         }
     }
 
-    protected void BuildTotalRow<TData, TExcelModel>(TData liveData, TData nonLivedata, int startIndex, IMapper mapper)
+    protected void BuildTotalRow<TData, TExcelModel>(TData liveData, TData nonLivedata, int startIndex, IMapper mapper, Market market)
         where TExcelModel : BasePerformanceExcelItem
     {
-        var excelModel = mapper.Map<TExcelModel>(liveData);
-        excelModel.Market = ExcelConstants.LiveText;
-        sheet.ApplyModel(totalSheet, excelModel, startIndex);
-        UpdateValueSpecificColumns(startIndex, excelModel);
-
-        excelModel = mapper.Map<TExcelModel>(nonLivedata);
-        excelModel.Market = ExcelConstants.NonLiveText;
-        sheet.ApplyModel(totalSheet, excelModel, startIndex + 1);
-        UpdateValueSpecificColumns(startIndex + 1, excelModel);
-
-        var cellTotalAddress = $"A{startIndex}:B{startIndex + 1}";
-        sheet!.Cells[cellTotalAddress].Merge = true;
-        sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
+        switch (market)
+        {
+            case Market.Live:
+                AddMarketTotalRow<TData, TExcelModel>(liveData, startIndex, mapper, ExcelConstants.LiveText);
+                break;
+            case Market.NonLive:
+                AddMarketTotalRow<TData, TExcelModel>(nonLivedata, startIndex, mapper, ExcelConstants.NonLiveText);
+                break;
+            case Market.All:
+                AddMarketTotalRow<TData, TExcelModel>(liveData, startIndex, mapper, ExcelConstants.LiveText);
+                AddMarketTotalRow<TData, TExcelModel>(nonLivedata, startIndex + 1, mapper, ExcelConstants.NonLiveText);
+                
+                var cellTotalAddress = $"A{startIndex}:B{startIndex + 1}";
+                sheet!.Cells[cellTotalAddress].Merge = true;
+                sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
+                return;
+        }
+        
+        var singleRowTotalAddress = $"A{startIndex}:B{startIndex}";
+        sheet!.Cells[singleRowTotalAddress].Merge = true;
+        sheet!.Cells[singleRowTotalAddress].Value = ExcelConstants.GrandTotalText;
+    }
+    
+    private void AddMarketTotalRow<TData, TExcelModel>(TData data, int rowIndex, IMapper mapper, string marketText)
+        where TExcelModel : BasePerformanceExcelItem
+    {
+        var excelModel = mapper.Map<TExcelModel>(data);
+        excelModel.Market = marketText;
+        sheet.ApplyModel(totalSheet, excelModel, rowIndex);
+        UpdateValueSpecificColumns(rowIndex, excelModel);
     }
 
     protected void UpdateValueSpecificColumns<TExcelModel>(int startIndex, TExcelModel model)
