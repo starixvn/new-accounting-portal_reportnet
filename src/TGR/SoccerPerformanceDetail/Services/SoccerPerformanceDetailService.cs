@@ -869,8 +869,111 @@ public class SoccerPerformanceDetailServiceImp(
         return traderPerformance;
     }
 
-    public Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
+    public async Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
     {
-        throw new NotImplementedException();
+        var pointHDPList = new PointHDPPerformanceList();
+
+        var betType = criteria.BetType.ToString();
+
+        pointHDPList.IsTotalGoalBetType = betType == "228" || betType == "229";
+
+        var pointHDPData = await repository.FetchAsync<PointHDPPerformanceInfo>(criteria);
+
+        if (!pointHDPData.Any()) return pointHDPList;
+
+        foreach (var item in pointHDPData)
+        {
+            var pointHDP = CalculatePointHDPPerformanceItem(item, criteria);
+
+            pointHDPList.ItemList.Add(pointHDP);
+        }
+
+        var total = pointHDPList.ItemList.DynamicSum();
+        pointHDPList.Total = total;
+
+        return pointHDPList;
+    }
+
+    private PointHDPPerformanceItem CalculatePointHDPPerformanceItem(PointHDPPerformanceInfo item, GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
+    {
+        var pointHDP = mapper.Map<PointHDPPerformanceItem>(item);
+        
+        var betOption = ConvertOption(criteria.BetTeam);
+        pointHDP.PointHDPConvert = ConvertPointHDP(item.PointHDP, criteria.BetType, betOption);
+
+        return pointHDP;
+    }
+
+    private string ConvertPointHDP(decimal pointHDP, short betType, string betOption)
+    {
+        var newPointHDP = string.Empty;
+
+        switch (betType)
+        {
+            case 28: // 3-Way Handicap --- Total Goal
+            case 453: // 1H 3-Way Handicap --- Total Goal
+            case 477: // Corner 3-Way Handicap --- Corner
+            case 478: // 1H Corner 3-Way Handicap --- Corner
+                newPointHDP = "0";
+                switch (betOption)
+                {
+                    case "1" when pointHDP > 0:
+                        newPointHDP = "-" + Math.Abs(pointHDP).ToString("0.##");
+                        break;
+                    case "1":
+                        {
+                            if (pointHDP < 0)
+                                newPointHDP = "+" + Math.Abs(pointHDP).ToString("0.##");
+                            break;
+                        }
+                    case "2" when pointHDP > 0:
+                        newPointHDP = "+" + Math.Abs(pointHDP).ToString("0.##");
+                        break;
+                    case "2":
+                        {
+                            if (pointHDP < 0)
+                                newPointHDP = "-" + Math.Abs(pointHDP).ToString("0.##");
+                            break;
+                        }
+                    default:
+                        {
+                            newPointHDP = pointHDP switch
+                            {
+                                > 0 => "A+" + pointHDP.ToString("0.##"),
+                                < 0 => "H+" + Math.Abs(pointHDP).ToString("0.##"),
+                                _ => newPointHDP
+                            };
+                            break;
+                        }
+                }
+                break;
+            case 228: // SABA OU Time Machine --- Total Goal
+                newPointHDP = pointHDP.ToString("0.##");
+                break;
+            case 229: // SABA HDP Time Machine --- Total Goal
+                newPointHDP = betOption.ToUpper() == "A" ? (-1 * pointHDP).ToString("0.##") : pointHDP.ToString("0.##");
+                break;
+            default:
+                newPointHDP = pointHDP.ToString("0.##");
+                break;
+        }
+
+        return newPointHDP;
+    }
+
+    private string ConvertOption(string betTeam)
+    {
+        if (betTeam.ToUpper() == "HOME")
+        {
+            return "1";
+        }
+        else if (betTeam.ToUpper() == "AWAY")
+        {
+            return "2";
+        }
+        else
+        {
+            return betTeam;
+        }
     }
 }

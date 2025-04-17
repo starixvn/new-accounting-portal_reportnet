@@ -61,6 +61,7 @@ public class TraderPerformanceDetailController(SoccerPerformanceDetailService se
         return Ok(bettypeDetail);
     }
 
+    [Route("main-market-betchoice")]
     public async Task<IActionResult> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
     {
         criteria.IsExcludeLeagues = true;

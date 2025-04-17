@@ -4,9 +4,9 @@ public class PointHDPPerformanceInfo
 {
     public decimal PointHDP { get; set; }
 
-    public int LeagueCount { get; set; }
+    public int NoOfLeagues { get; set; }
 
-    public int MatchCount { get; set; }
+    public int NoOfMatches { get; set; }
 
     public int BetCount { get; set; }
 

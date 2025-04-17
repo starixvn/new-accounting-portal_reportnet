@@ -557,5 +557,9 @@
 			<Mapping DataField="Username" ObjectProperty="TraderName" />
 			<Mapping DataField="CustId" ObjectProperty="TraderId" />
 		</Setting>
+		<Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_PointHDP" SpName="TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_PointHDP" DbName="DBTGRS.bodb_TGRS.wsv_tgrs">
+			<Mapping DataField="LeagueCount" ObjectProperty="NoOfLeagues" />
+			<Mapping DataField="MatchCount" ObjectProperty="NoOfMatches" />
+		</Setting>
 	</Function>
 </Functions>
