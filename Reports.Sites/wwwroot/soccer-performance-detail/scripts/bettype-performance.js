@@ -3178,7 +3178,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             showBetTypePerformanceReport();
         });
 
-        domElements.divLeaguePerformanceGrid.find('span.trader-link').click(function () {
+        domElements.divLeaguePerformanceGrid.find('span.trader-link').live('click', function () {
             var $link = $(this);
             var $leagueName = $link.closest('tr').find('div.league-name');
             var leagueId = $link.attr('data-league-id');
