@@ -58,7 +58,7 @@ public abstract class BaseExcelService(ConfigurationService configurationService
         using var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read);
         ExcelPackage = new ExcelPackage(stream);
         sheet = ExcelPackage.Workbook.Worksheets[mainSheetName];
-        if (mainSheetName is ExcelConstants.TraderPerformance or ExcelConstants.TeamPerformance)
+        if (mainSheetName is ExcelConstants.TraderPerformance or ExcelConstants.TeamPerformance or ExcelConstants.GradePerformance)
         {
             titleSheet = ExcelPackage.Workbook.Worksheets[ExcelConstants.TitleTemplate];
             bodySheet = ExcelPackage.Workbook.Worksheets[ExcelConstants.BodyTemplate];
@@ -73,7 +73,7 @@ public abstract class BaseExcelService(ConfigurationService configurationService
 
     protected void ClearTemplate(string mainSheetName)
     {
-        if (mainSheetName is ExcelConstants.TraderPerformance or ExcelConstants.TeamPerformance)
+        if (mainSheetName is ExcelConstants.TraderPerformance or ExcelConstants.TeamPerformance or ExcelConstants.GradePerformance)
         {
             ExcelPackage!.Workbook.Worksheets.Delete(ExcelConstants.TitleTemplate);
             ExcelPackage!.Workbook.Worksheets.Delete(ExcelConstants.BodyTemplate);
@@ -197,5 +197,18 @@ public abstract class BaseExcelService(ConfigurationService configurationService
             model.NoOfMatches > 0 ? model.Turnover / model.NoOfMatches : ExcelConstants.NotAvailableText;
         sheet!.Cells[$"M{startIndex}"].Value =
             model.NoOfMatches > 0 ? model.TurnoverReal / model.NoOfMatches : ExcelConstants.NotAvailableText;
+    }
+    
+    protected delegate void BuildBodyRowsDelegate<T>(IEnumerable<T> items, int startRowIndex, string title);
+    
+    protected int ProcessDataList<T>(IEnumerable<T> items, int startRowIndex, string title, BuildBodyRowsDelegate<T> buildBodyRowsMethod)
+    {
+        if (!items.Any())
+        {
+            return startRowIndex;
+        }
+        
+        buildBodyRowsMethod(items, startRowIndex, title);
+        return startRowIndex + items.Count() + 1;
     }
 } 

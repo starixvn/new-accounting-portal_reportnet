@@ -30,22 +30,11 @@ public class TeamExcelServiceImp(
         var rowIndex = BuildFilterBlock(criteria, leagueGroups, betTypes);
         var currentRowIndex = rowIndex + 4;
 
-        if (data.ItemLiveList.Any())
-        {
-            BuildBodyRows(data.ItemLiveList, currentRowIndex, ExcelConstants.LiveText);
-            currentRowIndex += data.ItemLiveList.Count;
-            currentRowIndex++;
-        }
-
-        if (data.ItemNonLiveList.Any())
-        {
-            BuildBodyRows(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText);
-            currentRowIndex += data.ItemNonLiveList.Count;
-            currentRowIndex++;
-        }
+        currentRowIndex = ProcessDataList(data.ItemLiveList, currentRowIndex, ExcelConstants.LiveText, BuildBodyRows);
+        currentRowIndex = ProcessDataList(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText, BuildBodyRows);
 
         BuildTotalRow(data.Total, currentRowIndex);
-        ClearTemplate(ExcelConstants.TraderPerformance);
+        ClearTemplate(ExcelConstants.TeamPerformance);
         return Task.FromResult(ExcelPackage!);
     }
 

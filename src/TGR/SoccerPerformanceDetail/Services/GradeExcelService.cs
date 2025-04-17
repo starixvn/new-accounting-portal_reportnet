@@ -34,21 +34,10 @@ public class GradeExcelServiceImp(
         var rowIndex = BuildFilterBlock(criteria, leagueGroups, betTypes);
         var currentRowIndex = rowIndex + 4;
 
-        if (data.ItemLiveList.Any())
-        {
-            BuildBodyRows(data.ItemLiveList, currentRowIndex, ExcelConstants.LiveText);
-            currentRowIndex += data.ItemLiveList.Count;
-            currentRowIndex++;
-        }
+        currentRowIndex = ProcessDataList(data.ItemLiveList, currentRowIndex, ExcelConstants.LiveText, BuildBodyRows);
+        currentRowIndex = ProcessDataList(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText, BuildBodyRows);
 
-        if (data.ItemNonLiveList.Any())
-        {
-            BuildBodyRows(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText);
-            currentRowIndex += data.ItemNonLiveList.Count;
-            currentRowIndex++;
-        }
-
-        BuildTotalRow(data.Total, currentRowIndex + 1);
+        BuildTotalRow(data.Total, currentRowIndex);
         ClearTemplate(ExcelConstants.GradePerformance);
         return Task.FromResult(ExcelPackage!);
     }
