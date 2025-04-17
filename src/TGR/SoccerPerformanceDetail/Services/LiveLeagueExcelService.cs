@@ -51,7 +51,7 @@ public class LiveLeagueExcelServiceImp(ConfigurationService configurationService
     {
         var index = 1;
         var rowIndex = startRowIndex;
-        var excelModels = mapper.Map<IEnumerable<LeaguePerformanceExcelItem>>(list);
+        var excelModels = mapper.Map<IEnumerable<LiveLeaguePerformanceExcelItem>>(list);
         foreach (var item in excelModels)
         {
             var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
@@ -63,7 +63,7 @@ public class LiveLeagueExcelServiceImp(ConfigurationService configurationService
 
     private void BuildTotalRow(LeaguePerformanceItem data, int startIndex)
     {
-        var excelModel = mapper.Map<LeaguePerformanceExcelItem>(data);
+        var excelModel = mapper.Map<LiveLeaguePerformanceExcelItem>(data);
         sheet.ApplyModel(totalSheet, excelModel, startIndex);
         var cellTotalAddress = $"A{startIndex}:C{startIndex}";
         sheet!.Cells[cellTotalAddress].Merge = true;
@@ -71,7 +71,7 @@ public class LiveLeagueExcelServiceImp(ConfigurationService configurationService
         UpdateValueSpecificColumns(startIndex, excelModel);
     }
 
-    private void UpdateValueSpecificColumns(int startIndex, LeaguePerformanceExcelItem model)
+    private void UpdateValueSpecificColumns(int startIndex, LiveLeaguePerformanceExcelItem model)
     {
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{startIndex}"], model.Margin);
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{startIndex}"], model.MarginReal);
