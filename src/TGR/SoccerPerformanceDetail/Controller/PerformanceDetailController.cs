@@ -172,7 +172,7 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     {
         criteria.IsExcludeLeagues = true;
 
-        var result = soccerDetailService.GetPointHDPPerformanceOfBetTypeBetChoice(criteria);
+        var result = await soccerDetailService.GetPointHDPPerformanceOfBetTypeBetChoice(criteria);
 
         return Ok(result);
     }
