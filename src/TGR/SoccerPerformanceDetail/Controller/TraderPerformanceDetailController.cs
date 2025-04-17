@@ -1,7 +1,6 @@
 ﻿using Fanex.NAP.Client;
 using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
-using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
 
 namespace SoccerPerformanceDetail.Controller;
@@ -59,15 +58,5 @@ public class TraderPerformanceDetailController(SoccerPerformanceDetailService se
         var bettypeDetail = await service.GetBettypeDetailTrader(criteria);
             
         return Ok(bettypeDetail);
-    }
-
-    [Route("main-market-betchoice")]
-    public async Task<IActionResult> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
-    {
-        criteria.IsExcludeLeagues = true;
-
-        var result = service.GetPointHDPPerformanceOfBetTypeBetChoice(criteria);
-
-        return Ok(result);
     }
 }
