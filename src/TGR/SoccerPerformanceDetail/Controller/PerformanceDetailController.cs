@@ -170,9 +170,16 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     [Route("main-market-betchoice")]
     public async Task<IActionResult> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
-
         var result = await soccerDetailService.GetPointHDPPerformanceOfBetTypeBetChoice(criteria);
+
+        return Ok(result);
+    }
+
+    [Route("main-market-betchoice-league")]
+    public async Task<IActionResult> GetLeaguePerformanceOfBetTypeBetChoicePointHDP(GetLeagueOfBetTypeBetChoicePointHDPCriteria criteria)
+    {
+
+        var result = await soccerDetailService.GetLeaguePerformanceOfBetTypeBetChoicePointHDP(criteria);
 
         return Ok(result);
     }

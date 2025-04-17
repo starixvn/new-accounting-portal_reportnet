@@ -82,6 +82,8 @@ public interface SoccerPerformanceDetailService
     Task<LeagueExclusionConfig> GetLeagueExclusionConfig();
 
     Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria);
+
+    Task<LeaguePerformanceList> GetLeaguePerformanceOfBetTypeBetChoicePointHDP(GetLeagueOfBetTypeBetChoicePointHDPCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -975,5 +977,14 @@ public class SoccerPerformanceDetailServiceImp(
         {
             return betTeam;
         }
+    }
+
+    public async Task<LeaguePerformanceList> GetLeaguePerformanceOfBetTypeBetChoicePointHDP(GetLeagueOfBetTypeBetChoicePointHDPCriteria criteria)
+    {
+        var rawData = await repository.FetchAsync<LeaguePerformanceInfo>(criteria);
+
+        var leaguePerformance = CalculatePerformanceLeague(rawData, false);
+
+        return leaguePerformance;
     }
 }
