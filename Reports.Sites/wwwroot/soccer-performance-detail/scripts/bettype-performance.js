@@ -3190,7 +3190,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             getTraderPerformanceOfLeagueReport(betTypeId, betTypeName, leagueId, leagueName, isLive);
         });
 
-        domElements.divLeaguePerformanceGrid.find('span.betchoices-link').click(function () {
+        domElements.divLeaguePerformanceGrid.find('span.betchoices-link').live('click', function () {
             var $link = $(this);
             var leagueId = $link.attr('data-league-id');
             var isLive = $link.attr('data-is-live');
