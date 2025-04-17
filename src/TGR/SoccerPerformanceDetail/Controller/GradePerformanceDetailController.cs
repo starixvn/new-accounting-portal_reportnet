@@ -17,8 +17,6 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [Route("main")]
     public async Task<IActionResult> GetGradePerformance(GetGradePerformanceCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
-
         if (criteria.IsAllLeagueGroup)
         {
             criteria.LeagueGroupIds = string.Empty;
@@ -45,7 +43,6 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [Route("trader-trader-detail")]
     public async Task<IActionResult> GetTraderPerformanceOfGrade(GetTraderPerformanceOfGradeCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var traderPerformance = await service.GetTraderPerformanceOfGrade(criteria);
 
         return Ok(traderPerformance);
@@ -54,7 +51,6 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [Route("trader-league-detail")]
     public async Task<IActionResult> GetLeaguePerformanceOfGrade(GetLeaguePerformanceOfGradeCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var leaguePerformance = await service.GetLeaguePerformanceOfGrade(criteria);
 
         return Ok(leaguePerformance);
@@ -63,7 +59,6 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [Route("trader-match-detail")]
     public async Task<IActionResult> GetMatchPerformanceOfGradeTrader(GetMatchPerformanceOfGradeTraderCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var matchPerformance = await service.GetMatchPerformanceOfGradeTrader(criteria);
 
         return Ok(matchPerformance);
@@ -72,7 +67,6 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [Route("trader-bettype-detail")]
     public async Task<IActionResult> GetBettypeDetailGrade(GetBettypeDetailGradeCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var bettypeDetail = await service.GetBettypeDetailGrade(criteria);
 
         return Ok(bettypeDetail);
@@ -81,7 +75,6 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [Route("trader-by-league-detail")]
     public async Task<IActionResult> GetTraderPerformanceOfGradeByLeague(GetTraderPerformanceOfGradeByLeagueCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var leaguePerformance = await service.GetTraderPerformanceOfGradeByLeague(criteria);
 
         return Ok(leaguePerformance);
@@ -90,7 +83,6 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [Route("grade-league-trader")]
     public async Task<IActionResult> GetMatchPerformanceOfGradeLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var matchPerformance = await service.GetMatchPerformanceOfLeagueTrader(criteria);
         return Ok(matchPerformance);
     }

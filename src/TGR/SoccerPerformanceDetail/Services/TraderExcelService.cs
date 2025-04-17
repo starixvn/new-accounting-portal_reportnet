@@ -38,15 +38,17 @@ public class TraderExcelServiceImp(
         {
             BuildBodyRows(data.ItemLiveList, currentRowIndex, ExcelConstants.LiveText);
             currentRowIndex += data.ItemLiveList.Count;
+            currentRowIndex++;
         }
 
         if (data.ItemNonLiveList.Any())
         {
-            BuildBodyRows(data.ItemNonLiveList, currentRowIndex + 1, ExcelConstants.NonLiveText);
-            currentRowIndex += data.ItemNonLiveList.Count + 1;
+            BuildBodyRows(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText);
+            currentRowIndex += data.ItemNonLiveList.Count;
+            currentRowIndex++;
         }
 
-        BuildTotalRow(data.Total, currentRowIndex + 1);
+        BuildTotalRow(data.Total, currentRowIndex);
         ClearTemplate(ExcelConstants.TraderPerformance);
         return Task.FromResult(ExcelPackage!);
     }

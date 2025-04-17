@@ -55,7 +55,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
         MarginFrom: null,
         MarginTo: null,
         Turnover: null,
-        WinLoss: null
+        WinLoss: null,
     };
     var cachedData = {
         MatchPerformance: null,
@@ -217,6 +217,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
                 parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;
                 parameters.IsVirtual = isVirtualPerformancePermission;
                 parameters.IsReal = isRealPerformancePermission;
+                parameters.IsExcludeLeagues = isExcludeLeagues;
 
                 if (isVirtualPerformancePermission) {
                     parameters.MarginFrom = domElements.txtMarginFrom.val().replace(/,/g, '');
@@ -654,7 +655,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -956,7 +958,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
         common.DisableInput();
         $.ajax({

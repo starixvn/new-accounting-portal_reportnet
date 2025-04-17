@@ -17,7 +17,6 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
     [Route("main")]
     public async Task<IActionResult> GetTeamPerformance(GetTeamPerformanceCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         if (criteria.IsAllLeagueGroup)
         {
             criteria.LeagueGroupIds = string.Empty;
@@ -44,7 +43,6 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
     [Route("team-trader-detail")]
     public async Task<IActionResult> GetTraderPerformanceOfTeam(GetTraderPerformanceOfTeamCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var traderPerformance = await service.GetTraderPerformanceOfTeam(criteria);
         
         return Ok(traderPerformance);
@@ -53,8 +51,6 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
     [Route("team-league-detail")]
     public async Task<IActionResult> GetLeagueDetailTeam(GetLeagueDetailTeamCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
-
         var teamPerformanceLeague = await service.GetLeaguePerformance(criteria);
 
         return Ok(teamPerformanceLeague);
@@ -63,7 +59,6 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
     [Route("team-trader-match-detail")]
     public async Task<IActionResult> GetMatchPerformanceOfTeamTrader(GetMatchPerformanceOfTeamTraderCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var matchPerformance = await service.GetMatchPerformanceOfTeamTrader(criteria);
         
         return Ok(matchPerformance);
@@ -72,7 +67,6 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
     [Route("team-trader-match-bettype-detail")]
     public async Task<IActionResult> GetBettypeDetailTeam(GetBettypeDetailTeamCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var bettypeDetail = await service.GetBettypeDetailTeam(criteria);
         
         return Ok(bettypeDetail);
@@ -81,7 +75,6 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
     [Route("team-league-trader-detail")]
     public async Task<IActionResult> GetTraderPerformanceOfLeagueTeam(GetTraderPerformanceOfLeagueTeam criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var result = await service.GetTraderPerformance(criteria);
         
         return Ok(result);
@@ -90,8 +83,6 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
     [Route("team-league-trader-match-detail")]
     public async Task<IActionResult> GetMatchPerformanceOfTraderLeagueTeam(GetMatchPerformanceOfTraderLeagueTeam criteria)
     {
-        criteria.IsExcludeLeagues = true;
-
         var data = await service.GetMatchPerformanceOfTrader(criteria);
 
         return Ok(data);

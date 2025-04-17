@@ -230,6 +230,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                 parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;
                 parameters.IsVirtual = isVirtualPerformancePermission;
                 parameters.IsReal = isRealPerformancePermission;
+                parameters.IsExcludeLeagues = isExcludeLeagues;
 
                 if (isVirtualPerformancePermission) {
                     parameters.MarginFrom = domElements.txtMarginFrom.val().replace(/,/g, '');
@@ -614,7 +615,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
             ToDate: parameters.ToDate,
             TeamId: teamId,
             Bettypes: parameters.BetTypes,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
         common.DisableInput();
         $.ajax({
@@ -846,7 +848,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
             ToDate: parameters.ToDate,
             Bettypes: parameters.BetTypes,
             TeamId: teamId,
-            LeagueId: leagueId
+            LeagueId: leagueId,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -1104,7 +1107,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
             Bettypes: parameters.BetTypes,
             CustId: traderId,
             TeamId: teamId,
-            LeagueId: leagueId
+            LeagueId: leagueId,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -1332,7 +1336,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
             Bettypes: parameters.BetTypes,
             CustId: traderId,
             MatchId: matchId,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -1559,7 +1564,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -1841,7 +1847,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();

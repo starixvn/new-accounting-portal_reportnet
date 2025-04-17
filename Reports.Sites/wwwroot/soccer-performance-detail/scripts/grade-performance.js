@@ -220,6 +220,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
                 parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;           
                 parameters.IsVirtual = isVirtualPerformancePermission;
                 parameters.IsReal = isRealPerformancePermission;
+                parameters.IsExcludeLeagues = isExcludeLeagues;
 
                 if (isVirtualPerformancePermission) {
                     parameters.MarginFrom = domElements.txtMarginFrom.val().replace(/,/g, '');
@@ -608,7 +609,8 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -848,7 +850,8 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -1383,7 +1386,8 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -1672,7 +1676,8 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
-            LeagueGroupIds: parameters.LeagueGroupIds
+            LeagueGroupIds: parameters.LeagueGroupIds,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
         common.DisableInput();
         $.ajax({
@@ -1909,7 +1914,8 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             Grade: grade,
             BetTypes: parameters.BetTypes,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
