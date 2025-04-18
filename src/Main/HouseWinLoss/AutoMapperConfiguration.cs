@@ -1,16 +1,26 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.Criteria;
+﻿namespace HouseWinLoss;
 
-namespace HouseWinLoss;
+using AutoMapper;
+using Common.Criteria;
+using Common.MatchDetail;
+using Common.Models;
+using NG2.BetType;
+using OtherSports.BetType;
+using Soccer.BetType;
+using Soccer.GroupBetType;
+using Soccer.SumBetType;
+using ExcelQueryModel = MetricGaming.BetType.ExcelQueryModel;
+using QueryModel = Bullfighting.MatchDetail.QueryModel;
+using WinLoss = Common.MatchDetail.WinLoss;
 
 public static class AutoMapperConfiguration
 {
     public static void InitializeHouseWinLoss(this IProfileExpression cfg)
     {
-        cfg.CreateMap<Bullfighting.MatchDetail.QueryModel, UniversalThirdPartyMatchDetailCriteria>();
-        cfg.CreateMap<Common.MatchDetail.RawWinLoss, Common.MatchDetail.WinLoss>();
-        cfg.CreateMap<Common.Models.WinLossRaw, Common.Models.WinLoss>();
-        cfg.CreateMap<MetricGaming.BetType.ExcelQueryModel, UniversalThirdPartyBetTypeCriteria>();
+        cfg.CreateMap<QueryModel, UniversalThirdPartyMatchDetailCriteria>();
+        cfg.CreateMap<RawWinLoss, WinLoss>();
+        cfg.CreateMap<WinLossRaw, Common.Models.WinLoss>();
+        cfg.CreateMap<ExcelQueryModel, UniversalThirdPartyBetTypeCriteria>();
         cfg.CreateMap<MetricGaming.BetType.QueryModel, UniversalThirdPartyBetTypeCriteria>();
         cfg.CreateMap<MetricGaming.LiveNonLive.ExcelQueryModel, UniversalSecondLevelCriteria>();
         cfg.CreateMap<MetricGaming.LiveNonLive.QueryModel, UniversalSecondLevelCriteria>();
@@ -20,8 +30,8 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<MetricGaming.Site.QueryModel, UniversalThirdPartySiteCriteria>();
         cfg.CreateMap<NumberGame.MatchDetail.ExcelQueryModel, NumberGameDrilldownCriteria>();
         cfg.CreateMap<NumberGame.MatchDetail.QueryModel, NumberGameDrilldownCriteria>();
-        cfg.CreateMap<OtherSports.BetType.ExcelQueryModel, OtherSports.BetType.Criteria>();
-        cfg.CreateMap<OtherSports.BetType.QueryModel, OtherSports.BetType.Criteria>();
+        cfg.CreateMap<OtherSports.BetType.ExcelQueryModel, Criteria>();
+        cfg.CreateMap<OtherSports.BetType.QueryModel, Criteria>();
         cfg.CreateMap<OtherSports.LiveNonLive.ExcelQueryModel, OtherSports.SportType.Criteria>();
         cfg.CreateMap<OtherSports.LiveNonLive.QueryModel, OtherSports.LiveNonLive.Criteria>();
         cfg.CreateMap<OtherSports.SportType.ExcelQueryModel, OtherSports.SportType.Criteria>();
@@ -34,19 +44,19 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<Products.QueryModel, Products.Criteria>();
         cfg.CreateMap<Racing.MatchDetail.ExcelQueryModel, UniversalThirdPartyMatchDetailCriteria>();
         cfg.CreateMap<Racing.MatchDetail.QueryModel, UniversalThirdPartyMatchDetailCriteria>();
-        cfg.CreateMap<Soccer.BetType.ExcelQueryModel, Soccer.BetType.BetTypeCriteria>();
-        cfg.CreateMap<Soccer.BetType.QueryModel, Soccer.BetType.BetTypeCriteria>();
-        cfg.CreateMap<Soccer.BetTypeFull.ExcelQueryModel, Soccer.SumBetType.SumBetTypeCriteria>();
-        cfg.CreateMap<Soccer.BetTypeFull.ExcelQueryModel, Soccer.BetType.BetTypeCriteria>();
-        cfg.CreateMap<Soccer.BetTypeFull.ExcelQueryModel, Soccer.GroupBetType.GroupBetTypeCriteria>();
-        cfg.CreateMap<Soccer.GroupBetType.ExcelQueryModel, Soccer.GroupBetType.GroupBetTypeCriteria>();
-        cfg.CreateMap<Soccer.GroupBetType.QueryModel, Soccer.GroupBetType.GroupBetTypeCriteria>();
+        cfg.CreateMap<Soccer.BetType.ExcelQueryModel, BetTypeCriteria>();
+        cfg.CreateMap<Soccer.BetType.QueryModel, BetTypeCriteria>();
+        cfg.CreateMap<Soccer.BetTypeFull.ExcelQueryModel, SumBetTypeCriteria>();
+        cfg.CreateMap<Soccer.BetTypeFull.ExcelQueryModel, BetTypeCriteria>();
+        cfg.CreateMap<Soccer.BetTypeFull.ExcelQueryModel, GroupBetTypeCriteria>();
+        cfg.CreateMap<Soccer.GroupBetType.ExcelQueryModel, GroupBetTypeCriteria>();
+        cfg.CreateMap<Soccer.GroupBetType.QueryModel, GroupBetTypeCriteria>();
         cfg.CreateMap<Soccer.LiveNonLive.ExcelQueryModel, Soccer.MajorMinor.Criteria>();
         cfg.CreateMap<Soccer.LiveNonLive.QueryModel, Soccer.LiveNonLive.Criteria>();
         cfg.CreateMap<Soccer.MajorMinor.ExcelQueryModel, Soccer.MajorMinor.Criteria>();
         cfg.CreateMap<Soccer.MajorMinor.QueryModel, Soccer.MajorMinor.Criteria>();
-        cfg.CreateMap<Soccer.SumBetType.ExcelQueryModel, Soccer.SumBetType.SumBetTypeCriteria>();
-        cfg.CreateMap<Soccer.SumBetType.QueryModel, Soccer.SumBetType.SumBetTypeCriteria>();
+        cfg.CreateMap<Soccer.SumBetType.ExcelQueryModel, SumBetTypeCriteria>();
+        cfg.CreateMap<Soccer.SumBetType.QueryModel, SumBetTypeCriteria>();
         cfg.CreateMap<Sportsbook.MatchDetail.ExcelQueryModel, UniversalSportbookMatchDetailCriteria>();
         cfg.CreateMap<Sportsbook.MatchDetail.QueryModel, UniversalSportbookMatchDetailCriteria>();
         cfg.CreateMap<Sportsbook.OutrightMatchDetail.ExcelQueryModel, UniversalSportbookMatchDetailCriteria>();
@@ -54,7 +64,7 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<Sportsbook.Site.ExcelQueryModel, UniversalSportbookSiteCriteria>();
         cfg.CreateMap<Sportsbook.Site.QueryModel, UniversalSportbookSiteCriteria>();
 
-        cfg.CreateMap<NG2.BetType.ExcelLiveNonLiveQueryModel, UniversalThirdPartyBetTypeCriteria>();
+        cfg.CreateMap<ExcelLiveNonLiveQueryModel, UniversalThirdPartyBetTypeCriteria>();
         cfg.CreateMap<VirtualSports.RacingDetail.ExcelQueryModel, UniversalThirdPartyMatchDetailCriteria>();
         cfg.CreateMap<VirtualSports.RacingDetail.QueryModel, UniversalThirdPartyMatchDetailCriteria>();
         cfg.CreateMap<VirtualSports.SportsbookDetail.ExcelQueryModel, UniversalThirdPartyMatchDetailCriteria>();

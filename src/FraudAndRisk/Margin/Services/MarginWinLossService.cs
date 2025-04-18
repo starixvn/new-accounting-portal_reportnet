@@ -1,10 +1,10 @@
-﻿using Fanex.Data.Repository;
-using Margin.Criteria;
-using Margin.Entities;
-using Margin.Model;
-using Utilities.RemotingRef;
+﻿namespace Margin.Services;
 
-namespace Margin.Services;
+using Criteria;
+using Entities;
+using Fanex.Data.Repository;
+using Model;
+using Utilities.RemotingRef;
 
 public interface MarginWinLossService
 {

@@ -1,10 +1,10 @@
-﻿using Fanex.Data.Repository;
-using TotalSMAAndActiveMember.Constant;
-using TotalSMAAndActiveMember.Criteria;
-using TotalSMAAndActiveMember.Entities;
-using TotalSMAAndActiveMember.Model;
+﻿namespace TotalSMAAndActiveMember.Services;
 
-namespace TotalSMAAndActiveMember.Services;
+using Constant;
+using Criteria;
+using Entities;
+using Fanex.Data.Repository;
+using Model;
 
 public interface TotalSMAMemberActiveService
 {

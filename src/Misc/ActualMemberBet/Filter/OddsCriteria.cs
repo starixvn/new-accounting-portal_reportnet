@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace ActualMemberBet.Filter;
 
-namespace ActualMemberBet.Filter;
+using Fanex.Data.Repository;
 
 public class OddsCriteria : CriteriaBase
 {

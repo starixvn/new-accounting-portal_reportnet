@@ -1,8 +1,8 @@
 ﻿
 
-using BetCount.Services;
-
 namespace Reports.Sites.DependencyInjection;
+
+using BetCount.Services;
 
 public static class BetCountInjection
 {

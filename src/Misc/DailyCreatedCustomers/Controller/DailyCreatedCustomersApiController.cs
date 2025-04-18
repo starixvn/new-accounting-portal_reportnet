@@ -1,9 +1,9 @@
-﻿using DailyCreatedCustomers.Criteria;
-using DailyCreatedCustomers.Services;
-using Microsoft.AspNetCore.Mvc;
-using Utilities.DateTimes;
+﻿namespace DailyCreatedCustomers.Controller;
 
-namespace DailyCreatedCustomers.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
+using Utilities.DateTimes;
 
 [Route("api/daily-created-customer")]
 [ApiController]

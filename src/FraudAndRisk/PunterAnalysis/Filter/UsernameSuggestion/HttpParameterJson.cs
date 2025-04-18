@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.Filter.UsernameSuggestion;
 
-namespace PunterAnalysis.Filter.UsernameSuggestion;
+using MediatR;
 
 public class HttpParameterJson : IRequest<IEnumerable<string>>
 {

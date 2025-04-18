@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿namespace SMAWinLoss.Summary;
 
-namespace SMAWinLoss.Summary;
+using MediatR;
 
 public class Handler(WinLossService service) : IRequestHandler<WinLossHttpParameter, WinLossModel>
 {

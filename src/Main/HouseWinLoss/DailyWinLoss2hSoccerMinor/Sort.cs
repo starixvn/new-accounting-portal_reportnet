@@ -13,6 +13,7 @@ public static class Sort
         }
 
         dataSource.Sort((Comparison<T>)Compare);
+        return;
 
         int Compare(T a, T b)
         {

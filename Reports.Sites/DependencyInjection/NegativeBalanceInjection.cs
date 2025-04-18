@@ -1,6 +1,6 @@
-﻿using NegativeBalance.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using NegativeBalance.Services;
 
 public static class NegativeBalanceInjection
 {

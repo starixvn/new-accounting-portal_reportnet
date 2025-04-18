@@ -2,7 +2,6 @@
 
 using Configuration;
 
-
 public class ExcelQueryModel
 {
     public DateTime StartDate { get; set; }

@@ -1,5 +1,4 @@
-﻿using Utilities.RemotingRef;
-using BasicWinLoss = HouseWinLoss.Common.BasicWinLoss;
+﻿using BasicWinLoss = HouseWinLoss.Common.BasicWinLoss;
 using CashOut = HouseWinLoss.CashOut;
 using CommonServices = HouseWinLoss.Common.Services;
 using Daily2hSoccerBettype = HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
@@ -19,6 +18,20 @@ using BetBuilder = HouseWinLoss.BetBuilder;
 
 
 namespace Reports.Sites.DependencyInjection;
+
+using BetBuilder.SportType;
+using CashOut.LiveNonLive;
+using Daily2hSoccerMinor.MatchDetail;
+using Daily2hSoccerMinor.OutrightMatchDetail;
+using MetricGaming.LiveNonLive;
+using OtherSports.LiveNonLive;
+using Parlay.Site;
+using Soccer.BaseService;
+using Soccer.BetTypeFull;
+using Soccer.GroupBetType;
+using Soccer.LiveNonLive;
+using Soccer.SumBetType;
+using Utilities.RemotingRef;
 
 public static class HouseWinLossInjection
 {
@@ -44,17 +57,17 @@ public static class HouseWinLossInjection
         service.AddTransient<Products.GridOptionsBuilder, Products.GridOptionsBuilderImp>();
         service.AddTransient<SimpleGrid.SimpleCriteriaFactory, SimpleGrid.SimpleCriteriaFactoryImp>();
 
-        service.AddTransient<Soccer.GroupBetType.GroupBetTypeWinLossService, Soccer.GroupBetType.GroupBetTypeWinLossServiceImp>();
-        service.AddTransient<Soccer.SumBetType.SumBetTypeWinLossService, Soccer.SumBetType.SumBetTypeWinLossServiceImp>();
-        service.AddTransient<Soccer.GroupBetType.GroupBetTypeGridOptionsBuilder, Soccer.GroupBetType.GroupBetTypeGridOptionsBuilderImp>();
-        service.AddTransient<Soccer.SumBetType.SumBetTypeGridOptionsBuilder, Soccer.SumBetType.SumBetTypeGridOptionsBuilderImp>();
-        service.AddTransient<Soccer.BaseService.BaseCalculationService, Soccer.BaseService.BaseCalculationServiceImp>();
-        service.AddTransient<Soccer.BetTypeFull.AbstractFactory, Soccer.BetTypeFull.AbstractFactoryImp>();
-        service.AddTransient<Soccer.LiveNonLive.SoccerLiveNonLiveWinLossService, Soccer.LiveNonLive.SoccerLiveNonLiveWinLossServiceImp>();
-        service.AddTransient<Parlay.Site.WinLossService, Parlay.Site.WinLossServiceImp>();
-        service.AddTransient<Parlay.Site.GridOptionsBuilder, Parlay.Site.GridOptionsBuilderImp>();
-        service.AddTransient<OtherSports.LiveNonLive.OtherSportsLiveNonLiveWinLossService, OtherSports.LiveNonLive.OtherSportsLiveNonLiveWinLossServiceImp>();
-        service.AddTransient<MetricGaming.LiveNonLive.MetricGamingLiveNonLiveWinLossService, MetricGaming.LiveNonLive.MetricGamingLiveNonLiveWinLossServiceImp>();
+        service.AddTransient<GroupBetTypeWinLossService, GroupBetTypeWinLossServiceImp>();
+        service.AddTransient<SumBetTypeWinLossService, SumBetTypeWinLossServiceImp>();
+        service.AddTransient<GroupBetTypeGridOptionsBuilder, GroupBetTypeGridOptionsBuilderImp>();
+        service.AddTransient<SumBetTypeGridOptionsBuilder, SumBetTypeGridOptionsBuilderImp>();
+        service.AddTransient<BaseCalculationService, BaseCalculationServiceImp>();
+        service.AddTransient<AbstractFactory, AbstractFactoryImp>();
+        service.AddTransient<SoccerLiveNonLiveWinLossService, SoccerLiveNonLiveWinLossServiceImp>();
+        service.AddTransient<WinLossService, WinLossServiceImp>();
+        service.AddTransient<GridOptionsBuilder, GridOptionsBuilderImp>();
+        service.AddTransient<OtherSportsLiveNonLiveWinLossService, OtherSportsLiveNonLiveWinLossServiceImp>();
+        service.AddTransient<MetricGamingLiveNonLiveWinLossService, MetricGamingLiveNonLiveWinLossServiceImp>();
 
         service.AddTransient<Decorator.GridOptionColumnDecorator, Decorator.GridOptionColumnDecoratorBasic>();
         service.AddTransient<Decorator.GridOptionColumnDecoratorBasic, Decorator.GridOptionColumnDecoratorBasic>();
@@ -67,15 +80,15 @@ public static class HouseWinLossInjection
         service.AddTransient<Decorator.MatchGridOptionColumnDecoratorOutright, Decorator.MatchGridOptionColumnDecoratorOutright>();
         service.AddTransient<Decorator.MatchGridOptionColumnDecoratorVirtualSport, Decorator.MatchGridOptionColumnDecoratorVirtualSport>();
 
-        service.AddTransient<CashOut.LiveNonLive.CashOutLiveNonLiveWinLossService, CashOut.LiveNonLive.CashOutLiveNonLiveWinLossServiceImp>();
+        service.AddTransient<CashOutLiveNonLiveWinLossService, CashOutLiveNonLiveWinLossServiceImp>();
         service.AddTransient<Daily2hSoccerBettype.BettypeGridOptionColumnDecorator, Daily2hSoccerBettype.BettypeGridOptionColumnDecoratorFull>();
-        service.AddTransient<Daily2hSoccerMinor.MatchDetail.SoccerMinorMatchGridOptionColumnDecorator, Daily2hSoccerMinor.MatchDetail.SoccerMinorMatchGridOptionColumnDecoratorFull>();
-        service.AddTransient<Daily2hSoccerMinor.OutrightMatchDetail.SoccerMinorMatchGridOptionColumnDecoratorOutright, Daily2hSoccerMinor.OutrightMatchDetail.SoccerMinorMatchGridOptionColumnDecoratorOutrightImp>();
+        service.AddTransient<SoccerMinorMatchGridOptionColumnDecorator, SoccerMinorMatchGridOptionColumnDecoratorFull>();
+        service.AddTransient<SoccerMinorMatchGridOptionColumnDecoratorOutright, SoccerMinorMatchGridOptionColumnDecoratorOutrightImp>();
         service.AddTransient<Daily2hSoccerMinor.MatchSortingService, Daily2hSoccerMinor.MatchSortingServiceImp>();
 
         service.AddTransient<ProductBetType.Service, ProductBetType.ServiceImp>();
         service.AddTransient<ProductBetType.GridOptionsBuilder, ProductBetType.GridOptionsBuilderImp>();
 
-        service.AddTransient<BetBuilder.SportType.BetBuilderSportTypeWinLossService, BetBuilder.SportType.BetBuilderSportTypeWinLossServiceImp>();
+        service.AddTransient<BetBuilderSportTypeWinLossService, BetBuilderSportTypeWinLossServiceImp>();
     }
 }

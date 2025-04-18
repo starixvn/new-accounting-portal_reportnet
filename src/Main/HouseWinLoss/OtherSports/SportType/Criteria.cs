@@ -1,6 +1,6 @@
 namespace HouseWinLoss.OtherSports.SportType;
 
-using HouseWinLoss.Common.Criteria;
+using Common.Criteria;
 using Configuration;
 
 public class Criteria : WinLossCriteria

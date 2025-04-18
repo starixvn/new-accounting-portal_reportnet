@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace SBPerformance.MarginBySite;
 
-namespace SBPerformance.MarginBySite;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class MarginBySiteHttpParameter : IRequest<SummaryEntity<MarginBySiteItemModel>>
 {

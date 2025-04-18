@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace SBPerformance.TopLosingLeague;
+
+using AutoMapper;
 using Fanex.Data.Repository;
 using Utilities.LinqDynamicSum;
-
-namespace SBPerformance.TopLosingLeague;
 
 public interface TopLosingLeagueService
 {

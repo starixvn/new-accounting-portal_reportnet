@@ -1,7 +1,7 @@
-﻿using SBCustomerPerformanceByDanger.Filter;
-using SBCustomerPerformanceByDanger.Report;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using SBCustomerPerformanceByDanger.Filter;
+using SBCustomerPerformanceByDanger.Report;
 
 public static class SBCustomerPerformanceByDangerInjection
 {

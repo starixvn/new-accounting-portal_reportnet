@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using HouseWinLoss.Common.Services;
+﻿namespace HouseWinLoss.ProductBetType;
 
-namespace HouseWinLoss.ProductBetType;
+using AutoMapper;
+using Common.Services;
 
 public interface Service
 {

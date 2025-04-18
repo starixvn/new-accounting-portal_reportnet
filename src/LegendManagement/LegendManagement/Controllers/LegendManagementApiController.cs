@@ -1,10 +1,10 @@
-﻿using LegendManagement.Criteria;
-using LegendManagement.Services;
+﻿namespace LegendManagement.Controllers;
+
+using Criteria;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-namespace LegendManagement.Controllers;
+using Services;
 
 [Route("LegendManagement")]
 [ApiController]

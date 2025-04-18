@@ -1,7 +1,7 @@
+namespace BetList.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace BetList.Criteria;
 
 public class GetScoreInformationCriteria : CriteriaBase
 {

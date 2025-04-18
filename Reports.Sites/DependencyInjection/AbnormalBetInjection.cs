@@ -1,8 +1,8 @@
-﻿using AbnormalBet.Filter;
+﻿namespace Reports.Sites.DependencyInjection;
+
+using AbnormalBet.Filter;
 using AbnormalBet.IpLocation;
 using AbnormalBet.Report;
-
-namespace Reports.Sites.DependencyInjection;
 
 public static class AbnormalBetInjection
 {

@@ -1,9 +1,9 @@
-﻿using BetConstructPerformance.Criteria;
-using BetConstructPerformance.Models;
-using Fanex.Data.Repository;
-using Utilities.LinqDynamicSum;
+﻿namespace BetConstructPerformance.Services;
 
-namespace BetConstructPerformance.Services;
+using Criteria;
+using Fanex.Data.Repository;
+using Models;
+using Utilities.LinqDynamicSum;
 
 public interface BetConstructPerformanceService
 {

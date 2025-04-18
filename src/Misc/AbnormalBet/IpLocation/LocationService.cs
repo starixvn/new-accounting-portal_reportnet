@@ -1,8 +1,8 @@
-﻿using AbnormalBet.Criteria;
-using AbnormalBet.Model;
-using Fanex.Data.Repository;
+﻿namespace AbnormalBet.IpLocation;
 
-namespace AbnormalBet.IpLocation;
+using Criteria;
+using Fanex.Data.Repository;
+using Model;
 
 public interface LocationService
 {

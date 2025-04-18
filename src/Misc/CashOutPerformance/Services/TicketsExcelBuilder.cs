@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using CashOutPerformance.Constants;
-using CashOutPerformance.Models;
-using CashOutPerformance.ViewModels;
+﻿namespace CashOutPerformance.Services;
+
+using AutoMapper;
+using Constants;
 using Epplus.Mapper.Extensions;
+using Models;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace CashOutPerformance.Services;
+using ViewModels;
 
 public interface TicketsExcelBuilder<T>
 {

@@ -1,7 +1,7 @@
+namespace TraderPerformance.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace TraderPerformance.Criteria;
 
 public class DetailReportCriteria : CriteriaBase
 {

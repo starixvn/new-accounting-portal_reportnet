@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿namespace Exchange.Report;
 
-namespace Exchange.Report;
+using MediatR;
 
 public class LicenseeHttpParameterJson : IRequest<ExchangeModel>
 {

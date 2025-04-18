@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace Exchange.Filter.Sport;
 
-namespace Exchange.Filter.Sport;
+using Fanex.Data.Repository;
 
 public class Criteria : CriteriaBase
 {

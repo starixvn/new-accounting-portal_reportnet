@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using MediatR;
+﻿namespace SBCustomerPerformanceByDanger.Filter;
 
-namespace SBCustomerPerformanceByDanger.Filter;
+using AutoMapper;
+using MediatR;
 
 public class FilterHandler(FilterService filterService, IMapper mapper)
     : IRequestHandler<BalanceUpDateQueryHttpParameter, DateTime>,

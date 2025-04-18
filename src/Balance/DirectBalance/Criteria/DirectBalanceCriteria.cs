@@ -1,8 +1,8 @@
-using DirectBalance.Constant;
+namespace DirectBalance.Criteria;
+
+using Constant;
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace DirectBalance.Criteria;
 
 public class DirectBalanceCriteria : CriteriaBase
 {

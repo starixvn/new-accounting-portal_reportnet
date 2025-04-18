@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using BetCount.Model;
+﻿namespace BetCount.Services;
+
+using AutoMapper;
 using Epplus.Mapper.Extensions;
+using Model;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace BetCount.Services;
 
 public interface BetCountExportExcelService
 {

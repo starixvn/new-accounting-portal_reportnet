@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using PunterAnalysis.League.Model;
+﻿namespace PunterAnalysis.League;
 
-namespace PunterAnalysis.League;
+using Fanex.Data.Repository;
+using Model;
 
 public interface LeagueService
 {

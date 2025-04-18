@@ -1,10 +1,10 @@
-﻿using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Business;
+﻿namespace SBPerformance.Common;
+
 using Fanex.NAP.Client;
+using Fanex.NAP.Client.Configuration;
+using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Mvc;
-
-namespace SBPerformance.Common;
 
 [Route("api/sb-performance/check-full-view")]
 public class SBPerformancePermissionController(

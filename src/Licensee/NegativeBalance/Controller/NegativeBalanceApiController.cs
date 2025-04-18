@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using NegativeBalance.Criteria;
-using NegativeBalance.Services;
-
 namespace NegativeBalance.Controller;
+
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/negative-balance")]
 

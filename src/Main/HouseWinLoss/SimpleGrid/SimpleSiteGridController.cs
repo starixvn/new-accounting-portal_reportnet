@@ -1,10 +1,10 @@
-﻿using Fanex.Excel.Models;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Common.SiteWinLoss;
+﻿namespace HouseWinLoss.SimpleGrid;
+
+using Common.ColumnDecorators;
+using Common.SiteWinLoss;
+using Fanex.Excel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
-
-namespace HouseWinLoss.SimpleGrid;
 
 [Route("api/house-win-loss-by-products/simple-site-grid")]
 [ApiController]

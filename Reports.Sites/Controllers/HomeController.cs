@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
-using Reports.Sites.Models;
-using System.Diagnostics;
-using Utilities.Configurations;
-
 namespace Reports.Sites.Controllers;
+
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Models;
+using Utilities.Configurations;
 
 public class HomeController(ConfigurationService config) : Controller
 {

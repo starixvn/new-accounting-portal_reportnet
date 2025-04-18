@@ -1,8 +1,10 @@
 ﻿namespace HouseWinLoss.Common.Extensions;
 
+using Models;
+
 public static class ExcelValueExtension
 {
-    public static object ExcelRealMargin(this Models.WinLoss item)
+    public static object ExcelRealMargin(this WinLoss item)
     {
         return item.RealTurnover == 0 ? "N/A" : item.RealMargin;
     }
@@ -12,7 +14,7 @@ public static class ExcelValueExtension
         return item.RealTurnover == 0 ? "N/A" : item.RealMargin;
     }
 
-    public static object ExcelVirtualMargin(this Models.WinLoss item)
+    public static object ExcelVirtualMargin(this WinLoss item)
     {
         return item.VirtualTurnover == 0 ? "N/A" : item.VirtualMargin;
     }

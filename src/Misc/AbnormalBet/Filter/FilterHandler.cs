@@ -1,8 +1,8 @@
-﻿using AbnormalBet.HttpParameter;
-using AbnormalBet.Model;
-using MediatR;
+﻿namespace AbnormalBet.Filter;
 
-namespace AbnormalBet.Filter;
+using HttpParameter;
+using MediatR;
+using Model;
 
 public class FilterHandler(FilterService filterService)
     : IRequestHandler<SiteHttpParameter, IEnumerable<SiteModel>>,

@@ -1,8 +1,8 @@
-﻿using BetCount.Criteria;
-using BetCount.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace BetCount.Controller;
 
-namespace BetCount.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/bet-count")]
 [ApiController]

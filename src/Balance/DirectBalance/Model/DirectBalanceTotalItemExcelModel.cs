@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace DirectBalance.Model;
 
-namespace DirectBalance.Model;
+using Epplus.Mapper.Annotations;
 
 public class DirectBalanceTotalItemExcelModel
 {

@@ -1,10 +1,10 @@
-﻿using Fanex.Data.Repository;
-using Fanex.RemotingRef;
-using SaveBetReport.Criteria;
-using SaveBetReport.Models;
-using Utilities.DateTimes;
+﻿namespace SaveBetReport.Services;
 
-namespace SaveBetReport.Services;
+using Criteria;
+using Fanex.Data.Repository;
+using Fanex.RemotingRef;
+using Models;
+using Utilities.DateTimes;
 
 public interface SaveBetReportService
 {

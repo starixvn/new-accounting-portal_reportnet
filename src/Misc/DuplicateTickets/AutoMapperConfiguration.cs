@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using DuplicateTickets.Model;
+﻿namespace DuplicateTickets;
 
-namespace DuplicateTickets;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

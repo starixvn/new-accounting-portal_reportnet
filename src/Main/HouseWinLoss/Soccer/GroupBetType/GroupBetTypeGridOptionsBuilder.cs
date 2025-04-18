@@ -1,9 +1,9 @@
+namespace HouseWinLoss.Soccer.GroupBetType;
+
+using BaseService;
+using Common.BasicWinLoss;
 using Fanex.Excel.Enums;
 using Fanex.Excel.Models;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Soccer.BaseService;
-
-namespace HouseWinLoss.Soccer.GroupBetType;
 
 public interface GroupBetTypeGridOptionsBuilder
 {

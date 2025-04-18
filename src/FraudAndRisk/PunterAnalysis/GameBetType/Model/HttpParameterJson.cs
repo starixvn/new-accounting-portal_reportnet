@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.GameBetType.Model;
 
-namespace PunterAnalysis.GameBetType.Model;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class HttpParameterJson : IRequest<SummaryEntity<GameBetTypeModel>>
 {

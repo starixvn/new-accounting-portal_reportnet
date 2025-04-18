@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace CashOutPerformance.Models;
 
-namespace CashOutPerformance.Models;
+using Epplus.Mapper.Annotations;
 
 public class WinningProbabilityLevelExcelModel
 {

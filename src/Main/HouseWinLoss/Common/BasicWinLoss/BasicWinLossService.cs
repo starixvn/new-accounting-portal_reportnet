@@ -1,7 +1,7 @@
-﻿using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.Services;
+﻿namespace HouseWinLoss.Common.BasicWinLoss;
 
-namespace HouseWinLoss.Common.BasicWinLoss;
+using Criteria;
+using Services;
 
 public interface BasicWinLossService
 {

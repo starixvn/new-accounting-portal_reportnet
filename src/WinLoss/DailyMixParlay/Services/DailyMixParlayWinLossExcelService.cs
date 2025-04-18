@@ -1,10 +1,10 @@
-﻿using OfficeOpenXml;
-using DailyMixParlay.Models;
-using Utilities.Configurations;
-using DailyMixParlay.Criteria;
-using DailyMixParlay.Constant;
+﻿namespace DailyMixParlay.Services;
 
-namespace DailyMixParlay.Services;
+using Constant;
+using Criteria;
+using Models;
+using OfficeOpenXml;
+using Utilities.Configurations;
 
 public interface DailyMixParlayWinLossExcelService
 {

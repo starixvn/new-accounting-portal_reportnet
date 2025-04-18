@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace Reports.Sites.Criteria;
 
-namespace Reports.Sites.Criteria;
+using Fanex.Data.Repository;
 
 public class PermissionCriteria : CriteriaBase
 {

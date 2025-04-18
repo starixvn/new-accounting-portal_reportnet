@@ -1,6 +1,6 @@
-﻿using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.Products;
 
-namespace HouseWinLoss.Products;
+using Common.Models;
 
 public class ProductWinLoss
 {

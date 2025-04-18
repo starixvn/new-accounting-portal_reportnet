@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using MediatR;
-using OfficeOpenXml;
-using PunterAnalysis.Shared;
-using PunterAnalysis.Summary.Model;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.Summary;
 
-namespace PunterAnalysis.Summary;
+using AutoMapper;
+using MediatR;
+using Model;
+using OfficeOpenXml;
+using Shared;
+using Utilities.LinqDynamicSum;
 
 public class HandlerExcel(
     SummaryService summaryService,

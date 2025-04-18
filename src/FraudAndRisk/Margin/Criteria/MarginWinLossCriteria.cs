@@ -1,7 +1,7 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿namespace Margin.Criteria;
 
-namespace Margin.Criteria;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 public class MarginWinLossCriteria : CriteriaBase
 {

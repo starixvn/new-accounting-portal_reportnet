@@ -1,6 +1,6 @@
-﻿using Exchange.Report;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using Exchange.Report;
 
 public static class ExchangeInjection
 {

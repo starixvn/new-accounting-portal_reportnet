@@ -1,7 +1,7 @@
-﻿using MediatR;
-using BetConstructPerformance.Models;
+﻿namespace BetConstructPerformance.Requests;
 
-namespace BetConstructPerformance.Requests;
+using MediatR;
+using Models;
 
 public class SportRequest : IRequest<SportModel>
 {

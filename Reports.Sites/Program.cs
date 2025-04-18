@@ -4,13 +4,13 @@ using Fanex.Logging.Sentry.RavenClient;
 using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Microsoft.AspNetCore.Mvc;
-using Reports.Sites;
-using Reports.Sites.DependencyInjection;
-using Reports.Sites.Middleware;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using ONEbook.UM.DependencyInjection;
 using ONEbook.UM.Filters;
+using Reports.Sites;
+using Reports.Sites.DependencyInjection;
+using Reports.Sites.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;

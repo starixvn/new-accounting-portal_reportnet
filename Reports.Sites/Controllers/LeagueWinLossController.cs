@@ -1,15 +1,14 @@
-﻿using Fanex.NAP.Client.Attributes;
+﻿namespace Reports.Sites.Controllers;
+
+using Fanex.NAP.Client;
+using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Services;
 using LeagueWinLoss.Services;
 using Microsoft.AspNetCore.Mvc;
-using Utilities.BalanceUpServices;
-
-namespace Reports.Sites.Controllers;
-
-using Fanex.NAP.Client;
 using Utilities;
+using Utilities.BalanceUpServices;
 
 public class LeagueWinLossController(
     INapSettings napSettings,

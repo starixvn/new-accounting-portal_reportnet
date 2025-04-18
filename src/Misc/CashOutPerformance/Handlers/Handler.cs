@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using CashOutPerformance.Constants;
-using CashOutPerformance.Criteria;
-using CashOutPerformance.Models;
-using CashOutPerformance.Requests;
-using CashOutPerformance.Services;
-using CashOutPerformance.ViewModels;
-using MediatR;
+﻿namespace CashOutPerformance.Handlers;
 
-namespace CashOutPerformance.Handlers;
+using AutoMapper;
+using Constants;
+using Criteria;
+using MediatR;
+using Models;
+using Requests;
+using Services;
+using ViewModels;
 
 public class Handler(CashOutPerformanceService service, IMapper mapper, ModelsHelperService modelsHelperService)
     : IRequestHandler<SportRequest, IEnumerable<FilterGroupItemModel>>,
@@ -75,20 +75,15 @@ public class Handler(CashOutPerformanceService service, IMapper mapper, ModelsHe
     {
         var criteria = mapper.Map<BetTypeLevelCriteria>(request);
         var rawData = await service.GetTickets<BetTypeLevelModel, BetTypeLevelCriteria>(criteria);
-        TicketViewModel<BetTypeLevelModel> data;
         var gameTimeCriteria = mapper.Map<GameTimeCriteria>(request);
-        switch (request.Type)
+        var data = request.Type switch
         {
-            case BetTypeDrillDownTypeConstants.GameTime:
-                data = modelsHelperService.UpdateGameTimeLevelModel(rawData.TicketList.ToList(), gameTimeCriteria);
-                break;
-            case BetTypeDrillDownTypeConstants.DetailGameTime:
-                data = modelsHelperService.UpdateDetailGameTimeLevelModel(rawData.TicketList.ToList(), gameTimeCriteria);
-                break;
-            default:
-                data = modelsHelperService.UpdateWinningProbabilityLevelModel(rawData.TicketList.ToList(), gameTimeCriteria);
-                break;
-        }
+            BetTypeDrillDownTypeConstants.GameTime => modelsHelperService.UpdateGameTimeLevelModel(
+                rawData.TicketList.ToList(), gameTimeCriteria),
+            BetTypeDrillDownTypeConstants.DetailGameTime => modelsHelperService.UpdateDetailGameTimeLevelModel(
+                rawData.TicketList.ToList(), gameTimeCriteria),
+            _ => modelsHelperService.UpdateWinningProbabilityLevelModel(rawData.TicketList.ToList(), gameTimeCriteria)
+        };
 
         return data;
     }

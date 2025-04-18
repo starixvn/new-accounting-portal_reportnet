@@ -1,8 +1,8 @@
-﻿using Margin.Criteria;
-using Margin.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace Margin.Controller;
 
-namespace Margin.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/margin-win-loss")]
 [ApiController]

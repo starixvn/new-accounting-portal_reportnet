@@ -1,8 +1,8 @@
-﻿using UpdatedUsernameCredit.Common;
+﻿namespace Reports.Sites.DependencyInjection;
+
+using UpdatedUsernameCredit.Common;
 using UpdatedUsernameCredit.UpdatedCredit;
 using UpdatedUsernameCredit.UpdatedUsername;
-
-namespace Reports.Sites.DependencyInjection;
 
 public static class UpdatedUsernameAndCreditInjection
 {

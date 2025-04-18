@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace Exchange.Report;
+
+using AutoMapper;
 using MediatR;
 using OfficeOpenXml;
-
-namespace Exchange.Report;
 
 public class LicenseeHandlerExcel(Service service, LicenseeExcelBuilder excelBuilder, IMapper mapper)
     : IRequestHandler<LicenseeHttpParameterExcel, ExcelPackage>

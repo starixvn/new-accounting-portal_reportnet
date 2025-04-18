@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using DailyMixParlay.Models;
+﻿namespace DailyMixParlay;
 
-namespace DailyMixParlay;
+using AutoMapper;
+using Models;
 
 public static class AutoMapperConfiguration
 {

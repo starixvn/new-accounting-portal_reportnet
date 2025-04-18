@@ -1,8 +1,8 @@
-﻿using LeagueWinLoss.Criteria;
-using LeagueWinLoss.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace LeagueWinLoss.Controller;
 
-namespace LeagueWinLoss.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/league-win-loss")]
 

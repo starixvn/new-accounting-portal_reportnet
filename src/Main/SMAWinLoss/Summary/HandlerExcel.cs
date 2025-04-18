@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace SMAWinLoss.Summary;
+
+using AutoMapper;
 using MediatR;
 using OfficeOpenXml;
-
-namespace SMAWinLoss.Summary;
 
 public class HandlerExcel(IMapper mapper, WinLossService service, ExcelBuilder excelBuilder)
     : IRequestHandler<WinLossHttpParameterExcel, ExcelPackage>

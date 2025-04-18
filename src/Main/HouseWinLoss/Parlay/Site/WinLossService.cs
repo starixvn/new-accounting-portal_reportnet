@@ -1,8 +1,8 @@
-﻿using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.Models;
-using HouseWinLoss.Common.Services;
+﻿namespace HouseWinLoss.Parlay.Site;
 
-namespace HouseWinLoss.Parlay.Site;
+using Common.Criteria;
+using Common.Models;
+using Common.Services;
 
 public interface WinLossService
 {

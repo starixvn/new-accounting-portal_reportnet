@@ -22,7 +22,7 @@ public class PasswordMaskActionFilter(IUserService userService) : IAsyncActionFi
 
         var controller = context.RouteData.Values["controller"]?.ToString();
         var action = context.RouteData.Values["action"]?.ToString();
-        var isPostMethod = context.HttpContext.Request.Method.Equals("POST", System.StringComparison.OrdinalIgnoreCase);
+        var isPostMethod = context.HttpContext.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase);
 
         if (controller != "Auth" ||
             action != "Index" ||

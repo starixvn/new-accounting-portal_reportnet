@@ -1,6 +1,6 @@
-﻿using BetConstructPerformance.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using BetConstructPerformance.Services;
 
 public static class BetConstructPerformanceInjection
 {

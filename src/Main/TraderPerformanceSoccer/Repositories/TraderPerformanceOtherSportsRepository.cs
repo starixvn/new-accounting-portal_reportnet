@@ -1,12 +1,12 @@
-using Fanex.Data.Repository;
+namespace TraderPerformance.Repositories;
+
 using System.Data;
+using Criteria;
 using Fanex.Common;
-using TraderPerformance.Criteria;
-using TraderPerformance.Model;
+using Fanex.Data.Repository;
+using Model;
 using Utilities.DateTimes;
 using Utilities.RemotingRef;
-
-namespace TraderPerformance.Repositories;
 
 public interface TraderPerformanceOtherSportsRepository
 {

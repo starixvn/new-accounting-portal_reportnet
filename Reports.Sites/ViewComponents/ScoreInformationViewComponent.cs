@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace Reports.Sites.ViewComponents;
 
-namespace Reports.Sites.ViewComponents;
+using Microsoft.AspNetCore.Mvc;
 
 public class ScoreInformationViewComponent : ViewComponent
 {

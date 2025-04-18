@@ -1,6 +1,6 @@
-﻿using PunterAnalysis.Shared;
+﻿namespace PunterAnalysis.League.Model;
 
-namespace PunterAnalysis.League.Model;
+using Shared;
 
 public class Criteria : BetCountAndLeagueCriteriaBase
 {

@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.Filter.AvailableDatabase;
 
-namespace PunterAnalysis.Filter.AvailableDatabase;
+using Fanex.Data.Repository;
 
 public class QueryCriteria : CriteriaBase
 {

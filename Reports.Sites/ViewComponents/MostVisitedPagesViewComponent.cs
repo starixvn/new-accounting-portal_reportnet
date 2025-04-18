@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Reports.Sites.ViewComponents;
+﻿namespace Reports.Sites.ViewComponents;
 
 using Fanex.NAP.Client;
+using Microsoft.AspNetCore.Mvc;
 
 public class MostVisitedPagesViewComponent(INapSession napSession) : ViewComponent
 {

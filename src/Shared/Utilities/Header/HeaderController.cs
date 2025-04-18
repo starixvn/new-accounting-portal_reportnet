@@ -1,8 +1,8 @@
-﻿using Fanex.NAP.Client;
+﻿namespace Utilities.Header;
+
+using Fanex.NAP.Client;
 using Fanex.NAP.Client.Models;
 using Microsoft.AspNetCore.Mvc;
-
-namespace Utilities.Header;
 
 [ApiController]
 public class HeaderController(INapSession napSession) : ControllerBase

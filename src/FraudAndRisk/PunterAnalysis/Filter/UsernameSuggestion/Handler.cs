@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿namespace PunterAnalysis.Filter.UsernameSuggestion;
+
+using AutoMapper;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client;
 using MediatR;
-
-namespace PunterAnalysis.Filter.UsernameSuggestion;
 
 public class Handler(INapSession napSession, IDynamicRepository repository, IMapper mapper)
     : IRequestHandler<HttpParameterJson, IEnumerable<string>>

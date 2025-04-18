@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace Utilities.Currencies;
 
-namespace Utilities.Currencies;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/currencies")]
 [ApiController]

@@ -3,7 +3,7 @@
 using AutoMapper;
 using Common.ColumnDecorators;
 using Common.Criteria;
-using HouseWinLoss.Common.MatchDetail;
+using Common.MatchDetail;
 using Configuration;
 using DailyWinLoss2hSoccerMinor;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +18,7 @@ public class BetBuilderMatchDetailController(
     MatchGridOptionColumnDecoratorFull decorator,
     MatchSortingService sortingService,
     IMapper mapper)
-    : ControllerBase()
+    : ControllerBase
 {
     [Route("")]
     public async Task<IActionResult> Json(QueryModel queryModel)

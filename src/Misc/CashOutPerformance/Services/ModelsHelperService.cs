@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using CashOutPerformance.Constants;
-using CashOutPerformance.Criteria;
-using CashOutPerformance.Models;
-using CashOutPerformance.ViewModels;
-using Utilities.LinqDynamicSum;
+﻿namespace CashOutPerformance.Services;
 
-namespace CashOutPerformance.Services;
+using AutoMapper;
+using Constants;
+using Criteria;
+using Models;
+using Utilities.LinqDynamicSum;
+using ViewModels;
 
 public interface ModelsHelperService
 {
@@ -64,7 +64,7 @@ public class ModelsHelperServiceImp(IMapper mapper) : ModelsHelperService
         foreach (var group in groups)
         {
             var gameTime = group.DynamicSum();
-            gameTime.ChildItems = new List<ChildItemBetTypeModel>();
+            gameTime.ChildItems = [];
             gameTime.GameTime = gameTime.GameTime.Replace(GameTimeConstants.HalftimeValue, GameTimeConstants.HalftimeText);
             gameTime.BetTypeName = gameTime.GameTime;
             var groupedOutComes = group.GroupBy(item => item.OutCome);

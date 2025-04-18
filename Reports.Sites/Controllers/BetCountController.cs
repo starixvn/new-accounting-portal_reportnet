@@ -1,9 +1,8 @@
-﻿using Fanex.NAP.Client.Attributes;
+﻿namespace Reports.Sites.Controllers;
+
+using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-
-namespace Reports.Sites.Controllers;
-
 using Utilities;
 
 public class BetCountController : Controller

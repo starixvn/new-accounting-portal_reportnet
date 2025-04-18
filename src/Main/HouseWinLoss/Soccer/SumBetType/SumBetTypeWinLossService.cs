@@ -1,7 +1,8 @@
-﻿using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.Services;
+﻿namespace HouseWinLoss.Soccer.SumBetType;
 
-namespace HouseWinLoss.Soccer.SumBetType;
+using BaseService;
+using Common.Criteria;
+using Common.Services;
 
 public interface SumBetTypeWinLossService
 {
@@ -10,7 +11,7 @@ public interface SumBetTypeWinLossService
 
 public class SumBetTypeWinLossServiceImp(
     RawWinLossService rawWinLossService,
-    BaseService.BaseCalculationService calculationService)
+    BaseCalculationService calculationService)
     : SumBetTypeWinLossService
 {
     public async Task<SumBetTypeWinLossModel> Query(WinLossCriteria criteria)

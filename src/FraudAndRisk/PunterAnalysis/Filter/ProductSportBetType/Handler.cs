@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using MediatR;
+﻿namespace PunterAnalysis.Filter.ProductSportBetType;
 
-namespace PunterAnalysis.Filter.ProductSportBetType;
+using Fanex.Data.Repository;
+using MediatR;
 
 public class Handler(IDynamicRepository repository)
     : IRequestHandler<HttpParameterJson, IEnumerable<ProductSportBetTypeEntity>>

@@ -1,7 +1,7 @@
 ﻿
-using CompanyWinLoss.Services;
-
 namespace Reports.Sites.DependencyInjection;
+
+using CompanyWinLoss.Services;
 
 public static class CompanyWinLossInjection
 {

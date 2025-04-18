@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace SuperBalance.Model;
 
-namespace SuperBalance.Model;
+using Epplus.Mapper.Annotations;
 
 public class BalanceItemExcelModel
 {

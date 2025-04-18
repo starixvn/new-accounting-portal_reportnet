@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace ActualMemberBet.Filter;
 
-namespace ActualMemberBet.Filter;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/actual-member-bet/filter")]
 [ApiController]

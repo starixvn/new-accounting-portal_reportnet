@@ -1,7 +1,7 @@
-using DuplicateTickets.Criteria;
-using Fanex.Data.Repository;
-
 namespace DuplicateTickets.Services;
+
+using Criteria;
+using Fanex.Data.Repository;
 
 public interface DuplicateTicketsCashOutService
 {

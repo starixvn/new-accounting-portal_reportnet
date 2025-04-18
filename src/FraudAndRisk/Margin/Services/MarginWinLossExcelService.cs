@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+﻿namespace Margin.Services;
+
+using AutoMapper;
 using Epplus.Mapper.Extensions;
-using Margin.Model;
+using Model;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace Margin.Services;
 
 public interface MarginWinLossExcelService
 {

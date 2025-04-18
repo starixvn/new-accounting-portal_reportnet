@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace Reports.Sites.Controllers;
 
-namespace Reports.Sites.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
 public class TotalSMAMemberActiveController : Controller
 {

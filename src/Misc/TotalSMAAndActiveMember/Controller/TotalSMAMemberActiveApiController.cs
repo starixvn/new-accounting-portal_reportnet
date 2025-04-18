@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TotalSMAAndActiveMember.Criteria;
-using TotalSMAAndActiveMember.Model;
-using TotalSMAAndActiveMember.Services;
-using Utilities.DateTimes;
+﻿namespace TotalSMAAndActiveMember.Controller;
 
-namespace TotalSMAAndActiveMember.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Model;
+using Services;
+using Utilities.DateTimes;
 
 [Route("api/total-sma-active-member")]
 [ApiController]

@@ -1,9 +1,7 @@
-﻿using MediatR;
+﻿namespace UpdatedUsernameCredit.UpdatedCredit;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
-namespace UpdatedUsernameCredit.UpdatedCredit;
-
 using Utilities.ExcelResult;
 
 [Route("api/updated-credit")]

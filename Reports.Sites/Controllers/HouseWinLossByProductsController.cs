@@ -1,14 +1,13 @@
-﻿using Fanex.NAP.Client.Configuration;
+﻿namespace Reports.Sites.Controllers;
+
+using Fanex.NAP.Client;
+using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Mvc;
-using Reports.Sites.Settings;
+using Settings;
 using Utilities.BalanceUpServices;
 using Utilities.PermissionFilter;
-
-namespace Reports.Sites.Controllers;
-
-using Fanex.NAP.Client;
 
 public class HouseWinLossByProductsController(
     IUserService userService,

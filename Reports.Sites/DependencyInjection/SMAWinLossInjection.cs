@@ -1,8 +1,7 @@
-﻿using SMAWinLoss.Filter;
+﻿namespace Reports.Sites.DependencyInjection;
+
+using SMAWinLoss.Filter;
 using SMAWinLoss.Summary;
-
-namespace Reports.Sites.DependencyInjection;
-
 using SMAWinLoss.VirtualRate;
 
 public static class SMAWinLossInjection

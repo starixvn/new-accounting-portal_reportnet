@@ -1,6 +1,6 @@
-﻿using ResultAnalysis.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using ResultAnalysis.Services;
 
 public static class ResultAnalysisInjection
 {

@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using Fanex.Data.Repository;
-using UpdatedUsernameCredit.Common;
+﻿namespace UpdatedUsernameCredit.UpdatedUsername;
 
-namespace UpdatedUsernameCredit.UpdatedUsername;
+using AutoMapper;
+using Common;
+using Fanex.Data.Repository;
 
 public interface UpdatedUsernameService
 {

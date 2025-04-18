@@ -1,6 +1,6 @@
-﻿using CreditMovementMonitor.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using CreditMovementMonitor.Services;
 
 public static class CreditMovementInjection
 {

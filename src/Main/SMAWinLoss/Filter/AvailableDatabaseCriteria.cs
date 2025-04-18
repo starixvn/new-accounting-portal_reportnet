@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using SMAWinLoss.Constants;
+﻿namespace SMAWinLoss.Filter;
 
-namespace SMAWinLoss.Filter;
+using Constants;
+using Fanex.Data.Repository;
 
 public class AvailableDatabaseCriteria : CriteriaBase
 {

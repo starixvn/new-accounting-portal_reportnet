@@ -1,10 +1,10 @@
+namespace SuperBalance.Controller;
+
+using Criteria;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 using Utilities.Constants;
 using Utilities.Services;
-using SuperBalance.Criteria;
-using SuperBalance.Services;
-
-namespace SuperBalance.Controller;
 
 [Route("api/super-balance")]
 [ApiController]

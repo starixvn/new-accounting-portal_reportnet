@@ -1,9 +1,9 @@
-using DirectBalance.Criteria;
-using DirectBalance.Services;
-using Microsoft.AspNetCore.Mvc;
-using Utilities.Services;
-
 namespace DirectBalance.Controller;
+
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
+using Utilities.Services;
 
 [Route("api/direct-balance")]
 [ApiController]

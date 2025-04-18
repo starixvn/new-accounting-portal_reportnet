@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SBPerformance.MarginBySite;
 
-namespace SBPerformance.MarginBySite;
+using Fanex.Data.Repository;
 
 public class MarginBySiteCriteria : CriteriaBase
 {

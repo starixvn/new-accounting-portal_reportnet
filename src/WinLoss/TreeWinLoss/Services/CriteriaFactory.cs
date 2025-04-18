@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using TreeWinLoss.Criteria;
+﻿namespace TreeWinLoss.Services;
 
-namespace TreeWinLoss.Services;
+using Criteria;
+using Fanex.Data.Repository;
 
 public interface CriteriaFactory
 {

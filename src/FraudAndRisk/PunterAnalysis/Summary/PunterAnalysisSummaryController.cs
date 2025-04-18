@@ -1,10 +1,8 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.Summary;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-using PunterAnalysis.Summary.Model;
-
-namespace PunterAnalysis.Summary;
-
+using Model;
 using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/summary")]

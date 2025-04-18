@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using ParlayWon.Model;
+﻿namespace ParlayWon;
 
-namespace ParlayWon;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

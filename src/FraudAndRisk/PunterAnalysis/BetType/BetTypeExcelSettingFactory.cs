@@ -1,7 +1,7 @@
-﻿using PunterAnalysis.Shared;
-using Utilities.Configurations;
+﻿namespace PunterAnalysis.BetType;
 
-namespace PunterAnalysis.BetType;
+using Shared;
+using Utilities.Configurations;
 
 public interface BetTypeExcelSetting
 {

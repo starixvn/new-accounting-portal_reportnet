@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace Exchange.Report;
 
-namespace Exchange.Report;
+using Fanex.Data.Repository;
 
 public class Criteria : CriteriaBase
 {

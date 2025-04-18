@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace PunterAnalysis.Summary.Model;
 
-namespace PunterAnalysis.Summary.Model;
+using Epplus.Mapper.Annotations;
 
 public class SummaryExcelModel
 {

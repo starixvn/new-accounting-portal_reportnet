@@ -1,9 +1,9 @@
-﻿using CompanyBalanceDifference.Criteria;
-using CompanyBalanceDifference.Entities;
-using CompanyBalanceDifference.Model;
-using Fanex.Data.Repository;
+﻿namespace CompanyBalanceDifference.Services;
 
-namespace CompanyBalanceDifference.Services;
+using Criteria;
+using Entities;
+using Fanex.Data.Repository;
+using Model;
 
 public interface CompanyBalanceDifferenceService
 {

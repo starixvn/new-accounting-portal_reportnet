@@ -1,6 +1,6 @@
-﻿using Utilities.MostVisitedPages;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using Utilities.MostVisitedPages;
 
 public static class MostVisitedPageInjection
 {

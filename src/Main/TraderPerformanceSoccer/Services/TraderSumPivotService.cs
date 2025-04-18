@@ -1,7 +1,7 @@
-﻿using Fanex.Common;
-using System.Data;
+﻿namespace TraderPerformance.Services;
 
-namespace TraderPerformance.Services;
+using System.Data;
+using Fanex.Common;
 
 public interface TraderSumPivotService
 {
@@ -49,19 +49,21 @@ public class TraderSumPivotServiceImp : TraderSumPivotService
                             var rawColumnName = rawData.Columns[columnIndex].ColumnName;
                             if (pivotColumns.Contains(rawColumnName))
                             {
-                                if (rawColumnName != BettypeColumnName)
+                                if (rawColumnName == BettypeColumnName)
                                 {
-                                    foreach (var bettype in bettypes)
-                                    {
-                                        var columnName = $"{rawColumnName}_{bettype}";
-                                        if (columnName.Contains("Overall") && !bettype.Contains(rawColumnName))
-                                        {
-                                            continue;
-                                        }
+                                    continue;
+                                }
 
-                                        var row = dataByMatch.FirstOrDefault(s => Converter.To<string>(s[BettypeColumnName]) == bettype);
-                                        newDataRow[columnName] = row == null ? 0 : row[columnIndex];
+                                foreach (var bettype in bettypes)
+                                {
+                                    var columnName = $"{rawColumnName}_{bettype}";
+                                    if (columnName.Contains("Overall") && !bettype.Contains(rawColumnName))
+                                    {
+                                        continue;
                                     }
+
+                                    var row = dataByMatch.FirstOrDefault(s => Converter.To<string>(s[BettypeColumnName]) == bettype);
+                                    newDataRow[columnName] = row == null ? 0 : row[columnIndex];
                                 }
                             }
                             else

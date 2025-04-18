@@ -1,11 +1,11 @@
-﻿using OfficeOpenXml;
-using AutoMapper;
-using Epplus.Mapper.Extensions;
-using TotalSMAAndActiveMember.Model;
-using Utilities.Configurations;
-using TotalSMAAndActiveMember.Constant;
+﻿namespace TotalSMAAndActiveMember.Services;
 
-namespace TotalSMAAndActiveMember.Services;
+using AutoMapper;
+using Constant;
+using Epplus.Mapper.Extensions;
+using Model;
+using OfficeOpenXml;
+using Utilities.Configurations;
 
 public interface TotalSMAMemberActiveExcelService
 {

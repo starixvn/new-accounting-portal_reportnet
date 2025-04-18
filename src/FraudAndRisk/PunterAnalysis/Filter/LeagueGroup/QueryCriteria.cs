@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.Filter.LeagueGroup;
 
-namespace PunterAnalysis.Filter.LeagueGroup;
+using Fanex.Data.Repository;
 
 public class QueryCriteria : CriteriaBase
 {

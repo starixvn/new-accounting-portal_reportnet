@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using DailyCreatedCustomers.Model;
+﻿namespace DailyCreatedCustomers.Services;
+
+using AutoMapper;
 using Epplus.Mapper.Extensions;
+using Model;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace DailyCreatedCustomers.Services;
 
 public interface DailyCreatedCustomersExcelService
 {

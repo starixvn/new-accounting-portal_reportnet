@@ -1,9 +1,9 @@
-﻿using Epplus.Mapper.Extensions;
-using OfficeOpenXml;
-using TraderPerformance.Model;
-using Utilities.Configurations;
+﻿namespace TraderPerformance.Services;
 
-namespace TraderPerformance.Services;
+using Epplus.Mapper.Extensions;
+using Model;
+using OfficeOpenXml;
+using Utilities.Configurations;
 
 public interface TraderPerformanceSoccerExcelService
 {

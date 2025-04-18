@@ -3,12 +3,12 @@
 using AutoMapper;
 using Common.ColumnDecorators;
 using Common.Criteria;
-using HouseWinLoss.Common.MatchDetail;
+using Common.MatchDetail;
 using Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ExcelResult;
 using Fanex.Excel.Models;
-using HouseWinLoss.DailyWinLoss2hSoccerMinor;
+using DailyWinLoss2hSoccerMinor;
 
 [Route("api/house-win-loss-by-products/sportsbook/match-detail")]
 [ApiController]

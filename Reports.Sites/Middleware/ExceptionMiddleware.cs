@@ -1,10 +1,10 @@
-﻿using Fanex.Logging;
+﻿namespace Reports.Sites.Middleware;
+
+using System.Net;
+using Fanex.Logging;
 using Fanex.Logging.Extensions;
 using Microsoft.AspNetCore.Diagnostics;
-using Reports.Sites.Models;
-using System.Net;
-
-namespace Reports.Sites.Middleware;
+using Models;
 
 public static class ExceptionMiddleware
 {

@@ -1,10 +1,10 @@
-﻿using Epplus.Mapper.Extensions;
-using OfficeOpenXml;
-using PeakConcurrentUsers.Criteria;
-using PeakConcurrentUsers.Model;
-using Utilities.Configurations;
+﻿namespace PeakConcurrentUsers.Services;
 
-namespace PeakConcurrentUsers.Services;
+using Criteria;
+using Epplus.Mapper.Extensions;
+using Model;
+using OfficeOpenXml;
+using Utilities.Configurations;
 
 public interface PeakConcurrentUserExcelService
 {

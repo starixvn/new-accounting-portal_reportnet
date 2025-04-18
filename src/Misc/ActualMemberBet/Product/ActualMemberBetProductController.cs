@@ -1,9 +1,7 @@
-﻿using MediatR;
+﻿namespace ActualMemberBet.Product;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
-namespace ActualMemberBet.Product;
-
 using Utilities.ExcelResult;
 
 [Route("api/actual-member-bet/product")]

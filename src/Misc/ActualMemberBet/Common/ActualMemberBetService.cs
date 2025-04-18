@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using Utilities.LinqDynamicSum;
+﻿namespace ActualMemberBet.Common;
 
-namespace ActualMemberBet.Common;
+using Fanex.Data.Repository;
+using Utilities.LinqDynamicSum;
 
 public interface ActualMemberBetService
 {

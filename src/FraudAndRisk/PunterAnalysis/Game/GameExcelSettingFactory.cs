@@ -1,7 +1,7 @@
-﻿using PunterAnalysis.Shared;
-using Utilities.Configurations;
+﻿namespace PunterAnalysis.Game;
 
-namespace PunterAnalysis.Game;
+using Shared;
+using Utilities.Configurations;
 
 public interface GameExcelSetting
 {

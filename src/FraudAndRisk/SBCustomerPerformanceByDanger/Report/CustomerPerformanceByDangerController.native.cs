@@ -1,9 +1,7 @@
-﻿using MediatR;
+﻿namespace SBCustomerPerformanceByDanger.Report;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
-namespace SBCustomerPerformanceByDanger.Report;
-
 using Utilities.ExcelResult;
 
 [Route("api/sb-customer-performance-by-danger/report")]

@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+﻿namespace PunterAnalysis.Performance.Sportsbook;
+
+using AutoMapper;
+using Criteria;
 using Fanex.Data.Repository;
 using MediatR;
-using PunterAnalysis.Performance.Sportsbook.Criteria;
-using PunterAnalysis.Performance.Sportsbook.Model;
-
-namespace PunterAnalysis.Performance.Sportsbook;
+using Model;
 
 public class Handler(IDynamicRepository repository, IMapper mapper)
     : IRequestHandler<SportsbookHttpParameterJson, ViewModelJson>

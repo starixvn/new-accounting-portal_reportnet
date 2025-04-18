@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using CashOutPerformance.Criteria;
-using CashOutPerformance.Models;
-using CashOutPerformance.Requests;
-using CashOutPerformance.ViewModels;
+﻿namespace CashOutPerformance;
 
-namespace CashOutPerformance;
+using AutoMapper;
+using Criteria;
+using Models;
+using Requests;
+using ViewModels;
 
 public static class AutoMapperConfiguration
 {

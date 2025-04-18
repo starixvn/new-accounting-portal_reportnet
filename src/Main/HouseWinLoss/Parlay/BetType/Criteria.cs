@@ -1,6 +1,6 @@
-using HouseWinLoss.Common.Criteria;
-
 namespace HouseWinLoss.Parlay.BetType;
+
+using Common.Criteria;
 
 public class Criteria : WinLossCriteria
 {

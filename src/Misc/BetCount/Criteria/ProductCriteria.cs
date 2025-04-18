@@ -1,6 +1,6 @@
-using Fanex.Data.Repository;
-
 namespace BetCount.Criteria;
+
+using Fanex.Data.Repository;
 
 public class ProductCriteria : CriteriaBase
 {

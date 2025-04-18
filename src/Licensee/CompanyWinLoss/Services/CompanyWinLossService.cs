@@ -1,14 +1,14 @@
-using CompanyWinLoss.Criteria;
-using CompanyWinLoss.Model;
+namespace CompanyWinLoss.Services;
+
+using Criteria;
 using Fanex.Caching;
 using Fanex.Data.Repository;
 using Fanex.Excel.Enums;
 using Fanex.Excel.Models;
 using Fanex.NAP.Client;
-using Utilities.DateTimes;
+using Model;
 using Utilities.BalanceUpServices;
-
-namespace CompanyWinLoss.Services;
+using Utilities.DateTimes;
 
 public interface CompanyWinLossService
 {

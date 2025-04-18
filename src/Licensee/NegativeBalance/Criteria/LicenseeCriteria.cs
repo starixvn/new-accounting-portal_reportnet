@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace NegativeBalance.Criteria;
 
-namespace NegativeBalance.Criteria;
+using Fanex.Data.Repository;
 
 public class LicenseeCriteria : CriteriaBase, ICriteria
 {

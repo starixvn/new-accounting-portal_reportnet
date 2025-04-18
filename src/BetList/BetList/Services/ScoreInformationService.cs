@@ -1,11 +1,11 @@
-using BetList.Criteria;
-using BetList.Model;
+namespace BetList.Services;
+
+using Criteria;
 using Fanex.Data.Repository;
 using Fanex.Result.Core;
 using Fanex.Result.Core.Base;
 using Fanex.Result.Core.Sportsbook.DTO;
-
-namespace BetList.Services;
+using Model;
 
 public interface ScoreInformationService
 {

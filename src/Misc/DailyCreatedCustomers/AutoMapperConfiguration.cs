@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using DailyCreatedCustomers.Model;
+﻿namespace DailyCreatedCustomers;
 
-namespace DailyCreatedCustomers;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

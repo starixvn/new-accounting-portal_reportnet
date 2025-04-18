@@ -1,10 +1,10 @@
-using DuplicateTickets.Entities;
-using DuplicateTickets.Model;
+namespace DuplicateTickets.Services;
+
 using System.Security.Cryptography;
 using System.Text;
+using Entities;
+using Model;
 using Utilities.DateTimes;
-
-namespace DuplicateTickets.Services;
 
 public interface DuplicateTicketsUtility
 {

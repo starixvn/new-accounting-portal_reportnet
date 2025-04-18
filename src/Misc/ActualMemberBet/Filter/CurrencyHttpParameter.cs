@@ -1,5 +1,5 @@
-﻿using MediatR;
+﻿namespace ActualMemberBet.Filter;
 
-namespace ActualMemberBet.Filter;
+using MediatR;
 
 public class CurrencyHttpParameter : IRequest<IEnumerable<Currency>>;

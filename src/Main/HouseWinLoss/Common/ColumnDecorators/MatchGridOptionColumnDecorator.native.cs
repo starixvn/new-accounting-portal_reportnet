@@ -1,6 +1,6 @@
-﻿using Fanex.Excel.Models;
+﻿namespace HouseWinLoss.Common.ColumnDecorators;
 
-namespace HouseWinLoss.Common.ColumnDecorators;
+using Fanex.Excel.Models;
 
 public interface MatchGridOptionColumnDecorator
 {

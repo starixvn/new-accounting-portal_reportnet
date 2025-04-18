@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.Shared;
 
-namespace PunterAnalysis.Shared;
+using Fanex.Data.Repository;
+using Utilities.LinqDynamicSum;
 
 public interface PunterAnalysisService
 {

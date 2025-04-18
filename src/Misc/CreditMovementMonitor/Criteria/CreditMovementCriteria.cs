@@ -1,7 +1,7 @@
+namespace CreditMovementMonitor.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace CreditMovementMonitor.Criteria;
 
 public class CreditMovementCriteria : CriteriaBase
 {

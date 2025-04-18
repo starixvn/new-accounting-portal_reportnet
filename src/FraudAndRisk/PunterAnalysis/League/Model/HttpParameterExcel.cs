@@ -1,8 +1,8 @@
-﻿using MediatR;
-using OfficeOpenXml;
-using PunterAnalysis.Constants;
+﻿namespace PunterAnalysis.League.Model;
 
-namespace PunterAnalysis.League.Model;
+using Constants;
+using MediatR;
+using OfficeOpenXml;
 
 public class HttpParameterExcel : IRequest<ExcelPackage>
 {

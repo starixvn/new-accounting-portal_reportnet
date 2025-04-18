@@ -1,7 +1,7 @@
-﻿using CashOutPerformance.Models;
-using MediatR;
+﻿namespace CashOutPerformance.Requests;
 
-namespace CashOutPerformance.Requests;
+using MediatR;
+using Models;
 
 public class LeagueRequest : IRequest<IEnumerable<LeagueModel>>
 {

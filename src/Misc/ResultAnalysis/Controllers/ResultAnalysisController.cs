@@ -1,10 +1,8 @@
-﻿using MediatR;
+﻿namespace ResultAnalysis.Controllers;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-using ResultAnalysis.Requests;
-
-namespace ResultAnalysis.Controllers;
-
+using Requests;
 using Utilities.ExcelResult;
 
 [Route("api/result-analysis")]

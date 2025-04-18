@@ -1,10 +1,8 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.League;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-using PunterAnalysis.League.Model;
-
-namespace PunterAnalysis.League;
-
+using Model;
 using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/league")]

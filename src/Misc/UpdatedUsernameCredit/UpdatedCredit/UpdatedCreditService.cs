@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using Fanex.Data.Repository;
-using UpdatedUsernameCredit.Common;
+﻿namespace UpdatedUsernameCredit.UpdatedCredit;
 
-namespace UpdatedUsernameCredit.UpdatedCredit;
+using AutoMapper;
+using Common;
+using Fanex.Data.Repository;
 
 public interface UpdatedCreditService
 {

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace Utilities.MostVisitedPages;
 
-namespace Utilities.MostVisitedPages;
+using Microsoft.AspNetCore.Mvc;
 
 [Route("api/most-visited-page")]
 [ApiController]

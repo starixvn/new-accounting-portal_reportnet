@@ -1,7 +1,7 @@
+namespace LegendManagement.Criteria;
+
 using Fanex.Data.Repository;
 using Microsoft.AspNetCore.Http;
-
-namespace LegendManagement.Criteria;
 
 public class UploadFileCriteria : CriteriaBase
 {

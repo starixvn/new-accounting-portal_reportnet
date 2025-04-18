@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.Filter.AvailableDateRange;
 
-namespace PunterAnalysis.Filter.AvailableDateRange;
+using Fanex.Data.Repository;
 
 public class QueryCriteria : CriteriaBase
 {

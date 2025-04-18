@@ -1,0 +1,45 @@
+﻿namespace SoccerPerformanceDetail.ViewModel;
+
+public class BetTypeBetChoiceItem
+{
+    public string BetChoice { get; set; }
+
+    public string BetOption { get; set; }
+
+    public string BetTeam { get; set; }
+
+    public decimal OddsSpread { get; set; }
+
+    public int LeagueCount { get; set; }
+
+    public int MatchCount { get; set; }
+
+    public int BetCount { get; set; }
+
+    public decimal Turnover { get; set; }
+
+    public decimal WinLoss { get; set; }
+
+    public decimal? Margin => Turnover != 0 ? WinLoss / Turnover * 100 : null;
+
+    public decimal TurnoverReal { get; set; }
+
+    public decimal WinLossReal { get; set; }
+
+    public decimal? MarginReal => TurnoverReal != 0 ? WinLossReal / TurnoverReal * 100 : null;
+
+    public bool IsLive { get; set; }
+
+    public static BetTypeBetChoiceItem operator +(BetTypeBetChoiceItem a, BetTypeBetChoiceItem b)
+    {
+        return new BetTypeBetChoiceItem
+        {
+            Turnover = a.Turnover + b.Turnover,
+            WinLoss = a.WinLoss + b.WinLoss,
+            TurnoverReal = a.TurnoverReal + b.TurnoverReal,
+            WinLossReal = a.WinLossReal + b.WinLossReal,
+            BetCount = a.BetCount + b.BetCount,
+            MatchCount = a.MatchCount + b.MatchCount
+        };
+    }
+}

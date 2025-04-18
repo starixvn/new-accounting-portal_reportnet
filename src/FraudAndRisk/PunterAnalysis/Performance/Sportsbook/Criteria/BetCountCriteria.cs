@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.Performance.Sportsbook.Criteria;
 
-namespace PunterAnalysis.Performance.Sportsbook.Criteria;
+using Fanex.Data.Repository;
 
 public class BetCountCriteria : CriteriaBase
 {

@@ -1,7 +1,7 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿namespace ParlayWon.Criteria;
 
-namespace ParlayWon.Criteria;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 public class ParlayWonReportCriteria : CriteriaBase
 {

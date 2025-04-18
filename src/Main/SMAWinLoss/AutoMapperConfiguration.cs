@@ -1,8 +1,7 @@
-﻿using AutoMapper;
-using SMAWinLoss.Summary;
+﻿namespace SMAWinLoss;
 
-namespace SMAWinLoss;
-
+using AutoMapper;
+using Summary;
 using VirtualRate;
 
 public static class AutoMapperConfiguration

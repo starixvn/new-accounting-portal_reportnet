@@ -61,6 +61,7 @@
     <ProjectReference Include="..\src\Misc\TotalSMAAndActiveMember\TotalSMAAndActiveMember.csproj" />
     <ProjectReference Include="..\src\Misc\UpdatedUsernameCredit\UpdatedUsernameCredit.csproj" />
     <ProjectReference Include="..\src\Shared\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\src\TGR\SoccerPerformanceDetail\SoccerPerformanceDetail.csproj" />
     <ProjectReference Include="..\src\WinLoss\DailyMixParlay\DailyMixParlay.csproj" />
     <ProjectReference Include="..\src\WinLoss\LeagueWinLoss\LeagueWinLoss.csproj" />
     <ProjectReference Include="..\src\WinLoss\TreeWinLoss\TreeWinLoss.csproj" />
@@ -88,6 +89,7 @@
     <None Include="App_Data\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+      
     <None Include="wwwroot\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -97,6 +99,18 @@
     <None Include="Views\Auth\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\soccer-performance-detail\scripts\league-performance.js" />
+    <Content Remove="wwwroot\soccer-performance-detail\scripts\trader-performance.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\League\" />
+    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Grade\" />
+    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Team\" />
+    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Trader\" />
   </ItemGroup>
 
 </Project>

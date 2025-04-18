@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace SBPerformance.MarginBySport;
 
-namespace SBPerformance.MarginBySport;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class MarginBySportHttpParameter : IRequest<SummaryEntity<MarginBySportItemModel>>
 {

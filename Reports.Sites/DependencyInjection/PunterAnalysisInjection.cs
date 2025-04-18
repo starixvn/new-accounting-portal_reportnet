@@ -1,4 +1,6 @@
-﻿using PunterAnalysis.AssociatedAccount;
+﻿namespace Reports.Sites.DependencyInjection;
+
+using PunterAnalysis.AssociatedAccount;
 using PunterAnalysis.BetCount;
 using PunterAnalysis.BetType;
 using PunterAnalysis.BetTypeGroup;
@@ -8,8 +10,6 @@ using PunterAnalysis.League;
 using PunterAnalysis.Shared;
 using PunterAnalysis.SportType;
 using PunterAnalysis.Summary;
-
-namespace Reports.Sites.DependencyInjection;
 
 public static class PunterAnalysisInjection
 {

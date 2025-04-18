@@ -1,7 +1,7 @@
 ﻿
-using DailyCreatedCustomers.Services;
-
 namespace Reports.Sites.DependencyInjection;
+
+using DailyCreatedCustomers.Services;
 
 public static class DailyCreatedCustomersInjection
 {

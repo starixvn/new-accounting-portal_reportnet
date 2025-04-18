@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SBCustomerPerformanceByDanger.Report;
 
-namespace SBCustomerPerformanceByDanger.Report;
+using Fanex.Data.Repository;
 
 public class CustomerPerformanceByDangerQueryCriteria : CriteriaBase
 {

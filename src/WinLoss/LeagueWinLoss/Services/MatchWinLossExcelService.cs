@@ -1,11 +1,11 @@
-﻿using System.Drawing;
+﻿namespace LeagueWinLoss.Services;
+
+using System.Drawing;
 using AutoMapper;
 using Epplus.Mapper.Extensions;
-using LeagueWinLoss.Model;
+using Model;
 using OfficeOpenXml;
 using Utilities.Configurations;
-
-namespace LeagueWinLoss.Services;
 
 public interface MatchWinLossExcelService
 {

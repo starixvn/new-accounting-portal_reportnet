@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SBPerformance.TopWinningMember;
 
-namespace SBPerformance.TopWinningMember;
+using Fanex.Data.Repository;
 
 public class TopWinningMemberCriteria : CriteriaBase
 {

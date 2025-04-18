@@ -1,6 +1,6 @@
-﻿using DuplicateTickets.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using DuplicateTickets.Services;
 
 public static class DuplicateTicketsInjection
 {

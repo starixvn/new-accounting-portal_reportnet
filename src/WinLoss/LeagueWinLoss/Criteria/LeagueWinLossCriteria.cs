@@ -1,7 +1,7 @@
+namespace LeagueWinLoss.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace LeagueWinLoss.Criteria;
 
 public class LeagueWinLossCriteria : CriteriaBase
 {

@@ -1,6 +1,6 @@
-﻿using SBPerformance.Constants;
+﻿namespace SBPerformance.Main;
 
-namespace SBPerformance.Main;
+using Constants;
 
 public class Entity
 {

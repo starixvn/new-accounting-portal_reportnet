@@ -1,7 +1,7 @@
-﻿using Fanex.Data.Repository;
-using HouseWinLoss.Common.Criteria;
+﻿namespace HouseWinLoss.Common.Services;
 
-namespace HouseWinLoss.Common.Services;
+using Criteria;
+using Fanex.Data.Repository;
 
 public interface PermissionFilterService1
 {

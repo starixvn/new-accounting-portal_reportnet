@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.ColumnDecorators;
-using HouseWinLoss.Soccer.GroupBetType;
+﻿namespace HouseWinLoss.Soccer.BetTypeFull;
 
-namespace HouseWinLoss.Soccer.BetTypeFull;
+using AutoMapper;
+using Common.ColumnDecorators;
+using Fanex.Excel.Models;
+using GroupBetType;
 
 public class GridOptionFactoryGroupBetType(
     GroupBetTypeWinLossService groupBetTypeWinLossService,

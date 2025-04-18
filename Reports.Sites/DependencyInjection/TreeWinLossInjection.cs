@@ -1,6 +1,6 @@
-﻿using TreeWinLoss.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using TreeWinLoss.Services;
 
 public static class TreeWinLossInjection
 {

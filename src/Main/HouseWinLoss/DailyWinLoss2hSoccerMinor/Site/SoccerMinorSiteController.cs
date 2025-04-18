@@ -2,7 +2,7 @@
 
 using AutoMapper;
 using Common.ColumnDecorators;
-using HouseWinLoss.Common.Criteria;
+using Common.Criteria;
 using Common.SiteWinLoss;
 using Configuration;
 using Microsoft.AspNetCore.Mvc;

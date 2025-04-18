@@ -1,35 +1,35 @@
-﻿using AutoMapper;
-using Fanex.RemotingRef;
-using Fanex.Result.Core.Base;
-using Fanex.Result.Core.RemotingRef;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Reports.Sites.DependencyInjection;
-using SabaPromotion;
-
-namespace Reports.Sites;
+﻿namespace Reports.Sites;
 
 using AbnormalBet;
 using ActualMemberBet;
+using AutoMapper;
 using BetConstructPerformance;
 using BetCount;
 using CashOutPerformance;
 using DailyCreatedCustomers;
 using DailyMixParlay;
+using DependencyInjection;
 using DirectBalance;
 using DuplicateTickets;
 using Exchange;
+using Fanex.RemotingRef;
+using Fanex.Result.Core.Base;
+using Fanex.Result.Core.RemotingRef;
 using HouseWinLoss;
 using LeagueWinLoss;
 using Margin;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using NegativeBalance;
 using ParlayWon;
 using PunterAnalysis;
 using ResultAnalysis;
+using SabaPromotion;
 using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
 using StackExchange.Redis;
+using SoccerPerformanceDetail;
 using SuperBalance;
 using TotalSMAAndActiveMember;
 using TreeWinLoss;
@@ -85,6 +85,7 @@ public static class ServiceCollectionExtensions
         services.RegisterMostVisitedPageServices();
         services.RegisterBetConstructPerformanceServices();
         services.RegisterSabaPromotionServices();
+        services.RegisterSoccerPerformanceDetailServices();
     }
 
     public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -204,6 +205,52 @@ public static class ServiceCollectionExtensions
             pipeline.AddJavaScriptBundle("/scripts/fanex-legend.js",
                 "/scripts/FanexLegend.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/tgrs/common-tgrs.js",
+                "/scripts/tgrs/moment.js",
+                "/scripts/tgrs/jquery.nexDatePicker.js",
+                "/scripts/tgrs/monPickr-0.0.3.js",
+                "/scripts/tgrs/jquery.multiselect.js",
+                "/scripts/tgrs/native-object-extensions.js",
+                "/scripts/tgrs/jquery.extensions.js",
+                "/scripts/tgrs/validator.js",
+                "/scripts/tgrs/layout.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/tgrs/tgrs.js",
+                "/scripts/tgrs/tgrs.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/bettype-performance.js",
+                "/soccer-performance-detail/scripts/grade-performance.js",
+                "/soccer-performance-detail/scripts/team-performance.js",
+                "/soccer-performance-detail/scripts/grade-history.js",
+                "/soccer-performance-detail/scripts/team-history.js",
+                "/soccer-performance-detail/scripts/bettype-performance.js",
+                "/soccer-performance-detail/scripts/performance-detail-helper.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/league-performance.js",
+                "/soccer-performance-detail/scripts/grade-performance.js",
+                "/soccer-performance-detail/scripts/team-performance.js",
+                "/soccer-performance-detail/scripts/grade-history.js",
+                "/soccer-performance-detail/scripts/team-history.js",
+                "/soccer-performance-detail/scripts/league-performance.js",
+                "/soccer-performance-detail/scripts/performance-detail-helper.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/trader-performance.js",
+                "/soccer-performance-detail/scripts/grade-history.js",
+                "/soccer-performance-detail/scripts/team-history.js",
+                "/soccer-performance-detail/scripts/trader-performance.js",
+                "/soccer-performance-detail/scripts/performance-detail-helper.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/team-performance.js",
+                "/soccer-performance-detail/scripts/grade-history.js",
+                "/soccer-performance-detail/scripts/grade-history.js",
+                "/soccer-performance-detail/scripts/team-performance.js",
+                "/soccer-performance-detail/scripts/performance-detail-helper.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/grade-performance.js",
+                "/soccer-performance-detail/scripts/team-history.js",
+                "/soccer-performance-detail/scripts/grade-performance.js",
+                "/soccer-performance-detail/scripts/performance-detail-helper.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");
@@ -290,6 +337,17 @@ public static class ServiceCollectionExtensions
             pipeline.AddLessBundle(
                 "/themes/base/common.css",
                 "/themes/base/common.less");
+
+            pipeline.AddLessBundle(
+                "/tgrs/styles/common.css",
+                "/tgrs/styles/reset.less",
+                "/stylesheets/tgrs/style.less",
+                "/stylesheets/multipleselect/jquery.multiselect.less");
+
+            pipeline.AddLessBundle(
+                "/soccer-performance-detail/styles/performance-detail.css",
+                "/soccer-performance-detail/styles/performance-detail.less",
+                "/soccer-performance-detail/styles/performance-summary.less");
         });
     }
 
@@ -321,6 +379,7 @@ public static class ServiceCollectionExtensions
             cfg.InitializeBetConstructPerformance();
             cfg.InitializeLeagueWinLoss();
             cfg.InitializeSabaPromotion();
+            cfg.InitializeSoccerPerformanceDetail();
         });
 
         var mapper = config.CreateMapper();

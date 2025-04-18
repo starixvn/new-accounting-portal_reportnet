@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.Summary.Model;
 
-namespace PunterAnalysis.Summary.Model;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class HttpParameterJson : IRequest<SummaryEntity<SummaryModel>>
 {

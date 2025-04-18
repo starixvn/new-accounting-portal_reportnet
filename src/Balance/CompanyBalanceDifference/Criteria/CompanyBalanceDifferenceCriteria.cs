@@ -1,6 +1,6 @@
-using Fanex.Data.Repository;
-
 namespace CompanyBalanceDifference.Criteria;
+
+using Fanex.Data.Repository;
 
 public class CompanyBalanceDifferenceCriteria : CriteriaBase
 {

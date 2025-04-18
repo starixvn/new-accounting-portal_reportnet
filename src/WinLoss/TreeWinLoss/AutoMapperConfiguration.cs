@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using TreeWinLoss.Entities;
-using TreeWinLoss.Model;
+﻿namespace TreeWinLoss;
 
-namespace TreeWinLoss;
+using AutoMapper;
+using Entities;
+using Model;
 
 public static class AutoMapperConfiguration
 {

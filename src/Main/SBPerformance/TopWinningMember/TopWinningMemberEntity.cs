@@ -1,6 +1,6 @@
-﻿using SBPerformance.Constants;
+﻿namespace SBPerformance.TopWinningMember;
 
-namespace SBPerformance.TopWinningMember;
+using Constants;
 
 public class TopWinningMemberEntity
 {

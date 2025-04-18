@@ -1,8 +1,8 @@
-﻿using OfficeOpenXml;
-using PunterAnalysis.League.Model;
-using PunterAnalysis.Shared;
+﻿namespace PunterAnalysis.League;
 
-namespace PunterAnalysis.League;
+using Model;
+using OfficeOpenXml;
+using Shared;
 
 public interface LeagueExcelBuilder
 {

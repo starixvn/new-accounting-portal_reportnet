@@ -1,8 +1,8 @@
-using BetList.Criteria;
-using BetList.Services;
-using Microsoft.AspNetCore.Mvc;
-
 namespace BetList.Controllers;
+
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/bet-list")]
 [ApiController]

@@ -1,7 +1,7 @@
-﻿using Epplus.Mapper.Extensions;
-using OfficeOpenXml;
+﻿namespace UpdatedUsernameCredit.Common;
 
-namespace UpdatedUsernameCredit.Common;
+using Epplus.Mapper.Extensions;
+using OfficeOpenXml;
 
 public interface ExcelBuilder
 {

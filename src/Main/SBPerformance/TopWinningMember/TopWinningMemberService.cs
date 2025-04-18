@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace SBPerformance.TopWinningMember;
+
+using AutoMapper;
 using Fanex.Data.Repository;
 using Utilities.LinqDynamicSum;
-
-namespace SBPerformance.TopWinningMember;
 
 public interface TopWinningMemberService
 {

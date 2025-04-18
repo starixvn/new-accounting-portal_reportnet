@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿namespace Reports.Sites.Models;
 
-namespace Reports.Sites.Models;
+using Newtonsoft.Json;
 
 public class ErrorDetails
 {

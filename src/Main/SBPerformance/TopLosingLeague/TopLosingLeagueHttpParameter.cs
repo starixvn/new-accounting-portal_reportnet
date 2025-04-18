@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace SBPerformance.TopLosingLeague;
 
-namespace SBPerformance.TopLosingLeague;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class TopLosingLeagueHttpParameter : IRequest<SummaryEntity<TopLosingLeagueItemModel>>
 {

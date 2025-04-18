@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using MediatR;
-using OfficeOpenXml;
-using PunterAnalysis.BetCount.Model;
-using PunterAnalysis.Shared;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.BetCount;
 
-namespace PunterAnalysis.BetCount;
+using AutoMapper;
+using MediatR;
+using Model;
+using OfficeOpenXml;
+using Shared;
+using Utilities.LinqDynamicSum;
 
 public class HandlerExcel(
     BetCountService betCountService,

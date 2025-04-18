@@ -1,6 +1,6 @@
-﻿using Fanex.Excel.Models;
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.MatchDetail;
 
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.MatchDetail;
+using Fanex.Excel.Models;
 
 public interface SoccerMinorMatchGridOptionColumnDecorator
 {

@@ -1,9 +1,9 @@
-﻿using AbnormalBet.Model;
-using Epplus.Mapper.Extensions;
-using Utilities.Configurations;
-using OfficeOpenXml;
+﻿namespace AbnormalBet.Report;
 
-namespace AbnormalBet.Report;
+using Epplus.Mapper.Extensions;
+using Model;
+using OfficeOpenXml;
+using Utilities.Configurations;
 
 public interface ReportExcelBuilder
 {

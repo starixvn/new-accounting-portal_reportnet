@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
+﻿namespace LeagueWinLoss.Model;
 
-namespace LeagueWinLoss.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 [JsonObject(NamingStrategyType = typeof(CamelCaseNamingStrategy))]
 public class LeagueSuggestionViewModel

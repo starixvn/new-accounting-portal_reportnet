@@ -1,7 +1,7 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿namespace DuplicateTickets.Criteria;
 
-namespace DuplicateTickets.Criteria;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 public class DuplicateTicketsCheckCashOutCriteria : CriteriaBase, INonQueryCommand
 {

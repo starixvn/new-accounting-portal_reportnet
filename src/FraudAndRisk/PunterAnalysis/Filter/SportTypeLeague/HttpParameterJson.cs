@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.Filter.SportTypeLeague;
 
-namespace PunterAnalysis.Filter.SportTypeLeague;
+using MediatR;
 
 public class HttpParameterJson : IRequest<IEnumerable<SportTypeLeagueEntity>>
 {

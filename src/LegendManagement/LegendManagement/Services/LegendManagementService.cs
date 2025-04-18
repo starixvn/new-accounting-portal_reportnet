@@ -1,15 +1,15 @@
-﻿using Fanex.Common;
+﻿namespace LegendManagement.Services;
+
+using Configurations;
+using Constants;
+using Criteria;
+using Fanex.Common;
 using Fanex.Data.Repository;
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Services;
-using LegendManagement.Configurations;
-using LegendManagement.Constants;
-using LegendManagement.Criteria;
-using LegendManagement.Models;
 using Microsoft.AspNetCore.Http;
-
-namespace LegendManagement.Services;
+using Models;
 
 public interface LegendManagementService
 {

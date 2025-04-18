@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SMAWinLoss.Summary;
 
-namespace SMAWinLoss.Summary;
+using Fanex.Data.Repository;
 
 public class WinLossCriteria : CriteriaBase
 {

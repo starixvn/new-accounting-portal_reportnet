@@ -1,7 +1,7 @@
-﻿using PunterAnalysis.Shared;
-using Utilities.Configurations;
+﻿namespace PunterAnalysis.Summary;
 
-namespace PunterAnalysis.Summary;
+using Shared;
+using Utilities.Configurations;
 
 public interface SummaryExcelSetting
 {

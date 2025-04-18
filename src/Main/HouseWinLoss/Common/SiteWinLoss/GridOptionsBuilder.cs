@@ -1,9 +1,9 @@
-﻿using Fanex.Excel.Enums;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.BasicWinLoss;
-using HouseWinLoss.Common.Models;
+﻿namespace HouseWinLoss.Common.SiteWinLoss;
 
-namespace HouseWinLoss.Common.SiteWinLoss;
+using BasicWinLoss;
+using Fanex.Excel.Enums;
+using Fanex.Excel.Models;
+using Models;
 
 public interface GridOptionsBuilder
 {

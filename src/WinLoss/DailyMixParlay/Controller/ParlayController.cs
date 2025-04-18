@@ -1,8 +1,8 @@
-﻿using DailyMixParlay.Criteria;
-using DailyMixParlay.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace DailyMixParlay.Controller;
 
-namespace DailyMixParlay.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Services;
 
 [Route("api/parlay")]
 

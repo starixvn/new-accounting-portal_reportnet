@@ -1,7 +1,7 @@
-﻿using PunterAnalysis.Shared;
-using Utilities.Configurations;
+﻿namespace PunterAnalysis.AssociatedAccount;
 
-namespace PunterAnalysis.AssociatedAccount;
+using Shared;
+using Utilities.Configurations;
 
 public interface AssociatedAccountExcelSetting
 {

@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace ResultAnalysis.Requests;
 
-namespace ResultAnalysis.Requests;
+using MediatR;
+using OfficeOpenXml;
 
 public class ResultAnalysisExcelRequest: IRequest<ExcelPackage>
 {

@@ -1,11 +1,11 @@
-﻿using Fanex.NAP.Client.Attributes;
+﻿namespace Reports.Sites.Controllers;
+
+using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NegativeBalance.Services;
-using Reports.Sites.Settings;
-
-namespace Reports.Sites.Controllers;
+using Settings;
 
 public class NegativeBalanceController(NegativeBalanceService service) : Controller
 {

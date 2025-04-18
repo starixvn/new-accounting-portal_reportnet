@@ -1,10 +1,8 @@
-﻿using AbnormalBet.HttpParameter;
+﻿namespace AbnormalBet.Report;
+
+using HttpParameter;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
-namespace AbnormalBet.Report;
-
 using Utilities.ExcelResult;
 
 [Route("api/ab-normal-bet/report")]

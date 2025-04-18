@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace SBPerformance.TopLosingLeague;
 
-namespace SBPerformance.TopLosingLeague;
+using Fanex.Data.Repository;
 
 public class TopLosingLeagueCriteria : CriteriaBase
 {

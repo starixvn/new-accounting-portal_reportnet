@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.GameBetType.Model;
 
-namespace PunterAnalysis.GameBetType.Model;
+using Fanex.Data.Repository;
 
 public class Criteria : CriteriaBase
 {

@@ -1,10 +1,9 @@
-﻿using HouseWinLoss.Common.Models;
-using HouseWinLoss.Common.Services;
-using Utilities.RemotingRef;
-
-namespace HouseWinLoss.Soccer.BaseService;
+﻿namespace HouseWinLoss.Soccer.BaseService;
 
 using AutoMapper;
+using Common.Models;
+using Common.Services;
+using Utilities.RemotingRef;
 
 public interface BaseCalculationService : CalculationService
 {

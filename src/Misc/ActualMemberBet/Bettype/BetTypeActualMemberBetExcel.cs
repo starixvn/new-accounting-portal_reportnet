@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace ActualMemberBet.Bettype;
 
-namespace ActualMemberBet.Bettype;
+using Epplus.Mapper.Annotations;
 
 public class BetTypeActualMemberBetExcel
 {

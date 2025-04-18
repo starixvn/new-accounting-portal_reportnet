@@ -1,6 +1,6 @@
-﻿using Fanex.Excel.Models;
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
 
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
+using Fanex.Excel.Models;
 
 public interface BettypeGridOptionColumnDecorator
 {

@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using MediatR;
-using PunterAnalysis.Summary.Model;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.Summary;
 
-namespace PunterAnalysis.Summary;
+using AutoMapper;
+using MediatR;
+using Model;
+using Utilities.LinqDynamicSum;
 
 public class Handler(SummaryService summaryService, IMapper mapper)
     : IRequestHandler<HttpParameterJson, SummaryEntity<SummaryModel>>

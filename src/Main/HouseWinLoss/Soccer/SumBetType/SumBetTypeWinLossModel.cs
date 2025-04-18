@@ -1,7 +1,7 @@
-﻿using HouseWinLoss.Common.Models;
-using HouseWinLoss.Soccer.BaseService;
+﻿namespace HouseWinLoss.Soccer.SumBetType;
 
-namespace HouseWinLoss.Soccer.SumBetType;
+using BaseService;
+using Common.Models;
 
 public class SumBetTypeWinLossModel : BaseBetTypeWinLossModel
 {

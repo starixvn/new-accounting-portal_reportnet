@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿namespace SBCustomerPerformanceByDanger.Report;
+
+using AutoMapper;
 using MediatR;
 using OfficeOpenXml;
 using Utilities.LinqDynamicSum;
-
-namespace SBCustomerPerformanceByDanger.Report;
 
 public class ReportExcelHandler(ReportService service, ReportExcelBuilder builder, IMapper mapper)
     : IRequestHandler<CustomerPerformanceByDangerQueryExcelHttpParameter, ExcelPackage>

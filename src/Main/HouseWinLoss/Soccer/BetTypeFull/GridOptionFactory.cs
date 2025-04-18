@@ -1,6 +1,6 @@
-﻿using Fanex.Excel.Models;
+﻿namespace HouseWinLoss.Soccer.BetTypeFull;
 
-namespace HouseWinLoss.Soccer.BetTypeFull;
+using Fanex.Excel.Models;
 
 public interface GridOptionFactory
 {

@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.PermissionFilter;
+﻿namespace SMAWinLoss.Filter;
 
-namespace SMAWinLoss.Filter;
+using MediatR;
+using Utilities.PermissionFilter;
 
 public class Handler(FilterService service, PermissionFilterService permissionService)
     : IRequestHandler<CurrencyHttpParameter, IEnumerable<Currency>>,

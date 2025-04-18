@@ -1,6 +1,6 @@
-﻿using TotalSMAAndActiveMember.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using TotalSMAAndActiveMember.Services;
 
 public static class TotalSMAAndActiveMemberInjection
 {

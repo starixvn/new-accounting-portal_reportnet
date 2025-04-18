@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace ResultAnalysis.Criteria;
 
-namespace ResultAnalysis.Criteria;
+using Fanex.Data.Repository;
 
 public class LeagueCriteria : CriteriaBase
 {

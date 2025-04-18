@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace CashOutPerformance.Requests;
 
-namespace CashOutPerformance.Requests;
+using MediatR;
+using OfficeOpenXml;
 
 public class TicketExcelRequest<T> : IRequest<ExcelPackage>
 {

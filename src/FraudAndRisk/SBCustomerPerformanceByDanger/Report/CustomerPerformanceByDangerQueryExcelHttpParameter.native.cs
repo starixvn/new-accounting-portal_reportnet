@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace SBCustomerPerformanceByDanger.Report;
 
-namespace SBCustomerPerformanceByDanger.Report;
+using MediatR;
+using OfficeOpenXml;
 
 public class CustomerPerformanceByDangerQueryExcelHttpParameter : IRequest<ExcelPackage>
 {

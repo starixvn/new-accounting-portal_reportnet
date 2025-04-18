@@ -1,7 +1,7 @@
-﻿using PunterAnalysis.Shared;
-using Utilities.Configurations;
+﻿namespace PunterAnalysis.League;
 
-namespace PunterAnalysis.League;
+using Shared;
+using Utilities.Configurations;
 
 public interface LeagueExcelSetting
 {

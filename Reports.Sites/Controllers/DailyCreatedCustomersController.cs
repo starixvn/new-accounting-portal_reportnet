@@ -1,9 +1,9 @@
-﻿using Fanex.NAP.Client.Attributes;
+﻿namespace Reports.Sites.Controllers;
+
+using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using Reports.Sites.Settings;
-
-namespace Reports.Sites.Controllers;
+using Settings;
 
 public class DailyCreatedCustomersController : Controller
 {

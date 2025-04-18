@@ -1,8 +1,8 @@
-﻿using HouseWinLoss.Common.Criteria;
-using HouseWinLoss.Common.Models;
-using HouseWinLoss.Common.Services;
+﻿namespace HouseWinLoss.Common.MatchDetailByCode;
 
-namespace HouseWinLoss.Common.MatchDetailByCode;
+using Criteria;
+using Models;
+using Services;
 
 public interface WinLossService
 {

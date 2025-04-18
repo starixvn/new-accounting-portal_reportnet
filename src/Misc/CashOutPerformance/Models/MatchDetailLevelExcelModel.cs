@@ -1,7 +1,7 @@
-﻿using System.Globalization;
-using Epplus.Mapper.Annotations;
+﻿namespace CashOutPerformance.Models;
 
-namespace CashOutPerformance.Models;
+using System.Globalization;
+using Epplus.Mapper.Annotations;
 
 public class MatchDetailLevelExcelModel
 {

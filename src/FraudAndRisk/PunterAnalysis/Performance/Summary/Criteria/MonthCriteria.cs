@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PunterAnalysis.Performance.Summary.Criteria;
 
-namespace PunterAnalysis.Performance.Summary.Criteria;
+using Fanex.Data.Repository;
 
 public class MonthCriteria : CriteriaBase
 {

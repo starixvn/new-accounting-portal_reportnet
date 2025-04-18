@@ -292,22 +292,130 @@
             }
             else {
                 var columnsHideLength = options.hiddenColumns.length;
-                selector = [];
                 try {
+                    // First, handle regular cell hiding
                     for (var colIndex1 = 0; colIndex1 < columnsHideLength; colIndex1++) {
                         var currentCol = options.hiddenColumns[colIndex1];
-                        //selector.push('.free-grid-td-' + currentCol);
-                        me.$grid.find('.free-grid-td-' + currentCol).addClass("grid-show-hide-column");
+                        me.$grid.find('td.free-grid-td-' + currentCol).addClass("grid-show-hide-column");
+                    }
+                    
+                    // Only process footer columns if footer is shown
+                    if (options.showFooter && options.footerRows.length > 0) {
+                        // More direct approach to handle footer column hiding
+                        me.hideFooterColumns(options.hiddenColumns);
                     }
                 }
                 catch (e) {
                     console.log(e);
                 }
-                //me.$grid.find(selector.join(',')).hide();
             }
 
             me.RegisterMouseHoverEvent();
             me.Initialize();
+        },
+        hideFooterColumns: function(hiddenColumns) {
+            var me = this;
+            var options = me.Options;
+            
+            // Simplified approach to target specific columns without redundancy
+            var processedColumns = {}; // Track which columns we've already processed
+            
+            // Process all footer rows one by one
+            for (var rowIndex = 0; rowIndex < options.footerRows.length; rowIndex++) {
+                var footerRow = options.footerRows[rowIndex];
+                if (!footerRow || !footerRow.Columns) continue;
+                
+                // First build a map of grid column indices to their actual positions in this footer row
+                var columnPositions = {};
+                var colPosition = 0;
+                
+                for (var i = 0; i < footerRow.Columns.length; i++) {
+                    var column = footerRow.Columns[i];
+                    if (!column || !column.Name || !me.columnsHastable[column.Name]) continue;
+                    
+                    var gridIndex = me.columnsHastable[column.Name].ColumnIndex;
+                    columnPositions[gridIndex] = colPosition;
+                    
+                    // If this is a merged column, it occupies multiple grid positions
+                    if (isValid(column.MergeColNumber) && column.MergeColNumber > 1) {
+                        var mergeWidth = column.MergeColNumber;
+                        // The merged cell appears at position 'colPosition' in the footer row
+                        for (var j = 1; j < mergeWidth; j++) {
+                            if (gridIndex + j < options.columns.length) {
+                                columnPositions[gridIndex + j] = colPosition; // Maps to same position
+                            }
+                        }
+                        colPosition++; // Only advance by 1 visual column for the entire merged group
+                    } else {
+                        colPosition++; // Regular column, advance by 1
+                    }
+                }
+                
+                // Now apply hiding for each hidden column
+                for (var i = 0; i < hiddenColumns.length; i++) {
+                    var gridColToHide = hiddenColumns[i];
+                    var footerPosition = columnPositions[gridColToHide];
+                    
+                    // Skip if this column isn't in this footer row or already processed
+                    if (footerPosition === undefined || processedColumns[footerPosition + '-' + rowIndex]) continue;
+                    
+                    // Mark as processed to avoid redundant operations
+                    processedColumns[footerPosition + '-' + rowIndex] = true;
+                    
+                    // Find the actual column in the footer at this position
+                    var actualFooterCol;
+                    var colOffset = 0;
+                    
+                    for (var j = 0; j < footerRow.Columns.length; j++) {
+                        var col = footerRow.Columns[j];
+                        if (!col || !col.Name) continue;
+                        
+                        if (colOffset === footerPosition) {
+                            actualFooterCol = col;
+                            break;
+                        }
+                        
+                        // Account for merged columns in position counting
+                        colOffset += (isValid(col.MergeColNumber) && col.MergeColNumber > 1) ? 1 : 1;
+                    }
+                    
+                    if (!actualFooterCol) continue;
+                    
+                    // Case 1: Direct column match
+                    if (me.columnsHastable[actualFooterCol.Name].ColumnIndex === gridColToHide) {
+                        var selector = '.free-grid-td-' + footerPosition;
+                        // For footer rows use direct css('display', 'none') instead of adding the class
+                        me.$grid.find('.col_footer thead th' + selector).addClass('grid-show-hide-column');
+                        me.$grid.find('.row_footer thead th' + selector).addClass('grid-show-hide-column');
+                    }
+                    // Case 2: Part of a merged column
+                    else if (isValid(actualFooterCol.MergeColNumber) && actualFooterCol.MergeColNumber > 1) {
+                        var baseGridIndex = me.columnsHastable[actualFooterCol.Name].ColumnIndex;
+                        var selector = '.free-grid-td-' + footerPosition;
+                        
+                        // Count how many columns in this merged cell are hidden
+                        var hiddenInSpan = 0;
+                        for (var k = 0; k < actualFooterCol.MergeColNumber; k++) {
+                            if (hiddenColumns.indexOf(baseGridIndex + k) >= 0) {
+                                hiddenInSpan++;
+                            }
+                        }
+                        
+                        // If all columns in span are hidden, hide the entire cell
+                        if (hiddenInSpan === actualFooterCol.MergeColNumber) {
+                            // For footer rows use direct css('display', 'none') instead of adding the class
+                            me.$grid.find('.col_footer thead th' + selector).addClass('grid-show-hide-column');
+                            me.$grid.find('.row_footer thead th' + selector).addClass('grid-show-hide-column');
+                        }
+                        // Otherwise adjust colspan
+                        else if (hiddenInSpan > 0) {
+                            var newColspan = actualFooterCol.MergeColNumber - hiddenInSpan;
+                            me.$grid.find('.col_footer thead th' + selector).attr('colspan', newColspan);
+                            me.$grid.find('.row_footer thead th' + selector).attr('colspan', newColspan);
+                        }
+                    }
+                }
+            }
         },
         ReRenderBodyAfterSort: function (sortColumnName, sortDirection) {
             var me = this;
@@ -946,6 +1054,8 @@
             var currentBodyRows = [];
             var currentPageStartIndex = 0;
 
+            
+
             //// If show pager, then take approriate data range
             if (options.showPager == true && options.customPager != true) {
                 var startIndex = (options.pagerOption.currentPage * options.pagerOption.itemsPerPage);
@@ -1027,6 +1137,36 @@
                 bodyHtmlTemp = bodyHtml.split('{$}_');
                 if (bodyHtmlTemp.length == 2) {
                     bodyHtml = bodyHtmlTemp[0] + bodyRowsHtml.join('') + bodyHtmlTemp[1];
+                }
+            }
+
+            // default sort
+            if (options.sortOption.serverSortFunction == null &&
+                options.sortOption.customGridSort == null) {
+                var defaultSort = false,
+                customSortFunction = null,
+                sortType = null,
+                columnName = '',
+                currentDirection = '';
+                for (var colIndex = 0; colIndex < options.columns.length; colIndex++) {
+                    if (options.columns[colIndex].SortDirection != null
+                    && options.columns[colIndex].SortDirection !== '') {
+                        defaultSort = true;
+                        currentDirection = options.columns[colIndex].SortDirection;
+                        customSortFunction = options.columns[colIndex].CustomSortFunction;
+                        columnName = options.columns[colIndex].Name;
+                        sortType = options.columns[colIndex].SortType;
+                        break;
+                    }
+                }
+
+                if (defaultSort) {
+                    options.bodyRows = Fanex.Grid.Helper.GetSortedArray(options.bodyRows,
+                                                                    columnName,
+                                                                    currentDirection,
+                                                                    customSortFunction,
+                                                                    sortType);
+
                 }
             }
 

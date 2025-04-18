@@ -1,6 +1,7 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace ResultAnalysis.Models;
 
-namespace ResultAnalysis.Models;
+using System.Globalization;
+using Epplus.Mapper.Annotations;
 
 public class ResultAnalysisSummaryOfQuarterExcelModel
 {
@@ -52,12 +53,12 @@ public class DetailedResultAnalysisOfHomeQuarterExcelModel
     public string HDP { get; set; }
 
     [Cell("D9")]
-    public string HdpString => HDP == "-" ? "-" : Math.Round(decimal.Parse(HDP), 2).ToString();
+    public string HdpString => HDP == "-" ? "-" : Math.Round(decimal.Parse(HDP), 2).ToString(CultureInfo.CurrentCulture);
 
     public string OU { get; set; }
 
     [Cell("E9")]
-    public string OuString => OU == "-" ? "-" : Math.Round(decimal.Parse(OU), 2).ToString();
+    public string OuString => OU == "-" ? "-" : Math.Round(decimal.Parse(OU), 2).ToString(CultureInfo.CurrentCulture);
 
     [Cell("F9")]
     public string Fav { get; set; }
@@ -116,12 +117,12 @@ public class DetailedResultAnalysisOfAwayQuarterExcelModel
     public string HDP { get; set; }
 
     [Cell("D9")]
-    public string HdpString => HDP == "-" ? "-" : Math.Round(decimal.Parse(HDP), 2).ToString();
+    public string HdpString => HDP == "-" ? "-" : Math.Round(decimal.Parse(HDP), 2).ToString(CultureInfo.CurrentCulture);
 
     public string OU { get; set; }
 
     [Cell("E9")]
-    public string OuString => OU == "-" ? "-" : Math.Round(decimal.Parse(OU), 2).ToString();
+    public string OuString => OU == "-" ? "-" : Math.Round(decimal.Parse(OU), 2).ToString(CultureInfo.CurrentCulture);
 
     [Cell("F9")]
     public string Fav { get; set; }

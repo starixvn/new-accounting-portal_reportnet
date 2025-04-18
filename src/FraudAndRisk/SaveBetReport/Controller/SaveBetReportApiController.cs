@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using SaveBetReport.Criteria;
-using SaveBetReport.Models;
-using SaveBetReport.Services;
+﻿namespace SaveBetReport.Controller;
 
-namespace SaveBetReport.Controller;
+using Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Models;
+using Services;
 
 [Route("api/save-bet")]
 [ApiController]

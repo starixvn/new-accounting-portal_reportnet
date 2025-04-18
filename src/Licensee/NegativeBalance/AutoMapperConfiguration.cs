@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using NegativeBalance.Model;
+﻿namespace NegativeBalance;
 
-namespace NegativeBalance;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

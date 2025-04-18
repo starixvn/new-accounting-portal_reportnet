@@ -1,10 +1,8 @@
-﻿using MediatR;
+﻿namespace PunterAnalysis.Game;
+
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-using PunterAnalysis.Game.Model;
-
-namespace PunterAnalysis.Game;
-
+using Model;
 using Utilities.ExcelResult;
 
 [Route("api/punter-analysis/game")]

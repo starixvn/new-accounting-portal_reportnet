@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace TraderPerformance.Model;
 
-namespace TraderPerformance.Model;
+using Epplus.Mapper.Annotations;
 
 public class TraderPerformanceOtherSportsDetailExcelModel
 {

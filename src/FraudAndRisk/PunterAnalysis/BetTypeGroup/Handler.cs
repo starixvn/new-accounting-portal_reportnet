@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using MediatR;
-using PunterAnalysis.BetTypeGroup.Model;
-using PunterAnalysis.Shared;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.BetTypeGroup;
 
-namespace PunterAnalysis.BetTypeGroup;
+using AutoMapper;
+using MediatR;
+using Model;
+using Shared;
+using Utilities.LinqDynamicSum;
 
 public class Handler(PunterAnalysisService punterAnalysisService, IMapper mapper)
     : HandlerBase(punterAnalysisService, mapper),

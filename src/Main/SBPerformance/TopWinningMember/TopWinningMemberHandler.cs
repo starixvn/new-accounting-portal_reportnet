@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Utilities.LinqDynamicSum;
+﻿namespace SBPerformance.TopWinningMember;
 
-namespace SBPerformance.TopWinningMember;
+using MediatR;
+using Utilities.LinqDynamicSum;
 
 public class TopWinningMemberHandler(TopWinningMemberService service)
     : IRequestHandler<TopWinningMemberHttpParameter, SummaryEntity<TopWinningMemberItemModel>>

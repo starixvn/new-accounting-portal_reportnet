@@ -1,7 +1,7 @@
+namespace DirectBalance.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace DirectBalance.Criteria;
 
 public class MasterDownlineCriteria : CriteriaBase
 {

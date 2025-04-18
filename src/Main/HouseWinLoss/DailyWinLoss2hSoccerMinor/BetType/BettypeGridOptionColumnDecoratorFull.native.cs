@@ -1,8 +1,8 @@
-﻿using Fanex.Excel.Enums;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.ColumnDecorators;
+﻿namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
 
-namespace HouseWinLoss.DailyWinLoss2hSoccerMinor.BetType;
+using Common.ColumnDecorators;
+using Fanex.Excel.Enums;
+using Fanex.Excel.Models;
 
 public class BettypeGridOptionColumnDecoratorFull(GridOptionColumnRemoval columnRemoval)
     : GridOptionColumnDecoratorBase(columnRemoval), BettypeGridOptionColumnDecorator

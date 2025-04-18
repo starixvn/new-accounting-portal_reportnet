@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using LeagueWinLoss.Model;
+﻿namespace LeagueWinLoss;
 
-namespace LeagueWinLoss;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

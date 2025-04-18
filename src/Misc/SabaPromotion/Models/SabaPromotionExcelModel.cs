@@ -1,6 +1,6 @@
-﻿using Epplus.Mapper.Annotations;
+﻿namespace SabaPromotion.Models;
 
-namespace SabaPromotion.Models;
+using Epplus.Mapper.Annotations;
 
 public class SabaPromotionExcelModel
 {

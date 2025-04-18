@@ -1,10 +1,10 @@
-﻿using CreditMovementMonitor.Criteria;
-using CreditMovementMonitor.Services;
+﻿namespace CreditMovementMonitor.Controller;
+
+using Criteria;
 using Fanex.Excel;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 using Utilities.DateTimes;
-
-namespace CreditMovementMonitor.Controller;
 
 [Route("api/credit-movement")]
 [ApiController]

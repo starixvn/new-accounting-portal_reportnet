@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using MediatR;
-using PunterAnalysis.BetCount.Model;
-using Utilities.LinqDynamicSum;
+﻿namespace PunterAnalysis.BetCount;
 
-namespace PunterAnalysis.BetCount;
+using AutoMapper;
+using MediatR;
+using Model;
+using Utilities.LinqDynamicSum;
 
 public class Handler(BetCountService betCountService, IMapper mapper)
     : IRequestHandler<HttpParameterJson, SummaryEntity<BetCountModel>>

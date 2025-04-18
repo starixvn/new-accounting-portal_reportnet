@@ -1,6 +1,6 @@
-﻿using MediatR;
-using PunterAnalysis.Performance.Summary.Model;
+﻿namespace PunterAnalysis.Performance.Summary;
 
-namespace PunterAnalysis.Performance.Summary;
+using MediatR;
+using Model;
 
 public class SummaryHttpParameterJson : HttpParameterJson, IRequest<ViewModelJson>;

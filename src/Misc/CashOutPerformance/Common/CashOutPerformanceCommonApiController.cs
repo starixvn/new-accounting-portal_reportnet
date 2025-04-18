@@ -1,10 +1,10 @@
-﻿using Fanex.NAP.Client.Configuration;
-using Fanex.NAP.Client.Helpers.Business;
+﻿namespace CashOutPerformance.Common;
+
 using Fanex.NAP.Client;
+using Fanex.NAP.Client.Configuration;
+using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Services;
 using Microsoft.AspNetCore.Mvc;
-
-namespace CashOutPerformance.Common;
 
 [Route("api/cash-out-performance/common")]
 [ApiController]

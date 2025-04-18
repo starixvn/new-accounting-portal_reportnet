@@ -1,0 +1,10 @@
+﻿namespace SoccerPerformanceDetail.ViewModel;
+
+public class LeagueGroup
+{
+    public int LeagueGroupId { get; set; }
+
+    public string LeagueGroupName { get; set; }
+
+    public int TargetLeagueGroupId { get; set; }
+}

@@ -1,7 +1,7 @@
-﻿using MediatR;
-using OfficeOpenXml;
+﻿namespace BetConstructPerformance.Requests;
 
-namespace BetConstructPerformance.Requests;
+using MediatR;
+using OfficeOpenXml;
 
 public class SportExcelRequest : IRequest<ExcelPackage>
 {

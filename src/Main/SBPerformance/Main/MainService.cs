@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿namespace SBPerformance.Main;
+
+using AutoMapper;
 using Fanex.Data.Repository;
 using Utilities.LinqDynamicSum;
-
-namespace SBPerformance.Main;
 
 public interface MainService
 {

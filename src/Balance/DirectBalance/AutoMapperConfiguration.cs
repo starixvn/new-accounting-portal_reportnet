@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using DirectBalance.Model;
+﻿namespace DirectBalance;
 
-namespace DirectBalance;
+using AutoMapper;
+using Model;
 
 public static class AutoMapperConfiguration
 {

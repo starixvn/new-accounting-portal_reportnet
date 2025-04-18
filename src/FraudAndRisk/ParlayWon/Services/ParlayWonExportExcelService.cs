@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using Epplus.Mapper.Extensions;
-using OfficeOpenXml;
-using ParlayWon.Model;
-using Utilities.Configurations;
+﻿namespace ParlayWon.Services;
 
-namespace ParlayWon.Services;
+using AutoMapper;
+using Epplus.Mapper.Extensions;
+using Model;
+using OfficeOpenXml;
+using Utilities.Configurations;
 
 public interface ParlayWonExportExcelService
 {

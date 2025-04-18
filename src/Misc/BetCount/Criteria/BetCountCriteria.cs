@@ -1,7 +1,7 @@
+namespace BetCount.Criteria;
+
 using Fanex.Data;
 using Fanex.Data.Repository;
-
-namespace BetCount.Criteria;
 
 public class BetCountCriteria : CriteriaBase
 {

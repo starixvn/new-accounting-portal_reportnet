@@ -1,8 +1,8 @@
-﻿using Fanex.Excel.Enums;
-using Fanex.Excel.Models;
-using HouseWinLoss.Common.Extensions;
+﻿namespace HouseWinLoss.Common.MatchDetail;
 
-namespace HouseWinLoss.Common.MatchDetail;
+using Extensions;
+using Fanex.Excel.Enums;
+using Fanex.Excel.Models;
 
 public interface GridOptionsBuilder
 {
@@ -11,7 +11,8 @@ public interface GridOptionsBuilder
 
 public class GridOptionsBuilderImp(GetTeamNameAndSuffixService teamNameService) : GridOptionsBuilder
 {
-    private readonly List<int> notDisplayHomeAwaySportTypeList = new List<int> { SportTypeConstants.VirtualDogRacing, SportTypeConstants.VirtualHorseRacing };
+    private readonly List<int> notDisplayHomeAwaySportTypeList =
+        [SportTypeConstants.VirtualDogRacing, SportTypeConstants.VirtualHorseRacing];
 
     public GridOptions Build(WinLossModel winLoss, string title)
     {
@@ -131,9 +132,9 @@ public class GridOptionsBuilderImp(GetTeamNameAndSuffixService teamNameService) 
     private GridDataRow BuildTotalRow(WinLoss item, string totalText)
     {
         var baseColumnIndex = notDisplayHomeAwaySportTypeList.Contains(item.SportType) ? 2 : 4;
-        var colummns = new List<Columns>
+        var columns = new List<Columns>
         {
-            new Columns
+            new()
             {
                 ColumnIndex = 0,
                 Name = "MatchCode",
@@ -145,9 +146,9 @@ public class GridOptionsBuilderImp(GetTeamNameAndSuffixService teamNameService) 
 
         var baseColumns = notDisplayHomeAwaySportTypeList.Contains(item.SportType) ? CreateBaseColumnsForNotDisplayHomeAway(baseColumnIndex, item)
             : CreateBaseColumns(baseColumnIndex, item);
-        colummns.AddRange(baseColumns);
+        columns.AddRange(baseColumns);
 
-        return new GridDataRow { Columns = colummns };
+        return new GridDataRow { Columns = columns };
     }
 
     private static List<Columns> CreateBaseColumns(int columnIndex, WinLoss item)

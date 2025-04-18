@@ -1,109 +1,108 @@
-﻿using Fanex.RemotingRef;
+﻿namespace Utilities.RemotingRef;
 
-namespace Utilities.RemotingRef
+using Fanex.RemotingRef;
+
+public interface RemotingRefService
 {
-    public interface RemotingRefService
+    string GetTeamName(int teamId);
+
+    string GetLeagueName(int leagueId);
+
+    string GetMatchCode(string matchCode);
+
+    string GetSportName(int sportId);
+
+    string GetBetTypeName(int betTypeId);
+
+    string GetLeagueName3rd(int leagueId);
+
+    string GetTeamName3rd(int teamId);
+}
+
+public class RemotingRefServiceImp(IRemotingRefService remotingRefService) : RemotingRefService
+{
+    public string GetTeamName(int teamId)
     {
-        string GetTeamName(int teamId);
-
-        string GetLeagueName(int leagueId);
-
-        string GetMatchCode(string matchCode);
-
-        string GetSportName(int sportId);
-
-        string GetBetTypeName(int betTypeId);
-
-        string GetLeagueName3rd(int leagueId);
-
-        string GetTeamName3rd(int teamId);
+        var teamIdString = teamId.ToString();
+        return remotingRefService.GetTeamName(teamIdString, "en", string.Empty);
     }
 
-    public class RemotingRefServiceImp(IRemotingRefService remotingRefService) : RemotingRefService
+    public string GetLeagueName(int leagueId)
     {
-        public string GetTeamName(int teamId)
-        {
-            var teamIdString = teamId.ToString();
-            return remotingRefService.GetTeamName(teamIdString, "en", string.Empty);
-        }
-
-        public string GetLeagueName(int leagueId)
-        {
-            var leagueIdString = leagueId.ToString();
-            return remotingRefService.GetLeagueName(leagueIdString, "en", string.Empty);
-        }
-
-        public string GetLeagueName3rd(int leagueId)
-        {
-            var leagueIdString = leagueId.ToString();
-            return remotingRefService.GetLeagueName3rd(leagueIdString, "en", string.Empty);
-        }
-
-        public string GetMatchCode(string matchCode)
-        {
-            return string.IsNullOrEmpty(matchCode) ? string.Empty : remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
-        }
-
-        public string GetSportName(int sportId)
-        {
-            var sportIdString = sportId.ToString();
-            return remotingRefService.GetSportName(sportIdString, "en");
-        }
-
-        public string GetBetTypeName(int betTypeId)
-        {
-            var betTypeIdString = betTypeId.ToString();
-            return remotingRefService.GetBetTypeName(betTypeIdString, "en");
-        }
-
-        public string GetTeamName3rd(int teamId)
-        {
-            var teamIdString = teamId.ToString();
-            return remotingRefService.GetTeamName3rd(teamIdString, "en", string.Empty);
-        }
+        var leagueIdString = leagueId.ToString();
+        return remotingRefService.GetLeagueName(leagueIdString, "en", string.Empty);
     }
 
-    public class RemotingRef3rdServiceImp(IRemotingRefService remotingRefService) : RemotingRefService
+    public string GetLeagueName3rd(int leagueId)
     {
-        public virtual string GetLeagueName(int leagueId)
-        {
-            var leagueIdString = leagueId.ToString();
-            return remotingRefService.GetLeagueName3rd(leagueIdString, "en", string.Empty);
-        }
+        var leagueIdString = leagueId.ToString();
+        return remotingRefService.GetLeagueName3rd(leagueIdString, "en", string.Empty);
+    }
 
-        public virtual string GetTeamName(int teamId)
-        {
-            var teamIdString = teamId.ToString();
-            return remotingRefService.GetTeamName3rd(teamIdString, "en", string.Empty);
-        }
+    public string GetMatchCode(string matchCode)
+    {
+        return string.IsNullOrEmpty(matchCode) ? string.Empty : remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
+    }
 
-        public string GetMatchCode(string matchCode)
-        {
-            return string.IsNullOrEmpty(matchCode) ? string.Empty : remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
-        }
+    public string GetSportName(int sportId)
+    {
+        var sportIdString = sportId.ToString();
+        return remotingRefService.GetSportName(sportIdString, "en");
+    }
 
-        public string GetSportName(int sportId)
-        {
-            var sportIdString = sportId.ToString();
-            return remotingRefService.GetSportName(sportIdString, "en");
-        }
+    public string GetBetTypeName(int betTypeId)
+    {
+        var betTypeIdString = betTypeId.ToString();
+        return remotingRefService.GetBetTypeName(betTypeIdString, "en");
+    }
 
-        public string GetBetTypeName(int betTypeId)
-        {
-            var betTypeIdString = betTypeId.ToString();
-            return remotingRefService.GetBetTypeName(betTypeIdString, "en");
-        }
+    public string GetTeamName3rd(int teamId)
+    {
+        var teamIdString = teamId.ToString();
+        return remotingRefService.GetTeamName3rd(teamIdString, "en", string.Empty);
+    }
+}
 
-        public string GetLeagueName3rd(int leagueId)
-        {
-            var leagueIdString = leagueId.ToString();
-            return remotingRefService.GetLeagueName3rd(leagueIdString, "en", string.Empty);
-        }
+public class RemotingRef3rdServiceImp(IRemotingRefService remotingRefService) : RemotingRefService
+{
+    public virtual string GetLeagueName(int leagueId)
+    {
+        var leagueIdString = leagueId.ToString();
+        return remotingRefService.GetLeagueName3rd(leagueIdString, "en", string.Empty);
+    }
 
-        public string GetTeamName3rd(int teamId)
-        {
-            var teamIdString = teamId.ToString();
-            return remotingRefService.GetTeamName3rd(teamIdString, "en", string.Empty);
-        }
+    public virtual string GetTeamName(int teamId)
+    {
+        var teamIdString = teamId.ToString();
+        return remotingRefService.GetTeamName3rd(teamIdString, "en", string.Empty);
+    }
+
+    public string GetMatchCode(string matchCode)
+    {
+        return string.IsNullOrEmpty(matchCode) ? string.Empty : remotingRefService.GetBetRadarMatchCodeFormat(matchCode, "en");
+    }
+
+    public string GetSportName(int sportId)
+    {
+        var sportIdString = sportId.ToString();
+        return remotingRefService.GetSportName(sportIdString, "en");
+    }
+
+    public string GetBetTypeName(int betTypeId)
+    {
+        var betTypeIdString = betTypeId.ToString();
+        return remotingRefService.GetBetTypeName(betTypeIdString, "en");
+    }
+
+    public string GetLeagueName3rd(int leagueId)
+    {
+        var leagueIdString = leagueId.ToString();
+        return remotingRefService.GetLeagueName3rd(leagueIdString, "en", string.Empty);
+    }
+
+    public string GetTeamName3rd(int teamId)
+    {
+        var teamIdString = teamId.ToString();
+        return remotingRefService.GetTeamName3rd(teamIdString, "en", string.Empty);
     }
 }

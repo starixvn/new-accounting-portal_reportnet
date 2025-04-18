@@ -1,10 +1,8 @@
-﻿using BetConstructPerformance.Requests;
+﻿namespace BetConstructPerformance.Controllers;
+
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-
-namespace BetConstructPerformance.Controllers;
-
+using Requests;
 using Utilities.ExcelResult;
 
 [Route("api/bet-construct")]

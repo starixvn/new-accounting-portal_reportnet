@@ -1,7 +1,7 @@
-﻿using TraderPerformance.Repositories;
-using TraderPerformance.Services;
+﻿namespace Reports.Sites.DependencyInjection;
 
-namespace Reports.Sites.DependencyInjection;
+using TraderPerformance.Repositories;
+using TraderPerformance.Services;
 
 public static class TradePerformanceSoccerInjection
 {

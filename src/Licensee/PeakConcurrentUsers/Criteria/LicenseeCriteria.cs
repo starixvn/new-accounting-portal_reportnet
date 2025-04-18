@@ -1,6 +1,6 @@
-﻿using Fanex.Data.Repository;
+﻿namespace PeakConcurrentUsers.Criteria;
 
-namespace PeakConcurrentUsers.Criteria;
+using Fanex.Data.Repository;
 
 public class LicenseeCriteria : CriteriaBase
 {
