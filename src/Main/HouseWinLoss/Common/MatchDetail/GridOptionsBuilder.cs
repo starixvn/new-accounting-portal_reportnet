@@ -15,8 +15,6 @@ public class GridOptionsBuilderImp(GetTeamNameAndSuffixService teamNameService) 
         [
             SportTypeConstants.VirtualDogRacing,
             SportTypeConstants.VirtualHorseRacing,
-            SportTypeConstants.VirtualDogRacing,
-            SportTypeConstants.VirtualHorseRacing,
             SportTypeConstants.VirtualSteepleChase,
             SportTypeConstants.VirtualHarnessRacing,
             SportTypeConstants.VirtualMotorRacing
