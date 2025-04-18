@@ -304,7 +304,33 @@ public class SoccerPerformanceDetailServiceImp(
         };
 
         var groupMatchByLeague = matchDataList.Where(x => x.LeagueId == leagueGroupId).ToList();
-        var groupTotal = groupMatchByLeague.DynamicSum();
+        MatchPerformanceItem groupTotal;
+        if (groupMatchByLeague.Count > 1)
+        {
+            groupTotal = groupMatchByLeague.DynamicSum();
+        }
+        else
+        {
+            var item = groupMatchByLeague.First()??new MatchPerformanceItem();
+            groupTotal = new MatchPerformanceItem
+            {
+                LeagueId = item.LeagueId,
+                HomeId = item.HomeId,
+                AwayId = item.AwayId,
+                MatchId = item.MatchId,
+                MatchName = item.MatchName,
+                EventDate = item.EventDate,
+                BetCount = item.BetCount,
+                Turnover = item.Turnover,
+                WinLoss = item.WinLoss,
+                TurnoverReal = item.TurnoverReal,
+                WinLossReal = item.WinLossReal,
+                Score = item.Score,
+                WinLossScore = item.WinLossScore,
+                SumCategory = item.SumCategory,
+                IsLive = item.IsLive
+            };
+        }
 
         var groupMatchLiveByLeague = matchDataList.Where(x => x.IsLive && x.LeagueId == leagueGroupId).ToList();
 
