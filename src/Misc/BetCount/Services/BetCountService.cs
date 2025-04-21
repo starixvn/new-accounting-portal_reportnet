@@ -311,6 +311,11 @@ public class BetCountServiceImp(
         {
             CreateVirtualSportThirdOldGroup(rawData, sports);
         }
+
+        if (rawData.Any(x => x.ProductId == BetCountConstants.VirtualSports7))
+        {
+            CreateVirtualSport7Group(rawData, sports);
+        }
     }
 
     private void CreateSportBookGroups(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
@@ -347,6 +352,13 @@ public class BetCountServiceImp(
     private void CreateBetradarVirtualSportGroup(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
     {
         var virtualSportRaw = rawData.Where(r => r.ProductId == BetCountConstants.MiscBetradarVirtualSportsId);
+        var virtualSportGroups = virtualSportRaw.GroupBy(rawInfo => new { rawInfo.SportId, rawInfo.SportName });
+        sports.AddRange(virtualSportGroups.Select(AddSportGroup));
+    }
+
+    private void CreateVirtualSport7Group(IEnumerable<ProductEntity> rawData, List<ProductModel> sports)
+    {
+        var virtualSportRaw = rawData.Where(r => r.ProductId == BetCountConstants.VirtualSports7);
         var virtualSportGroups = virtualSportRaw.GroupBy(rawInfo => new { rawInfo.SportId, rawInfo.SportName });
         sports.AddRange(virtualSportGroups.Select(AddSportGroup));
     }

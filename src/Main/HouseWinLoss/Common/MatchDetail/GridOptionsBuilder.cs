@@ -12,7 +12,13 @@ public interface GridOptionsBuilder
 public class GridOptionsBuilderImp(GetTeamNameAndSuffixService teamNameService) : GridOptionsBuilder
 {
     private readonly List<int> notDisplayHomeAwaySportTypeList =
-        [SportTypeConstants.VirtualDogRacing, SportTypeConstants.VirtualHorseRacing];
+        [
+            SportTypeConstants.VirtualDogRacing,
+            SportTypeConstants.VirtualHorseRacing,
+            SportTypeConstants.VirtualSteepleChase,
+            SportTypeConstants.VirtualHarnessRacing,
+            SportTypeConstants.VirtualMotorRacing
+        ];
 
     public GridOptions Build(WinLossModel winLoss, string title)
     {
