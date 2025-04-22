@@ -84,6 +84,8 @@ public interface SoccerPerformanceDetailService
     Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria);
 
     Task<LeaguePerformanceList> GetLeaguePerformanceOfBetTypeBetChoicePointHDP(GetLeagueOfBetTypeBetChoicePointHDPCriteria criteria);
+
+    Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeLeagueBetChoice(GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -899,11 +901,18 @@ public class SoccerPerformanceDetailServiceImp(
 
     public async Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeBetChoice(GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
     {
+        var result = await CalculatePointHDPPerformanceBetChoice(criteria, criteria.BetType, criteria.BetTeam);
+
+        return result;
+    }
+
+    private async Task<PointHDPPerformanceList> CalculatePointHDPPerformanceBetChoice(CriteriaBase criteria, short betType, string betTeam)
+    {
         var pointHDPList = new PointHDPPerformanceList();
 
-        var betType = criteria.BetType.ToString();
+        var betTypeString = betType.ToString();
 
-        pointHDPList.IsTotalGoalBetType = betType == "228" || betType == "229";
+        pointHDPList.IsTotalGoalBetType = betTypeString == "228" || betTypeString == "229";
 
         var pointHDPData = await repository.FetchAsync<PointHDPPerformanceInfo>(criteria);
 
@@ -911,7 +920,7 @@ public class SoccerPerformanceDetailServiceImp(
 
         foreach (var item in pointHDPData)
         {
-            var pointHDP = CalculatePointHDPPerformanceItem(item, criteria);
+            var pointHDP = CalculatePointHDPPerformanceItem(item, betType, betTeam);
 
             pointHDPList.ItemList.Add(pointHDP);
         }
@@ -922,12 +931,12 @@ public class SoccerPerformanceDetailServiceImp(
         return pointHDPList;
     }
 
-    private PointHDPPerformanceItem CalculatePointHDPPerformanceItem(PointHDPPerformanceInfo item, GetPointHDPPerformanceOfBetTypeBetChoiceCriteria criteria)
+    private PointHDPPerformanceItem CalculatePointHDPPerformanceItem(PointHDPPerformanceInfo item, short betType,  string betTeam)
     {
         var pointHDP = mapper.Map<PointHDPPerformanceItem>(item);
         
-        var betOption = ConvertOption(criteria.BetTeam);
-        pointHDP.PointHDPConvert = ConvertPointHDP(item.PointHDP, criteria.BetType, betOption);
+        var betOption = ConvertOption(betTeam);
+        pointHDP.PointHDPConvert = ConvertPointHDP(item.PointHDP, betType, betOption);
 
         return pointHDP;
     }
@@ -1012,5 +1021,10 @@ public class SoccerPerformanceDetailServiceImp(
         var leaguePerformance = CalculatePerformanceLeague(rawData, false);
 
         return leaguePerformance;
+    }
+
+    public Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeLeagueBetChoice(GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria criteria)
+    {
+        throw new NotImplementedException();
     }
 }
