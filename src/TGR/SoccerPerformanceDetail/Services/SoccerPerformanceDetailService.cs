@@ -6,7 +6,6 @@ using Fanex.Data.Repository;
 using global::Utilities.LinqDynamicSum;
 using global::Utilities.RemotingRef;
 using Model;
-using Org.BouncyCastle.Asn1.Pkcs;
 using System.Collections.Generic;
 using ViewModel;
 
@@ -1023,8 +1022,10 @@ public class SoccerPerformanceDetailServiceImp(
         return leaguePerformance;
     }
 
-    public Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeLeagueBetChoice(GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria criteria)
+    public async Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeLeagueBetChoice(GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria criteria)
     {
-        throw new NotImplementedException();
+        var result = await CalculatePointHDPPerformanceBetChoice(criteria, criteria.BetType, criteria.BetTeam);
+
+        return result;
     }
 }

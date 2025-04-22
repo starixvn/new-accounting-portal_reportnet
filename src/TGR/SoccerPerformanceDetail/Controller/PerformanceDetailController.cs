@@ -187,7 +187,7 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     [Route("main-league-betchoice-choice")]
     public async Task<IActionResult> GetPointHDPPerformanceOfBetTypeLeagueBetChoice(GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria criteria)
     {
-        var result = soccerDetailService.GetPointHDPPerformanceOfBetTypeLeagueBetChoice(criteria);
+        var result = await soccerDetailService.GetPointHDPPerformanceOfBetTypeLeagueBetChoice(criteria);
 
         return Ok(result);
     }
