@@ -549,6 +549,7 @@
 		<Setting Key="TGRS_Rpt_PerformanceDetail_Team_League_Trader" SpName="TGRS_Rpt_PerformanceDetail_Team_League_Trader" DbName="DBTGRS.bodb_TGRS.wsv_tgrs">
 			<Mapping DataField="Username" ObjectProperty="TraderName" />
 			<Mapping DataField="CustId" ObjectProperty="TraderId" />
+			<Mapping DataField="MatchCount" ObjectProperty="NoOfMatches" />
 		</Setting>
 		<Setting Key="TGRS_Rpt_PerformanceDetail_Team_League_Trader_Match" SpName="TGRS_Rpt_PerformanceDetail_Team_League_Trader_Match" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 		<Setting Key="TGRS_Team_SelList" SpName="TGRS_Team_SelList" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>

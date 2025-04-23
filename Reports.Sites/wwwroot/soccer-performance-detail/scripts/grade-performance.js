@@ -723,7 +723,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, Sort: true, SortDirection: 'desc', FormatNegative: '$'
+                    FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
                 }]);
         }
 
@@ -977,7 +977,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             },
             {
                 HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                FormatNumber: common.Formats.DecimalFormat, Sort: true, SortDirection: 'desc', FormatNegative: '$'
+                FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
             }]);
         }
 
@@ -1246,7 +1246,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, Sort: true, SortDirection: 'desc', FormatNegative: '$'
+                    FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
                 }]);
         }
 

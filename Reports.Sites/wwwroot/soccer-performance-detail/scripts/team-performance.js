@@ -723,7 +723,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, SortDirection: 'desc', FormatNegative: '$', Sort: true
+                    FormatNumber: common.Formats.DecimalFormat, FormatNegative: '$', Sort: true
                 }]);
         }
 
@@ -973,7 +973,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, Sort: true, SortDirection: 'desc', FormatNegative: '$'
+                    FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
                 }]);
         }
 
@@ -1691,7 +1691,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, Sort: true, SortDirection: 'desc', FormatNegative: '$'
+                    FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
                 }]);
         }
 
