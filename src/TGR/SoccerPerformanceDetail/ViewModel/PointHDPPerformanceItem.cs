@@ -28,8 +28,9 @@ public class PointHDPPerformanceItem
     {
         return new PointHDPPerformanceItem
         {
+            PointHDPConvert = a.PointHDPConvert,
             NoOfLeagues = a.NoOfLeagues + b.NoOfLeagues,
-            NoOfMatches = a.NoOfLeagues + b.NoOfLeagues,
+            NoOfMatches = a.NoOfMatches + b.NoOfMatches,
             Turnover = a.Turnover + b.Turnover,
             WinLoss = a.WinLoss + b.WinLoss,
             TurnoverReal = a.TurnoverReal + b.TurnoverReal,
