@@ -22,6 +22,8 @@ public class GetMatchPerformanceOfTraderLeagueTeam : CriteriaBase
 
     public bool IsExcludeLeagues { get; set; }
 
+    public string Bettypes { get; set; }
+
     public override bool IsValid()
     {
         return true;
