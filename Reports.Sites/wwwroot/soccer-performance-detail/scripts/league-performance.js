@@ -122,7 +122,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         });
 
         domElements.ddlBetType.multiselect({
-            selectedList: 2,
+            selectedList: 1,
             width: 160,
             height: 200,
             allSelectedText: labels.AllBetTypes,
@@ -202,7 +202,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         }              
 
         domElements.ddlLeagueGroup.multiselect({
-            selectedList: 2,
+            selectedList: 1,
             minWidth: 130,
             height: 200,
             allSelectedText: labels.AllLeagueGroups
