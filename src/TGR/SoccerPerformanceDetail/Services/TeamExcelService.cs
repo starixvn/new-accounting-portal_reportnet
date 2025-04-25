@@ -64,6 +64,7 @@ public class TeamExcelServiceImp(
         sheet!.ApplyModel(totalSheet, excelModel, startIndex);
         UpdateValueSpecificColumns(startIndex, excelModel);
         var cellTotalAddress = $"A{startIndex}:B{startIndex}";
+        sheet!.Cells[$"G{startIndex}"].Value = null;
         sheet!.Cells[cellTotalAddress].Merge = true;
         sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
     }
