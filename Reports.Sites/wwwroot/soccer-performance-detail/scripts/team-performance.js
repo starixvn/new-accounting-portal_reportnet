@@ -121,7 +121,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
         });
 
         domElements.ddlBetType.multiselect({
-            selectedList: 2,
+            selectedList: 1,
             width: 200,
             height: 200,
             allSelectedText: labels.AllBetTypes,
@@ -135,7 +135,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
         });
 
         domElements.ddlTeam.multiselect({
-            selectedList: 2,
+            selectedList: 1,
             minWidth: 140,
             height: 200,
             allSelectedText: labels.AllTeams,
@@ -207,7 +207,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
         }              
 
         domElements.ddlLeagueGroup.multiselect({
-            selectedList: 2,
+            selectedList: 1,
             minWidth: 130,
             height: 200,
             allSelectedText: labels.AllLeagueGroups
@@ -723,7 +723,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, SortDirection: 'desc', FormatNegative: '$', Sort: true
+                    FormatNumber: common.Formats.DecimalFormat, FormatNegative: '$', Sort: true
                 }]);
         }
 
@@ -973,7 +973,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, Sort: true, SortDirection: 'desc', FormatNegative: '$'
+                    FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
                 }]);
         }
 
@@ -1691,7 +1691,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                 },
                 {
                     HeaderText: labels.Margin, Width: 100, Name: 'ColMargin', HeaderAlign: 'center', CellAlign: 'right',
-                    FormatNumber: common.Formats.DecimalFormat, Sort: true, SortDirection: 'desc', FormatNegative: '$'
+                    FormatNumber: common.Formats.DecimalFormat, Sort: true, FormatNegative: '$'
                 }]);
         }
 
