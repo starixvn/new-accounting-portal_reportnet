@@ -21,7 +21,7 @@ public static class ExceptionMiddleware
                 {
                     var logMessage = new LogMessage(contextFeature.Error.Message)
                         .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
-                        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(contextFeature.Error.InnerException))
+                        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(contextFeature.Error))
                         .ToString();
                     await LogService.ErrorAsync(logMessage);
                     await context.Response.WriteAsync(new ErrorDetails

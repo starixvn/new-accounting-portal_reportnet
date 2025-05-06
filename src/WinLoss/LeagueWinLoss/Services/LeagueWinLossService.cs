@@ -51,7 +51,7 @@ public class LeagueWinLossServiceImp(
 {
     public async Task<LeagueWinLossModel> GetLeagueWinLoss(LeagueWinLossCriteria criteria)
     {
-        var rawData = (await repository.FetchAsync<LeagueWinLossEntity>(criteria)).ToList();
+        var rawData = (await repository.FetchAsync<LeagueWinLossEntity>(criteria))?.ToList() ?? [];
         var leagueWinLoss = new LeagueWinLossModel
         {
             SportWinLoss = [],
