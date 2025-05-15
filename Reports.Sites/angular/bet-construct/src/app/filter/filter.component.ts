@@ -6,7 +6,7 @@ import * as moment from "moment";
 import { CONFIG } from '../common/date-config';
 import { SelectItem } from 'nap-components/dropdown-select';
 import { FilterService } from './filter.service';
-import { TurnoverType } from '../common/model';
+import { DateType, TurnoverType } from '../common/model';
 import { ToastService } from 'nap-components/toast';
 
 @Component({
@@ -24,7 +24,12 @@ export class FilterComponent implements OnInit {
   turnoverOptions: SelectItem[] = [];
   turnover = TurnoverType.Normal;
   ticketStatusSelectItems = this.filterService.getStatusSelectItems();
+  gmtSelectItems = this.filterService.getGmtSelectItems();
+  gmtStatus = 0
   ticketStatus: number | undefined;
+  transactionDate: boolean = false;
+  dateOptions: SelectItem[] = [];
+  dateType = DateType.Winloss;
 
   constructor(private readonly filterService: FilterService,
     private readonly toastService: ToastService
@@ -32,6 +37,7 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.turnoverOptions = this.filterService.getTurnoverOptions();
+    this.dateOptions = this.filterService.getDateTypeSelectItems();
   }
 
   onGenerateClick() {

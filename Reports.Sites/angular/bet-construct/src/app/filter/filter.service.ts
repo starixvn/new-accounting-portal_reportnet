@@ -27,4 +27,18 @@ export class FilterService {
         { text: 'Non-Live', value: 0 }
     ];
    }
+
+    getDateTypeSelectItems(): SelectItem[] {
+      return [
+          { text: 'Win/Loss Date (GMT -4)', value: 0 },
+          { text: 'Transaction Date - Time Zone:', value: 1 }
+      ];
+    }
+
+   getGmtSelectItems(): SelectItem[] {
+    return [
+        { text: 'GMT +0', value: 0 },
+        { text: 'GMT -4', value: -4 }
+    ];
+   }
 }

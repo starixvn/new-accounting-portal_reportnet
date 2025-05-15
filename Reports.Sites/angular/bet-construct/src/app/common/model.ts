@@ -3,6 +3,11 @@
     NoDraw
   }
 
+  export enum DateType {
+    Winloss,
+    Transaction
+  }
+
   export interface SportItemModel {
     SportId: number;
     Sport: string;

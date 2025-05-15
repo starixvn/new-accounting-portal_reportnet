@@ -1,6 +1,6 @@
 @import '~nap-theme/scss/_mixins';
 .nap-filter {
-    padding: .3rem;
+    padding: 1rem .1rem;
     margin-bottom: .5rem;
     border: solid 1px #cecccd;
     border-radius: .3rem;
@@ -67,6 +67,10 @@
     &>.width-180 {
       width: 180px !important;
     }
+    &>.dateType {
+        width: 298px;
+        margin-left:65px;
+    }
   }
 }
 
@@ -76,4 +80,8 @@
 
 .width-190 {
   width: 190px !important;
+}
+
+.margin-left--35 {
+  margin-left: -35px !important;
 }

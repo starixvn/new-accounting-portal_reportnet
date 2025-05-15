@@ -1,5 +1,36 @@
 <div class="nap-filter">
-    <div class="row">
+    <div class="row margin-left--35">
+      <div class="nap-col">
+        <div class="nap-group">
+          <div class="dateType pb-4"><b>Date Type</b></div>
+          <div class="nap-control dateType">
+            <div class="form-check pb-4 form-check-inline" *ngFor="let option of dateOptions">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dateBy" [(ngModel)]="dateType" [value]="option.value"/> {{option.text}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col d-flex align-items-end pb-4">
+        <div class="nap-group">
+          <div class="nap-control">
+            <nap-dropdown-select [items]="gmtSelectItems" [(value)]="gmtStatus">
+            </nap-dropdown-select>
+          </div>
+        </div>
+      </div>
+      <div class="nap-col d-flex align-items-end pb-3">
+        <div class="nap-group">
+          <label>Status</label>
+          <div class="nap-control">
+            <nap-dropdown-select [items]="ticketStatusSelectItems" [(value)]="ticketStatus">
+            </nap-dropdown-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row margin-left--35">
       <div class="nap-col">
         <div class="nap-group">
           <label>From</label>
@@ -18,15 +49,6 @@
       </div>
       <div class="nap-col">
         <div class="nap-group">
-          <label>Status</label>
-          <div class="nap-control">
-            <nap-dropdown-select [items]="ticketStatusSelectItems" [(value)]="ticketStatus">
-            </nap-dropdown-select>
-          </div>
-        </div>
-      </div>
-      <div class="nap-col">
-        <div class="nap-group">
           <label>Turnover</label>
           <div class="nap-control turnover">
             <div class="form-check form-check-inline" *ngFor="let option of turnoverOptions">
@@ -37,11 +59,15 @@
           </div>
         </div>
       </div>
-      <div class="nap-col">
-        <label>&nbsp;</label>
-        <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
-          GENERATE
-        </button>
+    </div>
+    <div class="row margin-left--35">
+      <div class="nap-col pt-3">
+        <div class="nap-group">
+          <label>&nbsp;</label>
+          <button type="button" class="btn btn-primary" (click)="onGenerateClick()">
+            GENERATE
+          </button>
+        </div>
       </div>
     </div>
   </div>
