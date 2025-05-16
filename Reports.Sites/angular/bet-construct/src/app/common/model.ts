@@ -4,8 +4,8 @@
   }
 
   export enum DateType {
-    Winloss,
-    Transaction
+    WinlossDate = 'Winlostdate',
+    TransDate = 'Transdate'
   }
 
   export interface SportItemModel {
@@ -20,6 +20,7 @@
     BetCount: number;
     MemberWinLoss: number;
     MemberTurnover: number;
+    ActualTurnover: number;
     HouseIncome: number;
     HouseTurnover: number;
     AmountDueToBC: number;

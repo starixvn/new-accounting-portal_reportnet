@@ -5,15 +5,17 @@ using Fanex.Data.Repository;
 
 public class SportCriteria : CriteriaBase
 {
-    public DateTime FromDate { get; set; }
+    public string FromDate { get; set; }
 
-    public DateTime ToDate { get; set; }
+    public string ToDate { get; set; }
 
     public bool NoDraw { get; set; }
 
     public int? SportId { get; set; }
 
     public byte? LiveStatus { get; set; }
+
+    public string FilterType { get; set; }
 
     [SpParam(Ignored = true)]
     public int MatchCount { get; set; }

@@ -7,4 +7,5 @@ export interface FilterModel {
     breadCrumb: string[];
     liveStatus?: number;
     matchCount?: number;
+    filterType: string;
   }

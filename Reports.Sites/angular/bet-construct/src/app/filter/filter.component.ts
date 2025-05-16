@@ -1,13 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FilterModel } from './filter.model';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { DateHelper, DateFormat } from 'nap-components/date'
+import { DateHelper } from 'nap-components/date'
 import * as moment from "moment";
 import { CONFIG } from '../common/date-config';
 import { SelectItem } from 'nap-components/dropdown-select';
 import { FilterService } from './filter.service';
 import { DateType, TurnoverType } from '../common/model';
 import { ToastService } from 'nap-components/toast';
+import { CommonConstants } from '../common/constants';
 
 @Component({
   selector: 'app-filter',
@@ -25,11 +26,11 @@ export class FilterComponent implements OnInit {
   turnover = TurnoverType.Normal;
   ticketStatusSelectItems = this.filterService.getStatusSelectItems();
   gmtSelectItems = this.filterService.getGmtSelectItems();
-  gmtStatus = 0
+  gmt = 0;
   ticketStatus: number | undefined;
   transactionDate: boolean = false;
   dateOptions: SelectItem[] = [];
-  dateType = DateType.Winloss;
+  dateType = DateType.WinlossDate;
 
   constructor(private readonly filterService: FilterService,
     private readonly toastService: ToastService
@@ -50,14 +51,16 @@ export class FilterComponent implements OnInit {
   private createModel(): FilterModel {
     const fromDate = DateHelper.convertDateStructToMoment(this.startDate);
     const toDate = DateHelper.convertDateStructToMoment(this.endDate);
+    const gmtOffset = this.dateType === DateType.WinlossDate ? -4 * 60 : this.gmt * 60;
     const model: FilterModel = {
-      fromDate: DateHelper.formatMomentDate(fromDate, DateFormat.Date),
-      toDate: DateHelper.formatMomentDate(toDate, DateFormat.Date),
+      fromDate: fromDate.utcOffset(gmtOffset, true).format(CommonConstants.DATE_GMT),
+      toDate: toDate.utcOffset(gmtOffset, true).format(CommonConstants.DATE_GMT),
       sportId: undefined,
       sportName: '',
       noDraw: this.turnover === TurnoverType.NoDraw,
       breadCrumb: [],
-      liveStatus: this.ticketStatus
+      liveStatus: this.ticketStatus,
+      filterType: this.dateType
     };
     return model;
   }

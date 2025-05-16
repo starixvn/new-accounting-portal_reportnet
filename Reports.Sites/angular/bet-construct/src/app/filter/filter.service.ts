@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SelectItem } from 'nap-components/dropdown-select';
-import { TurnoverType } from '../common/model';
+import { DateType, TurnoverType } from '../common/model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +30,8 @@ export class FilterService {
 
     getDateTypeSelectItems(): SelectItem[] {
       return [
-          { text: 'Win/Loss Date (GMT -4)', value: 0 },
-          { text: 'Transaction Date - Time Zone:', value: 1 }
+          { text: 'Win/Loss Date (GMT -4)', value: DateType.WinlossDate },
+          { text: 'Transaction Date - Time Zone:', value: DateType.TransDate }
       ];
     }
 

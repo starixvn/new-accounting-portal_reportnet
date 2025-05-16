@@ -32,6 +32,8 @@ public class SportItemModel
 
     public decimal AmountDueToBC { get; set; }
 
+    public decimal ActualTurnover { get; set; }
+
     public decimal? Margin
     {
         get
@@ -56,7 +58,8 @@ public class SportItemModel
             MemberTurnover = a.MemberTurnover + b.MemberTurnover,
             HouseIncome = a.HouseIncome + b.HouseIncome,
             HouseTurnover = a.HouseTurnover + b.HouseTurnover,
-            AmountDueToBC = a.AmountDueToBC + b.AmountDueToBC
+            AmountDueToBC = a.AmountDueToBC + b.AmountDueToBC,
+            ActualTurnover = a.ActualTurnover + b.ActualTurnover
         };
     }
 }

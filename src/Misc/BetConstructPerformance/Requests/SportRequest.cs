@@ -5,9 +5,9 @@ using Models;
 
 public class SportRequest : IRequest<SportModel>
 {
-    public DateTime FromDate { get; set; }
+    public string FromDate { get; set; }
 
-    public DateTime ToDate { get; set; }
+    public string ToDate { get; set; }
 
     public bool NoDraw { get; set; }
 
@@ -16,4 +16,6 @@ public class SportRequest : IRequest<SportModel>
     public byte? LiveStatus { get; set; }
 
     public int MatchCount { get; set; }
+
+    public string FilterType { get; set; }
 }
