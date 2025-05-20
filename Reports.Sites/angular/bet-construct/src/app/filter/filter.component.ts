@@ -54,7 +54,7 @@ export class FilterComponent implements OnInit {
     const gmtOffset = this.dateType === DateType.WinlossDate ? -4 * 60 : this.gmt * 60;
     const model: FilterModel = {
       fromDate: fromDate.utcOffset(gmtOffset, true).format(CommonConstants.DATE_GMT),
-      toDate: toDate.utcOffset(gmtOffset, true).format(CommonConstants.DATE_GMT),
+      toDate: toDate.utcOffset(gmtOffset, true).set('hour', 23).set('minute', 59).set('second', 59).format(CommonConstants.DATE_GMT),
       sportId: undefined,
       sportName: '',
       noDraw: this.turnover === TurnoverType.NoDraw,
