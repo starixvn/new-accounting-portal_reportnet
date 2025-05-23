@@ -14,7 +14,9 @@ public interface TeamExcelService
     Task<ExcelPackage> ExportExcelTeamPerformance(TeamPerformanceList data,
         GetTeamPerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
-        IEnumerable<BetTypeItem> betTypes);
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance);
 }
 
 public class TeamExcelServiceImp(
@@ -23,7 +25,9 @@ public class TeamExcelServiceImp(
     : BaseExcelService(configurationService), TeamExcelService
 {
     public Task<ExcelPackage> ExportExcelTeamPerformance(TeamPerformanceList data, GetTeamPerformanceCriteria criteria, IEnumerable<LeagueGroup> leagueGroups,
-        IEnumerable<BetTypeItem> betTypes)
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance)
     {
         LoadTemplate("Team", "Team.xlsx", ExcelConstants.TeamPerformance);
 
@@ -34,6 +38,7 @@ public class TeamExcelServiceImp(
         currentRowIndex = ProcessDataList(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText, BuildBodyRows);
 
         BuildTotalRow(data.Total, currentRowIndex);
+        HideNonPermissionColumn(allowVirtualPerformance, allowRealPerformance);
         ClearTemplate(ExcelConstants.TeamPerformance);
         return Task.FromResult(ExcelPackage!);
     }

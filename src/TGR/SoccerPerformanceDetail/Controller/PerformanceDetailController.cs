@@ -53,7 +53,10 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         var leagueGroups = await soccerDetailService.GetLeagueGroups();
         var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, betTypePermission);
         var data = await soccerDetailService.GetBetTypePerformance(criteria);
-        var excelPackage = await excelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypes);
+        var allowVirtualPerformance = permissionService.IsVirtualPerformancePermission();
+        var allowRealPerformance = permissionService.IsRealPerformancePermission();
+
+        var excelPackage = await excelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypes, allowVirtualPerformance, allowRealPerformance);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileName = $"Performance_Detail_BetType_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
@@ -126,8 +129,11 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
             _ => ExcelConstants.NonLiveText
         };
         criteria.IsExcludeLeagues = true;
+        var allowVirtualPerformance = permissionService.IsVirtualPerformancePermission();
+        var allowRealPerformance = permissionService.IsRealPerformancePermission();
+
         var data = await soccerDetailService.GetLeaguePerformanceOfBetChoice(criteria);
-        var excelPackage = await liveLeagueService.ExportExcel(data, criteria, leagueGroups, betTypesString);
+        var excelPackage = await liveLeagueService.ExportExcel(data, criteria, leagueGroups, betTypesString, allowVirtualPerformance, allowRealPerformance);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileName =
             $"Performance_Detail_{betTypesString.Replace(" ", "_")}_{market}_{criteria.BetChoice}_{criteria.FromDate:yyyyMMdd}_{criteria.ToDate:yyyyMMdd}";

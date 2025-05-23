@@ -14,7 +14,9 @@ public interface LiveLeagueExcelService
     Task<ExcelPackage> ExportExcel(LeaguePerformanceList data,
         GetLeaguePerformanceOfBetChoiceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
-        string betType);
+        string betType,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance);
 }
 
 public class LiveLeagueExcelServiceImp(ConfigurationService configurationService,
@@ -35,14 +37,18 @@ public class LiveLeagueExcelServiceImp(ConfigurationService configurationService
     private ExcelPackage ExcelPackage { get; set; }
 
     public Task<ExcelPackage> ExportExcel(LeaguePerformanceList data, GetLeaguePerformanceOfBetChoiceCriteria criteria,
-        IEnumerable<LeagueGroup> leagueGroups, string betType)
+        IEnumerable<LeagueGroup> leagueGroups, string betType,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance)
     {
         LoadTemplate("LiveLeague.xlsx");
         BuildFilterBlock(criteria, leagueGroups, betType);
         var bodyData = criteria.IsLive ? data.ItemLiveList : data.ItemNonLiveList;
         BuildBodyRows(bodyData, StartRowIndex);
         var startTotalRowIndex = bodyData.Count + StartRowIndex;
+
         BuildTotalRow(data.Total, startTotalRowIndex);
+        HideNonPermissionColumn(allowVirtualPerformance, allowRealPerformance);
         ClearTemplate();
         return Task.FromResult(ExcelPackage!);
     }
@@ -106,6 +112,24 @@ public class LiveLeagueExcelServiceImp(ConfigurationService configurationService
         evenSheet = ExcelPackage.Workbook.Worksheets["EvenTemplate"];
         oddSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
         totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
+    }
+
+    private void HideNonPermissionColumn(bool allowVirtual, bool allowReal)
+    {
+        var rowCount = sheet!.Dimension.End.Row;
+        if (!allowVirtual)
+        {
+            sheet!.Cells[$"H1:K{rowCount}"].Value = null;
+            sheet!.Cells[$"H1:K{rowCount}"].Value = null;
+            sheet.Columns[8, 11].Width = 0;
+            sheet.Columns[8, 11].Hidden = true;
+        }
+        if (!allowReal)
+        {
+            sheet!.Cells[$"L1:O{rowCount}"].Value = null;
+            sheet.Columns[12, 15].Width = 0;
+            sheet.Columns[12, 15].Hidden = true;
+        }
     }
 
     private void ClearTemplate()

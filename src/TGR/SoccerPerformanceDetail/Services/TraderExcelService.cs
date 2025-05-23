@@ -14,7 +14,9 @@ public interface TraderExcelService
     Task<ExcelPackage> ExportExcelTraderPerformance(TraderPerformanceList data,
         GetTraderPerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
-        IEnumerable<BetTypeItem> betTypes);
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance);
 }
 
 public class TraderExcelServiceImp(
@@ -27,7 +29,9 @@ public class TraderExcelServiceImp(
         TraderPerformanceList data,
         GetTraderPerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
-        IEnumerable<BetTypeItem> betTypes)
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance)
     {
         LoadTemplate("Trader", "Trader.xlsx", ExcelConstants.TraderPerformance);
         
@@ -38,6 +42,7 @@ public class TraderExcelServiceImp(
         currentRowIndex = ProcessDataList(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText, BuildBodyRows);
 
         BuildTotalRow(data.Total, currentRowIndex);
+        HideNonPermissionColumn(allowVirtualPerformance, allowRealPerformance);
         ClearTemplate(ExcelConstants.TraderPerformance);
         return Task.FromResult(ExcelPackage!);
     }

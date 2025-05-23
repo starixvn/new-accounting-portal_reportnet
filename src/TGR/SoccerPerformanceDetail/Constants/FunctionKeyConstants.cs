@@ -2,8 +2,8 @@
 
 public static class FunctionKeyConstants
 {
-    public const string PerformanceDetailMajorBettypes = "PerformanceDetail_Majorbettypes";
-    public const string PerformanceDetailPHBettypes = "PerformanceDetail_PHbettypes";
+    public const string PerformanceDetailMajorBettypes = "MajorBetTypes";
+    public const string PerformanceDetailPHBettypes = "PHBetTypes";
     public const string SoccerLive = "SoccerLive";
     public const string SoccerNon_Live = "SoccerNon_Live";
     public const string VirtualPerformance = "VirtualPerformance";

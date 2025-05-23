@@ -62,8 +62,8 @@
                     }
                 </select>
             </div>
-            <div class="date-range"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
-            <div class="lbl-field col_4">
+            <div class="date-range" style="width:610px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
+            <div class="lbl-field col_4" style="width:94px">
                 <label for="ddlBetType">BetType</label>
             </div>
             <div class="edit-field col_8">
@@ -81,84 +81,57 @@
                 </select>
             </div>
         </div>
+        
         <div class="filter-row">
-            @if (@ViewBag.IsVirtualPerformancePermission)
-            {
-                <!-- Virtual -->
-                <div class="lbl-field col_6">
-                    <label for="txtMinTurnover">Minimum Virtual Turnover</label>
-                </div>
-                <div class="edit-field col_5">
-                    <input type="text" id="txtMinTurnover" style="width:10em" maxlength="10" data-val-number="Invalid value!" />
-                </div>
-                <div class="lbl-field col_6 min-winloss">
-                    <label for="txtMinWinLoss">Minimum Virtual WinLoss</label>
-                </div>
-                <div class="edit-field col_5">
-                    <input type="text" id="txtMinWinLoss" maxlength="10" data-val-number="Invalid value!" />
-                </div>
-                <div class="lbl-field col_6 margin">
-                    <label for="txtMarginFrom">Virtual Margin %</label>
-                </div>
-                <div class="edit-field col_12">
-                    <input type="text" id="txtMarginFrom" class="margin" maxlength="5" data-val-number="Invalid value!" />
-                    <span> - </span>
-                    <input type="text" id="txtMarginTo" class="margin" maxlength="5" data-val-number="Invalid value!" />
-                </div>
-                <!-- Virtual end -->
-            }
-
-        </div>
-        <div class="filter-row">
-            @if (@ViewBag.IsRealPerformancePermission)
-            {
-                <!-- Real -->
-                <div class="lbl-field col_6">
-                    <label for="txtMinTurnoverReal">Minimum Real Turnover</label>
-                </div>
-                <div class="edit-field col_5">
-                    <input type="text" id="txtMinTurnoverReal" style="width:10em" maxlength="10" data-val-number="Invalid value!" />
-                </div>
-                <div class="lbl-field col_6 min-winloss">
-                    <label for="txtMinWinLossReal">Minimum Real WinLoss</label>
-                </div>
-                <div class="edit-field col_5">
-                    <input type="text" id="txtMinWinLossReal" maxlength="10" data-val-number="Invalid value!" />
-                </div>
-                <div class="lbl-field col_6 margin">
-                    <label for="txtMarginFromReal">Real Margin %</label>
-                </div>
-                <div class="edit-field col_12">
-                    <input type="text" id="txtMarginFromReal" class="margin" maxlength="5" data-val-number="Invalid value!" />
-                    <span> - </span>
-                    <input type="text" id="txtMarginToReal" class="margin" maxlength="5" data-val-number="Invalid value!" />
-                </div>
-                <!-- Real end -->
-            }
+	        <div class="lbl-field col_6">
+		        <label for="txtLeague">League Group</label>
+	        </div>
+	        <div class="edit-field col_5">
+		        <select id="ddlLeagueGroup" multiple="multiple">
+			        @foreach (var leagueGroup in (IEnumerable<LeagueGroup>)ViewBag.LeagueGroups)
+			        {
+				        <option value=@leagueGroup.TargetLeagueGroupId selected>@leagueGroup.LeagueGroupName</option>
+			        }
+		        </select>
+	        </div>
+	        <div class="lbl-field col_6" style="margin-left: 12px">
+		        <label for="ddlMatchGroup">Match Group</label>
+	        </div>
+	        <div class="edit-field col_6">
+		        <select id="ddlMatchGroup" multiple="multiple">
+			        <option value="EXTRA_TIME" selected>Extra Time</option>
+			        <option value="NORMAL" selected>Normal</option>
+			        <option value="PENALTY" selected>Penalty</option>
+			        <option value="HEDGE" selected>Hedge</option>
+		        </select>
+	        </div>
+	        <div class="lbl-field col_15">
+		        <label for="ddlVrSettings">VR Setting</label>
+	        </div>
+	        <div class="edit-field col_6">
+		        <select id="ddlVrSettings" multiple="multiple">
+			        <option value="VR_PLUS" selected>VR+</option>
+			        <option value="NO_VR" selected>No VR</option>
+			        <option value="VR_MINUS" selected>VR-</option>
+		        </select>
+	        </div>
         </div>
         <div class="filter-row">
             <div class="lbl-field col_6">
-                <label for="txtLeague">League Group</label>
-            </div>
-            <div class="edit-field col_5">
-                <select id="ddlLeagueGroup" multiple="multiple">
-                    @foreach (var leagueGroup in (IEnumerable<LeagueGroup>)ViewBag.LeagueGroups)
-                    {
-                        <option value=@leagueGroup.TargetLeagueGroupId selected>@leagueGroup.LeagueGroupName</option>
-                    }
-                </select>
-            </div>
-            <div class="lbl-field col_5" style="width: 159px">
-                <label for="txtLeague">League</label>
-            </div>
-            <div class="edit-field col_5">
-                <input type="text" id="txtLeague" maxlength="100" />
-            </div>
-
-            <div class="lbl-field col_3 bettype-bm"></div>
-            <div class="submit width-auto col_4">
-                <input id="btnGenerate" type="button" class="blue-button bettype-generate" value="Generate" />
-            </div>
+		        <label for="txtLeague">League</label>
+	        </div>
+	        <div class="edit-field col_5">
+		        <input type="text" id="txtLeague" maxlength="100" style="width:130px" />
+	        </div>
+        </div>
+		
+        <div class="filter-row">
+	        <div class="lbl-field col_6">
+		        &nbsp;
+	        </div>
+	        <div class="edit-field col_5">
+		        <input id="btnGenerate" type="button" class="blue-button" value="Generate" />
+	        </div>
         </div>
     </div>
 </div>
@@ -234,12 +207,12 @@
             BetTypeBM: 'Bet Type BM %',
             Total: 'Total',
             GrandTotal: 'Grand Total',
-            AllBetTypes: 'All Bet Types',
+            AllBetTypes: 'All',
             EventDate: 'Event Date',
             EffectiveDate: 'Effective Date',
             NA: 'N/A',
             Forecast: 'Forecast',
-            AllLeagueGroups: 'All League Groups',
+            AllLeagueGroups: 'All',
             BetTypePerformance: 'Bet Type Performance',
             LeaguePerformance: 'League Performance',
             TraderPerformance: 'Trader Performance',

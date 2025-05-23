@@ -1,4 +1,6 @@
-﻿namespace Reports.Sites;
+﻿using NUglify.JavaScript;
+
+namespace Reports.Sites;
 
 using AbnormalBet;
 using ActualMemberBet;
@@ -34,6 +36,7 @@ using SuperBalance;
 using TotalSMAAndActiveMember;
 using TreeWinLoss;
 using UpdatedUsernameCredit;
+using WebOptimizer.Processors;
 
 public static class ServiceCollectionExtensions
 {
@@ -177,7 +180,9 @@ public static class ServiceCollectionExtensions
             pipeline.AddLessBundle("/style/fanex-legend.css",
                 "/scripts/FanexLegend.less");
 
-            pipeline.AddJavaScriptBundle("/scripts/nap-report-common.js",
+            var jsSettings = new JsSettings { CodeSettings = new CodeSettings { MinifyCode = false } };
+
+            pipeline.AddJavaScriptBundle("/scripts/nap-report-common.js", jsSettings,
                 "/scripts/_lib/jquery-1.8.2.js",
                 "/scripts/_lib/jquery-ui-1.9.1.js",
                 "/scripts/_lib/BlockUI/jquery.blockUI.1.33.js",
@@ -187,25 +192,25 @@ public static class ServiceCollectionExtensions
                 "/scripts/_lib/Tooltip/jquery.tipsy.js",
                 "/scripts/NapAccReports.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/msg-box.js",
+            pipeline.AddJavaScriptBundle("/scripts/msg-box.js", jsSettings,
                 "/scripts/_lib/msgbox/msgbox-0.0.1.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/jquery-multiselect.js",
+            pipeline.AddJavaScriptBundle("/scripts/jquery-multiselect.js", jsSettings,
                 "/scripts/_lib/MultipleSelect/jquery.multiselect.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/nex-date-picker.js",
+            pipeline.AddJavaScriptBundle("/scripts/nex-date-picker.js", jsSettings,
                 "/scripts/_lib/DatePicker/jquery.nexDatePicker.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/do-t.js",
+            pipeline.AddJavaScriptBundle("/scripts/do-t.js", jsSettings,
                 "/scripts/_lib/TemplateRender/doT/doT.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/month-picker.js",
+            pipeline.AddJavaScriptBundle("/scripts/month-picker.js", jsSettings,
                 "/scripts/_lib/MonthPicker/monPickr-0.0.3.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/fanex-legend.js",
+            pipeline.AddJavaScriptBundle("/scripts/fanex-legend.js", jsSettings,
                 "/scripts/FanexLegend.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/tgrs/common-tgrs.js",
+            pipeline.AddJavaScriptBundle("/scripts/tgrs/common-tgrs.js", jsSettings,
                 "/scripts/tgrs/moment.js",
                 "/scripts/tgrs/jquery.nexDatePicker.js",
                 "/scripts/tgrs/monPickr-0.0.3.js",
@@ -215,10 +220,10 @@ public static class ServiceCollectionExtensions
                 "/scripts/tgrs/validator.js",
                 "/scripts/tgrs/layout.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/tgrs/tgrs.js",
+            pipeline.AddJavaScriptBundle("/scripts/tgrs/tgrs.js", jsSettings,
                 "/scripts/tgrs/tgrs.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/bettype-performance.js",
+            pipeline.AddJavaScriptBundle("/scripts/bettype-performance.js", jsSettings,
                 "/soccer-performance-detail/scripts/grade-performance.js",
                 "/soccer-performance-detail/scripts/team-performance.js",
                 "/soccer-performance-detail/scripts/grade-history.js",
@@ -226,7 +231,7 @@ public static class ServiceCollectionExtensions
                 "/soccer-performance-detail/scripts/bettype-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/league-performance.js",
+            pipeline.AddJavaScriptBundle("/scripts/league-performance.js", jsSettings,
                 "/soccer-performance-detail/scripts/grade-performance.js",
                 "/soccer-performance-detail/scripts/team-performance.js",
                 "/soccer-performance-detail/scripts/grade-history.js",
@@ -234,19 +239,19 @@ public static class ServiceCollectionExtensions
                 "/soccer-performance-detail/scripts/league-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/trader-performance.js",
+            pipeline.AddJavaScriptBundle("/scripts/trader-performance.js", jsSettings,
                 "/soccer-performance-detail/scripts/grade-history.js",
                 "/soccer-performance-detail/scripts/team-history.js",
                 "/soccer-performance-detail/scripts/trader-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/team-performance.js",
+            pipeline.AddJavaScriptBundle("/scripts/team-performance.js", jsSettings,
                 "/soccer-performance-detail/scripts/grade-history.js",
                 "/soccer-performance-detail/scripts/grade-history.js",
                 "/soccer-performance-detail/scripts/team-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
-            pipeline.AddJavaScriptBundle("/scripts/grade-performance.js",
+            pipeline.AddJavaScriptBundle("/scripts/grade-performance.js", jsSettings,
                 "/soccer-performance-detail/scripts/team-history.js",
                 "/soccer-performance-detail/scripts/grade-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
@@ -264,7 +269,7 @@ public static class ServiceCollectionExtensions
                 "/themes/base/style.css",
                 "/themes/base/style.less");
 
-            pipeline.AddJavaScriptBundle("/scripts/jquery.fileDownload.js",
+            pipeline.AddJavaScriptBundle("/scripts/jquery.fileDownload.js", jsSettings,
                 "/scripts/_lib/jquery.fileDownload.js");
 
             pipeline.AddLessBundle(
@@ -353,7 +358,8 @@ public static class ServiceCollectionExtensions
 
     public static void AddAllAutoMapper(this IServiceCollection services)
     {
-        var config = new MapperConfiguration(cfg => {
+        var config = new MapperConfiguration(cfg =>
+        {
             cfg.InitializeHouseWinLoss();
             cfg.InitializeSMAWinLoss();
             cfg.InitializeSBPerformance();

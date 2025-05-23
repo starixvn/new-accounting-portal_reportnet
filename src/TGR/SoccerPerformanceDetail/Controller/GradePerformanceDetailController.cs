@@ -34,7 +34,10 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
         var leagueGroups = await service.GetLeagueGroups();
         var betTypes = await service.GetBetTypes(napSession.UserId, betTypePermission);
         var data = await service.GetGradePerformance(criteria);
-        var excelPackage = await excelService.ExportExcelGradePerformance(data, criteria, leagueGroups, betTypes);
+        var allowVirtualPerformance = permissionService.IsVirtualPerformancePermission();
+        var allowRealPerformance = permissionService.IsRealPerformancePermission();
+
+        var excelPackage = await excelService.ExportExcelGradePerformance(data, criteria, leagueGroups, betTypes, allowVirtualPerformance, allowRealPerformance);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileName = $"Performance_Detail_Grade_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");

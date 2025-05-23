@@ -28,7 +28,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP: common.ResolveRootUrl('PerformanceDetail/GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP'),
         GetIntervalPerformanceOfBetTypeLeagueBetChoice: common.ResolveRootUrl('PerformanceDetail/GetIntervalPerformanceOfBetTypeLeagueBetChoice'),
         GetPointHDPPerformanceOfBetTypeBetChoice: window.rootUrl + '/api/soccer-performance-detail/main-market-betchoice',
-        GetLeaguePerformanceOfBetTypeBetChoicePointHDP: window.rootUrl + '/api/soccer-performance-detail/main-market-betchoice-league',,
+        GetLeaguePerformanceOfBetTypeBetChoicePointHDP: window.rootUrl + '/api/soccer-performance-detail/main-market-betchoice-league',
         GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP: common.ResolveRootUrl('PerformanceDetail/GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP'),
         GetMatchPerformanceOfBetTypeLeagueTrader: window.rootUrl + '/api/soccer-performance-detail/league-trader-match',
         GetBetChoicePerformanceOfBetType: window.rootUrl +'/api/soccer-performance-detail/bet-choice-detail',
@@ -48,6 +48,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         txtRealMarginFrom: null,
         txtRealMarginTo: null,
         ddlLeagueGroup: null,
+        ddlMatchGroup: null,
+        ddlVrSettings: null,
         txtLeague: null,
         btnGenerate: null,
         divBetTypePerformanceContainer: null,
@@ -71,15 +73,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         MarketFilter: null,
         FromDate: null,
         ToDate: null,
-        BetTypes: null,
-        MarginFrom: null,
-        MarginTo: null,
-        BetTypeBMFrom: null,
-        BetTypeBMTo: null,
-        Turnover: null,
-        WinLoss: null,
-        IsVirtual: null,
-        IsReal: null,
+        BetTypes: null,        
         IsExcludeLeagues: null
     };
 
@@ -89,9 +83,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         FromDate: null,
         ToDate: null,
         LeagueGroupIds: null,
-        LeagueName: null,
-        IsVirtual: null,
-        IsReal: null,
+        LeagueName: null,        
         IsExcludeLeagues: null
     };
 
@@ -105,9 +97,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         LeagueName: null,
         BetTeam: null,
         Oddsspread: null,
-        IsFMBetType: null,
-        IsVirtual: null,
-        IsReal: null,
+        IsFMBetType: null,        
         IsExcludeLeagues: null
     };
 
@@ -129,6 +119,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         domElements.divDateRange = domElements.divBetTypePerformanceFilter.find('#divDateRange');
         domElements.ddlBetType = domElements.divBetTypePerformanceFilter.find('#ddlBetType');
         domElements.ddlLeagueGroup = domElements.divBetTypePerformanceFilter.find('#ddlLeagueGroup');
+        domElements.ddlMatchGroup = domElements.divBetTypePerformanceFilter.find('#ddlMatchGroup');
+        domElements.ddlVrSettings = domElements.divBetTypePerformanceFilter.find('#ddlVrSettings');
         domElements.txtLeague = domElements.divBetTypePerformanceFilter.find('#txtLeague');
         domElements.btnGenerate = domElements.divBetTypePerformanceFilter.find('#btnGenerate');
         domElements.divBetTypePerformanceContainer = $('#divBetTypePerformanceContainer');
@@ -147,20 +139,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         domElements.divPointHDPPerformanceGrid = $('#divPointHDPPerformanceGrid');
         domElements.divTimeMachinePerformanceContainer = $('#divTimeMachinePerformanceContainer');
         domElements.divTimeMachinePerformanceGrid = $('#divTimeMachinePerformanceGrid');
-
-        if (isVirtualPerformancePermission) {
-            domElements.txtMarginFrom = domElements.divBetTypePerformanceFilter.find('#txtMarginFrom');
-            domElements.txtMarginTo = domElements.divBetTypePerformanceFilter.find('#txtMarginTo');
-            domElements.txtMinTurnover = domElements.divBetTypePerformanceFilter.find('#txtMinTurnover');
-            domElements.txtMinWinLoss = domElements.divBetTypePerformanceFilter.find('#txtMinWinLoss');
-        }
-
-        if (isRealPerformancePermission) {
-            domElements.txtMarginFromReal = domElements.divBetTypePerformanceFilter.find('#txtMarginFromReal');
-            domElements.txtMarginToReal = domElements.divBetTypePerformanceFilter.find('#txtMarginToReal');
-            domElements.txtMinTurnoverReal = domElements.divBetTypePerformanceFilter.find('#txtMinTurnoverReal');
-            domElements.txtMinWinLossReal = domElements.divBetTypePerformanceFilter.find('#txtMinWinLossReal');
-        }
+       
     };
 
     // Bind event handlers.
@@ -189,104 +168,47 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             validator.ClearError(domElements.ddlBetType.next());
         });
 
-        if (isVirtualPerformancePermission) {
-            domElements.txtMarginFrom.numberField(2, true, null).focusout(function () {
-                var value = $.trim(domElements.txtMarginFrom.val());
-
-                domElements.txtMarginFrom.val(value);
-                validator.ClearError(domElements.txtMarginFrom);
-            });
-
-            domElements.txtMarginTo.numberField(2, true, null).focusout(function () {
-                var value = $.trim(domElements.txtMarginTo.val());
-
-                domElements.txtMarginTo.val(value);
-                validator.ClearError(domElements.txtMarginTo);
-            });
-
-            domElements.txtMinTurnover.numberField(2, true, null).focusout(function () {
-                var value = $.trim(domElements.txtMinTurnover.val());
-
-                domElements.txtMinTurnover.val(value);
-                validator.ClearError(domElements.txtMinTurnover);
-            });
-
-            domElements.txtMinWinLoss.numberField(2, true, null).focusout(function () {
-                var value = $.trim(domElements.txtMinWinLoss.val());
-
-                domElements.txtMinWinLoss.val(value);
-                validator.ClearError(domElements.txtMinWinLoss);
-            });
-        }
-
-        if (isRealPerformancePermission) {
-            domElements.txtMarginFromReal.numberField(2, true, null).focusout(function () {
-                var value = $.trim(domElements.txtMarginFromReal.val());
-
-                domElements.txtMarginFromReal.val(value);
-                validator.ClearError(domElements.txtMarginFromReal);
-            });
-
-            domElements.txtMarginToReal.numberField(2, true, null).focusout(function () {
-                var value = $.trim(domElements.txtMarginToReal.val());
-
-                domElements.txtMargitxtMarginToRealnTo.val(value);
-                validator.ClearError(domElements.txtMarginToReal);
-            });
-
-            domElements.txtMinTurnoverReal.numberField(2, true, null).focusout(function () {
-                var value = $.trim(domElements.txtMinTurnoverReal.val());
-
-                domElements.txtMinTurnoverReal.val(value);
-                validator.ClearError(domElements.txtMinTurnoverReal);
-            });
-
-            domElements.txtMinWinLossReal.numberField(2, true, null).focusout(function () {
-                var value = $.trim(domElements.txtMinWinLossReal.val());
-
-                domElements.txtMinWinLossReal.val(value);
-                validator.ClearError(domElements.txtMinWinLossReal);
-            });
-        }
-
+       
         domElements.ddlLeagueGroup.multiselect({
             selectedList: 1,
             minWidth: 130,
             height: 200,
             allSelectedText: labels.AllLeagueGroups
         });
+          
+       domElements.ddlMatchGroup.multiselect({
+            selectedList: 1,
+            minWidth: 120,
+            width: 120,
+            height: 100,
+            allSelectedText: "All"
+        });
+
+        domElements.ddlVrSettings.multiselect({
+            selectedList: 1,
+            minWidth: 226,
+            height: 80,
+            allSelectedText: "All"
+        });
 
         domElements.btnGenerate.click(function () {
             if (validator.ValidateForm(domElements.divBetTypePerformanceFilter, 'w') && validateFilterForm()) {
                 var selectedBetTypes = domElements.ddlBetType.val();
                 var selectedLeagueGroups = domElements.ddlLeagueGroup.val();
+                var selectedMatchGroups = domElements.ddlMatchGroup.val();
+                var selectedVrSettings = domElements.ddlVrSettings.val();
 
                 parameters.MarketFilter = domElements.ddlMarket.val();
                 parameters.FromDate = domElements.divDateRange.getFrom();
                 parameters.ToDate = domElements.divDateRange.getTo();
-                parameters.BetTypes = selectedBetTypes.join(',');
-                parameters.BetTypes = selectedBetTypes.join(',');
+                parameters.BetTypes = selectedBetTypes.join(',');                
                 var leagueGroupNotSelect = domElements.ddlLeagueGroup.find('option').not(':selected').length;
                 parameters.LeagueGroupIds = selectedLeagueGroups !== null ? selectedLeagueGroups.join(',') : "";
+                parameters.MatchGroup = selectedMatchGroups !== null ? selectedMatchGroups.join(',') : "";
+                parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings.join(',') : "";
                 parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;
-                parameters.LeagueName = domElements.txtLeague.val();
-                parameters.IsVirtual = isVirtualPerformancePermission;
-                parameters.IsReal = isRealPerformancePermission;
+                parameters.LeagueName = domElements.txtLeague.val();                
                 parameters.IsExcludeLeagues = isExcludeLeagues;
-
-                if (isVirtualPerformancePermission) {
-                    parameters.MarginFrom = domElements.txtMarginFrom.val().replace(/,/g, '');
-                    parameters.MarginTo = domElements.txtMarginTo.val().replace(/,/g, '');
-                    parameters.Turnover = domElements.txtMinTurnover.val().replace(/,/g, '');
-                    parameters.WinLoss = domElements.txtMinWinLoss.val().replace(/,/g, '');
-                }
-
-                if (isRealPerformancePermission) {
-                    parameters.MarginFromReal = domElements.txtMarginFromReal.val().replace(/,/g, '');
-                    parameters.MarginToReal = domElements.txtMarginToReal.val().replace(/,/g, '');
-                    parameters.TurnoverReal = domElements.txtMinTurnoverReal.val().replace(/,/g, '');
-                    parameters.WinLossReal = domElements.txtMinWinLossReal.val().replace(/,/g, '');
-                }
 
                 hideAllReports();
                 getBetTypePerformanceReport();
@@ -308,16 +230,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
 
     // Validate filter form.
     var validateFilterForm = function () {
-        var isValidateValueRangeVirtual = isVirtualPerformancePermission
-            ? validateValueRange(domElements.txtMarginFrom, domElements.txtMarginTo)
-            : true;
-        var isValidateValueRangeReal = isRealPerformancePermission
-            ? validateValueRange(domElements.txtMarginFromReal, domElements.txtMarginToReal)
-            : true;
-
-        return isValidateValueRangeVirtual
-            && isValidateValueRangeReal
-            && validateBetType()
+       
+        return validateBetType()
             && validateLeagueGroup();
     };
 
@@ -806,9 +720,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         betChoicePerformanceOfBetTypeParams.FromDate = parameters.FromDate;
         betChoicePerformanceOfBetTypeParams.ToDate = parameters.ToDate;
         betChoicePerformanceOfBetTypeParams.LeagueGroupIds = parameters.LeagueGroupIds;
-        betChoicePerformanceOfBetTypeParams.LeagueName = parameters.LeagueName;
-        betChoicePerformanceOfBetTypeParams.IsVirtual = isVirtualPerformancePermission;
-        betChoicePerformanceOfBetTypeParams.IsReal = isRealPerformancePermission;
+        betChoicePerformanceOfBetTypeParams.LeagueName = parameters.LeagueName;        
         betChoicePerformanceOfBetTypeParams.IsExcludeLeagues = isExcludeLeagues;
 
         common.DisableInput();
@@ -1981,9 +1893,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         leaguePerformanceOfBetChoiceParams.LeagueName = parameters.LeagueName;
         leaguePerformanceOfBetChoiceParams.BetTeam = betTeam;
         leaguePerformanceOfBetChoiceParams.Oddsspread = oddsspread;
-        leaguePerformanceOfBetChoiceParams.IsFMBetType = isFMBetType;
-        leaguePerformanceOfBetChoiceParams.IsVirtual = isVirtualPerformancePermission;
-        leaguePerformanceOfBetChoiceParams.IsReal = isRealPerformancePermission;
+        leaguePerformanceOfBetChoiceParams.IsFMBetType = isFMBetType;        
         leaguePerformanceOfBetChoiceParams.IsExcludeLeagues = isExcludeLeagues;
 
         common.DisableInput();
@@ -2240,9 +2150,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             IsLive: isLive,
             BetType: betTypeId,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate,
-            BetTypeBMFrom: parameters.BetTypeBMFrom,
-            BetTypeBMTo: parameters.BetTypeBMTo,
+            ToDate: parameters.ToDate,            
             LeagueGroupIds: parameters.LeagueGroupIds,
             LeagueName: parameters.LeagueName,
             IsExcludeLeagues: parameters.IsExcludeLeagues

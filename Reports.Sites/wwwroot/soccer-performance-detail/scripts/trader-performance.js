@@ -30,6 +30,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
         txtRealMarginFrom: null,
         txtRealMarginTo: null,
         ddlLeagueGroup: null,
+        ddlMatchGroup: null,
+        ddlVrSettings: null,
         btnGenerate: null,
         divTraderPerformanceContainer: null,
         divTraderPerformanceGrid: null,
@@ -51,11 +53,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
         FromDate: null,
         ToDate: null,
         BetTypes: null,
-        Username: null,
-        MarginFrom: null,
-        MarginTo: null,
-        Turnover: null,
-        WinLoss: null,
+        Username: null        
     };
     var cachedData = {
         MatchPerformance: null,
@@ -80,6 +78,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
         domElements.txtMinTurnover = domElements.divTraderPerformanceFilter.find('#txtMinTurnover');
         domElements.txtMinWinLoss = domElements.divTraderPerformanceFilter.find('#txtMinWinLoss');
         domElements.ddlLeagueGroup = domElements.divTraderPerformanceFilter.find('#ddlLeagueGroup');
+        domElements.ddlMatchGroup = domElements.divTraderPerformanceFilter.find('#ddlMatchGroup');
+        domElements.ddlVrSettings = domElements.divTraderPerformanceFilter.find('#ddlVrSettings');
         domElements.btnGenerate = domElements.divTraderPerformanceFilter.find('#btnGenerate');
         domElements.divTraderPerformanceContainer = $('#divTraderPerformanceContainer');
         domElements.divTraderPerformanceGrid = $('#divTraderPerformanceGrid');
@@ -202,10 +202,27 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             allSelectedText: labels.AllLeagueGroups
         });
 
+        domElements.ddlMatchGroup.multiselect({
+            selectedList: 1,
+            minWidth: 120,
+            width: 120,
+            height: 100,
+            allSelectedText: "All"
+        });
+
+        domElements.ddlVrSettings.multiselect({
+            selectedList: 1,
+            minWidth: 226,
+            height: 80,
+            allSelectedText: "All"
+        });
+
         domElements.btnGenerate.click(function () {
             if (validator.ValidateForm(domElements.divTraderPerformanceFilter, 'w') && validateFilterForm()) {
                 var selectedBetTypes = domElements.ddlBetType.val();
                 var selectedLeagueGroups = domElements.ddlLeagueGroup.val();
+                var selectedMatchGroups = domElements.ddlMatchGroup.val();
+                var selectedVrSettings = domElements.ddlVrSettings.val();
 
                 parameters.MarketFilter = domElements.ddlMarket.val();
                 parameters.FromDate = domElements.divDateRange.getFrom();
@@ -214,25 +231,11 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
                 parameters.BetTypes = selectedBetTypes.join(',');
                 var leagueGroupNotSelect = domElements.ddlLeagueGroup.find('option').not(':selected').length;
                 parameters.LeagueGroupIds = selectedLeagueGroups !== null ? selectedLeagueGroups.join(',') : "";
-                parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;
-                parameters.IsVirtual = isVirtualPerformancePermission;
-                parameters.IsReal = isRealPerformancePermission;
+                parameters.MatchGroup = selectedMatchGroups !== null ? selectedMatchGroups.join(',') : "";
+                parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings .join(',') : "";
+                parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;                
                 parameters.IsExcludeLeagues = isExcludeLeagues;
-
-                if (isVirtualPerformancePermission) {
-                    parameters.MarginFrom = domElements.txtMarginFrom.val().replace(/,/g, '');
-                    parameters.MarginTo = domElements.txtMarginTo.val().replace(/,/g, '');
-                    parameters.Turnover = domElements.txtMinTurnover.val().replace(/,/g, '');
-                    parameters.WinLoss = domElements.txtMinWinLoss.val().replace(/,/g, '');
-                }
-
-                if (isRealPerformancePermission) {
-                    parameters.MarginFromReal = domElements.txtMarginFromReal.val().replace(/,/g, '');
-                    parameters.MarginToReal = domElements.txtMarginToReal.val().replace(/,/g, '');
-                    parameters.TurnoverReal = domElements.txtMinTurnoverReal.val().replace(/,/g, '');
-                    parameters.WinLossReal = domElements.txtMinWinLossReal.val().replace(/,/g, '');
-                }
-
+             
                 hideReports();
 
                 getTraderPerformanceReport();
@@ -249,16 +252,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
 
     // Validate filter form.
     var validateFilterForm = function () {
-        var isValidateValueRangeVirtual = isVirtualPerformancePermission
-            ? validateValueRange(domElements.txtMarginFrom, domElements.txtMarginTo)
-            : true;
-        var isValidateValueRangeReal = isRealPerformancePermission
-            ? validateValueRange(domElements.txtMarginFromReal, domElements.txtMarginToReal)
-            : true;
-
-        return isValidateValueRangeVirtual
-            && isValidateValueRangeReal
-            && validateBetType()
+       return validateBetType()
             && validateLeagueGroup();    
     };
 

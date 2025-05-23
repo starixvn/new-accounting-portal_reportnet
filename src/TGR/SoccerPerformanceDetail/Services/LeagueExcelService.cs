@@ -12,7 +12,9 @@ public interface LeagueExcelService
     Task<ExcelPackage> ExportExcelLeaguePerformance(LeaguePerformanceList data,
         GetLeaguePerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
-        IEnumerable<BetTypeItem> betTypes);
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance, 
+        bool allowRealPerformance);
 }
 
 public class LeagueExcelServiceImp(ConfigurationService configurationService, IMapper mapper)
@@ -22,7 +24,9 @@ public class LeagueExcelServiceImp(ConfigurationService configurationService, IM
     public Task<ExcelPackage> ExportExcelLeaguePerformance(LeaguePerformanceList data,
         GetLeaguePerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
-        IEnumerable<BetTypeItem> betTypes)
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance)
     {
         LoadTemplate("League", "League.xlsx", ExcelConstants.LeaguePerformance);
         var rowIndex = BuildFilterBlock(criteria, leagueGroups, betTypes);
@@ -36,6 +40,9 @@ public class LeagueExcelServiceImp(ConfigurationService configurationService, IM
         BuildBodyRows<LeaguePerformanceItem, LeaguePerformanceExcelItem>(bodyData, startBodyRowIndex, mapper);
         var startTotalRowIndex = bodyData.Count + startBodyRowIndex;
         BuildTotalRow<LeaguePerformanceItem, LeaguePerformanceExcelItem>(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex, mapper, criteria.MarketFilter);
+
+        HideNonPermissionColumn(allowVirtualPerformance, allowRealPerformance);
+
         ClearTemplate(ExcelConstants.LeaguePerformance);
         return Task.FromResult(ExcelPackage!);
     }
