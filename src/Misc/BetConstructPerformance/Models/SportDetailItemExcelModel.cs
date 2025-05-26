@@ -35,14 +35,17 @@ public class SportDetailItemExcelModel
     public decimal MemberTurnover { get; set; }
 
     [Cell("K4")]
-    public decimal HouseIncome { get; set; }
+    public decimal ActualTurnover { get; set; }
 
     [Cell("L4")]
-    public decimal HouseTurnover { get; set; }
+    public decimal HouseIncome { get; set; }
 
     [Cell("M4")]
-    public decimal Margin { get; set; }
+    public decimal HouseTurnover { get; set; }
 
     [Cell("N4")]
+    public decimal Margin { get; set; }
+
+    [Cell("O4")]
     public decimal AmountDueToBC { get; set; }
 }
