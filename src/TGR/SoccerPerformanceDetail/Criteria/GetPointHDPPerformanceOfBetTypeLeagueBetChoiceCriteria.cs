@@ -31,4 +31,8 @@ public class GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria : CriteriaBa
     {
         return true;
     }
+
+    public string MatchGroup { get; set; }
+
+    public string VrSettings { get; set; }
 }

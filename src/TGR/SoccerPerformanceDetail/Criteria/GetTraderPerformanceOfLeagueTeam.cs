@@ -22,6 +22,10 @@ public class GetTraderPerformanceOfLeagueTeam : CriteriaBase
 
     public bool IsExcludeLeagues { get; set; }
 
+    public string MatchGroup { get; set; }
+
+    public string VrSetting { get; set; }
+
     public override string GetSettingKey()
     {
         return "TGRS_Rpt_PerformanceDetail_Team_League_Trader";

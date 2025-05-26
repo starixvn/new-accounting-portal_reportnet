@@ -652,7 +652,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             LeagueGroupIds: parameters.LeagueGroupIds,
             IsExcludeLeagues: parameters.IsExcludeLeagues
         };
-
+        matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
+        matchPerformanceParamrters.VrSettings = parameters.VrSettings;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -955,6 +956,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             LeagueGroupIds: parameters.LeagueGroupIds,
             IsExcludeLeagues: parameters.IsExcludeLeagues
         };
+        bettypeDetailParameters.MatchGroup = parameters.MatchGroup;
+        bettypeDetailParameters.VrSettings = parameters.VrSettings;
         common.DisableInput();
         $.ajax({
             type: 'POST',

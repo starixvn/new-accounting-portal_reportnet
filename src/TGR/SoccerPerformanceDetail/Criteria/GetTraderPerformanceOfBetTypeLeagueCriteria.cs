@@ -20,6 +20,10 @@ public class GetTraderPerformanceOfBetTypeLeagueCriteria : CriteriaBase
 
     public bool IsExcludeLeagues { get; set; }
 
+    public string MatchGroup { get; set; }
+
+    public string VrSetting { get; set; }
+
     public override string GetSettingKey()
     {
         return "TGRS_Rpt_PerformanceDetail_Bettype_League_Trader";

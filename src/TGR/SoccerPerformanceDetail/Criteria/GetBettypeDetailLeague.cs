@@ -24,6 +24,10 @@ public class GetBettypeDetailLeague : CriteriaBase
 
     public bool IsExcludeLeagues { get; set; }
 
+    public string MatchGroup { get; set; }
+
+    public string VrSettings { get; set; }
+
     [SpParam(Ignored = true)]
     public string LeagueGroupIds { get; set; }
 

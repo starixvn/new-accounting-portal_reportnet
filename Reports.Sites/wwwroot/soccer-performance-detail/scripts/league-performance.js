@@ -12,8 +12,7 @@ $(document).ready(function () {
 
 Namespace.Register('Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance');
 Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
-    var $this = this;
-    
+    var $this = this;    
     var domElements = {
         divLeaguePerformanceFilter: null,
         ddlMarket: null,
@@ -651,7 +650,9 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
             IsExcludeLeagues: isExcludeLeagues
-        };
+        };        
+        traderPerformanceParamrters.MatchGroup = parameters.MatchGroup;
+        traderPerformanceParamrters.VrSettings = parameters.VrSettings;
 
         common.DisableInput();
         $.ajax({
@@ -947,6 +948,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             ToDate: parameters.ToDate,
             IsExcludeLeagues: isExcludeLeagues
         };
+        matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
+        matchPerformanceParamrters.VrSettings = parameters.VrSettings;
 
         common.DisableInput();
         $.ajax({
@@ -1163,6 +1166,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             ToDate: parameters.ToDate,
             LeagueGroupIds: parameters.LeagueGroupIds
         };
+        bettypeDetailParameters.MatchGroup = parameters.MatchGroup;
+        bettypeDetailParameters.VrSettings = parameters.VrSettings;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1348,7 +1353,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             ToDate: parameters.ToDate,
             IsExcludeLeagues: isExcludeLeagues
         };
-
+        matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
+        matchPerformanceParamrters.VrSettings = parameters.VrSettings;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1556,6 +1562,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             ToDate: parameters.ToDate,
             IsExcludeLeagues: isExcludeLeagues
         };
+        bettypeDetailParameters.MatchGroup = parameters.MatchGroup;
+        bettypeDetailParameters.VrSettings = parameters.VrSettings;
         common.DisableInput();
         $.ajax({
             type: 'POST',

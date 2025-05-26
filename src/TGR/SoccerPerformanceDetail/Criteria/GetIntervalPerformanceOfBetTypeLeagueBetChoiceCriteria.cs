@@ -24,6 +24,10 @@ public class GetIntervalPerformanceOfBetTypeLeagueBetChoiceCriteria : CriteriaBa
 
     public bool IsExcludeLeagues { get; set; }
 
+    public string MatchGroup { get; set; }
+
+    public string VrSettings { get; set; }
+
     public override string GetSettingKey()
         => "TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice_Interval";
 

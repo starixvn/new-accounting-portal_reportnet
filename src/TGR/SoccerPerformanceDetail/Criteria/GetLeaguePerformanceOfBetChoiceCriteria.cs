@@ -28,6 +28,9 @@ public class GetLeaguePerformanceOfBetChoiceCriteria : CriteriaBase
     public string LeagueGroupIds { get; set; }
 
     public string LeagueName { get; set; }
+    public string MatchGroup { get; set; }
+
+    public string VrSettings { get; set; }
 
     public override string GetSettingKey()
     {

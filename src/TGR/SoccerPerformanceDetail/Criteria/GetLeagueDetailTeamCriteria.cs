@@ -21,6 +21,9 @@ public class GetLeagueDetailTeamCriteria : CriteriaBase
     public bool IsExcludeLeagues { get; set; }
 
     public string LeagueGroupIds { get; set; }
+    public string MatchGroup { get; set; }
+
+    public string VrSettings { get; set; }
 
     public override bool IsValid()
     {

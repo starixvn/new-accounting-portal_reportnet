@@ -22,6 +22,10 @@ public class GetLeaguePerformanceOfGradeCriteria : CriteriaBase
 
     public string LeagueGroupIds { get; set; }
 
+    public string MatchGroup { get; set; }
+
+    public string VrSettings { get; set; }
+
     public override string GetSettingKey()
     {
         return "TGRS_Rpt_PerformanceDetail_Grade_League";
