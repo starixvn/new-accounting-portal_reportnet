@@ -62,8 +62,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
         PageSize: common.Constants.PageSize,
         PageIndex: 0
     };
-    var gradeHistory = new Fanex.TGRS.PerformanceSummary.GradeHistory();
-    var teamHistory = new Fanex.TGRS.PerformanceSummary.TeamHistory();
+    
     var performanceDetailHelper = new Fanex.NAP.TGRS.PerformanceDetail.Helper();
 
     // Cache DOM Elements.
@@ -504,10 +503,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
         $.each(items, function (index, item) {
             traderCol = traderFormat.format(item.TraderId, item.TeamId, item.TraderName);
             noOfMatchesCol = noOfMatchesFormat.format(item.IsLive, labels.MatchPerformance, numeral(item.NoOfMatches).format(common.Formats.IntegerFormat));
-            gradeCol = gradeFormat.format(item.Grade);
-            gradeCol += item.HasGradeHistory ? detailIcon.format('grade-column', labels.GradeHistoryDetail) : '';
-            teamCol = teamFormat.format(item.TeamName);
-            teamCol += item.HasTeamHistory ? detailIcon.format('team-column', labels.TeamHistoryDetail) : '';
+            gradeCol = gradeFormat.format(item.Grade);            
+            teamCol = teamFormat.format(item.TeamName);            
 
             var currentColumns = [{ Name: 'ColNo', Value: index + 1 },
                 { Name: 'ColTrader', Value: traderCol },
@@ -587,37 +584,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
     }
 
     // Handle trander performance grid's events.
-    var handleTraderPerformanceGridEvents = function () {
-        domElements.divTraderPerformanceGrid.find('span.grade-column').click(function () {
-            var $link = $(this);
-            var $trader = $link.closest('tr').find('span.trader');
-            var traderId = $trader.attr('data-cust-id');
-            var traderName = $trader.text();
-
-            gradeHistory.GetGradeHistory({
-                CustId: traderId,
-                Username: traderName,
-                BetTypes: parameters.BetTypes,
-                FromDate: parameters.FromDate,
-                ToDate: parameters.ToDate
-            });
-        });
-
-        domElements.divTraderPerformanceGrid.find('span.team-column').click(function () {
-            var $link = $(this);
-            var $trader = $link.closest('tr').find('span.trader');
-            var traderId = $trader.attr('data-cust-id');
-            var traderName = $trader.text();
-
-            teamHistory.GetTeamHistory({
-                CustId: traderId,
-                Username: traderName,
-                BetTypes: parameters.BetTypes,
-                FromDate: parameters.FromDate,
-                ToDate: parameters.ToDate
-            });
-        });
-
+    var handleTraderPerformanceGridEvents = function () {        
         domElements.divTraderPerformanceGrid.find('span.match-link').click(function () {
             var $link = $(this);
             var $trader = $link.closest('tr').find('span.trader');

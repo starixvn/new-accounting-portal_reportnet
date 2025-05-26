@@ -226,33 +226,24 @@ public static class ServiceCollectionExtensions
             pipeline.AddJavaScriptBundle("/scripts/bettype-performance.js", jsSettings,
                 "/soccer-performance-detail/scripts/grade-performance.js",
                 "/soccer-performance-detail/scripts/team-performance.js",
-                "/soccer-performance-detail/scripts/grade-history.js",
-                "/soccer-performance-detail/scripts/team-history.js",
                 "/soccer-performance-detail/scripts/bettype-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
             pipeline.AddJavaScriptBundle("/scripts/league-performance.js", jsSettings,
                 "/soccer-performance-detail/scripts/grade-performance.js",
                 "/soccer-performance-detail/scripts/team-performance.js",
-                "/soccer-performance-detail/scripts/grade-history.js",
-                "/soccer-performance-detail/scripts/team-history.js",
                 "/soccer-performance-detail/scripts/league-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
             pipeline.AddJavaScriptBundle("/scripts/trader-performance.js", jsSettings,
-                "/soccer-performance-detail/scripts/grade-history.js",
-                "/soccer-performance-detail/scripts/team-history.js",
                 "/soccer-performance-detail/scripts/trader-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
             pipeline.AddJavaScriptBundle("/scripts/team-performance.js", jsSettings,
-                "/soccer-performance-detail/scripts/grade-history.js",
-                "/soccer-performance-detail/scripts/grade-history.js",
                 "/soccer-performance-detail/scripts/team-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
             pipeline.AddJavaScriptBundle("/scripts/grade-performance.js", jsSettings,
-                "/soccer-performance-detail/scripts/team-history.js",
                 "/soccer-performance-detail/scripts/grade-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 

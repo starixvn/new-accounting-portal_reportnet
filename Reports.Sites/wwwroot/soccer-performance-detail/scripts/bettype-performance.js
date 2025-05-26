@@ -107,9 +107,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         TotalItems: 0,
         PageSize: common.Constants.PageSize,
         PageIndex: 0
-    };
-    var gradeHistory = new Fanex.TGRS.PerformanceSummary.GradeHistory();
-    var teamHistory = new Fanex.TGRS.PerformanceSummary.TeamHistory();
+    };    
     var performanceDetailHelper = new Fanex.NAP.TGRS.PerformanceDetail.Helper();
 
     // Cache DOM Elements.
@@ -2423,42 +2421,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
 
     // Handle trander performance grid's events.
     var handleTraderPerformanceGridEvents = function (betTypeId, betTypeName) {
-        domElements.divTraderPerformanceGrid.find('span.grade-column').click(function () {
-            var $link = $(this);
-            var $trader = $link.closest('tr').find('span.trader');
-            var traderId = $trader.attr('data-cust-id');
-            var traderName = $trader.text();
-            var isLive = $link.attr('data-is-live');
-
-            gradeHistory.GetGradeHistory({
-                IsLive: isLive,
-                CustId: traderId,
-                Username: traderName,
-                BetTypes: betTypeId,
-                FromDate: parameters.FromDate,
-                ToDate: parameters.ToDate,
-                BetTypeBMFrom: parameters.BetTypeBMFrom,
-                BetTypeBMTo: parameters.BetTypeBMTo
-            });
-        });
-
-        domElements.divTraderPerformanceGrid.find('span.team-column').click(function () {
-            var $link = $(this);
-            var $trader = $link.closest('tr').find('span.trader');
-            var traderId = $trader.attr('data-cust-id');
-            var traderName = $trader.text();
-
-            teamHistory.GetTeamHistory({
-                CustId: traderId,
-                Username: traderName,
-                BetTypes: betTypeId,
-                FromDate: parameters.FromDate,
-                ToDate: parameters.ToDate,
-                BetTypeBMFrom: parameters.BetTypeBMFrom,
-                BetTypeBMTo: parameters.BetTypeBMTo
-            });
-        });
-
+        
         domElements.divTraderPerformanceGrid.find('span.match-link').click(function () {
             var $link = $(this);
             var $trader = $link.closest('tr').find('span.trader');
@@ -3395,46 +3358,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
 
     // Handle trander performance grid's events.
     var handleTraderPerformanceOfLeagueGridEvents = function (betTypeId, betTypeName, leagueId, leagueName) {
-        domElements.divTraderPerformanceGrid.find('span.grade-column').click(function () {
-            var $link = $(this);
-            var $trader = $link.closest('tr').find('span.trader');
-            var traderId = $trader.attr('data-cust-id');
-            var traderName = $trader.text();
-            var isLive = $link.attr('data-is-live');
-
-            gradeHistory.GetGradeHistory({
-                IsLive: isLive,
-                CustId: traderId,
-                Username: traderName,
-                LeagueId: leagueId,
-                BetTypes: betTypeId,
-                FromDate: parameters.FromDate,
-                ToDate: parameters.ToDate,
-                BetTypeBMFrom: parameters.BetTypeBMFrom,
-                BetTypeBMTo: parameters.BetTypeBMTo
-            });
-        });
-
-        domElements.divTraderPerformanceGrid.find('span.team-column').click(function () {
-            var $link = $(this);
-            var $trader = $link.closest('tr').find('span.trader');
-            var traderId = $trader.attr('data-cust-id');
-            var traderName = $trader.text();
-            var isLive = $link.attr('data-is-live');
-
-            teamHistory.GetTeamHistory({
-                IsLive: isLive,
-                CustId: traderId,
-                Username: traderName,
-                LeagueId: leagueId,
-                BetTypes: betTypeId,
-                FromDate: parameters.FromDate,
-                ToDate: parameters.ToDate,
-                BetTypeBMFrom: parameters.BetTypeBMFrom,
-                BetTypeBMTo: parameters.BetTypeBMTo
-            });
-        });
-
+        
         domElements.divTraderPerformanceGrid.find('span.match-link').click(function () {
             var $link = $(this);
             var $trader = $link.closest('tr').find('span.trader');

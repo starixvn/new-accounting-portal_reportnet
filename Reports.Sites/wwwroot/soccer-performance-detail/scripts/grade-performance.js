@@ -67,8 +67,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         PageSize: common.Constants.PageSize,
         PageIndex: 0
     };
-
-    var teamHistory = new Fanex.TGRS.PerformanceSummary.TeamHistory();
+    
     var performanceDetailHelper = new Fanex.NAP.TGRS.PerformanceDetail.Helper();
 
     // Cache DOM Elements.
@@ -1222,8 +1221,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             traderCol = traderFormat.format(item.TraderId, item.TeamId, item.TraderName);
             noOfMatchesCol = noOfMatchesFormat.format(labels.MatchPerformance, item.IsLive, numeral(item.NoOfMatches).format(common.Formats.IntegerFormat));
             teamCol = teamFormat.format(item.TeamName);
-            teamCol += item.HasTeamHistory ? detailIcon.format('team-column', labels.TeamHistoryDetail) : '';
-
+            
             var currentColumns = [{ Name: 'ColNo', Value: index + 1 },
                 { Name: 'ColTrader', Value: traderCol },
                 { Name: 'ColTeam', Value: teamCol, CssClass: 'history' },

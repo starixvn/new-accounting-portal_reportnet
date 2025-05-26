@@ -63,8 +63,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
         TotalItems: 0,
         PageSize: common.Constants.PageSize,
         PageIndex: 0
-    };
-    var gradeHistory = new Fanex.TGRS.PerformanceSummary.GradeHistory();
+    };    
     var performanceDetailHelper = new Fanex.NAP.TGRS.PerformanceDetail.Helper();
 
     // Cache DOM Elements.
@@ -1722,25 +1721,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
     }
 
     // Handle trander performance grid's events.
-    var handleTraderPerformanceGridEvents = function (teamId, teamName) {
-        domElements.divTraderPerformanceGrid.find('span.grade-column').click(function () {
-            var $link = $(this);
-            var $trader = $link.closest('tr').find('span.trader');
-            var traderId = $trader.attr('data-cust-id');
-            var traderName = $trader.text();
-            var isLive = $link.attr('data-is-live');
-
-            gradeHistory.GetGradeHistory({
-                IsLive: isLive,
-                CustId: traderId,
-                Username: traderName,
-                TeamId: teamId,
-                BetTypes: parameters.BetTypes,
-                FromDate: parameters.FromDate,
-                ToDate: parameters.ToDate
-            });
-        });
-
+    var handleTraderPerformanceGridEvents = function (teamId, teamName) {       
         domElements.divTraderPerformanceGrid.find('span.match-link').click(function () {
             var $link = $(this);
             var $trader = $link.closest('tr').find('span.trader');
