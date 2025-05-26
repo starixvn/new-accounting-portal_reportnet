@@ -18,7 +18,7 @@ import { CommonConstants } from '../common/constants';
 export class FilterComponent implements OnInit {
   @Output() generated = new EventEmitter<FilterModel>();
 
-  minStartDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today).subtract(1, 'month'));;
+  minStartDate: NgbDateStruct = { year: 2025, month: 5, day: 1 }
   maxEndDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));
   startDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));
   endDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));

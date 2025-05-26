@@ -35,7 +35,7 @@
         <div class="nap-group">
           <label>From</label>
           <div class="nap-control">
-            <nap-date-picker [(date)]="startDate" [maxDate]="endDate"></nap-date-picker>
+            <nap-date-picker [(date)]="startDate" [minDate]="minStartDate" [maxDate]="endDate"></nap-date-picker>
           </div>
         </div>
       </div>
@@ -74,8 +74,8 @@
         <div class="nap-col pt-3">
           <div class="nap-group">
             <label>&nbsp;</label>
-            <div class="nap-control width-430">
-              <p class="mb-0"><span>Note:</span> The Transaction Date filter is supported starting from May 1, 2025.</p>
+            <div class="nap-control width-450">
+              <p class="mb-0"><span>Note:</span> Data based on transaction date is available starting from May 1, 2025.</p>
             </div>
           </div>
         </div>
