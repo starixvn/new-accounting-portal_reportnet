@@ -37,7 +37,7 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         var fileExcel = "CashOutPerformance.xlsx";
         var cellAddressOfTitle = "A1:AH1";
         var cellAddressOfBreadCrumb = "A3:AH3";
-        byte totalLength = 23;
+        byte totalLength = 24;
         if (excelType != ExcelType.Match)
         {
             fileExcel = "SimpleCashOutPerformance.xlsx";
