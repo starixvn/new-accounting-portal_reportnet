@@ -48,5 +48,7 @@ public class MatchDetailLevelModel : CommonTicketModel
 
     public string CurrentScore { get; set; }
 
+    public string FinalScore { get; set; }
+
     public string SiteGroup { get; set; }
 }

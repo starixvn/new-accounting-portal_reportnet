@@ -85,6 +85,7 @@ export interface MatchDetailLevelModel extends CommonTicketModel {
   CurrentHomeOdds: string;
   CurrentAwayOdds: string;
   CurrentScore: string;
+  FinalScore: string;
   SiteGroup: string;
 }
 
