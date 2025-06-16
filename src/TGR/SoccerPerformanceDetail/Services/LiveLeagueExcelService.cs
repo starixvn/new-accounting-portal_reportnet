@@ -32,7 +32,7 @@ public class LiveLeagueExcelServiceImp(ConfigurationService configurationService
 
     private const int StartFilterBlockRowIndex = 3;
 
-    private const int StartRowIndex = 11;
+    private const int StartRowIndex = 13;
 
     private ExcelPackage ExcelPackage { get; set; }
 
