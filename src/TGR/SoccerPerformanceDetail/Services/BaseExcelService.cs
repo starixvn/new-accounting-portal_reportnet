@@ -28,8 +28,8 @@ public abstract class BaseExcelService(ConfigurationService configurationService
         sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
         sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value =
             ModelsHelper.MakeBetTypeSelectString(betTypes, criteria.BetTypes);
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.MatchGroup;
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.VrSettings;
+        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = FilterBeautyMapper.BeautyMatchGroup(criteria.MatchGroup);
+        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = FilterBeautyMapper.BeautyVrSetting(criteria.VrSettings);
         var lineCount = (int)Math.Ceiling((double)sheet!.Cells[$"B{rowIndex}:O{rowIndex}"].Text.Length / ExcelConstants.Width);
         if (lineCount > 1)
         {

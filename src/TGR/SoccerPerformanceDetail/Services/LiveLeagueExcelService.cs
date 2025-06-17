@@ -100,8 +100,8 @@ public class LiveLeagueExcelServiceImp(ConfigurationService configurationService
         sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = criteria.FromDate.ToString("MM/dd/yyyy");
         sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
         sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = betType;
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.MatchGroup;
-        sheet!.Cells[$"B{rowIndex}:O{rowIndex++}"].Value = criteria.VrSettings;
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = FilterBeautyMapper.BeautyMatchGroup(criteria.MatchGroup);
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = FilterBeautyMapper.BeautyVrSetting(criteria.VrSettings);
         sheet!.Cells[$"B{rowIndex}:M{rowIndex}"].Value = ModelsHelper.MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
     }
 
