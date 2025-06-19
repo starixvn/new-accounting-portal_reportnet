@@ -10,6 +10,6 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.3.6" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.4.2" />
   </ItemGroup>
 </Project>
