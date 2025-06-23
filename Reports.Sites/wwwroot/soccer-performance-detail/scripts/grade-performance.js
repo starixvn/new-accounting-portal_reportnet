@@ -308,7 +308,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             { HeaderText: labels.Score, Name: "ColScore", MergeRowNumber: 2 }
         ];
 
-        var columns = [{ HeaderText: labels.No, Width: 40, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', ShowCollapseExpand: true },
+        var columns = [{ HeaderText: labels.No, Width: 40, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center'},
             { HeaderText: labels.Grade, Width: 70, Name: 'ColGrade', HeaderAlign: 'center', CellAlign: 'center' },
             { HeaderText: labels.NoOfTraders, Width: 100, Name: 'ColNoOfTraders', HeaderAlign: 'center', CellAlign: 'right' },
             {
@@ -451,7 +451,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             subRows.push(row);
         });
 
-        var mergeColCount = (isVirtualPerformancePermission && isRealPerformancePermission) ? 15 : 11;
+        var mergeColCount = (isVirtualPerformancePermission && isRealPerformancePermission) ? 14 : 11;
 
         row = {
             Columns: [
