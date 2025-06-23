@@ -75,8 +75,8 @@ public class LeagueWinLossServiceImp(
 
         foreach (var sportGroup in sportGroups)
         {
-            var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType 
-                                               && x.IsSabaSport == sportGroup.Key.IsSabaSport);
+            var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType
+                                               && x.IsSabaSport == sportGroup.Key.IsSabaSport && sportGroup.Key.Sport == x.Sport);
             var sportName = sportGroup.Key.Sport;
             var leagues = BindingLeagues(rawSports);
             var sportTotal = CalculateSportTotal(sportName, rawSports);
