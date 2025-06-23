@@ -468,7 +468,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
             subRows.push(row);
         });
 
-        var mergeColCount = (isVirtualPerformancePermission && isRealPerformancePermission) ? 15 : 11;
+        var mergeColCount = (isVirtualPerformancePermission && isRealPerformancePermission) ? 14 : 11;
 
         row = {
             Columns: [
