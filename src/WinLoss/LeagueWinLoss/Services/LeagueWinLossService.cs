@@ -926,21 +926,44 @@ public class LeagueWinLossServiceImp(
 
     private MatchWinLossByLiveStatus CalculateMatchTotal(string title, IEnumerable<MatchEntity> matches)
     {
+        decimal memberWinLoss = 0,
+            smaWinLoss = 0,
+            extraPT = 0,
+            commission = 0,
+            virtualWinLoss = 0,
+            realIncome = 0,
+            virtualTurnover = 0,
+            realTurnover = 0;
+
+        foreach (var match in matches)
+        {
+            memberWinLoss += match.MemberWinLoss;
+            smaWinLoss += match.SMAWinLoss;
+            extraPT += match.ExtraPT;
+            commission += match.Commission;
+            virtualWinLoss += match.VirtualWinLoss;
+            realIncome += match.RealIncome;
+            virtualTurnover += match.VirtualTurnover;
+            realTurnover += match.RealTurnover;
+        }
+
+        var firstMatch = matches.FirstOrDefault() ?? new MatchEntity();
+
         return new MatchWinLossByLiveStatus
         {
             MatchEvent = title,
-            MatchId = (matches.FirstOrDefault() ?? new MatchEntity()).MatchID,
-            MatchCode = matches.FirstOrDefault()?.MatchCode,
-            MemberWinLoss = matches.Sum(x => x.MemberWinLoss),
-            SMAWinLoss = matches.Sum(x => x.SMAWinLoss),
-            ExtraPT = matches.Sum(x => x.ExtraPT),
-            Commission = matches.Sum(x => x.Commission),
-            VirtualWinLoss = matches.Sum(x => x.VirtualWinLoss),
-            RealIncome = matches.Sum(x => x.RealIncome),
-            VirtualTurnover = matches.Sum(x => x.VirtualTurnover),
-            RealTurnover = matches.Sum(x => x.RealTurnover),
-            IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault(),
-            LiveIndicator = (matches.FirstOrDefault() ?? new MatchEntity()).LiveIndicator
+            MatchId = firstMatch.MatchID,
+            MatchCode = firstMatch.MatchCode,
+            MemberWinLoss = memberWinLoss,
+            SMAWinLoss = smaWinLoss,
+            ExtraPT = extraPT,
+            Commission = commission,
+            VirtualWinLoss = virtualWinLoss,
+            RealIncome = realIncome,
+            VirtualTurnover = virtualTurnover,
+            RealTurnover = realTurnover,
+            IsOutright = firstMatch.IsOutright,
+            LiveIndicator = firstMatch.LiveIndicator
         };
     }
 
