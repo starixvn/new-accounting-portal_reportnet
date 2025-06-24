@@ -538,15 +538,7 @@ public class LeagueWinLossServiceImp(
 
     public async Task<MatchWinLossModel> GetMatches(MatchesCriteria criteria)
     {
-        await LogService.InfoAsync($"param: {JsonConvert.SerializeObject(criteria)}");
-        var sw = new Stopwatch();
-        sw.Start();
         var rawData = (await repository.FetchAsync<MatchEntity>(criteria)).ToList();
-        sw.Stop();
-        await LogService.InfoAsync($"sp(miliseconds) {sw.ElapsedMilliseconds}");
-        sw.Reset();
-        await LogService.InfoAsync("web: start");
-        sw.Start();
         var leagueWinLoss = new MatchWinLossModel
         {
             Match = [],
@@ -585,8 +577,6 @@ public class LeagueWinLossServiceImp(
         leagueWinLoss.BARM = BindingMatch(barRM);
 
         leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
-        sw.Stop();
-        await LogService.InfoAsync($"web (miliseconds) {sw.ElapsedMilliseconds}");
         return leagueWinLoss;
     }
 
