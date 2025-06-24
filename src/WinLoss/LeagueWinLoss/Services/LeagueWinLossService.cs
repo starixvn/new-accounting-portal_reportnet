@@ -916,26 +916,28 @@ public class LeagueWinLossServiceImp(
 
     private MatchWinLossByLiveStatus CalculateMatchTotal(string title, IEnumerable<MatchEntity> matches)
     {
-        decimal memberWinLoss = 0,
-            smaWinLoss = 0,
-            extraPT = 0,
-            commission = 0,
-            virtualWinLoss = 0,
-            realIncome = 0,
-            virtualTurnover = 0,
-            realTurnover = 0;
-
-        foreach (var match in matches)
-        {
-            memberWinLoss += match.MemberWinLoss;
-            smaWinLoss += match.SMAWinLoss;
-            extraPT += match.ExtraPT;
-            commission += match.Commission;
-            virtualWinLoss += match.VirtualWinLoss;
-            realIncome += match.RealIncome;
-            virtualTurnover += match.VirtualTurnover;
-            realTurnover += match.RealTurnover;
-        }
+        var totals = matches.Aggregate(
+            new {
+                MemberWinLoss = 0m,
+                SMAWinLoss = 0m,
+                ExtraPT = 0m,
+                Commission = 0m,
+                VirtualWinLoss = 0m,
+                RealIncome = 0m,
+                VirtualTurnover = 0m,
+                RealTurnover = 0m
+            },
+            (acc, match) => new {
+                MemberWinLoss = acc.MemberWinLoss + match.MemberWinLoss,
+                SMAWinLoss = acc.SMAWinLoss + match.SMAWinLoss,
+                ExtraPT = acc.ExtraPT + match.ExtraPT,
+                Commission = acc.Commission + match.Commission,
+                VirtualWinLoss = acc.VirtualWinLoss + match.VirtualWinLoss,
+                RealIncome = acc.RealIncome + match.RealIncome,
+                VirtualTurnover = acc.VirtualTurnover + match.VirtualTurnover,
+                RealTurnover = acc.RealTurnover + match.RealTurnover
+            }
+        );
 
         var firstMatch = matches.FirstOrDefault() ?? new MatchEntity();
 
@@ -944,14 +946,14 @@ public class LeagueWinLossServiceImp(
             MatchEvent = title,
             MatchId = firstMatch.MatchID,
             MatchCode = firstMatch.MatchCode,
-            MemberWinLoss = memberWinLoss,
-            SMAWinLoss = smaWinLoss,
-            ExtraPT = extraPT,
-            Commission = commission,
-            VirtualWinLoss = virtualWinLoss,
-            RealIncome = realIncome,
-            VirtualTurnover = virtualTurnover,
-            RealTurnover = realTurnover,
+            MemberWinLoss = totals.MemberWinLoss,
+            SMAWinLoss = totals.SMAWinLoss,
+            ExtraPT = totals.ExtraPT,
+            Commission = totals.Commission,
+            VirtualWinLoss = totals.VirtualWinLoss,
+            RealIncome = totals.RealIncome,
+            VirtualTurnover = totals.VirtualTurnover,
+            RealTurnover = totals.RealTurnover,
             IsOutright = firstMatch.IsOutright,
             LiveIndicator = firstMatch.LiveIndicator
         };
