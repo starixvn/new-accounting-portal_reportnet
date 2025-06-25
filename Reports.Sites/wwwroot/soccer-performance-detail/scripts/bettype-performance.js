@@ -3058,9 +3058,9 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     var handleLeaguePerformanceOfBetTypeGridEvents = function (betTypeId, betTypeName) {
         domElements.divLeaguePerformanceContainer.find('#spanBetTypeLink').click(function () {
             showBetTypePerformanceReport();
-        });
-
-        domElements.divLeaguePerformanceGrid.find('span.trader-link').live('click', function () {
+        });        
+        domElements.divLeaguePerformanceGrid.off('click', 'span.trader-link');
+        domElements.divLeaguePerformanceGrid.on('click', 'span.trader-link', function () {
             var $link = $(this);
             var $leagueName = $link.closest('tr').find('div.league-name');
             var leagueId = $link.attr('data-league-id');
@@ -3071,8 +3071,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
 
             getTraderPerformanceOfLeagueReport(betTypeId, betTypeName, leagueId, leagueName, isLive);
         });
-
-        domElements.divLeaguePerformanceGrid.find('span.betchoices-link').live('click', function () {
+        domElements.divLeaguePerformanceGrid.off('click', 'span.betchoices-link');
+        domElements.divLeaguePerformanceGrid.on('click','span.betchoices-link', function () {
             var $link = $(this);
             var leagueId = $link.attr('data-league-id');
             var isLive = $link.attr('data-is-live');
