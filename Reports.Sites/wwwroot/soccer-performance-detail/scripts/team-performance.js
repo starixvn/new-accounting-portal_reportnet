@@ -741,7 +741,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
                 { Name: 'ColMarginReal', Value: common.GetNumWithLabel(data.Total.MarginReal, labels.NA) }]);
         }
 
-        return footerData = { Columns: columns };
+        return footerData = [{ Columns: columns }];                
     }
 
     var handleLeaguePerformanceGridEvents = function (teamId, teamName) {
