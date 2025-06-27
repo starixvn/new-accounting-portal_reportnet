@@ -6,7 +6,6 @@ using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
 using Utilities.Configurations;
 

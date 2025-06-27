@@ -1,7 +1,6 @@
 ﻿using Fanex.NAP.Client;
 using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
-using SoccerPerformanceDetail.Model;
 using SoccerPerformanceDetail.Services;
 
 namespace SoccerPerformanceDetail.Controller;

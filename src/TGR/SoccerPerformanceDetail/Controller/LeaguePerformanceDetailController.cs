@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SoccerPerformanceDetail.Criteria;
 using SoccerPerformanceDetail.Services;
-using SoccerPerformanceDetail.Model;
 
 namespace SoccerPerformanceDetail.Controller;
 

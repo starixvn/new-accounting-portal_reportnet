@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SoccerPerformanceDetail.Services;
+﻿namespace SoccerPerformanceDetail.Services;
 
 internal static class FilterBeautyMapper
 {

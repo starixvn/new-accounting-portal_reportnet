@@ -25,14 +25,14 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         GetTraderPerformanceOfBetTypeLeague: window.rootUrl + '/api/soccer-performance-detail/league-trader-detail',
         GetBetChoicePerformaceOfBetTypeLeague: window.rootUrl + '/api/soccer-performance-detail/league-bet-choice-detail',
         GetPointHDPPerformanceOfBetTypeLeagueBetChoice: window.rootUrl + '/api/soccer-performance-detail/main-league-betchoice-choice',
-        GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP: common.ResolveRootUrl('PerformanceDetail/GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP'),
-        GetIntervalPerformanceOfBetTypeLeagueBetChoice: common.ResolveRootUrl('PerformanceDetail/GetIntervalPerformanceOfBetTypeLeagueBetChoice'),
+        GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP: window.rootUrl +'/api/soccer-performance-detail/GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP',
+        GetIntervalPerformanceOfBetTypeLeagueBetChoice: window.rootUrl + '/api/soccer-performance-detail/GetIntervalPerformanceOfBetTypeLeagueBetChoice',
         GetPointHDPPerformanceOfBetTypeBetChoice: window.rootUrl + '/api/soccer-performance-detail/main-market-betchoice',
         GetLeaguePerformanceOfBetTypeBetChoicePointHDP: window.rootUrl + '/api/soccer-performance-detail/main-market-betchoice-league',
-        GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP: common.ResolveRootUrl('PerformanceDetail/GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP'),
+        GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP: window.rootUrl + '/api/soccer-performance-detail/GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP',
         GetMatchPerformanceOfBetTypeLeagueTrader: window.rootUrl + '/api/soccer-performance-detail/league-trader-match',
-        GetBetChoicePerformanceOfBetType: window.rootUrl +'/api/soccer-performance-detail/bet-choice-detail',
-        GetIntervalPerformanceOfBetTypeBetChoice: common.ResolveRootUrl('PerformanceDetail/GetIntervalPerformanceOfBetTypeBetChoice')
+        GetBetChoicePerformanceOfBetType: window.rootUrl + '/api/soccer-performance-detail/bet-choice-detail',
+        GetIntervalPerformanceOfBetTypeBetChoice: window.rootUrl + '/api/soccer-performance-detail/GetIntervalPerformanceOfBetTypeBetChoice'
     };
     var domElements = {
         divBetTypePerformanceFilter: null,
