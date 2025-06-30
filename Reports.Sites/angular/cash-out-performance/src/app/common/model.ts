@@ -60,6 +60,7 @@ export interface BetTypeLevelModel extends CommonTicketModel {
   BetCount: number;
   OutCome: string;
   WinningProbabilityQuantile: string;
+  BetId: number;
 }
 
 export interface MatchDetailLevelModel extends CommonTicketModel {

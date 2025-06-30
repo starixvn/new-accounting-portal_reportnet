@@ -34,4 +34,6 @@ public class TicketRequest<T> : IRequest<TicketViewModel<T>>
     public byte? PriceService { get; set; }
 
     public bool? EvenOddCust { get; set; }
+
+    public int? BetId { get; set; }
 }

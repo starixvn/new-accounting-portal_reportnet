@@ -36,7 +36,7 @@
     </thead>
   </ng-template>
   <ng-template #rowItem let-item="item">
-    <td><a href="javascript:;" (click)="showMatchDetailLevel(item.BetType, item.BetTypeName)">{{item.BetTypeName}}</a>
+    <td><a href="javascript:;" (click)="showMatchDetailLevel(item.BetType, item.BetTypeName, item.BetId)">{{item.BetTypeName}}</a>
     </td>
     <td class="text-right" [napDecimalFormat]="item.COTurnover_RM"></td>
     <td *ngIf="isShowNotAvailable(item.ActualTurnover)" class="text-right">&nbsp;</td>

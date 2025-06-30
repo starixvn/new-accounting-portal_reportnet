@@ -58,6 +58,7 @@ export class SportGridComponent implements Grid {
     this.gridService.filterModel.pageSize = this.originalPageSize;
     this.gridService.filterModel.pageIndex = 1;
     this.gridService.cachedSportBettypeForSport = sportBettypeList;
+    this.gridService.filterModel.betId = undefined;
     this.gridService.generate(GridType.Event);
   }
 }
