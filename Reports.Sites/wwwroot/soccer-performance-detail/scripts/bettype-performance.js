@@ -2,6 +2,8 @@
 /*jshint strict: false*/
 /* global Namespace, numeral, Fanex, common, validator, labels, datepickerSetting, forecastBettype, messages */
 
+import { validate } from "numeral";
+
 ////'use strict';
 var validator = new Fanex.TGRS.Validator();
 var layout = new Fanex.TGRS.Layout();
@@ -230,7 +232,9 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     var validateFilterForm = function () {
        
         return validateBetType()
-            && validateLeagueGroup();
+            && validateLeagueGroup()
+            && validateMatchGroup()
+            && validateVrSetting();
     };
 
     // Validate From/To values.
@@ -269,6 +273,26 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     var validateLeagueGroup = function () {
         if (!domElements.ddlLeagueGroup.val()) {
             validator.ShowError(domElements.ddlLeagueGroup.next(), messages.RequiredField, 'w');
+
+            return false;
+        }
+
+        return true;
+    };
+
+    var validateMatchGroup = function () {
+        if (!domElements.ddlMatchGroup.val()) {
+            validator.ShowError(domElements.ddlMatchGroup.next(), "Please select at least one Match Group!", 'w');
+
+            return false;
+        }
+
+        return true;
+    };
+
+    var validateVrSetting = function () {
+        if (!domElements.ddlVrSettings.val()) {
+            validator.ShowError(domElements.ddlVrSettings.next(), "Please select at least one VR Setting!", 'w');
 
             return false;
         }

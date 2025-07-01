@@ -193,7 +193,9 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
     // Validate filter form.
     var validateFilterForm = function () {
        return validateDropdownFields()
-            && validateLeagueGroup(); 
+           && validateLeagueGroup()
+           && validateMatchGroup()
+           && validateVrSetting(); 
     };
 
     // Validate From/To values.
@@ -243,6 +245,26 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
         return true;
     }; 
+
+    var validateMatchGroup = function () {
+        if (!domElements.ddlMatchGroup.val()) {
+            validator.ShowError(domElements.ddlMatchGroup.next(), "Please select at least one Match Group!", 'w');
+
+            return false;
+        }
+
+        return true;
+    };
+
+    var validateVrSetting = function () {
+        if (!domElements.ddlVrSettings.val()) {
+            validator.ShowError(domElements.ddlVrSettings.next(), "Please select at least one VR Setting!", 'w');
+
+            return false;
+        }
+
+        return true;
+    };
 
     // Get team performance report data.
     var getTeamPerformanceReport = function () {
