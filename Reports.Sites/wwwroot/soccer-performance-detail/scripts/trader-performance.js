@@ -561,7 +561,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             subRows.push(row);
         });
 
-        var mergeColCount = (isVirtualPerformancePermission && isRealPerformancePermission) ? 15 : 12;
+        var mergeColCount = (isVirtualPerformancePermission && isRealPerformancePermission) ? 16 : 12;
 
         row = {           
             Columns: [
