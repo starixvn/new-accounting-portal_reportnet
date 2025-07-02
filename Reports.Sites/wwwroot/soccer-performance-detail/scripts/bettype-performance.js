@@ -2,8 +2,6 @@
 /*jshint strict: false*/
 /* global Namespace, numeral, Fanex, common, validator, labels, datepickerSetting, forecastBettype, messages */
 
-import { validate } from "numeral";
-
 ////'use strict';
 var validator = new Fanex.TGRS.Validator();
 var layout = new Fanex.TGRS.Layout();
