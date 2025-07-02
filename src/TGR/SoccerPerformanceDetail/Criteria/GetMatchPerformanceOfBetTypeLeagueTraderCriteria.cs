@@ -24,7 +24,7 @@ public class GetMatchPerformanceOfBetTypeLeagueTraderCriteria : CriteriaBase
 
     public string MatchGroup { get; set; }
 
-    public string VrSetting { get; set; }
+    public string VrSettings { get; set; }
 
     public override string GetSettingKey()
     {

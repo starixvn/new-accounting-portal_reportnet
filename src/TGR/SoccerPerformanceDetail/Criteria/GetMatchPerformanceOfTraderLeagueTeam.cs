@@ -26,7 +26,7 @@ public class GetMatchPerformanceOfTraderLeagueTeam : CriteriaBase
 
     public string MatchGroup { get; set; }
 
-    public string VrSetting { get; set; }
+    public string VrSettings { get; set; }
 
     public override bool IsValid()
     {
