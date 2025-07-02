@@ -422,7 +422,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
             bodyRows: bodyData,
             showDistinctRow: false,
             footerRows: footerData,
-            gridExpandHeight: 300
+            gridExpandHeight: 300,
+            showPager: true,
+            pagerOption: {
+                itemsPerPage: 100,
+                currentPage: 0,
+                itemsPerPageArray: [50, 100, 200, 500],
+                totalItem: report.Match.length
+            }
         };
 
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
