@@ -577,5 +577,6 @@
     <Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_PointHDP_Minute" SpName="TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_PointHDP_Minute" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
     <Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice_Interval" SpName="TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice_Interval" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
     <Setting Key="TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice_PointHDP_Minute" SpName="TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice_PointHDP_Minute" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
+    <Setting Key="RMS_SiteByGroupSel" SpName="RMS_SiteByGroupSel" DbName="DBRMS.bodb_RMS.wsv_rms" />
 	</Function>  
 </Functions>

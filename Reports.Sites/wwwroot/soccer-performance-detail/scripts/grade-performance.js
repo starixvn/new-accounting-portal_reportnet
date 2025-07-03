@@ -30,6 +30,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         ddlLeagueGroup: null,
         ddlMatchGroup: null,
         ddlVrSettings: null,
+        ddlCompany: null,
         btnGenerate: null,
         divGradePerformanceContainer: null,
         divGradePerformanceGrid: null,
@@ -83,6 +84,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         domElements.ddlLeagueGroup = domElements.divGradePerformanceFilter.find('#ddlLeagueGroup');
         domElements.ddlMatchGroup = domElements.divGradePerformanceFilter.find('#ddlMatchGroup');
         domElements.ddlVrSettings = domElements.divGradePerformanceFilter.find('#ddlVrSettings');
+        domElements.ddlCompany = domElements.divGradePerformanceFilter.find('#ddlCompany');
         domElements.btnGenerate = domElements.divGradePerformanceFilter.find('#btnGenerate');
         domElements.divGradePerformanceContainer = $('#divGradePerformanceContainer');
         domElements.divGradePerformanceGrid = $('#divGradePerformanceGrid');
@@ -110,7 +112,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             yearRanges: null,
             labelCss: 'col_5'
         });
-
+        $("#ddlPeriodType").width(160);
         domElements.ddlBetType.multiselect({
             selectedList: 1,
             width: 200,
@@ -127,15 +129,15 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         
         domElements.ddlLeagueGroup.multiselect({
             selectedList: 1,
-            minWidth: 130,
+            minWidth: 160,
             height: 200,
             allSelectedText: labels.AllLeagueGroups
         });
 
         domElements.ddlMatchGroup.multiselect({
             selectedList: 1,
-            minWidth: 120,
-            width: 120,
+            minWidth: 160,
+            width: 160,
             height: 100,
             allSelectedText: "All"
         });
@@ -147,12 +149,25 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             allSelectedText: "All"
         });
 
+        domElements.ddlCompany.multiselect({
+            selectedList: 1,
+            width: 160,
+            minWidth: 160,
+            height: 200,
+            allSelectedText: "All",
+            groupsCollapsable: true,
+            optGroupChecked: true
+        }).multiselectfilter({ width: 95 }).change(function () {
+            validator.ClearError(domElements.ddlCompany.next());
+        });
+
         domElements.btnGenerate.click(function () {
             if (validator.ValidateForm(domElements.divGradePerformanceFilter, 'w') && validateFilterForm()) {
                 var selectedBetTypes = domElements.ddlBetType.val();
                 var selectedLeagueGroups = domElements.ddlLeagueGroup.val();
                 var selectedMatchGroups = domElements.ddlMatchGroup.val();
                 var selectedVrSettings = domElements.ddlVrSettings.val();
+                var selectedCompany = domElements.ddlCompany.val();
 
                 parameters.MarketFilter = domElements.ddlMarket.val();
                 parameters.FromDate = domElements.divDateRange.getFrom();
@@ -161,7 +176,8 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
                 var leagueGroupNotSelect = domElements.ddlLeagueGroup.find('option').not(':selected').length;
                 parameters.LeagueGroupIds = selectedLeagueGroups !== null ? selectedLeagueGroups.join(',') : "";
                 parameters.MatchGroup = selectedMatchGroups !== null ? selectedMatchGroups.join(',') : "";
-                parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings .join(',') : "";
+                parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings.join(',') : "";
+                parameters.Sites = selectedCompany !== null ? selectedCompany.join(',') : "";
                 parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;           
                 parameters.IsVirtual = isVirtualPerformancePermission;
                 parameters.IsReal = isRealPerformancePermission;
@@ -188,7 +204,8 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
          return validateBetType()
              && validateLeagueGroup()
              && validateMatchGroup()
-             && validateVrSetting();
+             && validateVrSetting()
+             && validateCompany();
     };
 
     // Validate From/To values.
@@ -247,6 +264,16 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
     var validateVrSetting = function () {
         if (!domElements.ddlVrSettings.val()) {
             validator.ShowError(domElements.ddlVrSettings.next(), "Please select at least one VR Setting!", 'w');
+
+            return false;
+        }
+
+        return true;
+    };
+
+    var validateCompany = function () {
+        if (!domElements.ddlCompany.val()) {
+            validator.ShowError(domElements.ddlCompany.next(), "Please select at least one company!", 'w');
 
             return false;
         }
@@ -558,6 +585,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         };
         leaguePerformance.MatchGroup = parameters.MatchGroup;
         leaguePerformance.VrSettings = parameters.VrSettings;
+        leaguePerformance.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -800,6 +828,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         };
         traderPerformance.MatchGroup = parameters.MatchGroup;
         traderPerformance.VrSettings = parameters.VrSettings;
+        traderPerformance.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1066,6 +1095,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         };
         traderPerformance.MatchGroup = parameters.MatchGroup;
         traderPerformance.VrSettings = parameters.VrSettings;
+        traderPerformance.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1337,6 +1367,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         };
         matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
         matchPerformanceParamrters.VrSettings = parameters.VrSettings;
+        matchPerformanceParamrters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1628,6 +1659,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         };
         bettypeDetailParameters.MatchGroup = parameters.MatchGroup;
         bettypeDetailParameters.VrSettings = parameters.VrSettings;
+        bettypeDetailParameters.Sites = parameters.Sites;
 
         common.DisableInput();
         $.ajax({
@@ -1869,6 +1901,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         };
         matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
         matchPerformanceParamrters.VrSettings = parameters.VrSettings;
+        matchPerformanceParamrters.Sites = parameters.Sites;
 
         common.DisableInput();
         $.ajax({
@@ -2096,6 +2129,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
         };
         bettypeDetailParameters.MatchGroup = parameters.MatchGroup;
         bettypeDetailParameters.VrSettings = parameters.VrSettings;
+        bettypeDetailParameters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',

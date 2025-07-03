@@ -50,6 +50,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         ddlLeagueGroup: null,
         ddlMatchGroup: null,
         ddlVrSettings: null,
+        ddlCompany: null,
         txtLeague: null,
         btnGenerate: null,
         divBetTypePerformanceContainer: null,
@@ -119,6 +120,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         domElements.ddlLeagueGroup = domElements.divBetTypePerformanceFilter.find('#ddlLeagueGroup');
         domElements.ddlMatchGroup = domElements.divBetTypePerformanceFilter.find('#ddlMatchGroup');
         domElements.ddlVrSettings = domElements.divBetTypePerformanceFilter.find('#ddlVrSettings');
+        domElements.ddlCompany = domElements.divBetTypePerformanceFilter.find('#ddlCompany');
         domElements.txtLeague = domElements.divBetTypePerformanceFilter.find('#txtLeague');
         domElements.btnGenerate = domElements.divBetTypePerformanceFilter.find('#btnGenerate');
         domElements.divBetTypePerformanceContainer = $('#divBetTypePerformanceContainer');
@@ -152,9 +154,12 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             labelCss: 'col_5'
         });
 
+        $("#ddlPeriodType").width(160);
+
         domElements.ddlBetType.multiselect({
             selectedList: 1,
-            width: 200,
+            width: 225,
+            minWidth: 225,
             height: 200,
             allSelectedText: labels.AllBetTypes,
             groupsCollapsable: true,
@@ -166,7 +171,6 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             validator.ClearError(domElements.ddlBetType.next());
         });
 
-       
         domElements.ddlLeagueGroup.multiselect({
             selectedList: 1,
             minWidth: 130,
@@ -176,8 +180,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
           
        domElements.ddlMatchGroup.multiselect({
             selectedList: 1,
-            minWidth: 120,
-            width: 120,
+            minWidth: 160,
+            width: 160,
             height: 100,
             allSelectedText: "All"
         });
@@ -185,8 +189,21 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         domElements.ddlVrSettings.multiselect({
             selectedList: 1,
             minWidth: 226,
+            width: 226,
             height: 80,
             allSelectedText: "All"
+        });
+
+        domElements.ddlCompany.multiselect({
+            selectedList: 1,
+            width: 160,
+            minWidth: 160,
+            height: 200,
+            allSelectedText: "All",
+            groupsCollapsable: true,
+            optGroupChecked: true
+        }).multiselectfilter({ width: 95 }).change(function () {
+            validator.ClearError(domElements.ddlCompany.next());
         });
 
         domElements.btnGenerate.click(function () {
@@ -195,6 +212,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 var selectedLeagueGroups = domElements.ddlLeagueGroup.val();
                 var selectedMatchGroups = domElements.ddlMatchGroup.val();
                 var selectedVrSettings = domElements.ddlVrSettings.val();
+                var selectedCompany = domElements.ddlCompany.val();
 
                 parameters.MarketFilter = domElements.ddlMarket.val();
                 parameters.FromDate = domElements.divDateRange.getFrom();
@@ -204,6 +222,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 parameters.LeagueGroupIds = selectedLeagueGroups !== null ? selectedLeagueGroups.join(',') : "";
                 parameters.MatchGroup = selectedMatchGroups !== null ? selectedMatchGroups.join(',') : "";
                 parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings.join(',') : "";
+                parameters.Sites = selectedCompany !== null ? selectedCompany.join(',') : "";
                 parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;
                 parameters.LeagueName = domElements.txtLeague.val();                
                 parameters.IsExcludeLeagues = isExcludeLeagues;
@@ -232,7 +251,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         return validateBetType()
             && validateLeagueGroup()
             && validateMatchGroup()
-            && validateVrSetting();
+            && validateVrSetting()
+            && validateCompany();
     };
 
     // Validate From/To values.
@@ -291,6 +311,16 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     var validateVrSetting = function () {
         if (!domElements.ddlVrSettings.val()) {
             validator.ShowError(domElements.ddlVrSettings.next(), "Please select at least one VR Setting!", 'w');
+
+            return false;
+        }
+
+        return true;
+    };
+
+    var validateCompany = function () {
+        if (!domElements.ddlCompany.val()) {
+            validator.ShowError(domElements.ddlCompany.next(), "Please select at least one company!", 'w');
 
             return false;
         }
@@ -744,6 +774,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         betChoicePerformanceOfBetTypeParams.IsExcludeLeagues = isExcludeLeagues;
         betChoicePerformanceOfBetTypeParams.MatchGroup = parameters.MatchGroup;
         betChoicePerformanceOfBetTypeParams.VrSettings = parameters.VrSettings;
+        betChoicePerformanceOfBetTypeParams.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1032,6 +1063,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         intervalParamrters.MatchGroup = parameters.MatchGroup;
         intervalParamrters.VrSettings = parameters.VrSettings;
+        intervalParamrters.Sites = parameters.Sites;
 
         common.DisableInput();
         $.ajax({
@@ -1277,6 +1309,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         pointHDPParamrters.MatchGroup = parameters.MatchGroup;  
         pointHDPParamrters.VrSettings = parameters.VrSettings;
+        pointHDPParamrters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1554,6 +1587,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         timeMachineParameters.MatchGroup = parameters.MatchGroup;
         timeMachineParameters.VrSettings = parameters.VrSettings;
+        timeMachineParameters.Sites = parameters.Sites;
         common.DisableInput();
 
         $.ajax({
@@ -1591,6 +1625,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         timeMachineParameters.MatchGroup = parameters.MatchGroup;
         timeMachineParameters.VrSettings = parameters.VrSettings;
+        timeMachineParameters.Sites = parameters.Sites;
         common.DisableInput();
 
         $.ajax({
@@ -1854,6 +1889,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         leagueParamrters.MatchGroup = parameters.MatchGroup;
         leagueParamrters.VrSettings = parameters.VrSettings;
+        leagueParamrters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1924,6 +1960,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         leaguePerformanceOfBetChoiceParams.IsExcludeLeagues = isExcludeLeagues;
         leaguePerformanceOfBetChoiceParams.MatchGroup = parameters.MatchGroup;
         leaguePerformanceOfBetChoiceParams.VrSettings = parameters.VrSettings;
+        leaguePerformanceOfBetChoiceParams.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -2185,6 +2222,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         traderPerformance.MatchGroup = parameters.MatchGroup;
         traderPerformance.VrSettings = parameters.VrSettings;
+        traderPerformance.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -2484,6 +2522,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
         matchPerformanceParamrters.VrSettings = parameters.VrSettings;
+        matchPerformanceParamrters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -2788,6 +2827,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         leaguePerformanceParams.MatchGroup = parameters.MatchGroup;
         leaguePerformanceParams.VrSettings = parameters.VrSettings;
+        leaguePerformanceParams.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -3126,6 +3166,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         traderPerformanceParams.MatchGroup = parameters.MatchGroup; 
         traderPerformanceParams.VrSettings = parameters.VrSettings;
+        traderPerformanceParams.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -3410,6 +3451,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         betChoicePerformanceParams.MatchGroup = parameters.MatchGroup;
         betChoicePerformanceParams.VrSettings = parameters.VrSettings;
+        betChoicePerformanceParams.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -3680,6 +3722,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         pointHDPParamrters.MatchGroup = parameters.MatchGroup;
         pointHDPParamrters.VrSettings = parameters.VrSettings;
+        pointHDPParamrters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -3715,6 +3758,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         intervalParamrters.MatchGroup = parameters.MatchGroup;
         intervalParamrters.VrSettings = parameters.VrSettings;
+        intervalParamrters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -3962,6 +4006,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         };
         matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
         matchPerformanceParamrters.VrSettings = parameters.VrSettings;
+        matchPerformanceParamrters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',

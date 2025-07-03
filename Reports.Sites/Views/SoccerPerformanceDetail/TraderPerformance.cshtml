@@ -62,19 +62,15 @@
                     }
                 </select>
             </div>
-            <div class="date-range" style="width:610px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
-            <div class="lbl-field col_4" style="width:94px">
+            <div class="date-range" style="width:655px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
+            <div class="lbl-field col_4" style="width:102px">
                 <label for="ddlBetType">BetType</label>
             </div>
             <div class="edit-field col_8">
                 <select id="ddlBetType" multiple="multiple" style="width: 160px">
                     @foreach (var group in (IEnumerable<GroupBetTypes>)ViewBag.GroupBetTypes)
                     {
-                        var check = false;
-                        if (group.TotalDefaultCheckOfBetTypeList == group.BetTypeList.Count())
-                        {
-                            check = true;
-                        }
+                        bool check = group.TotalDefaultCheckOfBetTypeList == group.BetTypeList.Count();
                         <optgroup label="@group.GroupName" checked=@check>
                             @foreach (var bettype in (IEnumerable<BetType>)group.BetTypeList)
                             {
@@ -111,7 +107,7 @@
 		            <option value="HEDGE" selected>Hedge</option>
 	            </select>
             </div>
-            <div class="lbl-field col_15">
+            <div class="lbl-field col_17">
 	            <label for="ddlVrSettings">VR Setting</label>
             </div>
             <div class="edit-field col_6">
@@ -126,9 +122,28 @@
 	        <div class="lbl-field col_6">
 		        <label for="txtTrader">Trader</label>
 	        </div>
-	        <div class="edit-field col_5 align-left">
-		        <input type="text" id="txtTrader" maxlength="30" style="width: 130px" />
-	        </div>
+            <div class="edit-field col_5 align-left">
+                <input type="text" id="txtTrader" maxlength="30" style="width: 130px" />
+            </div>
+            <div class="lbl-field col_6" style="margin-left: 12px">
+                <label for="ddlCompany">Company</label>
+            </div>
+            <div class="edit-field col_6">
+                <select id="ddlCompany" multiple="multiple">
+                    <optgroup label="MBC Group" checked=@true>
+                        @foreach (var company in (List<string>)ViewBag.MBCGroup)
+                        {
+                            <option value="@company" selected="selected">@company</option>
+                        }
+                    </optgroup>
+                    <optgroup label="Licensee Group" checked=@true>
+                        @foreach (var company in (List<string>)ViewBag.LicenseeGroup)
+                        {
+                            <option value="@company" selected="selected">@company</option>
+                        }
+                    </optgroup>
+                </select>
+            </div>
         </div>
 		
         <div class="filter-row">

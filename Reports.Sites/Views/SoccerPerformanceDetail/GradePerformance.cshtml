@@ -55,26 +55,22 @@
                 <label>Market</label>
             </div>
             <div class="edit-field col_5">
-                <select id="ddlMarket" disabled="@isDisableMarket" style="width: 10.5em">
+                <select id="ddlMarket" disabled="@isDisableMarket" style="width: 165px">
                     @foreach (KeyValuePair<Market, string> item in markets)
                     {
                         <option value="@item.Key">@item.Value</option>
                     }
                 </select>
             </div>
-            <div class="date-range" style="width:610px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
-            <div class="lbl-field col_4" style="width:94px">
+            <div class="date-range" style="width:655px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
+            <div class="lbl-field col_4" style="width:102px">
                 <label for="ddlBetType">BetType</label>
             </div>
             <div class="edit-field col_8">
                 <select id="ddlBetType" multiple="multiple" style="width: 160px">
                     @foreach (var group in (IEnumerable<GroupBetTypes>)ViewBag.GroupBetTypes)
                     {
-                        var check = false;
-                        if (group.TotalDefaultCheckOfBetTypeList == group.BetTypeList.Count())
-                        {
-                            check = true;
-                        }
+                        bool check = group.TotalDefaultCheckOfBetTypeList == group.BetTypeList.Count();
                         <optgroup label="@group.GroupName" checked=@check>
                             @foreach (var bettype in (IEnumerable<BetType>)group.BetTypeList)
                             {
@@ -87,38 +83,60 @@
         </div>
 
         <div class="filter-row">
-	        <div class="lbl-field col_6">
-		        <label for="txtLeague">League Group</label>
-	        </div>
-	        <div class="edit-field col_5">
-		        <select id="ddlLeagueGroup" multiple="multiple">
-			        @foreach (var leagueGroup in (IEnumerable<LeagueGroup>)ViewBag.LeagueGroups)
-			        {
-				        <option value=@leagueGroup.TargetLeagueGroupId selected>@leagueGroup.LeagueGroupName</option>
-			        }
-		        </select>
-	        </div>
-	        <div class="lbl-field col_6" style="margin-left: 12px">
-		        <label for="ddlMatchGroup">Match Group</label>
-	        </div>
-	        <div class="edit-field col_6">
-		        <select id="ddlMatchGroup" multiple="multiple">
-			        <option value="EXTRA_TIME" selected>Extra Time</option>
-			        <option value="NORMAL" selected>Normal</option>
-			        <option value="PENALTY" selected>Penalty</option>
-			        <option value="HEDGE" selected>Hedge</option>
-		        </select>
-	        </div>
-	        <div class="lbl-field col_15">
-		        <label for="ddlVrSettings">VR Setting</label>
-	        </div>
-	        <div class="edit-field col_6">
-		        <select id="ddlVrSettings" multiple="multiple">
-			        <option value="VR_PLUS" selected>VR+</option>
-			        <option value="NO_VR" selected>No VR</option>
-			        <option value="VR_MINUS" selected>VR-</option>
-		        </select>
-	        </div>
+            <div class="lbl-field col_6">
+                <label for="txtLeague">League Group</label>
+            </div>
+            <div class="edit-field col_5">
+                <select id="ddlLeagueGroup" multiple="multiple">
+                    @foreach (var leagueGroup in (IEnumerable<LeagueGroup>)ViewBag.LeagueGroups)
+                    {
+                        <option value=@leagueGroup.TargetLeagueGroupId selected>@leagueGroup.LeagueGroupName</option>
+                    }
+                </select>
+            </div>
+            <div class="lbl-field col_6" style="margin-left: 12px">
+                <label for="ddlMatchGroup">Match Group</label>
+            </div>
+            <div class="edit-field col_6">
+                <select id="ddlMatchGroup" multiple="multiple">
+                    <option value="EXTRA_TIME" selected>Extra Time</option>
+                    <option value="NORMAL" selected>Normal</option>
+                    <option value="PENALTY" selected>Penalty</option>
+                    <option value="HEDGE" selected>Hedge</option>
+                </select>
+            </div>
+            <div class="lbl-field col_17">
+                <label for="ddlVrSettings">VR Setting</label>
+            </div>
+            <div class="edit-field col_6">
+                <select id="ddlVrSettings" multiple="multiple">
+                    <option value="VR_PLUS" selected>VR+</option>
+                    <option value="NO_VR" selected>No VR</option>
+                    <option value="VR_MINUS" selected>VR-</option>
+                </select>
+            </div>
+           
+        </div>
+        <div class="filter-row">
+            <div class="lbl-field col_6">
+                <label for="ddlCompany">Company</label>
+            </div>
+            <div class="edit-field col_5">
+                <select id="ddlCompany" multiple="multiple">
+                    <optgroup label="MBC Group" checked=@true>
+                        @foreach (var company in (List<string>)ViewBag.MBCGroup)
+                        {
+                            <option value="@company" selected="selected">@company</option>
+                        }
+                    </optgroup>
+                    <optgroup label="Licensee Group" checked=@true>
+                        @foreach (var company in (List<string>)ViewBag.LicenseeGroup)
+                        {
+                            <option value="@company" selected="selected">@company</option>
+                        }
+                    </optgroup>
+                </select>
+            </div>
         </div>
         <div class="filter-row">
 	        <div class="lbl-field col_6">

@@ -1,6 +1,7 @@
 ﻿@using SoccerPerformanceDetail.ViewModel
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SoccerPerformanceDetail
+@using SoccerPerformanceDetail.Model
 @using Utilities.DateTimes
 @{
     ViewBag.Title = "Soccer Performance Detail";
@@ -62,8 +63,8 @@
                     }
                 </select>
             </div>
-            <div class="date-range" style="width:610px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
-            <div class="lbl-field col_4" style="width:94px">
+            <div class="date-range" style="width:655px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
+            <div class="lbl-field col_4" style="width:102px">
                 <label for="ddlBetType">BetType</label>
             </div>
             <div class="edit-field col_8">
@@ -105,7 +106,7 @@
 			        <option value="HEDGE" selected>Hedge</option>
 		        </select>
 	        </div>
-	        <div class="lbl-field col_15">
+	        <div class="lbl-field col_17">
 		        <label for="ddlVrSettings">VR Setting</label>
 	        </div>
 	        <div class="edit-field col_6">
@@ -120,9 +121,28 @@
             <div class="lbl-field col_6">
 		        <label for="txtLeague">League</label>
 	        </div>
-	        <div class="edit-field col_5">
-		        <input type="text" id="txtLeague" maxlength="100" style="width:130px" />
-	        </div>
+            <div class="edit-field col_5">
+                <input type="text" id="txtLeague" maxlength="100" style="width:130px" />
+            </div>
+            <div class="lbl-field col_6" style="margin-left: 12px">
+                <label for="ddlCompany">Company</label>
+            </div>
+            <div class="edit-field col_6">
+                <select id="ddlCompany" multiple="multiple">
+                    <optgroup label="MBC Group" checked=@true>
+                        @foreach (var company in (List<string>)ViewBag.MBCGroup)
+                        {
+                            <option value="@company" selected="selected">@company</option>
+                        }
+                    </optgroup>
+                    <optgroup label="Licensee Group" checked=@true>
+                        @foreach (var company in (List<string>)ViewBag.LicenseeGroup)
+                        {
+                            <option value="@company" selected="selected">@company</option>
+                        }
+                    </optgroup>
+                </select>
+            </div>
         </div>
 		
         <div class="filter-row">
