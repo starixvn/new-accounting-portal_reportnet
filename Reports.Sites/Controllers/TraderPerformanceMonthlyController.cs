@@ -1,7 +1,7 @@
 ﻿using Reports.Sites.Settings;
-using SoccerPerformanceDetail.Criteria;
-using SoccerPerformanceDetail.Model;
-using SoccerPerformanceDetail.Services;
+using TGR.Criteria;
+using TGR.Model;
+using TGR.Services;
 
 namespace Reports.Sites.Controllers;
 

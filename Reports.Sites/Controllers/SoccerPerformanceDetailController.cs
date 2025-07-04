@@ -1,5 +1,8 @@
 ﻿using Fanex.Data.Repository;
 using Reports.Sites.Settings;
+using TGR.Criteria;
+using TGR.Model;
+using TGR.Services;
 
 namespace Reports.Sites.Controllers;
 
@@ -7,9 +10,6 @@ using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using SoccerPerformanceDetail.Criteria;
-using SoccerPerformanceDetail.Model;
-using SoccerPerformanceDetail.Services;
 using Utilities.Configurations;
 
 public class SoccerPerformanceDetailController(SoccerPerformanceDetailService service,
