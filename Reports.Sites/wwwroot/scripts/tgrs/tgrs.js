@@ -228,7 +228,7 @@ Fanex.TGRS.Common = function () {
             $(this).clearField();
         });
 
-        $.get('GetViewScorePermission', function (result) {
+        $.get('/SoccerPerformanceDetail/GetViewScorePermission', function (result) {
             $this.HasViewScorePermission = result;
         });
     };

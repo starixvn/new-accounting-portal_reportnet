@@ -71,17 +71,8 @@
 
   <ItemGroup>
     <Compile Remove="angular\**" />
-    <Compile Remove="Scripts\**" />
-    <Compile Remove="Services\**" />
     <Content Remove="angular\**" />
-    <Content Remove="Scripts\**" />
-    <Content Remove="Services\**" />
-    <EmbeddedResource Remove="angular\**" />
-    <EmbeddedResource Remove="Scripts\**" />
-    <EmbeddedResource Remove="Services\**" />
     <None Remove="angular\**" />
-    <None Remove="Scripts\**" />
-    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,16 +94,5 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\soccer-performance-detail\scripts\league-performance.js" />
-    <Content Remove="wwwroot\soccer-performance-detail\scripts\trader-performance.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\League\" />
-    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Grade\" />
-    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Team\" />
-    <Folder Include="ExcelTemplate\SoccerPerformanceDetail\Trader\" />
-  </ItemGroup>
 
 </Project>
