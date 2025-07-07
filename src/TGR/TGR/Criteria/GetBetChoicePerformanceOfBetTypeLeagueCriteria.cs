@@ -20,6 +20,9 @@ public class GetBetChoicePerformanceOfBetTypeLeagueCriteria : CriteriaBase
     public string MatchGroup { get; set; }
 
     public string VrSettings { get; set; }
+
+    public string Sites { get; set; }
+
     public bool IsExcludeLeagues { get; set; }        
 
     public override string GetSettingKey()

@@ -30,6 +30,8 @@ public class GetLeagueOfBetTypeBetChoicePointHDPCriteria : CriteriaBase
 
     public string VrSettings { get; set; }
 
+    public string Sites { get; set; }
+
     public override string GetSettingKey()
         => "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_PointHDP_League";
 

@@ -32,6 +32,8 @@ public class GetLeaguePerformanceOfBetChoiceCriteria : CriteriaBase
 
     public string VrSettings { get; set; }
 
+    public string Sites { get; set; }
+
     public override string GetSettingKey()
     {
         return "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_League";

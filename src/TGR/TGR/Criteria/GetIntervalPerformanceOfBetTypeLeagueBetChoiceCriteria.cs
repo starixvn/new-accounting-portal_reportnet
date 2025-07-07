@@ -28,6 +28,8 @@ public class GetIntervalPerformanceOfBetTypeLeagueBetChoiceCriteria : CriteriaBa
 
     public string VrSettings { get; set; }
 
+    public string Sites { get; set; }
+
     public override string GetSettingKey()
         => "TGRS_Rpt_PerformanceDetail_Bettype_League_BetChoice_Interval";
 
