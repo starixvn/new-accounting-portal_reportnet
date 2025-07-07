@@ -22,48 +22,66 @@
 }
 <div id="filter-bar">
     <div class="filter-form">
+	    <div class="filter-row">
+		    <div class="filter-cell">
+			    <div class="lbl-field col_4 align-right bold">
+				    Sport
+			    </div>
+			    <div class="edit-field col_12 align-left ddl-sport">
+				    <select id="dropdown-sport"></select>
+			    </div>
+		    </div>
+		    <div id="bettrans-mode" class="filter-cell">
+			    <div id="datepickerplugin" class="lbl-field col_23 align-right">
+			    </div>
+		    </div>
+		    <div id="warehouse-mode" class="filter-cell">
+			    <div id="historyDatepickerplugin" class="lbl-field col_23 align-right">
+			    </div>
+		    </div>
+		    <div class="filter-cell">
+			    <div class="lbl-field col_4 align-right bold">
+				    Turnover
+			    </div>
+			    <div class="lbl-field col_9 align-right">
+				    <div class="col_3 alpha">
+					    <input id="radio-turnover-normal" type="radio" value="0" checked="checked" name="radio-turnover"
+					           class="radio-turnover" />
+					    <label for="radio-turnover-normal">
+						    Normal
+					    </label>
+				    </div>
+				    <div class="col_3">
+					    <input id="radio-turnover-nodraw" type="radio" value="1" name="radio-turnover"
+					           class="radio-turnover" />
+					    <label for="radio-turnover-nodraw">
+						    No Draw
+					    </label>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
+	    <div class="filter-row">
+		    <div class="filter-cell">
+			    <div class="lbl-field col_4 align-right bold">
+				    League Group
+			    </div>
+                <div class="edit-field col_11 align-left ddl-leaguegroup">
+				    <select id="ddlLeagueGroup"></select>
+			    </div>
+		    </div>
+		    <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold mr-right-0">
+				    Division
+			    </div>
+			    <div class="edit-field col_11 align-left ddl-division">
+				    <select id="dropdown-division"></select>
+			    </div>
+		    </div>
+	    </div>
         <div class="filter-row">
-            <div class="filter-cell">
-                <div class="lbl-field col_3 align-right bold">
-                    Sport
-                </div>
-                <div class="edit-field col_12 align-left ddl-sport">
-                    <select id="dropdown-sport"></select>
-                </div>
-            </div>
-            <div id="bettrans-mode" class="filter-cell">
-                <div id="datepickerplugin" class="lbl-field col_23 align-right">
-                </div>
-            </div>
-            <div id="warehouse-mode" class="filter-cell">
-                <div id="historyDatepickerplugin" class="lbl-field col_23 align-right">
-                </div>
-            </div>
             <div class="filter-cell">
                 <div class="lbl-field col_4 align-right bold">
-                    Turnover
-                </div>
-                <div class="lbl-field col_9 align-right">
-                    <div class="col_3 alpha">
-                        <input id="radio-turnover-normal" type="radio" value="0" checked="checked" name="radio-turnover"
-                               class="radio-turnover" />
-                        <label for="radio-turnover-normal">
-                            Normal
-                        </label>
-                    </div>
-                    <div class="col_3">
-                        <input id="radio-turnover-nodraw" type="radio" value="1" name="radio-turnover"
-                               class="radio-turnover" />
-                        <label for="radio-turnover-nodraw">
-                            No Draw
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="filter-row">
-            <div class="filter-cell">
-                <div class="lbl-field col_3 align-right bold">
                     League
                 </div>
                 <div class="edit-field col_12 align-left">
@@ -72,14 +90,6 @@
             </div>
             <div class="filter-cell">
                 <div class="lbl-field col_3 align-right bold">
-                    Division
-                </div>
-                <div class="edit-field col_11 align-left ddl-division">
-                    <select id="dropdown-division"></select>
-                </div>
-            </div>
-            <div class="filter-cell">
-                <div class="lbl-field col_2 align-right bold">
                     Status
                 </div>
                 <div class="edit-field col_4 align-left">
@@ -102,7 +112,7 @@
         </div>
         <div class="filter-row">
             <div class="filter-cell">
-                <div class="submit width-auto col_4 mr-left-80">
+                <div class="submit width-auto col_4 mr-left-106">
                     <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" class="" />
                 </div>
             </div>

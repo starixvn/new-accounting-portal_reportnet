@@ -46,6 +46,8 @@ public interface LeagueWinLossService
     Task<IEnumerable<MarginModel>> GetMargins(MarginCriteria criteria);
 
     Task<IEnumerable<MarginModel>> RunCachedMargins(MarginCriteria criteria);
+
+    Task<List<LeagueGroupGroup>> GetLeagueGroupFilter();
 }
 
 public class LeagueWinLossServiceImp(
@@ -1076,5 +1078,39 @@ public class LeagueWinLossServiceImp(
             RealTurnover = rawData.RealTurnover,
             HasVR = rawData.HasVR
         };
+    }
+
+    public async Task<List<LeagueGroupGroup>> GetLeagueGroupFilter()
+    {
+        var result = new List<LeagueGroupGroup>();
+        var criteria = new LeagueGroupCriteria();
+
+        var rawData = (await repository.FetchAsync<LeagueGroupFilterEntity>(criteria)).ToList();
+        var groups = rawData.GroupBy(x => new { x.SportType, x.SportName});
+
+        foreach (var group in groups)
+        {
+            var leagueGroup = new LeagueGroupGroup
+            {
+                SportName = group.Key.SportName,
+                SportType = group.Key.SportType,
+                LeagueGroups = []
+            };
+            var leagues = rawData.Where(x => x.SportType == group.Key.SportType);
+
+            foreach (var league in leagues)
+            {
+                leagueGroup.LeagueGroups.Add(new LeagueGroupItem
+                {
+                    SportName = league.SportName,
+                    GroupId = league.GroupId,
+                    GroupName = league.GroupName
+                });
+            }
+
+            result.Add(leagueGroup);
+        }
+
+        return result;
     }
 }

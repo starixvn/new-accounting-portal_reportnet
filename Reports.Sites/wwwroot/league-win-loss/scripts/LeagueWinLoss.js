@@ -17,6 +17,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         txtLeague: null,
         autocomplete: null,
         ddlDivision: null,
+        ddlLeagueGroup: null,
         ddlGlobalShowTime: null,
         ddlStatus: null
     };
@@ -61,13 +62,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         getSport();
         getGlobalShowTime();
         getDivision();
-
+        getLeagueGroup();
         if (isFullModePermission === 'True' || isNormalModePermission === 'True') {
             hideWarehouseMode();
         }
-
         renderMode(isFullModePermission, isNormalModePermission);
-
         makeLeagueSuggestion();
         bindingEvent();
     };
@@ -85,6 +84,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.bettransModeBtn = $("#bettrans-mode-btn");
         _tables.txtLeague = $("#txt-league");
         _tables.ddlDivision = $("#dropdown-division");
+        _tables.ddlLeagueGroup = $("#ddlLeagueGroup");
         _tables.ddlGlobalShowTime = $("#ddlGlobalShowTime");
         _tables.ddlStatus = $("#ddlStatus");
     };
@@ -147,6 +147,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             null,
             self.RenderDivision,
             self.RenderDivision,
+            AccReport.enableInput,
+            false);
+    };
+
+    var getLeagueGroup = function () {
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "/api/league-win-loss/league-group-filter",
+            null,
+            self.RenderLeagueGroup,
+            self.RenderLeagueGroup,
             AccReport.enableInput,
             false);
     };
@@ -1130,4 +1140,76 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
         return html;
     }
+
+    self.RenderLeagueGroup = function (rs) {
+        var isSetDefaultCollapse = true;
+        var id = "ddl-leaguegroup";
+        var leagueGroups = [];
+        for (var i = 0; i < rs.length; i++) {
+            var leagueGroup = rs[i];
+            var leagueGroupLength = leagueGroup.LeagueGroups.length;
+            var leagues = [];
+            if (leagueGroup.SportName === 'Non-group Leagues') {
+                leagueGroups.push({
+                        id: id + "-group-" + leagueGroup.SportType,
+                        value: leagueGroup.SportType,
+                        text: leagueGroup.SportName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                        items: leagues
+                    });
+            } else {
+                for (var j = 0; j < leagueGroupLength; j++) {
+                var league = leagueGroup.LeagueGroups[j];
+                leagues.push({
+                    id: id + "-items-" + league.GroupId,
+                    value: league.GroupId,
+                    text: league.GroupName,
+                    checked: true,
+                    enable: true,
+                    cssClass: "",
+                    });
+                }
+
+                if (leagues.length > 0) {
+                    leagueGroups.push({
+                        id: id + "-group-" + leagueGroup.SportType,
+                        value: leagueGroup.SportName,
+                        text: leagueGroup.SportName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                        items: leagues
+                    });
+                }
+            }
+            
+        }
+        console.log(leagueGroups);
+        _tables.ddlLeagueGroup.fanexMultiSelect({
+            minWidth: 250,
+            maxHeight: 450,
+            showFilter: true,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: true,
+            showFooter: false,
+            checkAllText: 'All',
+            isUsedCustomCheckAllText: true,
+            useCustomCheckAllText: 'All',
+            noneSelectedText: 'Select an option',
+            noItemText: 'No league group found.',
+            disabled: false,
+            listData: leagueGroups,
+            onCheck: function () {},
+            onOpen: function () {
+                if (isSetDefaultCollapse) {
+                    $('#ddlLeagueGroupCollapseButton').trigger('click')
+                    isSetDefaultCollapse = false;
+                }
+            }
+        });
+        _tables.ddlLeagueGroup = $("#ddlLeagueGroup");
+    };
 }

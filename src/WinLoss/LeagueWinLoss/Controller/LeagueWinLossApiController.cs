@@ -245,4 +245,11 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
         var result = await service.GetMargins(criteria);
         return Ok(result);
     }
+
+    [Route("league-group-filter")]
+    public async Task<IActionResult> GetLeagueGroupFilter()
+    {
+        var result = await service.GetLeagueGroupFilter();
+        return Ok(result);
+    }
 }
