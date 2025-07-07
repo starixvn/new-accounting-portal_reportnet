@@ -125,25 +125,6 @@
             <div class="edit-field col_5 align-left">
                 <input type="text" id="txtTrader" maxlength="30" style="width: 130px" />
             </div>
-            <div class="lbl-field col_6" style="margin-left: 12px">
-                <label for="ddlCompany">Company</label>
-            </div>
-            <div class="edit-field col_6">
-                <select id="ddlCompany" multiple="multiple">
-                    <optgroup label="MBC Group" checked=@true>
-                        @foreach (var company in (List<string>)ViewBag.MBCGroup)
-                        {
-                            <option value="@company" selected="selected">@company</option>
-                        }
-                    </optgroup>
-                    <optgroup label="Licensee Group" checked=@true>
-                        @foreach (var company in (List<string>)ViewBag.LicenseeGroup)
-                        {
-                            <option value="@company" selected="selected">@company</option>
-                        }
-                    </optgroup>
-                </select>
-            </div>
         </div>
 		
         <div class="filter-row">
