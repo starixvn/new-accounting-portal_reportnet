@@ -404,7 +404,7 @@
 			<Mapping DataField="VirtualIncome" ObjectProperty="VirtualWinLoss" />
 		</Setting>
 		<Setting Key="WinLoss_LeagueWinLoss_GetSiteFilter" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="2400" />
-		<Setting Key="Acc_Rpt_LeagueWL_LeagueGroupSel" SpName="Acc_Rpt_LeagueWL_LeagueGroupSel_xtest" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="2400" />
+		<Setting Key="Acc_Rpt_LeagueWL_LeagueGroupSel" SpName="Acc_Rpt_LeagueWL_LeagueGroupSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="2400" />
 		<Setting Key="WinLoss_LeagueWinLoss_GetPermisionProfileID" SpName="Acc_Rpt_GetPermisionProfileID" DbName="DBWH.bodb_dwrs.wsv_nap" />
 		<Setting Key="Acc_Rpt_LeagueWL_BetType" SpName="Acc_Rpt_LeagueWL_BetType" DbName="DBWH.bodb_dwrs.wsv_nap">
 			<Mapping DataField="VirtualIncome" ObjectProperty="VirtualWinLoss" />

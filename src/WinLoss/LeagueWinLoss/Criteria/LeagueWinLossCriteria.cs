@@ -32,6 +32,8 @@ public class LeagueWinLossCriteria : CriteriaBase
 
     public int PermissionProfileID { get; set; }
 
+    public string LeagueGroup { get; set; }
+
     public override string GetSettingKey()
     {
         return "WinLoss_LeagueWinLoss_GetLeagueWinLoss";
