@@ -27,7 +27,7 @@ services.AddRemotingRef(configuration);
 services.AddResultCore(configuration);
 services.AddFanexData(configuration);
 services.AddNapClient(configuration);
-services.AddOneBookUmForWeb(configuration);
+services.AddOneBookUm(configuration);
 services.AddFanexLogSentry(configuration);
 services.AddMemoryCache(configuration.GetSection("fanex.caching"));
 services.AddAllAutoMapper();
@@ -35,6 +35,7 @@ services.AddAllMediatR();
 services.AddInternalServices();
 services.AddAllWebOptimizer();
 services.AddPasswordMaskActionFilter();
+services.AddHealthChecks();
 
 // Add services to the container.
 services.AddControllersWithViews(options =>
@@ -66,6 +67,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHealthChecks("/healthz");
 app.MapControllerRoute(
     name: "universalreports",
     pattern: "UniversalReports/{controller}/{action}",
