@@ -383,6 +383,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                       "" :
                       _tables.txtLeague.val();
         self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
+        self.Params.reportParams.LeagueGroup = _tables.ddlLeagueGroup.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.GlobalShowTime = _tables.ddlGlobalShowTime.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.LiveIndicator = _tables.ddlStatus.val();
     };
