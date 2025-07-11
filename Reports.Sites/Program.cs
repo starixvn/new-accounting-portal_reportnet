@@ -27,7 +27,7 @@ services.AddRemotingRef(configuration);
 services.AddResultCore(configuration);
 services.AddFanexData(configuration);
 services.AddNapClient(configuration);
-services.AddOneBookUm(configuration);
+services.AddOneBookUmForWeb(configuration);
 services.AddFanexLogSentry(configuration);
 services.AddMemoryCache(configuration.GetSection("fanex.caching"));
 services.AddAllAutoMapper();
