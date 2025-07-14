@@ -1,6 +1,5 @@
 ﻿namespace CashOutPerformance.Handlers;
 
-using System.Globalization;
 using AutoMapper;
 using Constants;
 using Criteria;
@@ -9,6 +8,7 @@ using Models;
 using OfficeOpenXml;
 using Requests;
 using Services;
+using System.Globalization;
 using ViewModels;
 
 public class HandlerExcel(
@@ -47,7 +47,8 @@ public class HandlerExcel(
             var status = item.LiveStatus == "0" ? "Non-Live" : "Live";
             item.LiveStatus = $"{sportName} {status}";
         }
-        var excelPackage = ticketsEventExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.Event, true);
+        var isSoccer = request.SportBettype.Split(',')[0].Split('_')[0] == "1";
+        var excelPackage = ticketsEventExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.Event, true, isSoccer);
         return excelPackage;
     }
 
@@ -65,7 +66,8 @@ public class HandlerExcel(
         var criteria = mapper.Map<MatchDetailLevelCriteria>(request);
         var reportData = await service.GetTickets<MatchDetailLevelModel, MatchDetailLevelCriteria>(criteria);
         var excelModel = mapper.Map<TicketViewExcelModel<MatchDetailLevelExcelModel>>(reportData);
-        var excelPackage = ticketsMatchExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.Match, criteria.IsShowFullColumn);
+        var isSoccer = request.SportBettype.Split(',')[0].Split('_')[0] == "1";
+        var excelPackage = ticketsMatchExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.Match, criteria.IsShowFullColumn, isSoccer);
         return excelPackage;
     }
 
@@ -104,7 +106,8 @@ public class HandlerExcel(
         var criteria = mapper.Map<BetTypeLevelCriteria>(request);
         var reportData = await service.GetTickets<SimpleBetTypeLevelModel, BetTypeLevelCriteria>(criteria);
         var excelModel = mapper.Map<TicketViewExcelModel<SimpleBetTypeLevelExcelModel>>(reportData);
-        var excelPackage = ticketsSimpleBetTypeExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.BetType, true);
+        var isSoccer = request.SportBettype.Split(',')[0].Split('_')[0] == "1";
+        var excelPackage = ticketsSimpleBetTypeExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.BetType, true, isSoccer);
         return excelPackage;
     }
 }

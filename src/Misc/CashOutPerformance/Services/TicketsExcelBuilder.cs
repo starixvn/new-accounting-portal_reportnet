@@ -10,7 +10,7 @@ using ViewModels;
 
 public interface TicketsExcelBuilder<T>
 {
-    ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn);
+    ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn, bool isSoccer);
 
     ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool isShowFullColumn);
 
@@ -32,7 +32,7 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
 
     private ExcelWorksheet templateSheet;
 
-    public ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn)
+    public ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn, bool isSoccer)
     {
         var fileExcel = "CashOutPerformance.xlsx";
         var cellAddressOfTitle = "A1:AH1";
@@ -51,6 +51,7 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         RenameFirstColumn(excelType);
         sheet.ApplyVertical(model.TicketList, ExcelConstants.StartRowIndex);
         BuildTotalRow(model, totalLength);
+        RemoveColumnsForBasketBall(excelType, isSoccer);
         ClearTemplate();
         RemoveUsernameColumn(isShowFullColumn);
         return ExcelPackage;
@@ -103,11 +104,18 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
 
     private void RemoveUsernameColumn(bool isShowFullColumn)
     {
-        const byte usernameColumnIndex = 2;
         if (!isShowFullColumn)
         {
-            sheet.DeleteColumn(usernameColumnIndex);
+            sheet.DeleteColumn(ExcelConstants.UsernameColumnIndex);
         }
+    }
+
+    private void RemoveColumnsForBasketBall(ExcelType excelType, bool isSoccer)
+    {
+        if (excelType != ExcelType.Match || isSoccer) return;
+        sheet.DeleteColumn(ExcelConstants.HalfScoreColumnIndex);
+        sheet.DeleteColumn(ExcelConstants.CurrentSectionColumnIndex);
+        sheet.DeleteColumn(ExcelConstants.BetSectionColumnIndex);
     }
 
     public ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool isShowFullColumn)
