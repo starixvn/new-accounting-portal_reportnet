@@ -16,9 +16,12 @@
     <col style="width: 100px" />
     <col style="width: 100px" />
     <col style="width: 100px" />
+    <col style="width: 100px" />
+    <col style="width: 100px" />
     <col style="width: 120px" />
     <col style="width: 140px" />
     <col style="width: 140px" />
+    <col style="width: 100px" />
     <col style="width: 100px" />
     <col style="width: 120px" />
     <col style="width: 120px" />
@@ -56,10 +59,13 @@
       <th scope="col" rowspan="2">Bet Choice</th>
       <th scope="col" rowspan="2">Bet Odds</th>
       <th scope="col" rowspan="2">Bet Score</th>
+      <th scope="col" rowspan="2">Bet Section</th>
+      <th scope="col" class="bg-green" rowspan="2">Current Section</th>
       <th scope="col" class="bg-green" rowspan="2">Current GoalLine</th>
       <th scope="col" class="bg-green" rowspan="2">Current Home Odds</th>
       <th scope="col" class="bg-green" rowspan="2">Current Away Odds</th>
       <th scope="col" class="bg-green" rowspan="2">Current Score</th>
+      <th scope="col" rowspan="2">Half Score</th>
       <th scope="col" rowspan="2">Final Score</th>
       <th scope="col" colspan="3">Original Currency</th>
       <th scope="col" colspan="11">Base RM</th>
@@ -99,10 +105,13 @@
   <td>{{ item.BetChoice }}</td>
   <td>{{ item.BetOdd }}</td>
   <td>{{ item.BetScore }}</td>
+  <td>{{ item.BetSection }}</td>
+  <td>{{ item.CurrentSection }}</td>
   <td>{{ item.CurrentGoalLine }}</td>
   <td>{{ item.CurrentHomeOdds }}</td>
   <td>{{ item.CurrentAwayOdds }}</td>
   <td class="text-center">{{ item.CurrentScore }}</td>
+  <td class="text-center">{{ item.HalfScore }}</td>
   <td class="text-center">{{ item.FinalScore }}</td>
   <td class="text-right" [napDecimalFormat]="item.COTurnover"></td>
   <td class="text-right" [napDecimalFormat]="item.BBAmount"></td>
@@ -127,7 +136,7 @@
 </ng-template>
 <div *ngIf="dataViewModel" [ngSwitch]="dataViewModel.Total > 0">
   <div class="nap-grid">
-    <div [style.width]="isShowFullColumn ? '4840px' : '4690px'">
+    <div [style.width]="isShowFullColumn ? '5140px' : '4990px'">
       <div class="header">
         <table>
           <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
@@ -149,7 +158,7 @@
         <table>
           <tbody>
             <tr>
-              <th scope="col" class="no-data" [attr.colspan]="isShowFullColumn ? 35 : 34">
+              <th scope="col" class="no-data" [attr.colspan]="isShowFullColumn ? 38 : 37">
                 There is no data
               </th>
             </tr>
@@ -161,7 +170,7 @@
           <ng-template [ngTemplateOutlet]="colgroup"></ng-template>
           <tfoot>
             <tr class="font-weight-bold">
-              <td [attr.colspan]="isShowFullColumn ? 24 : 23" class="text-right">Grand Total</td>
+              <td [attr.colspan]="isShowFullColumn ? 27 : 26" class="text-right">Grand Total</td>
               <td class="text-right" [napDecimalFormat]="dataViewModel.TotalTicket.COTurnover_RM"></td>
               <td *ngIf="isShowNotAvailable(dataViewModel.TotalTicket.ActualTurnover)" class="text-right">&nbsp;</td>
               <td *ngIf="!isShowNotAvailable(dataViewModel.TotalTicket.ActualTurnover)" class="text-right"
@@ -185,7 +194,7 @@
               <td class="text-right red-positive" [napDecimalFormat]="dataViewModel.TotalTicket.TotalIncome_RM"></td>
             </tr>
             <tr>
-              <td [attr.colspan]="isShowFullColumn ? 35 : 34">
+              <td [attr.colspan]="isShowFullColumn ? 38 : 37">
                 <nap-pagination [config]="paginationInstance" (pageChange)="onPageChange($event)"></nap-pagination>
               </td>
             </tr>

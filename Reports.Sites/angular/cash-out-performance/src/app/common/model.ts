@@ -88,6 +88,9 @@ export interface MatchDetailLevelModel extends CommonTicketModel {
   CurrentScore: string;
   FinalScore: string;
   SiteGroup: string;
+  BetSection: string;
+  CurrentSection: string;
+  HalfScore: string;
 }
 
 export interface TicketViewModel<T> {

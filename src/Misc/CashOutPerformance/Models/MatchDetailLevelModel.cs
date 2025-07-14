@@ -40,6 +40,10 @@ public class MatchDetailLevelModel : CommonTicketModel
 
     public string BetScore { get; set; }
 
+    public string BetSection { get; set; }
+
+    public string CurrentSection { get; set; }
+
     public string CurrentGoalLine { get; set; }
 
     public string CurrentHomeOdds { get; set; }
@@ -47,6 +51,8 @@ public class MatchDetailLevelModel : CommonTicketModel
     public string CurrentAwayOdds { get; set; }
 
     public string CurrentScore { get; set; }
+
+    public string HalfScore { get; set; }
 
     public string FinalScore { get; set; }
 
