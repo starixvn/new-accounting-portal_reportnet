@@ -800,8 +800,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         var noOfLeaguesFormat = '<span class="league-link link" data-betchoice="{0}" data-is-live="{1}" title="{7}" '
             + 'data-bettype-id="{2}" data-betteam="{3}" data-oddsspread="{4}" data-isfmbettype="{5}" data-betoption="{6}">{7}</span>';
 
-        var colBetChoiceFormat = '<span class="interval-link link" title="{0}" data-betteam="{1}" data-bettype-id="{2}" data-oddsspread="{3}">{0}</span>';
-        var colBetChoicePointHDPFormat = '<span class="point-hdp-link link" title="{0}" data-betteam="{1}" data-bettype-id="{2}">{0}</span>';
+        var colBetChoiceFormat = '<span class="interval-link link" title="{0}" data-betteam="{1}" data-bettype-id="{2}" data-oddsspread="{3}" data-hdp2="{4}" >{0}</span>';
+        var colBetChoicePointHDPFormat = '<span class="point-hdp-link link" title="{0}" data-betteam="{1}" data-bettype-id="{2}"  data-hdp2="{3}" >{0}</span>';
 
         var gridOptions = {
             gridExpandHeight: 260,
@@ -935,8 +935,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 noOfLeaguesCol = noOfLeaguesFormat.format(item.BetChoice, item.IsLive, betTypeId, item.BetTeam, item.OddsSpread, data.IsFMBetType
                     , betOption, numeral(item.LeagueCount).format(common.Formats.IntegerFormat));
 
-                colBetChoice = colBetChoiceFormat.format(betOption, item.BetTeam, betTypeId, item.OddsSpread);
-                colBetChoicePointHDP = colBetChoicePointHDPFormat.format(betOption, item.BetChoice, betTypeId);
+                colBetChoice = colBetChoiceFormat.format(betOption, item.BetTeam, betTypeId, item.OddsSpread, item.Hdp2);
+                colBetChoicePointHDP = colBetChoicePointHDPFormat.format(betOption, item.BetChoice, betTypeId, item.Hdp2);
 
                 totalTO += item.Turnover;
                 totalWL += item.WinLoss;
@@ -1024,9 +1024,10 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             var $link = $(this);
             var betTeam = $link.attr('data-betteam');
             var oddsspread = $link.attr('data-oddsspread');
+            var hdp2 = $link.attr('data-hdp2');
             var betChoice = $link.text();
 
-            getIntervalPerformanceOfBetTypeBetChoice(betTeam, betTypeId, betTypeName, isLive, oddsspread, betChoice);
+            getIntervalPerformanceOfBetTypeBetChoice(betTeam, betTypeId, betTypeName, isLive, oddsspread, betChoice, hdp2);
         });
 
         domElements.divBetChoicePerformanceContainer.find('span.point-hdp-link').click(function () {
@@ -1050,7 +1051,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         });
     };
 
-    var getIntervalPerformanceOfBetTypeBetChoice = function (betTeam, betTypeId, betTypeName, isLive, oddsspread, betChoice) {
+    var getIntervalPerformanceOfBetTypeBetChoice = function (betTeam, betTypeId, betTypeName, isLive, oddsspread, betChoice, hdp2) {
         var intervalParamrters = {
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
@@ -1059,7 +1060,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             IsLive: isLive,
             Oddsspread: oddsspread,
             LeagueGroupIds: parameters.LeagueGroupIds,
-            LeagueName: parameters.LeagueName
+            LeagueName: parameters.LeagueName,
+            Hdp2: hdp2
         };
         intervalParamrters.MatchGroup = parameters.MatchGroup;
         intervalParamrters.VrSettings = parameters.VrSettings;

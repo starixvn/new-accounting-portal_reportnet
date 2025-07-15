@@ -8,6 +8,8 @@ public class BetTypeBetChoiceItem
 
     public string BetTeam { get; set; }
 
+    public decimal Hdp2 { get; set; }
+
     public decimal OddsSpread { get; set; }
 
     public int LeagueCount { get; set; }
