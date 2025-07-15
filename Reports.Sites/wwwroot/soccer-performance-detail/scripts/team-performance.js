@@ -1500,7 +1500,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
     // Export team performance to excel.
     var exportTeamPerformance = function () {
-        AccReport.downloadFile(urls.ExportTeamPerformance, parameters);
+        AccReport.downloadFile(urls.ExportTeamPerformance, parameters, 'post');
     };
 
     // Get trader performance on a specific team.

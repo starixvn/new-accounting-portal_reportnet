@@ -45,8 +45,8 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         });
     }
 
-    [HttpGet("export-bettypes")]
-    public async Task<IActionResult> ExportExcelBetType([FromQuery] GetBetTypePerformanceCriteria criteria)
+    [HttpPost("export-bettypes")]
+    public async Task<IActionResult> ExportExcelBetType([FromForm] GetBetTypePerformanceCriteria criteria)
     {
         var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await soccerDetailService.GetLeagueGroups();
@@ -69,8 +69,8 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         return Ok(result);
     }
 
-    [HttpGet("export-bet-choice-detail")]
-    public async Task<IActionResult> ExportExcelBetChoicePerformanceOfBetType([FromQuery] GetBetChoicePerformanceOfBetTypeCriteria criteria)
+    [HttpPost("export-bet-choice-detail")]
+    public async Task<IActionResult> ExportExcelBetChoicePerformanceOfBetType([FromForm] GetBetChoicePerformanceOfBetTypeCriteria criteria)
     {
         var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await soccerDetailService.GetLeagueGroups();
@@ -114,8 +114,8 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         return Ok(leaguePerformance);
     }
 
-    [HttpGet("export-live-league-detail")]
-    public async Task<IActionResult> ExportLeaguePerformanceOfBetChoice([FromQuery]GetLeaguePerformanceOfBetChoiceCriteria criteria)
+    [HttpPost("export-live-league-detail")]
+    public async Task<IActionResult> ExportLeaguePerformanceOfBetChoice([FromForm] GetLeaguePerformanceOfBetChoiceCriteria criteria)
     {
         var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await soccerDetailService.GetLeagueGroups();

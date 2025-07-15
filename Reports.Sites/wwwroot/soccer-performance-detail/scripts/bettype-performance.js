@@ -752,15 +752,15 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
 
     // Export bet type performance to excel.
     var exportBetTypePerformance = function () {
-        AccReport.downloadFile(urls.ExportBetTypePerformance, parameters);
+        AccReport.downloadFile(urls.ExportBetTypePerformance, parameters, 'post');
     };
 
-    var exportBetChoicePerformanceOfBetType = function () {
-        common.DownloadFile(urls.ExportBetChoicePerformanceOfBetType, betChoicePerformanceOfBetTypeParams);
+    var exportBetChoicePerformanceOfBetType = function () {        
+        AccReport.downloadFile(urls.ExportBetChoicePerformanceOfBetType, betChoicePerformanceOfBetTypeParams, 'post');
     };
 
     var exportLeaguePerformanceOfBetChoice = function () {
-        AccReport.downloadFile(urls.ExportLeaguePerformanceOfBetChoice, leaguePerformanceOfBetChoiceParams);
+        AccReport.downloadFile(urls.ExportLeaguePerformanceOfBetChoice, leaguePerformanceOfBetChoiceParams, 'post');
     };
 
     // Get betchoice performance on a specific bet type.

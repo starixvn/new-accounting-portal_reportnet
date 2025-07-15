@@ -627,7 +627,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
 
     // Export trader performance to excel.
     var exportTraderPerformance = function () {
-        AccReport.downloadFile(urls.ExportTraderPerformance, parameters);
+        AccReport.downloadFile(urls.ExportTraderPerformance, parameters, 'post');
     };
 
     // Get match performance by trader.

@@ -657,7 +657,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
 
     // Export league performance to excel.
     var exportLeaguePerformance = function () {
-        AccReport.downloadFile(urls.ExportLeaguePerformance, parameters);
+        AccReport.downloadFile(urls.ExportLeaguePerformance, parameters, 'post');
     };
 
     // Get trader performance on a specific league.

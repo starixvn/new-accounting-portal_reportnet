@@ -26,8 +26,8 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
         return Ok(gradePerformance);
     }
 
-    [HttpGet("export-grade")]
-    public async Task<IActionResult> ExportExcelTrader([FromQuery] GetGradePerformanceCriteria criteria)
+    [HttpPost("export-grade")]
+    public async Task<IActionResult> ExportExcelTrader([FromForm] GetGradePerformanceCriteria criteria)
     {
         var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await service.GetLeagueGroups();

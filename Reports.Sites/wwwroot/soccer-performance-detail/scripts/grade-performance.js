@@ -542,7 +542,7 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
 
     // Export grade performance to excel.
     var exportGradePerformance = function () {
-        AccReport.downloadFile(urls.ExportGradePerformance, parameters);
+        AccReport.downloadFile(urls.ExportGradePerformance, parameters, 'post');
     };
 
     // Get league performance on a specific bet type.
