@@ -237,7 +237,9 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var (betChoiceData, betChoiceOfBetTypeInfo) = await repository.FetchMultipleAsync<BetTypeBetChoicePerformanceInfo, FMBetTypeBetChoiceInfo>(criteria);
 
-        var betTypeBetChoiceList = CalculateBetTypeBetChoiceList(betChoiceData, betChoiceOfBetTypeInfo);
+        var betTypeBetChoiceList = CalculateBetTypeBetChoiceList(
+            betChoiceData.OrderBy(b=>b.BetOption).ToList(),
+            betChoiceOfBetTypeInfo.ToList());
 
         return betTypeBetChoiceList;
     }
@@ -487,7 +489,9 @@ public class SoccerPerformanceDetailServiceImp(
     {
         var (betChoiceData, betChoiceOfBetTypeInfo) = await repository.FetchMultipleAsync<BetTypeBetChoicePerformanceInfo, FMBetTypeBetChoiceInfo>(criteria);
 
-        var betTypeBetChoiceList = CalculateBetTypeBetChoiceList(betChoiceData, betChoiceOfBetTypeInfo);
+        var betTypeBetChoiceList = CalculateBetTypeBetChoiceList(
+            betChoiceData.OrderBy(b=>b.BetOption).ToList(),
+            betChoiceOfBetTypeInfo.ToList());
 
         return betTypeBetChoiceList;
     }

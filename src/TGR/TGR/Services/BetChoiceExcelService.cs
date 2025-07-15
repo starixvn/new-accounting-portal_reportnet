@@ -37,6 +37,7 @@ public class BetChoiceExcelServiceImp(ConfigurationService configurationService,
     public Task<ExcelPackage> ExportExcelBetTypePerformance(BetTypeBetChoiceList data, GetBetChoicePerformanceOfBetTypeCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups, string betType)
     {
+        CalculateBetChoice(data, criteria.BetType);
         LoadTemplate("BetChoice.xlsx");
         BuildFilterBlock(criteria, leagueGroups, betType);
         BuildBodyRows(data.ItemList, StartRowIndex);
@@ -58,6 +59,24 @@ public class BetChoiceExcelServiceImp(ConfigurationService configurationService,
             sheet.ApplyModel(template, item, rowIndex);
             UpdateValueSpecificColumns(rowIndex++, item);
         }
+    }
+
+    private static void CalculateBetChoice(BetTypeBetChoiceList data, int betType)
+    {
+        data.ItemList.ForEach(i =>
+        {
+            i.BetChoice = GetBetChoice(i, data.IsFMBetType, betType);
+        });
+    }
+
+    private static string GetBetChoice(BetTypeBetChoiceItem item, bool isFmBetType,  int betType)
+    {
+        if (!isFmBetType)
+        {
+            return item.BetChoice;
+        }
+
+        return betType is 221 or 222 ? item.BetOption + " " + item.OddsSpread : item.BetOption;
     }
 
     private void BuildTotalRow(BetTypeBetChoiceItem data, int startIndex)
