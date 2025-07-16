@@ -27,33 +27,13 @@ public class GetTeamPerformanceCriteria : CriteriaBase, IBasePerformanceCriteria
 
     public string TeamIds { get; set; }
 
-    public decimal? Turnover { get; set; }
-
-    public decimal? WinLoss { get; set; }
-
-    public decimal? MarginFrom { get; set; }
-
-    public decimal? MarginTo { get; set; }
-
-    [SpParam(Ignored = true)]
-    public bool IsReal { get; set; }
-
-    [SpParam(Ignored = true)]
-    public bool IsVirtual { get; set; }
-
-    public decimal? TurnoverReal { get; set; }
-
-    public decimal? WinLossReal { get; set; }
-
-    public decimal? MarginFromReal { get; set; }
-
-    public decimal? MarginToReal { get; set; }
-
     public string BetTypes { get; set; }
 
     public bool IsExcludeLeagues { get; set; }
 
     public string LeagueGroupIds { get; set; }
+    public string VrSettings { get; set; }
+    public string MatchGroup { get; set; }
 
     [SpParam(Ignored = true)]
     public bool IsAllLeagueGroup { get; set; }

@@ -19,7 +19,9 @@ public class GetMatchPerformanceOfLeagueCriteria : CriteriaBase
     public string BetTypes { get; set; }
 
     public bool IsExcludeLeagues { get; set; }
+    public string MatchGroup { get; set; }
 
+    public string VrSettings { get; set; }
     public override string GetSettingKey()
     {
         return "TGRS_Rpt_PerformanceDetail_League_Match";

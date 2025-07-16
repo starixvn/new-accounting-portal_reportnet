@@ -17,7 +17,9 @@ public class GetBetChoicePerformanceOfBetTypeLeagueCriteria : CriteriaBase
     public DateTime FromDate { get; set; }
 
     public DateTime ToDate { get; set; }
+    public string MatchGroup { get; set; }
 
+    public string VrSettings { get; set; }
     public bool IsExcludeLeagues { get; set; }        
 
     public override string GetSettingKey()

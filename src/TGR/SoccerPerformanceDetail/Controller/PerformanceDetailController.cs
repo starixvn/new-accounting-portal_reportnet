@@ -4,7 +4,6 @@ using Constants;
 using Criteria;
 using Fanex.NAP.Client;
 using Microsoft.AspNetCore.Mvc;
-using Model;
 using Services;
 using Utilities;
 
@@ -53,7 +52,10 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
         var leagueGroups = await soccerDetailService.GetLeagueGroups();
         var betTypes = await soccerDetailService.GetBetTypes(napSession.UserId, betTypePermission);
         var data = await soccerDetailService.GetBetTypePerformance(criteria);
-        var excelPackage = await excelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypes);
+        var allowVirtualPerformance = permissionService.IsVirtualPerformancePermission();
+        var allowRealPerformance = permissionService.IsRealPerformancePermission();
+
+        var excelPackage = await excelService.ExportExcelBetTypePerformance(data, criteria, leagueGroups, betTypes, allowVirtualPerformance, allowRealPerformance);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileName = $"Performance_Detail_BetType_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
@@ -126,8 +128,11 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
             _ => ExcelConstants.NonLiveText
         };
         criteria.IsExcludeLeagues = true;
+        var allowVirtualPerformance = permissionService.IsVirtualPerformancePermission();
+        var allowRealPerformance = permissionService.IsRealPerformancePermission();
+
         var data = await soccerDetailService.GetLeaguePerformanceOfBetChoice(criteria);
-        var excelPackage = await liveLeagueService.ExportExcel(data, criteria, leagueGroups, betTypesString);
+        var excelPackage = await liveLeagueService.ExportExcel(data, criteria, leagueGroups, betTypesString, allowVirtualPerformance, allowRealPerformance);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
         var fileName =
             $"Performance_Detail_{betTypesString.Replace(" ", "_")}_{market}_{criteria.BetChoice}_{criteria.FromDate:yyyyMMdd}_{criteria.ToDate:yyyyMMdd}";
@@ -188,6 +193,42 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     public async Task<IActionResult> GetPointHDPPerformanceOfBetTypeLeagueBetChoice(GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria criteria)
     {
         var result = await soccerDetailService.GetPointHDPPerformanceOfBetTypeLeagueBetChoice(criteria);
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("GetIntervalPerformanceOfBetTypeBetChoice")]
+    public IActionResult GetIntervalPerformanceOfBetTypeBetChoice(GetIntervalPerformanceOfBetTypeBetChoiceCriteria criteria)
+    {
+        var result = soccerDetailService.GetIntervalPerformanceOfBetTypeBetChoice(criteria);
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP")]
+    public IActionResult GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP(GetTimeMachineOfBetTypeBetChoicePointHDPCriteria criteria)
+    {
+        var result = soccerDetailService.GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP(criteria);
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("GetIntervalPerformanceOfBetTypeLeagueBetChoice")]
+    public IActionResult GetIntervalPerformanceOfBetTypeLeagueBetChoice(GetIntervalPerformanceOfBetTypeLeagueBetChoiceCriteria criteria)
+    {
+        var result = soccerDetailService.GetIntervalPerformanceOfBetTypeLeagueBetChoice(criteria);
+
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP")]
+    public IActionResult GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP(GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDPCriteria criteria)
+    {
+        var result = soccerDetailService.GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP(criteria);
 
         return Ok(result);
     }

@@ -23,6 +23,9 @@ public class GetBettypeDetailTrader : CriteriaBase
     public bool IsExcludeLeagues { get; set; }
 
     public string LeagueGroupIds { get; set; }
+    public string MatchGroup { get; set; }
+
+    public string VrSettings { get; set; }
 
     public override string GetSettingKey()
     {

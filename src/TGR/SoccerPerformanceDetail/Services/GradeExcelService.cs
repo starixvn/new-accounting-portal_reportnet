@@ -14,7 +14,9 @@ public interface GradeExcelService
     Task<ExcelPackage> ExportExcelGradePerformance(GradePerformanceList data,
         GetGradePerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
-        IEnumerable<BetTypeItem> betTypes);
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance);
 }
 
 public class GradeExcelServiceImp(
@@ -27,7 +29,9 @@ public class GradeExcelServiceImp(
         GradePerformanceList data,
         GetGradePerformanceCriteria criteria,
         IEnumerable<LeagueGroup> leagueGroups,
-        IEnumerable<BetTypeItem> betTypes)
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance)
     {
         LoadTemplate("Grade", "Grade.xlsx", ExcelConstants.GradePerformance);
 
@@ -37,7 +41,8 @@ public class GradeExcelServiceImp(
         currentRowIndex = ProcessDataList(data.ItemLiveList, currentRowIndex, ExcelConstants.LiveText, BuildBodyRows);
         currentRowIndex = ProcessDataList(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText, BuildBodyRows);
 
-        BuildTotalRow(data.Total, currentRowIndex);
+        BuildTotalRow(data.Total, currentRowIndex); 
+        HideNonPermissionColumn(allowVirtualPerformance, allowRealPerformance);
         ClearTemplate(ExcelConstants.GradePerformance);
         return Task.FromResult(ExcelPackage!);
     }

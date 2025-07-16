@@ -30,7 +30,7 @@ public class BetChoiceExcelServiceImp(ConfigurationService configurationService,
 
     private const int StartFilterBlockRowIndex = 3;
 
-    private const int StartRowIndex = 11;
+    private const int StartRowIndex = 13;
 
     private ExcelPackage ExcelPackage { get; set; }
 
@@ -93,6 +93,8 @@ public class BetChoiceExcelServiceImp(ConfigurationService configurationService,
         sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = criteria.FromDate.ToString("MM/dd/yyyy");
         sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
         sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = betType;
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = FilterBeautyMapper.BeautyMatchGroup(criteria.MatchGroup);
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = FilterBeautyMapper.BeautyVrSetting(criteria.VrSettings);
         sheet!.Cells[$"B{rowIndex}:M{rowIndex}"].Value = ModelsHelper.MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
     }
 

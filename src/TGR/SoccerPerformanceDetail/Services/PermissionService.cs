@@ -2,7 +2,6 @@
 using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Services;
-using NPOI.SS.Formula.Functions;
 using SoccerPerformanceDetail.Constants;
 using SoccerPerformanceDetail.Model;
 

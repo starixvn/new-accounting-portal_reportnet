@@ -85,6 +85,18 @@ public interface SoccerPerformanceDetailService
     Task<LeaguePerformanceList> GetLeaguePerformanceOfBetTypeBetChoicePointHDP(GetLeagueOfBetTypeBetChoicePointHDPCriteria criteria);
 
     Task<PointHDPPerformanceList> GetPointHDPPerformanceOfBetTypeLeagueBetChoice(GetPointHDPPerformanceOfBetTypeLeagueBetChoiceCriteria criteria);
+
+    List<IntervalBetChoicePerformanceInfo> GetIntervalPerformanceOfBetTypeBetChoice(
+        GetIntervalPerformanceOfBetTypeBetChoiceCriteria criteria);
+
+    TimeMachinePerformanceList GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP(
+        GetTimeMachineOfBetTypeBetChoicePointHDPCriteria criteria);
+
+    List<IntervalBetChoicePerformanceInfo> GetIntervalPerformanceOfBetTypeLeagueBetChoice(
+        GetIntervalPerformanceOfBetTypeLeagueBetChoiceCriteria criteria);
+
+    TimeMachinePerformanceList GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP(
+        GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDPCriteria criteria);
 }
 
 public class SoccerPerformanceDetailServiceImp(
@@ -1027,5 +1039,62 @@ public class SoccerPerformanceDetailServiceImp(
         var result = await CalculatePointHDPPerformanceBetChoice(criteria, criteria.BetType, criteria.BetTeam);
 
         return result;
+    }
+
+    public List<IntervalBetChoicePerformanceInfo> GetIntervalPerformanceOfBetTypeBetChoice(
+        GetIntervalPerformanceOfBetTypeBetChoiceCriteria criteria)
+    {
+        return repository.Fetch<IntervalBetChoicePerformanceInfo>(criteria).ToList();
+    }
+
+    public TimeMachinePerformanceList GetTimeMachinePerformanceOfBetTypeBetChoicePointHDP(GetTimeMachineOfBetTypeBetChoicePointHDPCriteria criteria)
+    {
+        var timeList = new TimeMachinePerformanceList();
+
+        var timeData = repository.Fetch<TimeMachinePerformanceInfo>(criteria).ToList();
+
+        if (timeData.Any())
+        {
+            timeList.AddItem(timeData, criteria.BetType);
+
+            timeList.Total.Margin = CalculateTotalMargin(timeList.Total.WinLoss, timeList.Total.Turnover);
+            timeList.Total.MarginReal = CalculateTotalMargin(timeList.Total.WinLossReal, timeList.Total.TurnoverReal);
+        }
+
+        return timeList;
+    }
+
+    private decimal? CalculateTotalMargin(decimal winLoss, decimal turnover)
+    {
+        decimal? margin = null;
+
+        if (turnover != 0)
+        {
+            margin = winLoss / turnover * 100;
+        }
+
+        return margin;
+    }
+
+    public List<IntervalBetChoicePerformanceInfo> GetIntervalPerformanceOfBetTypeLeagueBetChoice(GetIntervalPerformanceOfBetTypeLeagueBetChoiceCriteria criteria)
+    {
+       return repository.Fetch<IntervalBetChoicePerformanceInfo>(criteria).ToList();
+    }
+
+    public TimeMachinePerformanceList GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDP(GetTimeMachinePerformanceOfBetTypeLeagueBetChoicePointHDPCriteria criteria)
+    {
+        var timeList = new TimeMachinePerformanceList();
+
+        var timeData = repository.Fetch<TimeMachinePerformanceInfo>(criteria).ToList();
+
+        if (timeData.Any())
+        {
+            timeList.AddItem(timeData, criteria.BetType);
+
+            timeList.Total.Margin = CalculateTotalMargin(timeList.Total.WinLoss, timeList.Total.Turnover);
+            timeList.Total.MarginReal = CalculateTotalMargin(timeList.Total.WinLossReal, timeList.Total.TurnoverReal);
+        }
+
+        return timeList;
     }
 }

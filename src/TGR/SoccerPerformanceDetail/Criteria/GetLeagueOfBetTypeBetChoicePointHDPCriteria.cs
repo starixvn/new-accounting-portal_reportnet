@@ -26,6 +26,10 @@ public class GetLeagueOfBetTypeBetChoicePointHDPCriteria : CriteriaBase
     [SpParam(Ignored = true)]
     public bool IsLive { get; set; }
 
+    public string MatchGroup { get; set; }
+
+    public string VrSettings { get; set; }
+
     public override string GetSettingKey()
         => "TGRS_Rpt_PerformanceDetail_Bettype_BetChoice_PointHDP_League";
 

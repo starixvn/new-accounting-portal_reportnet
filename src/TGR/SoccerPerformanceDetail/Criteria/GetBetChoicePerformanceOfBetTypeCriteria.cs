@@ -22,11 +22,9 @@ public class GetBetChoicePerformanceOfBetTypeCriteria : CriteriaBase
 
     public string LeagueName { get; set; }
 
-    [SpParam(Ignored = true)]
-    public bool IsReal { get; set; }
+    public string MatchGroup { get; set; }
 
-    [SpParam(Ignored = true)]
-    public bool IsVirtual { get; set; }
+    public string VrSettings { get; set; }
 
     public override string GetSettingKey()
     {
