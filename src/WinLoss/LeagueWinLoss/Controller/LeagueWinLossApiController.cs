@@ -1,7 +1,11 @@
-﻿namespace LeagueWinLoss.Controller;
+﻿using Fanex.Data.Repository;
+
+namespace LeagueWinLoss.Controller;
 
 using Criteria;
+using LeagueWinLoss.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Pkcs;
 using Services;
 
 [Route("api/league-win-loss")]
@@ -12,7 +16,8 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
     MatchWinLossExcelService matchExcelService,
     BetTypeWinLossExcelService betTypeExcelService,
     SiteWinLossExcelService siteExcelService,
-    SuperWinLossExcelService superExcelService) : ControllerBase
+    SuperWinLossExcelService superExcelService,
+    IDynamicRepository repository) : ControllerBase
 {
     [Route("sport")]
     public async Task<IActionResult> GetSport()
@@ -40,6 +45,39 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
     {
         var result = await service.GetLeagueWinLoss(criteria);
         _ = Task.Run(() => service.RunCachedMargins(new MarginCriteria() { SportBettype = criteria.SportBettype }));
+        return Ok(result);
+    }
+
+    [Route("saba-league")]
+    public async Task<IActionResult> GetSabaLeagueWinLoss(string key, DateTime fromDate, DateTime toDate, string leagueGroups = "113")
+    {
+        if (key != "8f65aa41c2f2403a3c4aaaea089409353641af6392ee627c820ab52d4ffd047a")
+        {
+            return Unauthorized();
+        }
+
+        var globalShowTime = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24";
+
+        var rawSite = (await repository.FetchAsync<SiteFilterEntity>(new SiteFilterCriteria())).ToList();
+        var siteNames = rawSite.Select(s => s.SiteName);
+
+        var rawSport = (await repository.FetchAsync<SportEntity>(new SportCriteria())).ToList();
+        var sportNames = rawSport.Select(s => $"{s.SportType}_{s.Bettype}");
+
+        var criteria = new LeagueWinLossCriteria
+        {
+            StartDate = fromDate,
+            EndDate = toDate,
+            IsNoDraw = false,
+            LeagueGroup = leagueGroups,
+            LeagueName = string.Empty,
+            LiveIndicator = 2,
+            PermissionProfileID = 1,
+            GlobalShowTime = globalShowTime,
+            SiteName = string.Join(",", siteNames),
+            SportBettype = string.Join(",", sportNames),
+        };
+        var result = await service.GetLeagueWinLoss(criteria);
         return Ok(result);
     }
 
