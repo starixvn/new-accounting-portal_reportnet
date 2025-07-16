@@ -1,3 +1,7 @@
+using System.Diagnostics;
+using Fanex.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 namespace LeagueWinLoss.Services;
 
 using Criteria;
@@ -535,7 +539,6 @@ public class LeagueWinLossServiceImp(
     public async Task<MatchWinLossModel> GetMatches(MatchesCriteria criteria)
     {
         var rawData = (await repository.FetchAsync<MatchEntity>(criteria)).ToList();
-
         var leagueWinLoss = new MatchWinLossModel
         {
             Match = [],
@@ -574,7 +577,6 @@ public class LeagueWinLossServiceImp(
         leagueWinLoss.BARM = BindingMatch(barRM);
 
         leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
-
         return leagueWinLoss;
     }
 
@@ -914,21 +916,46 @@ public class LeagueWinLossServiceImp(
 
     private MatchWinLossByLiveStatus CalculateMatchTotal(string title, IEnumerable<MatchEntity> matches)
     {
+        var totals = matches.Aggregate(
+            new {
+                MemberWinLoss = 0m,
+                SMAWinLoss = 0m,
+                ExtraPT = 0m,
+                Commission = 0m,
+                VirtualWinLoss = 0m,
+                RealIncome = 0m,
+                VirtualTurnover = 0m,
+                RealTurnover = 0m
+            },
+            (acc, match) => new {
+                MemberWinLoss = acc.MemberWinLoss + match.MemberWinLoss,
+                SMAWinLoss = acc.SMAWinLoss + match.SMAWinLoss,
+                ExtraPT = acc.ExtraPT + match.ExtraPT,
+                Commission = acc.Commission + match.Commission,
+                VirtualWinLoss = acc.VirtualWinLoss + match.VirtualWinLoss,
+                RealIncome = acc.RealIncome + match.RealIncome,
+                VirtualTurnover = acc.VirtualTurnover + match.VirtualTurnover,
+                RealTurnover = acc.RealTurnover + match.RealTurnover
+            }
+        );
+
+        var firstMatch = matches.FirstOrDefault() ?? new MatchEntity();
+
         return new MatchWinLossByLiveStatus
         {
             MatchEvent = title,
-            MatchId = (matches.FirstOrDefault() ?? new MatchEntity()).MatchID,
-            MatchCode = matches.FirstOrDefault()?.MatchCode,
-            MemberWinLoss = matches.Sum(x => x.MemberWinLoss),
-            SMAWinLoss = matches.Sum(x => x.SMAWinLoss),
-            ExtraPT = matches.Sum(x => x.ExtraPT),
-            Commission = matches.Sum(x => x.Commission),
-            VirtualWinLoss = matches.Sum(x => x.VirtualWinLoss),
-            RealIncome = matches.Sum(x => x.RealIncome),
-            VirtualTurnover = matches.Sum(x => x.VirtualTurnover),
-            RealTurnover = matches.Sum(x => x.RealTurnover),
-            IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault(),
-            LiveIndicator = (matches.FirstOrDefault() ?? new MatchEntity()).LiveIndicator
+            MatchId = firstMatch.MatchID,
+            MatchCode = firstMatch.MatchCode,
+            MemberWinLoss = totals.MemberWinLoss,
+            SMAWinLoss = totals.SMAWinLoss,
+            ExtraPT = totals.ExtraPT,
+            Commission = totals.Commission,
+            VirtualWinLoss = totals.VirtualWinLoss,
+            RealIncome = totals.RealIncome,
+            VirtualTurnover = totals.VirtualTurnover,
+            RealTurnover = totals.RealTurnover,
+            IsOutright = firstMatch.IsOutright,
+            LiveIndicator = firstMatch.LiveIndicator
         };
     }
 
