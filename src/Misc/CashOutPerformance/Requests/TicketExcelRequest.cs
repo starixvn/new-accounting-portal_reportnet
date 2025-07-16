@@ -42,4 +42,6 @@ public class TicketExcelRequest<T> : IRequest<ExcelPackage>
     public bool? EvenOddCust { get; set; }
 
     public byte? PriceService { get; set; }
+
+    public int? BetId { get; set; }
 }

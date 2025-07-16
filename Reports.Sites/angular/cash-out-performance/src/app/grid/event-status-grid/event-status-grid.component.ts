@@ -91,6 +91,7 @@ export class EventStatusGridComponent implements Grid {
     this.gridService.filterModel.sportBettype = this.gridService.cachedSportBettypeForSport;
     this.gridService.filterModel.pageSize = 0;
     this.gridService.filterModel.pageIndex = 0;
+    this.gridService.filterModel.betId = undefined;
     var sportType = this.gridService.filterModel.sportBettype.split(',')[0].split('_')[0];
     if (sportType === SportType.SOCCER) {
       this.gridService.generate(GridType.BetType);

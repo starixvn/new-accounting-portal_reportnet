@@ -47,13 +47,14 @@ export class SimpleBettypeGridComponent implements Grid {
     return _.isNil(data);
   }
 
-  showMatchDetailLevel(betType: number, betTypeName: string): void{
+  showMatchDetailLevel(betType: number, betTypeName: string, betId: number): void{
     this.gridService.matchDetailTitle = betTypeName;
     const sportBettypeList =
       this.gridService.cachedSportBettypeForSport.split(',').filter(x => x.split('_')[1] === betType.toString()).join(',');
     this.gridService.filterModel.sportBettype = sportBettypeList;
     this.gridService.filterModel.pageSize = this.originalPageSize;
     this.gridService.filterModel.pageIndex = 1;
+    this.gridService.filterModel.betId = betId;
     this.gridService.generate(GridType.MatchDetail);
   }
 

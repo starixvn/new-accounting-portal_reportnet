@@ -48,7 +48,8 @@ export interface FilterModel {
     exchangeBy: boolean,
     filterType: number,
     evenOddCust?: boolean,
-    priceService?: number
+    priceService?: number,
+    betId?: number
   }
 
   export interface SiteModel {
