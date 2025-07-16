@@ -20,6 +20,8 @@ public class GetIntervalPerformanceOfBetTypeLeagueBetChoiceCriteria : CriteriaBa
 
     public string BetTeam { get; set; }
 
+    public decimal Hdp2 { get; set; }
+
     public decimal Oddsspread { get; set; }
 
     public bool IsExcludeLeagues { get; set; }
