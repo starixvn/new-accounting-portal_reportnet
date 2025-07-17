@@ -450,7 +450,7 @@
 		<Setting Key="Acc_Rpt_SabaPromotion" SpName="Acc_Rpt_SabaPromotion" DbName="DBWH.bodb_dwrs.wsv_nap" >
 			<Mapping DataField="RptDate" ObjectProperty="Date" />
 		</Setting>
-		<Setting Key="Acc_Rpt_SabaPromotion_Promo_Sel" SpName="Acc_Rpt_SabaPromotion_Promo_Sel" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
+		<Setting Key="Acc_Rpt_SabaPromotion_Promo_Sel" SpName="Acc_Rpt_SabaPromotion_Promo_Sel" DbName="DBACC.bodb02.wsv_nap"></Setting>
 	</Function>
 	<Function Name="TGR">
 		<Setting Key="TGRS_LeagueGroupSoccer_Get" SpName="TGRS_LeagueGroupSoccer_Get" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
