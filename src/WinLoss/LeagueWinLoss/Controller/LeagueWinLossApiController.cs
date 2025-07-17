@@ -1,4 +1,5 @@
 ﻿using Fanex.Data.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LeagueWinLoss.Controller;
 
@@ -49,6 +50,7 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
     }
 
     [Route("saba-league")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetSabaLeagueWinLoss(string key, DateTime fromDate, DateTime toDate, string leagueGroups = "113")
     {
         if (key != "8f65aa41c2f2403a3c4aaaea089409353641af6392ee627c820ab52d4ffd047a")
