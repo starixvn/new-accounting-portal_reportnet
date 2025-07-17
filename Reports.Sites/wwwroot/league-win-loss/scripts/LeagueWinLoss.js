@@ -17,6 +17,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         txtLeague: null,
         autocomplete: null,
         ddlDivision: null,
+        ddlLeagueGroup: null,
         ddlGlobalShowTime: null,
         ddlStatus: null
     };
@@ -32,6 +33,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             SortColumnName: '',
             SortDirection: '',
             SiteName: '',
+            LeagueGroup: '',
             LiveIndicator: 2,
             GlobalShowTime: '',
             PermissionProfileID: permissionProfileID
@@ -61,13 +63,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         getSport();
         getGlobalShowTime();
         getDivision();
-
+        getLeagueGroup();
         if (isFullModePermission === 'True' || isNormalModePermission === 'True') {
             hideWarehouseMode();
         }
-
         renderMode(isFullModePermission, isNormalModePermission);
-
         makeLeagueSuggestion();
         bindingEvent();
     };
@@ -85,6 +85,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.bettransModeBtn = $("#bettrans-mode-btn");
         _tables.txtLeague = $("#txt-league");
         _tables.ddlDivision = $("#dropdown-division");
+        _tables.ddlLeagueGroup = $("#dropdown-leaguegroup");
         _tables.ddlGlobalShowTime = $("#ddlGlobalShowTime");
         _tables.ddlStatus = $("#ddlStatus");
     };
@@ -151,6 +152,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             false);
     };
 
+    var getLeagueGroup = function () {
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "/api/league-win-loss/league-group-filter",
+            null,
+            self.RenderLeagueGroup,
+            self.RenderLeagueGroup,
+            AccReport.enableInput,
+            false);
+    };
+
     var renderHistoryDatePicker = function () {
         $('#historyDatepickerplugin').nexDatePicker({
             nexDatePickerType: "quickchoose",
@@ -163,7 +174,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             {
                 Id: "dropDownListId",
                 Label: "Date ",
-                LabelCss: "lbl-field col_2 bold",
+                LabelCss: "lbl-field col_3 bold",
                 OptionCss: "edit-field col_6"
             },
             firstDatePicker: {
@@ -372,6 +383,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                       "" :
                       _tables.txtLeague.val();
         self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
+        self.Params.reportParams.LeagueGroup = _tables.ddlLeagueGroup.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.GlobalShowTime = _tables.ddlGlobalShowTime.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.LiveIndicator = _tables.ddlStatus.val();
     };
@@ -394,6 +406,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                       "" :
                       _tables.txtLeague.val();
         self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
+        self.Params.reportParams.LeagueGroup = _tables.ddlLeagueGroup.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.GlobalShowTime = _tables.ddlGlobalShowTime.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.LiveIndicator = _tables.ddlStatus.val();
         self.Params.reportParams.PermissionProfileID = permissionProfileID;
@@ -418,6 +431,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         if (params.SiteName == '') {
             AccReport.popUp.show("Please select  at least one division!", "dropdown-division");
+            return false;
+        }
+
+        if (params.LeagueGroup == '') {
+            AccReport.popUp.show("Please select  at least one League Group!", "dropdown-leaguegroup");
             return false;
         }
 
@@ -1130,4 +1148,74 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="View Chart">' + realMarginValue.toLocaleString('en-US', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</div>';
         return html;
     }
+
+    self.RenderLeagueGroup = function (rs) {
+        var isSetDefaultCollapse = true;
+        var id = "ddl-leaguegroup";
+        var leagueGroups = [];
+        for (var i = 0; i < rs.length; i++) {
+            var leagueGroup = rs[i];
+            var leagueGroupLength = leagueGroup.LeagueGroups.length;
+            var leagues = [];
+            if (leagueGroup.SportName === 'Non-group Leagues') {
+                leagueGroups.push({
+                        id: id + "-group" + leagueGroup.SportType,
+                        value: leagueGroup.LeagueGroups[0].GroupId,
+                        text: leagueGroup.SportName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                        items: leagues
+                    });
+            } else {
+                for (var j = 0; j < leagueGroupLength; j++) {
+                var league = leagueGroup.LeagueGroups[j];
+                leagues.push({
+                    id: id + "-" + league.GroupId,
+                    value: league.GroupId,
+                    text: league.GroupName,
+                    checked: true,
+                    enable: true,
+                    cssClass: "",
+                    });
+                }
+
+                if (leagues.length > 0) {
+                    leagueGroups.push({
+                        id: id + "-group" + leagueGroup.SportType,
+                        value: leagueGroup.SportName,
+                        text: leagueGroup.SportName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                        items: leagues
+                    });
+                }
+            }
+            
+        }
+        _tables.ddlLeagueGroup.fanexMultiSelect({
+            minWidth: 250,
+            maxHeight: 450,
+            showFilter: true,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: true,
+            showFooter: false,
+            checkAllText: 'All',
+            isUsedCustomCheckAllText: true,
+            useCustomCheckAllText: 'All',
+            noneSelectedText: 'Select an option',
+            noItemText: 'No league group found.',
+            disabled: false,
+            listData: leagueGroups,
+            onCheck: function () {},
+            onOpen: function () {
+                if (isSetDefaultCollapse) {
+                    isSetDefaultCollapse = false;
+                }
+            }
+        });
+        _tables.ddlLeagueGroup = $("#dropdown-leaguegroup");
+    };
 }

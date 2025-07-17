@@ -222,7 +222,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
     };
 
     var renderReport = function (report) {
-        var liveStatus = self.Params.reportParams.LiveIndicator === "1" ? "Live" : "Non-Live";
+        var liveStatus = self.Params.reportParams.LiveIndicator === 1 ? "Live" : "Non-Live";
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];
