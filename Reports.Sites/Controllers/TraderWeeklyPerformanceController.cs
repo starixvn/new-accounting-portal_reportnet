@@ -10,17 +10,17 @@ using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
 
-public class TraderPerformanceMonthlyController : Controller
+public class TraderWeeklyPerformanceController : Controller
 {
-    [NapAuth(FunctionKey = FunctionKeys.TraderPerformanceMonthly, Policy = Constant.Policy.Read)]
+    [NapAuth(FunctionKey = FunctionKeys.TraderWeeklyPerformance, Policy = Constant.Policy.Read)]
     public async Task<IActionResult> Index()
     {
-        return View("~/Views/TraderPerformanceMonthly/Index.cshtml");
+        return View("~/Views/TraderWeeklyPerformance/Index.cshtml");
     }
 
     public ActionResult ExportCoverageExcel(int year, string months, string weeks)
     {
-        var templatePath = "ExcelTemplate/TraderPerformanceMonthly/MonthlyPerformanceCoverage.xlsx";
+        var templatePath = "ExcelTemplate/TraderWeeklyPerformance/TraderWeeklyPerformanceCoverage.xlsx";
         var monthList = months.Split([','], StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
         var weekList = weeks.Split([','], StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
 

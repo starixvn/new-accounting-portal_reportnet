@@ -84,7 +84,7 @@ function TraderPerformanceMonthlyByWeek() {
 
     $(domElements.btnExport).click(function () {
         if (validateFilterForm()) {
-            var url = "/TraderPerformanceMonthly/ExportCoverageExcel";
+            var url = "/TraderWeeklyPerformance/ExportCoverageExcel";
             var filter =
             {
                 Year: $(domElements.yearSelector).val(),
