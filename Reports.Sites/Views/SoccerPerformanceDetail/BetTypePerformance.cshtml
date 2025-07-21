@@ -196,9 +196,9 @@
 	<script type="text/javascript" src="~/scripts/bettype-performance.js?v=20250702"></script>
     <script type="text/javascript">
         var datepickerSetting = {
-            MinDate: '@(((DateTime)ViewBag.MinDate).ToShortFormatedDate())',
-            DefaultFromDate: '@(((DateTime)ViewBag.DefaultFromDate).ToShortFormatedDate())',
-            DefaultToDate: '@(((DateTime)ViewBag.DefaultToDate).ToShortFormatedDate())',
+            MinDate: '@(((DateTime)ViewBag.MinDate).ToString("MM/dd/yyyy"))',
+            DefaultFromDate: '@(((DateTime)ViewBag.DefaultFromDate).ToString("MM/dd/yyyy"))',
+            DefaultToDate: '@(((DateTime)ViewBag.DefaultToDate).ToString("MM/dd/yyyy"))',
             AllowYearRange: @ViewBag.AllowYearRange
         };
         var forecastBettype = '@ViewBag.ForecastBetType';
