@@ -6,6 +6,7 @@ import { MatchDetailLevelModel, TicketViewModel } from '../../../app/common/mode
 import { Grid } from '../grid.model';
 import { MatchDetailGridService } from './match-detail-grid.service';
 import { GridService } from '../grid.service';
+import { SportType } from '../../common/constants';
 import * as _ from 'lodash';
 
 @Component({
@@ -34,6 +35,26 @@ export class MatchDetailGridComponent implements Grid {
 
   get isShowFullColumn(): boolean {
     return this.gridService.filterModel.isShowFullColumn;
+  }
+
+  get isSoccer(): boolean {
+    return this.gridService.filterModel.sportBettype.split(',')[0].split('_')[0] === SportType.SOCCER;
+  }
+
+  get gridWidth(): string {
+    if (this.isShowFullColumn) {
+      return this.isSoccer ? '5140px' : '4840px';
+    } else {
+      return this.isSoccer ? '4990px' : '4690px';
+    }
+  }
+
+  get colSpan(): number {
+    if (this.isShowFullColumn) {
+      return this.isSoccer ? 38 : 35;
+    } else {
+      return this.isSoccer ? 37 : 34;
+    }
   }
 
   query() {

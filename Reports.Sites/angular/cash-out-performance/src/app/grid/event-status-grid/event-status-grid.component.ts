@@ -7,7 +7,7 @@ import { PaginationService } from 'nap-components/pagination';
 import { Observable } from 'rxjs';
 import { EventStatusService } from './event-status.service';
 import * as _ from 'lodash';
-import { SportType } from 'src/app/common/constants';
+import { SportType } from '../../common/constants';
 
 @Component({
   selector: 'app-event-status-grid',
