@@ -17,11 +17,6 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
     {
         criteria.LeagueName ??= string.Empty;
 
-        if (criteria.IsAllLeagueGroup)
-        {
-            criteria.LeagueGroupIds = string.Empty;
-        }
-
         var leaguePerformance = await service.GetLeaguePerformance(criteria, criteria.MarketFilter == Market.All);
 
         return Ok(leaguePerformance);

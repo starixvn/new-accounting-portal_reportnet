@@ -17,11 +17,6 @@ public class TraderPerformanceDetailController(SoccerPerformanceDetailService se
     {
         criteria.Username ??= string.Empty;
             
-        if (criteria.IsAllLeagueGroup)
-        {
-            criteria.LeagueGroupIds = string.Empty;
-        }
-           
         var traderPerformance = await service.GetTraderPerformance(criteria);
             
         return Ok(traderPerformance);

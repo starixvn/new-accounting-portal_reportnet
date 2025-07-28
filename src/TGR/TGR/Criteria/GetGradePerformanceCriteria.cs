@@ -33,9 +33,6 @@ public class GetGradePerformanceCriteria : CriteriaBase, IBasePerformanceCriteri
     public string VrSettings { get; set; }
     public string MatchGroup { get; set; }
 
-    [SpParam(Ignored = true)]
-    public bool IsAllLeagueGroup { get; set; }
-
     public override string GetSettingKey()
     {
         return "TGRS_Rpt_PerformanceDetail_Grade";

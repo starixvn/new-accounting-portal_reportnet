@@ -16,11 +16,6 @@ public class GradePerformanceDetailController(SoccerPerformanceDetailService ser
     [Route("main")]
     public async Task<IActionResult> GetGradePerformance(GetGradePerformanceCriteria criteria)
     {
-        if (criteria.IsAllLeagueGroup)
-        {
-            criteria.LeagueGroupIds = string.Empty;
-        }
-
         var gradePerformance = await service.GetGradePerformance(criteria);
         
         return Ok(gradePerformance);

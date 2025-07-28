@@ -218,12 +218,10 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 parameters.FromDate = domElements.divDateRange.getFrom();
                 parameters.ToDate = domElements.divDateRange.getTo();
                 parameters.BetTypes = selectedBetTypes.join(',');                
-                var leagueGroupNotSelect = domElements.ddlLeagueGroup.find('option').not(':selected').length;
                 parameters.LeagueGroupIds = selectedLeagueGroups !== null ? selectedLeagueGroups.join(',') : "";
                 parameters.MatchGroup = selectedMatchGroups !== null ? selectedMatchGroups.join(',') : "";
                 parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings.join(',') : "";
                 parameters.Sites = selectedCompany !== null ? selectedCompany.join(',') : "";
-                parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;
                 parameters.LeagueName = domElements.txtLeague.val();                
                 parameters.IsExcludeLeagues = isExcludeLeagues;
 

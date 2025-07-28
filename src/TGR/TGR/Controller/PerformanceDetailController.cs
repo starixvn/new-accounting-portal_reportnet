@@ -19,11 +19,6 @@ public class PerformanceDetailController(SoccerPerformanceDetailService soccerDe
     [Route("bettypes")]
     public async Task<IActionResult> GetBetTypePerformance(GetBetTypePerformanceCriteria criteria)
     {
-        if (criteria.IsAllLeagueGroup)
-        {
-            criteria.LeagueGroupIds = string.Empty;
-        }
-
         var betTypePerformance = await soccerDetailService.GetBetTypePerformance(criteria);
 
         return Ok(betTypePerformance);

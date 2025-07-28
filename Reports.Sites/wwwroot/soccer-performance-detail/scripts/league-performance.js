@@ -157,12 +157,9 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 parameters.MarketFilter = domElements.ddlMarket.val();
                 parameters.FromDate = domElements.divDateRange.getFrom();
                 parameters.ToDate = domElements.divDateRange.getTo();
-                var leagueGroupNotSelect = domElements.ddlLeagueGroup.find('option').not(':selected').length;
-
                 parameters.LeagueGroupIds = selectedLeagueGroups !== null ? selectedLeagueGroups.join(',') : "";
                 parameters.MatchGroup = selectedMatchGroups !== null ? selectedMatchGroups.join(',') : "";
                 parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings.join(',') : "";                
-                parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;
                 parameters.LeagueName = domElements.txtLeague.val();
                 parameters.BetTypes = selectedBetTypes !== null ? selectedBetTypes.join(',') : null;                
                 parameters.IsExcludeLeagues = isExcludeLeagues;

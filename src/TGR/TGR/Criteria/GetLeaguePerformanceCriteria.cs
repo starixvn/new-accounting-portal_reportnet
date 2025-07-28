@@ -29,9 +29,6 @@ public class GetLeaguePerformanceCriteria : CriteriaBase, IBasePerformanceCriter
     public string VrSettings { get; set; }
     public string MatchGroup { get; set; }
 
-    [SpParam(Ignored = true)]
-    public bool IsAllLeagueGroup { get; set; }
-
     public string LeagueName { get; set; }
 
     public string BetTypes { get; set; }

@@ -16,11 +16,6 @@ public class TeamPerformanceDetailController(SoccerPerformanceDetailService serv
     [Route("main")]
     public async Task<IActionResult> GetTeamPerformance(GetTeamPerformanceCriteria criteria)
     {
-        if (criteria.IsAllLeagueGroup)
-        {
-            criteria.LeagueGroupIds = string.Empty;
-        }
-        
         var teamPerformance = await service.GetTeamPerformance(criteria);
 
         return Ok(teamPerformance);
