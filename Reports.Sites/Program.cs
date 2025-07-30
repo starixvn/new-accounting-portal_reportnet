@@ -24,7 +24,7 @@ builder.WebHost.ConfigureKestrel(options =>
 services.AddAuthentication(configuration);
 services.AddGlobalServices();
 services.AddRemotingRef(configuration);
-services.AddResultCore(configuration);
+services.AddResultCore();
 services.AddFanexData(configuration);
 services.AddNapClient(configuration);
 services.AddOneBookUmForWeb(configuration);

@@ -1,6 +1,6 @@
-﻿namespace Reports.Sites.DependencyInjection;
+﻿using TGR.Services;
 
-using SoccerPerformanceDetail.Services;
+namespace Reports.Sites.DependencyInjection;
 
 public static class SoccerPerformanceDetailInjection
 {

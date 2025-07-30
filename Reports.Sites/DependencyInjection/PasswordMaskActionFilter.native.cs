@@ -63,7 +63,7 @@ public class PasswordMaskActionFilter(IUserService userService) : IAsyncActionFi
         return hashPassword;
     }
 
-    private string GetSecretPassword(string password, string token)
+    private static string GetSecretPassword(string password, string token)
     {
         return ToSHA256(password + token);
     }
@@ -77,7 +77,7 @@ public class PasswordMaskActionFilter(IUserService userService) : IAsyncActionFi
 
         using var hashAlgorithm = SHA256.Create();
         var hashData = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
-        var encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLower();
+        var encrypted = Convert.ToHexStringLower(hashData).Replace("-", string.Empty);
 
         return encrypted;
     }

@@ -1,4 +1,8 @@
-﻿using Reports.Sites.Settings;
+﻿using Fanex.Data.Repository;
+using Reports.Sites.Settings;
+using TGR.Criteria;
+using TGR.Model;
+using TGR.Services;
 
 namespace Reports.Sites.Controllers;
 
@@ -6,13 +10,13 @@ using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
-using SoccerPerformanceDetail.Services;
 using Utilities.Configurations;
 
 public class SoccerPerformanceDetailController(SoccerPerformanceDetailService service,
     INapSession napSession,
     ConfigurationService configurationService,
-    PermissionService permissionService) : Controller
+    PermissionService permissionService,
+    IDynamicRepository repository) : Controller
 {
     private readonly int[] ForecastBetType = [1, 3, 7, 8];
     private const string ViewPath = "~/Views/SoccerPerformanceDetail/";
@@ -77,8 +81,9 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     {
         var minDate = new DateTime(DateTime.Today.AddYears(configurationService.PerformanceYearRange * -1).Year, 1, 1);
         minDate = minDate < configurationService.AvailableDate ? configurationService.AvailableDate : minDate;
-
+        var companies = await repository.FetchAsync<Company>(new SiteByGroupSel_Criteria());
         var betTypePermissions = await permissionService.GetBettypePermission();
+
         ViewBag.MinDate = minDate;
         ViewBag.DefaultFromDate = DateTime.Today.AddDays(configurationService.PerformanceDefaultDayRange * -1);
         ViewBag.DefaultToDate = DateTime.Today;
@@ -90,5 +95,7 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
         ViewBag.GroupBetTypes = await service.GetGroupBetTypes(napSession.UserId, betTypePermissions);
         ViewBag.LeagueGroups = await service.GetLeagueGroups();
         ViewBag.IsExcludeLeagues = (await service.GetLeagueExclusionConfig()).IsExcludeLeagues;
+        ViewBag.MBCGroup = companies.Where(c => c.IsDeposit == 0).Select(c => c.Site).ToList();
+        ViewBag.LicenseeGroup = companies.Where(c => c.IsDeposit != 0).Select(c => c.Site).ToList();
     }
 }

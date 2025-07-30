@@ -1,0 +1,94 @@
+﻿@{
+	ViewBag.Title = "Trader Weekly Performance";
+	Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+
+@section Head
+{
+    <link rel="stylesheet" type="text/css" href="~/tgrs/styles/common.css?v=2" />
+}
+
+@section Headline
+{
+    <div class="title">
+        <div>
+            <span>TGR / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+    <div class="server-time">
+        <span>GMT-4</span>
+    </div>
+}
+<div class="filter-bar">
+    <div id="divBetTypePerformanceFilter" class="filter-form">
+        <div class="filter-row">
+            <div class="lbl-field col_3">
+                <label for="yearSelector">Year</label>
+            </div>
+            <div class="edit-field col_6">
+                <select id="yearSelector">
+                    @for (var year = DateTime.Now.Year; year >= 2015; year--)
+                    {
+                        if (year < DateTime.Now.Year)
+                        {
+                            <option value="@((int) year)">@year</option>
+                        }
+                        else
+                        {
+                            <option value="@((int) year)" selected>@year</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="lbl-field col_3">
+                <label for="monthSelector">Month</label>
+            </div>
+            <div class="edit-field col_5">
+                <select id="monthSelector" multiple="multiple">
+                    <option value="1" selected>January</option>
+                    <option value="2" selected>February</option>
+                    <option value="3" selected>March</option>
+                    <option value="4" selected>April</option>
+                    <option value="5" selected>May</option>
+                    <option value="6" selected>June</option>
+                    <option value="7" selected>July</option>
+                    <option value="8" selected>August</option>
+                    <option value="9" selected>September</option>
+                    <option value="10" selected>October</option>
+                    <option value="11" selected>November</option>
+                    <option value="12" selected>December</option>
+                </select>
+            </div>
+
+            <div class="lbl-field col_4">
+                <label for="weekSelector">Week</label>
+            </div>
+            <div class="edit-field col_5">
+                <select id="weekSelector" multiple="multiple">
+                    @for (var week = 1; week <= 53; week++)
+                    {
+                        <option value="@((int) week)" selected>Week @week</option>
+                    }
+                </select>
+            </div>
+
+            <div class="lbl-field col_2">
+                <label for="blankSelector"></label>
+            </div>
+            <div class="submit col_5">
+                <input id="btnExport" type="button" class="blue-button" value="Export" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Foot 
+{
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/tgrs/common-tgrs.js?v=3"></script>
+    <script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
+    <script type="text/javascript" src="~/scripts/msg-box.js"></script>
+    <script src="/scripts/tgrs/trader-weekly-performance.js" type="text/javascript"></script>
+}

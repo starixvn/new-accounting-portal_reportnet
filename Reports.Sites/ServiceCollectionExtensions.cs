@@ -1,4 +1,5 @@
 ﻿using NUglify.JavaScript;
+using TGR;
 
 namespace Reports.Sites;
 
@@ -31,7 +32,6 @@ using SBCustomerPerformanceByDanger;
 using SBPerformance;
 using SMAWinLoss;
 using StackExchange.Redis;
-using SoccerPerformanceDetail;
 using SuperBalance;
 using TotalSMAAndActiveMember;
 using TreeWinLoss;
@@ -46,7 +46,7 @@ public static class ServiceCollectionExtensions
             .FromApplication("Nap-Reports");
     }
 
-    public static void AddResultCore(this IServiceCollection services, IConfiguration configuration)
+    public static void AddResultCore(this IServiceCollection services)
     {
         ResultCoreManager.RegisterRefDataHelper(new RefDataHelper());
     }

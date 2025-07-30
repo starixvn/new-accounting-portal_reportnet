@@ -218,6 +218,9 @@ var AccReport = function ($) {
                 if (url.indexOf('MAMonitorTool') > 0 || url.indexOf('ExportLeagueWinLoss') > 0 || url.indexOf('excel') > 0) {
                     $.fileDownload(url, { httpMethod: "POST", data: data });
                 }
+                else if (method && method.toLowerCase() == 'post') {
+                    $.fileDownload(url, { httpMethod: "POST", data: data });
+                }
                 else {
                     var downloadUrl = url + "?" + data;
                     var iframe = $('body iframe');

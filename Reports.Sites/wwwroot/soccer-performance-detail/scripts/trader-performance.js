@@ -31,7 +31,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
         txtRealMarginTo: null,
         ddlLeagueGroup: null,
         ddlMatchGroup: null,
-        ddlVrSettings: null,
+        ddlVrSettings: null,        
         btnGenerate: null,
         divTraderPerformanceContainer: null,
         divTraderPerformanceGrid: null,
@@ -78,7 +78,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
         domElements.txtMinWinLoss = domElements.divTraderPerformanceFilter.find('#txtMinWinLoss');
         domElements.ddlLeagueGroup = domElements.divTraderPerformanceFilter.find('#ddlLeagueGroup');
         domElements.ddlMatchGroup = domElements.divTraderPerformanceFilter.find('#ddlMatchGroup');
-        domElements.ddlVrSettings = domElements.divTraderPerformanceFilter.find('#ddlVrSettings');
+        domElements.ddlVrSettings = domElements.divTraderPerformanceFilter.find('#ddlVrSettings');        
         domElements.btnGenerate = domElements.divTraderPerformanceFilter.find('#btnGenerate');
         domElements.divTraderPerformanceContainer = $('#divTraderPerformanceContainer');
         domElements.divTraderPerformanceGrid = $('#divTraderPerformanceGrid');
@@ -113,7 +113,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             yearRanges: null,
             labelCss: 'col_5'
         });
-
+        $("#ddlPeriodType").width(160);
         domElements.ddlBetType.multiselect({
             selectedList: 1,
             width: 200,
@@ -203,8 +203,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
 
         domElements.ddlMatchGroup.multiselect({
             selectedList: 1,
-            minWidth: 120,
-            width: 120,
+            minWidth: 160,
+            width: 160,
             height: 100,
             allSelectedText: "All"
         });
@@ -215,24 +215,22 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             height: 80,
             allSelectedText: "All"
         });
-
+        
         domElements.btnGenerate.click(function () {
             if (validator.ValidateForm(domElements.divTraderPerformanceFilter, 'w') && validateFilterForm()) {
                 var selectedBetTypes = domElements.ddlBetType.val();
                 var selectedLeagueGroups = domElements.ddlLeagueGroup.val();
                 var selectedMatchGroups = domElements.ddlMatchGroup.val();
-                var selectedVrSettings = domElements.ddlVrSettings.val();
+                var selectedVrSettings = domElements.ddlVrSettings.val();                
 
                 parameters.MarketFilter = domElements.ddlMarket.val();
                 parameters.FromDate = domElements.divDateRange.getFrom();
                 parameters.ToDate = domElements.divDateRange.getTo();
                 parameters.Username = domElements.txtTrader.val();
                 parameters.BetTypes = selectedBetTypes.join(',');
-                var leagueGroupNotSelect = domElements.ddlLeagueGroup.find('option').not(':selected').length;
                 parameters.LeagueGroupIds = selectedLeagueGroups !== null ? selectedLeagueGroups.join(',') : "";
                 parameters.MatchGroup = selectedMatchGroups !== null ? selectedMatchGroups.join(',') : "";
-                parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings .join(',') : "";
-                parameters.IsAllLeagueGroup = leagueGroupNotSelect == 0;                
+                parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings.join(',') : "";                
                 parameters.IsExcludeLeagues = isExcludeLeagues;
              
                 hideReports();
@@ -251,10 +249,10 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
 
     // Validate filter form.
     var validateFilterForm = function () {
-       return validateBetType()
-           && validateLeagueGroup()
-           && validateMatchGroup()
-           && validateVrSetting();    
+        return validateBetType()
+            && validateLeagueGroup()
+            && validateMatchGroup()
+            && validateVrSetting();
     };
 
     // Validate From/To values.
@@ -319,7 +317,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
 
         return true;
     };
-
+    
     // Get trader performance on a specific league.
     var getTraderPerformanceReport = function () {
         common.DisableInput();
@@ -627,7 +625,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
 
     // Export trader performance to excel.
     var exportTraderPerformance = function () {
-        AccReport.downloadFile(urls.ExportTraderPerformance, parameters);
+        AccReport.downloadFile(urls.ExportTraderPerformance, parameters, 'post');
     };
 
     // Get match performance by trader.
@@ -642,7 +640,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             IsExcludeLeagues: parameters.IsExcludeLeagues
         };
         matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
-        matchPerformanceParamrters.VrSettings = parameters.VrSettings;
+        matchPerformanceParamrters.VrSettings = parameters.VrSettings;        
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -946,7 +944,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TraderPerformance = function () {
             IsExcludeLeagues: parameters.IsExcludeLeagues
         };
         bettypeDetailParameters.MatchGroup = parameters.MatchGroup;
-        bettypeDetailParameters.VrSettings = parameters.VrSettings;
+        bettypeDetailParameters.VrSettings = parameters.VrSettings;        
         common.DisableInput();
         $.ajax({
             type: 'POST',

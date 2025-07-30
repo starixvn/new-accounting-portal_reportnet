@@ -1,6 +1,6 @@
-﻿@using SoccerPerformanceDetail.ViewModel
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@using SoccerPerformanceDetail
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using TGR
+@using TGR.ViewModel
 @using Utilities.DateTimes
 @{
 	ViewBag.Title = "Soccer Performance Detail";
@@ -62,19 +62,15 @@
                     }
                 </select>
             </div>
-            <div class="date-range" style="width:610px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
-            <div class="lbl-field col_4" style="width:94px">
+            <div class="date-range" style="width:655px"><div class="lbl-field" style="width:25px"></div><div id="divDateRange"></div></div>
+            <div class="lbl-field col_4" style="width:102px">
                 <label for="ddlBetType">BetType</label>
             </div>
             <div class="edit-field col_8">
                 <select id="ddlBetType" multiple="multiple" style="width: 160px">
                     @foreach (var group in (IEnumerable<GroupBetTypes>)ViewBag.GroupBetTypes)
                     {
-                        var check = false;
-                        if (group.TotalDefaultCheckOfBetTypeList == group.BetTypeList.Count())
-                        {
-                            check = true;
-                        }
+                        bool check = group.TotalDefaultCheckOfBetTypeList == group.BetTypeList.Count();
                         <optgroup label="@group.GroupName" checked=@check>
                             @foreach (var bettype in (IEnumerable<BetType>)group.BetTypeList)
                             {
@@ -111,7 +107,7 @@
 		            <option value="HEDGE" selected>Hedge</option>
 	            </select>
             </div>
-            <div class="lbl-field col_15">
+            <div class="lbl-field col_17">
 	            <label for="ddlVrSettings">VR Setting</label>
             </div>
             <div class="edit-field col_6">
@@ -126,9 +122,9 @@
 	        <div class="lbl-field col_6">
 		        <label for="txtTrader">Trader</label>
 	        </div>
-	        <div class="edit-field col_5 align-left">
-		        <input type="text" id="txtTrader" maxlength="30" style="width: 130px" />
-	        </div>
+            <div class="edit-field col_5 align-left">
+                <input type="text" id="txtTrader" maxlength="30" style="width: 130px" />
+            </div>
         </div>
 		
         <div class="filter-row">
@@ -155,14 +151,15 @@
 {
     <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
 	<script type="text/javascript" src="~/scripts/tgrs/common-tgrs.js?v=3"></script>
-	<script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
+    <script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.fileDownload.js"></script>
 	<script type="text/javascript" src="~/scripts/msg-box.js"></script>
     <script type="text/javascript" src="~/scripts/trader-performance.js?v=20250702"></script>
     <script type="text/javascript">
         var datepickerSetting = {
-            MinDate: '@(((DateTime)ViewBag.MinDate).ToShortFormatedDate())',
-            DefaultFromDate: '@(((DateTime)ViewBag.DefaultFromDate).ToShortFormatedDate())',
-            DefaultToDate: '@(((DateTime)ViewBag.DefaultToDate).ToShortFormatedDate())',
+            MinDate: '@(((DateTime)ViewBag.MinDate).ToString("MM/dd/yyyy"))',
+            DefaultFromDate: '@(((DateTime)ViewBag.DefaultFromDate).ToString("MM/dd/yyyy"))',
+            DefaultToDate: '@(((DateTime)ViewBag.DefaultToDate).ToString("MM/dd/yyyy"))',
             AllowYearRange: parseInt('@ViewBag.AllowYearRange')
         };
         var forecastBettype = '@ViewBag.ForecastBetType';

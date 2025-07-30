@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Epplus.Mapper" Version="7.5.0" />
-    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.5.2" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.5.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />

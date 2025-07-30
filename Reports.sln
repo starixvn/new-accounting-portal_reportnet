@@ -97,7 +97,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SabaPromotion", "src\Misc\S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TGR", "TGR", "{FB1A9D18-C2BD-4D45-9F33-B72359C95814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerPerformanceDetail", "src\TGR\SoccerPerformanceDetail\SoccerPerformanceDetail.csproj", "{EEC2B9DD-FE39-4992-A19D-96C7A01EEACD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TGR", "src\TGR\TGR\TGR.csproj", "{EEC2B9DD-FE39-4992-A19D-96C7A01EEACD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
