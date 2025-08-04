@@ -36,6 +36,8 @@ public class GetTraderPerformanceCriteria : CriteriaBase, IBasePerformanceCriter
     public string VrSettings { get; set; }
     public string MatchGroup { get; set; }
 
+    public string Sites { get; set; }
+
     public override string GetSettingKey()
     {
         return "TGRS_Rpt_PerformanceDetail_Trader";

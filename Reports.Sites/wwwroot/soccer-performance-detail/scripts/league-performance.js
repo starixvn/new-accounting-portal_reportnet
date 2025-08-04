@@ -44,7 +44,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         divMatchPerformanceOfLeagueContainer: null,
         divMatchPerformanceOfLeagueGrid: null,
         divBettypePerformanceOfLeagueMatchContainer: null,
-        divBettypePerformanceOfLeagueMatchGrid: null
+        divBettypePerformanceOfLeagueMatchGrid: null,
+        ddlCompany: null
     };
     var urls = {
         GetInitializedData: window.rootUrl + '/api/soccer-performance-detail/league/initialized-data',
@@ -73,6 +74,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         domElements.ddlMarket = $('#ddlMarket');
         domElements.divDateRange = domElements.divLeaguePerformanceFilter.find('#divDateRange');
         domElements.txtLeague = domElements.divLeaguePerformanceFilter.find('#txtLeague');
+        domElements.ddlCompany = domElements.divLeaguePerformanceFilter.find('#ddlCompany');
         domElements.ddlBetType = domElements.divLeaguePerformanceFilter.find('#ddlBetType');       
         domElements.ddlLeagueGroup = domElements.divLeaguePerformanceFilter.find('#ddlLeagueGroup');
         domElements.ddlMatchGroup = domElements.divLeaguePerformanceFilter.find('#ddlMatchGroup');
@@ -124,6 +126,18 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
 
             domElements.txtLeague.val(value);
         });
+
+        domElements.ddlCompany.multiselect({
+            selectedList: 1,
+            width: 160,
+            minWidth: 160,
+            height: 200,
+            allSelectedText: "All",
+            groupsCollapsable: true,
+            optGroupChecked: true
+        }).multiselectfilter({ width: 95 }).change(function () {
+            validator.ClearError(domElements.ddlCompany.next());
+        });
         
         domElements.ddlLeagueGroup.multiselect({
             selectedList: 1,
@@ -152,7 +166,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 var selectedBetTypes = domElements.ddlBetType.val();
                 var selectedLeagueGroups = domElements.ddlLeagueGroup.val();
                 var selectedMatchGroups = domElements.ddlMatchGroup.val();
-                var selectedVrSettings = domElements.ddlVrSettings.val();                
+                var selectedVrSettings = domElements.ddlVrSettings.val();
+                var selectedCompany = domElements.ddlCompany.val();
 
                 parameters.MarketFilter = domElements.ddlMarket.val();
                 parameters.FromDate = domElements.divDateRange.getFrom();
@@ -161,6 +176,7 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
                 parameters.MatchGroup = selectedMatchGroups !== null ? selectedMatchGroups.join(',') : "";
                 parameters.VrSettings = selectedVrSettings !== null ? selectedVrSettings.join(',') : "";                
                 parameters.LeagueName = domElements.txtLeague.val();
+                parameters.Sites = selectedCompany !== null ? selectedCompany.join(',') : "";
                 parameters.BetTypes = selectedBetTypes !== null ? selectedBetTypes.join(',') : null;                
                 parameters.IsExcludeLeagues = isExcludeLeagues;
 
@@ -186,7 +202,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
         return validateBetType()
             && validateLeagueGroup()
             && validateMatchGroup()
-            && validateVrSetting();
+            && validateVrSetting()
+            && validateCompany();
     };
 
     // Validate From/To values.
@@ -245,6 +262,16 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
     var validateVrSetting = function () {
         if (!domElements.ddlVrSettings.val()) {
             validator.ShowError(domElements.ddlVrSettings.next(), "Please select at least one VR Setting!", 'w');
+
+            return false;
+        }
+
+        return true;
+    };
+
+    var validateCompany = function () {
+        if (!domElements.ddlCompany.val()) {
+            validator.ShowError(domElements.ddlCompany.next(), "Please select at least one company!", 'w');
 
             return false;
         }
@@ -668,7 +695,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             IsExcludeLeagues: isExcludeLeagues
         };        
         traderPerformanceParamrters.MatchGroup = parameters.MatchGroup;
-        traderPerformanceParamrters.VrSettings = parameters.VrSettings;        
+        traderPerformanceParamrters.VrSettings = parameters.VrSettings;
+        traderPerformanceParamrters.Sites = parameters.Sites;
 
         common.DisableInput();
         $.ajax({
@@ -931,7 +959,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             IsExcludeLeagues: isExcludeLeagues
         };
         matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
-        matchPerformanceParamrters.VrSettings = parameters.VrSettings;        
+        matchPerformanceParamrters.VrSettings = parameters.VrSettings;
+        matchPerformanceParamrters.Sites = parameters.Sites;
 
         common.DisableInput();
         $.ajax({
@@ -1149,7 +1178,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             LeagueGroupIds: parameters.LeagueGroupIds
         };
         bettypeDetailParameters.MatchGroup = parameters.MatchGroup;
-        bettypeDetailParameters.VrSettings = parameters.VrSettings;        
+        bettypeDetailParameters.VrSettings = parameters.VrSettings;
+        bettypeDetailParameters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1336,7 +1366,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             IsExcludeLeagues: isExcludeLeagues
         };
         matchPerformanceParamrters.MatchGroup = parameters.MatchGroup;
-        matchPerformanceParamrters.VrSettings = parameters.VrSettings;        
+        matchPerformanceParamrters.VrSettings = parameters.VrSettings;
+        matchPerformanceParamrters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -1545,7 +1576,8 @@ Fanex.NAP.TGRS.PerformanceDetail.LeaguePerformance = function () {
             IsExcludeLeagues: isExcludeLeagues
         };
         bettypeDetailParameters.MatchGroup = parameters.MatchGroup;
-        bettypeDetailParameters.VrSettings = parameters.VrSettings;        
+        bettypeDetailParameters.VrSettings = parameters.VrSettings;
+        bettypeDetailParameters.Sites = parameters.Sites;
         common.DisableInput();
         $.ajax({
             type: 'POST',

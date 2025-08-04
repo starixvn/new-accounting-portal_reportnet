@@ -122,9 +122,28 @@
 	        <div class="lbl-field col_6">
 		        <label for="txtTrader">Trader</label>
 	        </div>
-            <div class="edit-field col_5 align-left">
-                <input type="text" id="txtTrader" maxlength="30" style="width: 130px" />
-            </div>
+	        <div class="edit-field col_5 align-left">
+		        <input type="text" id="txtTrader" maxlength="30" style="width: 130px" />
+	        </div>
+	        <div class="lbl-field col_6" style="margin-left: 12px">
+		        <label for="ddlCompany">Company</label>
+	        </div>
+	        <div class="edit-field col_6">
+		        <select id="ddlCompany" multiple="multiple">
+			        <optgroup label="MBC Group" checked=@true>
+				        @foreach (var company in (List<string>)ViewBag.MBCGroup)
+				        {
+					        <option value="@company" selected="selected">@company</option>
+				        }
+			        </optgroup>
+			        <optgroup label="Licensee Group" checked=@true>
+				        @foreach (var company in (List<string>)ViewBag.LicenseeGroup)
+				        {
+					        <option value="@company" selected="selected">@company</option>
+				        }
+			        </optgroup>
+		        </select>
+	        </div>
         </div>
 		
         <div class="filter-row">
@@ -154,7 +173,7 @@
     <script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
     <script type="text/javascript" src="/scripts/jquery.fileDownload.js"></script>
 	<script type="text/javascript" src="~/scripts/msg-box.js"></script>
-    <script type="text/javascript" src="~/scripts/trader-performance.js?v=20250702"></script>
+    <script type="text/javascript" src="~/scripts/trader-performance.js?v=20250804"></script>
     <script type="text/javascript">
         var datepickerSetting = {
             MinDate: '@(((DateTime)ViewBag.MinDate).ToString("MM/dd/yyyy"))',
