@@ -425,6 +425,7 @@
       <Mapping DataField="[LeagueId]" ObjectProperty="LeagueId" />
       <Mapping DataField="[CompanyMargin]" ObjectProperty="CompanyMargin" />
     </Setting>
+    <Setting Key="Acc_API_Soccer_Pingoal" SpName="Acc_API_Soccer_Pingoal" DbName="DB061.bodb02.wsv_nap" TimeOut="2400" />
   </Function>
   <Function Name="Misc - Duplicate Tickets">
     <Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel" DbName="DBRPT.bodb_Report.wsv_nap" TimeOut="600" />

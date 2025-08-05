@@ -49,37 +49,16 @@ public class LeagueWinLossApiController(LeagueWinLossService service,
         return Ok(result);
     }
 
-    [Route("saba-league")]
+    [Route("soccer-pingoal")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetSabaLeagueWinLoss(string key, DateTime fromDate, DateTime toDate, string leagueGroups = "113")
+    public async Task<IActionResult> GetSoccerPinGoal(string key)
     {
         if (key != "8f65aa41c2f2403a3c4aaaea089409353641af6392ee627c820ab52d4ffd047a")
         {
             return Unauthorized();
         }
 
-        var globalShowTime = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24";
-
-        var rawSite = (await repository.FetchAsync<SiteFilterEntity>(new SiteFilterCriteria())).ToList();
-        var siteNames = rawSite.Select(s => s.SiteName);
-
-        var rawSport = (await repository.FetchAsync<SportEntity>(new SportCriteria())).ToList();
-        var sportNames = rawSport.Select(s => $"{s.SportType}_{s.Bettype}");
-
-        var criteria = new LeagueWinLossCriteria
-        {
-            StartDate = fromDate,
-            EndDate = toDate,
-            IsNoDraw = false,
-            LeagueGroup = leagueGroups,
-            LeagueName = string.Empty,
-            LiveIndicator = 2,
-            PermissionProfileID = 1,
-            GlobalShowTime = globalShowTime,
-            SiteName = string.Join(",", siteNames),
-            SportBettype = string.Join(",", sportNames),
-        };
-        var result = await service.GetLeagueWinLoss(criteria);
+        var result = await repository.FetchAsync<object>(new SoccerPingoalApiCriteria());
         return Ok(result);
     }
 
