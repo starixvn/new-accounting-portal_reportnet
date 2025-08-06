@@ -1,0 +1,143 @@
+﻿using AutoMapper;
+using Epplus.Mapper.Extensions;
+using OfficeOpenXml;
+using TGR.Constants;
+using TGR.Criteria.SoccerPerformanceDetail;
+using TGR.Utilities;
+using TGR.ViewModel.SoccerPerformanceDetail;
+using Utilities.Configurations;
+
+namespace TGR.Services.SoccerPerformanceDetail;
+
+public interface LiveLeagueExcelService
+{
+    Task<ExcelPackage> ExportExcel(LeaguePerformanceList data,
+        GetLeaguePerformanceOfBetChoiceCriteria criteria,
+        IEnumerable<LeagueGroup> leagueGroups,
+        string betType,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance);
+}
+
+public class LiveLeagueExcelServiceImp(ConfigurationService configurationService,
+    IMapper mapper) : LiveLeagueExcelService
+{
+    private ExcelWorksheet sheet;
+
+    private ExcelWorksheet oddSheet;
+
+    private ExcelWorksheet evenSheet;
+
+    private ExcelWorksheet totalSheet;
+
+    private const int StartFilterBlockRowIndex = 3;
+
+    private const int StartRowIndex = 13;
+
+    private ExcelPackage ExcelPackage { get; set; }
+
+    public Task<ExcelPackage> ExportExcel(LeaguePerformanceList data, GetLeaguePerformanceOfBetChoiceCriteria criteria,
+        IEnumerable<LeagueGroup> leagueGroups, string betType,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance)
+    {
+        LoadTemplate("LiveLeague.xlsx");
+        BuildFilterBlock(criteria, leagueGroups, betType);
+        var bodyData = criteria.IsLive ? data.ItemLiveList : data.ItemNonLiveList;
+        BuildBodyRows(bodyData, StartRowIndex);
+        var startTotalRowIndex = bodyData.Count + StartRowIndex;
+
+        BuildTotalRow(data.Total, startTotalRowIndex);
+        HideNonPermissionColumn(allowVirtualPerformance, allowRealPerformance);
+        ClearTemplate();
+        return Task.FromResult(ExcelPackage!);
+    }
+
+    private void BuildBodyRows(IEnumerable<LeaguePerformanceItem> list, int startRowIndex)
+    {
+        var index = 1;
+        var rowIndex = startRowIndex;
+        var excelModels = mapper.Map<IEnumerable<LiveLeaguePerformanceExcelItem>>(list);
+        foreach (var item in excelModels)
+        {
+            var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
+            item.No = index++;
+            sheet.ApplyModel(template, item, rowIndex);
+            UpdateValueSpecificColumns(rowIndex++, item);
+        }
+    }
+
+    private void BuildTotalRow(LeaguePerformanceItem data, int startIndex)
+    {
+        var excelModel = mapper.Map<LiveLeaguePerformanceExcelItem>(data);
+        sheet.ApplyModel(totalSheet, excelModel, startIndex);
+        var cellTotalAddress = $"A{startIndex}:C{startIndex}";
+        sheet!.Cells[cellTotalAddress].Merge = true;
+        sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
+        UpdateValueSpecificColumns(startIndex, excelModel);
+    }
+
+    private void UpdateValueSpecificColumns(int startIndex, LiveLeaguePerformanceExcelItem model)
+    {
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{startIndex}"], model.Margin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{startIndex}"], model.MarginReal);
+        sheet!.Cells[$"G{startIndex}"].Value =
+            model.NoOfMatches > 0 ? model.Turnover / model.NoOfMatches : ExcelConstants.NotAvailableText;
+        sheet!.Cells[$"K{startIndex}"].Value =
+            model.NoOfMatches > 0 ? model.TurnoverReal / model.NoOfMatches : ExcelConstants.NotAvailableText;
+    }
+
+
+    private void BuildFilterBlock(GetLeaguePerformanceOfBetChoiceCriteria criteria, IEnumerable<LeagueGroup> leagueGroups, string betType)
+    {
+        var rowIndex = StartFilterBlockRowIndex;
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = criteria.Market switch
+        {
+            -1 => "All",
+            1 => ExcelConstants.LiveText,
+            _ => ExcelConstants.NonLiveText
+        };
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = criteria.FromDate.ToString("MM/dd/yyyy");
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = criteria.ToDate.ToString("MM/dd/yyyy");
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = betType;
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = FilterBeautyMapper.BeautyMatchGroup(criteria.MatchGroup);
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex++}"].Value = FilterBeautyMapper.BeautyVrSetting(criteria.VrSettings);
+        sheet!.Cells[$"B{rowIndex}:M{rowIndex}"].Value = ModelsHelper.MakeLeagueGroupSelectString(criteria.LeagueGroupIds, leagueGroups);
+    }
+
+    private void LoadTemplate(string fileExcel)
+    {
+        var templateAbsolutelyPath = $"{configurationService.CurrentDirectory}/ExcelTemplate/SoccerPerformanceDetail/BetType/{fileExcel}";
+        using var stream = new FileStream(templateAbsolutelyPath, FileMode.Open, FileAccess.Read);
+        ExcelPackage = new ExcelPackage(stream);
+        sheet = ExcelPackage.Workbook.Worksheets["League Performance"];
+        evenSheet = ExcelPackage.Workbook.Worksheets["EvenTemplate"];
+        oddSheet = ExcelPackage.Workbook.Worksheets["OddTemplate"];
+        totalSheet = ExcelPackage.Workbook.Worksheets["TotalTemplate"];
+    }
+
+    private void HideNonPermissionColumn(bool allowVirtual, bool allowReal)
+    {
+        var rowCount = sheet!.Dimension.End.Row;
+        if (!allowVirtual)
+        {
+            sheet!.Cells[$"H1:K{rowCount}"].Value = null;
+            sheet!.Cells[$"H1:K{rowCount}"].Value = null;
+            sheet.Columns[8, 11].Width = 0;
+            sheet.Columns[8, 11].Hidden = true;
+        }
+        if (!allowReal)
+        {
+            sheet!.Cells[$"L1:O{rowCount}"].Value = null;
+            sheet.Columns[12, 15].Width = 0;
+            sheet.Columns[12, 15].Hidden = true;
+        }
+    }
+
+    private void ClearTemplate()
+    {
+        ExcelPackage!.Workbook.Worksheets.Delete("EvenTemplate");
+        ExcelPackage!.Workbook.Worksheets.Delete("OddTemplate");
+        ExcelPackage!.Workbook.Worksheets.Delete("TotalTemplate");
+    }
+}

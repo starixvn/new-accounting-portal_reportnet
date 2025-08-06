@@ -1,4 +1,5 @@
 ﻿using TGR.Services;
+using TGR.Services.SoccerPerformanceDetail;
 
 namespace Reports.Sites.DependencyInjection;
 

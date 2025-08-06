@@ -1,5 +1,5 @@
 ﻿using OfficeOpenXml;
-using TGR.Model;
+using TGR.Model.SoccerPerformanceDetail;
 
 namespace TGR.Services;
 

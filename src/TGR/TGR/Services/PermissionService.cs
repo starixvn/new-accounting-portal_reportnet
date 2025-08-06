@@ -3,7 +3,7 @@ using Fanex.NAP.Client.Configuration;
 using Fanex.NAP.Client.Helpers.Business;
 using Fanex.NAP.Client.Services;
 using TGR.Constants;
-using TGR.Model;
+using TGR.Model.SoccerPerformanceDetail;
 
 namespace TGR.Services;
 

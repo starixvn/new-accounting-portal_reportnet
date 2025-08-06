@@ -2,9 +2,9 @@ using AutoMapper;
 using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using TGR.Constants;
-using TGR.Criteria;
+using TGR.Criteria.SoccerPerformanceDetail;
 using TGR.Utilities;
-using TGR.ViewModel;
+using TGR.ViewModel.SoccerPerformanceDetail;
 using Utilities.Configurations;
 
 namespace TGR.Services;

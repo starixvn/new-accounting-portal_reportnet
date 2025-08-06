@@ -1,0 +1,87 @@
+﻿using AutoMapper;
+using Epplus.Mapper.Extensions;
+using OfficeOpenXml;
+using TGR.Constants;
+using TGR.Criteria.SoccerPerformanceDetail;
+using TGR.Utilities;
+using TGR.ViewModel.SoccerPerformanceDetail;
+using Utilities.Configurations;
+
+namespace TGR.Services.SoccerPerformanceDetail;
+
+public interface TeamExcelService
+{
+    Task<ExcelPackage> ExportExcelTeamPerformance(TeamPerformanceList data,
+        GetTeamPerformanceCriteria criteria,
+        IEnumerable<LeagueGroup> leagueGroups,
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance);
+}
+
+public class TeamExcelServiceImp(
+    ConfigurationService configurationService,
+    IMapper mapper)
+    : BaseExcelService(configurationService), TeamExcelService
+{
+    public Task<ExcelPackage> ExportExcelTeamPerformance(TeamPerformanceList data, GetTeamPerformanceCriteria criteria, IEnumerable<LeagueGroup> leagueGroups,
+        IEnumerable<BetTypeItem> betTypes,
+        bool allowVirtualPerformance,
+        bool allowRealPerformance)
+    {
+        LoadTemplate("Team", "Team.xlsx", ExcelConstants.TeamPerformance);
+
+        var rowIndex = BuildFilterBlock(criteria, leagueGroups, betTypes);
+        var currentRowIndex = rowIndex + 4;
+
+        currentRowIndex = ProcessDataList(data.ItemLiveList, currentRowIndex, ExcelConstants.LiveText, BuildBodyRows);
+        currentRowIndex = ProcessDataList(data.ItemNonLiveList, currentRowIndex, ExcelConstants.NonLiveText, BuildBodyRows);
+
+        BuildTotalRow(data.Total, currentRowIndex);
+        HideNonPermissionColumn(allowVirtualPerformance, allowRealPerformance);
+        ClearTemplate(ExcelConstants.TeamPerformance);
+        return Task.FromResult(ExcelPackage!);
+    }
+
+    private void BuildBodyRows(IEnumerable<TeamPerformanceItem> list, int startRowIndex, string title)
+    {
+        var index = 1;
+        var rowIndex = startRowIndex;
+
+        var titleExcelItem = new TeamPerformanceExcelTitleItem
+        {
+            Title = title
+        };
+        sheet!.ApplyModel(titleSheet, titleExcelItem, rowIndex++);
+
+        var excelModels = mapper.Map<IEnumerable<TeamPerformanceExcelItem>>(list);
+        foreach (var item in excelModels)
+        {
+            item.No = index++;
+            sheet!.ApplyModel(bodySheet, item, rowIndex);
+            UpdateValueSpecificColumns(rowIndex++, item);
+        }
+    }
+
+    private void BuildTotalRow(TeamPerformanceItem data, int startIndex)
+    {
+        var excelModel = mapper.Map<TeamPerformanceExcelItem>(data);
+        sheet!.ApplyModel(totalSheet, excelModel, startIndex);
+        UpdateValueSpecificColumns(startIndex, excelModel);
+        var cellTotalAddress = $"A{startIndex}:B{startIndex}";
+        sheet!.Cells[$"G{startIndex}"].Value = null;
+        sheet!.Cells[cellTotalAddress].Merge = true;
+        sheet!.Cells[cellTotalAddress].Value = ExcelConstants.GrandTotalText;
+    }
+
+    private void UpdateValueSpecificColumns(int startIndex, TeamPerformanceExcelItem model)
+    {
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"G{startIndex}"], model.Score);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"K{startIndex}"], model.Margin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"O{startIndex}"], model.MarginReal);
+        sheet!.Cells[$"I{startIndex}"].Value =
+            model.NoOfMatches > 0 ? model.Turnover / model.NoOfMatches : ExcelConstants.NotAvailableText;
+        sheet!.Cells[$"M{startIndex}"].Value =
+            model.NoOfMatches > 0 ? model.TurnoverReal / model.NoOfMatches : ExcelConstants.NotAvailableText;
+    }
+}

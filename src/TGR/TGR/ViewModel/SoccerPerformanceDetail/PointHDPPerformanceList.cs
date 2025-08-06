@@ -1,0 +1,11 @@
+﻿namespace TGR.ViewModel.SoccerPerformanceDetail
+{
+    public class PointHDPPerformanceList
+    {
+        public List<PointHDPPerformanceItem> ItemList { get; set; } = [];
+
+        public PointHDPPerformanceItem Total { get; set; } = new();
+
+        public bool IsTotalGoalBetType { get; set; }
+    }
+}

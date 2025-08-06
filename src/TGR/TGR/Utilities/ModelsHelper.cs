@@ -1,6 +1,6 @@
 ﻿using OfficeOpenXml;
 using TGR.Constants;
-using TGR.ViewModel;
+using TGR.ViewModel.SoccerPerformanceDetail;
 
 namespace TGR.Utilities;
 

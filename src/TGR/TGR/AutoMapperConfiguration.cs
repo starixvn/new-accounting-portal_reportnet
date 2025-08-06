@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TGR.Model;
-using TGR.ViewModel;
+using TGR.Model.SoccerPerformanceDetail;
+using TGR.ViewModel.SoccerPerformanceDetail;
 
 namespace TGR;
 
