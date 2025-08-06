@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Performance Detail (Juice & Leftover)";
+	Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head
+{
+	<link rel="stylesheet" type="text/css" href="~/tgrs/styles/common.css?v=2" />
+	<link rel="stylesheet" type="text/css" href="~/style/month-picker.css" />
+	<link rel="stylesheet" type="text/css" href="~/style/month-picker-custom.css" />
+	<link rel="stylesheet" type="text/css" href="~/style/nex-date-picker.css" />
+	<link rel="stylesheet" type="text/css" href="~/style/pager-pagination.css" />
+	<link rel="stylesheet" type="text/css" href="~/style/fanex-grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/soccer-performance-detail-juice-leftover/styles/performance-detail-juice-leftover.css" />
+}
+@section Headline
+{
+	<div class="title">
+		<div>
+			<span>TGR / </span><span class="curr">@ViewBag.Title</span>
+		</div>
+	</div>
+    <div class="header-button">
+        <a href="@Url.Content("~/Reports/NewPerformanceDetail/LeaguePerformance")" class="green-button change-list">
+            <span class="list-icon"></span>League
+        </a>
+        <a href="@Url.Content("~/Reports/NewPerformanceDetail/TraderPerformance")" class="green-button change-list">
+            <span class="list-icon"></span>Trader
+        </a>
+        <a href="@Url.Content("~/Reports/NewPerformanceDetail/GradePerformance")" class="green-button change-list">
+            <span class="list-icon"></span>Grade
+        </a>
+        <a href="@Url.Content("~/Reports/NewPerformanceDetail/TeamPerformance")" class="green-button change-list">
+            <span class="list-icon"></span>Team
+        </a>
+        <a href="#" class="green-button change-list disabled">
+            <span class="list-icon"></span>BetType
+        </a>
+    </div>
+}
+<div class="filter-bar">
+    <div id="divBetTypePerformanceFilter" class="filter-form">
+        <div class="filter-row">
+            <div class="date-range"><div id="divDateRange"></div></div>
+            <div class="col_1">
+                <input id="btnGenerate" type="button" class="blue-button" value="Generate" />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divBetTypePerformanceContainer" class="content-grid display-none">
+    <div id="divBetTypePerformanceGrid" class="freegrid"></div>
+</div>
+<div id="divTraderPerformanceContainer" class="content-grid display-none">
+    <div id="divTraderPerformanceGrid" class="freegrid"></div>
+</div>
+<div id="divMatchPerformanceContainer" class="content-grid display-none">
+    <div id="divMatchPerformanceGrid" class="freegrid"></div>
+</div>
+<div id="divLeaguePerformanceContainer" class="content-grid display-none">
+    <div id="divLeaguePerformanceGrid" class="freegrid"></div>
+</div>
+@section Foot
+{
+	<script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+	<script type="text/javascript" src="~/scripts/tgrs/common-tgrs.js?v=3"></script>
+	<script type="text/javascript" src="~/scripts/tgrs/tgrs.js"></script>
+	<script type="text/javascript" src="/scripts/jquery.fileDownload.js"></script>
+	<script type="text/javascript" src="~/scripts/msg-box.js"></script>
+    <script type="text/javascript" src="~/scripts/performance-detail-juice-leftover/bettype-performance.js"></script>
+    <script type="text/javascript">
+        var datepickerSetting = {
+            MinDate: '@(((DateTime)ViewBag.MinDate).ToString("MM/dd/yyyy"))',
+            DefaultFromDate: '@(((DateTime)ViewBag.DefaultFromDate).ToString("MM/dd/yyyy"))',
+            DefaultToDate: '@(((DateTime)ViewBag.DefaultToDate).ToString("MM/dd/yyyy"))',
+            AllowYearRange: @ViewBag.AllowYearRange
+        };
+        var forecastBettype = '@ViewBag.ForecastBetType';
+        var labels = {
+            No: '#',
+            BetType: 'Bet Type',
+            NoOfLeagues: 'No. Of Leagues',
+            NoOfTraders: 'No. Of Traders',
+            NoOfMatches: 'No. Of Matches',
+            Turnover: 'Turnover (MY)',
+            WinLoss: 'Win Loss',
+            BetCount: 'Bet Count',
+            Margin: 'Margin %',
+            MarginTotal: 'Margin on Total %',
+            Trader: 'Trader',
+            Grade: 'Grade',
+            Team: 'Team',
+            Match: 'Match',
+            League: 'League',
+            BetTypeBM: 'Bet Type BM %',
+            Total: 'Total',
+            GrandTotal: 'Grand Total',
+            AllBetTypes: 'All BetTypes',
+            EventDate: 'Event Date',
+            EffectiveDate: 'Effective Date',
+            NA: 'NA',
+            Forecast: 'Forecast',
+            BetTypePerformance: 'Bet Type Performance',
+            LeaguePerformance: 'League Performance',
+            TraderPerformance: 'Trader Performance',
+            MatchPerformance: 'Match Performance',
+            TeamHistoryDetail: 'Team History Detail',
+            GradeHistoryDetail: 'Grade History Detail',
+            Score: 'Score',
+            Benchmark: 'BM %',
+            ScoreByLatestBenchMark: 'Score By Latest BenchMark',
+            ScoreByPeriod: 'Score By Period',
+            Afternoon: 'Afternoon',
+            Night: 'Night',
+            Midnight: 'Midnight'
+        };
+        var messages = {
+            InvalidValue: 'Invalid value!',
+            RequiredField: 'Required field!'
+        };
+    </script>
+}
