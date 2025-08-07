@@ -247,6 +247,10 @@ public static class ServiceCollectionExtensions
                 "/soccer-performance-detail/scripts/grade-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/bettype-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/bettype-performance.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");
@@ -344,6 +348,11 @@ public static class ServiceCollectionExtensions
                 "/soccer-performance-detail/styles/performance-detail.css",
                 "/soccer-performance-detail/styles/performance-detail.less",
                 "/soccer-performance-detail/styles/performance-summary.less");
+
+            pipeline.AddLessBundle(
+                "/performance-detail-juice-leftover/styles/performance-detail-juice-leftover.css",
+                "/performance-detail-juice-leftover/styles/performance-detail.less",
+                "/performance-detail-juice-leftover/styles/performance-summary.less");
         });
     }
 
