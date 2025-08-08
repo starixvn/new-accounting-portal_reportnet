@@ -89,6 +89,7 @@ public static class ServiceCollectionExtensions
         services.RegisterBetConstructPerformanceServices();
         services.RegisterSabaPromotionServices();
         services.RegisterSoccerPerformanceDetailServices();
+        services.RegisterJuiceLeftOverInjectionServices();
     }
 
     public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)

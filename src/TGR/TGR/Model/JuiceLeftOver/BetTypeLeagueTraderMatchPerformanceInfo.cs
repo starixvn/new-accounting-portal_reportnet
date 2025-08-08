@@ -38,5 +38,5 @@ public class BetTypeLeagueTraderMatchPerformanceInfo
 
     public string EventDateString => Convert.ToDateTime(EventDate).ToShortFormatedDate();
 
-    public string MatchName => string.Format("{0} {1} {2}", CacheRef.GetTeamName(HomeId), ViewLang.Vs, CacheRef.GetTeamName(AwayId));
+    public string MatchName { get; set; }
 }

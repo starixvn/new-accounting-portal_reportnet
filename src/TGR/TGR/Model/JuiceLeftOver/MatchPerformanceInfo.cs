@@ -1,4 +1,6 @@
-﻿namespace TGR.Model.JuiceLeftOver;
+﻿using Utilities.DateTimes;
+
+namespace TGR.Model.JuiceLeftOver;
 
 public class MatchPerformanceInfo
 {
@@ -40,7 +42,7 @@ public class MatchPerformanceInfo
 
     public string EventDateString => Convert.ToDateTime(EventDate).ToShortFormatedDate();
 
-    public string LeagueName => CacheRef.GetLeagueName(LeagueId);
+    public string LeagueName { get; set; }
 
-    public string MatchName => string.Format("{0} -vs- {1}", CacheRef.GetTeamName(HomeId), CacheRef.GetTeamName(AwayId));
+    public string MatchName { get; set; }
 }
