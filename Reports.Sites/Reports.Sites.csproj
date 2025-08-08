@@ -101,5 +101,9 @@
     <Content Remove="wwwroot\performance-detail-juice-leftover\styles\performance-summary.less" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ExcelTemplate\PerformanceDetailJuiceLeftover\BetType\" />
+  </ItemGroup>
+
 
 </Project>

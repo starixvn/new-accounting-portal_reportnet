@@ -14,13 +14,13 @@ Namespace.Register('Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance');
 Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     var $this = this;
     var urls = {
-        GetBetTypePerformance: common.ResolveRootUrl('NewPerformanceDetail/GetBetTypePerformance'),
-        ExportBetTypePerformance: common.ResolveRootUrl('NewPerformanceDetail/ExportBetTypePerformance'),
-        GetTraderPerformanceOfBetType: common.ResolveRootUrl('NewPerformanceDetail/GetTraderPerformanceOfBetType'),
-        GetMatchPerformanceOfBetTypeTrader: common.ResolveRootUrl('NewPerformanceDetail/GetMatchPerformanceOfBetTypeTrader'),
-        GetLeaguePerformanceOfBetType: common.ResolveRootUrl('NewPerformanceDetail/GetLeaguePerformanceOfBetType'),
-        GetTraderPerformanceOfBetTypeLeague: common.ResolveRootUrl('NewPerformanceDetail/GetTraderPerformanceOfBetTypeLeague'),
-        GetMatchPerformanceOfBetTypeLeagueTrader: common.ResolveRootUrl('NewPerformanceDetail/GetMatchPerformanceOfBetTypeLeagueTrader')
+        GetBetTypePerformance: window.rootUrl + '/api/juice-left-over/bettype/main',
+        ExportBetTypePerformance: window.rootUrl + '/api/juice-left-over/bettype/export-bettypes',
+        GetTraderPerformanceOfBetType: window.rootUrl + '/api/juice-left-over/bettype/bettype-trader',
+        GetMatchPerformanceOfBetTypeTrader: window.rootUrl + '/api/juice-left-over/bettype/bettype-trader-match',
+        GetLeaguePerformanceOfBetType: window.rootUrl + '/api/juice-left-over/bettype/bettype-league',
+        GetTraderPerformanceOfBetTypeLeague: window.rootUrl + '/api/juice-left-over/bettype/bettype-league-trader',
+        GetMatchPerformanceOfBetTypeLeagueTrader: window.rootUrl + '/api/juice-left-over/bettype/bettype-league-trader-match'
     };
     var domElements = {
         divBetTypePerformanceFilter: null,
@@ -42,7 +42,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
     };
     var parameters = {
         FromDate: null,
-        ToDate: null
+        ToDate: null,
+        IsExcludeLeagues: null
     };
     var cachedData = {
         MatchPerformance: null,
@@ -133,6 +134,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
 
                 parameters.FromDate = domElements.divDateRange.getFrom();
                 parameters.ToDate = domElements.divDateRange.getTo();
+                parameters.IsExcludeLeagues = isExcludeLeagues;
 
                 hideAllReports();
                 getBetTypePerformanceReport();
@@ -291,7 +293,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                               { Name: 'ColJuiceMargin', Value: common.GetNumWithLabel(item.JuiceMargin, labels.NA) },
                               { Name: 'ColJuiceMarginTotal', Value: common.GetNumWithLabel(item.JuiceMarginTotal, labels.NA) },
                               { Name: 'ColLeftoverTO', Value: item.TurnoverLeftover },
-                              { Name: 'ColLeftover', Value: item.WinlostLeftover },
+                              { Name: 'ColLeftover', Value: item.WinLossLeftover },
                               { Name: 'ColLeftoverMargin', Value: common.GetNumWithLabel(item.LeftoverMargin, labels.NA) },
                               { Name: 'ColLeftoverMarginTotal', Value: common.GetNumWithLabel(item.LeftoverMarginTotal, labels.NA) },
                               { Name: 'ColTurnover', Value: item.Turnover },
@@ -304,7 +306,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 totalWL += item.WinLoss;
                 totalJuiceWL += item.Juice;
                 totalJuiceTO += item.TurnoverJuice;
-                totalLeftoverWL += item.WinlostLeftover;
+                totalLeftoverWL += item.WinLossLeftover;
                 totalLeftoverTO += item.TurnoverLeftover;
                 totalBetcount += item.BetCount;
                 totalLeague += item.LeagueCount;
@@ -371,7 +373,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
 
     // Export bet type performance to excel.
     var exportBetTypePerformance = function () {
-        common.DownloadFile(urls.ExportBetTypePerformance, parameters);
+        AccReport.downloadFile(urls.ExportBetTypePerformance, parameters, 'post');
     };
 
     // Get trader performance on a specific bet type.
@@ -381,7 +383,9 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             FromDate: parameters.FromDate,
             ToDate: parameters.ToDate,
             BetTypeBMFrom: parameters.BetTypeBMFrom,
-            BetTypeBMTo: parameters.BetTypeBMTo
+            BetTypeBMTo: parameters.BetTypeBMTo,
+            IsExcludeLeagues: parameters.IsExcludeLeagues,
+            IsViewScore: common.HasViewScorePermission
         };
 
         common.DisableInput();
@@ -550,7 +554,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                               { Name: 'ColJuiceMargin', Value: common.GetNumWithLabel(item.JuiceMargin, labels.NA) },
                               { Name: 'ColJuiceMarginTotal', Value: common.GetNumWithLabel(item.JuiceMarginTotal, labels.NA) },
                               { Name: 'ColLeftoverTO', Value: item.TurnoverLeftover },
-                              { Name: 'ColLeftover', Value: item.WinlostLeftover },
+                              { Name: 'ColLeftover', Value: item.WinLossLeftover },
                               { Name: 'ColLeftoverMargin', Value: common.GetNumWithLabel(item.LeftoverMargin, labels.NA) },
                               { Name: 'ColLeftoverMarginTotal', Value: common.GetNumWithLabel(item.LeftoverMarginTotal, labels.NA) },
                               { Name: 'ColTurnover', Value: item.Turnover },
@@ -564,7 +568,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 totalWL += item.WinLoss;
                 totalJuiceWL += item.Juice;
                 totalJuiceTO += item.TurnoverJuice;
-                totalLeftoverWL += item.WinlostLeftover;
+                totalLeftoverWL += item.WinLossLeftover;
                 totalLeftoverTO += item.TurnoverLeftover;
                 totalBetcount += item.BetCount;
                 totalLeague += item.LeagueCount;
@@ -623,7 +627,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 FromDate: parameters.FromDate,
                 ToDate: parameters.ToDate,
                 BetTypeBMFrom: parameters.BetTypeBMFrom,
-                BetTypeBMTo: parameters.BetTypeBMTo
+                BetTypeBMTo: parameters.BetTypeBMTo,
+                IsExcludeLeagues: parameters.IsExcludeLeagues
             });
         });
 
@@ -640,7 +645,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 FromDate: parameters.FromDate,
                 ToDate: parameters.ToDate,
                 BetTypeBMFrom: parameters.BetTypeBMFrom,
-                BetTypeBMTo: parameters.BetTypeBMTo
+                BetTypeBMTo: parameters.BetTypeBMTo,
+                IsExcludeLeagues: parameters.IsExcludeLeagues
             });
         });
 
@@ -672,7 +678,9 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             CustId: traderId,
             BetType: betTypeId,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: parameters.IsExcludeLeagues,
+            IsViewScore: common.HasViewScorePermission
         };
 
         common.DisableInput();
@@ -740,7 +748,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                         currentGroup.groupTotalTOLeftover += item.TurnoverLeftover;
                         currentGroup.groupTotalTOJuice += item.TurnoverJuice;
                         currentGroup.groupTotalWL += item.WinLoss;
-                        currentGroup.groupTotalWLLeftover += item.WinlostLeftover;
+                        currentGroup.groupTotalWLLeftover += item.WinLossLeftover;
                         currentGroup.groupTotalWLJuice += item.Juice;
                         currentGroup.groupBetCount += item.BetCount;
 
@@ -893,7 +901,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                                   { Name: 'ColJuiceMargin', Value: common.GetNumWithLabel(item.JuiceMargin, labels.NA) },
                                   { Name: 'ColJuiceMarginTotal', Value: common.GetNumWithLabel(item.JuiceMarginTotal, labels.NA) },
                                   { Name: 'ColLeftoverTO', Value: item.TurnoverLeftover },
-                                  { Name: 'ColLeftover', Value: item.WinlostLeftover },
+                                  { Name: 'ColLeftover', Value: item.WinLossLeftover },
                                   { Name: 'ColLeftoverMargin', Value: common.GetNumWithLabel(item.LeftoverMargin, labels.NA) },
                                   { Name: 'ColLeftoverMarginTotal', Value: common.GetNumWithLabel(item.LeftoverMarginTotal, labels.NA) },
                                   { Name: 'ColTurnover', Value: item.Turnover },
@@ -977,7 +985,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
         var leaguePerformance = {
             BetType: betTypeId,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: parameters.IsExcludeLeagues
         };
 
         common.DisableInput();
@@ -1123,7 +1132,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                               { Name: 'ColJuiceMargin', Value: common.GetNumWithLabel(item.JuiceMargin, labels.NA) },
                               { Name: 'ColJuiceMarginTotal', Value: common.GetNumWithLabel(item.JuiceMarginTotal, labels.NA) },
                               { Name: 'ColLeftoverTO', Value: item.TurnoverLeftover },
-                              { Name: 'ColLeftover', Value: item.WinlostLeftover },
+                              { Name: 'ColLeftover', Value: item.WinLossLeftover },
                               { Name: 'ColLeftoverMargin', Value: common.GetNumWithLabel(item.LeftoverMargin, labels.NA) },
                               { Name: 'ColLeftoverMarginTotal', Value: common.GetNumWithLabel(item.LeftoverMarginTotal, labels.NA) },
                               { Name: 'ColTurnover', Value: item.Turnover },
@@ -1136,7 +1145,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 totalWL += item.WinLoss;
                 totalJuiceWL += item.Juice;
                 totalJuiceTO += item.TurnoverJuice;
-                totalLeftoverWL += item.WinlostLeftover;
+                totalLeftoverWL += item.WinLossLeftover;
                 totalLeftoverTO += item.TurnoverLeftover;
                 totalBetcount += item.BetCount;
                 totalMatch += item.MatchCount;
@@ -1206,7 +1215,9 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             BetType: betTypeId,
             LeagueId: leagueId,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: parameters.IsExcludeLeagues,
+            IsViewScore: common.HasViewScorePermission
         };
 
         common.DisableInput();
@@ -1369,7 +1380,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                               { Name: 'ColJuiceMargin', Value: common.GetNumWithLabel(item.JuiceMargin, labels.NA) },
                               { Name: 'ColJuiceMarginTotal', Value: common.GetNumWithLabel(item.JuiceMarginTotal, labels.NA) },
                               { Name: 'ColLeftoverTO', Value: item.TurnoverLeftover },
-                              { Name: 'ColLeftover', Value: item.WinlostLeftover },
+                              { Name: 'ColLeftover', Value: item.WinLossLeftover },
                               { Name: 'ColLeftoverMargin', Value: common.GetNumWithLabel(item.LeftoverMargin, labels.NA) },
                               { Name: 'ColLeftoverMarginTotal', Value: common.GetNumWithLabel(item.LeftoverMarginTotal, labels.NA) },
                               { Name: 'ColTurnover', Value: item.Turnover },
@@ -1383,7 +1394,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 totalWL += item.WinLoss;
                 totalJuiceWL += item.Juice;
                 totalJuiceTO += item.TurnoverJuice;
-                totalLeftoverWL += item.WinlostLeftover;
+                totalLeftoverWL += item.WinLossLeftover;
                 totalLeftoverTO += item.TurnoverLeftover;
                 totalBetcount += item.BetCount;
                 totalMatch += item.MatchCount;
@@ -1442,7 +1453,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 FromDate: parameters.FromDate,
                 ToDate: parameters.ToDate,
                 BetTypeBMFrom: parameters.BetTypeBMFrom,
-                BetTypeBMTo: parameters.BetTypeBMTo
+                BetTypeBMTo: parameters.BetTypeBMTo,
+                IsExcludeLeagues: parameters.IsExcludeLeagues
             });
         });
 
@@ -1460,7 +1472,8 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 FromDate: parameters.FromDate,
                 ToDate: parameters.ToDate,
                 BetTypeBMFrom: parameters.BetTypeBMFrom,
-                BetTypeBMTo: parameters.BetTypeBMTo
+                BetTypeBMTo: parameters.BetTypeBMTo,
+                IsExcludeLeagues: parameters.IsExcludeLeagues
             });
         });
 
@@ -1489,7 +1502,9 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
             LeagueId: leagueId,
             CustId: traderId,
             FromDate: parameters.FromDate,
-            ToDate: parameters.ToDate
+            ToDate: parameters.ToDate,
+            IsExcludeLeagues: parameters.IsExcludeLeagues,
+            IsViewScore: common.HasViewScorePermission
         };
 
         common.DisableInput();
@@ -1625,7 +1640,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                               { Name: 'ColJuiceMargin', Value: common.GetNumWithLabel(item.JuiceMargin, labels.NA) },
                               { Name: 'ColJuiceMarginTotal', Value: common.GetNumWithLabel(item.JuiceMarginTotal, labels.NA) },
                               { Name: 'ColLeftoverTO', Value: item.TurnoverLeftover },
-                              { Name: 'ColLeftover', Value: item.WinlostLeftover },
+                              { Name: 'ColLeftover', Value: item.WinLossLeftover },
                               { Name: 'ColLeftoverMargin', Value: common.GetNumWithLabel(item.LeftoverMargin, labels.NA) },
                               { Name: 'ColLeftoverMarginTotal', Value: common.GetNumWithLabel(item.LeftoverMarginTotal, labels.NA) },
                               { Name: 'ColTurnover', Value: item.Turnover },
@@ -1639,7 +1654,7 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 totalWL += item.WinLoss;
                 totalJuiceWL += item.Juice;
                 totalJuiceTO += item.TurnoverJuice;
-                totalLeftoverWL += item.WinlostLeftover;
+                totalLeftoverWL += item.WinLossLeftover;
                 totalLeftoverTO += item.TurnoverLeftover;
                 totalBetcount += item.BetCount;
 

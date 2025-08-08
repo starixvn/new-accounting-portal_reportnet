@@ -17,6 +17,7 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
     INapSession napSession,
     ConfigurationService configurationService,
     PermissionService permissionService,
+    DataService dataService,
     IDynamicRepository repository) : Controller
 {
     private readonly int[] ForecastBetType = [1, 3, 7, 8];
@@ -95,7 +96,7 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
         ViewBag.IsRealPerformancePermission = permissionService.IsRealPerformancePermission();
         ViewBag.GroupBetTypes = await service.GetGroupBetTypes(napSession.UserId, betTypePermissions);
         ViewBag.LeagueGroups = await service.GetLeagueGroups();
-        ViewBag.IsExcludeLeagues = (await service.GetLeagueExclusionConfig()).IsExcludeLeagues;
+        ViewBag.IsExcludeLeagues = (await dataService.GetLeagueExclusionConfig()).IsExcludeLeagues;
         ViewBag.MBCGroup = companies.Where(c => c.IsDeposit == 0).Select(c => c.Site).ToList();
         ViewBag.LicenseeGroup = companies.Where(c => c.IsDeposit != 0).Select(c => c.Site).ToList();
     }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using TGR.Model.SoccerPerformanceDetail;
 using TGR.ViewModel.SoccerPerformanceDetail;
+using JuiceLeftOver = TGR.Model.JuiceLeftOver;
+using JuiceLeftOverViewModel = TGR.ViewModel.JuiceLeftOver;
 
 namespace TGR;
 
@@ -25,5 +27,10 @@ public static class AutoMapperConfiguration
         cfg.CreateMap<GradePerformanceInfo, GradePerformanceItem>();
         cfg.CreateMap<GradePerformanceItem, GradePerformanceExcelItem>();
         cfg.CreateMap<PointHDPPerformanceInfo, PointHDPPerformanceItem>();
+    }
+
+    public static void InitializePerformanceDetailJuiceLeftOver(this IProfileExpression cfg)
+    {
+        cfg.CreateMap<JuiceLeftOver.BetTypePerformanceInfo, JuiceLeftOverViewModel.BetTypePerformanceInfoExcelItem>();
     }
 }

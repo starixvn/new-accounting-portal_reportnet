@@ -8,7 +8,8 @@ using Utilities.Configurations;
 namespace Reports.Sites.Controllers;
 
 public class PerformanceDetailJuiceLeftoverController(ConfigurationService configurationService,
-    PermissionService permissionService) : Controller
+    PermissionService permissionService,
+    DataService dataService) : Controller
 {
     private const string ViewPath = "~/Views/PerformanceDetailJuiceLeftover/";
 
@@ -39,5 +40,6 @@ public class PerformanceDetailJuiceLeftoverController(ConfigurationService confi
         ViewBag.DefaultFromDate = DateTime.Today.AddDays(configurationService.PerformanceDefaultDayRange * -1);
         ViewBag.DefaultToDate = DateTime.Today;
         ViewBag.AllowYearRange = configurationService.PerformanceAllowYearRange;
+        ViewBag.IsExcludeLeagues = (await dataService.GetLeagueExclusionConfig()).IsExcludeLeagues;
     }
 }

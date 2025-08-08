@@ -387,6 +387,7 @@ public static class ServiceCollectionExtensions
             cfg.InitializeLeagueWinLoss();
             cfg.InitializeSabaPromotion();
             cfg.InitializeSoccerPerformanceDetail();
+            cfg.InitializePerformanceDetailJuiceLeftOver();
         });
 
         var mapper = config.CreateMapper();
