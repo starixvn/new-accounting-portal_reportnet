@@ -97,12 +97,14 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\performance-detail-juice-leftover\bettype-performance.js" />
+    <Content Remove="wwwroot\performance-detail-juice-leftover\scripts\league-performance.js" />
     <Content Remove="wwwroot\performance-detail-juice-leftover\styles\performance-detail.less" />
     <Content Remove="wwwroot\performance-detail-juice-leftover\styles\performance-summary.less" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ExcelTemplate\PerformanceDetailJuiceLeftover\BetType\" />
+    <Folder Include="ExcelTemplate\PerformanceDetailJuiceLeftover\League\" />
   </ItemGroup>
 
 

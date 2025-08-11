@@ -19,6 +19,12 @@ public class PerformanceDetailJuiceLeftoverController(ConfigurationService confi
         return await RenderViewWithPermissionCheck("BetTypePerformance");
     }
 
+    [NapAuth(FunctionKey = FunctionKeys.SoccerPerformanceDetail, Policy = Constant.Policy.Read)]
+    public async Task<IActionResult> LeaguePerformance()
+    {
+        return await RenderViewWithPermissionCheck("LeaguePerformance");
+    }
+
     private async Task<IActionResult> RenderViewWithPermissionCheck(string viewName)
     {
         if (permissionService.HasNotPermissionToAccessPage())

@@ -36,7 +36,7 @@ public class LeagueMatchPerformanceInfo
 
     public decimal? Margin => Turnover != 0 ? ((decimal?)(WinLoss / Turnover * 100)) : null;
 
-    public string EventDateString => Convert.ToDateTime(EventDate).ToShortFormatedDate();
+    public string EventDateString => Convert.ToDateTime(EventDate).ToShortFormatedDateWithSlash();
 
     public string MatchName { get; set; }
 

@@ -41,7 +41,7 @@ public abstract class BaseExcelService(ConfigurationService configurationService
         excelRange.Value = $"From Date: {fromDate:MM/dd/yyyy} - To Date: {toDate:MM/dd/yyyy}";
     }
 
-    protected void BuildBodyRows<TData, TExcelModel>(IEnumerable<TData> list, int startRowIndex, IMapper mapper)
+    protected void BuildBodyRows<TData, TExcelModel>(IEnumerable<TData> list, int startRowIndex, IMapper mapper, Action<int, TExcelModel> updateValueSpecificColumns)
         where TExcelModel : BaseExcelItem
     {
         var index = 1;
@@ -52,26 +52,15 @@ public abstract class BaseExcelService(ConfigurationService configurationService
             var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
             item.No = index++;
             sheet.ApplyModel(template, item, rowIndex);
-            UpdateValueSpecificColumns(rowIndex++, item);
+            updateValueSpecificColumns(rowIndex++, item);
         }
     }
 
-    protected void UpdateValueSpecificColumns<TExcelModel>(int rowIndex, TExcelModel model)
-        where TExcelModel : BaseExcelItem
-    {
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"H{rowIndex}"], model.JuiceMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{rowIndex}"], model.JuiceMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"L{rowIndex}"], model.LeftoverMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{rowIndex}"], model.LeftoverMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"P{rowIndex}"], model.Margin);
-    }
-
-    protected void BuildTotalRow<TData, TExcelModel>(TData data, int startIndex, IMapper mapper)
-        where TExcelModel : BaseExcelItem
+    protected void BuildTotalRow<TData, TExcelModel>(TData data, int startIndex, IMapper mapper, Action<int, TExcelModel> updateValueSpecificColumns)
     {
         var excelModel = mapper.Map<TExcelModel>(data);
         sheet.ApplyModel(totalSheet, excelModel, startIndex);
-        UpdateValueSpecificColumns(startIndex, excelModel);
+        updateValueSpecificColumns(startIndex, excelModel);
         var singleRowTotalAddress = $"A{startIndex}:B{startIndex}";
         sheet!.Cells[singleRowTotalAddress].Merge = true;
         sheet!.Cells[singleRowTotalAddress].Value = ExcelConstants.GrandTotalText;

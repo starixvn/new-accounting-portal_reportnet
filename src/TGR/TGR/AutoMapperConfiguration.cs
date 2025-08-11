@@ -32,5 +32,6 @@ public static class AutoMapperConfiguration
     public static void InitializePerformanceDetailJuiceLeftOver(this IProfileExpression cfg)
     {
         cfg.CreateMap<JuiceLeftOver.BetTypePerformanceInfo, JuiceLeftOverViewModel.BetTypePerformanceInfoExcelItem>();
+        cfg.CreateMap<JuiceLeftOver.LeaguePerformanceInfo, JuiceLeftOverViewModel.LeaguePerformanceInfoExcelItem>();
     }
 }

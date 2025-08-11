@@ -252,6 +252,10 @@ public static class ServiceCollectionExtensions
                 jsSettings,
                 "/performance-detail-juice-leftover/scripts/bettype-performance.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/league-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/league-performance.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");

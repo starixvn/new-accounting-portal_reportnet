@@ -1,39 +1,48 @@
 ﻿using Fanex.NAP.TGRS.Reports.Services.JuiceLeftOver;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 using TGR.Criteria.JuiceLeftOver;
+using TGR.Services.JuiceLeftOver;
 
 namespace TGR.Controller.JuiceLeftOver;
 
 [Route("api/juice-left-over/league")]
-public class LeagueController(LeagueService service) : ControllerBase
+[ApiController]
+public class LeagueController(LeagueService service, ExcelService excelService) : ControllerBase
 {
-    [Route("api/juice-left-over/main")]
+    [Route("main")]
     public async Task<IActionResult> GetLeaguePerformance(GetLeaguePerformanceCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var result = await service.GetLeaguePerformance(criteria);
 
         return Ok(result);
     }
 
-    public ActionResult ExportLeaguePerformance(GetLeaguePerformanceCriteria criteria)
+    [HttpPost("export-leagues")]
+    public async Task<IActionResult> ExportExcelLeague([FromForm] GetLeaguePerformanceCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
+        var data = await service.GetLeaguePerformance(criteria);
 
-        return new EmptyResult();
+        var excelPackage = await excelService.ExportExcelLeaguePerformance(data, criteria);
+        var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
+        var fileName = $"Performance_Detail_League_(Juice-LeftOver)_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 
-    public ActionResult ExportMatchPerformance(GetMatchPerformanceOfLeagueNameCriteria criteria)
+    [HttpPost("export-match")]
+    public async Task<IActionResult> ExportExcelMatch([FromForm] GetMatchPerformanceOfLeagueNameCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
-        return new EmptyResult();
+        var csvData = await service.GetCsvDataForMatchPerformance(criteria);
+        var csvFileName =
+            $"Performance_Detail_All_Matches_(Juice-LeftOver)_{criteria.FromDate:yyyyMMdd}_{criteria.ToDate:yyyyMMdd}.csv";
+        var encoded = Encoding.UTF8.GetBytes(csvData);
+
+        return File(encoded, "text/plain", csvFileName);
     }
 
     [Route("league-trader")]
     public async Task<IActionResult> GetTraderPerformanceOfLeague(GetTraderPerformanceOfLeagueCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
-        criteria.IsViewScore = true;
         var result = await service.GetTraderPerformanceByLeague(criteria);
 
         return Ok(result);
@@ -42,7 +51,6 @@ public class LeagueController(LeagueService service) : ControllerBase
     [Route("league-trader-match")]
     public async Task<IActionResult> GetMatchPerformanceOfLeagueTrader(GetMatchPerformanceOfLeagueTraderCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var result = await service.GetMatchPerformanceOfLeagueAndTrader(criteria);
 
         return Ok(result);
@@ -51,8 +59,6 @@ public class LeagueController(LeagueService service) : ControllerBase
     [Route("league-bettype")]
     public async Task<IActionResult> GetBettypeDetailLeague(GetBettypeDetailLeagueCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
-        criteria.IsViewScore = true;
         var result = await service.GetBettypePerformanceOfLeagueTraderAndMatch(criteria);
 
         return Ok(result);
@@ -61,7 +67,6 @@ public class LeagueController(LeagueService service) : ControllerBase
     [Route("league-match")]
     public async Task<IActionResult> GetMatchPerformanceOfLeague(GetMatchPerformanceOfLeagueCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
         var result = await service.GetMatchPerformanceOfLeague(criteria);
 
         return Ok(result);
@@ -70,8 +75,6 @@ public class LeagueController(LeagueService service) : ControllerBase
     [Route("league-match-bettype")]
     public async Task<IActionResult> GetBettypePerformanceOfLeagueMatch(GetBetTypePerformanceOfLeagueMatchCriteria criteria)
     {
-        criteria.IsExcludeLeagues = true;
-        criteria.IsViewScore = true;
         var result = await service.GetBettypePerformanceOfLeagueAndMatch(criteria);
 
         return Ok(result);
