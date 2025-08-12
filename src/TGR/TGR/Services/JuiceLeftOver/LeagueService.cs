@@ -163,7 +163,7 @@ public class LeagueServiceImp(IDynamicRepository repository, RemotingRefService 
                 $"{juiceMargin}," +
                 $"{juiceMarginTotal}," +
                 $"{item.TurnoverLeftover.ToString(formatNumber)}," +
-                $"{item.WinlostLeftover.ToString(formatNumber)}," +
+                $"{item.WinLossLeftover.ToString(formatNumber)}," +
                 $"{leftoverMargin}," +
                 $"{leftoverMarginTotal}," +
                 $"{item.Turnover.ToString(formatNumber)}," +
@@ -174,7 +174,7 @@ public class LeagueServiceImp(IDynamicRepository repository, RemotingRefService 
             totalJuiceTO += item.TurnoverJuice;
             totalJuiceWL += item.Juice;
             totalLeftoverTO += item.TurnoverLeftover;
-            totalLeftoverWL += item.WinlostLeftover;
+            totalLeftoverWL += item.WinLossLeftover;
             totalTO += item.Turnover;
             totalWL += item.WinLoss;
             totalBetcount += item.BetCount ?? 0;

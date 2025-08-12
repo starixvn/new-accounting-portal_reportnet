@@ -24,15 +24,15 @@ public class BetTypeLeagueTraderMatchPerformanceInfo
 
     public decimal Juice { get; set; }
 
-    public decimal WinlostLeftover => WinLoss - Juice;
+    public decimal WinLossLeftover => WinLoss - Juice;
 
     public decimal? JuiceMargin => TurnoverJuice != 0 ? ((decimal?)(Juice / TurnoverJuice * 100)) : null;
 
     public decimal? JuiceMarginTotal => Turnover != 0 ? ((decimal?)(Juice / Turnover * 100)) : null;
 
-    public decimal? LeftoverMargin => TurnoverLeftover != 0 ? ((decimal?)(WinlostLeftover / TurnoverLeftover * 100)) : null;
+    public decimal? LeftoverMargin => TurnoverLeftover != 0 ? ((decimal?)(WinLossLeftover / TurnoverLeftover * 100)) : null;
 
-    public decimal? LeftoverMarginTotal => Turnover != 0 ? ((decimal?)(WinlostLeftover / Turnover * 100)) : null;
+    public decimal? LeftoverMarginTotal => Turnover != 0 ? ((decimal?)(WinLossLeftover / Turnover * 100)) : null;
 
     public decimal? Margin => Turnover != 0 ? ((decimal?)(WinLoss / Turnover * 100)) : null;
 

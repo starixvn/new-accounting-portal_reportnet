@@ -541,7 +541,6 @@ Fanex.NAP.TGRS.PerformanceDetail.BetTypePerformance = function () {
                 noOfMatchesCol = noOfMatchesFormat.format(labels.MatchPerformance, numeral(item.MatchCount).format(common.Formats.IntegerFormat));
                 gradeCol = gradeFormat.format(item.Grade);
                 teamCol = teamFormat.format(item.TeamName);
-
                 row = {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
                               { Name: 'ColTrader', Value: traderCol },
