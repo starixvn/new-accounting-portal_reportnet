@@ -23,7 +23,7 @@ public class LeaguePerformanceDetailController(SoccerPerformanceDetailService se
     }
 
     [HttpPost("export-league")]
-    public async Task<IActionResult> ExportExcelLeague([FromBody] GetLeaguePerformanceCriteria criteria)
+    public async Task<IActionResult> ExportExcelLeague([FromForm] GetLeaguePerformanceCriteria criteria)
     {
         var betTypePermission = await permissionService.GetBettypePermission();
         var leagueGroups = await service.GetLeagueGroups();

@@ -57,4 +57,9 @@ public class LeaguePerformanceItem
             BetCount = a.BetCount + b.BetCount
         };
     }
+
+    public LeaguePerformanceItem Clone()
+    {
+        return (LeaguePerformanceItem)MemberwiseClone();
+    }
 }

@@ -31,6 +31,8 @@ public class GetLeaguePerformanceCriteria : CriteriaBase, IBasePerformanceCriter
 
     public string LeagueName { get; set; }
 
+    public string Sites { get; set; }
+
     public string BetTypes { get; set; }
 
     public bool IsExcludeLeagues { get; set; }

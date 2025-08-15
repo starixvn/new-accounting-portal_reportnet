@@ -28,6 +28,8 @@ public class GetBettypeDetailLeague : CriteriaBase
 
     public string VrSettings { get; set; }
 
+    public string Sites { get; set; }
+
     [SpParam(Ignored = true)]
     public string LeagueGroupIds { get; set; }
 

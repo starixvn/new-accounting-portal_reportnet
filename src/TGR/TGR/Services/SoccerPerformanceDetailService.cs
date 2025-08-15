@@ -427,12 +427,12 @@ public class SoccerPerformanceDetailServiceImp(
         var leaguePerformanceData = mapper.Map<List<LeaguePerformanceItem>>(rawData);
 
         var liveData = leaguePerformanceData.Where(x => x.IsLive).ToList();
-        var liveTotal = liveData.DynamicSum();
+        var liveTotal = CalculateTotal(liveData);
 
         var nonLiveData = leaguePerformanceData.Where(x => !x.IsLive).ToList();
-        var nonLiveTotal = nonLiveData.DynamicSum();
+        var nonLiveTotal = CalculateTotal(nonLiveData);
 
-        var total = leaguePerformanceData.DynamicSum();
+        var total = CalculateTotal(leaguePerformanceData);
 
         if (isAllMarket)
         {
@@ -1099,5 +1099,19 @@ public class SoccerPerformanceDetailServiceImp(
         }
 
         return timeList;
+    }
+
+    private LeaguePerformanceItem CalculateTotal(IReadOnlyCollection<LeaguePerformanceItem> data)
+    {
+        var total = data.DynamicSum();
+        if (data.Count != 1)
+        {
+            return total;
+
+        }
+        total = total.Clone();
+        total.LeagueGroupName = string.Empty;
+        return total;
+
     }
 }
