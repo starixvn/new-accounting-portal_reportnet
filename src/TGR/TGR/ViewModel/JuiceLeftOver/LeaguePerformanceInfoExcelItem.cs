@@ -29,13 +29,13 @@ public class LeaguePerformanceInfoExcelItem : BaseExcelItem
     public decimal TurnoverLeftover { get; set; }
 
     [Cell("J5")]
-    public decimal? LeftoverMargin { get; set; }
+    public decimal? WinLossLeftover { get; set; }
 
     [Cell("K5")]
-    public decimal? LeftoverMarginTotal { get; set; }
+    public decimal? LeftoverMargin { get; set; }
 
     [Cell("L5")]
-    public decimal WinLossLeftover { get; set; }
+    public decimal LeftoverMarginTotal { get; set; }
 
     [Cell("M5")]
     public decimal Turnover { get; set; }
