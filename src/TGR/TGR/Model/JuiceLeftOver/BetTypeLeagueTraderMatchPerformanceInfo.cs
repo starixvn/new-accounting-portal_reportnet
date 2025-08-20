@@ -1,6 +1,4 @@
-﻿using Utilities.DateTimes;
-
-namespace TGR.Model.JuiceLeftOver;
+﻿namespace TGR.Model.JuiceLeftOver;
 
 public class BetTypeLeagueTraderMatchPerformanceInfo
 {
@@ -36,7 +34,7 @@ public class BetTypeLeagueTraderMatchPerformanceInfo
 
     public decimal? Margin => Turnover != 0 ? ((decimal?)(WinLoss / Turnover * 100)) : null;
 
-    public string EventDateString => Convert.ToDateTime(EventDate).ToShortFormatedDate();
+    public string EventDateString => $"{Convert.ToDateTime(EventDate):MM/dd/yyyy}";
 
     public string MatchName { get; set; }
 }

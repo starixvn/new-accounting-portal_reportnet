@@ -157,7 +157,7 @@ public class LeagueServiceImp(IDynamicRepository repository, RemotingRefService 
 
             content.AppendLine($"{item.EventDateString}," +
                 $"{item.LeagueName}," +
-                $"{item.MatchName}," +
+                $"{remotingRefService.GetTeamName(item.HomeId)} -vs- {remotingRefService.GetTeamName(item.AwayId)}," +
                 $"{item.TurnoverJuice.ToString(formatNumber)}," +
                 $"{item.Juice.ToString(formatNumber)}," +
                 $"{juiceMargin}," +
