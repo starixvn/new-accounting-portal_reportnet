@@ -256,6 +256,10 @@ public static class ServiceCollectionExtensions
                 jsSettings,
                 "/performance-detail-juice-leftover/scripts/league-performance.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/team-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/team-performance.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");

@@ -1,5 +1,6 @@
 ﻿using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
+using Fanex.NAP.TGRS.Reports.Services.JuiceLeftOver;
 using Microsoft.AspNetCore.Mvc;
 using Reports.Sites.Settings;
 using TGR.Services;
@@ -9,7 +10,8 @@ namespace Reports.Sites.Controllers;
 
 public class PerformanceDetailJuiceLeftoverController(ConfigurationService configurationService,
     PermissionService permissionService,
-    DataService dataService) : Controller
+    DataService dataService,
+    TeamService teamService) : Controller
 {
     private const string ViewPath = "~/Views/PerformanceDetailJuiceLeftover/";
 
@@ -23,6 +25,13 @@ public class PerformanceDetailJuiceLeftoverController(ConfigurationService confi
     public async Task<IActionResult> LeaguePerformance()
     {
         return await RenderViewWithPermissionCheck("LeaguePerformance");
+    }
+
+    [NapAuth(FunctionKey = FunctionKeys.SoccerPerformanceDetail, Policy = Constant.Policy.Read)]
+    public async Task<IActionResult> TeamPerformance()
+    {
+        ViewBag.Teams = await teamService.GetTeams();
+        return await RenderViewWithPermissionCheck("TeamPerformance");
     }
 
     private async Task<IActionResult> RenderViewWithPermissionCheck(string viewName)
