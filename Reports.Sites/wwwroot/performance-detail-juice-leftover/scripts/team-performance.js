@@ -38,7 +38,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
     };
     var urls = {
         GetTeamPerformance:  window.rootUrl + '/api/juice-left-over/team/main',
-        ExportTeamPerformance:  window.rootUrl + '/api/juice-left-over/team/export',
+        ExportTeamPerformance:  window.rootUrl + '/api/juice-left-over/team/export-teams',
         GetTraderPerformanceOfTeam:  window.rootUrl + '/api/juice-left-over/team/team-trader',
         GetMatchPerformanceOfTeamTrader:  window.rootUrl + '/api/juice-left-over/team/team-trader-match',
         GetBettypeDetail:  window.rootUrl + '/api/juice-left-over/team/team-league-trader-match-bettype',
@@ -1382,7 +1382,7 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
 
     // Export team performance to excel.
     var exportTeamPerformance = function () {
-        common.DownloadFile(urls.ExportTeamPerformance, parameters);
+        AccReport.downloadFile(urls.ExportTeamPerformance, parameters, 'post');
     };
 
     // Get trader performance on a specific team.

@@ -87,4 +87,6 @@ public static class DateTimeExtensions
     }
 
     public static string ToLongMMMddFormatedDate(this DateTime date) => $"{date:MMM dd, yyyy hh:mm:ss tt}";
+
+    public static string ToMMddFormatedDate(this DateTime date) => $"{date:MM/dd/yyyy}";
 }

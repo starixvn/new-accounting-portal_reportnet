@@ -37,4 +37,19 @@ public class TeamPerformanceInfo
     public decimal? LeftoverMarginTotal => Turnover != 0 ? ((decimal?)(WinlostLeftover / Turnover * 100)) : null;
 
     public decimal? Margin => Turnover != 0 ? ((decimal?)(WinLoss / Turnover * 100)) : null;
+
+    public static TeamPerformanceInfo operator +(TeamPerformanceInfo a, TeamPerformanceInfo b)
+    {
+        return new TeamPerformanceInfo
+        {
+            TraderCount = a.TraderCount + b.TraderCount,
+            MatchCount = a.MatchCount + b.MatchCount,
+            LeagueCount = a.LeagueCount + b.LeagueCount,
+            TurnoverJuice = a.TurnoverJuice + b.TurnoverJuice,
+            Juice = a.Juice + b.Juice,
+            Turnover = a.Turnover + b.Turnover,
+            WinLoss = a.WinLoss + b.WinLoss,
+            BetCount = a.BetCount + b.BetCount
+        };
+    }
 }

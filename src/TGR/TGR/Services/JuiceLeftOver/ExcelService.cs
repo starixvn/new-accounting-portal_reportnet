@@ -17,6 +17,9 @@ public interface ExcelService
 
     Task<ExcelPackage> ExportExcelLeaguePerformance(IEnumerable<LeaguePerformanceInfo> data,
         GetLeaguePerformanceCriteria criteria);
+
+    Task<ExcelPackage> ExportExcelTeamPerformance(IEnumerable<TeamPerformanceInfo> data,
+        GetTeamPerformanceCriteria criteria, IEnumerable<TeamInfo> teams);
 }
 
 public class ExcelServiceImp(ConfigurationService configurationService, IMapper mapper) : BaseExcelService(configurationService), ExcelService
@@ -44,6 +47,20 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
         return Task.FromResult(ExcelPackage!);
     }
 
+    public Task<ExcelPackage> ExportExcelTeamPerformance(IEnumerable<TeamPerformanceInfo> data, GetTeamPerformanceCriteria criteria, IEnumerable<TeamInfo> teams)
+    {
+        LoadTemplate("Team", "Team.xlsx", ExcelConstants.TeamPerformance);
+        var teamsString = ModelsHelper.MakeTeamSelectString(teams, criteria.TeamIds);
+        BuildTitle(criteria.FromDate, criteria.ToDate, teamsString, sheet.Cells["A2:R2"]);
+        BuildBodyRows<TeamPerformanceInfo, TeamPerformanceInfoExcelItem>(data, startBodyRowIndex, mapper, UpdateValueSpecificColumnsForTeam);
+        var totalData = data.DynamicSum();
+        var totalRowIndex = startBodyRowIndex + data.Count();
+        BuildTotalRow<TeamPerformanceInfo, TeamPerformanceInfoExcelItem>(totalData, totalRowIndex, mapper, UpdateValueSpecificColumnsForTeam);
+        sheet!.Cells[$"R{totalRowIndex}"].Value = string.Empty;
+        ClearTemplate(ExcelConstants.TeamPerformance);
+        return Task.FromResult(ExcelPackage!);
+    }
+
     private void UpdateValueSpecificColumnsForBetType(int rowIndex, BetTypePerformanceInfoExcelItem model)
     {
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"H{rowIndex}"], model.JuiceMargin);
@@ -60,5 +77,15 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"K{rowIndex}"], model.LeftoverMargin);
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"L{rowIndex}"], model.LeftoverMarginTotal);
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"O{rowIndex}"], model.Margin);
+    }
+
+    private void UpdateValueSpecificColumnsForTeam(int rowIndex, TeamPerformanceInfoExcelItem model)
+    {
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"H{rowIndex}"], model.JuiceMargin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{rowIndex}"], model.JuiceMarginTotal);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"L{rowIndex}"], model.LeftoverMargin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{rowIndex}"], model.LeftoverMarginTotal);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"P{rowIndex}"], model.Margin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"R{rowIndex}"], model.Score);
     }
 }

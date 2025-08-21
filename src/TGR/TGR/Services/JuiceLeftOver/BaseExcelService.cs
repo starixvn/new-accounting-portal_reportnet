@@ -41,6 +41,11 @@ public abstract class BaseExcelService(ConfigurationService configurationService
         excelRange.Value = $"From Date: {fromDate:MM/dd/yyyy} - To Date: {toDate:MM/dd/yyyy}";
     }
 
+    protected void BuildTitle(DateTime fromDate, DateTime toDate, string team, ExcelRange excelRange)
+    {
+        excelRange.Value = $"From Date: {fromDate:MM/dd/yyyy} - To Date: {toDate:MM/dd/yyyy} {Environment.NewLine}Team: {team}";
+    }
+
     protected void BuildBodyRows<TData, TExcelModel>(IEnumerable<TData> list, int startRowIndex, IMapper mapper, Action<int, TExcelModel> updateValueSpecificColumns)
         where TExcelModel : BaseExcelItem
     {

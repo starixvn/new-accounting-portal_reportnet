@@ -38,7 +38,7 @@ public class TeamTraderMatchPerformanceInfo
 
     public decimal? Margin => Turnover != 0 ? ((decimal?)(WinLoss / Turnover * 100)) : null;
 
-    public string EventDateString => Convert.ToDateTime(EventDate).ToShortFormatedDate();
+    public string EventDateString => Convert.ToDateTime(EventDate).ToMMddFormatedDate();
 
     public string MatchName { get; set; }   
 }
