@@ -86,7 +86,7 @@ public class GradeServiceImp(IDynamicRepository repository, RemotingRefService r
         {
             var homeTeam = remotingRefService.GetTeamName(item.HomeId);
             var awayTeam = remotingRefService.GetTeamName(item.AwayId);
-            item.MatchName = $"{homeTeam} vs {awayTeam}";
+            item.MatchName = $"{homeTeam} -vs- {awayTeam}";
 
             return item;
         });
@@ -151,7 +151,7 @@ public class GradeServiceImp(IDynamicRepository repository, RemotingRefService r
         {
             var homeTeam = remotingRefService.GetTeamName(item.HomeId);
             var awayTeam = remotingRefService.GetTeamName(item.AwayId);
-            item.MatchName = $"{homeTeam} vs {awayTeam}";
+            item.MatchName = $"{homeTeam} -vs- {awayTeam}";
 
             return item;
         });

@@ -25,7 +25,7 @@ public class LeagueController(LeagueService service, ExcelService excelService) 
 
         var excelPackage = await excelService.ExportExcelLeaguePerformance(data, criteria);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
-        var fileName = $"Performance_Detail_League_(Juice-LeftOver)_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        var fileName = $"Performance_Detail_League_(Juice-LeftOver)_{criteria.FromDate:yyyyMMdd}_{criteria.ToDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 

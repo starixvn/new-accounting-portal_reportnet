@@ -40,7 +40,7 @@ public class TeamController(TeamService service, ExcelService excelService) : Co
         var teams = await service.GetTeams();
         var excelPackage = await excelService.ExportExcelTeamPerformance(data, criteria, teams);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
-        var fileName = $"Performance_Detail_Team_(Juice-LeftOver)_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        var fileName = $"Performance_Detail_Team_(Juice-LeftOver)_{criteria.FromDate:yyyyMMdd}_{criteria.ToDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 
