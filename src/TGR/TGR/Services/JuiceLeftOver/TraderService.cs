@@ -51,7 +51,7 @@ public class TraderServiceImp(IDynamicRepository repository, RemotingRefService 
         {
             var homeTeam = remotingRefService.GetTeamName(item.HomeId.Value);
             var awayTeam = remotingRefService.GetTeamName(item.AwayId.Value);
-            item.MatchName = $"{homeTeam} vs {awayTeam}";
+            item.MatchName = $"{homeTeam} -vs- {awayTeam}";
             item.LeagueName = remotingRefService.GetLeagueName(item.LeagueId.Value);
 
             return item;

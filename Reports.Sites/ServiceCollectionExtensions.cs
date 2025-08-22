@@ -264,6 +264,11 @@ public static class ServiceCollectionExtensions
                 jsSettings,
                 "/performance-detail-juice-leftover/scripts/grade-performance.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/trader-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/trader-performance.js",
+                "/performance-detail-juice-leftover/scripts/performance-detail-helper.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");

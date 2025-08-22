@@ -23,6 +23,9 @@ public interface ExcelService
 
     Task<ExcelPackage> ExportExcelGradePerformance(IEnumerable<GradePerformanceInfo> data,
         GetGradePerformanceCriteria criteria);
+
+    Task<ExcelPackage> ExportExcelTraderPerformance(IEnumerable<TraderPerformanceInfo> data,
+        GetTraderPerformanceCriteria criteria);
 }
 
 public class ExcelServiceImp(ConfigurationService configurationService, IMapper mapper) : BaseExcelService(configurationService), ExcelService
@@ -34,7 +37,9 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
         BuildTitle(criteria.FromDate, criteria.ToDate, sheet.Cells["A2:Q2"]);
         BuildBodyRows<BetTypePerformanceInfo, BetTypePerformanceInfoExcelItem>(data, startBodyRowIndex, mapper, UpdateValueSpecificColumnsForBetType);
         var totalData = data.DynamicSum();
-        BuildTotalRow<BetTypePerformanceInfo, BetTypePerformanceInfoExcelItem>(totalData, startBodyRowIndex + data.Count(), mapper, UpdateValueSpecificColumnsForBetType);
+        var totalRowIndex = startBodyRowIndex + data.Count();
+        var mergedTotalCellAddress = $"A{totalRowIndex}:B{totalRowIndex}";
+        BuildTotalRow<BetTypePerformanceInfo, BetTypePerformanceInfoExcelItem>(totalData, totalRowIndex, mapper, UpdateValueSpecificColumnsForBetType, mergedTotalCellAddress);
         ClearTemplate(ExcelConstants.BetTypePerformance);
         return Task.FromResult(ExcelPackage!);
     }
@@ -45,7 +50,9 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
         BuildTitle(criteria.FromDate, criteria.ToDate, sheet.Cells["A2:P2"]);
         BuildBodyRows<LeaguePerformanceInfo, LeaguePerformanceInfoExcelItem>(data, startBodyRowIndex, mapper, UpdateValueSpecificColumnsForLeague);
         var totalData = data.DynamicSum();
-        BuildTotalRow<LeaguePerformanceInfo, LeaguePerformanceInfoExcelItem>(totalData, startBodyRowIndex + data.Count(), mapper, UpdateValueSpecificColumnsForLeague);
+        var totalRowIndex = startBodyRowIndex + data.Count();
+        var mergedTotalCellAddress = $"A{totalRowIndex}:B{totalRowIndex}";
+        BuildTotalRow<LeaguePerformanceInfo, LeaguePerformanceInfoExcelItem>(totalData, totalRowIndex, mapper, UpdateValueSpecificColumnsForLeague, mergedTotalCellAddress);
         ClearTemplate(ExcelConstants.LeaguePerformance);
         return Task.FromResult(ExcelPackage!);
     }
@@ -58,7 +65,8 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
         BuildBodyRows<TeamPerformanceInfo, TeamPerformanceInfoExcelItem>(data, startBodyRowIndex, mapper, UpdateValueSpecificColumnsForTeam);
         var totalData = data.DynamicSum();
         var totalRowIndex = startBodyRowIndex + data.Count();
-        BuildTotalRow<TeamPerformanceInfo, TeamPerformanceInfoExcelItem>(totalData, totalRowIndex, mapper, UpdateValueSpecificColumnsForTeam);
+        var mergedTotalCellAddress = $"A{totalRowIndex}:B{totalRowIndex}";
+        BuildTotalRow<TeamPerformanceInfo, TeamPerformanceInfoExcelItem>(totalData, totalRowIndex, mapper, UpdateValueSpecificColumnsForTeam, mergedTotalCellAddress);
         sheet!.Cells[$"R{totalRowIndex}"].Value = string.Empty;
         ClearTemplate(ExcelConstants.TeamPerformance);
         return Task.FromResult(ExcelPackage!);
@@ -71,8 +79,23 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
         BuildBodyRows<GradePerformanceInfo, GradePerformanceInfoExcelItem>(data, startBodyRowIndex, mapper, UpdateValueSpecificColumnsForGrade);
         var totalData = data.DynamicSum();
         var totalRowIndex = startBodyRowIndex + data.Count();
-        BuildTotalRow<GradePerformanceInfo, GradePerformanceInfoExcelItem>(totalData, totalRowIndex, mapper, UpdateValueSpecificColumnsForGrade);
+        var mergedTotalCellAddress = $"A{totalRowIndex}:B{totalRowIndex}";
+        BuildTotalRow<GradePerformanceInfo, GradePerformanceInfoExcelItem>(totalData, totalRowIndex, mapper, UpdateValueSpecificColumnsForGrade, mergedTotalCellAddress);
         sheet!.Cells[$"R{totalRowIndex}"].Value = string.Empty;
+        ClearTemplate(ExcelConstants.TeamPerformance);
+        return Task.FromResult(ExcelPackage!);
+    }
+
+    public Task<ExcelPackage> ExportExcelTraderPerformance(IEnumerable<TraderPerformanceInfo> data, GetTraderPerformanceCriteria criteria)
+    {
+        LoadTemplate("Trader", "Trader.xlsx", ExcelConstants.TraderPerformance);
+        BuildTitle(criteria.FromDate, criteria.ToDate, sheet.Cells["A2:S2"]);
+        BuildBodyRows<TraderPerformanceInfo, TraderPerformanceInfoExcelItem>(data, startBodyRowIndex, mapper, UpdateValueSpecificColumnsForTrader);
+        var totalData = data.DynamicSum();
+        var totalRowIndex = startBodyRowIndex + data.Count();
+        var mergedTotalCellAddress = $"A{totalRowIndex}:D{totalRowIndex}";
+        BuildTotalRow<TraderPerformanceInfo, TraderPerformanceInfoExcelItem>(totalData, totalRowIndex, mapper, UpdateValueSpecificColumnsForTrader, mergedTotalCellAddress);
+        sheet!.Cells[$"S{totalRowIndex}"].Value = string.Empty;
         ClearTemplate(ExcelConstants.TeamPerformance);
         return Task.FromResult(ExcelPackage!);
     }
@@ -113,5 +136,15 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{rowIndex}"], model.LeftoverMarginTotal);
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"P{rowIndex}"], model.Margin);
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"R{rowIndex}"], model.Score);
+    }
+
+    private void UpdateValueSpecificColumnsForTrader(int rowIndex, TraderPerformanceInfoExcelItem model)
+    {
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{rowIndex}"], model.JuiceMargin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"J{rowIndex}"], model.JuiceMarginTotal);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{rowIndex}"], model.LeftoverMargin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"N{rowIndex}"], model.LeftoverMarginTotal);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"Q{rowIndex}"], model.Margin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"S{rowIndex}"], model.Score);
     }
 }

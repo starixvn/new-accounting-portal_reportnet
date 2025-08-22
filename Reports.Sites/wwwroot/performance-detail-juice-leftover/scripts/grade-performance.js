@@ -97,6 +97,8 @@ Fanex.NAP.TGRS.PerformanceDetail.GradePerformance = function () {
             labelCss: 'col_5'
         });
 
+        $("#ddlPeriodType").width(160);
+
         domElements.btnGenerate.click(function () {
             if (validator.ValidateForm(domElements.divGradePerformanceFilter, 'w')) {
                 parameters.FromDate = domElements.divDateRange.getFrom();

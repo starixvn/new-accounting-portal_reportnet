@@ -2,10 +2,7 @@
 using Epplus.Mapper.Extensions;
 using OfficeOpenXml;
 using TGR.Constants;
-using TGR.Criteria.SoccerPerformanceDetail;
-using TGR.Utilities;
 using TGR.ViewModel.JuiceLeftOver;
-using TGR.ViewModel.SoccerPerformanceDetail;
 using Utilities.Configurations;
 
 namespace TGR.Services.JuiceLeftOver;
@@ -61,13 +58,12 @@ public abstract class BaseExcelService(ConfigurationService configurationService
         }
     }
 
-    protected void BuildTotalRow<TData, TExcelModel>(TData data, int startIndex, IMapper mapper, Action<int, TExcelModel> updateValueSpecificColumns)
+    protected void BuildTotalRow<TData, TExcelModel>(TData data, int startIndex, IMapper mapper, Action<int, TExcelModel> updateValueSpecificColumns, string mergedTotalCellAddress)
     {
         var excelModel = mapper.Map<TExcelModel>(data);
         sheet.ApplyModel(totalSheet, excelModel, startIndex);
         updateValueSpecificColumns(startIndex, excelModel);
-        var singleRowTotalAddress = $"A{startIndex}:B{startIndex}";
-        sheet!.Cells[singleRowTotalAddress].Merge = true;
-        sheet!.Cells[singleRowTotalAddress].Value = ExcelConstants.GrandTotalText;
+        sheet!.Cells[mergedTotalCellAddress].Merge = true;
+        sheet!.Cells[mergedTotalCellAddress].Value = ExcelConstants.GrandTotalText;
     }
 }

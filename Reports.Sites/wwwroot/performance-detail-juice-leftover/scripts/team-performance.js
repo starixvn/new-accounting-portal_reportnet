@@ -96,6 +96,8 @@ Fanex.NAP.TGRS.PerformanceDetail.TeamPerformance = function () {
             labelCss: 'col_5'
         });
 
+        $("#ddlPeriodType").width(160);
+
         domElements.ddlBetType.multiselect({
             selectedList: 2,
             minWidth: 200,
