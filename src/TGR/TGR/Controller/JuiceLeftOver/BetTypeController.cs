@@ -66,7 +66,7 @@ public class BetTypeController(BetTypeService service, ExcelService excelService
 
         var excelPackage = await excelService.ExportExcelBetTypePerformance(data, criteria);
         var stream = new MemoryStream(await excelPackage.GetAsByteArrayAsync());
-        var fileName = $"Performance_Detail_BetType_(Juice-LeftOver)_{criteria.FromDate:yyyyMMdd}_{criteria.FromDate:yyyyMMdd}";
+        var fileName = $"Performance_Detail_BetType_(Juice-LeftOver)_{criteria.FromDate:yyyyMMdd}_{criteria.ToDate:yyyyMMdd}";
         return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
     }
 }
