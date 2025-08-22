@@ -102,49 +102,52 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
 
     private void UpdateValueSpecificColumnsForBetType(int rowIndex, BetTypePerformanceInfoExcelItem model)
     {
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"H{rowIndex}"], model.JuiceMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{rowIndex}"], model.JuiceMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"L{rowIndex}"], model.LeftoverMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{rowIndex}"], model.LeftoverMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"P{rowIndex}"], model.Margin);
+        UpdateCommonColumns(rowIndex, model, "H", "I", "L", "M", "P");
     }
 
     private void UpdateValueSpecificColumnsForLeague(int rowIndex, LeaguePerformanceInfoExcelItem model)
     {
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"G{rowIndex}"], model.JuiceMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"H{rowIndex}"], model.JuiceMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"K{rowIndex}"], model.LeftoverMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"L{rowIndex}"], model.LeftoverMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"O{rowIndex}"], model.Margin);
+        UpdateCommonColumns(rowIndex, model, "G", "H", "K", "L", "O");
     }
 
     private void UpdateValueSpecificColumnsForTeam(int rowIndex, TeamPerformanceInfoExcelItem model)
     {
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"H{rowIndex}"], model.JuiceMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{rowIndex}"], model.JuiceMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"L{rowIndex}"], model.LeftoverMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{rowIndex}"], model.LeftoverMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"P{rowIndex}"], model.Margin);
+        UpdateCommonColumns(rowIndex, model, "H", "I", "L", "M", "P");
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"R{rowIndex}"], model.Score);
     }
 
     private void UpdateValueSpecificColumnsForGrade(int rowIndex, GradePerformanceInfoExcelItem model)
     {
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"H{rowIndex}"], model.JuiceMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{rowIndex}"], model.JuiceMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"L{rowIndex}"], model.LeftoverMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{rowIndex}"], model.LeftoverMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"P{rowIndex}"], model.Margin);
+        UpdateCommonColumns(rowIndex, model, "H", "I", "L", "M", "P");
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"R{rowIndex}"], model.Score);
     }
 
     private void UpdateValueSpecificColumnsForTrader(int rowIndex, TraderPerformanceInfoExcelItem model)
     {
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"I{rowIndex}"], model.JuiceMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"J{rowIndex}"], model.JuiceMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"M{rowIndex}"], model.LeftoverMargin);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"N{rowIndex}"], model.LeftoverMarginTotal);
-        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"Q{rowIndex}"], model.Margin);
+        UpdateCommonColumns(rowIndex, model, "I", "J", "M", "N", "Q");
         ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"S{rowIndex}"], model.Score);
+    }
+
+    private void UpdateCommonColumns<T>(int rowIndex, T model, string juiceMarginCol, string juiceMarginTotalCol, 
+        string leftoverMarginCol, string leftoverMarginTotalCol, string marginCol) where T : class
+    {
+        var juiceMargin = GetPropertyValue<decimal?>(model, "JuiceMargin");
+        var juiceMarginTotal = GetPropertyValue<decimal?>(model, "JuiceMarginTotal");
+        var leftoverMargin = GetPropertyValue<decimal?>(model, "LeftoverMargin");
+        var leftoverMarginTotal = GetPropertyValue<decimal?>(model, "LeftoverMarginTotal");
+        var margin = GetPropertyValue<decimal?>(model, "Margin");
+
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"{juiceMarginCol}{rowIndex}"], juiceMargin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"{juiceMarginTotalCol}{rowIndex}"], juiceMarginTotal);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"{leftoverMarginCol}{rowIndex}"], leftoverMargin);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"{leftoverMarginTotalCol}{rowIndex}"], leftoverMarginTotal);
+        ModelsHelper.FormatCellWithNumber(sheet!.Cells[$"{marginCol}{rowIndex}"], margin);
+    }
+
+    private T GetPropertyValue<T>(object model, string propertyName)
+    {
+        var property = model.GetType().GetProperty(propertyName);
+        var value = property?.GetValue(model);
+        return value is T typedValue ? typedValue : default;
     }
 }
