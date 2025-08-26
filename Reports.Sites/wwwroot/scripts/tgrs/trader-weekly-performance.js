@@ -91,7 +91,7 @@ function TraderPerformanceMonthlyByWeek() {
                 Weeks: $(domElements.weekSelector).val().join(','),
                 Months: $(domElements.monthSelector).val().join(',')
             };
-            common.DownloadFile(url, filter);
+            AccReport.downloadFileWithLoadingIcon(url, filter);
         }
     })
 }

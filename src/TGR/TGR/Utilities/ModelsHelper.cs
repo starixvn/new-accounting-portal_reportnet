@@ -1,6 +1,7 @@
 ﻿using OfficeOpenXml;
 using TGR.Constants;
-using TGR.ViewModel;
+using TGR.Model.JuiceLeftOver;
+using TGR.ViewModel.SoccerPerformanceDetail;
 
 namespace TGR.Utilities;
 
@@ -55,6 +56,12 @@ public static class ModelsHelper
 
         return string.Join(", ", result);
     }
+
+    public static string MakeTeamSelectString(IEnumerable<TeamInfo> data, string teamIds)
+    {
+        return string.Join(", ", teamIds == "0" ? data.Select(obj => obj.TeamName) : data.Where(obj => teamIds.Contains(obj.TeamId.ToString())).Select(obj => obj.TeamName));
+    }
+
 
     public static void FormatCellWithNumber(ExcelRange cell, decimal? data)
     {

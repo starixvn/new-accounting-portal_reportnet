@@ -1,7 +1,6 @@
 ﻿using Fanex.Data.Repository;
 using Reports.Sites.Settings;
-using TGR.Criteria;
-using TGR.Model;
+using TGR.Criteria.SoccerPerformanceDetail;
 using TGR.Services;
 
 namespace Reports.Sites.Controllers;
@@ -10,12 +9,15 @@ using Fanex.NAP.Client;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
+using TGR.Model.SoccerPerformanceDetail;
+using TGR.Services.SoccerPerformanceDetail;
 using Utilities.Configurations;
 
 public class SoccerPerformanceDetailController(SoccerPerformanceDetailService service,
     INapSession napSession,
     ConfigurationService configurationService,
     PermissionService permissionService,
+    DataService dataService,
     IDynamicRepository repository) : Controller
 {
     private readonly int[] ForecastBetType = [1, 3, 7, 8];
@@ -94,7 +96,7 @@ public class SoccerPerformanceDetailController(SoccerPerformanceDetailService se
         ViewBag.IsRealPerformancePermission = permissionService.IsRealPerformancePermission();
         ViewBag.GroupBetTypes = await service.GetGroupBetTypes(napSession.UserId, betTypePermissions);
         ViewBag.LeagueGroups = await service.GetLeagueGroups();
-        ViewBag.IsExcludeLeagues = (await service.GetLeagueExclusionConfig()).IsExcludeLeagues;
+        ViewBag.IsExcludeLeagues = (await dataService.GetLeagueExclusionConfig()).IsExcludeLeagues;
         ViewBag.MBCGroup = companies.Where(c => c.IsDeposit == 0).Select(c => c.Site).ToList();
         ViewBag.LicenseeGroup = companies.Where(c => c.IsDeposit != 0).Select(c => c.Site).ToList();
     }

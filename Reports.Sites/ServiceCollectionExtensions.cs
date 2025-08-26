@@ -89,6 +89,7 @@ public static class ServiceCollectionExtensions
         services.RegisterBetConstructPerformanceServices();
         services.RegisterSabaPromotionServices();
         services.RegisterSoccerPerformanceDetailServices();
+        services.RegisterJuiceLeftOverInjectionServices();
     }
 
     public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -247,6 +248,27 @@ public static class ServiceCollectionExtensions
                 "/soccer-performance-detail/scripts/grade-performance.js",
                 "/soccer-performance-detail/scripts/performance-detail-helper.js");
 
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/bettype-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/bettype-performance.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/league-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/league-performance.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/team-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/team-performance.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/grade-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/grade-performance.js");
+
+            pipeline.AddJavaScriptBundle("/scripts/performance-detail-juice-leftover/trader-performance.js",
+                jsSettings,
+                "/performance-detail-juice-leftover/scripts/trader-performance.js",
+                "/performance-detail-juice-leftover/scripts/performance-detail-helper.js");
+
             pipeline.AddLessBundle(
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.css",
                 "/daily-mix-parlay-winloss/styles/DailyMixParlayWinLoss.less");
@@ -344,6 +366,11 @@ public static class ServiceCollectionExtensions
                 "/soccer-performance-detail/styles/performance-detail.css",
                 "/soccer-performance-detail/styles/performance-detail.less",
                 "/soccer-performance-detail/styles/performance-summary.less");
+
+            pipeline.AddLessBundle(
+                "/performance-detail-juice-leftover/styles/performance-detail-juice-leftover.css",
+                "/performance-detail-juice-leftover/styles/performance-detail.less",
+                "/performance-detail-juice-leftover/styles/performance-summary.less");
         });
     }
 
@@ -377,6 +404,7 @@ public static class ServiceCollectionExtensions
             cfg.InitializeLeagueWinLoss();
             cfg.InitializeSabaPromotion();
             cfg.InitializeSoccerPerformanceDetail();
+            cfg.InitializePerformanceDetailJuiceLeftOver();
         });
 
         var mapper = config.CreateMapper();

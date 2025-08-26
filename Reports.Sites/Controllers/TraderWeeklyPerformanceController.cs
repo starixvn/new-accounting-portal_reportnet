@@ -1,6 +1,4 @@
 ﻿using Reports.Sites.Settings;
-using TGR.Criteria;
-using TGR.Model;
 using TGR.Services;
 
 namespace Reports.Sites.Controllers;
@@ -9,6 +7,8 @@ using Fanex.Data.Repository;
 using Fanex.NAP.Client.Attributes;
 using Fanex.NAP.Client.Helpers.Business;
 using Microsoft.AspNetCore.Mvc;
+using TGR.Criteria.TraderWeeklyPerformance;
+using TGR.Model.SoccerPerformanceDetail;
 
 public class TraderWeeklyPerformanceController : Controller
 {

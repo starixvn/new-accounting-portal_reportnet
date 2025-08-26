@@ -1,0 +1,69 @@
+﻿using AutoMapper;
+using Epplus.Mapper.Extensions;
+using OfficeOpenXml;
+using TGR.Constants;
+using TGR.ViewModel.JuiceLeftOver;
+using Utilities.Configurations;
+
+namespace TGR.Services.JuiceLeftOver;
+
+public abstract class BaseExcelService(ConfigurationService configurationService)
+{
+    protected ExcelWorksheet sheet;
+    protected ExcelWorksheet oddSheet;
+    protected ExcelWorksheet evenSheet;
+    protected ExcelWorksheet totalSheet;
+    protected ExcelPackage ExcelPackage;
+
+    protected void LoadTemplate(string category, string fileExcel, string mainSheetName)
+    {
+        var templatePath = $"{configurationService.CurrentDirectory}/ExcelTemplate/PerformanceDetailJuiceLeftover/{category}/{fileExcel}";
+        using var stream = new FileStream(templatePath, FileMode.Open, FileAccess.Read);
+        ExcelPackage = new ExcelPackage(stream);
+        sheet = ExcelPackage.Workbook.Worksheets[mainSheetName];
+        evenSheet = ExcelPackage.Workbook.Worksheets[ExcelConstants.EvenTemplate];
+        oddSheet = ExcelPackage.Workbook.Worksheets[ExcelConstants.OddTemplate];
+        totalSheet = ExcelPackage.Workbook.Worksheets[ExcelConstants.TotalTemplate];
+    }
+
+    protected void ClearTemplate(string mainSheetName)
+    {
+        ExcelPackage!.Workbook.Worksheets.Delete(ExcelConstants.EvenTemplate);
+        ExcelPackage!.Workbook.Worksheets.Delete(ExcelConstants.OddTemplate);
+        ExcelPackage!.Workbook.Worksheets.Delete(ExcelConstants.TotalTemplate);
+    }
+
+    protected void BuildTitle(DateTime fromDate, DateTime toDate, ExcelRange excelRange)
+    {
+        excelRange.Value = $"From Date: {fromDate:MM/dd/yyyy} - To Date: {toDate:MM/dd/yyyy}";
+    }
+
+    protected void BuildTitle(DateTime fromDate, DateTime toDate, string team, ExcelRange excelRange)
+    {
+        excelRange.Value = $"From Date: {fromDate:MM/dd/yyyy} - To Date: {toDate:MM/dd/yyyy} {Environment.NewLine}Team: {team}";
+    }
+
+    protected void BuildBodyRows<TData, TExcelModel>(IEnumerable<TData> list, int startRowIndex, IMapper mapper, Action<int, TExcelModel> updateValueSpecificColumns)
+        where TExcelModel : BaseExcelItem
+    {
+        var index = 1;
+        var rowIndex = startRowIndex;
+        var excelModels = mapper.Map<IEnumerable<TExcelModel>>(list);
+        foreach (var item in excelModels)
+        {
+            var template = rowIndex % 2 == 0 ? evenSheet : oddSheet;
+            item.No = index++;
+            sheet.ApplyModel(template, item, rowIndex);
+            updateValueSpecificColumns(rowIndex++, item);
+        }
+    }
+
+    protected void BuildTotalRow<TData, TExcelModel>(TData data, int startIndex, IMapper mapper, Action<int, TExcelModel> updateValueSpecificColumns, string mergedTotalCellAddress)
+    {
+        var excelModel = mapper.Map<TExcelModel>(data);
+        sheet.ApplyModel(totalSheet, excelModel, startIndex);
+        updateValueSpecificColumns(startIndex, excelModel);
+        sheet!.Cells[mergedTotalCellAddress].Merge = true;
+        sheet!.Cells[mergedTotalCellAddress].Value = ExcelConstants.GrandTotalText;
+    }
+}

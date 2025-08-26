@@ -1,4 +1,5 @@
 ﻿using TGR.Services;
+using TGR.Services.SoccerPerformanceDetail;
 
 namespace Reports.Sites.DependencyInjection;
 
@@ -15,5 +16,6 @@ public static class SoccerPerformanceDetailInjection
         service.AddTransient<TeamExcelService, TeamExcelServiceImp>();
         service.AddTransient<GradeExcelService, GradeExcelServiceImp>();
         service.AddTransient<PermissionService, PermissionServiceImp>();
+        service.AddTransient<DataService, DataServiceImp>();
     }
 }
