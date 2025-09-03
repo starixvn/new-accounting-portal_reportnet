@@ -12,6 +12,7 @@
     <col style="width: 320px" />
     <col style="width: 130px" />
     <col style="width: 130px" />
+    <col style="width: 130px" />
     <col style="width: 90px" />
     <col style="width: 100px" />
     <col style="width: 100px" />
@@ -53,6 +54,7 @@
       <th scope="col" rowspan="2">Sport</th>
       <th scope="col" rowspan="2">League</th>
       <th scope="col" rowspan="2">Match</th>
+      <th scope="col" rowspan="2">KO Time</th>
       <th scope="col" rowspan="2">Bet Time</th>
       <th scope="col" rowspan="2">Cash Out Time</th>
       <th scope="col" rowspan="2">Bet Type</th>
@@ -99,6 +101,7 @@
   <td class="text-center">{{ item.SportName }}</td>
   <td>{{ item.LeagueName }}</td>
   <td>{{ item.MatchName }}</td>
+  <td class="text-center">{{ item.KoTime | date: 'yyyy-MM-dd hh:mm aaa' }}</td>
   <td class="text-center">{{ item.BetTime | date: 'yyyy-MM-dd hh:mm aaa' }}</td>
   <td class="text-center">{{ item.CashOutTime | date: 'yyyy-MM-dd hh:mm aaa' }}</td>
   <td>{{ item.BetTypeName }}</td>

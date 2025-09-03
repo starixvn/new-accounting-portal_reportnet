@@ -43,17 +43,17 @@ export class MatchDetailGridComponent implements Grid {
 
   get gridWidth(): string {
     if (this.isShowFullColumn) {
-      return this.isSoccer ? '5140px' : '4840px';
+      return this.isSoccer ? '5270px' : '4970px';
     } else {
-      return this.isSoccer ? '4990px' : '4690px';
+      return this.isSoccer ? '5120px' : '4820px';
     }
   }
 
   get colSpan(): number {
     if (this.isShowFullColumn) {
-      return this.isSoccer ? 38 : 35;
+      return this.isSoccer ? 39 : 36;
     } else {
-      return this.isSoccer ? 37 : 34;
+      return this.isSoccer ? 38 : 35;
     }
   }
 

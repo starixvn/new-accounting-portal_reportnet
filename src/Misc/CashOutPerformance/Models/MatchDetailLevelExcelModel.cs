@@ -8,6 +8,7 @@ public class MatchDetailLevelExcelModel
     private string dateTime;
     private string betTime;
     private string cashOutTime;
+    private string koTime;
 
     [Cell("A6")]
     public string WLDate
@@ -54,6 +55,23 @@ public class MatchDetailLevelExcelModel
     public string MatchName { get; set; }
 
     [Cell("K6")]
+    public string KoTime
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(koTime))
+            {
+                return koTime;
+            }
+
+            var date = DateTime.Parse(koTime, new CultureInfo("en-US"));
+            return date.ToString("yyyy-MM-dd hh:mm:ss tt");
+
+        }
+        set => koTime = value;
+    }
+
+    [Cell("L6")]
     public string BetTime
     {
         get
@@ -70,7 +88,7 @@ public class MatchDetailLevelExcelModel
         set => betTime = value;
     }
 
-    [Cell("L6")]
+    [Cell("M6")]
     public string CashOutTime
     {
         get
@@ -87,81 +105,81 @@ public class MatchDetailLevelExcelModel
         set => cashOutTime = value;
     }
 
-    [Cell("M6")]
+    [Cell("N6")]
     public string BetTypeName { get; set; }
 
-    [Cell("N6")]
+    [Cell("O6")]
     public string BetChoice { get; set; }
 
-    [Cell("O6")]
+    [Cell("P6")]
     public string BetOdd { get; set; }
 
-    [Cell("P6")]
+    [Cell("Q6")]
     public string BetScore { get; set; }
 
-    [Cell("Q6")]
+    [Cell("R6")]
     public string BetSection { get; set; }
 
-    [Cell("R6")]
+    [Cell("S6")]
     public string CurrentSection { get; set; }
 
-    [Cell("S6")]
+    [Cell("T6")]
     public string CurrentGoalLine { get; set; }
 
-    [Cell("T6")]
+    [Cell("U6")]
     public string CurrentHomeOdds { get; set; }
 
-    [Cell("U6")]
+    [Cell("V6")]
     public string CurrentAwayOdds { get; set; }
 
-    [Cell("V6")]
+    [Cell("W6")]
     public string CurrentScore { get; set; }
 
-    [Cell("W6")]
+    [Cell("X6")]
     public string HalfScore { get; set; }
 
-    [Cell("X6")]
+    [Cell("Y6")]
     public string FinalScore { get; set; }
 
-    [Cell("Y6")]
+    [Cell("Z6")]
     public decimal COTurnover { get; set; }
 
-    [Cell("Z6")]
+    [Cell("AA6")]
     public decimal BBAmount { get; set; }
 
-    [Cell("AA6")]
+    [Cell("AB6")]
     public decimal MemberWL { get; set; }
 
-    [Cell("AB6")]
+    [Cell("AC6")]
     public decimal COTurnover_RM { get; set; }
 
-    [Cell("AC6")]
+    [Cell("AD6")]
     public decimal? ActualTurnover { get; set; }
 
-    [Cell("AD6")]
+    [Cell("AE6")]
     public decimal BBAmount_RM { get; set; }
 
-    [Cell("AE6")]
+    [Cell("AF6")]
     public decimal MemberWL_RM { get; set; }
 
-    [Cell("AF6")]
+    [Cell("AG6")]
     public decimal? AssumedPayout { get; set; }
 
-    [Cell("AG6")]
+    [Cell("AH6")]
     public decimal? HypGGR { get; set; }
 
-    [Cell("AH6")]
+    [Cell("AI6")]
     public decimal? COProfit { get; set; }
 
-    [Cell("AI6")]
+    [Cell("AJ6")]
     public decimal? Margin { get; set; }
 
-    [Cell("AJ6")]
+    [Cell("AK6")]
     public decimal Comm_RM { get; set; }
 
-    [Cell("AK6")]
+    [Cell("AL6")]
     public decimal COIncome_RM { get; set; }
 
-    [Cell("AL6")]
+    [Cell("AM6")]
     public decimal TotalIncome_RM { get; set; }
 }
