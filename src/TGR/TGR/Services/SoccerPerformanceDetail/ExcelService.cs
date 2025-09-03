@@ -38,7 +38,7 @@ public class ExcelServiceImp(ConfigurationService configurationService, IMapper 
             _ => data.ItemByOrderList
         };
         BuildBodyRows<BetTypePerformanceItem, BetTypePerformanceExcelItem>(bodyData, startBodyRowIndex, mapper);
-        var startTotalRowIndex = data.ItemByOrderList.Count + startBodyRowIndex;
+        var startTotalRowIndex = bodyData.Count + startBodyRowIndex;
         BuildTotalRow<BetTypePerformanceItem, BetTypePerformanceExcelItem>(data.TotalItemLive, data.TotalItemNonLive, startTotalRowIndex, mapper, criteria.MarketFilter);
         HideNonPermissionColumn(allowVirtualPerformance, allowRealPerformance);
         ClearTemplate(ExcelConstants.BetTypePerformance);
