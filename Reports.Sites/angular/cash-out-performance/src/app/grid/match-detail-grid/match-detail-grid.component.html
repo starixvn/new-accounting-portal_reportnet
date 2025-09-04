@@ -104,13 +104,13 @@
   <td>{{ item.BetTypeName }}</td>
   <td>{{ item.BetChoice }}</td>
   <td>{{ item.BetOdd }}</td>
-  <td>{{ item.BetScore }}</td>
-  <td>{{ item.BetSection }}</td>
-  <td>{{ item.CurrentSection }}</td>
+  <td >{{ item.BetScore }}</td>
+  <td *ngIf="isSoccer">{{ item.BetSection }}</td>
+  <td *ngIf="isSoccer">{{ item.CurrentSection }}</td>
   <td>{{ item.CurrentGoalLine }}</td>
   <td>{{ item.CurrentHomeOdds }}</td>
   <td>{{ item.CurrentAwayOdds }}</td>
-  <td class="text-center">{{ item.CurrentScore }}</td>
+  <td *ngIf="isSoccer" class="text-center">{{ item.CurrentScore }}</td>
   <td class="text-center">{{ item.HalfScore }}</td>
   <td class="text-center">{{ item.FinalScore }}</td>
   <td class="text-right" [napDecimalFormat]="item.COTurnover"></td>
