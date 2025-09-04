@@ -52,8 +52,8 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         sheet.ApplyVertical(model.TicketList, ExcelConstants.StartRowIndex);
         BuildTotalRow(model, totalLength);
         RemoveColumnsForBasketBall(excelType, isSoccer);
-        ClearTemplate();
         RemoveUsernameColumn(isShowFullColumn);
+        ClearTemplate();
         return ExcelPackage;
     }
 
@@ -116,6 +116,7 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         sheet.DeleteColumn(ExcelConstants.HalfScoreColumnIndex);
         sheet.DeleteColumn(ExcelConstants.CurrentSectionColumnIndex);
         sheet.DeleteColumn(ExcelConstants.BetSectionColumnIndex);
+        
     }
 
     public ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool isShowFullColumn)

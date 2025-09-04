@@ -22,5 +22,11 @@ public static class ExcelConstants
 
     public const byte BetSectionColumnIndex = 17;
 
+    public const byte CashOutTurnOverColumnIndex = 25;
+
+    public const byte BuyBackAmountColumnIndex = 26;
+
+    public const byte MemberWinlossColumnIndex = 27;
+
     public const byte UsernameColumnIndex = 2;
 }
