@@ -73,6 +73,7 @@ export interface MatchDetailLevelModel extends CommonTicketModel {
   SportName: string;
   LeagueName: string;
   MatchName: string;
+  KoTime: Date;
   BetTime: Date;
   CashOutTime: Date;
   BetOdd: string;

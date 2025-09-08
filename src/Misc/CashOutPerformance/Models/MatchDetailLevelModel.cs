@@ -26,6 +26,8 @@ public class MatchDetailLevelModel : CommonTicketModel
 
     public DateTime CashOutTime { get; set; }
 
+    public DateTime KoTime { get; set; }
+
     public string BetOdd { get; set; }
 
     public string BetTypeName { get; set; }
