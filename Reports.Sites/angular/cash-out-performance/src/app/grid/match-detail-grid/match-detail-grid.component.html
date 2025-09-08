@@ -113,8 +113,8 @@
   <td>{{ item.CurrentGoalLine }}</td>
   <td>{{ item.CurrentHomeOdds }}</td>
   <td>{{ item.CurrentAwayOdds }}</td>
-  <td *ngIf="isSoccer" class="text-center">{{ item.CurrentScore }}</td>
-  <td class="text-center">{{ item.HalfScore }}</td>
+  <td class="text-center">{{ item.CurrentScore }}</td>
+  <td *ngIf="isSoccer" class="text-center">{{ item.HalfScore }}</td>
   <td class="text-center">{{ item.FinalScore }}</td>
   <td class="text-right" [napDecimalFormat]="item.COTurnover"></td>
   <td class="text-right" [napDecimalFormat]="item.BBAmount"></td>

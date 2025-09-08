@@ -16,11 +16,11 @@ public static class ExcelConstants
 
     public const string WinningProbability = "Winning Probability (%)";
 
-    public const byte HalfScoreColumnIndex = 23;
+    public const byte HalfScoreColumnIndex = 24;
 
-    public const byte CurrentSectionColumnIndex = 18;
+    public const byte CurrentSectionColumnIndex = 19;
 
-    public const byte BetSectionColumnIndex = 17;
+    public const byte BetSectionColumnIndex = 18;
 
     public const byte UsernameColumnIndex = 2;
 }
