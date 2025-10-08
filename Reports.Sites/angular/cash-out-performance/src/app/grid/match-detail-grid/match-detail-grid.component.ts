@@ -6,7 +6,7 @@ import { MatchDetailLevelModel, TicketViewModel } from '../../../app/common/mode
 import { Grid } from '../grid.model';
 import { MatchDetailGridService } from './match-detail-grid.service';
 import { GridService } from '../grid.service';
-import { SportType } from '../../common/constants';
+import { SportBetType, SportType } from '../../common/constants';
 import * as _ from 'lodash';
 
 @Component({
@@ -41,20 +41,30 @@ export class MatchDetailGridComponent implements Grid {
     return this.gridService.filterModel.sportBettype.split(',')[0].split('_')[0] === SportType.SOCCER;
   }
 
+  get isSpecialSportBetType(): boolean {
+    return SportBetType.SOCCER_1X2.includes(this.gridService.filterModel.sportBettype);
+  };
+
   get gridWidth(): string {
+    let width = 0;
     if (this.isShowFullColumn) {
-      return this.isSoccer ? '5270px' : '4970px';
+      width = this.isSoccer ? 5420 : 5120;
     } else {
-      return this.isSoccer ? '5120px' : '4820px';
+      width = this.isSoccer ? 5270 : 4970;
     }
+    width = this.isSpecialSportBetType ? width - 260  : width;
+    return `${width}px`;
   }
 
   get colSpan(): number {
+    let colSpan = 0;
     if (this.isShowFullColumn) {
-      return this.isSoccer ? 39 : 36;
+      colSpan = this.isSoccer ? 40 : 37;
     } else {
-      return this.isSoccer ? 38 : 35;
+      colSpan = this.isSoccer ? 39 : 36;
     }
+    colSpan = this.isSpecialSportBetType ? colSpan - 2 : colSpan;
+    return colSpan;
   }
 
   query() {

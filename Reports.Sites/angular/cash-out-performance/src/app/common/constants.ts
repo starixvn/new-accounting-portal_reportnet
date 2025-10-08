@@ -16,3 +16,7 @@ export class BetTypeDrillDownType {
 export class SportType {
     static readonly SOCCER = '1';
 }
+
+export class SportBetType {
+    static readonly SOCCER_1X2 = ['1_5', '1_15'];
+}

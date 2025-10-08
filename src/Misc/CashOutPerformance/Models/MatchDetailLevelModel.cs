@@ -30,6 +30,10 @@ public class MatchDetailLevelModel : CommonTicketModel
 
     public string BetOdd { get; set; }
 
+    public string AllOdds { get; set; }
+
+    public string AllCurrentOdds { get; set; }
+
     public string BetTypeName { get; set; }
 
     public string BetChoice { get; set; }

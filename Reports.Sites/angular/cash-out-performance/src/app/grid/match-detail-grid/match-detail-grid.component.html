@@ -16,12 +16,14 @@
     <col style="width: 90px" />
     <col style="width: 100px" />
     <col style="width: 100px" />
+    <col style="width: 150px" />
     <col style="width: 100px" />
     <col *ngIf="isSoccer" style="width: 100px" />
     <col *ngIf="isSoccer" style="width: 100px" />
-    <col style="width: 120px" />
-    <col style="width: 140px" />
-    <col style="width: 140px" />
+    <col *ngIf="!isSpecialSportBetType" style="width: 120px" />
+    <col *ngIf="!isSpecialSportBetType" style="width: 140px" />
+    <col *ngIf="!isSpecialSportBetType" style="width: 140px" />
+    <col *ngIf="isSpecialSportBetType" style="width: 140px" />
     <col style="width: 100px" />
     <col *ngIf="isSoccer" style="width: 100px" />
     <col style="width: 120px" />
@@ -60,12 +62,14 @@
       <th scope="col" rowspan="2">Bet Type</th>
       <th scope="col" rowspan="2">Bet Choice</th>
       <th scope="col" rowspan="2">Bet Odds</th>
+      <th scope="col" rowspan="2">All Odds</th>
       <th scope="col" rowspan="2">Bet Score</th>
       <th scope="col" rowspan="2" *ngIf="isSoccer">Bet Section</th>
       <th scope="col" class="bg-green" rowspan="2" *ngIf="isSoccer">Current Section</th>
-      <th scope="col" class="bg-green" rowspan="2">Current GoalLine</th>
-      <th scope="col" class="bg-green" rowspan="2">Current Home Odds</th>
-      <th scope="col" class="bg-green" rowspan="2">Current Away Odds</th>
+      <th scope="col" class="bg-green" rowspan="2" *ngIf="!isSpecialSportBetType">Current GoalLine</th>
+      <th scope="col" class="bg-green" rowspan="2" *ngIf="!isSpecialSportBetType">Current Home Odds</th>
+      <th scope="col" class="bg-green" rowspan="2" *ngIf="!isSpecialSportBetType">Current Away Odds</th>
+      <th scope="col" class="bg-green" rowspan="2" *ngIf="isSpecialSportBetType">Current All Odds</th>
       <th scope="col" class="bg-green" rowspan="2">Current Score</th>
       <th scope="col" rowspan="2" *ngIf="isSoccer">Half Score</th>
       <th scope="col" rowspan="2">Final Score</th>
@@ -107,12 +111,14 @@
   <td>{{ item.BetTypeName }}</td>
   <td>{{ item.BetChoice }}</td>
   <td>{{ item.BetOdd }}</td>
+  <td class="text-center">{{ item.AllOdds }}</td>
   <td >{{ item.BetScore }}</td>
   <td *ngIf="isSoccer">{{ item.BetSection }}</td>
   <td *ngIf="isSoccer">{{ item.CurrentSection }}</td>
-  <td>{{ item.CurrentGoalLine }}</td>
-  <td>{{ item.CurrentHomeOdds }}</td>
-  <td>{{ item.CurrentAwayOdds }}</td>
+  <td *ngIf="!isSpecialSportBetType">{{ item.CurrentGoalLine }}</td>
+  <td *ngIf="!isSpecialSportBetType">{{ item.CurrentHomeOdds }}</td>
+  <td *ngIf="!isSpecialSportBetType">{{ item.CurrentAwayOdds }}</td>
+  <td class="text-center" *ngIf="isSpecialSportBetType">{{ item.AllCurrentOdds }}</td>
   <td class="text-center">{{ item.CurrentScore }}</td>
   <td *ngIf="isSoccer" class="text-center">{{ item.HalfScore }}</td>
   <td class="text-center">{{ item.FinalScore }}</td>

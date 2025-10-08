@@ -115,71 +115,77 @@ public class MatchDetailLevelExcelModel
     public string BetOdd { get; set; }
 
     [Cell("Q6")]
-    public string BetScore { get; set; }
+    public string AllOdds { get; set; }
 
     [Cell("R6")]
-    public string BetSection { get; set; }
+    public string BetScore { get; set; }
 
     [Cell("S6")]
-    public string CurrentSection { get; set; }
+    public string BetSection { get; set; }
 
     [Cell("T6")]
-    public string CurrentGoalLine { get; set; }
+    public string CurrentSection { get; set; }
 
     [Cell("U6")]
-    public string CurrentHomeOdds { get; set; }
+    public string CurrentGoalLine { get; set; }
 
     [Cell("V6")]
-    public string CurrentAwayOdds { get; set; }
+    public string CurrentHomeOdds { get; set; }
 
     [Cell("W6")]
-    public string CurrentScore { get; set; }
+    public string CurrentAwayOdds { get; set; }
 
     [Cell("X6")]
-    public string HalfScore { get; set; }
+    public string AllCurrentOdds { get; set; }
 
     [Cell("Y6")]
-    public string FinalScore { get; set; }
+    public string CurrentScore { get; set; }
 
     [Cell("Z6")]
-    public decimal COTurnover { get; set; }
+    public string HalfScore { get; set; }
 
     [Cell("AA6")]
-    public decimal BBAmount { get; set; }
+    public string FinalScore { get; set; }
 
     [Cell("AB6")]
-    public decimal MemberWL { get; set; }
+    public decimal COTurnover { get; set; }
 
     [Cell("AC6")]
-    public decimal COTurnover_RM { get; set; }
+    public decimal BBAmount { get; set; }
 
     [Cell("AD6")]
-    public decimal? ActualTurnover { get; set; }
+    public decimal MemberWL { get; set; }
 
     [Cell("AE6")]
-    public decimal BBAmount_RM { get; set; }
+    public decimal COTurnover_RM { get; set; }
 
     [Cell("AF6")]
-    public decimal MemberWL_RM { get; set; }
+    public decimal? ActualTurnover { get; set; }
 
     [Cell("AG6")]
-    public decimal? AssumedPayout { get; set; }
+    public decimal BBAmount_RM { get; set; }
 
     [Cell("AH6")]
-    public decimal? HypGGR { get; set; }
+    public decimal MemberWL_RM { get; set; }
 
     [Cell("AI6")]
-    public decimal? COProfit { get; set; }
+    public decimal? AssumedPayout { get; set; }
 
     [Cell("AJ6")]
-    public decimal? Margin { get; set; }
+    public decimal? HypGGR { get; set; }
 
     [Cell("AK6")]
-    public decimal Comm_RM { get; set; }
+    public decimal? COProfit { get; set; }
 
     [Cell("AL6")]
-    public decimal COIncome_RM { get; set; }
+    public decimal? Margin { get; set; }
 
     [Cell("AM6")]
+    public decimal Comm_RM { get; set; }
+
+    [Cell("AN6")]
+    public decimal COIncome_RM { get; set; }
+
+    [Cell("AO6")]
     public decimal TotalIncome_RM { get; set; }
 }

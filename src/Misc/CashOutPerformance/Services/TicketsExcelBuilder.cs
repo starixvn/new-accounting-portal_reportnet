@@ -10,7 +10,7 @@ using ViewModels;
 
 public interface TicketsExcelBuilder<T>
 {
-    ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn, bool isSoccer);
+    ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn, string sportBetType);
 
     ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool isShowFullColumn);
 
@@ -32,12 +32,14 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
 
     private ExcelWorksheet templateSheet;
 
-    public ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn, bool isSoccer)
+    private readonly string[] SpecialSportBetType = ["1_5", "1_15"];
+
+    public ExcelPackage Build(string title, string[] breadCrumb, TicketViewExcelModel<T> model, ExcelType excelType, bool isShowFullColumn, string sportBetType)
     {
         var fileExcel = "CashOutPerformance.xlsx";
         var cellAddressOfTitle = "A1:AH1";
         var cellAddressOfBreadCrumb = "A3:AH3";
-        byte totalLength = 28;
+        byte totalLength = 30;
         if (excelType != ExcelType.Match)
         {
             fileExcel = "SimpleCashOutPerformance.xlsx";
@@ -51,7 +53,7 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         RenameFirstColumn(excelType);
         sheet.ApplyVertical(model.TicketList, ExcelConstants.StartRowIndex);
         BuildTotalRow(model, totalLength);
-        RemoveColumnsForBasketBall(excelType, isSoccer);
+        RemoveRedundantColumns(excelType, sportBetType);
         RemoveUsernameColumn(isShowFullColumn);
         ClearTemplate();
         
@@ -111,13 +113,43 @@ public class TicketsExcelBuilderImp<T>(ConfigurationService configurationService
         }
     }
 
-    private void RemoveColumnsForBasketBall(ExcelType excelType, bool isSoccer)
+    private void RemoveRedundantColumns(ExcelType excelType, string sportBetType)
     {
-        if (excelType != ExcelType.Match || isSoccer) return;
+        var isSoccer = sportBetType.Split(',')[0].Split('_')[0] == "1";
+        if (excelType != ExcelType.Match)
+        {
+            return;
+        }
+        if (isSoccer)
+        {
+            RemoveColumnsForSoccer(sportBetType);
+        }
+        else
+        {
+            RemoveColumnsForBasketball();
+        }
+    }
+
+    private void RemoveColumnsForSoccer(string sportBetType)
+    {
+        if (SpecialSportBetType.Contains(sportBetType))
+        {
+            sheet.DeleteColumn(ExcelConstants.CurrentAwayOddsColumnIndex);
+            sheet.DeleteColumn(ExcelConstants.CurrentHomeOddsColumnIndex);
+            sheet.DeleteColumn(ExcelConstants.CurrentGoalLineColumnIndex);
+        }
+        else
+        {
+            sheet.DeleteColumn(ExcelConstants.AllCurrentOddsColumnIndex);
+        }
+    }
+
+    private void RemoveColumnsForBasketball()
+    {
         sheet.DeleteColumn(ExcelConstants.HalfScoreColumnIndex);
+        sheet.DeleteColumn(ExcelConstants.AllCurrentOddsColumnIndex);
         sheet.DeleteColumn(ExcelConstants.CurrentSectionColumnIndex);
         sheet.DeleteColumn(ExcelConstants.BetSectionColumnIndex);
-        
     }
 
     public ExcelPackage BuildSportLevel(string title, string[] breadCrumb, SportLevelExcelModel model, bool isShowFullColumn)

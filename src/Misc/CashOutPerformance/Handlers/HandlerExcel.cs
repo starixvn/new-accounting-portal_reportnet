@@ -47,8 +47,7 @@ public class HandlerExcel(
             var status = item.LiveStatus == "0" ? "Non-Live" : "Live";
             item.LiveStatus = $"{sportName} {status}";
         }
-        var isSoccer = request.SportBettype.Split(',')[0].Split('_')[0] == "1";
-        var excelPackage = ticketsEventExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.Event, true, isSoccer);
+        var excelPackage = ticketsEventExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.Event, true, request.SportBettype);
         return excelPackage;
     }
 
@@ -66,8 +65,7 @@ public class HandlerExcel(
         var criteria = mapper.Map<MatchDetailLevelCriteria>(request);
         var reportData = await service.GetTickets<MatchDetailLevelModel, MatchDetailLevelCriteria>(criteria);
         var excelModel = mapper.Map<TicketViewExcelModel<MatchDetailLevelExcelModel>>(reportData);
-        var isSoccer = request.SportBettype.Split(',')[0].Split('_')[0] == "1";
-        var excelPackage = ticketsMatchExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.Match, criteria.IsShowFullColumn, isSoccer);
+        var excelPackage = ticketsMatchExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.Match, criteria.IsShowFullColumn, request.SportBettype);
         return excelPackage;
     }
 
@@ -106,8 +104,7 @@ public class HandlerExcel(
         var criteria = mapper.Map<BetTypeLevelCriteria>(request);
         var reportData = await service.GetTickets<SimpleBetTypeLevelModel, BetTypeLevelCriteria>(criteria);
         var excelModel = mapper.Map<TicketViewExcelModel<SimpleBetTypeLevelExcelModel>>(reportData);
-        var isSoccer = request.SportBettype.Split(',')[0].Split('_')[0] == "1";
-        var excelPackage = ticketsSimpleBetTypeExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.BetType, true, isSoccer);
+        var excelPackage = ticketsSimpleBetTypeExcelBuilder.Build(request.Title, request.BreadCrumb, excelModel, ExcelType.BetType, true, request.SportBettype);
         return excelPackage;
     }
 }

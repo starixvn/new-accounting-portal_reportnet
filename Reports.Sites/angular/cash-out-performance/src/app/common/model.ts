@@ -77,6 +77,8 @@ export interface MatchDetailLevelModel extends CommonTicketModel {
   BetTime: Date;
   CashOutTime: Date;
   BetOdd: string;
+  AllOdds: string;
+  AllCurrentOdds: string;
   BetTypeName: string;
   BetChoice: string;
   COTurnover: number;
