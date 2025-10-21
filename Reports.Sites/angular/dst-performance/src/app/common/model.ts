@@ -1,0 +1,32 @@
+  export enum TurnoverType {
+    Normal,
+    NoDraw
+  }
+
+  export enum DateType {
+    WinlossDate = 'Winlostdate',
+    TransDate = 'Transdate'
+  }
+
+  export interface SportItemModel {
+    SportId: number;
+    Sport: string;
+    Date: Date;
+    LeagueName: string;
+    MatchName: string;
+    BetTypeName: string;
+    LiveStatus: string;
+    MatchCount: number;
+    BetCount: number;
+    MemberWinLoss: number;
+    MemberTurnover: number;
+    ActualTurnover: number;
+    HouseIncome: number;
+    HouseTurnover: number;
+    AmountDueToDST: number;
+  }
+
+  export interface SportModel {
+    Items: SportItemModel[];
+    Total: SportItemModel;
+  }

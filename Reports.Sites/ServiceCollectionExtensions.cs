@@ -1,4 +1,5 @@
-﻿using NUglify.JavaScript;
+﻿using DstPerformance;
+using NUglify.JavaScript;
 using TGR;
 
 namespace Reports.Sites;
@@ -90,6 +91,7 @@ public static class ServiceCollectionExtensions
         services.RegisterSabaPromotionServices();
         services.RegisterSoccerPerformanceDetailServices();
         services.RegisterJuiceLeftOverInjectionServices();
+        services.RegisterDstPerformanceServices();
     }
 
     public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
@@ -405,6 +407,7 @@ public static class ServiceCollectionExtensions
             cfg.InitializeSabaPromotion();
             cfg.InitializeSoccerPerformanceDetail();
             cfg.InitializePerformanceDetailJuiceLeftOver();
+            cfg.InitializeDstPerformance();
         });
 
         var mapper = config.CreateMapper();

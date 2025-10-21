@@ -607,4 +607,7 @@
 		<Setting Key="TGRS_Rpt_NewPerformanceDetail_Team_Trader_Match_Bettype" SpName="TGRS_Rpt_NewPerformanceDetail_Team_Trader_Match_Bettype" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 		<Setting Key="TGRS_Rpt_NewPerformanceDetail_LeagueAllMatch" SpName="TGRS_Rpt_NewPerformanceDetail_LeagueAllMatch" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 	</Function>
+	<Function Name="DSTPerformance">
+		<Setting Key="Acc_Rpt_DSTPerformance" SpName="Acc_Rpt_DSTPerformance" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
+	</Function>
 </Functions>
