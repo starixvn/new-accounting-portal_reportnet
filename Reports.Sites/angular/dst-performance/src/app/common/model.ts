@@ -8,14 +8,16 @@
     TransDate = 'Transdate'
   }
 
-  export interface SportItemModel {
+  export interface ReportItemModel {
     SportId: number;
     Sport: string;
     Date: Date;
+    LeagueId: number;
     LeagueName: string;
     MatchName: string;
+    BetType: number;
     BetTypeName: string;
-    LiveStatus: string;
+    MatchId: number;
     MatchCount: number;
     BetCount: number;
     MemberWinLoss: number;
@@ -24,9 +26,10 @@
     HouseIncome: number;
     HouseTurnover: number;
     AmountDueToDST: number;
+    Margin: number;
   }
 
-  export interface SportModel {
-    Items: SportItemModel[];
-    Total: SportItemModel;
+  export interface ReportModel {
+    Items: ReportItemModel[];
+    Total: ReportItemModel;
   }

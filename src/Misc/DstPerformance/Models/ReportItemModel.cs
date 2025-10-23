@@ -1,22 +1,26 @@
 ﻿namespace DstPerformance.Models;
 
-public class SportItemModel
+public class ReportItemModel
 {
+    public string Level { get; set; }
+
     public int SportId { get; set; }
 
     public string Sport { get; set; }
 
     public DateTime Date { get; set; }
 
+    public int LeagueId { get; set; }
+
     public string LeagueName { get; set; }
 
     public string MatchName { get; set; }
 
-    public string BetTypeName { get; set; }
-
-    public string LiveStatus { get; set; }
-
     public int MatchId { get; set; }
+
+    public int BetType { get; set; }
+
+    public string BetTypeName { get; set; }
 
     public int MatchCount { get; set; }
 
@@ -47,9 +51,9 @@ public class SportItemModel
         }
     }
 
-    public static SportItemModel operator +(SportItemModel a, SportItemModel b)
+    public static ReportItemModel operator +(ReportItemModel a, ReportItemModel b)
     {
-        return new SportItemModel
+        return new ReportItemModel
         {
             Sport = "Grand Total",
             MatchCount = a.MatchCount + b.MatchCount,

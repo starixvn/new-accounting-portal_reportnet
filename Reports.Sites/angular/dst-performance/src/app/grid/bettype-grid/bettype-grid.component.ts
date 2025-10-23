@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Grid } from '../grid.model';
+import { Grid, GridType } from '../grid.model';
 import { Observable } from 'rxjs';
-import { SportModel } from 'src/app/common/model';
+import { ReportModel } from '../../../app/common/model';
 import { GridService } from '../grid.service';
-import { SportGridService } from '../sport-grid/sport-grid.service';
+import * as moment from 'moment';
+import { LevelConstants } from '../../../app/common/constants';
 
 @Component({
   selector: 'app-bettype-grid',
@@ -11,19 +12,28 @@ import { SportGridService } from '../sport-grid/sport-grid.service';
   styleUrls: ['./bettype-grid.component.scss']
 })
 export class BetTypeGridComponent implements Grid {
-  dataViewModel!: SportModel;
+  dataViewModel!: ReportModel;
 
-  constructor(private readonly gridService: GridService,
-    private readonly service: SportGridService
+  constructor(private readonly gridService: GridService
   ) { }
 
   get title(): string {
     return this.gridService.filterModel.sportName;
   }
+
+  showLeague(betType: number, betTypeName: string, date: Date): void {
+      this.gridService.filterModel.betTypeName = betTypeName;
+      this.gridService.filterModel.betType = betType;
+      this.gridService.filterModel.fromDate = moment(date).format('MMM DD, YYYY');
+      this.gridService.filterModel.toDate = moment(date).format('MMM DD, YYYY');
+      this.gridService.filterModel.leagueId = undefined;
+      this.gridService.filterModel.level = LevelConstants.LEAGUE;
+      this.gridService.generate!(GridType.League);
+    }
   
-  query(): Observable<SportModel> {
+  query(): Observable<ReportModel> {
     return new Observable(observer => {
-      this.service.getSports(this.gridService.filterModel).subscribe(data => {
+      this.gridService.getData(this.gridService.filterModel).subscribe(data => {
         this.dataViewModel = data;
       });
       observer.complete();
@@ -31,6 +41,6 @@ export class BetTypeGridComponent implements Grid {
   }
 
   exportExcel(): void {
-    this.service.exportExcel(this.gridService.filterModel);
+    this.gridService.exportExcel(this.gridService.filterModel);
   }
 }

@@ -21,6 +21,8 @@ import { BreadcrumbModule } from 'nap-components/breadcrumb';
 import { SportGridComponent } from './grid/sport-grid/sport-grid.component';
 import { BetTypeGridComponent } from './grid/bettype-grid/bettype-grid.component';
 import { DecimalFormatDirective } from './directive/decimal-format.directive';
+import { LeagueGridComponent } from './grid/league-grid/league-grid.component';
+import { MatchGridComponent } from './grid/match-grid/match-grid.component';
 
 declare module "@angular/core" {
   interface ModuleWithProviders<T = any> {
@@ -36,6 +38,8 @@ declare module "@angular/core" {
     GridComponent,
     SportGridComponent,
     BetTypeGridComponent,
+    LeagueGridComponent,
+    MatchGridComponent,
     DecimalFormatDirective
   ],
   imports: [

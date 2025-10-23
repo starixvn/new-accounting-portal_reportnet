@@ -1,14 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FilterModel } from './filter.model';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { DateHelper } from 'nap-components/date'
+import { DateFormat, DateHelper } from 'nap-components/date'
 import * as moment from "moment";
 import { CONFIG } from '../common/date-config';
 import { SelectItem } from 'nap-components/dropdown-select';
 import { FilterService } from './filter.service';
 import { TurnoverType } from '../common/model';
 import { ToastService } from 'nap-components/toast';
-import { CommonConstants } from '../common/constants';
+import { CommonConstants, LevelConstants } from '../common/constants';
 
 @Component({
   selector: 'app-filter',
@@ -18,14 +18,14 @@ import { CommonConstants } from '../common/constants';
 export class FilterComponent implements OnInit {
   @Output() generated = new EventEmitter<FilterModel>();
 
-  minStartDate: NgbDateStruct = { year: 2025, month: 5, day: 1 }
-  maxEndDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));
-  startDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));
-  endDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.today));
+  minStartDate: NgbDateStruct = { year: 2019, month: 1, day: 1 };
+  maxEndDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.yesterday));
+  startDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.yesterday));
+  endDate: NgbDateStruct = DateHelper.convertMomentToDateStruct(moment.utc(CONFIG.date.yesterday));
   turnoverOptions: SelectItem[] = [];
   turnover = TurnoverType.Normal;
   ticketStatusSelectItems = this.filterService.getStatusSelectItems();
-  ticketStatus: number | undefined;
+  ticketStatus = 2;
 
   constructor(private readonly filterService: FilterService,
     private readonly toastService: ToastService
@@ -46,12 +46,15 @@ export class FilterComponent implements OnInit {
     const fromDate = DateHelper.convertDateStructToMoment(this.startDate);
     const toDate = DateHelper.convertDateStructToMoment(this.endDate);
     const model: FilterModel = {
-      fromDate: fromDate.format(CommonConstants.DATE_GMT),
-      toDate: toDate.set('hour', 23).set('minute', 59).set('second', 59).set('millisecond', 999).format(CommonConstants.DATE_GMT),
+      fromDate: DateHelper.formatMomentDate(fromDate, DateFormat.Date),
+      toDate: DateHelper.formatMomentDate(toDate, DateFormat.Date),
       noDraw: this.turnover === TurnoverType.NoDraw,
       breadCrumb: [],
       liveStatus: this.ticketStatus,
-      sportName: ''
+      sportName: '',
+      betTypeName: '',
+      leagueName: '',
+      level: LevelConstants.SPORT
     };
     return model;
   }

@@ -22,7 +22,7 @@ export class FilterService {
 
   getStatusSelectItems(): SelectItem[] {
     return [
-        { text: 'All', value:  undefined },
+        { text: 'All', value:  2 },
         { text: 'Live', value: 1 },
         { text: 'Non-Live', value: 0 }
     ];

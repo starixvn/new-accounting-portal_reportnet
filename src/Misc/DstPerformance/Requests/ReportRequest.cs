@@ -3,7 +3,7 @@ using MediatR;
 
 namespace DstPerformance.Requests;
 
-public class SportRequest : IRequest<SportModel>
+public class ReportRequest : IRequest<ReportModel>
 {
     public string FromDate { get; set; }
 
@@ -13,9 +13,9 @@ public class SportRequest : IRequest<SportModel>
 
     public int? SportId { get; set; }
 
-    public byte? LiveStatus { get; set; }
+    public int? BetType { get; set; }
 
-    public int MatchCount { get; set; }
+    public int? LeagueId { get; set; }
 
-    public string FilterType { get; set; }
+    public byte LiveStatus { get; set; }
 }

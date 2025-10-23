@@ -1,6 +1,6 @@
 <ng-template #colgroup>
     <colgroup>
-      <col style="width: 80px" />
+      <col style="width: 100px" />
       <col style="width: 200px" />
       <col style="width: 100px" />
       <col style="width: 100px" />
@@ -17,7 +17,7 @@
     <thead>
       <tr>
         <th scope="col">Date</th>
-        <th scope="col">BetType</th>
+        <th scope="col">Bet Type</th>
         <th scope="col">Match Count</th>
         <th scope="col">Bet Count</th>
         <th scope="col">Member WL</th>
@@ -26,14 +26,16 @@
         <th scope="col">House Income</th>
         <th scope="col">House Turnover</th>
         <th scope="col">Margin</th>
-        <th scope="col">Amount due to BetConstruct</th>
+        <th scope="col">Amount due to DST</th>
       </tr>
     </thead>
   </ng-template>
   <ng-template #rowItem let-item="item">
     <tr>
-        <td class="text-right">{{item.Date | date: 'dd/MM/yyyy'}}</td>
-        <td>{{item.BetTypeName}}</td>
+        <td>{{item.Date | date: 'dd/MM/yyyy'}}</td>
+        <td>
+          <a href="javascript:;" (click)="showLeague(item.BetType, item.BetTypeName, item.Date)">{{item.BetTypeName}}</a>
+        </td>
         <td class="text-right">{{item.MatchCount | number: '1.0-0'}}</td>
         <td class="text-right">{{item.BetCount | number: '1.0-0'}}</td>
         <td class="text-right" [appDecimalFormat]="item.MemberWinLoss"></td>
@@ -56,12 +58,12 @@
         <td class="text-right font-weight-bold" [appDecimalFormat]="item.HouseIncome"></td>
         <td class="text-right font-weight-bold">{{item.HouseTurnover | number: '1.2-2'}}</td>
         <td class="text-right font-weight-bold" [ngClass]="item.Margin < 0 ? 'red-negative' : ''">{{ item.Margin * 100 | number: '1.2-2' }}%</td>
-        <td class="text-right font-weight-bold" [appDecimalFormat]="item.AmountDueToBC"></td>
+        <td class="text-right font-weight-bold" [appDecimalFormat]="item.AmountDueToDST"></td>
     </tr>
   </ng-template>
   <div *ngIf="dataViewModel" [ngSwitch]="dataViewModel.Items.length > 0">
     <div class="nap-grid">
-        <div style="width: 1320px">
+        <div style="width: 1340px">
             <div class="header">
                 <table>
                   <ng-template [ngTemplateOutlet]="colgroup"></ng-template>

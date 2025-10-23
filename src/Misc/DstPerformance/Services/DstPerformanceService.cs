@@ -7,23 +7,19 @@ namespace DstPerformance.Services;
 
 public interface DstPerformanceService
 {
-    Task<SportModel> GetSports(ReportCriteria criteria);
+    Task<ReportModel> GetData(ReportCriteria criteria);
 }
 
 public class DstPerformanceServiceImp(IDynamicRepository repository) : DstPerformanceService
 {
-    public Task<SportModel> GetSports(ReportCriteria criteria)
+    public Task<ReportModel> GetData(ReportCriteria criteria)
     {
-        var rawData = repository.Fetch<SportItemModel>(criteria);
-        var data = new SportModel
+        var rawData = repository.Fetch<ReportItemModel>(criteria);
+        var data = new ReportModel
         {
             Items = rawData,
             Total = rawData.DynamicSum()
         };
-        if (criteria.SportId.HasValue)
-        {
-            data.Total.MatchCount = criteria.MatchCount;
-        }
         return Task.FromResult(data);
     }
 }

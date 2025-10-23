@@ -3,7 +3,7 @@ using OfficeOpenXml;
 
 namespace DstPerformance.Requests;
 
-public class SportExcelRequest : IRequest<ExcelPackage>
+public class ReportExcelRequest : IRequest<ExcelPackage>
 {
     public string FromDate { get; set; }
 
@@ -13,11 +13,11 @@ public class SportExcelRequest : IRequest<ExcelPackage>
 
     public int? SportId { get; set; }
 
-    public string SportName { get; set; }
+    public int? BetType { get; set; }
 
-    public byte? LiveStatus { get; set; }
+    public int? LeagueId { get; set; }
 
-    public int MatchCount { get; set; }
+    public byte LiveStatus { get; set; }
 
-    public string FilterType { get; set; }
+    public string Level { get; set; }
 }

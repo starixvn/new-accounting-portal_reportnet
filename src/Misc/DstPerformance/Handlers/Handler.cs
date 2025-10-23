@@ -7,11 +7,11 @@ using MediatR;
 
 namespace DstPerformance.Handlers;
 
-public class Handler(DstPerformanceService service, IMapper mapper) : IRequestHandler<SportRequest, SportModel>
+public class Handler(DstPerformanceService service, IMapper mapper) : IRequestHandler<ReportRequest, ReportModel>
 {
-    public Task<SportModel> Handle(SportRequest request, CancellationToken cancellationToken)
+    public Task<ReportModel> Handle(ReportRequest request, CancellationToken cancellationToken)
     {
         var criteria = mapper.Map<ReportCriteria>(request);
-        return service.GetSports(criteria);
+        return service.GetData(criteria);
     }
 }

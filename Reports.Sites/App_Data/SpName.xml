@@ -608,6 +608,8 @@
 		<Setting Key="TGRS_Rpt_NewPerformanceDetail_LeagueAllMatch" SpName="TGRS_Rpt_NewPerformanceDetail_LeagueAllMatch" DbName="DBTGRS.bodb_TGRS.wsv_tgrs"/>
 	</Function>
 	<Function Name="DSTPerformance">
-		<Setting Key="Acc_Rpt_DSTPerformance" SpName="Acc_Rpt_DSTPerformance" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
+		<Setting Key="Acc_Rpt_DSTPerformance" SpName="Acc_Rpt_DSTPerformance" DbName="DBWH.bodb_dwrs.wsv_nap">
+			<Mapping DataField="RptDate" ObjectProperty="Date" />
+		</Setting>
 	</Function>
 </Functions>

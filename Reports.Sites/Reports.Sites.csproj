@@ -107,6 +107,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ExcelTemplate\DstPerformance\" />
     <Folder Include="ExcelTemplate\PerformanceDetailJuiceLeftover\BetType\" />
     <Folder Include="ExcelTemplate\PerformanceDetailJuiceLeftover\League\" />
   </ItemGroup>

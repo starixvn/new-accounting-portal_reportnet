@@ -9,16 +9,16 @@ namespace DstPerformance.Controllers;
 [ApiController]
 public class BetConstructPerformanceApiController(IMediator mediator) : ControllerBase
 {
-    [Route("sports")]
-    public async Task<IActionResult> Sports(SportRequest request)
+    [Route("data")]
+    public async Task<IActionResult> Sports(ReportRequest request)
     {
         var viewModel = await mediator.Send(request);
         return Ok(viewModel);
     }
 
-    [Route("excel-sports")]
+    [Route("excel-data")]
     [HttpPost]
-    public async Task<IActionResult> Excel(SportExcelRequest request)
+    public async Task<IActionResult> Excel(ReportExcelRequest request)
     {
         var excelPackage = await mediator.Send(request);
         return new EpplusExcelResult(excelPackage);

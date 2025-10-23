@@ -1,10 +1,10 @@
 {
     "/api": {
-        "target": "http://localhost:5290/",
+        "target": "https://localhost:44352/",
         "secure": false
     },
     "/state-api": {
-        "target": "http://localhost:5290/",
+        "target": "https://localhost:44352/",
         "secure": false
     }
 }

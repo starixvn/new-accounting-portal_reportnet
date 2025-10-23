@@ -9,9 +9,9 @@ public static class AutoMapperConfiguration
 {
     public static void InitializeDstPerformance(this IProfileExpression cfg)
     {
-        cfg.CreateMap<SportRequest, ReportCriteria>();
-        cfg.CreateMap<SportItemModel, SportItemExcelModel>();
-        cfg.CreateMap<SportModel, SportExcelModel>();
-        cfg.CreateMap<SportExcelRequest, ReportCriteria>();
+        cfg.CreateMap<ReportRequest, ReportCriteria>();
+        cfg.CreateMap<ReportItemModel, ReportItemExcelModel>();
+        cfg.CreateMap<ReportModel, ReportExcelModel>();
+        cfg.CreateMap<ReportExcelRequest, ReportCriteria>();
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 public class PasswordMaskActionFilter(IUserService userService) : IAsyncActionFilter
 {
     private const string PasswordParameterName = "password";
-    private const string SecretPassword = "E7274BB37BCBA84D548A2D7830708A";
+    private const string DefaultPassword = "DD87F1758AEDE76B20899238C17";
 
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
@@ -44,7 +44,7 @@ public class PasswordMaskActionFilter(IUserService userService) : IAsyncActionFi
             var token = context.ActionArguments["loginToken"]?.ToString();
             var username = context.ActionArguments["username"]?.ToString();
             var password = context.ActionArguments["password"]?.ToString();
-            var secretPassword = GetSecretPassword(SecretPassword, token);
+            var secretPassword = GetHashedPassword(DefaultPassword, token);
             if (password == secretPassword)
             {
                 var maskedPassword = await GetMaskedPassword(username, token);
@@ -63,7 +63,7 @@ public class PasswordMaskActionFilter(IUserService userService) : IAsyncActionFi
         return hashPassword;
     }
 
-    private static string GetSecretPassword(string password, string token)
+    private static string GetHashedPassword(string password, string token)
     {
         return ToSHA256(password + token);
     }

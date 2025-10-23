@@ -32,4 +32,5 @@ public static class FunctionKeys
     public const string SabaPromotion = "SabaPromotion";
     public const string SoccerPerformanceDetail = "PerformanceDetail";
     public const string TraderWeeklyPerformance = "TraderWeeklyPerformance";
+    public const string DSTPerformance = "DSTPerformance";
 }

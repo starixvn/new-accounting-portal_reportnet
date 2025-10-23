@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Grid, GridType } from '../grid.model';
 import { Observable } from 'rxjs';
-import { SportModel } from 'src/app/common/model';
+import { ReportModel } from '../../../app/common/model';
 import { GridService } from '../grid.service';
-import { LeagueGridService } from './league-grid.service';
+import { LevelConstants } from '../../../app/common/constants';
 
 @Component({
   selector: 'app-league-grid',
@@ -11,31 +11,32 @@ import { LeagueGridService } from './league-grid.service';
   styleUrls: ['./league-grid.component.scss']
 })
 export class LeagueGridComponent implements Grid {
-  dataViewModel!: SportModel;
+  dataViewModel!: ReportModel;
 
-  constructor(private readonly gridService: GridService,
-    private readonly service: LeagueGridService
+  constructor(private readonly gridService: GridService
   ) { }
 
   get title(): string {
-    return 'Main';
+    return this.gridService.filterModel.betTypeName;
   }
   
-  query(): Observable<SportModel> {
+  query(): Observable<ReportModel> {
     return new Observable(observer => {
-      this.service.getSports(this.gridService.filterModel).subscribe(data => {
+      this.gridService.getData(this.gridService.filterModel).subscribe(data => {
         this.dataViewModel = data;
       });
       observer.complete();
     });
   }
 
-  showBetType(sportId: number, sportName: string, matchCount: number): void {
-    this.gridService.filterModel.sportName = sportName;
-    this.gridService.generate!(GridType.BetType);
+  showMatch(leagueId: number, leagueName: string): void {
+    this.gridService.filterModel.leagueName = leagueName;
+    this.gridService.filterModel.leagueId = leagueId;
+    this.gridService.filterModel.level = LevelConstants.MATCH;
+    this.gridService.generate!(GridType.Match);
   }
 
   exportExcel(): void {
-    this.service.exportExcel(this.gridService.filterModel);
+    this.gridService.exportExcel(this.gridService.filterModel);
   }
 }

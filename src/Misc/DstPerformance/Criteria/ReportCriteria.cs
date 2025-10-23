@@ -1,5 +1,4 @@
-﻿using Fanex.Data;
-using Fanex.Data.Repository;
+﻿using Fanex.Data.Repository;
 
 namespace DstPerformance.Criteria;
 
@@ -18,9 +17,6 @@ public class ReportCriteria : CriteriaBase
     public int? LeagueId { get; set; }
 
     public byte LiveStatus { get; set; }
-
-    [SpParam(Ignored = true)]
-    public int MatchCount { get; set; }
 
     public override string GetSettingKey() => "Acc_Rpt_DSTPerformance";
 
