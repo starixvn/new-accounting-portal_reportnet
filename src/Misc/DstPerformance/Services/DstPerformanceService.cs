@@ -20,6 +20,10 @@ public class DstPerformanceServiceImp(IDynamicRepository repository) : DstPerfor
             Items = rawData,
             Total = rawData.DynamicSum()
         };
+        if (criteria is { SportId: not null, BetType: null })
+        {
+            data.Total.MatchCount = criteria.MatchCount;
+        }
         return Task.FromResult(data);
     }
 }

@@ -10,7 +10,7 @@ namespace DstPerformance.Controllers;
 public class BetConstructPerformanceApiController(IMediator mediator) : ControllerBase
 {
     [Route("data")]
-    public async Task<IActionResult> Sports(ReportRequest request)
+    public async Task<IActionResult> Data(ReportRequest request)
     {
         var viewModel = await mediator.Send(request);
         return Ok(viewModel);

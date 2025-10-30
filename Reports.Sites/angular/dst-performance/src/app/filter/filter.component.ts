@@ -54,7 +54,8 @@ export class FilterComponent implements OnInit {
       sportName: '',
       betTypeName: '',
       leagueName: '',
-      level: LevelConstants.SPORT
+      level: LevelConstants.SPORT,
+      matchCount: 0
     };
     return model;
   }

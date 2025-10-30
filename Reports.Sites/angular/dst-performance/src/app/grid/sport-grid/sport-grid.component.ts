@@ -14,6 +14,7 @@ export class SportGridComponent implements Grid {
   dataViewModel!: ReportModel;
   fromDate!: string;
   toDate!: string;
+  matchCount = 0;
 
   constructor(private readonly gridService: GridService
   ) { }
@@ -33,7 +34,7 @@ export class SportGridComponent implements Grid {
     });
   }
 
-  showBetType(sportId: number, sportName: string): void {
+  showBetType(sportId: number, sportName: string, matchCount: number): void {
     this.gridService.filterModel.sportName = sportName;
     this.gridService.filterModel.sportId = sportId;
     this.gridService.filterModel.fromDate = this.fromDate;
@@ -41,6 +42,7 @@ export class SportGridComponent implements Grid {
     this.gridService.filterModel.betType = undefined;
     this.gridService.filterModel.leagueId = undefined;
     this.gridService.filterModel.level = LevelConstants.BETTYPE;
+    this.gridService.filterModel.matchCount = matchCount;
     this.gridService.generate!(GridType.BetType);
   }
 

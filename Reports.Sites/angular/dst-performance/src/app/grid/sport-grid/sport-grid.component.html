@@ -30,8 +30,11 @@
   </ng-template>
   <ng-template #rowItem let-item="item">
     <tr>
-        <td>
-          <a href="javascript:;" (click)="showBetType(item.SportId, item.Sport)">{{item.Sport}}</a>
+        <td *ngIf="item.SportId !== -1">
+          <a href="javascript:;" (click)="showBetType(item.SportId, item.Sport, item.MatchCount)">{{item.Sport}}</a>
+        </td>
+        <td *ngIf="item.SportId === -1">
+          {{item.Sport}}
         </td>
         <td class="text-right">{{item.MatchCount | number: '1.0-0'}}</td>
         <td class="text-right">{{item.BetCount | number: '1.0-0'}}</td>

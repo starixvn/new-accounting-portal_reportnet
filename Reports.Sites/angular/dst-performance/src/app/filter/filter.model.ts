@@ -11,4 +11,5 @@ export interface FilterModel {
     leagueName: string;
     betTypeName: string;
     level: string;
+    matchCount: number;
   }

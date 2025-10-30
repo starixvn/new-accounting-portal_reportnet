@@ -18,4 +18,6 @@ public class ReportRequest : IRequest<ReportModel>
     public int? LeagueId { get; set; }
 
     public byte LiveStatus { get; set; }
+
+    public int MatchCount { get; set; }
 }

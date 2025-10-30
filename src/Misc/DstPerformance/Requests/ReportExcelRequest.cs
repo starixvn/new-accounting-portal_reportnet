@@ -20,4 +20,6 @@ public class ReportExcelRequest : IRequest<ExcelPackage>
     public byte LiveStatus { get; set; }
 
     public string Level { get; set; }
+
+    public int MatchCount { get; set; }
 }
