@@ -5,6 +5,7 @@ import { ReportModel } from '../../../app/common/model';
 import { GridService } from '../grid.service';
 import * as moment from 'moment';
 import { LevelConstants } from '../../../app/common/constants';
+import { FilterModel } from '../../../app/filter/filter.model';
 
 @Component({
   selector: 'app-bettype-grid',
@@ -13,6 +14,7 @@ import { LevelConstants } from '../../../app/common/constants';
 })
 export class BetTypeGridComponent implements Grid {
   dataViewModel!: ReportModel;
+  originalFilterModel!: FilterModel;
 
   constructor(private readonly gridService: GridService
   ) { }
@@ -35,12 +37,13 @@ export class BetTypeGridComponent implements Grid {
     return new Observable(observer => {
       this.gridService.getData(this.gridService.filterModel).subscribe(data => {
         this.dataViewModel = data;
+        this.originalFilterModel = { ...this.gridService.filterModel };
       });
       observer.complete();
     });
   }
 
   exportExcel(): void {
-    this.gridService.exportExcel(this.gridService.filterModel);
+    this.gridService.exportExcel(this.originalFilterModel);
   }
 }

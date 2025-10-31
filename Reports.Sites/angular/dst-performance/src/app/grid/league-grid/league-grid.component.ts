@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ReportModel } from '../../../app/common/model';
 import { GridService } from '../grid.service';
 import { LevelConstants } from '../../../app/common/constants';
+import { FilterModel } from 'src/app/filter/filter.model';
 
 @Component({
   selector: 'app-league-grid',
@@ -12,6 +13,7 @@ import { LevelConstants } from '../../../app/common/constants';
 })
 export class LeagueGridComponent implements Grid {
   dataViewModel!: ReportModel;
+  originalFilterModel!: FilterModel
 
   constructor(private readonly gridService: GridService
   ) { }
@@ -24,6 +26,7 @@ export class LeagueGridComponent implements Grid {
     return new Observable(observer => {
       this.gridService.getData(this.gridService.filterModel).subscribe(data => {
         this.dataViewModel = data;
+        this.originalFilterModel = { ...this.gridService.filterModel };
       });
       observer.complete();
     });
@@ -37,6 +40,6 @@ export class LeagueGridComponent implements Grid {
   }
 
   exportExcel(): void {
-    this.gridService.exportExcel(this.gridService.filterModel);
+    this.gridService.exportExcel(this.originalFilterModel);
   }
 }
