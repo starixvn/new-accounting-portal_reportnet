@@ -57,6 +57,7 @@
     <ProjectReference Include="..\src\Misc\CashOutPerformance\CashOutPerformance.csproj" />
     <ProjectReference Include="..\src\Misc\CreditMovementMonitor\CreditMovementMonitor.csproj" />
     <ProjectReference Include="..\src\Misc\DailyCreatedCustomers\DailyCreatedCustomers.csproj" />
+    <ProjectReference Include="..\src\Misc\DstPerformance\DstPerformance.csproj" />
     <ProjectReference Include="..\src\Misc\DuplicateTickets\DuplicateTickets.csproj" />
     <ProjectReference Include="..\src\Misc\Exchange\Exchange.csproj" />
     <ProjectReference Include="..\src\Misc\ResultAnalysis\ResultAnalysis.csproj" />
@@ -106,6 +107,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ExcelTemplate\DstPerformance\" />
     <Folder Include="ExcelTemplate\PerformanceDetailJuiceLeftover\BetType\" />
     <Folder Include="ExcelTemplate\PerformanceDetailJuiceLeftover\League\" />
   </ItemGroup>

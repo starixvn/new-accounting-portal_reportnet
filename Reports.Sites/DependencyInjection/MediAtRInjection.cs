@@ -1,4 +1,6 @@
-﻿namespace Reports.Sites.DependencyInjection;
+﻿using DstPerformance;
+
+namespace Reports.Sites.DependencyInjection;
 
 using System.Reflection;
 using AbnormalBet;
@@ -28,5 +30,6 @@ public static class MediatRInjection
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(PunterAnalysisAttribute).GetTypeInfo().Assembly));
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ResultAnalysisAttribute).GetTypeInfo().Assembly));
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(BetConstructPerformanceAttribute).GetTypeInfo().Assembly));
+        service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DstPerformanceAttribute).GetTypeInfo().Assembly));
     }
 }

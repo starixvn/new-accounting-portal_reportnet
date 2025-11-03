@@ -1,0 +1,30 @@
+import { Injectable } from '@angular/core';
+import { SelectItem } from 'nap-components/dropdown-select';
+import { TurnoverType } from '../common/model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FilterService {
+  private readonly url = 'api/cash-out-performance/';
+
+  constructor() { }
+
+  getTurnoverOptions(): SelectItem[] {
+    return [{
+        text: 'Normal',
+        value: TurnoverType.Normal
+    }, {
+        text: 'No Draw',
+        value: TurnoverType.NoDraw
+    }];
+  }
+
+  getStatusSelectItems(): SelectItem[] {
+    return [
+        { text: 'All', value:  2 },
+        { text: 'Live', value: 1 },
+        { text: 'Non-Live', value: 0 }
+    ];
+   }
+}
