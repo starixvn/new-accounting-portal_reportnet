@@ -15,11 +15,20 @@ public class DstPerformanceServiceImp(IDynamicRepository repository) : DstPerfor
     public Task<ReportModel> GetData(ReportCriteria criteria)
     {
         var rawData = repository.Fetch<ReportItemModel>(criteria);
+        var parlayData = rawData.Where(r => r.SportId.IsParlay());
         var data = new ReportModel
         {
             Items = rawData,
             Total = rawData.DynamicSum()
         };
+        if (data.Items.All(i => i.SportId.IsParlay()))
+        {
+            data.Total.SportId = -1;
+        }
+        else
+        {
+            data.Total.MatchCount -= parlayData.Sum(s => s.MatchCount);
+        }
         if (criteria is { SportId: not null, BetType: null })
         {
             data.Total.MatchCount = criteria.MatchCount;

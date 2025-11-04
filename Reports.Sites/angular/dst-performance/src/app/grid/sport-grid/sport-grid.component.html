@@ -36,7 +36,8 @@
         <td *ngIf="item.SportId === -1">
           {{item.Sport}}
         </td>
-        <td class="text-right">{{item.MatchCount | number: '1.0-0'}}</td>
+        <td *ngIf="item.SportId !== -1" class="text-right">{{item.MatchCount | number: '1.0-0'}}</td>
+        <td *ngIf="item.SportId === -1" class="text-right">-</td>
         <td class="text-right">{{item.BetCount | number: '1.0-0'}}</td>
         <td class="text-right" [appDecimalFormat]="item.MemberWinLoss"></td>
         <td class="text-right">{{item.MemberTurnover | number: '1.2-2'}}</td>
@@ -50,7 +51,8 @@
   <ng-template #rowTotalItem let-item="item">
     <tr>
         <td class="text-center font-weight-bold">Grand Total</td>
-        <td class="text-right font-weight-bold">{{item.MatchCount | number: '1.0-0'}}</td>
+        <td *ngIf="item.SportId !== -1" class="text-right font-weight-bold">{{item.MatchCount | number: '1.0-0'}}</td>
+        <td *ngIf="item.SportId === -1" class="text-right font-weight-bold">-</td>
         <td class="text-right font-weight-bold">{{item.BetCount | number: '1.0-0'}}</td>
         <td class="text-right font-weight-bold" [appDecimalFormat]="item.MemberWinLoss"></td>
         <td class="text-right font-weight-bold">{{item.MemberTurnover | number: '1.2-2'}}</td>

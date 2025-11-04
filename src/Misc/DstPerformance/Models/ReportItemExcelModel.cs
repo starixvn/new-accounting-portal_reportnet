@@ -1,4 +1,5 @@
 ﻿using DstPerformance.Constants;
+using DstPerformance.Services;
 using Epplus.Mapper.Annotations;
 
 namespace DstPerformance.Models;
@@ -9,11 +10,15 @@ public class ReportItemExcelModel
 
     public string Sport { get; set; }
 
+    public int SportId { get; set; }
+
     public string LeagueName { get; set; }
 
     public string MatchName { get; set; }
 
     public string BetTypeName { get; set; }
+
+    public int MatchCount { get; set; }
 
     [Cell("A4")]
     public DateTime Date { get; set; }
@@ -27,8 +32,7 @@ public class ReportItemExcelModel
         _ => MatchName
     };
 
-    [Cell("C4")]
-    public int MatchCount { get; set; }
+    [Cell("C4")] public string MatchCountString => SportId.IsParlay() ? "-" : $"{MatchCount:#,##0}";
 
     [Cell("D4")]
     public int BetCount { get; set; }

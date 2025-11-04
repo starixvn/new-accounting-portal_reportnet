@@ -37,7 +37,7 @@ public class ExcelBuilderServiceImp(ConfigurationService configurationService) :
         var grandTotalCellAddress = level != LevelConstants.BetType
             ? $"A{startSummaryRowIndex}"
             : $"A{startSummaryRowIndex}:B{startSummaryRowIndex}";
-        FormatSheet(model.Items.Count(), grandTotalCellAddress);
+        FormatSheet(model.Items.Count(), grandTotalCellAddress, level);
         ClearTemplate();
         return ExcelPackage;
     }
@@ -56,7 +56,7 @@ public class ExcelBuilderServiceImp(ConfigurationService configurationService) :
         ExcelPackage.Workbook.Worksheets.Delete("TotalTemplate");
     }
 
-    private void FormatSheet(int totalItems, string grandTotalCellAddress)
+    private void FormatSheet(int totalItems, string grandTotalCellAddress, string level)
     {
         for (var i = 0; i < totalItems; i++)
         {
@@ -67,6 +67,10 @@ public class ExcelBuilderServiceImp(ConfigurationService configurationService) :
             sheet.Cells[cellAddress].Style.Fill.BackgroundColor.SetColor(backgroundColor);
         }
 
+        if (level == LevelConstants.Sport)
+        {
+            sheet.Column(ExcelConstants.SportColumnIndex).Width = ExcelConstants.SportColumnWidth;
+        }
         sheet.Cells[grandTotalCellAddress].Merge = true;
         sheet.Cells[grandTotalCellAddress].Value = "Grand Total";
         sheet.Cells[grandTotalCellAddress].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
