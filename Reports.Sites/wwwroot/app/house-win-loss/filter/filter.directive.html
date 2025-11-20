@@ -26,6 +26,9 @@
                     <label><input type="radio" ng-value="0" ng-model="vm.turnover"> Normal</label>
                     <label><input type="radio" ng-value="1" ng-model="vm.turnover"> No Draw</label>
                 </div>
+                <div class="radio-group">
+                    <input type="checkbox" ng-model="vm.excludeHedge"> Exclude Hedge
+                </div>
                 <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.generate()">Generate</button>
                 <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.todayClicked()">{{vm.today | amDateFormat:'MMM DD, YYYY'}}</button>
                 <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.yesterdayClicked()">{{vm.yesterday | amDateFormat:'MMM DD, YYYY'}}</button>
@@ -37,6 +40,9 @@
                     <label class="bold">Turnover</label>
                     <label><input type="radio" ng-value="0" ng-model="vm.turnover"> Normal</label>
                     <label><input type="radio" ng-value="1" ng-model="vm.turnover"> No Draw</label>
+                </div>
+                <div class="radio-group">
+                    <input type="checkbox" ng-model="vm.excludeHedge"> Exclude Hedge
                 </div>
                 <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.generate()">Generate</button>
                 <button type="button" class="btn btn-sm btn-filter" data-ng-click="vm.viewNormalMode()" data-ng-show="vm.showBothMode">Back</button>

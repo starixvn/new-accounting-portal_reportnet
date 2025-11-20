@@ -4,6 +4,8 @@ public class UniversalSecondLevelCriteria : WinLossCriteria
 {
     public bool IsNoDraw { get; set; }
 
+    public bool ExcludeHedge { get; set; }
+
     public int AliasProductID { get; set; }
 
     public int PermissionProfileID { get; set; }

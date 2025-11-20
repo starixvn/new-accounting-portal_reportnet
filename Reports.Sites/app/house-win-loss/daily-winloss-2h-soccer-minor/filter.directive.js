@@ -12,7 +12,7 @@ import moment from "moment";
             restrict: 'EA',
             scope: {
             },
-            templateUrl: 'app/house-win-loss/filter/filter.directive.html',
+            templateUrl: 'app/house-win-loss/filter/filter.soccer-monitor.directive.html',
             replace: true,
             controller: controller,
             controllerAs: 'vm',

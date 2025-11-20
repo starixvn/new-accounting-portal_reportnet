@@ -97,6 +97,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\app\house-win-loss\filter\filter.soccer-monitor.directive.html" />
     <Content Remove="wwwroot\performance-detail-juice-leftover\bettype-performance.js" />
     <Content Remove="wwwroot\performance-detail-juice-leftover\scripts\grade-performance.js" />
     <Content Remove="wwwroot\performance-detail-juice-leftover\scripts\league-performance.js" />
@@ -114,6 +115,12 @@
 
   <ItemGroup>
     <None Include="Views\PerformanceDetailJuiceLeftover\TraderPerformance.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="wwwroot\app\house-win-loss\filter\filter.soccer-monitor.directive.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 

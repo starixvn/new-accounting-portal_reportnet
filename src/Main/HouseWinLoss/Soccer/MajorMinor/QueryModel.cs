@@ -14,6 +14,8 @@ public class QueryModel
 
     public bool IsNoDraw { get; set; }
 
+    public bool ExcludeHedge { get; set; }
+
     public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
 
     public int PermissionProfileID { get; set; }

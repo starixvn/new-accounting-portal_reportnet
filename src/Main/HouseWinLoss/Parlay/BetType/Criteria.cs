@@ -10,5 +10,7 @@ public class Criteria : WinLossCriteria
 
     public bool IsNoDraw { get; set; }
 
+    public bool ExcludeHedge { get; set; }
+
     public override string GetSettingKey() => "HouseWinlossByProducts_Lvl2";
 }

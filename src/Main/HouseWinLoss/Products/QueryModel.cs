@@ -11,4 +11,6 @@ public class QueryModel
     public int PermissionProfileID { get; set; }
 
     public bool IsNoDraw { get; set; }
+
+    public bool ExcludeHedge { get; set; }
 }

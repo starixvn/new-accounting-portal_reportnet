@@ -9,6 +9,8 @@ public class Criteria : WinLossCriteria
 
     public bool IsNoDraw { get; set; }
 
+    public bool ExcludeHedge { get; set; }
+
     public int PermissionProfileID { get; set; }
 
     public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Sporttype";
