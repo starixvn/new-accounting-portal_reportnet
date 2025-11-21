@@ -64,7 +64,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             LiveIndicator: _leagueWinLoss.Params.reportParams.LiveIndicator,
             SportType: sportType,
             LeagueId: leagueId,
-            PermissionProfileID: _leagueWinLoss.Params.reportParams.PermissionProfileID
+            PermissionProfileID: _leagueWinLoss.Params.reportParams.PermissionProfileID,
+            ExcludeHedge: _leagueWinLoss.Params.reportParams.ExcludeHedge
         });
     };
     viewBetTypesByStatus = function (sportName, leagueName, sportType, leagueId) {

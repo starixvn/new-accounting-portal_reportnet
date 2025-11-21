@@ -34,6 +34,8 @@ public class LeagueWinLossCriteria : CriteriaBase
 
     public string LeagueGroup { get; set; }
 
+    public bool ExcludeHedge { get; set; }
+
     public override string GetSettingKey()
     {
         return "WinLoss_LeagueWinLoss_GetLeagueWinLoss";

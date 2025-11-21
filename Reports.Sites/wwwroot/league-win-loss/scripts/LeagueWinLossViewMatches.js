@@ -22,7 +22,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
             GlobalShowTime: '',
             SportType: 0,
             LeagueId: '',
-            PermissionProfileID: permissionProfileID
+            PermissionProfileID: permissionProfileID,
+            ExcludeHedge: false
         }
     };
     self.initPage = function () {

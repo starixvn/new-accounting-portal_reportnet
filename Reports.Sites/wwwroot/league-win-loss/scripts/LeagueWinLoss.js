@@ -19,7 +19,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         ddlDivision: null,
         ddlLeagueGroup: null,
         ddlGlobalShowTime: null,
-        ddlStatus: null
+        ddlStatus: null,
+        chbExcludeHedge: null
     };
 
     self.Params = {
@@ -36,7 +37,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             LeagueGroup: '',
             LiveIndicator: 2,
             GlobalShowTime: '',
-            PermissionProfileID: permissionProfileID
+            PermissionProfileID: permissionProfileID,
+            ExcludeHedge: false
         },
 
         isNormalMode: true,
@@ -88,6 +90,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.ddlLeagueGroup = $("#dropdown-leaguegroup");
         _tables.ddlGlobalShowTime = $("#ddlGlobalShowTime");
         _tables.ddlStatus = $("#ddlStatus");
+        _tables.chbExcludeHedge = $("#checkbox-exclude-hedge");
     };
 
     var setDayValueForButtons = function () {
@@ -386,6 +389,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.LeagueGroup = _tables.ddlLeagueGroup.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.GlobalShowTime = _tables.ddlGlobalShowTime.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.LiveIndicator = _tables.ddlStatus.val();
+        self.Params.reportParams.ExcludeHedge = _tables.chbExcludeHedge.prop('checked');
     };
 
     var getParams = function () {
@@ -410,6 +414,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.GlobalShowTime = _tables.ddlGlobalShowTime.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.LiveIndicator = _tables.ddlStatus.val();
         self.Params.reportParams.PermissionProfileID = permissionProfileID;
+        self.Params.reportParams.ExcludeHedge = _tables.chbExcludeHedge.prop('checked');
     };
 
     var checkReportParams = function (params) {

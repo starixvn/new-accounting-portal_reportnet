@@ -24,6 +24,8 @@ public class MatchesWithChoiceCriteria : CriteriaBase
 
     public string GlobalShowTime { get; set; }
 
+    public bool ExcludeHedge { get; set; }
+
     [SpParam(Ignored = true)]
     public string LeagueName { get; set; }
 
