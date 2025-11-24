@@ -5,19 +5,50 @@ CombinationWinLoss_HistoryReport = function () {
         btnGenerate: null,
         monthPicker: null,
         ddlReport: null,
-        ddlSiteType_HistoryReport: null
+        ddlSiteType_HistoryReport: null,
+        ddlParlayType_HistoryReport: null
     };
 
     self.Params = {
         reportParams: {
             FromDate: null,
             ToDate: null,
-            Site: 0
+            Site: 0,
+            ParlayType: 0
         }
     };
 };
 
 CombinationWinLoss_HistoryReport.prototype.InitPage = function () {
+    ddlParlayTypeItems = [{
+            Id: "1_MixParlay",
+            Value: 1,
+            Text: "Mix Parlay",
+            Checked: true,
+            Enable: true
+        },
+        {
+            Id: "2_BetBuilder",
+            Value: 2,
+            Text: "Bet Builder+",
+            Checked: true,
+            Enable: true,
+        }
+    ]
+    $("#ddlParlayType_HistoryReport").multiSelect(
+        {
+            minWidth: 140,
+            maxHeight: 450,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: true,
+            showFooter: false,
+            showTooltip: true,
+            checkAllText: 'All',
+            isUsedCustomCheckAllText: true,
+            customCheckAllText: 'All',
+            listData: ddlParlayTypeItems
+        });
     this.CachedDOMElements();
 };
 
@@ -26,6 +57,7 @@ CombinationWinLoss_HistoryReport.prototype.CachedDOMElements = function () {
     this.Tables.btnGenerate_HistoryReport = $("#btnGenerate_HistoryReport");
     this.Tables.monthPicker = $('#ddlMonth');
     this.Tables.ddlSiteType_HistoryReport = $('#ddlSiteType_HistoryReport');
+    this.Tables.ddlParlayType_HistoryReport = $("#ddlParlayType_HistoryReport");
 
     this.Tables.reportContainer = $('#combinationReportContainer_HistoryReport');
     this.Tables.report = $('#combinationReport_HistoryReport');
@@ -42,12 +74,12 @@ CombinationWinLoss_HistoryReport.prototype.BindingEvent = function () {
 
 CombinationWinLoss_HistoryReport.prototype.GetReport = function () {
     var self = this;
-
-    AccReport.disableInput();
     self.GetParams();
-    $.ajax({
+    if (self.ValidateParams() == true) {
+        AccReport.disableInput();
+        $.ajax({
         type: "POST",
-        url: window.rootUrl + "api/parlay/combination",
+        url: window.rootUrl + "/api/parlay/combination",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify(self.Params.reportParams),
@@ -67,13 +99,42 @@ CombinationWinLoss_HistoryReport.prototype.GetReport = function () {
         complete: function () {
             AccReport.enableInput();
         }
-    });
+        });
+    } else {
+        AccReport.enableInput();
+    }
+    
 };
+
+CombinationWinLoss_HistoryReport.prototype.ValidateParams = function () {
+        var isValid = true;
+        var message = '';
+        var notifyIds = [];
+
+        if (isNaN(this.Params.reportParams.ParlayType)) {
+            if (message == '') {
+                message = "Please select at least one Parlay Type!";
+            }
+            notifyIds.push("ddlParlayType");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            AccReport.popUp.removeHighLight();
+            AccReport.popUp.show(message, notifyIds.join(","));
+        } else {
+            AccReport.popUp.removeHighLight();
+        }
+
+        return isValid;
+    };
 
 CombinationWinLoss_HistoryReport.prototype.GetParams = function (dateType) {
     this.Params.reportParams.FromDate = this.Tables.monthPicker.monPickr("getFromDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
     this.Params.reportParams.ToDate = this.Tables.monthPicker.monPickr("getToDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
     this.Params.reportParams.Site = this.Tables.ddlSiteType_HistoryReport.val();
+    var parlayType = $("#ddlParlayType_HistoryReport").multiSelect("getCheckedItems");
+    this.Params.reportParams.ParlayType = parlayType.length === 2 ? 0 : parseInt(parlayType.toString());
 };
 
 CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
