@@ -6,19 +6,50 @@ WinLossByProduct = function () {
         btnToday: null,
         btnYesterday: null,
         datepickerplugin: null,
-        ddlSiteType: null
+        ddlSiteType: null,
+        ddlParlayType: null
     };
 
     self.Params = {
         reportParams: {
             FromDate: null,
             ToDate: null,
-            Site: 0
+            Site: 0,
+            ParlayType: 0
         }
     };
 };
 
 WinLossByProduct.prototype.InitPage = function () {
+    ddlParlayTypeItems = [{
+            Id: "1_MixParlay",
+            Value: 1,
+            Text: "Mix Parlay",
+            Checked: true,
+            Enable: true
+        },
+        {
+            Id: "2_BetBuilder",
+            Value: 2,
+            Text: "Bet Builder+",
+            Checked: true,
+            Enable: true,
+        }
+    ]
+    $("#ddlParlayType").multiSelect(
+        {
+            minWidth: 140,
+            maxHeight: 450,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: true,
+            showFooter: false,
+            showTooltip: true,
+            checkAllText: 'All',
+            isUsedCustomCheckAllText: true,
+            customCheckAllText: 'All',
+            listData: ddlParlayTypeItems
+        });
     this.CachedDOMElements();
 };
 
@@ -30,7 +61,7 @@ WinLossByProduct.prototype.CachedDOMElements = function () {
     this.Tables.fromDatepicker = $(".ui_nexdatepicker_fromdate");
     this.Tables.toDatepicker = $(".ui_nexdatepicker_todate");
     this.Tables.ddlSiteType = $("#ddlSiteType");
-
+    this.Tables.ddlParlayType = $("#ddlParlayType");
     this.Tables.reportContainer = $('#advanceMixParlayReportContainer');
     this.Tables.report = $('#advanceMixParlayReport');
 };
@@ -60,10 +91,10 @@ WinLossByProduct.prototype.BindingEvent = function () {
 
 WinLossByProduct.prototype.GetReport = function (dateType) {
     var self = this;
-
-    AccReport.disableInput();
     self.GetParams(dateType);
-    $.ajax({
+    if (self.ValidateParams() == true) {
+        AccReport.disableInput();
+        $.ajax({
         type: "POST",
         url: window.rootUrl + "/api/parlay/product",
         contentType: "application/json; charset=utf-8",
@@ -85,8 +116,35 @@ WinLossByProduct.prototype.GetReport = function (dateType) {
         complete: function () {
             AccReport.enableInput();
         }
-    });
+        });
+    } else {
+        AccReport.enableInput();
+    }
+    
 };
+
+WinLossByProduct.prototype.ValidateParams = function () {
+        var isValid = true;
+        var message = '';
+        var notifyIds = [];
+
+        if (isNaN(this.Params.reportParams.ParlayType)) {
+            if (message == '') {
+                message = "Please select at least one Parlay Type!";
+            }
+            notifyIds.push("ddlParlayType");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            AccReport.popUp.removeHighLight();
+            AccReport.popUp.show(message, notifyIds.join(","));
+        } else {
+            AccReport.popUp.removeHighLight();
+        }
+
+        return isValid;
+    };
 
 WinLossByProduct.prototype.GetParams = function (dateType) {
     switch (dateType) {
@@ -106,6 +164,8 @@ WinLossByProduct.prototype.GetParams = function (dateType) {
     }
 
     this.Params.reportParams.Site = this.Tables.ddlSiteType.val();
+    var parlayType = this.Tables.ddlParlayType.multiSelect("getCheckedItems");
+    this.Params.reportParams.ParlayType = parlayType.length === 2 ? 0 : parseInt(parlayType.toString());
 };
 
 WinLossByProduct.prototype.RenderReport = function (report) {

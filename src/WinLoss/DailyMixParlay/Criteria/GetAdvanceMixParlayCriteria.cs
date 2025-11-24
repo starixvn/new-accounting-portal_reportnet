@@ -11,6 +11,8 @@ public class GetAdvanceMixParlayCriteria : CriteriaBase
 
     public int Site { get; set; }
 
+    public int ParlayType { get; set; }
+
     [SpParam(Ignored = true)]
     public int Bettype => 9;
 

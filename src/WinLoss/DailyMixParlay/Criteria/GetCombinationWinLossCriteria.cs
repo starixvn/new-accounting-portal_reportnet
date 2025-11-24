@@ -10,6 +10,8 @@ public class GetCombinationWinLossCriteria : CriteriaBase
 
     public int Site { get; set; }
 
+    public int ParlayType { get; set; }
+
     public override string GetSettingKey()
     {
         return "DailyMixParlayWinLoss_GetCombinationWinLoss";
