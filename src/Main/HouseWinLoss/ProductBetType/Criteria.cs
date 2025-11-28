@@ -21,5 +21,7 @@ public class Criteria : WinLossCriteria
 
     public int IsMajor { get; set; }
 
+    public bool ExcludeHedge { get; set; }
+
     public override string GetSettingKey() => "HouseWinlossByProducts_Lvl2_BettypePerformance";
 }

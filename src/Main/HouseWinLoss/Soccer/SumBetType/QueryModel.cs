@@ -19,4 +19,6 @@ public class QueryModel
     public int IsSabaSport { get; set; } = Constants.IsSabaSportDefault;
 
     public int PermissionProfileID { get; set; }
+
+    public bool ExcludeHedge { get; set; }
 }

@@ -25,4 +25,6 @@ public class QueryModel
     public int SportType { get; set; }
 
     public string SiteType { get; set; }
+
+    public bool ExcludeHedge { get; set; }
 }

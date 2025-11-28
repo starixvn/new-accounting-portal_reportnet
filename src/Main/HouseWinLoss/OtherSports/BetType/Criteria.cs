@@ -15,5 +15,7 @@ public class Criteria : WinLossCriteria
 
     public int PermissionProfileID { get; set; }
 
+    public bool ExcludeHedge { get; set; }
+
     public override string GetSettingKey() => "HouseWinlossByProducts_LvlN_Sportsbook_Bettype";
 }

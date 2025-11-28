@@ -27,6 +27,9 @@ public class MatchesCriteria : CriteriaBase
 
     public int ShowHedgeOrNormalMatchOnly { get; set; }
 
+    [SpParam(Ignored = true)]
+    public bool ExcludeHedge { get; set; }
+
     public int BetType { get; set; }
 
     [SpParam(Ignored = true)]

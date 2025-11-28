@@ -18,6 +18,7 @@ import angular from "angular";
         
         function generate(viewSetting) {
             $scope.viewSetting = viewSetting;
+            pane.data.isHedge = pane.data.excludeHedge ? 0 : pane.data.isHedge;
             pane.service.getData(viewSetting, pane.data).then(function (data) {
                 createLinks(data);
                 renderGrid(data);

@@ -86,6 +86,7 @@ import moment from "moment";
                 controller: "SportsbookMatchDetailController",
                 service: "sportsbookMatchDetailService",
                 serviceBaseUrl: function (data) {
+
                     return data.betType === 10
                         ? 'api/house-win-loss-by-products/sportsbook/outright-match-detail'
                         : 'api/house-win-loss-by-products/sportsbook/match-detail';

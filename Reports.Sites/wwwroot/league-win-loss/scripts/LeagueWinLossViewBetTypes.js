@@ -25,7 +25,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             GlobalShowTime: '',
             SportType: 0,
             LeagueId: '',
-            PermissionProfileID: permissionProfileID
+            PermissionProfileID: permissionProfileID,
+            ExcludeHedge: false
         }
     };
     self.initPage = function () {

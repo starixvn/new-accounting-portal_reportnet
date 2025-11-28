@@ -250,14 +250,21 @@ public class LeagueWinLossServiceImp(
             GrandTotal = new BettypeWinLossBySite()
         };
 
-        var rawData = (await repository.FetchAsync<BettypeWinLossEntity>(criteria)).ToList();
+        var rawData = await repository.FetchAsync<BettypeWinLossEntity>(criteria);
+        if (criteria.ExcludeHedge)
+        {
+            rawData = rawData.Where(entity => !entity.IsHedge);
+        }
 
-        if (!rawData.Any())
+        var data = rawData.ToList();
+
+
+        if (!data.Any())
         {
             return result;
         }
 
-        var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
+        var rawBettypes = data.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
                                              && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
                                              && !x.SiteType.Contains("Other Sports 8RM")
                                              && !x.SiteType.Contains("Other Sports BARM"));
@@ -278,10 +285,10 @@ public class LeagueWinLossServiceImp(
 
         result.Total = CalculateBettypeTotal("Total", rawBettypes);
 
-        var eightRM = rawData.FirstOrDefault(x => x.SiteType.Contains("8RM"));
+        var eightRM = data.FirstOrDefault(x => x.SiteType.Contains("8RM"));
         result.RM = BindingBettype(eightRM);
 
-        var barRM = rawData.FirstOrDefault(x => x.SiteType.Contains("BARM"));
+        var barRM = data.FirstOrDefault(x => x.SiteType.Contains("BARM"));
         result.BARM = BindingBettype(barRM);
 
         result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
@@ -450,14 +457,20 @@ public class LeagueWinLossServiceImp(
             GrandTotal = new BettypeWinLossBySite()
         };
 
-        var rawData = (await repository.FetchAsync<BettypeWinLossEntity>(criteria)).ToList();
+        var rawData = await repository.FetchAsync<BettypeWinLossEntity>(criteria);
+        if (criteria.ExcludeHedge)
+        {
+            rawData = rawData.Where(entity => !entity.IsHedge);
+        }
+
+        var data = rawData.ToList();
 
         if (!rawData.Any())
         {
             return result;
         }
 
-        var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
+        var rawBettypes = data.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
                                              && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
                                              && !x.SiteType.Contains("Other Sports 8RM")
                                              && !x.SiteType.Contains("Other Sports BARM"));
@@ -488,13 +501,13 @@ public class LeagueWinLossServiceImp(
         var total = CalculateBettypeTotal("Total", rawBettypes);
         result.Total = total;
 
-        var eightRM = rawData.FirstOrDefault(x => x.SiteType.Contains("8RM"));
+        var eightRM = data.FirstOrDefault(x => x.SiteType.Contains("8RM"));
         result.RM = BindingBettype(eightRM);
 
-        var barRM = rawData.FirstOrDefault(x => x.SiteType.Contains("BARM"));
+        var barRM = data.FirstOrDefault(x => x.SiteType.Contains("BARM"));
         result.BARM = BindingBettype(barRM);
 
-        result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
+        result.GrandTotal = CalculateBettypeTotal("Grand Total", data);
 
 
         return result;
@@ -511,36 +524,49 @@ public class LeagueWinLossServiceImp(
             GrandTotal = new BettypeWinLossBySite()
         };
 
-        var rawData = (await repository.FetchAsync<BettypeWinLossEntity>(criteria)).ToList();
+        var rawData = await repository.FetchAsync<BettypeWinLossEntity>(criteria);
+        if (criteria.ExcludeHedge)
+        {
+            rawData = rawData.Where(entity => !entity.IsHedge);
+        }
+
+        var data = rawData.ToList();
 
         if (!rawData.Any())
         {
             return result;
         }
 
-        var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
-                                             && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
-                                             && !x.SiteType.Contains("Other Sports 8RM")
-                                             && !x.SiteType.Contains("Other Sports BARM"));
+        var rawBettypes = data.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
+                                          && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
+                                          && !x.SiteType.Contains("Other Sports 8RM")
+                                          && !x.SiteType.Contains("Other Sports BARM"));
 
         result.BettypeWinLoss = BindingBettypes(rawBettypes).ToList();
 
         result.Total = CalculateBettypeTotal("Total", rawBettypes);
 
-        var eightRM = rawData.FirstOrDefault(x => x.SiteType.Contains("8RM"));
+        var eightRM = data.FirstOrDefault(x => x.SiteType.Contains("8RM"));
         result.RM = BindingBettype(eightRM);
 
-        var barRM = rawData.FirstOrDefault(x => x.SiteType.Contains("BARM"));
+        var barRM = data.FirstOrDefault(x => x.SiteType.Contains("BARM"));
         result.BARM = BindingBettype(barRM);
 
-        result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
+        result.GrandTotal = CalculateBettypeTotal("Grand Total", data);
 
         return result;
     }
 
     public async Task<MatchWinLossModel> GetMatches(MatchesCriteria criteria)
     {
-        var rawData = (await repository.FetchAsync<MatchEntity>(criteria)).ToList();
+
+        var rawData = await repository.FetchAsync<MatchEntity>(criteria);
+        if (criteria.ExcludeHedge)
+        {
+            rawData = rawData.Where(entity => !entity.IsHedge);
+        }
+
+        var data = rawData.ToList();
         var leagueWinLoss = new MatchWinLossModel
         {
             Match = [],
@@ -550,7 +576,7 @@ public class LeagueWinLossServiceImp(
             GrandTotal = new MatchWinLossByLiveStatus()
         };
 
-        var rawMatches = rawData.Where(x =>
+        var rawMatches = data.Where(x =>
             !x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
             && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM")
             && !x.MatchEvent.Contains("Other Sports 8RM")
@@ -572,13 +598,13 @@ public class LeagueWinLossServiceImp(
 
         leagueWinLoss.Total = CalculateMatchTotal("Total", rawMatches);
 
-        var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("8RM"));
+        var eightRM = data.FirstOrDefault(x => x.MatchEvent.Contains("8RM"));
         leagueWinLoss.RM = BindingMatch(eightRM);
 
-        var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("BARM"));
+        var barRM = data.FirstOrDefault(x => x.MatchEvent.Contains("BARM"));
         leagueWinLoss.BARM = BindingMatch(barRM);
 
-        leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
+        leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", data);
         return leagueWinLoss;
     }
 

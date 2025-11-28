@@ -18,4 +18,6 @@ public class SumBetTypeCriteria : WinLossCriteria
     public int Sporttype => Constants.SportTypeSoccer;
 
     public int PermissionProfileID { get; set; }
+
+    public bool ExcludeHedge { get; set; }
 }

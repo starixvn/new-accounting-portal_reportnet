@@ -27,7 +27,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
             IsIncludeHedge: true,
             SportType: 0,
             LeagueId: '',
-            PermissionProfileID: permissionProfileID
+            PermissionProfileID: permissionProfileID,
+            ExcludeHedge: false
         }
     };
     self.initPage = function () {

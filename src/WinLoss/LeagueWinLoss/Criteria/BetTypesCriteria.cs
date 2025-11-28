@@ -45,6 +45,9 @@ public class BetTypesCriteria : CriteriaBase
 
     public int PermissionProfileID { get; set; }
 
+    [SpParam(Ignored = true)]
+    public bool ExcludeHedge { get; set; }
+
     public override string GetSettingKey()
     {
         return "WinLoss_LeagueWinLoss_GetBetTypes";
